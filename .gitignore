@@ -1,0 +1,17 @@
+*.pyc
+*~
+*.sqlite*
+*.orig
+*.log
+media/**
+collected-static/**
+venv
+build/
+.elife-json
+.coverage
+.repop*
+htmlcov/
+app.cfg
+uwsgi.ini
+ingestion-lax.log.json
+/src/core/prod_settings.py
