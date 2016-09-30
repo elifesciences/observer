@@ -49,21 +49,27 @@ class JournalMetric(models.Model):
     metrics = CharField(max_length=10, choices=metric_choices())
 '''
 
-class PublishedArticle(models.Model):
+class Article(models.Model):
     journal = models.ForeignKey(Journal)
     msid = PositiveIntegerField(unique=True, help_text="article identifier from beginning of submission process right through to end of publication.")
-    title = CharField(max_length=255)
+    title = CharField(max_length=255, null=True)
     doi = CharField(max_length=255)
-    current_version = PositiveSmallIntegerField()
-    status = CharField(max_length=3, choices=status_choices())
-    type = CharField(max_length=50, choices=type_choices(), help_text="article as exported from EJP submission system")
     
-    datetime_submitted = DateTimeField()
-    datetime_accepted = DateTimeField()
-    datetime_entered_review = DateTimeField()
-    datetime_entered_production = DateTimeField()
-    datetime_published = DateTimeField()
-    datetime_version_published = DateTimeField(help_text="date and time this version of the article was published")
+    current_version = PositiveSmallIntegerField(null=True)
+    num_poa_versions = PositiveSmallIntegerField(default=0)
+    num_vor_versions = PositiveSmallIntegerField(default=0)
+    first_poa_version_published = DateTimeField(null=True)
+    first_vor_version_published = DateTimeField(null=True)
+    
+    status = CharField(max_length=3, choices=status_choices(), null=True)
+    type = CharField(max_length=50, choices=type_choices(), help_text="article as exported from EJP submission system")
+
+    datetime_submitted = DateTimeField(null=True)
+    datetime_accept_decision = DateTimeField(help_text="this is a accept OR reject decision")
+    datetime_entered_review = DateTimeField(null=True)
+    datetime_entered_production = DateTimeField(null=True)
+    datetime_published = DateTimeField(null=True)
+    datetime_version_published = DateTimeField(help_text="date and time current version of article published")
 
     datetime_poa_published = DateTimeField(blank=True, null=True, help_text="date and time first POA version published")
     datetime_vor_published = DateTimeField(blank=True, null=True, help_text="date and time first VOR version published")
@@ -81,11 +87,11 @@ class PublishedArticle(models.Model):
     #days_production_to_publication
     #days_publication_to_next_version
 
-    volume = PositiveSmallIntegerField()
-    issue = PositiveSmallIntegerField()
+    volume = PositiveSmallIntegerField(null=True)
+    issue = PositiveSmallIntegerField(null=True)
     
-    num_authors = PositiveSmallIntegerField()
-    num_references = PositiveSmallIntegerField()
+    num_authors = PositiveSmallIntegerField(null=True)
+    num_references = PositiveSmallIntegerField(null=True)
 
     num_views = PositiveIntegerField(default=0)
     num_downloads = PositiveIntegerField(default=0)
@@ -94,5 +100,3 @@ class PublishedArticle(models.Model):
     #pdf_url
     #xml_url
     #json_url
-    
-class 
