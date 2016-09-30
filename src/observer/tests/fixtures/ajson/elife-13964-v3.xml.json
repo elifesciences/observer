@@ -1,0 +1,770 @@
+{
+    "journal": {
+        "id": "eLife", 
+        "title": "eLife", 
+        "issn": "2050-084X"
+    }, 
+    "snippet": {
+        "status": "vor", 
+        "id": "13964", 
+        "type": null, 
+        "doi": "10.7554/eLife.13964", 
+        "title": "ERG signaling in prostate cancer is driven through PRMT5-dependent methylation of the Androgen Receptor", 
+        "published": "2016-05-16T00:00:00", 
+        "volume": 5, 
+        "elocationId": "e13964", 
+        "pdf": "elife-13964-v3.pdf", 
+        "subjects": [
+            "cancer-biology", 
+            "cell-biology"
+        ], 
+        "research-organisms": [
+            "Human"
+        ], 
+        "copyright": {
+            "license": "CC-BY-4.0", 
+            "holder": "Mounir et al", 
+            "statement": "This article is distributed under the terms of the Creative Commons Attribution License, which permits unrestricted use and redistribution provided that the original author and source are credited."
+        }, 
+        "impactStatement": "The transcription factor ERG recruits the PRMT5 enzyme to methylate the androgen receptor, presenting a post-translational regulatory mechanism that could be therapeutically exploited to control cell proliferation."
+    }, 
+    "article": {
+        "status": "vor", 
+        "id": "13964", 
+        "type": null, 
+        "doi": "10.7554/eLife.13964", 
+        "title": "ERG signaling in prostate cancer is driven through PRMT5-dependent methylation of the Androgen Receptor", 
+        "published": "2016-05-16T00:00:00", 
+        "volume": 5, 
+        "elocationId": "e13964", 
+        "pdf": "elife-13964-v3.pdf", 
+        "subjects": [
+            "cancer-biology", 
+            "cell-biology"
+        ], 
+        "research-organisms": [
+            "Human"
+        ], 
+        "copyright": {
+            "license": "CC-BY-4.0", 
+            "holder": "Mounir et al", 
+            "statement": "This article is distributed under the terms of the Creative Commons Attribution License, which permits unrestricted use and redistribution provided that the original author and source are credited."
+        }, 
+        "impactStatement": "The transcription factor ERG recruits the PRMT5 enzyme to methylate the androgen receptor, presenting a post-translational regulatory mechanism that could be therapeutically exploited to control cell proliferation.", 
+        "keywords": [
+            "TMPRSS2:ERG", 
+            "PRMT5", 
+            "androgen receptor", 
+            "prostate cancer"
+        ], 
+        "body": [
+            {
+                "type": "section", 
+                "id": "s1", 
+                "title": "Introduction", 
+                "content": [
+                    {
+                        "type": "paragraph", 
+                        "text": "Prostate cancer (PC) is highly prevalent and lethal (<xref ref-type=\"bibr\" rid=\"bib23\">Siegel et al., 2015</xref>). Drugs targeting the Androgen Receptor (AR), a 'lineage driver' of PC (<xref ref-type=\"bibr\" rid=\"bib10\">Garraway and Sellers, 2006</xref>), are an important therapeutic approach. AR is an androgen (i.e. testosterone)-activated nuclear hormone receptor that regulates normal prostate gland growth and differentiation. In PC however, AR facilitates unregulated proliferation (<xref ref-type=\"bibr\" rid=\"bib19\">Mills, 2014</xref>). While it is unclear how AR and other lineage factors switch between promoting normal lineage differentiation vs. tumor growth, it is hypothesized that somatic mutations in additional genes may facilitate such changes (<xref ref-type=\"bibr\" rid=\"bib10\">Garraway and Sellers, 2006</xref>). Many PCs bear chromosomal translocations resulting in aberrant expression of the ETS transcription factor ERG, most commonly through the <italic>TMPRSS2:ERG</italic> fusion (<xref ref-type=\"bibr\" rid=\"bib22\">Shah and Chinnaiyan, 2009</xref>). <italic>TMPRSS2:ERG</italic>, alone or in combination with additional genetic alterations, promotes prostate tumor formation in mice (<xref ref-type=\"bibr\" rid=\"bib2\">Baena et al., 2013</xref>; <xref ref-type=\"bibr\" rid=\"bib6\">Chen et al., 2013</xref>; <xref ref-type=\"bibr\" rid=\"bib13\">King et al., 2009</xref>; <xref ref-type=\"bibr\" rid=\"bib14\">Klezovitch et al., 2008</xref>; <xref ref-type=\"bibr\" rid=\"bib20\">Mounir et al., 2015</xref>; <xref ref-type=\"bibr\" rid=\"bib24\">Tomlins et al., 2008</xref>). ERG is recruited to many AR target genes and represses AR-dependent transcription (<xref ref-type=\"bibr\" rid=\"bib30\">Yu et al., 2010</xref>), suggesting ERG functions at least in part through attenuating AR target gene expression. However, ERG also regulates the expression of AR-independent genes thought to drive oncogenic function (<xref ref-type=\"bibr\" rid=\"bib14\">Klezovitch et al., 2008</xref>; <xref ref-type=\"bibr\" rid=\"bib20\">Mounir et al., 2015</xref>; <xref ref-type=\"bibr\" rid=\"bib24\">Tomlins et al., 2008</xref>; <xref ref-type=\"bibr\" rid=\"bib25\">Wang et al., 2008</xref>). We explored whether a deeper mechanistic understanding of ERG proliferative function could yield therapeutic insights into targeting this key PC oncogene."
+                    }
+                ]
+            }, 
+            {
+                "type": "section", 
+                "id": "s2", 
+                "title": "Results and discussion", 
+                "content": [
+                    {
+                        "type": "paragraph", 
+                        "text": "To identify genes that selectively facilitate the growth of <italic>TMPRSS2:ERG</italic> positive PC cells, we performed a pooled short hairpin RNA (shRNA) screen in <italic>TMPRSS2:ERG</italic> and AR-positive VCaP prostate cancer cells, using ERG-negative 22Rv1 cells as a control (Materials and methods). The shRNA pool targets 648 genes involved in transcriptional and epigenetic regulation (<xref ref-type=\"supplementary-material\" rid=\"SD1-data\">Supplementary file 1</xref>). While ERG shRNAs were not in the pool, AR shRNAs were preferentially depleted from VCaP cells, underscoring AR dependence in this cell line. Thirty two (32) genes showing VCaP-selective shRNA depletion (Materials and methods) were considered for further study (<xref ref-type=\"fig\" rid=\"fig1\">Figure 1A</xref>; <xref ref-type=\"supplementary-material\" rid=\"SD1-data\">Supplementary file 1</xref>)."
+                    }, 
+                    {
+                        "type": "image", 
+                        "doi": "10.7554/eLife.13964.003", 
+                        "id": "fig1", 
+                        "label": "Figure 1.", 
+                        "title": "Identification of PRMT5.\u00a0", 
+                        "caption": [
+                            {
+                                "type": "paragraph", 
+                                "text": "(<bold>A</bold>) Log p-value plots (RSA metric, see Materials and methods) of shRNA depletion from VCaP cells (y-axis) versus 22Rv1 cells (x-axis).\u00a0Grey lines denote <italic>p</italic>-value cutoff for screen hits (10<sup>-5</sup>), with bottom right quadrant enriched for VCaP-selective screen hits. Red dots indicate screen hits that are also candidate ERG interactors from <xref ref-type=\"supplementary-material\" rid=\"SD2-data\">Supplementary file 2.</xref> (<bold>B</bold>) Western blot of PRMT5, AR, and ERG following ERG or control IgG immunoprecipitation from untreated (-) or R1881-treated (+) VCaP cells. (<bold>C</bold>) Left panel: western blots of noted proteins from 22Rv1 whole cell extracts (WCE), either in parental (Par) cells, cells expressing exogenous ERG ('ERG'), or cells expressing a DNA-binding defective ERG ('Dx'); PRMT5 knockdown under these conditions is as noted. Right panel: Western blot of ERG immunoprecipitation (IP) from 22Rv1 for ERG and PRMT5. (<bold>D</bold>) PRMT5 proliferation after PRMT5 knockdown (sh1, sh2 and sh3) in VCaP cells (see Materials and methods). NTC: non-targeting control. Error bars represent <underline>+</underline> SEM of three biological replicates, each with three technical repeats. (<bold>E</bold>) 22Rv1 proliferation as in (<bold>C</bold>). (<bold>F</bold>) LNCaP proliferation as in (<bold>C</bold>). (<bold>G</bold>) VCaP proliferation as in (<bold>C</bold>) alongside expression of shRNA-resistant wild-type (WT) PRMT5, catalytically inactive PRMT5 (G365A/R368A), or vector control (Vector). Error bars represent <underline>+</underline> SEM of three biological replicates, each with three technical repeats."
+                            }, 
+                            {
+                                "type": "paragraph", 
+                                "text": "<bold>DOI:</bold> <ext-link ext-link-type=\"doi\" href=\"10.7554/eLife.13964.003\">http://dx.doi.org/10.7554/eLife.13964.003</ext-link>"
+                            }
+                        ], 
+                        "alt": "", 
+                        "uri": "https://example.org/elife-13964-fig1-v3", 
+                        "supplements": [
+                            {
+                                "type": "image", 
+                                "doi": "10.7554/eLife.13964.004", 
+                                "id": "fig1s1", 
+                                "label": "Figure 1\u2014figure supplement 1.", 
+                                "title": "PRMT5 knockdown in prostate cancer cells.", 
+                                "caption": [
+                                    {
+                                        "type": "paragraph", 
+                                        "text": "(<bold>A</bold>) Western blot of candidate ERG interactors from <xref ref-type=\"fig\" rid=\"fig1\">Figure 1A</xref>, as presented in <xref ref-type=\"fig\" rid=\"fig1\">Figure 1B</xref>.\u00a0(<bold>B</bold>) Left panel: western blot for FLAG-PRMT5 and GFP-ERG constructs after immunoprecipitation of FLAG-PRMT5 in 293 cells. Right panel: western blot for HA-ERG and V5-PRMT5 after immunoprecipitation of HA-ERG from PC3 cells. (<bold>C</bold>) Top panel: schematic representation of four ERG deletion mutants. ERG FL: full-length ERG; ERG\u25b3NTD: ERG lacking N-terminal domain; ERG\u25b3CTD: ERG lacking C-terminal domain; ERG\u25b3PNT: ERG lacking pointed domain. Bottom left panel: western blot of noted proteins from WCEs of 293 cells expressing FLAG-PRMT5 and either ERG construct. Bottom right panel: Western blot of FLAG-PRMT5 IP from 293 cells. (<bold>D</bold>) VCaP, LNCaP and 22Rv1 cells targeted by PRMT5 knockdown using three shRNA sequences (sh1, sh2, sh3) or NTC shRNA. Cells were left either treated or untreated with 100ng/ml doxycycline (Dox) for 7, 4 and 5 days respectively to induce shRNA expression. Western blots were analyzed for levels of PRMT5, total histone H4, AR and GAPDH as loading control. (<bold>E</bold>) Top panel: waterfall plot of Achilles cell line panel sensitivity to knockdown of PRMT5 using PRMT5 shRNA#1 (<xref ref-type=\"bibr\" rid=\"bib15\">Kryukov et al., 2016</xref>). Prostate cancer cell lines are in red and ERG status is noted. Bottom panel: replotting of the data, colored for MTAP status\u2014red arrows indicate the locations of the prostate cancer cell lines noted in the top panel."
+                                    }, 
+                                    {
+                                        "type": "paragraph", 
+                                        "text": "<bold>DOI:</bold> <ext-link ext-link-type=\"doi\" href=\"10.7554/eLife.13964.004\">http://dx.doi.org/10.7554/eLife.13964.004</ext-link>"
+                                    }
+                                ], 
+                                "alt": "", 
+                                "uri": "https://example.org/elife-13964-fig1-figsupp1-v3"
+                            }
+                        ]
+                    }, 
+                    {
+                        "type": "paragraph", 
+                        "text": "We next narrowed the shRNA screen hit list by focusing on candidates more likely to be ERG interacting proteins. We immunoprecipitated ERG from VCaP cells, and then identified co-immunoprecipitated proteins by mass spectrometry (Materials and methods). Identified proteins (<xref ref-type=\"supplementary-material\" rid=\"SD2-data\">Supplementary file 2</xref>) included AR and DNA-PKcs, previously known ERG interactors (<xref ref-type=\"bibr\" rid=\"bib3\">Brenner et al., 2011</xref>; <xref ref-type=\"bibr\" rid=\"bib30\">Yu et al., 2010</xref>). Eight of the VCaP-selective shRNA screen hits that also co-immunoprecipitated with ERG were further validated by directed ERG co-immunoprecipitation experiments in VCaP cells. Of these, AR and PRMT5 were the only proteins that co-immunoprecipitated with ERG but not IgG control; these interactions were not overtly influenced by exposure to an androgen analog (R1881, <xref ref-type=\"fig\" rid=\"fig1\">Figure 1B</xref>; <xref ref-type=\"fig\" rid=\"fig1s1\">Figure 1\u2014figure supplement 1A</xref>). We next tested whether the ERG/PRMT5 interaction is observed in other models. PRMT5 co-immunoprecipitated with ERG in 22Rv1 cells ectopically expressing ERG. This interaction was still observed upon expression of ERG bearing mutations in the DNA binding domain ('Dx', <xref ref-type=\"fig\" rid=\"fig1\">Figure 1C</xref>), suggesting DNA binding is not required for the ERG/PRMT5 interaction. Reciprocal co-immunoprecipitation experiments using overexpressed ERG and PRMT5 in AR-negative 293 and PC3 cells suggest the ERG/PRMT5 interaction can occur in the absence of AR (<xref ref-type=\"fig\" rid=\"fig1s1\">Figure 1\u2014figure supplement 1B</xref>). Further work in 293 cells using truncated ERG constructs suggested that the conserved ETS DNA binding domain of ERG was necessary for the observed co-immunoprecipitation with PRMT5 (<xref ref-type=\"fig\" rid=\"fig1s1\">Figure 1\u2014figure supplement 1C</xref>). Given this evidence that ERG and PRMT5 co-exist in a protein complex, we focused further efforts on PRMT5, as to our knowledge it has not been previously linked to ERG biology."
+                    }, 
+                    {
+                        "type": "paragraph", 
+                        "text": "To validate the growth effects of PRMT5 knockdown, we transduced ERG-positive VCaP cells, and ERG-negative 22Rv1 and LNCaP PC cells, with three independent doxycycline (Dox)-inducible shRNA vectors targeting PRMT5 and a non-targeting control shRNA (NTC). PRMT5 knockdown was robust in all cell lines (<xref ref-type=\"fig\" rid=\"fig1s1\">Figure 1\u2014figure supplement 1D</xref>). Robust growth inhibition was observed in VCaP cells; in contrast PRMT5 knockdown had no growth effects in ERG-negative 22Rv1 cells, and only minor effects in ERG negative LNCaP cells (<xref ref-type=\"fig\" rid=\"fig1\">Figure 1D\u2013F</xref>). Deletion of methylthioadenosine phosphorylase (MTAP), which is common across cancers, is a major determinant of sensitivity to PRMT5 inhibition (<xref ref-type=\"bibr\" rid=\"bib15\">Kryukov et al., 2016</xref>; <xref ref-type=\"bibr\" rid=\"bib17\">Mavrakis et al., 2016</xref>); as VCaP, LNCaP, and 22Rv1 cells are all MTAP intact, the observed sensitivity of VCaP to PRMT5 shRNA is not due to MTAP deletion. The project Achilles shRNA screen dataset (<xref ref-type=\"bibr\" rid=\"bib15\">Kryukov et al., 2016</xref>) contains three prostate cancer cell lines (VCaP, 22Rv1 and <italic>TMPRSS2:ERG</italic> positive NCI-H660) and one PRMT5 hairpin likely to have minimal off-target effects. This shRNA shows a trend of sensitivity in ERG-positive lines, in agreement with our findings (<xref ref-type=\"fig\" rid=\"fig1s1\">Figure 1\u2014figure supplement 1E</xref>)."
+                    }, 
+                    {
+                        "type": "paragraph", 
+                        "text": "PRMT5 is a protein arginine methyltransferase that regulates multiple signaling pathways through the mono- and symmetric di-methylation of arginines on its target proteins (<xref ref-type=\"bibr\" rid=\"bib29\">Yang and Bedford, 2013</xref>).To determine whether the antiproliferative effects of PRMT5 knockdown in ERG positive VCaP cells were mediated through methyltransferase activity, we expressed shRNA-resistant wild-type PRMT5, or a catalytically inactive G365A/R368A double mutant (Materials and methods) (<xref ref-type=\"bibr\" rid=\"bib1\">Antonysamy et al., 2012</xref>) along with PRMT5 shRNA in VCaP cells. WT PRMT5, but not the G365A/R368A mutant, rescued the effects of PRMT5 knockdown on VCaP cell proliferation (<xref ref-type=\"fig\" rid=\"fig1\">Figure 1G</xref>), indicating a requirement for PRMT5 catalytic function to support VCaP proliferation."
+                    }, 
+                    {
+                        "type": "paragraph", 
+                        "text": "To understand pathways affected by PRMT5, we performed transcriptional profiling of PRMT5 knockdown in VCaP cells, followed by the identification of significantly altered pathways (<xref ref-type=\"fig\" rid=\"fig2\">Figure 2A</xref>; <xref ref-type=\"supplementary-material\" rid=\"SD3-data\">Supplementary file 3</xref>; see Materials and methods). Among these, AR activation was the second most significantly affected pathway, and is a key pathway in common with previous reports of ERG knockdown in VCaP cells (<xref ref-type=\"bibr\" rid=\"bib6\">Chen et al., 2013</xref>; <xref ref-type=\"bibr\" rid=\"bib20\">Mounir et al., 2015</xref>; <xref ref-type=\"bibr\" rid=\"bib30\">Yu et al., 2010</xref>). AR pathway upregulation was apparent using multiple published AR gene signatures (<xref ref-type=\"fig\" rid=\"fig2s1\">Figure 2\u2014figure supplement 1</xref>). Using quantitative PCR of reverse transcribed RNA (qRT-PCR), we confirmed that knockdown of either PRMT5 or ERG increased the expression of the AR target genes <italic>PSA, NKX3-1</italic> and <italic>SLC45A3</italic> (<xref ref-type=\"fig\" rid=\"fig2\">Figure 2B</xref>). Expression of shRNA-resistant WT PRMT5, but not the G365A/R368A mutant, rescued the effects of PRMT5 knockdown on AR target gene expression (<xref ref-type=\"fig\" rid=\"fig2\">Figure 2C</xref>; <xref ref-type=\"fig\" rid=\"fig2s2\">Figure 2\u2014figure supplement 2A</xref>), demonstrating that PRMT5 methyltransferase activity is required for repression of AR target genes. The effect of PRMT5 knockdown was restricted to genes co-regulated by both AR and ERG, as PRMT5 knockdown did not affect previously published (<xref ref-type=\"bibr\" rid=\"bib20\">Mounir et al., 2015</xref>) AR-independent ERG target genes in VCaP (<xref ref-type=\"fig\" rid=\"fig2s2\">Figure 2\u2014figure supplement 2B</xref>). In addition, PRMT5 knockdown did not induce AR target gene expression in ERG negative 22Rv1 or LNCaP PC cells (<xref ref-type=\"fig\" rid=\"fig2s2\">Figure 2\u2014figure supplement 2C</xref>). In 22Rv1 cells, exogenous ERG expression is sufficient to attenuate <italic>PSA, NKX3-1</italic>, and <italic>SLC45A3</italic> expression (<xref ref-type=\"bibr\" rid=\"bib20\">Mounir et al., 2015</xref>). Under these conditions, PRMT5 knockdown restored the expression of these genes to baseline levels, yet had no effect on their expression in the background of the DNA-binding defective (i.e. inactive) ERG mutant ('Dx', <xref ref-type=\"fig\" rid=\"fig2s2\">Figure 2\u2014figure supplement 2D</xref>). These data indicate that PRMT5\u2019s ability to repress AR function is dependent on ERG."
+                    }, 
+                    {
+                        "type": "image", 
+                        "doi": "10.7554/eLife.13964.005", 
+                        "id": "fig2", 
+                        "label": "Figure 2.", 
+                        "title": "PRMT5 is an ERG-dependent inhibitor of AR signaling.", 
+                        "caption": [
+                            {
+                                "type": "paragraph", 
+                                "text": "(<bold>A</bold>) Heat map showing all genes upregulated (red) or downregulated (blue) by at least 1.5 fold following knockdown with PRMT5 shRNA1 (sh1) or shRNA2 (sh2) compared to NTC shRNA.\u00a0Rows represent probe sets; columns represent individual samples (technical replicates are marked by 1 or 2). Table indicates pathways significantly upregulated by PRMT5 knockdown (see Materials and methods, and <xref ref-type=\"supplementary-material\" rid=\"SD3-data\">Supplementary file 3</xref> for significantly downregulated pathways). (<bold>B</bold>) qRT-PCR of AR targets <italic>PSA, NKX3-1,</italic> and <italic>SLC45A3</italic> in VCaP cells expressing the noted shRNA constructs. Expression levels were normalized as described in Materials and methods; bars represent <underline>+</underline> SEM of three biological replicates, each with three technical repeats. (<bold>C</bold>) qRT-PCR of <italic>PSA</italic> and <italic>NKX3-1</italic> from VCaP cells expressing the noted shRNA constructs alongside cDNAs expressing vector control (Vector), wild-type (WT) PRMT5, or a catalytically dead PRMT5 mutant (G365A/R368A). Data and error bars represented as in (<bold>B</bold>). (<bold>D</bold>) Top panels: cartoons of the <italic>PSA</italic> and <italic>NKX3-1</italic> loci. ERG and AR binding sites (and control regions) are noted and numbered relative to the transcription start site (TSS) as described in Materials and methods. Bottom panels: ERG, PRMT5, and AR ChIP qPCR for the noted regions of <italic>PSA</italic> (left) or <italic>NKX3-1</italic> (right) in VCaP cells upon ERG or PRMT5 knockdown. Normalization to IgG control ChIP is as described in Materials and methods; error bars represent <underline>+</underline> SEM of three biological replicates, each with three technical repeats. (<bold>E</bold>) Heatmap visualization of AR binding from ChIP-sequencing data as determined by normalized reads across the AR Cistrome (Materials and methods) in replicate samples induced using AR ligands (DHT or R881 as indicated) and harboring inducible PRMT5 shRNA1 (sh1), shRNA2 (sh2), or shRNA3 (sh3) compared to NTC shRNA. 1659 peaks show differential binding with at least 1.5 fold difference (p-value of 0.01, q-value 0.151). The majority of differentially bound sites exhibit increased binding (6% of the total Cistrome) under PRMT5 knockdown conditions."
+                            }, 
+                            {
+                                "type": "paragraph", 
+                                "text": "<bold>DOI:</bold> <ext-link ext-link-type=\"doi\" href=\"10.7554/eLife.13964.005\">http://dx.doi.org/10.7554/eLife.13964.005</ext-link>"
+                            }
+                        ], 
+                        "alt": "", 
+                        "uri": "https://example.org/elife-13964-fig2-v3", 
+                        "supplements": [
+                            {
+                                "type": "image", 
+                                "doi": "10.7554/eLife.13964.006", 
+                                "id": "fig2s1", 
+                                "label": "Figure 2\u2014figure supplement 1.", 
+                                "title": "AR signature analysis.", 
+                                "caption": [
+                                    {
+                                        "type": "paragraph", 
+                                        "text": "Correlation between three independent androgen receptor activation gene signatures (<xref ref-type=\"bibr\" rid=\"bib16\">Malik et al., 2015</xref>; <xref ref-type=\"bibr\" rid=\"bib18\">Mendiratta et al., 2009</xref>; <xref ref-type=\"bibr\" rid=\"bib21\">Nelson et al., 2002</xref>) in comparison with the top-ranked upregulated genes following PRMT5 knockdown by shRNA in VCaP cells (<xref ref-type=\"fig\" rid=\"fig2\">Figure 2A</xref>).Each vertical line (green, blue, or red) represents the highest expressed probe set for each gene in the gene signatures. Lines are elongated if the probe set was upregulated following PRMT5 knockdown by at least 1.5 fold with a nominal p value <0.05. The p values shown are based on a two-tailed Fisher\u2019s exact test described in Materials and methods."
+                                    }, 
+                                    {
+                                        "type": "paragraph", 
+                                        "text": "<bold>DOI:</bold> <ext-link ext-link-type=\"doi\" href=\"10.7554/eLife.13964.006\">http://dx.doi.org/10.7554/eLife.13964.006</ext-link>"
+                                    }
+                                ], 
+                                "alt": "", 
+                                "uri": "https://example.org/elife-13964-fig2-figsupp1-v3"
+                            }, 
+                            {
+                                "type": "image", 
+                                "doi": "10.7554/eLife.13964.007", 
+                                "id": "fig2s2", 
+                                "label": "Figure 2\u2014figure supplement 2.", 
+                                "title": "ERG and PRMT5 effects on AR target genes are specific.", 
+                                "caption": [
+                                    {
+                                        "type": "paragraph", 
+                                        "text": "(<bold>A</bold>) Western blot of VCaP cells expressing wild-type (WT) PRMT5, a catalytic dead PRMT5 mutant (PRMT5 G365A/R368A) or a vector control (Vector) in the background of two independent shRNA vectors (sh1 and sh2).\u00a0Cells were maintained in culture for 10 days in presence of 100\u00a0ng/ml doxycycline (Dox). Western blot analysis shows expression levels of HA affinity tag (overexpressed PRMT5), total PRMT5, and GAPDH as a loading control. (<bold>B</bold>) qRT-PCR of the migration genes <italic>PLAT, PLAU</italic> and the neuroendocrine genes <italic>NTRK3, CHGA, GDAP1</italic> in VCaP cells expressing either ERG or PRMT5 shRNA constructs. Expression levels were normalized as described in Materials and methods; bars represent <underline>+</underline> SEM of three replicates. (<bold>C</bold>) qRT-PCR of <italic>PSA, NKX3-1</italic> and <italic>SLC45A3</italic> in LNCaP and 22Rv1 cells expressing either NTC shRNA, PRMT5 shRNA 1 or PRMT5 shRNA 2. Data represent normalized expression of <italic>PSA, NKX3-1</italic> and <italic>SLC45A3</italic> mRNA relative to the B2M transcript. Error bars represent <underline>+</underline> SEM of three replicates. (<bold>D</bold>) qRT-PCR for <italic>PSA, NKX3-1</italic> and <italic>SLC45A3</italic> in parental (PAR) 22Rv1 cells and following expression of either ERG or ERG DNAx and expressing either NTC shRNA, PRMT5 shRNA 1 or PRMT5 shRNA 2 (see Materials and methods for description) normalized relative to the B2M transcript. Error bars represent <underline>+</underline> SEM of three replicates."
+                                    }, 
+                                    {
+                                        "type": "paragraph", 
+                                        "text": "<bold>DOI:</bold> <ext-link ext-link-type=\"doi\" href=\"10.7554/eLife.13964.007\">http://dx.doi.org/10.7554/eLife.13964.007</ext-link>"
+                                    }
+                                ], 
+                                "alt": "", 
+                                "uri": "https://example.org/elife-13964-fig2-figsupp2-v3"
+                            }, 
+                            {
+                                "type": "image", 
+                                "doi": "10.7554/eLife.13964.008", 
+                                "id": "fig2s3", 
+                                "label": "Figure 2\u2014figure supplement 3.", 
+                                "title": "ERG, AR and PRMT5 recruitment.", 
+                                "caption": [
+                                    {
+                                        "type": "paragraph", 
+                                        "text": "(<bold>A</bold>) Top panel: cartoons of the <italic>PSA</italic> and <italic>NKX3-1</italic> loci including the promoter and enhancer regions bound by ERG and AR (-4100 and -3800 on PSA; +10800 and +62100 on NKX3-1) along with other control regions.\u00a0All distances shown are relative to the <italic>PSA</italic> and <italic>NKX3-1</italic> transcription start site (TSS). Bottom panels: chromatin Immunoprecipitations (ChIP) for ERG, PRMT5, and AR followed by quantitative PCR using primers specific to each region as shown by the horizontal bars in top panels. Shown are the recruitments to the <italic>PSA</italic> promoter and enhancer regions (left) and to the <italic>NKX3-1</italic> promoter and enhancer regions (right) in 22Rv1 cells in the absence and presence of ERG. All recruitments are normalized to the IgG control ChIP. Normalization and error bars are described in Materials and methods. (<bold>B</bold>) The top 1000 (MACS mfold rank) AR and ERG recruitment peaks, analyzed for evolutionary conservation in mammalian species using Phastcons, showing that ERG and AR samples have internally consistent performance. (<bold>C</bold>) Top-scoring motifs in all samples for AR ChIPseq (left panel) and ERG ChIP-seq (right panel). (<bold>D</bold>) z-scores for the motifs identified in (<bold>C</bold>)."
+                                    }, 
+                                    {
+                                        "type": "paragraph", 
+                                        "text": "<bold>DOI:</bold> <ext-link ext-link-type=\"doi\" href=\"10.7554/eLife.13964.008\">http://dx.doi.org/10.7554/eLife.13964.008</ext-link>"
+                                    }
+                                ], 
+                                "alt": "", 
+                                "uri": "https://example.org/elife-13964-fig2-figsupp3-v3"
+                            }
+                        ]
+                    }, 
+                    {
+                        "type": "paragraph", 
+                        "text": "We next used chromatin immunoprecipitation (ChIP) to investigate ERG, AR, and PRMT5 recruitment to the AR targets <italic>PSA</italic> and <italic>NKX3-1</italic> following modulation of ERG or PRMT5 expression. ERG knockdown in VCaP reduced its recruitment to previously characterized (<xref ref-type=\"bibr\" rid=\"bib27\">Wei et al., 2010</xref>) binding sites on both genes (<xref ref-type=\"fig\" rid=\"fig2\">Figure 2D</xref>). We also observed PRMT5 recruitment to these same sites, which was dramatically reduced upon ERG knockdown. Conversely, ERG expression in 22Rv1 cells induced PRMT5 recruitment to these same sites (<xref ref-type=\"fig\" rid=\"fig2s3\">Figure 2\u2014figure supplement 3A</xref>). In VCaP, PRMT5 knockdown reduced its own recruitment to both genes but had virtually no effect on ERG recruitment (<xref ref-type=\"fig\" rid=\"fig2\">Figure 2D</xref>). As expected (<xref ref-type=\"bibr\" rid=\"bib30\">Yu et al., 2010</xref>), ERG expression in 22Rv1 reduced AR recruitment to both genes (<xref ref-type=\"fig\" rid=\"fig2s3\">Figure 2\u2014figure supplement 3A</xref>), and ERG knockdown in VCaP increased AR recruitment (<xref ref-type=\"fig\" rid=\"fig2\">Figure 2D</xref>). Like ERG, PRMT5 knockdown in VCaP strongly induced AR recruitment (<xref ref-type=\"fig\" rid=\"fig2\">Figure 2D</xref>)."
+                    }, 
+                    {
+                        "type": "paragraph", 
+                        "text": "To extend these findings to a genome wide scale, we performed AR and ERG ChIP-seq experiments in androgen (DHT or R1881) stimulated VCaP cells upon PRMT5 knockdown (Materials and methods; available PRMT5 antibodies did not work in our hands for ChIP-seq). ERG and AR recruitment were robust in these experiments, as judged by recovery of the canonical DNA binding sites of these proteins (<xref ref-type=\"fig\" rid=\"fig2s3\">Figure 2\u2014figure supplement 3B\u2013D</xref>). In agreement with directed ChIP experiments, AR ChIP-seq demonstrated that PRMT5 knockdown increased the recruitment of AR at a subset of peaks (6% p-val 0.01, q-val 0.151), (<xref ref-type=\"fig\" rid=\"fig2\">Figure 2E</xref>), but did not significantly affect ERG binding on the same set of sites. Collectively, these data support a model where ERG recruits PRMT5 to AR targets, and PRMT5 is required for ERG-dependent attenuation of AR binding to specific regulatory regions."
+                    }, 
+                    {
+                        "type": "paragraph", 
+                        "text": "In many cell types, PRMT5 represses gene expression through symmetric di-methylation of histone H4 at arginine 3 (H4R3me2s) (<xref ref-type=\"bibr\" rid=\"bib29\">Yang and Bedford, 2013</xref>), suggesting this as a mechanism for PRMT5 function at AR target genes. However, ERG expression in 22Rv1 cells did not alter H4R3me2s levels at the <italic>PSA</italic> or <italic>NKX3-1</italic> loci (<xref ref-type=\"fig\" rid=\"fig3s1\">Figure 3\u2014figure supplement 1</xref>). We therefore hypothesized that PRMT5 directly methylates AR. To test this, we immunoprecipitated AR from ERG-positive VCaP cells, and blotted for AR, mono-methyl arginine (MMA), or symmetric di-methyl arginine (SDMA). MMA and SDMA signals were indeed detected in AR immunoprecipitates from VCaP cells, and were reduced following knockdown of either ERG or PRMT5 (<xref ref-type=\"fig\" rid=\"fig3\">Figure 3A</xref>). To confirm these findings in an additional ERG-dependent model, we also immunoprecipitated AR from the prostates of wild-type and <italic>TMPRSS2:ERG</italic> transgenic mice, the latter of which show ERG-dependent hyperproliferative phenotypes (<xref ref-type=\"bibr\" rid=\"bib20\">Mounir et al., 2015</xref>). Like VCaP, immunoprecipitated AR from <italic>TMPRSS2:ERG</italic> mouse prostates showed high mono- (MMA) and symmetric di-methylation (SDMA) levels compared to wild-type controls (<xref ref-type=\"fig\" rid=\"fig3\">Figure 3B</xref>). On the other hand, LNCaP cells, which bear a translocation in the ETS factor <italic>ETV1</italic>, do not show any SDMA signal on AR, and show reduced levels of MMA versus VCaP (<xref ref-type=\"fig\" rid=\"fig3\">Figure 3C</xref>), suggesting that AR symmetric dimethylation is unique to ERG versus ETV1. We next immunoprecipitated AR from 22Rv1 cells, which express wild-type AR as well as a roughly 80\u2009kDa truncated AR variant that lacks its ligand binding domain (LBD) (<xref ref-type=\"bibr\" rid=\"bib8\">Dehm et al., 2008</xref>). In these cells, ERG expression increased MMA and SDMA signals on wild-type AR but not the truncated variant, and these ERG-dependent signals were reduced upon PRMT5 knockdown (<xref ref-type=\"fig\" rid=\"fig3\">Figure 3D</xref>), suggesting the AR LBD is mono- and symmetrically di-methylated in an ERG- and PRMT5-dependent manner."
+                    }, 
+                    {
+                        "type": "image", 
+                        "doi": "10.7554/eLife.13964.009", 
+                        "id": "fig3", 
+                        "label": "Figure 3.", 
+                        "title": "PRMT5 methylates AR on arginine 761.", 
+                        "caption": [
+                            {
+                                "type": "paragraph", 
+                                "text": "(A) (<bold>A</bold>) Left panel: western blots of noted proteins from VCaP whole cell extracts (WCE) after ERG or PRMT5 knockdown.\u00a0Right panel: Western blot of AR immunoprecipitation (IP) from VCaP. SDMA: symmetric di-methyl arginine; MMA: mono-methyl arginine. (<bold>B</bold>) Left panel: Western blot analysis of noted proteins from homozygous <italic>TMPRSS2:ERG</italic> transgenic (Tg/Tg) and WT mouse tissues. Right panel: AR or IgG IP from mouse tissues followed by western blot analysis of MMA, SDMA and total AR levels. (<bold>C</bold>) Western blot of AR immunoprecipitation (IP) from VCaP and LNCaP cells grown in charcoal-stripped serum (CSS) and stimulated with 10nM R1881. SDMA: symmetric di-methyl arginine; MMA: mono-methyla arginine. (<bold>D</bold>) Left panel: western blot of noted proteins from 22Rv1 parental (PAR) or ERG-expressing (ERG) WCEs. FL: full-length; TR: truncated (lacking ligand binding domain, LBD). Right panel: Western blot of AR IP from 22Rv1. (<bold>E</bold>) Left panel: RWPE-1 parental (PAR) and AR and ERG-expressing (AR/ERG) cells targeted by PRMT5 knockdown (PRMT5 shRNA) or NTC shRNA were left either untreated (<bold>C</bold>) or treated with 100ng/ml doxycycline (<bold>D</bold>) in the absence or presence of 1nM R1881 (R) for 24\u2009hr. Western blot analysis shows expression levels of PRMT5, ERG, AR and GAPDH from input samples (WCE). Right panel: Lysates were then used for AR immunoprecipitation (AR IP) followed by western blot analysis using antibodies against MMA, SDMA or total AR levels. (<bold>F</bold>) Top panel: location of all arginines (R) in the AR LBD. NTD: N-terminal domain; DBD: DNA binding domain. Right panel: western blot of AR IPs from RWPE-1 cells expressing ERG with wild-type AR (AR WT) or R761K mutant. C: control untreated; D: Dox-treated (ERG induction); R: R1881-treated. Bottom panel: western blot analysis of MMA, SDMA and total AR levels from AR IPs in RWPE-1 cells expressing ERG with either wild-type AR (AR WT) or R761K mutant. C: control untreated; D: Dox-treated (ERG induction); R: R1881-treated. (<bold>G</bold>) Representative immunofluorescence images of Dox- and R1881-treated RWPE-1 cells expressing ERG or AR as noted above each column. AR/SDMA: proximity ligation signals using antibodies detecting AR and SDMA (see Materials and methods). Scale bar, 50 \u00b5m. Data shown is a representative example of three biological replicates."
+                            }, 
+                            {
+                                "type": "paragraph", 
+                                "text": "<bold>DOI:</bold> <ext-link ext-link-type=\"doi\" href=\"10.7554/eLife.13964.009\">http://dx.doi.org/10.7554/eLife.13964.009</ext-link>"
+                            }
+                        ], 
+                        "alt": "", 
+                        "uri": "https://example.org/elife-13964-fig3-v3", 
+                        "supplements": [
+                            {
+                                "type": "image", 
+                                "doi": "10.7554/eLife.13964.010", 
+                                "id": "fig3s1", 
+                                "label": "Figure 3\u2014figure supplement 1.", 
+                                "title": "H4R3me2s ChIP.", 
+                                "caption": [
+                                    {
+                                        "type": "paragraph", 
+                                        "text": "Top panel: schematic representation of the <italic>PSA</italic> and <italic>NKX3-1</italic> loci including the promoter and enhancer regions bound by ERG and AR (-4100 and -3800 on PSA; +10800 and +62100 on NKX3-1) along with other control regions.All distances shown are relative to the <italic>PSA</italic> and <italic>NKX3-1</italic> transcription start site (TSS). Bottom panel: enrichment analysis of symmetric di-methyl arginine 3 on histone 4 (H4R3me2s) was performed by Chromatin Immunoprecipitations (ChIP) for H4R3me2s followed by quantitative PCR amplification using primers specific to each region as shown by the horizontal bars. Enrichment analysis was performed in 22Rv1 cells in the absence or presence of ERG. All enrichments are normalized to the IgG control ChIP. Data shown from three biological replicates, each with three technical repeats."
+                                    }, 
+                                    {
+                                        "type": "paragraph", 
+                                        "text": "<bold>DOI:</bold> <ext-link ext-link-type=\"doi\" href=\"10.7554/eLife.13964.010\">http://dx.doi.org/10.7554/eLife.13964.010</ext-link>"
+                                    }
+                                ], 
+                                "alt": "", 
+                                "uri": "https://example.org/elife-13964-fig3-figsupp1-v3"
+                            }, 
+                            {
+                                "type": "image", 
+                                "doi": "10.7554/eLife.13964.011", 
+                                "id": "fig3s2", 
+                                "label": "Figure 3\u2014figure supplement 2.", 
+                                "title": "PRMT5 methylates AR in vitro.", 
+                                "caption": [
+                                    {
+                                        "type": "paragraph", 
+                                        "text": "(<bold>A</bold>) Area ratio of SAH levels normalized to spike-in control SAH-d4 in methyltransferase assay including PRMT5 enzyme, SAM, AR LBD (ligand binding domain), ETS (ERG ETS domain) or PNT (ERG PNT domain) as noted.\u00a0(<bold>B</bold>) Area ratio of SAH levels normalized to spike-in control SAH-d4 in methyltransferase assay including PRMT1 enzyme, SAM, AR LBD (ligand binding domain), ETS (ERG ETS domain) or H4 control peptide as noted. (<bold>C</bold>) Area ratio of SAH levels normalized to spike-in control SAH-d4 in methyltransferase assay including PRMT5 enzyme, SAM, AR LBD (ligand binding domain) and ETS (ERG ETS domain) as noted; in the presence or absence of pan-PRMT inhibitor AMI-1. (<bold>D</bold>) Western blot analysis of MMA and GST-AR levels from samples in (<bold>C</bold>)."
+                                    }, 
+                                    {
+                                        "type": "paragraph", 
+                                        "text": "<bold>DOI:</bold> <ext-link ext-link-type=\"doi\" href=\"10.7554/eLife.13964.011\">http://dx.doi.org/10.7554/eLife.13964.011</ext-link>"
+                                    }
+                                ], 
+                                "alt": "", 
+                                "uri": "https://example.org/elife-13964-fig3-figsupp2-v3"
+                            }, 
+                            {
+                                "type": "image", 
+                                "doi": "10.7554/eLife.13964.012", 
+                                "id": "fig3s3", 
+                                "label": "Figure 3\u2014figure supplement 3.", 
+                                "title": "AR and ERG expression in RWPE-1, and mutation of AR LBD.", 
+                                "caption": [
+                                    {
+                                        "type": "paragraph", 
+                                        "text": "(<bold>B</bold>) RWPE-1 control cells and stably expressing AR wild type (AR WT) were either left untreated (<bold>C</bold>) or treated with 100ng/ml doxycycline (<bold>D</bold>) to induce ERG expression, in the absence (<bold>D</bold>) or presence (R/D) of 1nM R1881 for 24\u2009hr.\u00a0Western blot analysis shows expression levels of AR and ERG. (<bold>B</bold>) qRT-PCR of the luminal genes <italic>PSA</italic> (blue) and <italic>NKX3-1</italic> (red) from RWPE-1 cells treated as in (<bold>A</bold>). Data represent normalized expression of <italic>PSA</italic> and <italic>NKX3-1</italic> mRNA relative to the B2M transcript. Error bars represent <underline>+</underline> SEM of three replicates. (<bold>C</bold>) Western blot analysis of AR, ERG and GAPDH expression levels from RWPE-1 parental cells or cells stably expressing either AR wild type (WT), R711K, R727K, R753K, R761K, R775K, R780K, R787K, R789K, R787/789K, R832K, R841K, R847K, R855K, R856K, R855/856K or R872K AR mutant. (<bold>D</bold>) RWPE-1 cells stably expressing either AR R711K, R727K, R753K, R775K, R780K, R787K, R789K, R787/789K, R832K, R841K, R847K, R855K, R856K, R855/856K or R872K mutant were used for AR IP followed by western blot analysis for MMA, SDMA and total AR levels."
+                                    }, 
+                                    {
+                                        "type": "paragraph", 
+                                        "text": "<bold>DOI:</bold> <ext-link ext-link-type=\"doi\" href=\"10.7554/eLife.13964.012\">http://dx.doi.org/10.7554/eLife.13964.012</ext-link>"
+                                    }
+                                ], 
+                                "alt": "", 
+                                "uri": "https://example.org/elife-13964-fig3-figsupp3-v3"
+                            }
+                        ]
+                    }, 
+                    {
+                        "type": "paragraph", 
+                        "text": "To further understand if the observed AR methylation was directly dependent on PRMT5, we performed biochemical assays using purified PRMT5 (complexed with its requisite binding partner MEP50/WDR77) and AR LBD. PRMT5 activity, as judged by production of SAH (the by-product of SAM-dependent substrate methylation), was observed in the presence of AR LBD as substrate, but not in the presence of ERG ETS DNA binding domain or pointed (PNT) domain. PRMT5 activity in the presence of AR LBD further increased with the addition of ERG ETS domain protein to the reaction, but not with PNT domain (<xref ref-type=\"fig\" rid=\"fig3s2\">Figure 3\u2014figure supplement 2A</xref>). Unlike PRMT5, purified PRMT1 showed no activity in the presence of AR LBD (<xref ref-type=\"fig\" rid=\"fig3s2\">Figure 3\u2014figure supplement 2B</xref>). PRMT5 activity on AR, in the absence or presence of ERG ETS domain, was reduced with the addition of the tool PRMT inhibitor AMI-1 (<xref ref-type=\"bibr\" rid=\"bib7\">Cheng et al., 2004</xref>). PRMT5 dependent methylation of the AR-LBD was also observed in western blots, where increased signal for MMA (but not SDMA, likely due to low overall PRMT5 activity in vitro and the distributive nature of this enzyme [<xref ref-type=\"bibr\" rid=\"bib26\">Wang et al., 2014</xref>]) was observed at the correct size for the AR-LBD protein in the presence of PRMT5. This activity was increased by ERG ETS domain, and inhibited by AMI-1 (<xref ref-type=\"fig\" rid=\"fig3s2\">Figure 3\u2014figure supplement 2C\u2013D</xref>). Together this data indicates that AR LBD is a substrate of the PRMT5 enzyme in vitro, and that the ERG ETS domain can facilitate greater PRMT5 activity on AR."
+                    }, 
+                    {
+                        "type": "paragraph", 
+                        "text": "To identify the arginine methylation site(s) on AR, we cloned AR cDNA and mutated all arginines in the LBD to lysine (see Materials and methods). We expressed each construct in AR-negative, ERG-negative RWPE-1 prostate cells. R1881 stimulates exogenous AR to induce target gene expression in these cells. ERG expression represses this effect (<xref ref-type=\"fig\" rid=\"fig3s3\">Figure 3\u2014figure supplement 3A\u2013B</xref>) and induces PRMT5-dependent mono- and symmetric di-methylation of AR (<xref ref-type=\"fig\" rid=\"fig3\">Figure 3E</xref>). RWPE-1 cells co-expressing ERG with each of the AR constructs were assessed for SDMA and MMA modification of AR following immunoprecipitation. All mutants were expressed at equivalent levels to wild-type AR (<xref ref-type=\"fig\" rid=\"fig3s3\">Figure 3\u2014figure supplement 3C</xref>). Only one AR mutant, R761K, completely lacked MMA and SDMA of AR in the presence of ERG (<xref ref-type=\"fig\" rid=\"fig3\">Figure 3F</xref>; <xref ref-type=\"fig\" rid=\"fig3s3\">Figure 3\u2014figure supplement 3D</xref>). We confirmed these results in RWPE-1 cells using a proximity ligation assay to detect symmetric di-methylation of AR (Materials and methods). We detected strong proximity signals in RWPE-1 nuclei upon expression of wild-type AR and exposure to R1881 (which stimulates nuclear translocation of AR) that were dependent upon ERG expression. These signals were not detected in the AR R761K mutant cell line (<xref ref-type=\"fig\" rid=\"fig3\">Figure 3G</xref>). This demonstrates that arginine 761 is the likely target of ERG- and PRMT5-dependent AR methylation."
+                    }, 
+                    {
+                        "type": "paragraph", 
+                        "text": "Available structural information (<xref ref-type=\"bibr\" rid=\"bib4\">Chandra V et al., 2008</xref>; <xref ref-type=\"bibr\" rid=\"bib9\">Emsley et al., 2010</xref>; <xref ref-type=\"bibr\" rid=\"bib11\">Helsen et al., 2012</xref>) (see Materials and methods) suggests R761 methylation on AR may affect LBD interactions with the DNA binding domain (DBD, <xref ref-type=\"fig\" rid=\"fig4\">Figure 4A</xref>), resulting in altered DNA binding and gene activation. To test this, we evaluated the recruitment of WT versus R761K mutant AR in RWPE-1 cells treated with R1881, using the <italic>PSA</italic> locus as a model AR-regulated gene. Relative to WT AR, the AR R761K mutant showed enhanced recruitment to <italic>PSA</italic> and increased <italic>PSA</italic> expression. Moreover, R761K mutation prevented ERG-dependent attenuation of AR recruitment to <italic>PSA</italic> and <italic>PSA</italic> expression (<xref ref-type=\"fig\" rid=\"fig4\">Figure 4B,C</xref>). In contrast to these effects, the AR R761K mutation did not affect overall AR protein levels, the ability of AR to shuttle into the nucleus upon R1881 induction (<xref ref-type=\"fig\" rid=\"fig4s1\">Figure 4\u2014figure supplement 1</xref>), or the levels of ERG or PRMT5 recruitment to <italic>PSA</italic> (<xref ref-type=\"fig\" rid=\"fig4s1\">Figure 4\u2014figure supplement 1C</xref>). These results indicate R761 methylation mediated through ERG and PRMT5 attenuates ligand-dependent AR activation, likely through modulating interactions between the LBD and DBD."
+                    }, 
+                    {
+                        "type": "image", 
+                        "doi": "10.7554/eLife.13964.013", 
+                        "id": "fig4", 
+                        "label": "Figure 4.", 
+                        "title": "R761 methylation regulates AR recruitment, transcription, and proliferation.", 
+                        "caption": [
+                            {
+                                "type": "paragraph", 
+                                "text": "(<bold>A</bold>) Model of AR LBD (PDB: 2AO6; yellow) and AR DBD (PDB: 1R4I; green) interactions (see Materials and methods).\u00a0A modeled di-methylated R761 is shown (red). Grey ribbon: TIF2 coactivator peptide. Cyan spheres: R1881. DNA is shown as orange/blue sticks. (<bold>B</bold>) AR ChIP qPCR for regions of the <italic>PSA</italic> gene as in <xref ref-type=\"fig\" rid=\"fig2\">Figure 2D</xref> from RWPE-1 cells expressing wild-type (WT, left) AR or AR R761K (right). DOX: ERG expression; R1881 is 1nM. Error bars represent <underline>+</underline> SEM of three biological replicates, each with three technical repeats. (<bold>C</bold>) <italic>PSA</italic> qRT-PCR in RWPE-1 cells expressing WT AR (left) or AR R761K (right). Error bars represent <underline>+</underline> SEM of three biological replicates, each with three technical repeats. (<bold>D</bold>) RWPE-1 parental cells and cells expressing either wild type AR (AR WT) or AR R761K mutant were left either untreated (control) or treated with 0.1, 1 or 5nM R1881 for 6 days and confluence measurements (see Materials and methods for description) were collected. Error bars represent <underline>+</underline> SEM of three biological replicates, each with three technical repeats. (<bold>E</bold>) <italic>PSA</italic> qRT-PCR from VCaP cells expressing the noted AR constructs, grown in androgen-depleted media (charcoal-stripped serum). (<bold>F</bold>) VCaP cell proliferation upon expression of the noted AR constructs."
+                            }, 
+                            {
+                                "type": "paragraph", 
+                                "text": "<bold>DOI:</bold> <ext-link ext-link-type=\"doi\" href=\"10.7554/eLife.13964.013\">http://dx.doi.org/10.7554/eLife.13964.013</ext-link>"
+                            }
+                        ], 
+                        "alt": "", 
+                        "uri": "https://example.org/elife-13964-fig4-v3", 
+                        "supplements": [
+                            {
+                                "type": "image", 
+                                "doi": "10.7554/eLife.13964.014", 
+                                "id": "fig4s1", 
+                                "label": "Figure 4\u2014figure supplement 1.", 
+                                "title": "AR R761K mutation effects in RWPE-1.", 
+                                "caption": [
+                                    {
+                                        "type": "paragraph", 
+                                        "text": "(<bold>A</bold>) Western blot of RWPE-1 parental cells and cells stably expressing AR wild type (AR WT) or AR R761K mutant.\u00a0Cells were either untreated (<bold>C</bold>) or treated with 100ng/ml doxycycline (<bold>D</bold>) to induce ERG expression, in the absence or presence of 1\u00a0nM R1881 for 24\u2009hr (R, R/D). Blots for AR, ERG, and GAPDH are shown. (<bold>B</bold>) Representative immunofluorescence images of AR from RWPE-1 cells stably expressing either AR WT or R761K mutant. Cells were either untreated (-) or treated with 0.1 or 1nM R1881 for 24\u2009hr. Cells were also stained with DAPI to visualize nuclei. Cells were fixed and stained as described in Materials and methods. Scale bar, 50 \u00b5m. Data shown is a representative example of three biological replicates. (<bold>C</bold>) ChIP qPCR of ERG (top row) and PRMT5 (bottom row) at the <italic>PSA</italic> promoter and enhancer regions in RWPE-1 cells expressing either wild type AR (AR WT, left column) or AR R761K mutant (right column) in the absence and presence of ERG (Dox) or R1881 (R; 1nM for 24\u2009hrs). All recruitments are normalized to the IgG control ChIP. Error bars represent <underline>+</underline> SEM of three biological replicates, each with three technical repeats."
+                                    }, 
+                                    {
+                                        "type": "paragraph", 
+                                        "text": "<bold>DOI:</bold> <ext-link ext-link-type=\"doi\" href=\"10.7554/eLife.13964.014\">http://dx.doi.org/10.7554/eLife.13964.014</ext-link>"
+                                    }
+                                ], 
+                                "alt": "", 
+                                "uri": "https://example.org/elife-13964-fig4-figsupp1-v3"
+                            }
+                        ]
+                    }, 
+                    {
+                        "type": "paragraph", 
+                        "text": "Increased AR activity drives PC proliferation (<xref ref-type=\"bibr\" rid=\"bib5\">Chen et al., 2004</xref>). However, we noted that RWPE-1 cells expressing AR R761K, despite increased AR activity, were more prone to R1881-induced growth arrest (<xref ref-type=\"fig\" rid=\"fig4\">Figure 4D</xref>). This suggested that heightened AR activity via R761K mutation (or loss of R761 methylation) may block proliferation in certain contexts. To further explore this, we expressed R761K mutant AR in VCaP cells. Despite transcriptional hyperactivity, as judged by increased <italic>PSA</italic> expression relative to either WT or an irrelevant R789K mutant AR, VCaP cells expressing AR R761K proliferated poorly in reduced-androgen media (<xref ref-type=\"fig\" rid=\"fig4\">Figure 4E and F</xref>)."
+                    }, 
+                    {
+                        "type": "paragraph", 
+                        "text": "Detailed mechanisms of how the tumor context affects AR and other lineage oncogenes to switch their function from lineage differentiation to proliferation in cancer has remained elusive (<xref ref-type=\"bibr\" rid=\"bib10\">Garraway and Sellers, 2006</xref>). Our results indicate that a primary effect of ERG in facilitating PC proliferation is modulating AR function. We propose that ERG- and PRMT5-dependent methylation of R761 on AR reduces AR recruitment to genes that would otherwise induce differentiation, yet R761 methylation allows sufficient AR function to promote proliferation. While our results raise the question of how R761-methylated AR may still facilitate proliferation, R761 methylation could prove a relevant biomarker for AR-mediated proliferation versus arrest in <italic>TMPRSS2:ERG</italic> positive cells. Finally, as PRMT5 is an enzyme required downstream of ERG in facilitating AR proliferative function, exploring therapeutic PRMT5 inhibition in <italic>TMPRSS2:ERG</italic> positive prostate cancers may be warranted."
+                    }
+                ]
+            }, 
+            {
+                "type": "section", 
+                "id": "s3", 
+                "title": "Materials and methods", 
+                "content": [
+                    {
+                        "type": "section", 
+                        "id": "s3-1", 
+                        "title": "Cell Lines", 
+                        "content": [
+                            {
+                                "type": "paragraph", 
+                                "text": "VCaP, 22Rv1, LNCaP, PC3, RWPE-1, and 293T cells were obtained from ATCC and maintained in recommended media unless otherwise specified. Cell identities were verified by SNP analyses using ABI TaqMan SNP genotyping assays (Asuragen) and tested for mycoplasma contamination using the MycoAlert Mycoplasma Detection kit (Lonza)."
+                            }
+                        ]
+                    }, 
+                    {
+                        "type": "section", 
+                        "id": "s3-2", 
+                        "title": "shRNA screen and data analysis", 
+                        "content": [
+                            {
+                                "type": "paragraph", 
+                                "text": "22Rv1 and VCaP cells were used for a screen using a custom shRNA library (Cellecta, Inc.) targeting transcriptional and epigenetic regulators similar to a previously reported library (<xref ref-type=\"bibr\" rid=\"bib12\">Hoffman et al., 2014</xref>). shRNA library design and construction and viral packing were performed as previously described (<xref ref-type=\"bibr\" rid=\"bib12\">Hoffman et al., 2014</xref>). To obtain an MOI of 0.3, the required volume of virus was determined using a 10 point dose curve ranging from 0 to 1ml of viral supernatant in the presence of 10\u00a0ug/ml polybrene. Infection efficiency was determined by the percentage of RFP positive cells measured by FACS analysis. Screens were run in duplicate. For the 22Rv1 screen, 14.4 million cells were plated 24\u2009hr prior to infection in T-225 flasks. On the day of infection, the culture media was replaced with fresh media containing 10\u00a0ug/mL polybrene and sufficient virus was added for an MOI of 0.3. 24\u2009hr after infection, the culture media was replaced with fresh media containing puromycin. 72\u2009hr following puromycin addition, cells were trypsinized, and 14.4 million cells were plated into new flasks. For the VCaP screen, 23.7 million cells were plated 24\u2009hr prior to infection in T-225 flasks. On the day of infection, the culture media was replaced with fresh media containing 10\u00a0ug/mL polybrene and sufficient virus was added for an MOI of 0.3. 24\u2009hr after infection, the culture media was replaced with fresh media and cells were allowed to recover for 72\u2009hr prior to puromycin selection. 5 days following puromycin addition, cells were trypsinized, and 23.7 million cells were plated into new flasks. At each passage, an aliquot of cells was used to measure transduction efficiency determined by measuring the% RFP positive cells and was typically > 90%. Cells were maintained in culture and split when confluence reached 90% and at each passage, 14.4 million cells (22Rv1 screen) and 23.7 million cells (VCaP screen) were passaged into new flasks, ensuring a representation of >1000 cells/shRNA in the library and the% RFP positive cells was measured to ensure stability of the transduced population over time. When the cells reached 5-population doublings, 40 million cells were harvested by centrifugation and stored at \u221220\u00b0C. Purification of genomic DNA and PCR for library production were performed as previously described (<xref ref-type=\"bibr\" rid=\"bib12\">Hoffman et al., 2014</xref>). shRNA screen data analysis was performed as previously described (<xref ref-type=\"bibr\" rid=\"bib12\">Hoffman et al., 2014</xref>). For gene based hit calling, the The <underline>R</underline>edundant <underline>s</underline>iRNA <underline>A</underline>ctivity or RSA metric was used as described (<xref ref-type=\"bibr\" rid=\"bib12\">Hoffman et al., 2014</xref>). Briefly, the RSA down p-value is the statistical score that models the probability of a gene 'hit' based on the collective activities of multiple shRNAs per gene. The RSA down p-value reports the statistically significant genes causing a loss in viability. All hits showing an RSA score >10<sup>-5</sup> in the 22Rv1 screen and <10<sup>-5</sup> in the VCaP screen (total of 32 genes) were used for further analysis (see <xref ref-type=\"supplementary-material\" rid=\"SD1-data\">Supplementary file 1</xref> for full list)."
+                            }
+                        ]
+                    }, 
+                    {
+                        "type": "section", 
+                        "id": "s3-3", 
+                        "title": "ERG immunoprecipitation and mass spectrometry analysis", 
+                        "content": [
+                            {
+                                "type": "paragraph", 
+                                "text": "Nuclear extracts of VCaP cells (~600 million cells) were pre-cleared using agarose beads (Trueblot rabbit kit, eBioscience) and used for pulldown with either an ERG antibody (Santa Cruz#353) or an anti-rabbit IgG antibody. All antibodies were pre-coupled to beads (AminoLink Plus kit, Thermo Scientific), washed then used for pulldown. Immunoprecipitations were eluted at pH2.5 followed by TCA protein precipitation, alkylated with iodoacetamide, and separated on a NuPage 4\u201312% Bis-Tris gradient gel (Invitrogen). Complete gel lanes were excised using a LEAP 2DiD robot and in-gel digested with trypsin (Tecan Freedom EVO 20). Peptide sequencing for the resulting resulting 16 digest samples was performed by liquid chromatography-tandem mass spectrometry using an Eksigent 1D+ high-pressure liquid chromatography system coupled to a LTQ-Orbitrap XL mass spectrometer (Thermo Scientific). Peptide mass and fragmentation data were searched against a combined forward-reverse IPI database (v3.55) using Mascot 2.2 (Matrix Science). Peptide and protein validation were done using Transproteomic pipeline v3.3sqall (Institute for Systems Biology; [<ext-link ext-link-type=\"uri\" href=\"http://tools.proteomecenter.org/software.php\">http://tools.proteomecenter.org/software.php</ext-link>]) using a false positive threshold of <1% for protein identifications (See <xref ref-type=\"supplementary-material\" rid=\"SD2-data\">Supplementary file 2</xref> for full list; in red are the ERG interactors also identified as shRNA screen hits)."
+                            }
+                        ]
+                    }, 
+                    {
+                        "type": "section", 
+                        "id": "s3-4", 
+                        "title": "shRNA knockdown", 
+                        "content": [
+                            {
+                                "type": "paragraph", 
+                                "text": "The Dox-inducible shRNA vector (pLKO-Tet-On) was previously described, as were the sequences of the nontargeting control and ERG shRNA inserts and stable cell line generation(<xref ref-type=\"bibr\" rid=\"bib20\">Mounir et al., 2015</xref>). PRMT5 shRNA sequences are as follows:"
+                            }, 
+                            {
+                                "type": "paragraph", 
+                                "text": "PRMT5 shRNA#1:"
+                            }, 
+                            {
+                                "type": "paragraph", 
+                                "text": "AGGGACTGGAATACGCTAATTCTCGAGAATTAGCGTATTCCAGTCCCT"
+                            }, 
+                            {
+                                "type": "paragraph", 
+                                "text": "PRMT5 shRNA#2:"
+                            }, 
+                            {
+                                "type": "paragraph", 
+                                "text": "AGGGACTGGAATACGTTAATTGTTAATATTCATAGCAATTAGCGTATTCCAGTCCCTPRMT5 shRNA#3:"
+                            }, 
+                            {
+                                "type": "paragraph", 
+                                "text": "GCGGATAAAGTTGTATGTTGTGTTAATATTCATAGCACAGCATACAGCTTTATCCGC"
+                            }, 
+                            {
+                                "type": "paragraph", 
+                                "text": "All shRNA were expressed from a puromycin resistant vector. Lentiviral production and cell transduction was as previously described (<xref ref-type=\"bibr\" rid=\"bib20\">Mounir et al., 2015</xref>)."
+                            }
+                        ]
+                    }, 
+                    {
+                        "type": "section", 
+                        "id": "s3-5", 
+                        "title": "cDNA vectors", 
+                        "content": [
+                            {
+                                "type": "paragraph", 
+                                "text": "The Dox-inducible ERG constructs named ERG or ERG DNAx used for stable and inducible expression in 22Rv1 cells were generated as previously described (<xref ref-type=\"bibr\" rid=\"bib20\">Mounir et al., 2015</xref>). The cDNA expression rescue constructs were cloned into a pRETRO retroviral vector under a CMV promoter and containing a neomycin-IRES-YFP selection cassette. The HA-tagged PRMT5 sequence was generated synthetically to resist knockdown by all PRMT5 shRNAs used in this study and was cloned into a Gateway compatible entry vector. In order to resist knockdown by all PRMT5 shRNA sequences, 6\u20137 silent mutations (in red below) were introduced into the HA-PRMT5 cDNA sequence to produce a shRNA resistant version (HA-scPRMT5). For shPRMT5-1: the AGGGACTGGAATACGCTAATT target sequence was converted to <underline>C</underline>G<underline>C</underline>GA<underline>T</underline>TGGAA<underline>C</underline>ACG<underline>T</underline>T<underline>G</underline>ATT (underlines denote altered bases)."
+                            }, 
+                            {
+                                "type": "paragraph", 
+                                "text": "For shPRMT5-2: the GCGGATAAAGCTGTATGCTGT target sequence was converted to <underline>CA</underline>G<underline>A</underline>AT<underline>C</underline>AAGCT<underline>C</underline>TA<underline>C</underline>GC<underline>C</underline>GT (underlines denote altered bases)."
+                            }, 
+                            {
+                                "type": "paragraph", 
+                                "text": "Full sequence of scPRMT5 below:"
+                            }, 
+                            {
+                                "type": "paragraph", 
+                                "text": "scPRMT5 sequence: ATGTACCCCTATGACGTGCCAGATTACGCCATGGCGGCGATGGCGGTCGGGGGTGCTGGTGGGAGCCGCGTGTCCAGCGGGAGGGACCTGAATTGCGTCCCCGAAATAGCTGACACACTAGGGGCTGTGGCCAAGCAGGGGTTTGATTTCCTCTGCATGCCTGTCTTCCATCCCAGGTTCAAGCGCGAGTTTATTCAGGAACCTGCTAAGAATCGGCCCGGTCCCCAGACACGATCAGACCTACTGCTGTCAGGACGCGATTGGAACACGTTGATTGTGGGAAAGCTTTCTCCATGGATTCGTCCAGACTCAAAAGTGGAGAAGATTCGCAGGAACTCCGAGGCGGCCATGTTACAGGAGCTGAATTTTGGTGCATATTTGGGTCTTCCAGCTTTCCTGCTGCCCCTTAATCAGGAAGATAACACCAACCTGGCCAGAGTTTTGACCAACCACATCCACACTGGCCATCACTCTTCCATGTTCTGGATGCGGGTACCCTTGGTGGCACCAGAGGACCTGAGAGATGATATAATTGAGAATGCACCAACTACACACACAGAGGAGTACAGTGGGGAGGAGAAAACGTGGATGTGGTGGCACAACTTCCGGACTTTGTGTGACTATAGTAAGAGGATTGCAGTGGCTCTTGAAATTGGGGCTGATTTGCCCTCTAATCACGTCATTGATCGCTGGCTTGGGGAGCCCATCAAAGCAGCCATTCTCCCCACTAGCATTTTCCTGACCAATAAGAAGGGATTTCCTGTTCTTTCTAAGATGCACCAGAGGCTCATCTTCCGGCTCCTCAAGTTGGAGGTGCAGTTCATCATCACAGGCACCAACCACCACTCAGAGAAGGAGTTTTGTAGCTACCTGCAGTACCTGGAATACTTAAGCCAGAACCGTCCTCCACCTAATGCCTATGAACTCTTTGCCAAGGGCTATGAAGACTATCTGCAGTCCCCGCTTCAGCCACTGATGGACAATCTGGAATCTCAGACATATGAAGTGTTTGAAAAGGACCCCATCAAATACTCTCAGTACCAGCAGGCCATCTATAAATGTCTGCTAGACCGAGTACCAGAAGAGGAGAAGGATACCAATGTCCAGGTACTGATGGTGCTGGGAGCAGGACGGGGACCCCTGGTGAACGCTTCCCTGCGGGCAGCCAAGCAGGCCGACCGCAGAATCAAGCTCTACGCCGTGGAGAAAAACCCAAATGCCGTGGTGACGCTAGAGAACTGGCAGTTTGAAGAATGGGGATCCCAGGTCACGGTAGTCAGCTCAGACATGAGGGAATGGGTGGCTCCAGAGAAAGCAGACATCATTGTCAGTGAGCTTCTGGGCTCATTTGCTGACAATGAATTGTCGCCTGAGTGCCTGGATGGAGCCCAGCACTTCCTAAAAGATGATGGTGTGAGCATCCCCGGGGAGTACACTTCCTTTCTGGCTCCCATCTCTTCCTCCAAGCTGTACAATGAGGTCCGAGCCTGTAGGGAGAAGGACCGTGACCCTGAGGCCCAGTTTGAGATGCCTTATGTGGTACGGCTGCACAACTTCCACCAGCTCTCTGCACCCCAGCCCTGTTTCACCTTCAGTCACCCTAATCGCGACCCCATGATTGACAACAACCGCTATTGCACCTTGGAATTTCCTGTGGAGGTGAACACAGTACTACATGGCTTTGCCGGCTACTTTGAGACTGTGCTTTATCAGGACATCACTCTGAGTATCCGTCCAGAGACTCACTCTCCTGGGATGTTCTCATGGTTTCCTATTCTGTTTCCCATCAAGCAGCCCATAACGGTACGTGAAGGCCAAACCATCTGTGTGCGTTTCTGGCGATGCAGCAATTCCAAGAAGGTGTGGTATGAGTGGGCTGTGACAGCACCAGTCTGTTCTGCTATTCATAACCCCACAGGCCGCTCATATACCATTGGCCTCTGA."
+                            }, 
+                            {
+                                "type": "paragraph", 
+                                "text": "Generation of the PRMT5 catalytic dead mutant was performed by site-directed mutagenesis (QuickChange II, Agilent) through mutation of G365 to A and R368 to A (<xref ref-type=\"bibr\" rid=\"bib1\">Antonysamy et al., 2012</xref>)."
+                            }
+                        ]
+                    }, 
+                    {
+                        "type": "section", 
+                        "id": "s3-6", 
+                        "title": "Cell culture and proliferation assays", 
+                        "content": [
+                            {
+                                "type": "paragraph", 
+                                "text": "VCaP, 22Rv1, LNCaP and RWPE-1 cell lines (ATCC) were grown in vendor-recommended media and maintained in a humidified 5% CO<sub>2</sub> incubator at 37\u00b0C. Doxycycline (Dox, Sigma) was used at 100 ng/ml. Cell proliferation was measured in 6-well plates (Corning) using automated confluence readings (IncuCyte EX, Essen Bioscience). R1881 (Sigma) and charcoal-stripped serum (Omega Scientific) were used where indicated."
+                            }
+                        ]
+                    }, 
+                    {
+                        "type": "section", 
+                        "id": "s3-7", 
+                        "title": "Immunoprecipitation assays", 
+                        "content": [
+                            {
+                                "type": "paragraph", 
+                                "text": "2\u20135\u00a0ug of AR, ERG or IgG control antibody was coupled to 1mg of magnetic beads according to manufacturer\u2019s protocol (Invitrogen Dynabeads Antibody Coupling kit#143.11D). After coupling, 1\u00a0mg of the antibody/bead mixture was incubated with 1\u20135\u00a0mg of protein lysate overnight under rotation at 4\u00b0C. IP samples were then washed with RIPA buffer containing protease/phosphatase inhibitor cocktail for 3\u20134 washes and resuspended in non-reducing loading buffer, boiled and loaded on a gel for western blot analysis. Immunoprecipitations were performed using the following antibodies: anti-ERG antibody (Epitomics# 2805\u20131), anti-HA antibody (Roche#11815016001), anti-AR antibody (Thermo Scientific# MA5-13426) or anti-IgG antibody (Rockland Immunochemicals# RL011-0102)."
+                            }
+                        ]
+                    }, 
+                    {
+                        "type": "section", 
+                        "id": "s3-8", 
+                        "title": "Western blot analysis", 
+                        "content": [
+                            {
+                                "type": "paragraph", 
+                                "text": "Procedures were previously described (<xref ref-type=\"bibr\" rid=\"bib20\">Mounir et al., 2015</xref>) and the following antibodies were used at 1:1000 dilutions and incubated overnight at 4\u00b0C: ERG (Epitomics# 2805\u20131), PRMT5 (CST# 2252; SIGMA#P0493), GAPDH (Millipore#MAB374), H4 (CST#2592), AR (Santa Cruz#sc-7305), HA (Roche#11815016001), Symmetric Di-methyl arginine (SDMA, CST#13222), Mono-methyl arginine (MMA, CST#8711), TRIP12 (Abcam#ab86220), EIF4E (CST#9742), CDC42 (BD Transduction Laboratories#610929), HDAC1 (CST#2062), SMARCB1/SNF5 (Bethyl Laboratories# A301-087A), SMARCE1/BAF57 (Bethyl Laboratories# A300\u2013810A)."
+                            }
+                        ]
+                    }, 
+                    {
+                        "type": "section", 
+                        "id": "s3-9", 
+                        "title": "Microarray and pathway analyses", 
+                        "content": [
+                            {
+                                "type": "paragraph", 
+                                "text": "Generation of labeled cDNA, hybridization to Affymetrix U133plus2 human arrays, and data normalization were performed as described (<xref ref-type=\"bibr\" rid=\"bib20\">Mounir et al., 2015</xref>). For the candidate signatures in Figure supplement 2A (<xref ref-type=\"bibr\" rid=\"bib16\">Malik et al., 2015</xref>; <xref ref-type=\"bibr\" rid=\"bib18\">Mendiratta et al., 2009</xref>; <xref ref-type=\"bibr\" rid=\"bib21\">Nelson et al., 2002</xref>), a two-tailed fisher\u2019s exact test was used to determine if probesets representing genes in those signatures were under- or over-represented in the set of probesets that were up- or down-regulated at least 1.5-fold compared to expressed but non-differentially-expressed probesets, with a nominal p-value of 0.05 or less. For an unbiased approach (<xref ref-type=\"fig\" rid=\"fig2\">Figure 2A</xref>), pathways derived from GO terms and transcription-factor networks were analyzed for overrepresentation via a one-tailed interpolated fisher\u2019s exact test, using genes that varied 1.5-fold or more with a nominal p-value of 0.05 or less compared to all genes represented on the array; Benjamini-Hochberg (BH) correction was then applied to these p-values (<xref ref-type=\"bibr\" rid=\"bib28\">Wiederschain et al., 2007</xref>). The VCaP microarray dataset (<xref ref-type=\"fig\" rid=\"fig2\">Figure 2A</xref>) is available at the NCBI Gene Expression Omnibus (accession number GSE65965)."
+                            }
+                        ]
+                    }, 
+                    {
+                        "type": "section", 
+                        "id": "s3-10", 
+                        "title": "Signature correlation analysis", 
+                        "content": [
+                            {
+                                "type": "paragraph", 
+                                "text": "Black line (Figure supplement 2A) represents expressed probe set position and is ranked by average fold-change. Blue, green, and red lines indicate where the probe sets mapping to genes in the androgen receptor activation signatures appear in our data set and show the cumulative sum of the probe sets in the androgen receptor activation signatures that overlap with our gene list (only the highest expressing probe set was used per gene). The dashed line represents the hypothetical cumulative sum for a random list of genes that are unenriched."
+                            }
+                        ]
+                    }, 
+                    {
+                        "type": "section", 
+                        "id": "s3-11", 
+                        "title": "RNA isolation and qRT-PCR", 
+                        "content": [
+                            {
+                                "type": "paragraph", 
+                                "text": "RNA isolation was performed as previously described (<xref ref-type=\"bibr\" rid=\"bib20\">Mounir et al., 2015</xref>). Taqman reactions (Applied Biosystems) were performed using Gene Expression master mix, FAM-labeled probes for <italic>PSA, NKX3-1</italic> and <italic>SLC45A3</italic> and VIC-labeled probe for Beta-2-macroglobulin (B2M) as a normalization control. Samples were run on a 7900HT Real-Time PCR machine (Applied Biosystems) and data was analyzed and normalized according to manufacturer\u2019s instructions (2<sup>-\u0394Ct</sup> method)."
+                            }
+                        ]
+                    }, 
+                    {
+                        "type": "section", 
+                        "id": "s3-12", 
+                        "title": "Chromatin immunoprecipitation (ChIP)", 
+                        "content": [
+                            {
+                                "type": "paragraph", 
+                                "text": "VCaP, 22Rv1 and RWPE-1 cells were treated as specified followed by cross-linking with 1% formaldehyde for 10\u00a0min. Cells were next lysed in 1% SDS and sonicated until DNA ladder is below 1\u00a0kb (Diagenode). Sheared chromatin was then used for IP with specific primary antibodies (2-4\u00a0ug; previously tested) pre-complexed with Protein A/G Dynabeads and incubated overnight under rotation at 4\u00b0C. The next day, ChIP samples were washed with RIPA buffer and TE followed by reverse crosslinking using 1%SDS and 30\u00a0ug/ml proteinase K (Invitrogen) at 65\u00b0C for 6\u2009hr with beads. The eluates were then purified using the QIAquick PCR purification kit (Qiagen) and used for qPCR with the following primer sets:"
+                            }, 
+                            {
+                                "type": "paragraph", 
+                                "text": "<italic>PSA</italic> -4100: acctgctcagcctttgtctc AND ttgtttactgtcaaggacaatcg"
+                            }, 
+                            {
+                                "type": "paragraph", 
+                                "text": "<italic>PSA</italic> -3800: agaattgcctcccaacactg AND cagtcgatcgggacctagaa"
+                            }, 
+                            {
+                                "type": "paragraph", 
+                                "text": "<italic>PSA</italic> -100: cttccacagctctgggtgt AND aaaccttcattccccaggac"
+                            }, 
+                            {
+                                "type": "paragraph", 
+                                "text": "<italic>PSA</italic> +700: agccccagactcttcattca AND atgcagatttggggaatcag"
+                            }, 
+                            {
+                                "type": "paragraph", 
+                                "text": "<italic>NKX3-1</italic> -2800: gagagcagctgttcctccac AND acgagccttttccacctttc"
+                            }, 
+                            {
+                                "type": "paragraph", 
+                                "text": "<italic>NKX3-1</italic> -200: agggaggagagctggagaag AND tcctccctaggggattcct"
+                            }, 
+                            {
+                                "type": "paragraph", 
+                                "text": "<italic>NKX3-1</italic> +2150: accaggatgaggatgtcacc AND cagggacagagagagccttg"
+                            }, 
+                            {
+                                "type": "paragraph", 
+                                "text": "<italic>NKX3-1</italic> -+10800: tctctcgttggctcctgatt AND ccagcttttgttccttcctg"
+                            }, 
+                            {
+                                "type": "paragraph", 
+                                "text": "<italic>NKX3-1</italic> +62100: cggtttattgcccatgaaga AND aacagggctcacagtgcttt"
+                            }
+                        ]
+                    }, 
+                    {
+                        "type": "section", 
+                        "id": "s3-13", 
+                        "title": "ChIP-seq", 
+                        "content": [
+                            {
+                                "type": "paragraph", 
+                                "text": "VCaP cells harboring Dox inducible shRNAs targeting PRMT5 where grown to 80% confluency and re-seeded (day 0) into full media containing 100\u00a0ng/ml Doxycycline. On day 3 media was replaced with \u2018hormone reduced\u2019 media, containing 100\u00a0ng/ml Doxycycline. Cells were stimulated with adding indicated ligands (DHT (Sigma), R1881 [Sigma]) or vehicle on day 4 and harvesting of cells was performed on day 5. Cells were harvested by fixation using 1% methanol free formaldedyde (Polysciences, Cat#18814) in PBS at room temperature. Fixation was stopped after 8\u2009min by replacing fixation buffer with ice cold PBS containing 125\u00a0mM glycine and 5\u00a0mg/ml BSA. Cells were further washed once using ice-cold PBS and re-suspended into 500\u00a0ul of PBS containing Complete Protease Inhibitors (Roche). Cells where then pelleted and supernatant removed, and the resulting pellet either snap frozen in liquid Nitrogen or immediately re-suspended in lysis buffer for further processing."
+                            }, 
+                            {
+                                "type": "paragraph", 
+                                "text": "For ChIP the resulting cell lysate was sonicated using a Covaris E210 instrument according to manufacturers recommendations. Each ChIP reaction was performed using soluble fraction chromatin corresponding to 7.5\u00a0ug purifed DNA and 4\u00a0ug of antibodies. Antibodies were allowed to bind overnight before capture on protein A magnetic beads (Invitrogen, Dynal). Bound beads where washed 4 times in RIPA buffer containing 500\u00a0mM LiCl, and 2 times with TE buffer before being re-suspended in containing 100\u00a0mM NaHCO<sub>3</sub> and 1% (w/v) SDS. Crosslink reversal was done at 65C\u00b0C for 6\u2009hr and ChIP DNA were isolated using DNA purification beads (MagBio). ChIP-seq libraries were generated using the KAPA HTP library preparation kit (Kapa biosciences). All handling of samples after sonication was done on using a Sciclone NGS Workstation (P/N SG3-31020-0300, PerkinElmer). Sequencing was performed on an Illumina NextSeq500 instrument."
+                            }, 
+                            {
+                                "type": "paragraph", 
+                                "text": "Reads passing Illumina standard QC were mapped to genome version Hg19 using BWA, and binding sites (\u2018peaks\u2019) were identified using MACS2, evolutionary conservation scores at peak locations was calculated using Phastcons and enriched DNA motifs using MDscan and Seqpos. These were performed using the ChiLin QC pipeline (liulab.dfci.harvard.edu/WEBSITE/software). Peaks from AR ChIP-sequencing samples with a MACS2 enrichment score higher than 10 were extended to a uniform 400\u00a0bp across all samples and overlapping peaks where collapsed to generate a union of all peaks. This resulted in a Cistrome of 25,593 peaks that were used in all genome wide ChIP analyses. Using the features of this Cistrome as GTF, read counts from BWA mapped Bam files were processed using the Qlucore 3.1.19 software. Heatmaps and statistical test (two-sided t-test using correction for multiple hypothesis testing) of differential binding scores on the 25,593 features were performed in Qlucore v3.1.19. The AR and ERG ChIPseq datasets are available at the NCBI Gene Expression Omnibus (Accession number GSE79128)."
+                            }
+                        ]
+                    }, 
+                    {
+                        "type": "section", 
+                        "id": "s3-14", 
+                        "title": "Proximity ligation assay (PLA) and microscopy", 
+                        "content": [
+                            {
+                                "type": "paragraph", 
+                                "text": "RWPE-1 cells were treated as specified, fixed with 4% paraformaldehyde for 45 min at room temperature (Electron Microscopy Sciences), blocked with 5% goat serum, 0.5% Triton X-100 in PBS for 2\u2009hr and incubated with 1:50 dilutions of AR (LSBIO #LS-C87494) and symmetric di-methyl arginine antibodies (CST#13222) in 5% goat serum and 0.05% Triton X-100. Fixed samples were incubated overnight at 4\u00b0C in primary antibody before incubations with proximity ligation assay (PLA) secondary antibodies (Duolink, Sigma).The secondary antibody incubation, ligation, amplification and final wash steps were performed according to the manufacturer\u2019s specifications. Confocal microscopy was performed using an LSM 510 META (Carl Zeiss, Inc.) with a 40x C-Apochromat objective, NA 1.2. Images were collected and processed using Zen software (Carl Zeiss, Inc.)."
+                            }
+                        ]
+                    }, 
+                    {
+                        "type": "section", 
+                        "id": "s3-15", 
+                        "title": "AR mutagenesis and stable cell line generation", 
+                        "content": [
+                            {
+                                "type": "paragraph", 
+                                "text": "Full length <italic>Homo sapiens</italic> androgen receptor (AR) sequence (transcript variant 1; NM_000044.3) was synthesized to include a 5\u2019 NotI and 3\u2019 BamHI sites and used as a template for the mutagenesis of each arginine in the ligand binding domain of AR into lysine (QuikChange XL site-directed mutagenesis kit, Agilent). Following sequence verification to ensure mutation incorporation, each AR mutant sequence was cloned into the pLVX vector via the 5\u2019 NotI and 3\u2019 BamHI as previously described (<xref ref-type=\"bibr\" rid=\"bib20\">Mounir et al., 2015</xref>)."
+                            }
+                        ]
+                    }, 
+                    {
+                        "type": "section", 
+                        "id": "s3-16", 
+                        "title": "Immunofluorescence and microscopy", 
+                        "content": [
+                            {
+                                "type": "paragraph", 
+                                "text": "Immunofluorescence of RWPE-1 cells was performed by fixing cells for 45 min at room temperature by adding 4% paraformaldehyde (Electron Microscopy Sciences) and incubated with 1:50 dilution of AR antibody (LSBIO #LS-C87494). Confocal microscopy was performed using an LSM 510 META (Carl Zeiss, Inc.) with a 40x C-Apochromat objective, NA 1.2. Images were collected and processed using Zen software (Carl Zeiss, Inc.)."
+                            }
+                        ]
+                    }, 
+                    {
+                        "type": "section", 
+                        "id": "s3-17", 
+                        "title": "AR structural model", 
+                        "content": [
+                            {
+                                "type": "paragraph", 
+                                "text": "The heterodimeric structure of PPAR\u03b3-RXR\u03b1\u00a0(PDB Code: 3DZY) was used as a template to overlay individual domain structures of AR including the DBD in complex with DNA (PDB Code: 1R4I) and the LBD in complex with coactivator peptide TIF2(iii) and ligand R1881 (PDB Code: 2AO6). A superposition was achieved using secondary structure matching in COOT (<xref ref-type=\"bibr\" rid=\"bib9\">Emsley et al., 2010</xref>). The AR DBD was superposed onto chain A of RXR\u03b1 and the AR-LBD was superposed onto chain B of PPAR\u03b3, resulting in the final overlay shown in <xref ref-type=\"fig\" rid=\"fig4\">Figure 4A</xref>. A dimethylated Arg was superposed onto R761 (NCBI Reference Sequence: NP_000035.2; some publications may refer to it as R760 when using the previous Reference Sequence number) within the AR LBD using least squares fit and matching only mainchain atoms, after which the non-methylated Arg was removed from the resulting model. While structure determination of AR containing its intact DBD and LBD has remained elusive, structural data of each individual domain, as well as intact structures within the nuclear receptor family, lead to a valuable understanding of interdomain communication. A previous study utilized the heterodimeric structure of PPAR\u03b3 and RXR\u03b1 to apply in silico three-dimensional alignment and docking analysis, followed by mutational analysis, to propose a DBD-LBD interface within AR, including R761 (<xref ref-type=\"fig\" rid=\"fig4\">Figure 4A</xref>) (<xref ref-type=\"bibr\" rid=\"bib4\">Chandra V et al., 2008</xref>; <xref ref-type=\"bibr\" rid=\"bib11\">Helsen et al., 2012</xref>). We hypothesize that R761 is involved in key interactions at this interface and that its methylation would add hydrophobicity, eliminating any polar interactions, as well as steric bulk. This disruption at the DBD-LBD interface could result in destabilization of the quaternary structure, resulting in an inhibitory effect on AR activation. While AR R761K closely mimics the properties of wt AR, the substitution eliminates the possibility of methylation by PRMT5 and, therefore, eliminates the possibility of this type of disruption, accounting for the observed increase in activation."
+                            }
+                        ]
+                    }, 
+                    {
+                        "type": "section", 
+                        "id": "s3-18", 
+                        "title": "AR protein expression and purification", 
+                        "content": [
+                            {
+                                "type": "paragraph", 
+                                "text": "The gene encoding human AR LBD (residues 663\u2013919), was inserted into a pGEX-6P-1 vector and expressed as a GST-tagged fusion protein in BL21 Star (DE3) cells. Cells were grown in TB2 medium containing 10 \u00b5M dihydrotestosterone (DHT) and induced with 1\u2009mM IPTG for 14 \u201316\u2009hr at 16<sup>\u00b0</sup>C. Cells were resuspended in buffer A containing 50\u2009mM Tris-HCl (pH 7.3), 150\u2009mM NaCl, 10% glycerol, 0.25\u2009mM TCEP, and 10 \u00b5M DHT, to which 50 \u00b5g/ml DNase I and protease inhibitor cocktail (Roche) were added. Cells were lysed using an M-110L Microfluidizer at 18,000 psi, followed by the addition of 0.5% CHAPS to the lysate prior to high speed centrifugation. For one-step batch purification, the soluble extract was incubated with 2\u2009ml of glutathione sepharose 4 fast flow medium (GE Healthcare) for 1\u2009hr at 4<sup>\u00b0</sup>C with rotational mixing. The sepharose medium was washed in buffer A with the addition of 0.5% CHAPS. Elution was accomplished by resuspending and incubating the media for 10 min in the wash buffer plus 10\u201320\u2009mM reduced glutathione. The eluted fractions were then combined and concentrated to 0.3 mg/ml."
+                            }
+                        ]
+                    }, 
+                    {
+                        "type": "section", 
+                        "id": "s3-19", 
+                        "title": "PRMT5 methyltransferase assays", 
+                        "content": [
+                            {
+                                "type": "paragraph", 
+                                "text": "PRMT5 enzymatic activity was assessed by monitoring <italic>S</italic>-adenosyl-L-homocysteine (SAH) product formation utilizing liquid chromatography-tandem mass spectrometry (LC-MS/MS). 0.5\u20131\u00a0uM of PRMT5/MEP50 recombinant enzyme (BPS, cat#51045) was incubated with 50\u00a0uM SAM, 2\u00a0uM GST-AR LBD and/or 5\u00a0uM ETS or PNT ERG protein for 2\u2009hr at 37\u00b0C. Reactions were quenched to 0.1% HCOOH followed by addition of [\u03b2,\u03b2,\u03b3,\u03b3-<sup>2</sup>H<sub>4</sub>]-SAH (SAH-D<sub>4</sub>) in 20% DMSO as an internal standard for MS quantification. Samples were sonicated with a Hendrix SM-100 sonicator (Microsonics Systems) and centrifuged. SAH was separated from the reaction mixture by reversed phase chromatography using polar endcapped C18 reversed phase columns (Synergi Hydro-RP, 2.5\u2009\u03bcm, 100\u2009\u00c5, 20 x 2\u2009mm, Phenomenex) and detected using a 4000 QTRAP Hybrid Triple Quadrupole/Linear Ion Trap LC-MS/MS system (AB Sciex)."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ], 
+        "decisionLetter": {
+            "doi": "10.7554/eLife.13964.023", 
+            "description": [
+                {
+                    "type": "paragraph", 
+                    "text": "In the interests of transparency, eLife includes the editorial decision letter and accompanying author responses. A lightly edited version of the letter sent to the authors after peer review is shown, indicating the most substantive concerns; minor comments are not usually included."
+                }
+            ], 
+            "content": [
+                {
+                    "type": "paragraph", 
+                    "text": "Thank you for submitting your work entitled \"ERG signaling in prostate cancer is driven through PRMT5-dependent methylation of the Androgen Receptor\" for consideration by <italic>eLife</italic>. Your article has been reviewed by two peer reviewers, and the evaluation has been overseen by a Reviewing Editor and Kevin Struhl as the Senior Editor."
+                }, 
+                {
+                    "type": "paragraph", 
+                    "text": "The reviewers have discussed the reviews with one another and the Reviewing Editor has drafted this decision to help you prepare a revised submission. As you will see below, the reviewers have some concerns that will require quite an additional effort to address. Ordinarily, we allow just two months to return a revised version but we are concerned that this required experiments may take longer to complete. To help us assess the likelihood of a successful completion of the required additional work, please send us a note indicating how you plan to proceed and an estimate of the time it will take to complete the work."
+                }, 
+                {
+                    "type": "paragraph", 
+                    "text": "Summary:"
+                }, 
+                {
+                    "type": "paragraph", 
+                    "text": "In this manuscript, the authors present two major findings: 1) PRMT5 methylates AR at R761 and these methylation results in decreased AR recruitment at target genes and decreased AR function and 2) ERG targets AR to be methylated. Overall, the findings address long-standing questions of ERG function in prostate tumorigenesis and possibly posit new therapies to ERG translocated prostate cancers. This would be certainly relevant to the prostate field. In addition, it is appropriate for a general audience for implications of a general enzyme that affects specific programs. The experiments are well done and logical. The manuscript is well written. However, at this point, there are several critical experiments that should be performed to solidify the conclusion."
+                }, 
+                {
+                    "type": "paragraph", 
+                    "text": "Essential revisions:"
+                }, 
+                {
+                    "type": "paragraph", 
+                    "text": "1) Definition of the ERG and AR binding genome wide with and without PRMT5 and ERG knockdown and correlation with the gene expression is very important for the conclusion. Is AR binding specifically depleted in ERG co-bound sites? The changes genome wide may not reflect the selected sites, as highlighted by the effect of FOXA1 on AR. This does require time and effort. But AR and ERG ChIP-seq is well optimized and ChIP-seq today is cost effective so this is eminently doable."
+                }, 
+                {
+                    "type": "paragraph", 
+                    "text": "2) One weakness of the manuscript, intrinsic to prostate cancer research, is the use of a single ERG positive cell line. So any hit of the screen could be ERG specific, or even more likely, VCAP specific. Since there are no other available ERG dependent cell lines, the authors should note in the manuscript this major caveat. It would be very helpful if the authors could examine xenografts or perform some validation of the mechanisms in primary human tissue samples. For example, authors can IP AR from several ERG positive and ERG negative prostatectomy specimens to assess for methylation."
+                }, 
+                {
+                    "type": "paragraph", 
+                    "text": "3) Mass spec evidence of methylation at R761 would be helpful. Since you know what you're looking for, IP of AR in VCAP and another ERG negative line and looking for this should not be hard and would provide definitive evidence. The mutagenesis is highly suggestive, but could still change conformation in a way such that R761 is not the direct methylation site."
+                }
+            ]
+        }, 
+        "authorResponse": {
+            "doi": "10.7554/eLife.13964.024", 
+            "content": [
+                {
+                    "type": "paragraph", 
+                    "text": "<italic>Essential revisions:</italic>"
+                }, 
+                {
+                    "type": "paragraph", 
+                    "text": "<italic>1) Definition of the ERG and AR binding genome wide with and without PRMT5 and ERG knockdown and correlation with the gene expression is very important for the conclusion. Is AR binding specifically depleted in ERG co-bound sites? The changes genome wide may not reflect the selected sites, as highlighted by the effect of FOXA1 on AR. This does require time and effort. But AR and ERG ChIP-seq is well optimized and ChIP-seq today is cost effective so this is eminently doable.</italic>"
+                }, 
+                {
+                    "type": "paragraph", 
+                    "text": "We thank the reviewers for raising this important point. To extend our findings beyond individual genes, we performed ChIPseq for both ERG and AR in the presence of the androgen molecules R1881 and DHT, and in the absence or presence of PRMT5 knockdown. This data is provided in <xref ref-type=\"fig\" rid=\"fig2\">Figure 2E</xref> and <xref ref-type=\"fig\" rid=\"fig2s3\">Figure 2\u2014figure supplement 3B\u2013D</xref>; raw data is deposited at the NCBI Gene Expression Omnibus under accession number GSE79128. In agreement with our data from directed analyses of the AR targets <italic>KLK3</italic> (aka <italic>PSA</italic>) and <italic>NKX3-1</italic>, the ChIPseq dataset shows a significant increase of AR recruitment upon PRMT5 knockdown at 6% of the total AR-bound cistrome. Genome-wide recruitment of ERG was not significantly affected upon PRMT5 knockdown, including to the sites where AR recruitment was increased (this data is deposited in NCBI, but no figures added to the paper due to the lack of significant findings). This data agrees with our model that ERG recruits PRMT5 to attenuate AR activity to a significant subset of its target genes."
+                }, 
+                {
+                    "type": "paragraph", 
+                    "text": "<italic>2) One weakness of the manuscript, intrinsic to prostate cancer research is the use of a single ERG positive cell line. So any hit of the screen could be ERG specific, or even more likely, VCAP specific. Since there are no other available ERG dependent cell lines, the authors should note in the manuscript this major caveat. It would be very helpful if the authors could examine xenografts or perform some validation of the mechanisms in primary human tissue samples. For example, authors can IP AR from several ERG positive and ERG negative prostatectomy specimens to assess for methylation.</italic>"
+                }, 
+                {
+                    "type": "paragraph", 
+                    "text": "We thank the reviewers for acknowledging the challenges of obtaining appropriate prostate models and patient specimens. To address the general lack of <italic>TMPRSS2:ERG</italic> positive models, we have explored the ERG/PRMT5 interaction using additional model systems. First, in <xref ref-type=\"fig\" rid=\"fig2\">Figure 2C</xref> we expressed exogenous ERG, or a DNA-binding defective mutant of ERG (DNA binding defective, or 'Dx', which is mutant for two key arginines that contact DNA), in AR-positive 22Rv1 prostate cells. This demonstrates that the ERG/PRMT5 interaction can be observed outside VCaP. Furthermore, PRMT5 shRNA in this line demonstrates that the band observed in IP experiments is indeed PRMT5, and further suggests that DNA binding is not required to observe this interaction. Second, in <xref ref-type=\"fig\" rid=\"fig1s1\">Figure 1\u2014figure supplement 1B</xref>, we perform reciprocal PRMT5 and ERG IP\u2019s in AR-negative 293 and PC3 cells, respectively. These data show that the ERG/PRMT5 interaction can occur in the absence of AR. Third, in <xref ref-type=\"fig\" rid=\"fig1s1\">Figure 1\u2014figure supplement 1C</xref>, we generated truncated mutants of ERG, and expressed these constructs in 293 cells. All of these constructs contain the ETS DNA binding domain, suggesting that this domain is required for PRMT5 interaction. Unfortunately, constructs deleted for the ETS DNA binding domain could not be expressed to further confirm this finding. Fourth, in <xref ref-type=\"fig\" rid=\"fig3\">Figure 3B</xref>, we IP\u2019ed AR from prostate tissues of <italic>TMPRSS2:ERG</italic> transgenic mice vs. control mice (Mounir et al., Oncogene 2015); AR immunoprecipitates from the <italic>TMPRSS2:ERG</italic> mouse prostates show increased SDMA and MMA signals at the correct size for AR. Fifth, we show in <xref ref-type=\"fig\" rid=\"fig2s2\">Figure 2\u2014figure supplement 2B</xref> that the effects of PRMT5 knockdown are specific to ERG-dependent AR targets in VCaP, and that PRMT5 knockdown does not affect previously described AR-independent targets of ERG. Together, we feel this data strongly suggests the ERG/PRMT5 interaction, as well as increased AR arginine methylation in the presence of ERG, is present outside of the VCaP model, and that the ability of PRMT5 to mediate ERG activity is specific to AR-dependent genes."
+                }, 
+                {
+                    "type": "paragraph", 
+                    "text": "We further attempted to confirm our findings in human tissue samples. In the absence of an AR-R761me2s-specific antibody for immunoblotting or IHC, we planned to use a chromogenic in situ proximity ligation assay (PLA) (Duolink In Situ \u2013 Brightfield, Sigma \u2013 Aldrich) with primary antibodies recognizing AR and symmetric di-methyl arginine (SDMA) to detect AR-R761me2s in human prostate cancer samples. First, we focused on optimizing PLA for formalin-fixed paraffin-embedded (FFPE) tissues, using FFPE RWPE-1 prostate cells, FFPE human prostate cancer samples, and two primary antibodies against Ki67 (Ki67 mouse monoclonal antibody, Dako; and Ki67 rabbit monoclonal antibody, Vector). While numerous individual spots representing positive signal were detected in the nuclei of RWPE-1 prostate cells, few, if any, spots were seen in the human tissues (see <xref ref-type=\"fig\" rid=\"fig5\">Author response image 1</xref>), suggesting that pre-analytic variables, such as formalin-fixation time and storage conditions, may be have decreased the sensitivity of PLA to a point where the positive signal is below the limit of detection of the assay. Therefore, unfortunately, we do not currently have a robust means of detecting AR-R761me2s in human prostate cancer samples. The generation of a specific AR-R761me2s antibody would be of great benefit; however, we have not yet been able to generate such reagents.", 
+                    "content": [
+                        {
+                            "type": "image", 
+                            "doi": "10.7554/eLife.13964.018", 
+                            "id": "fig5", 
+                            "label": "Author Response Image 1.", 
+                            "title": "<bold>DOI:</bold> <ext-link ext-link-type=\"doi\" xlink:href=\"10.7554/eLife.13964.018\">http://dx.doi.org/10.7554/eLife.13964.018</ext-link>", 
+                            "caption": [
+                                {
+                                    "type": "paragraph", 
+                                    "text": "<bold>DOI:</bold> <ext-link ext-link-type=\"doi\" href=\"10.7554/eLife.13964.018\">http://dx.doi.org/10.7554/eLife.13964.018</ext-link>"
+                                }
+                            ], 
+                            "alt": "", 
+                            "uri": "elife-13964-resp-fig1-v3"
+                        }
+                    ]
+                }, 
+                {
+                    "type": "paragraph", 
+                    "text": "<italic>3) Mass spec evidence of methylation at R761 would be helpful. Since you know what you're looking for, IP of AR in VCAP and another ERG negative line and looking for this should not be hard and would provide definitive evidence. The mutagenesis is highly suggestive, but could still change conformation in a way such that R761 is not the direct methylation site.</italic>"
+                }, 
+                {
+                    "type": "paragraph", 
+                    "text": "We agree that mass spectrometry data would be an important support of our findings. We made several attempts at mass spec identification of the arginine site using AR immunoprecipitated from VCaP cells. Unfortunately, we could not identify this site by mass spectrometry. In our hands, arginine methylation has been generally difficult to detect, including on histones, which are 'classic' PRMT5 targets. We suspect that R761me2s does not occur on the entire population of AR within the cell lysate, which 'masks' the detection of methylated AR by mass spec. This may be in line with the observation that PRMT5 knockdown does not affect AR recruitment to all possible sites in our ChIPseq experiments."
+                }, 
+                {
+                    "type": "paragraph", 
+                    "text": "While not directly addressing the reviewers\u2019 question, we provide additional supporting data that PRMT5 can methylate purified AR ligand binding domain in vitro. These biochemical assays demonstrate PRMT5 activity (SAH production, identification of methylation by western blot) on purified AR but not ERG, and that addition of purified ERG DNA binding domain can facilitate greater PRMT5 activity on AR. This data is provided in <xref ref-type=\"fig\" rid=\"fig3s2\">Figure 3\u2014figure supplement 2A\u2013D</xref>."
+                }
+            ]
+        }
+    }
+}

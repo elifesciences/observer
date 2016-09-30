@@ -1,0 +1,48 @@
+{
+    "journal": {
+        "id": "eLife", 
+        "title": "eLife", 
+        "issn": "2050-084X"
+    }, 
+    "snippet": {
+        "status": "poa", 
+        "id": "18675", 
+        "type": "research-article", 
+        "doi": "10.7554/eLife.18675", 
+        "title": "bMERB domains are bivalent Rab8 family effectors evolved by gene duplication", 
+        "published": "2016-08-23T00:00:00", 
+        "volume": 5, 
+        "elocationId": "e18675", 
+        "pdf": "elife-18675-v3.pdf", 
+        "subjects": [
+            "biochemistry", 
+            "biophysics-structural-biology"
+        ], 
+        "research-organisms": [
+            "Human"
+        ]
+    }, 
+    "article": {
+        "status": "poa", 
+        "id": "18675", 
+        "type": "research-article", 
+        "doi": "10.7554/eLife.18675", 
+        "title": "bMERB domains are bivalent Rab8 family effectors evolved by gene duplication", 
+        "published": "2016-08-23T00:00:00", 
+        "volume": 5, 
+        "elocationId": "e18675", 
+        "pdf": "elife-18675-v3.pdf", 
+        "subjects": [
+            "biochemistry", 
+            "biophysics-structural-biology"
+        ], 
+        "research-organisms": [
+            "Human"
+        ], 
+        "copyright": {
+            "license": "CC-BY-4.0", 
+            "holder": "Rai et al", 
+            "statement": "This article is distributed under the terms of the Creative Commons Attribution License permitting unrestricted use and redistribution provided that the original author and source are credited."
+        }
+    }
+}

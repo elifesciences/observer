@@ -1,0 +1,191 @@
+import os
+from os.path import join
+from django.db import transaction
+import json
+from et3 import render
+from et3.extract import path as p, val
+from . import utils, models
+from .utils import subdict
+from kids.cache import cache
+from functools import partial
+
+POA, VOR = 'poa', 'vor'
+EXCLUDE_ME = 0xDEADBEEF
+
+def doi2msid(doi):
+    "doi to manuscript id used in EJP"
+    prefix = '10.7554/eLife.'
+    return doi[len(prefix):].lstrip('0')
+
+def msid2doi(msid):
+    assert len(str(msid)) <= 5, "given msid is too long: %r" % msid
+    assert utils.isint(msid), "given msid must be an integer: %r" % msid
+    return '10.7554/eLife.%05d' % int(msid)
+
+def wrangle_dt_published(art):
+    if art.get('version', 0) == 1:
+        return art['published']
+    # we can't determine the original datetime published from the data
+    # return a marker that causes this key+val to be removed in post
+    return EXCLUDE_ME
+
+@cache
+def getartobj(msid):
+    try:
+        return models.Article.objects.get(msid=msid)
+    except models.Article.DoesNotExist:
+        return None
+
+def calc_num_poa(art):
+    "how many POA versions of this article have we published?"
+    if art['status'] == POA:
+        return art.get('version', 0)
+    # vor
+    elif art.get('version', 0) == 1:
+        # the first version is a VOR, there are no POA versions
+        return 0
+    # we can't calculate this, exclude from update
+    return EXCLUDE_ME
+
+def calc_num_vor(art):
+    "how many VOR versions of this article have we published?"
+    if art['status'] == VOR:
+        if art.get('version', 0) == 1:
+            return 1
+        #obj = getartobj(int(art['id']))
+        #if obj:
+        #    # ver=3, numpoa=1, then num vor must be 2
+        #    return art['version'] - obj.num_poa_versions
+        
+        # if we had access to the current article:
+        #   return current-version - num-poa-versions
+    return EXCLUDE_ME
+
+def ao(v):
+    msid = v['article']['id']
+    return getartobj(msid)
+
+def todt(v):
+    if v == EXCLUDE_ME:
+        return v
+    return utils.todt(v)
+
+# shift to et3?
+def _or(v):
+    def fn(x):
+        return x if x else v
+    return fn
+
+calc_sub_to_acc = 0
+calc_sub_to_rev = 0
+calc_sub_to_prod = 0
+calc_sub_to_pub = 0
+calc_acc_to_rev = 0
+calc_acc_to_prod = 0
+calc_acc_to_pub = 0
+calc_rev_to_prod = 0
+calc_rev_to_pub = 0
+calc_prod_to_pub = 0
+calc_pub_to_next = 0
+
+
+#
+#
+#
+
+DESC = {
+    'journal_name': [p('journal.title')],
+    'msid': [p('article.id'), int],
+    'title': [p('article.title')],
+    'doi': [p('article.id'), msid2doi],
+    'impact_statement': [p('article.impactStatement', None)],
+    'type': [p('article.type'), _or(models.UNKNOWN_TYPE)],
+    'volume': [p('article.volume')],
+    'num_authors': [p('article.authors', []), len],
+    'num_references': [p('article.references', []), len],
+
+    # assumes we're ingesting the most recent article!
+    # this means bulk ingestion must be done in order
+    # this means we ignore updates to previous versions of an article
+    'current_version': [p('article.version', None)],
+    'status': [p('article.status')],
+    
+    #'datetime_accept_decision': [p('history.received', None), todt],
+
+    'num_poa_versions': [p('article'), calc_num_poa],
+    'num_vor_versions': [p('article'), calc_num_vor],
+    
+    'datetime_published': [p('article'), wrangle_dt_published, todt],
+    'datetime_version_published': [p('article.published'), todt],
+
+    'days_submission_to_acceptance': [ao, calc_sub_to_acc],
+    'days_submission_to_review': [ao, calc_sub_to_rev],
+    'days_submission_to_production': [ao, calc_sub_to_prod],
+    'days_submission_to_publication': [ao, calc_sub_to_pub],
+    'days_accepted_to_review': [ao, calc_acc_to_rev],
+    'days_accepted_to_production': [ao, calc_acc_to_prod],
+    'days_accepted_to_publication': [ao, calc_acc_to_pub],
+    'days_review_to_production': [ao, calc_rev_to_prod],
+    'days_review_to_publication': [ao, calc_rev_to_pub],
+    'days_production_to_publication': [ao, calc_prod_to_pub],
+    'days_publication_to_next_version': [ao, calc_pub_to_next]
+}
+
+def flatten_article_json(article_data, article_history_data={}):
+    "takes article-json and squishes it into something obs can digest"
+    data = article_data
+    data['history'] = article_history_data
+    struct = render.render_item(DESC, data)    
+    return struct
+
+
+def create_or_update(Model, orig_data, key_list, create=True, update=True, commit=True, **overrides):
+    inst = None
+    created = updated = False
+    data = {}
+    data.update(orig_data)
+    data.update(overrides)
+    try:
+        # try and find an entry of Model using the key fields in the given data
+        inst = Model.objects.get(**subdict(data, key_list))
+        # object exists, otherwise DoesNotExist would have been raised
+        if update:
+            
+            # article exists, assert v==v+1?
+            
+            [setattr(inst, key, val) for key, val in data.items() if val != EXCLUDE_ME]
+            updated = True
+    except Model.DoesNotExist:
+
+        # article doesn't exist. assert v==1 ?
+        
+        if create:
+            #inst = Model(**data)
+            # shift this exclude me handling to et3
+            inst = Model(**{k:v for k,v in data.items() if v != EXCLUDE_ME})
+            created = True
+
+    if (updated or created) and commit:
+        inst.save()
+    
+    # it is possible to neither create nor update.
+    # in this case if the model cannot be found then None is returned: (None, False, False)
+    return (inst, created, updated)
+
+@transaction.atomic
+def upsert_article_json(article_data, article_history_data):
+    mush = flatten_article_json(article_data, article_history_data)
+    print(mush['type'])
+    return create_or_update(models.Article, mush, ['msid'])
+
+def bulk_upsert(article_json_dir):
+    paths = utils.gmap(lambda fname: join(article_json_dir, fname), os.listdir(article_json_dir))
+    paths = sorted(paths)
+    results = {}
+    for path in paths:
+        try:
+            triple = upsert_article_json(json.load(open(path, 'r')), {})
+            results[os.path.basename(path)] = triple
+        except Exception as err:
+            print('FAILED',path,err)
+    return results

@@ -1,0 +1,47 @@
+{
+    "journal": {
+        "id": "eLife", 
+        "title": "eLife", 
+        "issn": "2050-084X"
+    }, 
+    "snippet": {
+        "status": "poa", 
+        "id": "13964", 
+        "type": null, 
+        "doi": "10.7554/eLife.13964", 
+        "title": "ERG signaling in prostate cancer is driven through PRMT5-dependent methylation of the androgen receptor", 
+        "published": "2016-05-16T00:00:00", 
+        "volume": 5, 
+        "elocationId": "e13964", 
+        "pdf": null, 
+        "subjects": [
+            "cancer-biology", 
+            "cell-biology"
+        ], 
+        "research-organisms": [
+            "Human"
+        ]
+    }, 
+    "article": {
+        "status": "poa", 
+        "id": "13964", 
+        "type": null, 
+        "doi": "10.7554/eLife.13964", 
+        "title": "ERG signaling in prostate cancer is driven through PRMT5-dependent methylation of the androgen receptor", 
+        "published": "2016-05-16T00:00:00", 
+        "volume": 5, 
+        "elocationId": "e13964", 
+        "subjects": [
+            "cancer-biology", 
+            "cell-biology"
+        ], 
+        "research-organisms": [
+            "Human"
+        ], 
+        "copyright": {
+            "license": "CC-BY-4.0", 
+            "holder": "Mounir et al", 
+            "statement": "This article is distributed under the terms of the Creative Commons Attribution License permitting unrestricted use and redistribution provided that the original author and source are credited."
+        }
+    }
+}
