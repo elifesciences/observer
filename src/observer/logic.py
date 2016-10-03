@@ -25,7 +25,7 @@ def msid2doi(msid):
     return '10.7554/eLife.%05d' % int(msid)
 
 def wrangle_dt_published(art):
-    if art.get('version', 0) == 1:
+    if art['version'] == 1:
         return art['published']
     # we can't determine the original datetime published from the data
     # return a marker that causes this key+val to be removed in post
@@ -40,32 +40,33 @@ def getartobj(msid):
 def calc_num_poa(art):
     "how many POA versions of this article have we published?"
     if art['status'] == POA:
-        return art.get('version', 0)
+        return art['version']
     # vor
-    elif art.get('version', 0) == 1:
+    elif art['version'] == 1:
         # the first version is a VOR, there are no POA versions
         return 0
     # we can't calculate this, exclude from update
     return EXCLUDE_ME
 
-def calc_num_vor(art):
+def calc_num_vor(args):
     "how many VOR versions of this article have we published?"
+    art, artobj = args
     if art['status'] == VOR:
-        if art.get('version', 0) == 1:
+        if art['version'] == 1:
             return 1
-        #obj = getartobj(int(art['id']))
-        #if obj:
-        #    # ver=3, numpoa=1, then num vor must be 2
-        #    return art['version'] - obj.num_poa_versions
-        
-        # if we had access to the current article:
-        #   return current-version - num-poa-versions
+        # ver=3, numpoa=1, then num vor must be 2
+        return art['version'] - artobj.num_poa_versions
     return EXCLUDE_ME
 
 @cache
-def ao(v):
-    msid = v['article']['id']
+def ao(ad):
+    "returns the stored Article Object (ao) for the given row"
+    msid = ad['article']['id']
     return getartobj(msid)
+
+def ado(ad):
+    "returns the Article Data and stored article Object as a pair"
+    return ad['article'], ao(ad)
 
 def todt(v):
     if v == EXCLUDE_ME:
@@ -115,7 +116,7 @@ DESC = {
     #'datetime_accept_decision': [p('history.received', None), todt],
 
     'num_poa_versions': [p('article'), calc_num_poa],
-    'num_vor_versions': [p('article'), calc_num_vor],
+    'num_vor_versions': [ado, calc_num_vor],
     
     'datetime_published': [p('article'), wrangle_dt_published, todt],
     'datetime_version_published': [p('article.published'), todt],
@@ -141,7 +142,6 @@ def flatten_article_json(article_data, article_history_data=None):
     data['history'] = article_history_data
     struct = render.render_item(DESC, data)    
     return struct
-
 
 def create_or_update(Model, orig_data, key_list, create=True, update=True, commit=True, **overrides):
     inst = None
@@ -172,6 +172,7 @@ def create_or_update(Model, orig_data, key_list, create=True, update=True, commi
 
 @transaction.atomic
 def upsert_article_json(article_data, article_history_data):
+    "despite the name, it accepts the article-json as python data, not a json string"
     mush = flatten_article_json(article_data, article_history_data)
 
     assert mush['current_version'] == article_data['article']['version']
@@ -191,20 +192,28 @@ def upsert_article_json(article_data, article_history_data):
 
     return create_or_update(models.Article, mush, ['msid'])
 
+#
+# upsert from file/dir of article-json
+#
+
+def pathdata(path):
+    """parses additional article values from the given path. 
+    assumes a file name similar to: elife-13964-v1"""
+    fname = os.path.basename(path)
+    _, msid, rest = fname.split('-')
+    ver, rest = rest.split('.', 1)
+    return msid, int(ver.strip('v'))
+
 def file_upsert(path):
-    def pathdata(p):
-        """parses additional article values from the given path. 
-        assumes a file name similar to: elife-13964-v1"""
-        fname = os.path.basename(p)
-        _, msid, rest = fname.split('-')
-        ver, rest = rest.split('.', 1)
+    def extra(p):
+        _, ver = pathdata(p)
         return {
             'article': {
-                'version': int(ver.strip('v'))
+                'version': ver
             }
         }
     article_json = json.load(open(path, 'r'))
-    article_json = utils.deepmerge(article_json, pathdata(path))
+    article_json = utils.deepmerge(article_json, extra(path))
     history_data = {}
     return upsert_article_json(article_json, history_data)
 
