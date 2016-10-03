@@ -3,11 +3,10 @@ from os.path import join
 from django.db import transaction
 import json
 from et3 import render
-from et3.extract import path as p, val
+from et3.extract import path as p
 from . import utils, models
 from .utils import subdict
 from kids.cache import cache
-from functools import partial
 
 POA, VOR = 'poa', 'vor'
 EXCLUDE_ME = 0xDEADBEEF

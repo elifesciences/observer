@@ -1,5 +1,5 @@
 from django.db import models
-from django.db.models import PositiveSmallIntegerField, PositiveIntegerField, CharField, DateTimeField, IntegerField, TextField
+from django.db.models import PositiveSmallIntegerField, PositiveIntegerField, CharField, DateTimeField, TextField
 
 POA, VOR = 'poa', 'vor'
 UNKNOWN_TYPE = 'unknown-type'
