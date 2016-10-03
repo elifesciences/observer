@@ -5,7 +5,7 @@ import json
 from et3 import render
 from et3.extract import path as p
 from . import utils, models
-from .utils import subdict
+from .utils import subdict, gmap
 from kids.cache import cache
 
 POA, VOR = 'poa', 'vor'
@@ -213,18 +213,21 @@ def file_upsert(path):
             }
         }
     article_json = json.load(open(path, 'r'))
-    article_json = utils.deepmerge(article_json, extra(path))
+
+    # TODO: remove - the fixtures we're using are only partial
+    if not article_json['article'].get('version'):
+        article_json = utils.deepmerge(article_json, extra(path))
+    
     history_data = {}
     return upsert_article_json(article_json, history_data)
 
 def bulk_upsert(article_json_dir):
     paths = utils.gmap(lambda fname: join(article_json_dir, fname), os.listdir(article_json_dir))
-    paths = sorted(paths)
-    results = {}
-    for path in paths:
+    def safe_handler(path):
         try:
-            triple = file_upsert(path)
-            results[os.path.basename(path)] = triple
+            return file_upsert(path)
+        except StateError:
+            raise
         except Exception as err:
-            print('FAILED',path,err)
-    return results
+            LOG.error("failed to handle %r: %s", path, err)
+    return gmap(safe_handler, sorted(paths))

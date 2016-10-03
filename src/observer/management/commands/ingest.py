@@ -1,4 +1,4 @@
-import sys, json, argparse
+import os, sys,json
 from django.core.management.base import BaseCommand
 import logging
 from observer import logic
@@ -9,28 +9,31 @@ class Command(BaseCommand):
     help = 'ingest article-json from a file or stdin'
 
     def add_arguments(self, parser):
-        parser.add_argument('infile', nargs='?', type=argparse.FileType('r'), default=sys.stdin)
+        parser.add_argument('--target', action='store')
 
     def handle(self, *args, **options):
         self.log_context = {}
+        
+        original_target = options['target']
+        target = os.path.abspath(os.path.expanduser(original_target))
+
+        fn = logic.file_upsert
+        if os.path.isdir(target):
+            fn = logic.bulk_upsert
 
         try:
-            article_json = options['infile'].read()
-            self.log_context['data'] = str(article_json[:25]) + "... (truncated)" if article_json else ''
-            article_data = json.loads(article_json)
-        except json.JSONDecodeError as err:
-            LOG.error("could not decode the json you gave me: %r for data: %r", err, article_json)
-            sys.exit(1)
-
-        # REMOVE: this is a hack because the version isn't available in the article-json we're using yet
-        if not article_data['article'].get('version'):
-            _, ver = logic.pathdata(options['infile'].name)
-            article_data['article']['version'] = ver
+            results = fn(target)
+            if not isinstance(results, list):
+                results = [results]
             
-        try:
-            artobj, created, updated = logic.upsert_article_json(article_data, {})
-            LOG.info("art %s created=%s, updated=%s" % (artobj.msid, created, updated))
+            for result in results:
+                artobj, created, updated = result
+                LOG.info("art %s created=%s, updated=%s" % (artobj.msid, created, updated))
 
+        except json.JSONDecodeError as err:
+            LOG.error("failed to load your bad data: %s", err)
+            sys.exit(1)
+                
         except logic.StateError as err:
             LOG.error("failed to ingest article: %s", err)
             sys.exit(1)
