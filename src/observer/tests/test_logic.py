@@ -6,14 +6,16 @@ from observer import logic, models
 class Logic(BaseCase):
     def setUp(self):
         self.unique_article_count = 4
-        self.article_json = json.load(open(self.ajson_list()[0], 'r'))
+        self.article_json = self.ajson_list()[0]
 
     def test_flatten(self):
-        logic.flatten_article_json(self.article_json)
+        article_json = json.load(open(self.article_json, 'r'))
+        article_json['article']['version'] = 1 # patch fixture with missing
+        logic.flatten_article_json(article_json)
 
     def test_upsert(self):
         self.assertEqual(models.Article.objects.count(), 0)
-        logic.upsert_article_json(self.article_json, {})
+        logic.file_upsert(self.article_json)
         self.assertEqual(models.Article.objects.count(), 1)
 
     def test_bulk_upsert(self):

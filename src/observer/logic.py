@@ -11,6 +11,9 @@ from kids.cache import cache
 POA, VOR = 'poa', 'vor'
 EXCLUDE_ME = 0xDEADBEEF
 
+class StateError(Exception):
+    pass
+
 def doi2msid(doi):
     "doi to manuscript id used in EJP"
     prefix = '10.7554/eLife.'
@@ -28,7 +31,6 @@ def wrangle_dt_published(art):
     # return a marker that causes this key+val to be removed in post
     return EXCLUDE_ME
 
-@cache
 def getartobj(msid):
     try:
         return models.Article.objects.get(msid=msid)
@@ -60,6 +62,7 @@ def calc_num_vor(art):
         #   return current-version - num-poa-versions
     return EXCLUDE_ME
 
+@cache
 def ao(v):
     msid = v['article']['id']
     return getartobj(msid)
@@ -106,7 +109,7 @@ DESC = {
     # assumes we're ingesting the most recent article!
     # this means bulk ingestion must be done in order
     # this means we ignore updates to previous versions of an article
-    'current_version': [p('article.version', None)],
+    'current_version': [p('article.version')],
     'status': [p('article.status')],
     
     #'datetime_accept_decision': [p('history.received', None), todt],
@@ -130,8 +133,10 @@ DESC = {
     'days_publication_to_next_version': [ao, calc_pub_to_next]
 }
 
-def flatten_article_json(article_data, article_history_data={}):
+def flatten_article_json(article_data, article_history_data=None):
     "takes article-json and squishes it into something obs can digest"
+    if not article_history_data:
+        article_history_data = {}        
     data = article_data
     data['history'] = article_history_data
     struct = render.render_item(DESC, data)    
@@ -149,15 +154,9 @@ def create_or_update(Model, orig_data, key_list, create=True, update=True, commi
         inst = Model.objects.get(**subdict(data, key_list))
         # object exists, otherwise DoesNotExist would have been raised
         if update:
-            
-            # article exists, assert v==v+1?
-            
             [setattr(inst, key, val) for key, val in data.items() if val != EXCLUDE_ME]
             updated = True
     except Model.DoesNotExist:
-
-        # article doesn't exist. assert v==1 ?
-        
         if create:
             #inst = Model(**data)
             # shift this exclude me handling to et3
@@ -174,8 +173,40 @@ def create_or_update(Model, orig_data, key_list, create=True, update=True, commi
 @transaction.atomic
 def upsert_article_json(article_data, article_history_data):
     mush = flatten_article_json(article_data, article_history_data)
-    print(mush['type'])
+
+    assert mush['current_version'] == article_data['article']['version']
+
+    orig_art = getartobj(mush['msid'])
+    new_ver = mush['current_version']
+    if orig_art:
+        # article exists, ensure we're not replacing newer with older content
+        orig_ver = orig_art.current_version
+        if new_ver < orig_ver:
+            raise StateError("refusing to replace new article data (v%s) with old article data (v%s)" % \
+                    (orig_ver, new_ver))
+    else:
+        # article does not exist, ensure we're inserting v1 content
+        if new_ver != 1:
+            raise StateError("refusing to create article with non v1 article data (v%s). articles must be created in order!" % new_ver)
+
     return create_or_update(models.Article, mush, ['msid'])
+
+def file_upsert(path):
+    def pathdata(p):
+        """parses additional article values from the given path. 
+        assumes a file name similar to: elife-13964-v1"""
+        fname = os.path.basename(p)
+        _, msid, rest = fname.split('-')
+        ver, rest = rest.split('.', 1)
+        return {
+            'article': {
+                'version': int(ver.strip('v'))
+            }
+        }
+    article_json = json.load(open(path, 'r'))
+    article_json = utils.deepmerge(article_json, pathdata(path))
+    history_data = {}
+    return upsert_article_json(article_json, history_data)
 
 def bulk_upsert(article_json_dir):
     paths = utils.gmap(lambda fname: join(article_json_dir, fname), os.listdir(article_json_dir))
@@ -183,7 +214,7 @@ def bulk_upsert(article_json_dir):
     results = {}
     for path in paths:
         try:
-            triple = upsert_article_json(json.load(open(path, 'r')), {})
+            triple = file_upsert(path)
             results[os.path.basename(path)] = triple
         except Exception as err:
             print('FAILED',path,err)
