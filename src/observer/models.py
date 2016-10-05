@@ -99,3 +99,8 @@ class Article(models.Model):
     #pdf_url
     #xml_url
     #json_url
+
+    #has_digest
+    
+    class Meta:
+        db_table = 'articles'
