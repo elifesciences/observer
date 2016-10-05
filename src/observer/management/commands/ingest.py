@@ -23,13 +23,6 @@ class Command(BaseCommand):
 
         try:
             results = fn(target)
-            if not isinstance(results, list):
-                results = [results]
-            
-            for result in results:
-                artobj, created, updated = result
-                LOG.info("art %s created=%s, updated=%s" % (artobj.msid, created, updated))
-
         except json.JSONDecodeError as err:
             LOG.error("failed to load your bad data: %s", err)
             sys.exit(1)
