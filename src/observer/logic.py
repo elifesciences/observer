@@ -7,6 +7,9 @@ from et3.extract import path as p
 from . import utils, models
 from .utils import subdict, gmap
 from kids.cache import cache
+import logging
+
+LOG = logging.getLogger(__name__)
 
 POA, VOR = 'poa', 'vor'
 EXCLUDE_ME = 0xDEADBEEF
@@ -219,8 +222,10 @@ def file_upsert(path):
         article_json = utils.deepmerge(article_json, extra(path))
     
     history_data = {}
+    LOG.info("ingesting article %s-v%s", article_json['article']['id'], article_json['article']['version'])
     return upsert_article_json(article_json, history_data)
 
+@transaction.atomic
 def bulk_upsert(article_json_dir):
     paths = utils.gmap(lambda fname: join(article_json_dir, fname), os.listdir(article_json_dir))
     def safe_handler(path):
