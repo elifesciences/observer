@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+from os.path import join
+from pythonjsonlogger import jsonlogger
+
+PROJECT_NAME = 'observer'
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -120,3 +124,67 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+#
+# logging
+#
+
+LOG_NAME = '%s.log' % PROJECT_NAME # ll: lax.log
+LOG_FILE = join(PROJECT_DIR, LOG_NAME) # ll: /path/to/lax/log/lax.log
+
+if not DEBUG:
+    LOG_FILE = join('/var/log/', LOG_NAME) # ll: /var/log/lax.log
+
+# whereever our log files are, ensure they are writable before we do anything else.
+def writable(path):
+    os.system('touch ' + path)
+    # https://docs.python.org/2/library/os.html
+    assert os.access(path, os.W_OK), "file doesn't exist or isn't writable: %s" % path
+
+writable(LOG_FILE)
+
+ATTRS = ['asctime', 'created', 'levelname', 'message', 'filename', 'funcName', 'lineno', 'module', 'pathname']
+FORMAT_STR = ' '.join(map(lambda v: '%('+v+')s', ATTRS))
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+
+    'formatters': {
+        'json': {
+            '()': jsonlogger.JsonFormatter,
+            'format': FORMAT_STR,
+        },
+        'brief': {
+            'format': '%(levelname)s - %(message)s'
+        },
+    },
+    
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': LOG_FILE,
+            'formatter': 'json',
+        },
+        'debug-console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'brief',
+        },
+    },
+    
+    'loggers': {
+        '': {
+            'handlers': ['debug-console', 'file'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        'django.request': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
