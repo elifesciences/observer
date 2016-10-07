@@ -1,5 +1,5 @@
 from django.db import models
-from django.db.models import PositiveSmallIntegerField, PositiveIntegerField, CharField, DateTimeField, TextField
+from django.db.models import PositiveSmallIntegerField, PositiveIntegerField, CharField, DateTimeField, TextField, NullBooleanField
 
 POA, VOR = 'poa', 'vor'
 UNKNOWN_TYPE = 'unknown-type'
@@ -69,10 +69,24 @@ class Article(models.Model):
     num_vor_versions = PositiveSmallIntegerField(default=0)
 
     # these can all be pulled from the article-history endpoint
-    datetime_submitted = DateTimeField(null=True)
+    datetime_submitted = DateTimeField(null=True, help_text="when the author uploaded their article")
+    
+    datetime_initial_qc_complete = DateTimeField(null=True, help_text="when author hands off submission for review")
+    datetime_initial_decision = DateTimeField(null=True, help_text="when decision to accept/reject/revise was made")
+    initial_decision = models.CharField(max_length=25, null=True, choices=decision_codes())
+
+    datetime_full_qc = models.DateField(null=True)
+    datetime_full_decision = models.DateField(null=True)
+    decision = models.CharField(max_length=25, null=True, choices=decision_codes()) 
+
     datetime_accept_decision = DateTimeField(null=True, help_text="this is a accept OR reject decision")
+    accepted_in_revision = PositiveSmallIntegerField(null=True, help_text="in which revision was the manuscript accepted?")
+
+    # these two probably conflict with the initial_qc and full_qc above
     datetime_entered_review = DateTimeField(null=True)
     datetime_entered_production = DateTimeField(null=True)
+
+
     datetime_published = DateTimeField(null=True)
     datetime_version_published = DateTimeField(help_text="date and time current version of article published")
 
@@ -100,7 +114,7 @@ class Article(models.Model):
     #xml_url
     #json_url
 
-    #has_digest
+    has_digest = NullBooleanField(null=True, help_text="Null/None means I don't know!")
     
     class Meta:
         db_table = 'articles'
