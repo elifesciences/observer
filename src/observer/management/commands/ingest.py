@@ -22,7 +22,7 @@ class Command(BaseCommand):
             fn = logic.bulk_upsert
 
         try:
-            results = fn(target)
+            fn(target)
         except json.JSONDecodeError as err:
             LOG.error("failed to load your bad data: %s", err)
             sys.exit(1)
