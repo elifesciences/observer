@@ -9,7 +9,7 @@ class Command(BaseCommand):
     help = 'ingest article-json from a file or stdin'
 
     def add_arguments(self, parser):
-        parser.add_argument('--target', action='store')
+        parser.add_argument('--target', required=True, action='store')
 
     def handle(self, *args, **options):
         self.log_context = {}

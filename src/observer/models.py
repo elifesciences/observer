@@ -49,6 +49,17 @@ class JournalMetric(models.Model):
     metrics = CharField(max_length=10, choices=metric_choices())
 '''
 
+def decision_codes():
+    return [
+        ('reject-initial-submission', 'RJI'),
+        ('reject-full-submission', 'RJF'),
+        ('revise-full-submission', 'RVF'),
+        ('accept-full-submission', 'AF'),
+        ('encourage-full-submission', 'EF'),
+        ('simple-withdraw', 'SW')
+    ]
+    
+
 class Article(models.Model):
     journal_name = models.CharField(max_length=255)
     msid = PositiveIntegerField(unique=True, help_text="article identifier from beginning of submission process right through to end of publication.")
@@ -70,6 +81,8 @@ class Article(models.Model):
 
     # these can all be pulled from the article-history endpoint
     datetime_submitted = DateTimeField(null=True, help_text="when the author uploaded their article")
+
+    num_revisions = PositiveSmallIntegerField(null=True, help_text="number of revisions article has currently gone through")
     
     datetime_initial_qc_complete = DateTimeField(null=True, help_text="when author hands off submission for review")
     datetime_initial_decision = DateTimeField(null=True, help_text="when decision to accept/reject/revise was made")
@@ -104,7 +117,7 @@ class Article(models.Model):
     days_review_to_production = PositiveSmallIntegerField(null=True)
     days_review_to_publication = PositiveSmallIntegerField(null=True)
     days_production_to_publication = PositiveSmallIntegerField(null=True)
-    days_publication_to_next_version = PositiveSmallIntegerField(null=True)
+    days_publication_to_current_version = PositiveSmallIntegerField(null=True, help_text="day elapsed between v1 and current versionb")
 
     num_views = PositiveIntegerField(default=0)
     num_downloads = PositiveIntegerField(default=0)

@@ -8,6 +8,7 @@ from . import utils, models
 from .utils import subdict, gmap
 from kids.cache import cache
 import logging
+from django.conf import settings
 
 LOG = logging.getLogger(__name__)
 
@@ -92,12 +93,25 @@ calc_acc_to_pub = 0
 calc_rev_to_prod = 0
 calc_rev_to_pub = 0
 calc_prod_to_pub = 0
-calc_pub_to_next = 0
 
+def calc_pub_to_current(v):
+    art_struct, art_obj = v
+    if not art_obj: # or art_struct['version'] == 1:
+        # article doesn't exist yet must be a v1, or
+        # we're reingesting v1 again
+        return 0
+    v1dt = art_obj.datetime_published
+    vNdt = todt(art_struct['published'])
+    return (vNdt - v1dt).days
 
 #
 #
 #
+
+def has_key(key):
+    def fn(v):
+        return key in v
+    return fn
 
 DESC = {
     'journal_name': [p('journal.title')],
@@ -115,15 +129,22 @@ DESC = {
     # this means we ignore updates to previous versions of an article
     'current_version': [p('article.version')],
     'status': [p('article.status')],
-    
-    #'datetime_accept_decision': [p('history.received', None), todt],
 
     'num_poa_versions': [p('article'), calc_num_poa],
     'num_vor_versions': [ado, calc_num_vor],
-    
+
     'datetime_published': [p('article'), wrangle_dt_published, todt],
     'datetime_version_published': [p('article.published'), todt],
 
+    'days_publication_to_current_version': [ado, calc_pub_to_current],
+    
+    'has_digest': [p('article'), has_key('digest')],
+}
+
+# calculated from art history response
+ART_HISTORY = {
+    #'num_revisions': [],
+    'datetime_accept_decision': [p('history.received', None), todt],
     'days_submission_to_acceptance': [ao, calc_sub_to_acc],
     'days_submission_to_review': [ao, calc_sub_to_rev],
     'days_submission_to_production': [ao, calc_sub_to_prod],
@@ -134,7 +155,13 @@ DESC = {
     'days_review_to_production': [ao, calc_rev_to_prod],
     'days_review_to_publication': [ao, calc_rev_to_pub],
     'days_production_to_publication': [ao, calc_prod_to_pub],
-    'days_publication_to_next_version': [ao, calc_pub_to_next]
+}
+
+# calculated from art metrics
+ART_POPULARITY = {
+    'num_views': [],
+    'num_downloads': [],
+    'num_citations': [],
 }
 
 def flatten_article_json(article_data, article_history_data=None):
@@ -143,7 +170,7 @@ def flatten_article_json(article_data, article_history_data=None):
         article_history_data = {}        
     data = article_data
     data['history'] = article_history_data
-    struct = render.render_item(DESC, data)    
+    struct = render.render_item(DESC, data)
     return struct
 
 def create_or_update(Model, orig_data, key_list, create=True, update=True, commit=True, **overrides):
@@ -218,7 +245,8 @@ def file_upsert(path):
     article_json = json.load(open(path, 'r'))
 
     # TODO: remove - the fixtures we're using are only partial
-    if not article_json['article'].get('version'):
+    ver = article_json['article'].get('version')
+    if not ver or ver > 5: # we've never had a v5 article
         article_json = utils.deepmerge(article_json, extra(path))
     
     history_data = {}
@@ -235,4 +263,7 @@ def bulk_upsert(article_json_dir):
             raise
         except Exception as err:
             LOG.error("failed to handle %r: %s", path, err)
+            if settings.DEBUG:
+                # failfast in debug mode
+                raise
     return gmap(safe_handler, sorted(paths))
