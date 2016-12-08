@@ -1,7 +1,7 @@
 import json
 from os.path import join
 from .base import BaseCase
-from observer import logic, models
+from observer import logic, models, utils
 
 class Logic(BaseCase):
     def setUp(self):
@@ -46,3 +46,34 @@ class Logic(BaseCase):
             except AssertionError as err:
                 print('failed on',msid,'with vers',vers)
                 raise err
+
+class AggregateLogic(BaseCase):
+    def setUp(self):
+        # 13964 v1,v2,v3
+        # 14850 v1
+        # 15378 v1,v2,v3
+        # 18675 v1,v2,v3,v4
+        logic.bulk_upsert(join(self.fixture_dir, 'ajson'))
+
+    def test_calc_poa_published(self):
+        poa_pubdates = {
+            '13964': '2016-05-16T00:00:00',
+            '14850': None, # no poa
+            '15378': '2016-07-29T00:00:00',
+            '18675': '2016-08-23T00:00:00'
+        }
+        for msid, expected_dt in poa_pubdates.items():
+            obj = models.Article.objects.get(msid=msid)
+            self.assertEqual(obj.datetime_poa_published, utils.todt(expected_dt))
+
+    def test_calc_vor_published(self):
+        vor_pubdates = {
+            '13964': '2016-05-16T00:00:00',
+            '14850': '2016-07-21T00:00:00',
+            '15378': '2016-07-29T00:00:00',
+            '18675': '2016-08-23T00:00:00'
+        }
+        for msid, expected_dt in vor_pubdates.items():
+            obj = models.Article.objects.get(msid=msid)
+            self.assertEqual(obj.datetime_vor_published, utils.todt(expected_dt), "failed to calculate vor for %s" % msid)
+        
