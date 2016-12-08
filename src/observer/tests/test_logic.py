@@ -26,9 +26,27 @@ class Logic(BaseCase):
         logic.bulk_upsert(join(self.fixture_dir, 'ajson'))
         self.assertEqual(models.Article.objects.count(), self.unique_article_count)
 
+class AggregateLogic(BaseCase):
+    def setUp(self):
+        # 13964 v1,v2,v3
+        # 14850 v1
+        # 15378 v1,v2,v3
+        # 18675 v1,v2,v3,v4
+        logic.bulk_upsert(join(self.fixture_dir, 'ajson'))
+
+    def test_num_authors(self):
+        expected_authors = {
+            '13964': 24,
+            '14850': 4,
+            '15378': 5,
+            '18675': 9
+        }
+        for msid, author_count in expected_authors.items():
+            art = models.Article.objects.get(msid=msid)
+            self.assertEqual(art.num_authors, author_count)
+
     def test_num_versions(self):
         "ensure our version calculations are correct"
-        logic.bulk_upsert(join(self.fixture_dir, 'ajson'))
         expected_versions = {
             13964: (3, 2, 1),
             14850: (1, 0, 1),
@@ -46,14 +64,6 @@ class Logic(BaseCase):
             except AssertionError as err:
                 print('failed on',msid,'with vers',vers)
                 raise err
-
-class AggregateLogic(BaseCase):
-    def setUp(self):
-        # 13964 v1,v2,v3
-        # 14850 v1
-        # 15378 v1,v2,v3
-        # 18675 v1,v2,v3,v4
-        logic.bulk_upsert(join(self.fixture_dir, 'ajson'))
 
     def test_calc_poa_published(self):
         poa_pubdates = {
