@@ -1,3 +1,5 @@
+import os
+from os.path import join
 import copy
 from dateutil import parser
 from datetime import datetime
@@ -5,6 +7,14 @@ import pytz
 
 import logging
 LOG = logging.getLogger(__name__)
+
+def listfiles(path, ext_list=None):
+    "returns a list of absolute paths for given dir"
+    path_list = map(lambda fname: os.path.abspath(join(path, fname)), os.listdir(path))
+    if ext_list:
+        path_list = filter(lambda path: os.path.splitext(path)[1] in ext_list, path_list)
+    return sorted(filter(os.path.isfile, path_list))
+
 
 def isint(v):
     try:

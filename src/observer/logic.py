@@ -1,5 +1,5 @@
 import os
-from os.path import join
+#from os.path import join
 from django.db import transaction
 import json
 from et3 import render
@@ -108,6 +108,27 @@ def calc_pub_to_current(v):
 #
 #
 
+def calc_poa_published(args):
+    "returns the date the poa was first published. None if never published"
+    art_struct, art_obj = args
+    if art_struct['version'] == 1 and art_struct['status'] == models.POA:
+        # ideal case, v1 POA
+        return art_struct['published']
+    # can't calculate, ignore
+    return EXCLUDE_ME
+
+def calc_vor_published(args):
+    "returns the date the poa was first published. None if never published"
+    art_struct, art_obj = args
+    if art_struct['version'] == 1 and art_struct['status'] == models.VOR:
+        # ideal case
+        return art_struct['published']
+    # consult previous obj
+    if art_obj and art_obj.status == models.POA and art_struct['status'] == models.VOR:
+        return art_struct['published']
+    # can't calculate, ignore
+    return EXCLUDE_ME
+    
 def has_key(key):
     def fn(v):
         return key in v
@@ -135,6 +156,9 @@ DESC = {
 
     'datetime_published': [p('article'), wrangle_dt_published, todt],
     'datetime_version_published': [p('article.published'), todt],
+
+    'datetime_poa_published': [ado, calc_poa_published, todt],
+    'datetime_vor_published': [ado, calc_vor_published, todt],
 
     'days_publication_to_current_version': [ado, calc_pub_to_current],
     
@@ -255,7 +279,8 @@ def file_upsert(path):
 
 @transaction.atomic
 def bulk_upsert(article_json_dir):
-    paths = utils.gmap(lambda fname: join(article_json_dir, fname), os.listdir(article_json_dir))
+    #paths = utils.gmap(lambda fname: join(article_json_dir, fname), os.listdir(article_json_dir))
+    paths = utils.listfiles(article_json_dir, ['.json'])
     def safe_handler(path):
         try:
             return file_upsert(path)

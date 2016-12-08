@@ -7,41 +7,755 @@
     "snippet": {
         "status": "poa", 
         "id": "13964", 
-        "type": null, 
+        "version": 1, 
+        "type": "short-report", 
         "doi": "10.7554/eLife.13964", 
+        "authorLine": "Zineb Mounir et al", 
         "title": "ERG signaling in prostate cancer is driven through PRMT5-dependent methylation of the androgen receptor", 
-        "published": "2016-05-16T00:00:00", 
+        "published": "2016-05-16T00:00:00Z", 
+        "versionDate": "2016-05-16T00:00:00Z", 
         "volume": 5, 
         "elocationId": "e13964", 
-        "pdf": null, 
+        "pdf": "https://publishing-cdn.elifesciences.org/13964/elife-13964-v1.pdf", 
         "subjects": [
-            "cancer-biology", 
-            "cell-biology"
+            {
+                "id": "cancer-biology", 
+                "name": "Cancer Biology"
+            }, 
+            {
+                "id": "cell-biology", 
+                "name": "Cell Biology"
+            }
         ], 
-        "research-organisms": [
+        "researchOrganisms": [
             "Human"
-        ]
+        ], 
+        "abstract": {
+            "content": [
+                {
+                    "type": "paragraph", 
+                    "text": "The <i>TMPRSS2:ERG</i> gene fusion is common in androgen receptor (AR) positive prostate cancers, yet its function remains poorly understood. From a screen for functionally relevant ERG interactors, we identify the arginine methyltransferase PRMT5. ERG recruits PRMT5 to AR-target genes, where PRMT5 methylates AR on arginine 761. This attenuates AR recruitment and transcription of genes expressed in differentiated prostate epithelium. The AR-inhibitory function of PRMT5 is restricted to <i>TMPRSS2:ERG</i>-positive prostate cancer cells. Mutation of this methylation site on AR results in a transcriptionally hyperactive AR, suggesting that the proliferative effects of ERG and PRMT5 are mediated through attenuating AR's ability to induce genes normally involved in lineage differentiation. This provides a rationale for targeting PRMT5 in <i>TMPRSS2:ERG</i> positive prostate cancers. Moreover, methylation of AR at arginine 761 highlights a mechanism for how the ERG oncogene may coax AR towards inducing proliferation versus differentiation."
+                }
+            ]
+        }
     }, 
     "article": {
         "status": "poa", 
         "id": "13964", 
-        "type": null, 
+        "version": 1, 
+        "type": "short-report", 
         "doi": "10.7554/eLife.13964", 
+        "authorLine": "Zineb Mounir et al", 
         "title": "ERG signaling in prostate cancer is driven through PRMT5-dependent methylation of the androgen receptor", 
-        "published": "2016-05-16T00:00:00", 
+        "published": "2016-05-16T00:00:00Z", 
+        "versionDate": "2016-05-16T00:00:00Z", 
         "volume": 5, 
         "elocationId": "e13964", 
+        "pdf": "https://publishing-cdn.elifesciences.org/13964/elife-13964-v1.pdf", 
         "subjects": [
-            "cancer-biology", 
-            "cell-biology"
+            {
+                "id": "cancer-biology", 
+                "name": "Cancer Biology"
+            }, 
+            {
+                "id": "cell-biology", 
+                "name": "Cell Biology"
+            }
         ], 
-        "research-organisms": [
+        "researchOrganisms": [
             "Human"
         ], 
+        "abstract": {
+            "content": [
+                {
+                    "type": "paragraph", 
+                    "text": "The <i>TMPRSS2:ERG</i> gene fusion is common in androgen receptor (AR) positive prostate cancers, yet its function remains poorly understood. From a screen for functionally relevant ERG interactors, we identify the arginine methyltransferase PRMT5. ERG recruits PRMT5 to AR-target genes, where PRMT5 methylates AR on arginine 761. This attenuates AR recruitment and transcription of genes expressed in differentiated prostate epithelium. The AR-inhibitory function of PRMT5 is restricted to <i>TMPRSS2:ERG</i>-positive prostate cancer cells. Mutation of this methylation site on AR results in a transcriptionally hyperactive AR, suggesting that the proliferative effects of ERG and PRMT5 are mediated through attenuating AR's ability to induce genes normally involved in lineage differentiation. This provides a rationale for targeting PRMT5 in <i>TMPRSS2:ERG</i> positive prostate cancers. Moreover, methylation of AR at arginine 761 highlights a mechanism for how the ERG oncogene may coax AR towards inducing proliferation versus differentiation."
+                }
+            ]
+        }, 
         "copyright": {
             "license": "CC-BY-4.0", 
             "holder": "Mounir et al", 
             "statement": "This article is distributed under the terms of the Creative Commons Attribution License permitting unrestricted use and redistribution provided that the original author and source are credited."
-        }
+        }, 
+        "authors": [
+            {
+                "type": "person", 
+                "name": {
+                    "preferred": "Zineb Mounir", 
+                    "index": "Mounir, Zineb"
+                }, 
+                "affiliations": [
+                    {
+                        "name": [
+                            "Genentech"
+                        ], 
+                        "address": {
+                            "formatted": [
+                                "South San Francisco", 
+                                "United States"
+                            ], 
+                            "components": {
+                                "locality": [
+                                    "South San Francisco"
+                                ], 
+                                "country": "United States"
+                            }
+                        }
+                    }
+                ], 
+                "competingInterests": "The authors declare that no competing interests exist."
+            }, 
+            {
+                "type": "person", 
+                "name": {
+                    "preferred": "Joshua M Korn", 
+                    "index": "Korn, Joshua M"
+                }, 
+                "affiliations": [
+                    {
+                        "name": [
+                            "Department of Oncology", 
+                            "Novartis Institutes for BioMedical Research"
+                        ], 
+                        "address": {
+                            "formatted": [
+                                "Cambridge", 
+                                "United States"
+                            ], 
+                            "components": {
+                                "locality": [
+                                    "Cambridge"
+                                ], 
+                                "country": "United States"
+                            }
+                        }
+                    }
+                ], 
+                "competingInterests": "The authors declare that no competing interests exist."
+            }, 
+            {
+                "type": "person", 
+                "name": {
+                    "preferred": "Thomas Westerling", 
+                    "index": "Westerling, Thomas"
+                }, 
+                "affiliations": [
+                    {
+                        "name": [
+                            "Department of Medical Oncology, Center for Functional Cancer Epigenetics, Dana-Farber Cancer Institute", 
+                            "Harvard Medical School"
+                        ], 
+                        "address": {
+                            "formatted": [
+                                "Boston", 
+                                "United States"
+                            ], 
+                            "components": {
+                                "locality": [
+                                    "Boston"
+                                ], 
+                                "country": "United States"
+                            }
+                        }
+                    }
+                ], 
+                "competingInterests": "The authors declare that no competing interests exist."
+            }, 
+            {
+                "type": "person", 
+                "name": {
+                    "preferred": "Fallon Lin", 
+                    "index": "Lin, Fallon"
+                }, 
+                "affiliations": [
+                    {
+                        "name": [
+                            "Department of Oncology", 
+                            "Novartis Institutes for BioMedical Research"
+                        ], 
+                        "address": {
+                            "formatted": [
+                                "Cambridge", 
+                                "United States"
+                            ], 
+                            "components": {
+                                "locality": [
+                                    "Cambridge"
+                                ], 
+                                "country": "United States"
+                            }
+                        }
+                    }
+                ], 
+                "competingInterests": "The authors declare that no competing interests exist."
+            }, 
+            {
+                "type": "person", 
+                "name": {
+                    "preferred": "Christina A Kirby", 
+                    "index": "Kirby, Christina A"
+                }, 
+                "affiliations": [
+                    {
+                        "name": [
+                            "Center for Proteomic Chemistry", 
+                            "Novartis Institutes for BioMedical Research"
+                        ], 
+                        "address": {
+                            "formatted": [
+                                "Cambridge", 
+                                "United States"
+                            ], 
+                            "components": {
+                                "locality": [
+                                    "Cambridge"
+                                ], 
+                                "country": "United States"
+                            }
+                        }
+                    }
+                ], 
+                "competingInterests": "The authors declare that no competing interests exist."
+            }, 
+            {
+                "type": "person", 
+                "name": {
+                    "preferred": "Markus Schirle", 
+                    "index": "Schirle, Markus"
+                }, 
+                "affiliations": [
+                    {
+                        "name": [
+                            "Developmental and Molecular Pathways", 
+                            "Novartis Institutes for Biomedical Research"
+                        ], 
+                        "address": {
+                            "formatted": [
+                                "Cambridge", 
+                                "United States"
+                            ], 
+                            "components": {
+                                "locality": [
+                                    "Cambridge"
+                                ], 
+                                "country": "United States"
+                            }
+                        }
+                    }
+                ], 
+                "competingInterests": "The authors declare that no competing interests exist."
+            }, 
+            {
+                "type": "person", 
+                "name": {
+                    "preferred": "Gregg McAllister", 
+                    "index": "McAllister, Gregg"
+                }, 
+                "affiliations": [
+                    {
+                        "name": [
+                            "Developmental and Molecular Pathways", 
+                            "Novartis Institutes for Biomedical Research"
+                        ], 
+                        "address": {
+                            "formatted": [
+                                "Cambridge", 
+                                "United States"
+                            ], 
+                            "components": {
+                                "locality": [
+                                    "Cambridge"
+                                ], 
+                                "country": "United States"
+                            }
+                        }
+                    }
+                ], 
+                "competingInterests": "The authors declare that no competing interests exist."
+            }, 
+            {
+                "type": "person", 
+                "name": {
+                    "preferred": "Greg Hoffman", 
+                    "index": "Hoffman, Greg"
+                }, 
+                "affiliations": [
+                    {
+                        "name": [
+                            "Developmental and Molecular Pathways", 
+                            "Novartis Institutes for Biomedical Research"
+                        ], 
+                        "address": {
+                            "formatted": [
+                                "Cambridge", 
+                                "United States"
+                            ], 
+                            "components": {
+                                "locality": [
+                                    "Cambridge"
+                                ], 
+                                "country": "United States"
+                            }
+                        }
+                    }
+                ], 
+                "competingInterests": "The authors declare that no competing interests exist."
+            }, 
+            {
+                "type": "person", 
+                "name": {
+                    "preferred": "Nadire Ramadan", 
+                    "index": "Ramadan, Nadire"
+                }, 
+                "affiliations": [
+                    {
+                        "name": [
+                            "Developmental and Molecular Pathways", 
+                            "Novartis Institutes for Biomedical Research"
+                        ], 
+                        "address": {
+                            "formatted": [
+                                "Cambridge", 
+                                "United States"
+                            ], 
+                            "components": {
+                                "locality": [
+                                    "Cambridge"
+                                ], 
+                                "country": "United States"
+                            }
+                        }
+                    }
+                ], 
+                "competingInterests": "The authors declare that no competing interests exist."
+            }, 
+            {
+                "type": "person", 
+                "name": {
+                    "preferred": "Anke Hartung", 
+                    "index": "Hartung, Anke"
+                }, 
+                "affiliations": [
+                    {
+                        "name": [
+                            "Organovo"
+                        ], 
+                        "address": {
+                            "formatted": [
+                                "San Diego", 
+                                "United States"
+                            ], 
+                            "components": {
+                                "locality": [
+                                    "San Diego"
+                                ], 
+                                "country": "United States"
+                            }
+                        }
+                    }
+                ], 
+                "competingInterests": "The authors declare that no competing interests exist."
+            }, 
+            {
+                "type": "person", 
+                "name": {
+                    "preferred": "Yan Feng", 
+                    "index": "Feng, Yan"
+                }, 
+                "affiliations": [
+                    {
+                        "name": [
+                            "Developmental and Molecular Pathways", 
+                            "Novartis Institutes for Biomedical Research"
+                        ], 
+                        "address": {
+                            "formatted": [
+                                "Cambridge", 
+                                "United States"
+                            ], 
+                            "components": {
+                                "locality": [
+                                    "Cambridge"
+                                ], 
+                                "country": "United States"
+                            }
+                        }
+                    }
+                ], 
+                "competingInterests": "The authors declare that no competing interests exist."
+            }, 
+            {
+                "type": "person", 
+                "name": {
+                    "preferred": "David Randal Kipp", 
+                    "index": "Kipp, David Randal"
+                }, 
+                "affiliations": [
+                    {
+                        "name": [
+                            "Oncology", 
+                            "NIBR"
+                        ], 
+                        "address": {
+                            "formatted": [
+                                "Cambridge", 
+                                "United States"
+                            ], 
+                            "components": {
+                                "locality": [
+                                    "Cambridge"
+                                ], 
+                                "country": "United States"
+                            }
+                        }
+                    }
+                ], 
+                "competingInterests": "The authors declare that no competing interests exist."
+            }, 
+            {
+                "type": "person", 
+                "name": {
+                    "preferred": "Christopher Quinn", 
+                    "index": "Quinn, Christopher"
+                }, 
+                "affiliations": [
+                    {
+                        "name": [
+                            "Oncology", 
+                            "NIBR"
+                        ], 
+                        "address": {
+                            "formatted": [
+                                "Cambridge", 
+                                "United States"
+                            ], 
+                            "components": {
+                                "locality": [
+                                    "Cambridge"
+                                ], 
+                                "country": "United States"
+                            }
+                        }
+                    }
+                ], 
+                "competingInterests": "The authors declare that no competing interests exist."
+            }, 
+            {
+                "type": "person", 
+                "name": {
+                    "preferred": "Michelle Fodor", 
+                    "index": "Fodor, Michelle"
+                }, 
+                "affiliations": [
+                    {
+                        "name": [
+                            "Oncology", 
+                            "NIBR"
+                        ], 
+                        "address": {
+                            "formatted": [
+                                "Cambridge", 
+                                "United States"
+                            ], 
+                            "components": {
+                                "locality": [
+                                    "Cambridge"
+                                ], 
+                                "country": "United States"
+                            }
+                        }
+                    }
+                ], 
+                "competingInterests": "The authors declare that no competing interests exist."
+            }, 
+            {
+                "type": "person", 
+                "name": {
+                    "preferred": "Jason Baird", 
+                    "index": "Baird, Jason"
+                }, 
+                "affiliations": [
+                    {
+                        "name": [
+                            "Oncology", 
+                            "NIBR"
+                        ], 
+                        "address": {
+                            "formatted": [
+                                "Cambridge", 
+                                "United States"
+                            ], 
+                            "components": {
+                                "locality": [
+                                    "Cambridge"
+                                ], 
+                                "country": "United States"
+                            }
+                        }
+                    }
+                ], 
+                "competingInterests": "The authors declare that no competing interests exist."
+            }, 
+            {
+                "type": "person", 
+                "name": {
+                    "preferred": "Marie Schoumacher", 
+                    "index": "Schoumacher, Marie"
+                }, 
+                "affiliations": [
+                    {
+                        "name": [
+                            "Laboratoires Servier"
+                        ], 
+                        "address": {
+                            "formatted": [
+                                "Neuilly-sur-Seine", 
+                                "France"
+                            ], 
+                            "components": {
+                                "locality": [
+                                    "Neuilly-sur-Seine"
+                                ], 
+                                "country": "France"
+                            }
+                        }
+                    }
+                ], 
+                "competingInterests": "The authors declare that no competing interests exist."
+            }, 
+            {
+                "type": "person", 
+                "name": {
+                    "preferred": "Ronald Meyer", 
+                    "index": "Meyer, Ronald"
+                }, 
+                "affiliations": [
+                    {
+                        "name": [
+                            "Department of Oncology", 
+                            "Novartis Institutes for Biomedical Research"
+                        ], 
+                        "address": {
+                            "formatted": [
+                                "Cambridge", 
+                                "United States"
+                            ], 
+                            "components": {
+                                "locality": [
+                                    "Cambridge"
+                                ], 
+                                "country": "United States"
+                            }
+                        }
+                    }
+                ], 
+                "competingInterests": "The authors declare that no competing interests exist."
+            }, 
+            {
+                "type": "person", 
+                "name": {
+                    "preferred": "James Deeds", 
+                    "index": "Deeds, James"
+                }, 
+                "affiliations": [
+                    {
+                        "name": [
+                            "Department of Oncology", 
+                            "Novartis Institutes for Biomedical Research"
+                        ], 
+                        "address": {
+                            "formatted": [
+                                "Cambridge", 
+                                "United States"
+                            ], 
+                            "components": {
+                                "locality": [
+                                    "Cambridge"
+                                ], 
+                                "country": "United States"
+                            }
+                        }
+                    }
+                ], 
+                "competingInterests": "The authors declare that no competing interests exist."
+            }, 
+            {
+                "type": "person", 
+                "name": {
+                    "preferred": "Gilles Buchwalter", 
+                    "index": "Buchwalter, Gilles"
+                }, 
+                "affiliations": [
+                    {
+                        "name": [
+                            "Celgene Avilomics Research"
+                        ], 
+                        "address": {
+                            "formatted": [
+                                "Bedford", 
+                                "United States"
+                            ], 
+                            "components": {
+                                "locality": [
+                                    "Bedford"
+                                ], 
+                                "country": "United States"
+                            }
+                        }
+                    }
+                ], 
+                "competingInterests": "The authors declare that no competing interests exist."
+            }, 
+            {
+                "type": "person", 
+                "name": {
+                    "preferred": "Travis Stams", 
+                    "index": "Stams, Travis"
+                }, 
+                "affiliations": [
+                    {
+                        "name": [
+                            "Center for Proteomic Chemistry", 
+                            "Novartis Institutes for Biomedical Research"
+                        ], 
+                        "address": {
+                            "formatted": [
+                                "Cambridge", 
+                                "United States"
+                            ], 
+                            "components": {
+                                "locality": [
+                                    "Cambridge"
+                                ], 
+                                "country": "United States"
+                            }
+                        }
+                    }
+                ], 
+                "competingInterests": "The authors declare that no competing interests exist."
+            }, 
+            {
+                "type": "person", 
+                "name": {
+                    "preferred": "Nicholas Keen", 
+                    "index": "Keen, Nicholas"
+                }, 
+                "affiliations": [
+                    {
+                        "name": [
+                            "Department of Oncology", 
+                            "Novartis Institutes for Biomedical Research"
+                        ], 
+                        "address": {
+                            "formatted": [
+                                "Cambridge", 
+                                "United States"
+                            ], 
+                            "components": {
+                                "locality": [
+                                    "Cambridge"
+                                ], 
+                                "country": "United States"
+                            }
+                        }
+                    }
+                ], 
+                "competingInterests": "The authors declare that no competing interests exist."
+            }, 
+            {
+                "type": "person", 
+                "name": {
+                    "preferred": "William R Sellers", 
+                    "index": "Sellers, William R"
+                }, 
+                "affiliations": [
+                    {
+                        "name": [
+                            "Department of Oncology", 
+                            "Novartis Institutes for BioMedical Research"
+                        ], 
+                        "address": {
+                            "formatted": [
+                                "Cambridge", 
+                                "United States"
+                            ], 
+                            "components": {
+                                "locality": [
+                                    "Cambridge"
+                                ], 
+                                "country": "United States"
+                            }
+                        }
+                    }
+                ], 
+                "competingInterests": "The authors declare that no competing interests exist."
+            }, 
+            {
+                "type": "person", 
+                "name": {
+                    "preferred": "Myles Brown", 
+                    "index": "Brown, Myles"
+                }, 
+                "affiliations": [
+                    {
+                        "name": [
+                            "Department of Medical Oncology, Center for Functional Cancer Epigenetics, Dana-Farber Cancer Institute", 
+                            "Harvard Medical School"
+                        ], 
+                        "address": {
+                            "formatted": [
+                                "Boston", 
+                                "United States"
+                            ], 
+                            "components": {
+                                "locality": [
+                                    "Boston"
+                                ], 
+                                "country": "United States"
+                            }
+                        }
+                    }
+                ], 
+                "competingInterests": "The authors declare that no competing interests exist."
+            }, 
+            {
+                "type": "person", 
+                "name": {
+                    "preferred": "Raymond A Pagliarini", 
+                    "index": "Pagliarini, Raymond A"
+                }, 
+                "affiliations": [
+                    {
+                        "name": [
+                            "Celgene Avilomics Research"
+                        ], 
+                        "address": {
+                            "formatted": [
+                                "Bedford", 
+                                "United States"
+                            ], 
+                            "components": {
+                                "locality": [
+                                    "Bedford"
+                                ], 
+                                "country": "United States"
+                            }
+                        }
+                    }
+                ], 
+                "emailAddresses": [
+                    "raymond.pagliarini@novartis.com"
+                ], 
+                "competingInterests": "The authors declare that no competing interests exist."
+            }
+        ], 
+        "additionalFiles": [
+            {
+                "mediaType": "application/zip", 
+                "uri": "https://publishing-cdn.elifesciences.org/13964/elife-13964-supp-v1.zip", 
+                "filename": "elife-13964-supp-v1.zip"
+            }
+        ]
     }
 }
