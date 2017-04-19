@@ -1,8 +1,5 @@
 # Observer
  
-An effort by [eLife Sciences](http://elifesciences.org) to provide a flexible, 
-mostly-structured, data store for articles.
-
 An effort by [eLife Sciences](http://elifesciences.org) to provide an 
 unsophisticated reporting application for article data.
 
@@ -13,11 +10,6 @@ the [Django web framework](https://www.djangoproject.com/) and a
 [Github repo](https://github.com/elifesciences/observer/).
 
 ## RSS
-
-RSS feeds are available here:
-
-* [code](https://github.com/elifesciences/observer/blob/master/src/publisher/rss.py)
-* [articles published in the last day](https://observer.elifesciences.org/rss/articles/poa+vor/last-1-days/) \[[POA](https://lax.elifesciences.org/rss/articles/poa/last-1-days/)\] \[[VOR](https://lax.elifesciences.org/rss/articles/vor/last-1-days/)\], or [last week](https://lax.elifesciences.org/rss/articles/poa+vor/last-7-days/) \[[POA](https://lax.elifesciences.org/rss/articles/poa/last-7-days/)\] \[[VOR](https://lax.elifesciences.org/rss/articles/vor/last-7-days/)\]
 
 The URLs look like:
 
