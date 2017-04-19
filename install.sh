@@ -4,7 +4,7 @@ echo "[-] install.sh"
 
 # ll: /usr/bin/python3.6
 #maxpy=$(which /usr/bin/python3* | grep -E '[0-9]$' | sort -r | head -n 1)
-maxpy=/usr/bin/python3.6
+maxpy=/usr/bin/python3.5
 
 # ll: python3.6
 # http://stackoverflow.com/questions/2664740/extract-file-basename-without-path-and-extension-in-bash

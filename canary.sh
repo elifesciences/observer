@@ -5,7 +5,7 @@ set -e
 
 # reload the virtualenv
 rm -rf venv/
-virtualenv --python=`which python3.6` venv
+virtualenv --python=`which python3.5` venv
 source venv/bin/activate
 pip install -r requirements.txt
 
