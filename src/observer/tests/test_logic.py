@@ -62,7 +62,7 @@ class AggregateLogic(BaseCase):
                 self.assertEqual(art.num_vor_versions, expected_vor)
                 self.assertEqual(art.status, models.VOR)
             except AssertionError as err:
-                print('failed on',msid,'with vers',vers)
+                print('failed on', msid, 'with vers', vers)
                 raise err
 
     def test_calc_poa_published(self):
@@ -86,4 +86,3 @@ class AggregateLogic(BaseCase):
         for msid, expected_dt in vor_pubdates.items():
             obj = models.Article.objects.get(msid=msid)
             self.assertEqual(obj.datetime_vor_published, utils.todt(expected_dt), "failed to calculate vor for %s" % msid)
-        

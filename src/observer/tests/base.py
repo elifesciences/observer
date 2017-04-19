@@ -10,6 +10,6 @@ class BaseCase(TestCase):
     def ajson_list(self):
         path = join(self.fixture_dir, 'ajson')
         return utils.gmap(lambda fname: join(path, fname), os.listdir(path))
-    
+
     def freshen(self, obj):
         return type(obj).objects.get(pk=obj.pk)

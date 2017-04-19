@@ -1,4 +1,4 @@
-import os, sys,json
+import os, sys, json
 from django.core.management.base import BaseCommand
 import logging
 from observer import logic
@@ -13,7 +13,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         self.log_context = {}
-        
+
         original_target = options['target']
         target = os.path.abspath(os.path.expanduser(original_target))
 
@@ -26,7 +26,7 @@ class Command(BaseCommand):
         except json.JSONDecodeError as err:
             LOG.error("failed to load your bad data: %s", err)
             sys.exit(1)
-                
+
         except logic.StateError as err:
             LOG.error("failed to ingest article: %s", err)
             sys.exit(1)

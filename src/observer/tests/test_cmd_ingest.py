@@ -24,7 +24,7 @@ class Cmd(BaseCase):
         except SystemExit as err:
             return err.code, stdout
         self.fail("ingest script should always throw a systemexit()")
-    
+
     def test_single_ingest_from_cli(self):
         "ensure an ingest from the cli can happen targeting a specific file"
         args = [self.nom, '--target', self.ajson_fixture]
@@ -40,7 +40,7 @@ class Cmd(BaseCase):
         self.assertEqual(errcode, 0)
         # all articles have been ingested
         self.assertEqual(models.Article.objects.count(), self.num_unique_articles)
-        
+
     def test_ingest_from_cli_bad_data(self):
         "ensure command fails with exit status 1 on bad data"
         self.assertEqual(models.Article.objects.count(), 0)

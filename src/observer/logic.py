@@ -128,7 +128,7 @@ def calc_vor_published(args):
         return art_struct['published']
     # can't calculate, ignore
     return EXCLUDE_ME
-    
+
 def has_key(key):
     def fn(v):
         return key in v
@@ -161,7 +161,7 @@ DESC = {
     'datetime_vor_published': [ado, calc_vor_published, todt],
 
     'days_publication_to_current_version': [ado, calc_pub_to_current],
-    
+
     'has_digest': [p('article'), has_key('digest')],
 }
 
@@ -191,7 +191,7 @@ ART_POPULARITY = {
 def flatten_article_json(article_data, article_history_data=None):
     "takes article-json and squishes it into something obs can digest"
     if not article_history_data:
-        article_history_data = {}        
+        article_history_data = {}
     data = article_data
     data['history'] = article_history_data
     struct = render.render_item(DESC, data)
@@ -214,12 +214,12 @@ def create_or_update(Model, orig_data, key_list, create=True, update=True, commi
         if create:
             #inst = Model(**data)
             # shift this exclude me handling to et3
-            inst = Model(**{k:v for k,v in data.items() if v != EXCLUDE_ME})
+            inst = Model(**{k: v for k, v in data.items() if v != EXCLUDE_ME})
             created = True
 
     if (updated or created) and commit:
         inst.save()
-    
+
     # it is possible to neither create nor update.
     # in this case if the model cannot be found then None is returned: (None, False, False)
     return (inst, created, updated)
@@ -237,8 +237,8 @@ def upsert_article_json(article_data, article_history_data):
         # article exists, ensure we're not replacing newer with older content
         orig_ver = orig_art.current_version
         if new_ver < orig_ver:
-            raise StateError("refusing to replace new article data (v%s) with old article data (v%s)" % \
-                    (orig_ver, new_ver))
+            raise StateError("refusing to replace new article data (v%s) with old article data (v%s)" %
+                             (orig_ver, new_ver))
     else:
         # article does not exist, ensure we're inserting v1 content
         if new_ver != 1:
@@ -251,7 +251,7 @@ def upsert_article_json(article_data, article_history_data):
 #
 
 def pathdata(path):
-    """parses additional article values from the given path. 
+    """parses additional article values from the given path.
     assumes a file name similar to: elife-13964-v1"""
     fname = os.path.basename(path)
     _, msid, rest = fname.split('-')
@@ -272,7 +272,7 @@ def file_upsert(path):
     ver = article_json['article'].get('version')
     if not ver or ver > 5: # we've never had a v5 article
         article_json = utils.deepmerge(article_json, extra(path))
-    
+
     history_data = {}
     LOG.info("ingesting article %s-v%s", article_json['article']['id'], article_json['article']['version'])
     return upsert_article_json(article_json, history_data)
@@ -281,6 +281,7 @@ def file_upsert(path):
 def bulk_upsert(article_json_dir):
     #paths = utils.gmap(lambda fname: join(article_json_dir, fname), os.listdir(article_json_dir))
     paths = utils.listfiles(article_json_dir, ['.json'])
+
     def safe_handler(path):
         try:
             return file_upsert(path)
