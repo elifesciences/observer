@@ -1,14 +1,22 @@
 #!/bin/bash
 set -e
 
+echo "[-] .lint.sh"
+
 # remove any old compiled python files
 # pylint likes to lint them
-#find src/ -name '*.py[c|~]' -delete
-# http://stackoverflow.com/questions/28991015/python3-project-remove-pycache-folders-and-pyc-files
-find . \( -name \*.pyc -o -name \*.pyo -o -name __pycache__ \) -prune -exec rm -rf {} +
+find src/ -name '*.py[c|~]' -delete
+find src/ -regex "\(.*__pycache__.*\|*.py[co]\)" -delete
 
-echo "* calling pyflakes"
+echo "pyflakes"
 pyflakes ./src/
-echo "* calling pylint"
-pylint -E ./src/observer/** --load-plugins=pylint_django --disable=E1103
-echo "* passed linting"
+# disabled until pylint supports Python 3.6
+# https://github.com/PyCQA/pylint/issues/1113
+
+echo "pylint"
+pylint -E ./src/observer/** --load-plugins=pylint_django --disable=E1103 2> /dev/null
+
+echo "scrubbing"
+. .scrub.sh 2> /dev/null
+
+echo "[✓] .lint.sh"
