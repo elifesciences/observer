@@ -21,8 +21,9 @@ def format_report(report, format, context):
     return known_formats[format](report, context)
 
 def report(request, name, format='rss'):
-    report = reports.get_report(name)
-    if not report:
+    try:
+        report = reports.get_report(name)
+    except KeyError:
         raise Http404("report not found")
     try:
         report_paginated = paginate_report_results(report)

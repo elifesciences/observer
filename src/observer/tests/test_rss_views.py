@@ -17,7 +17,17 @@ class One(BaseCase):
     def tearDown(self):
         pass
 
-    def test_latest_articles_rss(self):
+    def test_missing_article_gives_404(self):
+        url = reverse('report', kwargs={'name': 'pants-report'})
+        resp = self.c.get(url)
+        self.assertEqual(404, resp.status_code)
+    
+    def test_latest_articles_report_exists(self):
         url = reverse('report', kwargs={'name': 'latest-articles'})
+        resp = self.c.get(url)
+        self.assertEqual(200, resp.status_code)
+
+    def test_upcoming_articles_report_exists(self):
+        url = reverse('report', kwargs={'name': 'upcoming-articles'})
         resp = self.c.get(url)
         self.assertEqual(200, resp.status_code)

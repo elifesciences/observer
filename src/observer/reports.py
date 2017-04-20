@@ -6,8 +6,19 @@ def latest_articles():
         'items': [],
     }
 
+def upcoming_articles():
+    return {
+        'title': 'upcoming articles',
+        'description': 'eLife PAP articles',
+        'items': [],
+    }
+
+#
+#
+#
 
 def get_report(name):
     return {
-        'latest-articles': latest_articles
+        'latest-articles': latest_articles,
+        'upcoming-articles': upcoming_articles,
     }[name]
