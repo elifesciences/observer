@@ -1,5 +1,12 @@
 from feedgen.feed import FeedGenerator
-import utils
+import logging
+
+LOG = logging.getLogger(__name__)
+
+try:
+    import utils
+except ImportError:
+    from . import utils
 
 def set_obj_attrs(obj, data):
     def set(key, val):
@@ -17,10 +24,10 @@ def mkfeed(report):
 
     # wrangle some more bits
     data['link'] = {'href': data['link'], 'rel': 'self'}
-    
+
     # add some defaults
     data['language'] = 'en'
-    
+
     # set the attributes
     # http://lkiesow.github.io/python-feedgen/#create-a-feed
     set_obj_attrs(fg, data)
@@ -44,8 +51,28 @@ def add_entry(fg, item):
 
 def add_many_entries(fg, item_list):
     [add_entry(fg, item) for item in item_list]
-    
-if __name__ == '__main__':    
+
+
+#
+#
+#
+
+def format_report(report, context):
+    try:
+        report.update(context) # yes, this nukes any conflicting keys in the report
+        report['title'] = 'eLife: ' + report['title']
+        feed = mkfeed(report)
+        add_many_entries(feed, report['items'])
+        return feed.rss_str(pretty=True).decode('utf-8')
+    except BaseException as e:
+        LOG.exception("unhandled exception formatting report %r", report)
+        raise
+
+#
+#
+#
+
+if __name__ == '__main__':
     demo_report = {
         'title': 'a demonstration',
         'id': 'data.elifesciences.org/latest.rss',

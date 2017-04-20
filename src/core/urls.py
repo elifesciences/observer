@@ -19,5 +19,5 @@ from django.conf.urls import include
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^', include('observer.urls')), #, namespace='report')),
+    url(r'^', include('observer.urls')),
 ]

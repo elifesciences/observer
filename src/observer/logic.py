@@ -5,7 +5,7 @@ import json
 from et3 import render
 from et3.extract import path as p
 from . import utils, models
-from .utils import subdict, gmap
+from .utils import subdict, lmap
 from kids.cache import cache
 import logging
 from django.conf import settings
@@ -279,7 +279,7 @@ def file_upsert(path):
 
 @transaction.atomic
 def bulk_upsert(article_json_dir):
-    #paths = utils.gmap(lambda fname: join(article_json_dir, fname), os.listdir(article_json_dir))
+    #paths = utils.lmap(lambda fname: join(article_json_dir, fname), os.listdir(article_json_dir))
     paths = utils.listfiles(article_json_dir, ['.json'])
 
     def safe_handler(path):
@@ -292,4 +292,4 @@ def bulk_upsert(article_json_dir):
             if settings.DEBUG:
                 # failfast in debug mode
                 raise
-    return gmap(safe_handler, sorted(paths))
+    return lmap(safe_handler, sorted(paths))

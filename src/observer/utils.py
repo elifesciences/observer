@@ -23,8 +23,8 @@ def isint(v):
     except (ValueError, TypeError):
         return False
 
-def gmap(fn, lst):
-    return list(map(fn, lst))
+lmap = lambda func, *iterable: list(map(func, *iterable))
+lfilter = lambda func, *iterable: list(filter(func, *iterable))
 
 def todt(val):
     "turn almost any formatted datetime string into a UTC datetime object"

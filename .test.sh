@@ -8,7 +8,7 @@ args="$@"
 module="src"
 print_coverage=1
 if [ ! -z "$args" ]; then
-    module="$args"
+    module="src.$args"
     print_coverage=0
 fi
 
@@ -16,10 +16,12 @@ fi
 find src/ -name '*.pyc' -delete
 
 # called by test.sh
-rm -f build/junit.xml
 #./src/manage.py test --testrunner=green.djangorunner.DjangoRunner "$@"
-coverage run --source='src/' --omit='*/tests/*,*/migrations/*' src/manage.py test "$module" --no-input
-echo "* passed tests"
+#coverage run --source='src/' --omit='*/tests/*,*/migrations/*' src/manage.py test "$module" --no-input
+#echo "* passed tests"
+
+GREEN_CONFIG=.green ./src/manage.py test "$module" --testrunner=green.djangorunner.DjangoRunner --no-input -v 3
+
 
 # run coverage test
 # only report coverage if we're running a complete set of tests

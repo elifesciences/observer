@@ -17,7 +17,7 @@ class One(BaseCase):
     def tearDown(self):
         pass
 
-    def test_latest_articles_rss(self):        
+    def test_latest_articles_rss(self):
         url = reverse('report', kwargs={'name': 'latest-articles'})
         resp = self.c.get(url)
         self.assertEqual(200, resp.status_code)
