@@ -1,5 +1,5 @@
 from django.db import models
-from django.db.models import PositiveSmallIntegerField, PositiveIntegerField, CharField, DateTimeField, TextField, NullBooleanField
+from django.db.models import PositiveSmallIntegerField, PositiveIntegerField, CharField, DateTimeField, TextField, NullBooleanField, EmailField
 
 POA, VOR = 'poa', 'vor'
 UNKNOWN_TYPE = 'unknown-type'
@@ -59,6 +59,8 @@ def decision_codes():
         ('simple-withdraw', 'SW')
     ]
 
+#class ArticleJson(models.Model):
+#
 
 class Article(models.Model):
     journal_name = models.CharField(max_length=255)
@@ -66,10 +68,15 @@ class Article(models.Model):
     title = CharField(max_length=255, null=True)
     doi = CharField(max_length=255)
 
+    abstract = TextField(null=True)
+    author_line = TextField(null=True, help_text="abbreviated way of referring to the article's authors")
+    author_name = CharField(null=True, max_length=150, help_text="coresponding author name")
+    author_email = EmailField(null=True, help_text="corresponding author email.")
+
     impact_statement = TextField(null=True)
     type = CharField(max_length=50, choices=type_choices(), help_text="article as exported from EJP submission system")
     current_version = PositiveSmallIntegerField(null=True)
-    status = CharField(max_length=3, choices=status_choices(), null=True)
+    status = CharField(max_length=3, choices=status_choices(), null=True, help_text="article's current status (poa or vor)")
     volume = PositiveSmallIntegerField(null=True)
 
     num_authors = PositiveSmallIntegerField(null=True)

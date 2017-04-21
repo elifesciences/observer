@@ -5,7 +5,7 @@ import json
 from et3 import render
 from et3.extract import path as p
 from . import utils, models
-from .utils import subdict, lmap
+from .utils import subdict, lmap, lfilter
 from kids.cache import cache
 import logging
 from django.conf import settings
@@ -134,12 +134,33 @@ def has_key(key):
         return key in v
     return fn
 
+def find_author(art):
+    authors = lfilter(lambda a: 'emailAddresses' in a, art.get('authors', []))
+    if authors:
+        return authors[0]
+    return {}
+
+def find_author_name(art):
+    author = find_author(art)
+    nom = author.get('name', None) #, p('name.preferred', None)]
+    if isinstance(nom, dict):
+        return nom['preferred']
+    return nom
+
 DESC = {
     #'journal_name': [p('journal.title')],
     'journal_name': ['elife'],
     'msid': [p('id'), int],
     'title': [p('title')],
     'doi': [p('id'), msid2doi],
+
+    'abstract': [p('abstract.content.0.text', '')],
+    # we have exactly one instance of a paper with no authors. ridiculous.
+    'author_line': [p('authorLine', 'no-author?')],
+
+    'author_name': [find_author_name],
+    'author_email': [find_author, p('emailAddresses.0', None)],
+
     'impact_statement': [p('impactStatement', None)],
     'type': [p('type'), _or(models.UNKNOWN_TYPE)],
     'volume': [p('volume')],

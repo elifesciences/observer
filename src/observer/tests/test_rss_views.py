@@ -21,7 +21,7 @@ class One(BaseCase):
         url = reverse('report', kwargs={'name': 'pants-report'})
         resp = self.c.get(url)
         self.assertEqual(404, resp.status_code)
-    
+
     def test_latest_articles_report_exists(self):
         url = reverse('report', kwargs={'name': 'latest-articles'})
         resp = self.c.get(url)

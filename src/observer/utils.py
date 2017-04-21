@@ -4,7 +4,7 @@ import copy
 from dateutil import parser
 from datetime import datetime
 import pytz
-
+import itertools
 import logging
 LOG = logging.getLogger(__name__)
 
@@ -76,3 +76,36 @@ def deepmerge(a, b, path=None):
     "merges 'b' into a copy of 'a'"
     a = copy.deepcopy(a)
     return _merge(a, b, path)
+
+
+def to_dict(instance):
+    from django.db.models.fields.related import ManyToManyField
+    opts = instance._meta
+    data = {}
+    for f in opts.concrete_fields + opts.many_to_many:
+        if isinstance(f, ManyToManyField):
+            if instance.pk is None:
+                data[f.name] = []
+            else:
+                data[f.name] = list(f.value_from_object(instance).values_list('pk', flat=True))
+        else:
+            data[f.name] = f.value_from_object(instance)
+    return data
+
+
+def renkey(ddict, oldkey, newkey):
+    "renames a key in ddict from oldkey to newkey"
+    if oldkey in ddict:
+        ddict[newkey] = ddict[oldkey]
+        del ddict[oldkey]
+    return ddict
+
+def renkeys(ddict, pair_list):
+    for oldkey, newkey in pair_list:
+        renkey(ddict, oldkey, newkey)
+
+def take(n, items):
+    return itertools.islice(items, n)
+
+def pad_msid(msid):
+    return '%05d' % int(msid)
