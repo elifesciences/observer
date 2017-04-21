@@ -1,7 +1,7 @@
 import json
 from os.path import join
 from .base import BaseCase
-from observer import logic, models, utils
+from observer import ingest_logic as logic, models, utils
 
 class Logic(BaseCase):
     def setUp(self):
