@@ -57,17 +57,16 @@ def article_to_rss_entry(art):
     item = utils.to_dict(art)
 
     # extract the entry bits
-    item = utils.subdict(item, ['id', 'doi', 'title', 'abstract'])  # , 'description', 'author', 'category', 'guid', 'pubdate'])
+    item = utils.subdict(item, ['id', 'doi', 'title', 'abstract', 'datetime_published'])  # , 'description', 'author', 'category', 'guid', 'pubdate'])
 
     # rename some bits
     utils.renkeys(item, [
         ('doi', 'link'),
         ('abstract', 'description'),
+        ('datetime_published', 'pubdate'),
     ])
 
     # wrangle
-    # data['dc:date'] = ...
-    #item['id'] = str(item['id'])
     item['id'] = "https://dx.doi.org/" + item['link']
     item['link'] = {'href': "https://beta.elifesciences.org/articles/" + utils.pad_msid(art.msid)}
     
@@ -75,8 +74,8 @@ def article_to_rss_entry(art):
     '''
     email = art.author_email
     item['author'] = [
-        {'name': 'Alicia N McMurchy', 'email': 'foo@bar.com'},
-        {'name': 'Przemyslaw Stempor', 'email': 'foo@bar.com'},
+        {'name': 'Alicia N McMurchy', 'email': email},
+        {'name': 'Przemyslaw Stempor', 'email': email},
         {'name': 'Tessa Gaarenstroom'},
     ]
     '''
