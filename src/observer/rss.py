@@ -101,9 +101,13 @@ if __name__ == '__main__':
     demo_report = {
         'title': 'a demonstration',
         'id': 'data.elifesciences.org/latest.rss',
-        'link': 'example.org',
         'description': 'this is a simple asdf'
+    }    
+    entry = {
+        'title': 'item title',
+        'link': {'href': 'some id'}
     }
+
     feed = mkfeed(demo_report)
-    add_entry(feed, {'title': 'item title', 'link': 'some id'})
+    add_entry(feed, entry)
     print(feed.rss_str(pretty=True).decode('utf8'))
