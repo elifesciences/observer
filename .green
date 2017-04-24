@@ -1,1 +1,2 @@
-run-coverage=1
+run-coverage = 1
+verbose = 2
