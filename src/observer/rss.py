@@ -33,6 +33,7 @@ def mkfeed(report):
 
     # add some defaults
     data['language'] = 'en'
+    data['generator'] = 'observer (using python-feedgen)'
 
     # set the attributes
     # http://lkiesow.github.io/python-feedgen/#create-a-feed
