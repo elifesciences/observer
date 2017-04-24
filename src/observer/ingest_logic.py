@@ -254,6 +254,7 @@ def regenerate(msid):
     def flatten_av(avobj):
         article_history_data = {} # eh
         article_data = avobj.ajson
+        LOG.info('regenerating %s v%s' % (article_data['id'], article_data['version']))
         mush = flatten_article_json(article_data, article_history_data)
         article_presave_checks(article_data, mush)
         artobj, _, _ = create_or_update(models.Article, mush, ['msid'])
@@ -272,6 +273,7 @@ def file_upsert(path, regen=True, quiet=False):
     try:
         if not os.path.isfile(path):
             raise ValueError("can't handle path %r" % path)
+        LOG.info('loading %s', path)
         article_data = json.load(open(path, 'r'))
         ajson = upsert_ajson(article_data)[0]
         if regen:
@@ -286,5 +288,5 @@ def file_upsert(path, regen=True, quiet=False):
 def bulk_file_upsert(article_json_dir):
     "insert/update ArticleJSON from a directory of files"
     paths = sorted(utils.listfiles(article_json_dir, ['.json']))
-    msid_list = set(lmap(partial(file_upsert, regen=False, quiet=True), paths))
+    msid_list = sorted(set(lmap(partial(file_upsert, regen=False, quiet=True), paths)))
     return lmap(regenerate, msid_list)
