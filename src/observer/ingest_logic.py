@@ -1,14 +1,14 @@
 import os
 #from os.path import join
+from functools import partial
 from django.db import transaction
 import json
 from et3 import render
 from et3.extract import path as p
 from . import utils, models
-from .utils import lmap, lfilter, create_or_update, ensure
+from .utils import lmap, lfilter, create_or_update
 from kids.cache import cache
 import logging
-from django.conf import settings
 
 LOG = logging.getLogger(__name__)
 
@@ -219,15 +219,12 @@ def flatten_article_json(article_data, article_history_data=None):
     struct = render.render_item(DESC, data)
     return struct
 
+#
+#
+#
 
-@transaction.atomic
-def upsert_article_json(article_data, article_history_data):
-    "despite the name, it accepts the article-json as python data, not a json string"
-    mush = flatten_article_json(article_data, article_history_data)
-
-    # TODO: why is this check being done again ... ?
-    ensure(mush['current_version'] == article_data['version'],
-           "after scraping the article data, the given article version has changed")
+def article_presave_checks(given_data, flat_data):
+    mush = flat_data
 
     orig_art = getartobj(mush['msid'])
     new_ver = mush['current_version']
@@ -242,39 +239,52 @@ def upsert_article_json(article_data, article_history_data):
         if new_ver != 1:
             raise StateError("refusing to create article with non v1 article data (v%s). articles must be created in order!" % new_ver)
 
-    return create_or_update(models.Article, mush, ['msid'])
+def upsert_ajson(article_data):
+    "insert/update ArticleJSON from a dictionary of article data"
+    article_data = {
+        'msid': article_data['id'],
+        'version': article_data['version'],
+        'ajson': article_data
+    }
+    return create_or_update(models.ArticleJSON, article_data, ['msid', 'version'])
+
+@transaction.atomic
+def regenerate(msid):
+    "scrapes the stored article data to generate a models.Article object"
+    def flatten_av(avobj):
+        article_history_data = {} # eh
+        article_data = avobj.ajson
+        mush = flatten_article_json(article_data, article_history_data)
+        article_presave_checks(article_data, mush)
+        artobj, _, _ = create_or_update(models.Article, mush, ['msid'])
+        return artobj
+    avl = models.ArticleJSON.objects.filter(msid=msid).order_by('version') # ASC
+    models.Article.objects.filter(msid=msid).delete() # destroy what we have
+    return lmap(flatten_av, avl)
+
 
 #
 # upsert from file/dir of article-json
 #
 
-def pathdata(path):
-    """parses additional article values from the given path.
-    assumes a file name similar to: elife-13964-v1"""
-    fname = os.path.basename(path)
-    _, msid, rest = fname.split('-')
-    ver, rest = rest.split('.', 1)
-    return msid, int(ver.strip('v'))
-
-def file_upsert(path):
-    article_json = json.load(open(path, 'r'))
-    history_data = {}
-    LOG.info("ingesting article %s-v%s", article_json['id'], article_json['version'])
-    return upsert_article_json(article_json, history_data)
+def file_upsert(path, regen=True, quiet=False):
+    "insert/update ArticleJSON from a file"
+    try:
+        if not os.path.isfile(path):
+            raise ValueError("can't handle path %r" % path)
+        article_data = json.load(open(path, 'r'))
+        ajson = upsert_ajson(article_data)[0]
+        if regen:
+            regenerate(ajson.msid)
+        return ajson.msid
+    except Exception as err:
+        LOG.exception("failed to insert article-json %r: %s", path, err)
+        if not quiet:
+            raise
 
 @transaction.atomic
 def bulk_file_upsert(article_json_dir):
-    #paths = utils.lmap(lambda fname: join(article_json_dir, fname), os.listdir(article_json_dir))
-    paths = utils.listfiles(article_json_dir, ['.json'])
-
-    def safe_handler(path):
-        try:
-            return file_upsert(path)
-        except StateError:
-            raise
-        except Exception as err:
-            LOG.error("failed to handle %r: %s", path, err)
-            if settings.DEBUG:
-                # failfast in debug mode
-                raise
-    return lmap(safe_handler, sorted(paths))
+    "insert/update ArticleJSON from a directory of files"
+    paths = sorted(utils.listfiles(article_json_dir, ['.json']))
+    msid_list = set(lmap(partial(file_upsert, regen=False, quiet=True), paths))
+    return lmap(regenerate, msid_list)

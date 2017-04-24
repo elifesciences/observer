@@ -25,16 +25,19 @@ class Command(BaseCommand):
 
         try:
             fn(target)
+            sys.exit(0)
+
         except json.JSONDecodeError as err:
             LOG.error("failed to load your bad data: %s", err)
-            sys.exit(1)
 
         except ingest_logic.StateError as err:
             LOG.error("failed to ingest article: %s", err)
-            sys.exit(1)
+
+        except ValueError as err:
+            LOG.error("failed to ingest article, bad data: %s", err)
 
         except:
             LOG.exception("unhandled exception attempting to ingest article", extra=self.log_context)
             raise
 
-        sys.exit(0)
+        sys.exit(1)

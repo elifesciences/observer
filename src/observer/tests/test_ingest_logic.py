@@ -26,6 +26,11 @@ class Logic(BaseCase):
         logic.bulk_file_upsert(join(self.fixture_dir, 'ajson'))
         self.assertEqual(models.Article.objects.count(), self.unique_article_count)
 
+    def test_upsert_ajson(self):
+        self.assertEqual(models.ArticleJSON.objects.count(), 0)
+        logic.file_upsert(self.article_json)
+        self.assertEqual(models.ArticleJSON.objects.count(), 1)
+
 class AggregateLogic(BaseCase):
     def setUp(self):
         # 13964 v1,v2,v3
