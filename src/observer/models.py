@@ -122,7 +122,7 @@ class Article(models.Model):
 
 
 class ArticleJSON(models.Model):
-    msid = models.ForeignKey(Article, to_field='msid')
+    msid = PositiveSmallIntegerField()
     version = PositiveSmallIntegerField()
     ajson = JSONField()
 
