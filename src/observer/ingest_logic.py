@@ -250,7 +250,7 @@ def upsert_ajson(article_data):
 
 @transaction.atomic
 def regenerate(msid):
-    "scrapes the stored article data to generate a models.Article object"
+    "scrapes the stored article data to (re)generate a models.Article object"
     def flatten_av(avobj):
         article_history_data = {} # eh
         article_data = avobj.ajson
@@ -263,6 +263,9 @@ def regenerate(msid):
     models.Article.objects.filter(msid=msid).delete() # destroy what we have
     return lmap(flatten_av, avl)
 
+@transaction.atomic
+def regenerate_many(msid_list):
+    return lmap(regenerate, msid_list)
 
 #
 # upsert from file/dir of article-json
