@@ -1,7 +1,7 @@
 import json
 from os.path import join
 from .base import BaseCase
-from observer import logic, models, utils
+from observer import ingest_logic as logic, models, utils
 
 class Logic(BaseCase):
     def setUp(self):
@@ -11,7 +11,7 @@ class Logic(BaseCase):
     def test_flatten(self):
         "a basic transformation of the data is possible without errors"
         article_json = json.load(open(self.article_json, 'r'))
-        article_json['article']['version'] = 1 # patch fixture with missing
+        article_json['version'] = 1 # patch fixture with missing
         logic.flatten_article_json(article_json)
 
     def test_upsert(self):
@@ -20,10 +20,10 @@ class Logic(BaseCase):
         logic.file_upsert(self.article_json)
         self.assertEqual(models.Article.objects.count(), 1)
 
-    def test_bulk_upsert(self):
+    def test_bulk_file_upsert(self):
         "we can create/update a sample of our articles across multiple versions"
         self.assertEqual(models.Article.objects.count(), 0)
-        logic.bulk_upsert(join(self.fixture_dir, 'ajson'))
+        logic.bulk_file_upsert(join(self.fixture_dir, 'ajson'))
         self.assertEqual(models.Article.objects.count(), self.unique_article_count)
 
 class AggregateLogic(BaseCase):
@@ -32,7 +32,7 @@ class AggregateLogic(BaseCase):
         # 14850 v1
         # 15378 v1,v2,v3
         # 18675 v1,v2,v3,v4
-        logic.bulk_upsert(join(self.fixture_dir, 'ajson'))
+        logic.bulk_file_upsert(join(self.fixture_dir, 'ajson'))
 
     def test_num_authors(self):
         expected_authors = {

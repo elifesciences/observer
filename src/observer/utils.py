@@ -4,9 +4,16 @@ import copy
 from dateutil import parser
 from datetime import datetime
 import pytz
-
+import itertools
 import logging
+
 LOG = logging.getLogger(__name__)
+
+def ensure(assertion, msg, *args):
+    """intended as a convenient replacement for `assert` statements that
+    get compiled away with -O flags"""
+    if not assertion:
+        raise AssertionError(msg % args)
 
 def listfiles(path, ext_list=None):
     "returns a list of absolute paths for given dir"
@@ -23,8 +30,8 @@ def isint(v):
     except (ValueError, TypeError):
         return False
 
-def gmap(fn, lst):
-    return list(map(fn, lst))
+lmap = lambda func, *iterable: list(map(func, *iterable))
+lfilter = lambda func, *iterable: list(filter(func, *iterable))
 
 def todt(val):
     "turn almost any formatted datetime string into a UTC datetime object"
@@ -76,3 +83,65 @@ def deepmerge(a, b, path=None):
     "merges 'b' into a copy of 'a'"
     a = copy.deepcopy(a)
     return _merge(a, b, path)
+
+
+def to_dict(instance):
+    from django.db.models.fields.related import ManyToManyField
+    opts = instance._meta
+    data = {}
+    for f in opts.concrete_fields + opts.many_to_many:
+        if isinstance(f, ManyToManyField):
+            if instance.pk is None:
+                data[f.name] = []
+            else:
+                data[f.name] = list(f.value_from_object(instance).values_list('pk', flat=True))
+        else:
+            data[f.name] = f.value_from_object(instance)
+    return data
+
+
+def renkey(ddict, oldkey, newkey):
+    "renames a key in ddict from oldkey to newkey"
+    if oldkey in ddict:
+        ddict[newkey] = ddict[oldkey]
+        del ddict[oldkey]
+    return ddict
+
+def renkeys(ddict, pair_list):
+    for oldkey, newkey in pair_list:
+        renkey(ddict, oldkey, newkey)
+
+def take(n, items):
+    return itertools.islice(items, n)
+
+def pad_msid(msid):
+    return '%05d' % int(msid)
+
+EXCLUDE_ME = 0xDEADBEEF
+
+def create_or_update(Model, orig_data, key_list, create=True, update=True, commit=True, **overrides):
+    inst = None
+    created = updated = False
+    data = {}
+    data.update(orig_data)
+    data.update(overrides)
+    try:
+        # try and find an entry of Model using the key fields in the given data
+        inst = Model.objects.get(**subdict(data, key_list))
+        # object exists, otherwise DoesNotExist would have been raised
+        if update:
+            [setattr(inst, key, val) for key, val in data.items() if val != EXCLUDE_ME]
+            updated = True
+    except Model.DoesNotExist:
+        if create:
+            #inst = Model(**data)
+            # shift this exclude me handling to et3
+            inst = Model(**{k: v for k, v in data.items() if v != EXCLUDE_ME})
+            created = True
+
+    if (updated or created) and commit:
+        inst.save()
+
+    # it is possible to neither create nor update.
+    # in this case if the model cannot be found then None is returned: (None, False, False)
+    return (inst, created, updated)

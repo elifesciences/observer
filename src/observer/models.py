@@ -1,5 +1,6 @@
+from annoying.fields import JSONField
 from django.db import models
-from django.db.models import PositiveSmallIntegerField, PositiveIntegerField, CharField, DateTimeField, TextField, NullBooleanField
+from django.db.models import PositiveSmallIntegerField, PositiveIntegerField, CharField, DateTimeField, TextField, NullBooleanField, EmailField
 
 POA, VOR = 'poa', 'vor'
 UNKNOWN_TYPE = 'unknown-type'
@@ -29,27 +30,8 @@ def status_choices():
         (POA, 'POA'), (VOR, 'VOR')
     ]
 
-def period_choices():
-    lst = ['year', 'month', 'day']
-    return dict(zip(lst, lst))
-
-def metric_choices():
-    lst = [
-        'total-published'
-        'total-poa-published',
-        'total-vor-published',
-    ]
-    return dict(zip(map(lambda s: s.replace('-', ' ').title(), lst), lst))
-
-'''
-class JournalMetric(models.Model):
-    journal = models.ForeignKey(Journal)
-    period_type = CharField(max_length=5, choices=period_choices())
-    period = CharField(max_length=10)
-    metrics = CharField(max_length=10, choices=metric_choices())
-'''
-
 def decision_codes():
+    "mapping of EJP decision codes to words"
     return [
         ('reject-initial-submission', 'RJI'),
         ('reject-full-submission', 'RJF'),
@@ -59,17 +41,21 @@ def decision_codes():
         ('simple-withdraw', 'SW')
     ]
 
-
 class Article(models.Model):
-    journal_name = models.CharField(max_length=255)
+    journal_name = CharField(max_length=255)
     msid = PositiveIntegerField(unique=True, help_text="article identifier from beginning of submission process right through to end of publication.")
     title = CharField(max_length=255, null=True)
     doi = CharField(max_length=255)
 
+    abstract = TextField(null=True)
+    author_line = TextField(null=True, help_text="abbreviated way of referring to the article's authors")
+    author_name = CharField(null=True, max_length=150, help_text="coresponding author name")
+    author_email = EmailField(null=True, help_text="corresponding author email.")
+
     impact_statement = TextField(null=True)
     type = CharField(max_length=50, choices=type_choices(), help_text="article as exported from EJP submission system")
     current_version = PositiveSmallIntegerField(null=True)
-    status = CharField(max_length=3, choices=status_choices(), null=True)
+    status = CharField(max_length=3, choices=status_choices(), null=True, help_text="article's current status (poa or vor)")
     volume = PositiveSmallIntegerField(null=True)
 
     num_authors = PositiveSmallIntegerField(null=True)
@@ -130,3 +116,15 @@ class Article(models.Model):
 
     class Meta:
         db_table = 'articles'
+
+    datetime_record_created = DateTimeField(auto_now_add=True)
+    datetime_record_updated = DateTimeField(auto_now=True)
+
+
+class ArticleJSON(models.Model):
+    msid = models.ForeignKey(Article, to_field='msid')
+    version = PositiveSmallIntegerField()
+    ajson = JSONField()
+
+    class Meta:
+        unique_together = ('msid', 'version')

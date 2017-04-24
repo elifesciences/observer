@@ -53,8 +53,7 @@ class Cmd(BaseCase):
     def test_ingest_from_cli_bad_article(self):
         self.assertEqual(models.Article.objects.count(), 0)
         data = json.load(open(self.ajson_fixture, 'r'))
-        data['article']['version'] = 2 # ingestion must start at 1 else raises StateError
-        data['snippet']['version'] = 2
+        data['version'] = 2 # ingestion must start at 1 else raises StateError
 
         # write a temporary file to pass to command
         tempdir = tempfile.mkdtemp()

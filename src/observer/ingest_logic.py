@@ -5,7 +5,7 @@ import json
 from et3 import render
 from et3.extract import path as p
 from . import utils, models
-from .utils import subdict, gmap
+from .utils import lmap, lfilter, create_or_update, ensure
 from kids.cache import cache
 import logging
 from django.conf import settings
@@ -65,12 +65,12 @@ def calc_num_vor(args):
 @cache
 def ao(ad):
     "returns the stored Article Object (ao) for the given row"
-    msid = ad['article']['id']
+    msid = ad['id']
     return getartobj(msid)
 
 def ado(ad):
     "returns the Article Data and stored article Object as a pair"
-    return ad['article'], ao(ad)
+    return ad, ao(ad)
 
 def todt(v):
     if v == EXCLUDE_ME:
@@ -134,35 +134,57 @@ def has_key(key):
         return key in v
     return fn
 
+def find_author(art):
+    authors = lfilter(lambda a: 'emailAddresses' in a, art.get('authors', []))
+    if authors:
+        return authors[0]
+    return {}
+
+def find_author_name(art):
+    author = find_author(art)
+    nom = author.get('name', None)
+    if isinstance(nom, dict):
+        return nom['preferred']
+    return nom
+
 DESC = {
-    'journal_name': [p('journal.title')],
-    'msid': [p('article.id'), int],
-    'title': [p('article.title')],
-    'doi': [p('article.id'), msid2doi],
-    'impact_statement': [p('article.impactStatement', None)],
-    'type': [p('article.type'), _or(models.UNKNOWN_TYPE)],
-    'volume': [p('article.volume')],
-    'num_authors': [p('article.authors', []), len],
-    'num_references': [p('article.references', []), len],
+    #'journal_name': [p('journal.title')],
+    'journal_name': ['elife'],
+    'msid': [p('id'), int],
+    'title': [p('title')],
+    'doi': [p('id'), msid2doi],
+
+    'abstract': [p('abstract.content.0.text', '')],
+    # we have exactly one instance of a paper with no authors. ridiculous.
+    'author_line': [p('authorLine', 'no-author?')],
+
+    'author_name': [find_author_name],
+    'author_email': [find_author, p('emailAddresses.0', None)],
+
+    'impact_statement': [p('impactStatement', None)],
+    'type': [p('type'), _or(models.UNKNOWN_TYPE)],
+    'volume': [p('volume')],
+    'num_authors': [p('authors', []), len],
+    'num_references': [p('references', []), len],
 
     # assumes we're ingesting the most recent article!
     # this means bulk ingestion must be done in order
     # this means we ignore updates to previous versions of an article
-    'current_version': [p('article.version')],
-    'status': [p('article.status')],
+    'current_version': [p('version')],
+    'status': [p('status')],
 
-    'num_poa_versions': [p('article'), calc_num_poa],
+    'num_poa_versions': [calc_num_poa],
     'num_vor_versions': [ado, calc_num_vor],
 
-    'datetime_published': [p('article'), wrangle_dt_published, todt],
-    'datetime_version_published': [p('article.published'), todt],
+    'datetime_published': [wrangle_dt_published, todt],
+    'datetime_version_published': [p('published'), todt],
 
     'datetime_poa_published': [ado, calc_poa_published, todt],
     'datetime_vor_published': [ado, calc_vor_published, todt],
 
     'days_publication_to_current_version': [ado, calc_pub_to_current],
 
-    'has_digest': [p('article'), has_key('digest')],
+    'has_digest': [has_key('digest')],
 }
 
 # calculated from art history response
@@ -197,39 +219,15 @@ def flatten_article_json(article_data, article_history_data=None):
     struct = render.render_item(DESC, data)
     return struct
 
-def create_or_update(Model, orig_data, key_list, create=True, update=True, commit=True, **overrides):
-    inst = None
-    created = updated = False
-    data = {}
-    data.update(orig_data)
-    data.update(overrides)
-    try:
-        # try and find an entry of Model using the key fields in the given data
-        inst = Model.objects.get(**subdict(data, key_list))
-        # object exists, otherwise DoesNotExist would have been raised
-        if update:
-            [setattr(inst, key, val) for key, val in data.items() if val != EXCLUDE_ME]
-            updated = True
-    except Model.DoesNotExist:
-        if create:
-            #inst = Model(**data)
-            # shift this exclude me handling to et3
-            inst = Model(**{k: v for k, v in data.items() if v != EXCLUDE_ME})
-            created = True
-
-    if (updated or created) and commit:
-        inst.save()
-
-    # it is possible to neither create nor update.
-    # in this case if the model cannot be found then None is returned: (None, False, False)
-    return (inst, created, updated)
 
 @transaction.atomic
 def upsert_article_json(article_data, article_history_data):
     "despite the name, it accepts the article-json as python data, not a json string"
     mush = flatten_article_json(article_data, article_history_data)
 
-    assert mush['current_version'] == article_data['article']['version']
+    # TODO: why is this check being done again ... ?
+    ensure(mush['current_version'] == article_data['version'],
+           "after scraping the article data, the given article version has changed")
 
     orig_art = getartobj(mush['msid'])
     new_ver = mush['current_version']
@@ -259,27 +257,14 @@ def pathdata(path):
     return msid, int(ver.strip('v'))
 
 def file_upsert(path):
-    def extra(p):
-        _, ver = pathdata(p)
-        return {
-            'article': {
-                'version': ver
-            }
-        }
     article_json = json.load(open(path, 'r'))
-
-    # TODO: remove - the fixtures we're using are only partial
-    ver = article_json['article'].get('version')
-    if not ver or ver > 5: # we've never had a v5 article
-        article_json = utils.deepmerge(article_json, extra(path))
-
     history_data = {}
-    LOG.info("ingesting article %s-v%s", article_json['article']['id'], article_json['article']['version'])
+    LOG.info("ingesting article %s-v%s", article_json['id'], article_json['version'])
     return upsert_article_json(article_json, history_data)
 
 @transaction.atomic
-def bulk_upsert(article_json_dir):
-    #paths = utils.gmap(lambda fname: join(article_json_dir, fname), os.listdir(article_json_dir))
+def bulk_file_upsert(article_json_dir):
+    #paths = utils.lmap(lambda fname: join(article_json_dir, fname), os.listdir(article_json_dir))
     paths = utils.listfiles(article_json_dir, ['.json'])
 
     def safe_handler(path):
@@ -292,4 +277,4 @@ def bulk_upsert(article_json_dir):
             if settings.DEBUG:
                 # failfast in debug mode
                 raise
-    return gmap(safe_handler, sorted(paths))
+    return lmap(safe_handler, sorted(paths))
