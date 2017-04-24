@@ -26,7 +26,6 @@ GREEN_CONFIG=.green ./src/manage.py test "$module" --testrunner=green.djangorunn
 # run coverage test
 # only report coverage if we're running a complete set of tests
 if [ $print_coverage -eq 1 ]; then
-    coverage report
     # is only run if tests pass
     covered=$(coverage report | grep TOTAL | awk '{print $4}' | sed 's/%//')
     if [ $covered -lt 78 ]; then
