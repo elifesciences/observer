@@ -102,7 +102,7 @@ if __name__ == '__main__':
         'title': 'a demonstration',
         'id': 'data.elifesciences.org/latest.rss',
         'description': 'this is a simple asdf'
-    }    
+    }
     entry = {
         'title': 'item title',
         'link': {'href': 'some id'}
