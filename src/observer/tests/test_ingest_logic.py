@@ -31,6 +31,29 @@ class Logic(BaseCase):
         logic.file_upsert(self.article_json)
         self.assertEqual(models.ArticleJSON.objects.count(), 1)
 
+class Subjects(BaseCase):
+    def setUp(self):
+        pass
+
+    def test_subjects_created(self):
+        self.assertEqual(0, models.Subject.objects.count())
+        msid = logic.file_upsert(join(self.fixture_dir, 'ajson', 'elife-13964-v1.xml.json'))
+        self.assertEqual(2, models.Subject.objects.count())
+        art = models.Article.objects.get(msid=msid)
+        self.assertEqual(2, art.subjects.count())
+
+class Authors(BaseCase):
+    def setUp(self):
+        pass
+
+    def test_authors_created(self):
+        self.assertEqual(0, models.Author.objects.count())
+        msid = logic.file_upsert(join(self.fixture_dir, 'ajson', 'elife-13964-v1.xml.json'))
+        self.assertEqual(24, models.Author.objects.count())
+        art = models.Article.objects.get(msid=msid)
+        self.assertEqual(24, art.authors.count())
+
+
 class AggregateLogic(BaseCase):
     def setUp(self):
         # 13964 v1,v2,v3

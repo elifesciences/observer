@@ -15,6 +15,16 @@ def ensure(assertion, msg, *args):
     if not assertion:
         raise AssertionError(msg % args)
 
+def delall(ddict, lst):
+    "mutator. "
+    def delkey(key):
+        try:
+            del ddict[key]
+            return True
+        except KeyError:
+            return False
+    return list(zip(lst, lmap(delkey, lst)))
+
 def listfiles(path, ext_list=None):
     "returns a list of absolute paths for given dir"
     path_list = map(lambda fname: os.path.abspath(join(path, fname)), os.listdir(path))
@@ -119,12 +129,13 @@ def pad_msid(msid):
 
 EXCLUDE_ME = 0xDEADBEEF
 
-def create_or_update(Model, orig_data, key_list, create=True, update=True, commit=True, **overrides):
+def create_or_update(Model, orig_data, key_list=None, create=True, update=True, commit=True, **overrides):
     inst = None
     created = updated = False
     data = {}
     data.update(orig_data)
     data.update(overrides)
+    key_list = key_list or data.keys()
     try:
         # try and find an entry of Model using the key fields in the given data
         inst = Model.objects.get(**subdict(data, key_list))
