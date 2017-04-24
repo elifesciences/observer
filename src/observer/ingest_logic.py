@@ -5,7 +5,7 @@ import json
 from et3 import render
 from et3.extract import path as p
 from . import utils, models
-from .utils import subdict, lmap, lfilter
+from .utils import lmap, lfilter, create_or_update, ensure
 from kids.cache import cache
 import logging
 from django.conf import settings
@@ -142,7 +142,7 @@ def find_author(art):
 
 def find_author_name(art):
     author = find_author(art)
-    nom = author.get('name', None) #, p('name.preferred', None)]
+    nom = author.get('name', None)
     if isinstance(nom, dict):
         return nom['preferred']
     return nom
@@ -219,39 +219,15 @@ def flatten_article_json(article_data, article_history_data=None):
     struct = render.render_item(DESC, data)
     return struct
 
-def create_or_update(Model, orig_data, key_list, create=True, update=True, commit=True, **overrides):
-    inst = None
-    created = updated = False
-    data = {}
-    data.update(orig_data)
-    data.update(overrides)
-    try:
-        # try and find an entry of Model using the key fields in the given data
-        inst = Model.objects.get(**subdict(data, key_list))
-        # object exists, otherwise DoesNotExist would have been raised
-        if update:
-            [setattr(inst, key, val) for key, val in data.items() if val != EXCLUDE_ME]
-            updated = True
-    except Model.DoesNotExist:
-        if create:
-            #inst = Model(**data)
-            # shift this exclude me handling to et3
-            inst = Model(**{k: v for k, v in data.items() if v != EXCLUDE_ME})
-            created = True
-
-    if (updated or created) and commit:
-        inst.save()
-
-    # it is possible to neither create nor update.
-    # in this case if the model cannot be found then None is returned: (None, False, False)
-    return (inst, created, updated)
 
 @transaction.atomic
 def upsert_article_json(article_data, article_history_data):
     "despite the name, it accepts the article-json as python data, not a json string"
     mush = flatten_article_json(article_data, article_history_data)
 
-    assert mush['current_version'] == article_data['version']
+    # TODO: why is this check being done again ... ?
+    ensure(mush['current_version'] == article_data['version'],
+           "after scraping the article data, the given article version has changed")
 
     orig_art = getartobj(mush['msid'])
     new_ver = mush['current_version']
@@ -287,7 +263,7 @@ def file_upsert(path):
     return upsert_article_json(article_json, history_data)
 
 @transaction.atomic
-def bulk_upsert(article_json_dir):
+def bulk_file_upsert(article_json_dir):
     #paths = utils.lmap(lambda fname: join(article_json_dir, fname), os.listdir(article_json_dir))
     paths = utils.listfiles(article_json_dir, ['.json'])
 

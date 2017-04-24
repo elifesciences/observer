@@ -21,7 +21,7 @@ class Command(BaseCommand):
 
         fn = ingest_logic.file_upsert
         if os.path.isdir(target):
-            fn = ingest_logic.bulk_upsert
+            fn = ingest_logic.bulk_file_upsert
 
         try:
             fn(target)
