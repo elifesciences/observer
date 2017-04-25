@@ -8,7 +8,7 @@ args="$@"
 module="src"
 print_coverage=1
 if [ ! -z "$args" ]; then
-    module="src.$args"
+    module="$args"
     print_coverage=0
 fi
 
@@ -17,10 +17,10 @@ find src/ -name '*.pyc' -delete
 
 # called by test.sh
 #./src/manage.py test --testrunner=green.djangorunner.DjangoRunner "$@"
-#coverage run --source='src/' --omit='*/tests/*,*/migrations/*' src/manage.py test "$module" --no-input
+coverage run --source='src/' --omit='*/tests/*,*/migrations/*' src/manage.py test "$module" --no-input
 #echo "* passed tests"
 
-GREEN_CONFIG=.green ./src/manage.py test "$module" --testrunner=green.djangorunner.DjangoRunner --no-input -v 3
+#GREEN_CONFIG=.green ./src/manage.py test "$module" --testrunner=green.djangorunner.DjangoRunner --no-input -v 3
 
 
 # run coverage test
