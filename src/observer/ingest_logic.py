@@ -147,14 +147,27 @@ def find_author_name(art):
         return nom['preferred']
     return nom
 
+# todo: add to et3?
 def foreach(desc):
     def wrap(data):
         return [render.render_item(desc, row) for row in data]
     return wrap
 
+# todo: add to et3?
+def pp(*pobjs):
+    def wrapper(data):
+        for i, pobj in enumerate(pobjs):
+            try:
+                return pobj(data)
+            except BaseException as err:
+                if (i + 1) == len(pobjs):
+                    raise
+                continue
+    return wrapper
+
 AUTHOR_DESC = {
     'type': [p('type')],
-    'name': [p('name.preferred', None)],
+    'name': [pp(p('name.preferred'), p('name', None))],
     'country': [p('affiliations.0.address.components.country', None)]
 }
 
@@ -200,7 +213,7 @@ DESC = {
     #
 
     'subjects': [p('subjects'), lambda sl: [{'name': v['id'], 'label': v['name']} for v in sl]],
-    'authors': [p('authors'), foreach(AUTHOR_DESC)]
+    'authors': [p('authors', []), foreach(AUTHOR_DESC)]
 }
 
 # calculated from art history response

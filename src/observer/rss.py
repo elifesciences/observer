@@ -70,16 +70,8 @@ def article_to_rss_entry(art):
     # wrangle
     item['id'] = "https://dx.doi.org/" + item['link']
     item['link'] = {'href': "https://beta.elifesciences.org/articles/" + utils.pad_msid(art.msid)}
-
-    item['author'] = {'name': art.author_name, 'email': art.author_email}
-    '''
-    email = art.author_email
-    item['author'] = [
-        {'name': 'Alicia N McMurchy', 'email': email},
-        {'name': 'Przemyslaw Stempor', 'email': email},
-        {'name': 'Tessa Gaarenstroom'},
-    ]
-    '''
+    item['author'] = [{'name': a.name, 'email': art.author_email} for a in art.authors.all()]
+    item['category'] = [{'term': c.name, 'label': c.label} for c in art.subjects.all()]
     return item
 
 def format_report(report, context):
@@ -105,7 +97,11 @@ if __name__ == '__main__':
     }
     entry = {
         'title': 'item title',
-        'link': {'href': 'some id'}
+        'link': {'href': 'some id'},
+        'category': [
+            {'term': 'foo', 'label': 'Foo'},
+            {'term': 'foo', 'label': 'Foo'}
+        ]
     }
 
     feed = mkfeed(demo_report)

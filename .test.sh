@@ -36,3 +36,4 @@ if [ $print_coverage -eq 1 ]; then
     fi
 fi
 
+echo "[✓] .test.sh"
