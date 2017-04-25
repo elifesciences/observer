@@ -11,4 +11,20 @@ elifePipeline {
             builderProjectTests 'observer--ci', '/srv/observer'
         }
     }
+
+    elifeMainlineOnly {
+        stage 'End2end tests', {
+            elifeSpectrum(
+                deploy: [
+                    stackname: 'observer--end2end',
+                    revision: commit,
+                    folder: '/srv/observer'
+                ]
+            )
+        }
+     
+        stage 'Approval', {
+            elifeGitMoveToBranch commit, 'approved'
+        }
+    }
 }
