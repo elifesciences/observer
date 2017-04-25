@@ -9,6 +9,6 @@ elifePipeline {
         elifeDeploySlackNotification 'observer', 'prod'
         elifeGitMoveToBranch commit, 'master'
         builderDeployRevision 'observer--prod', commit
-        builderSmokeTests 'observer--prod', '/opt/observer'
+        builderSmokeTests 'observer--prod', '/srv/observer'
     }
 }
