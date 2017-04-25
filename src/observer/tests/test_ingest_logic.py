@@ -106,6 +106,7 @@ class AggregateLogic(BaseCase):
     def test_num_versions(self):
         "ensure our version calculations are correct"
         expected_versions = {
+            # expected ver, expected poa, expected vor
             13964: (3, 2, 1),
             14850: (1, 0, 1),
             15378: (3, 1, 2),
