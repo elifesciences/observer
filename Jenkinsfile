@@ -8,7 +8,7 @@ elifePipeline {
     stage 'Project tests', {
         lock('observer--ci') {
             builderDeployRevision 'observer--ci', commit
-            builderProjectTests 'observer--ci', '/opt/observer'
+            builderProjectTests 'observer--ci', '/srv/observer'
         }
     }
 }
