@@ -42,6 +42,17 @@ class Subjects(BaseCase):
         art = models.Article.objects.get(msid=msid)
         self.assertEqual(2, art.subjects.count())
 
+    def test_subjects_data(self):
+        # alphabetical order, asc
+        expected = [
+            ('cancer-biology', 'Cancer Biology'),
+            ('cell-biology', 'Cell Biology')
+        ]
+        msid = logic.file_upsert(join(self.fixture_dir, 'ajson', 'elife-13964-v1.xml.json'))
+        art = models.Article.objects.get(msid=msid)
+        subjects = [(s.name, s.label) for s in art.subjects.all()]
+        self.assertEqual(subjects, expected)
+
 class Authors(BaseCase):
     def setUp(self):
         pass

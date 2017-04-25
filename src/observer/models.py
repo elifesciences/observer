@@ -46,6 +46,9 @@ class Subject(models.Model):
     name = CharField(max_length=150, primary_key=True)
     label = CharField(max_length=150)
 
+    class Meta:
+        ordering = ('name',) # alphabetically, asc
+
     def __str__(self):
         return self.name
 
