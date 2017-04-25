@@ -13,11 +13,11 @@ the [Django web framework](https://www.djangoproject.com/) and a
 
 The URLs look like:
 
-    /reportname/reportformat/
+    /reportname/
 
-For example, if you wanted all articles published in the last month:
+For example, if you wanted all articles published:
 
-    /published/rss/
+    /latest-articles/
 
 ## installation
 
