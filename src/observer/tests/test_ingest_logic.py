@@ -64,6 +64,25 @@ class Authors(BaseCase):
         art = models.Article.objects.get(msid=msid)
         self.assertEqual(24, art.authors.count())
 
+    def test_authors_data(self):
+        msid = logic.file_upsert(join(self.fixture_dir, 'ajson', 'elife-13964-v1.xml.json'))
+        art = models.Article.objects.get(msid=msid)
+        authors = art.authors.all()
+        expected = [
+            ('person', 'Anke Hartung', 'United States'),
+            ('person', 'Christina A Kirby', 'United States'),
+        ]
+        actual = [(p.type, p.name, p.country) for p in authors[:2]]
+        self.assertEqual(expected, actual)
+
+        # there are 24, test the last two as well for correct ordering
+        expected = [
+            ('person', 'Yan Feng', 'United States'), # incredible name
+            ('person', 'Zineb Mounir', 'United States'),
+        ]
+        actual = [(p.type, p.name, p.country) for p in list(authors)[-2:]]
+        self.assertEqual(expected, actual)
+
 
 class AggregateLogic(BaseCase):
     def setUp(self):
