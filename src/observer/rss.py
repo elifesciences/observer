@@ -10,17 +10,22 @@ except ImportError:
     from . import utils
 
 def set_obj_attrs(obj, data):
-    def set(key, val):
+    def set(obj, key, val):
+        if ':' in key:
+            # namespaced setter, assumes ns has been loaded
+            ns, key = key.split(':', 1)
+            obj = getattr(obj, ns)
         setter = getattr(obj, key)
         if isinstance(val, list):
             for row in val:
                 setter(row)
         else:
             getattr(obj, key)(val)
-    [set(key, val) for key, val in data.items()]
+    [set(obj, key, val) for key, val in data.items()]
 
 def mkfeed(report):
     fg = FeedGenerator()
+    fg.load_extension('dc', atom=True, rss=True)
 
     # extract the report bits
     data = utils.subdict(report, ['id', 'title', 'description', 'link'])
@@ -44,6 +49,7 @@ def mkfeed(report):
 def add_entry(fg, item):
     entry = fg.add_entry()
     set_obj_attrs(entry, item)
+    return entry
 
 def add_many_entries(fg, item_list):
     [add_entry(fg, item) for item in utils.take(250, item_list)]
@@ -72,6 +78,7 @@ def article_to_rss_entry(art):
     item['link'] = {'href': "https://beta.elifesciences.org/articles/" + utils.pad_msid(art.msid)}
     item['author'] = [{'name': a.name, 'email': art.author_email} for a in art.authors.all()]
     item['category'] = [{'term': c.name, 'label': c.label} for c in art.subjects.all()]
+    item['dc:dc_date'] = utils.ymdhms(item['pubdate'])
     return item
 
 def format_report(report, context):
@@ -98,6 +105,7 @@ if __name__ == '__main__':
     entry = {
         'title': 'item title',
         'link': {'href': 'some id'},
+        'dc:dc_date': '2017-01-01',
         'category': [
             {'term': 'foo', 'label': 'Foo'},
             {'term': 'foo', 'label': 'Foo'}
@@ -106,4 +114,6 @@ if __name__ == '__main__':
 
     feed = mkfeed(demo_report)
     add_entry(feed, entry)
+    #entryobj = add_entry(feed, entry)
+    # entryobj.dc.dc_date('2017-01-01')
     print(feed.rss_str(pretty=True).decode('utf8'))

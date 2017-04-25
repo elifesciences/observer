@@ -1,3 +1,4 @@
+from rfc3339 import rfc3339
 import os
 from os.path import join
 import copy
@@ -64,6 +65,13 @@ def todt(val):
             LOG.debug("got an aware dt that isn't in utc: %r", dt)
             return dt.astimezone(pytz.utc)
     return dt
+
+def ymdhms(dt):
+    "returns an rfc3339 representation of a datetime object"
+    if dt:
+        dt = todt(dt) # convert to utc, etc
+        return rfc3339(dt, utc=True)
+
 
 def subdict(dt, ks):
     "returns a copy of the given dictionary `dt` with only the keys `ks` included"
