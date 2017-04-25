@@ -160,8 +160,8 @@ def pp(*pobjs):
             try:
                 return pobj(data)
             except BaseException as err:
-                if (i + 1) == len(pobjs):
-                    raise
+                if (i + 1) == len(pobjs): # if this is the last p-obj ..
+                    raise # die.
                 continue
     return wrapper
 
