@@ -6,7 +6,7 @@ from observer import ingest_logic as logic, models, utils
 class Logic(BaseCase):
     def setUp(self):
         self.unique_article_count = 4
-        self.article_json = self.ajson_list()[0]
+        self.article_json = join(self.fixture_dir, 'ajson', 'elife-13964-v1.xml.json')
 
     def test_flatten(self):
         "a basic transformation of the data is possible without errors"
@@ -31,6 +31,59 @@ class Logic(BaseCase):
         logic.file_upsert(self.article_json)
         self.assertEqual(models.ArticleJSON.objects.count(), 1)
 
+class Subjects(BaseCase):
+    def setUp(self):
+        pass
+
+    def test_subjects_created(self):
+        self.assertEqual(0, models.Subject.objects.count())
+        msid = logic.file_upsert(join(self.fixture_dir, 'ajson', 'elife-13964-v1.xml.json'))
+        self.assertEqual(2, models.Subject.objects.count())
+        art = models.Article.objects.get(msid=msid)
+        self.assertEqual(2, art.subjects.count())
+
+    def test_subjects_data(self):
+        # alphabetical order, asc
+        expected = [
+            ('cancer-biology', 'Cancer Biology'),
+            ('cell-biology', 'Cell Biology')
+        ]
+        msid = logic.file_upsert(join(self.fixture_dir, 'ajson', 'elife-13964-v1.xml.json'))
+        art = models.Article.objects.get(msid=msid)
+        subjects = [(s.name, s.label) for s in art.subjects.all()]
+        self.assertEqual(subjects, expected)
+
+class Authors(BaseCase):
+    def setUp(self):
+        pass
+
+    def test_authors_created(self):
+        self.assertEqual(0, models.Author.objects.count())
+        msid = logic.file_upsert(join(self.fixture_dir, 'ajson', 'elife-13964-v1.xml.json'))
+        self.assertEqual(24, models.Author.objects.count())
+        art = models.Article.objects.get(msid=msid)
+        self.assertEqual(24, art.authors.count())
+
+    def test_authors_data(self):
+        msid = logic.file_upsert(join(self.fixture_dir, 'ajson', 'elife-13964-v1.xml.json'))
+        art = models.Article.objects.get(msid=msid)
+        authors = art.authors.all()
+        expected = [
+            ('person', 'Anke Hartung', 'United States'),
+            ('person', 'Christina A Kirby', 'United States'),
+        ]
+        actual = [(p.type, p.name, p.country) for p in authors[:2]]
+        self.assertEqual(expected, actual)
+
+        # there are 24, test the last two as well for correct ordering
+        expected = [
+            ('person', 'Yan Feng', 'United States'), # incredible name
+            ('person', 'Zineb Mounir', 'United States'),
+        ]
+        actual = [(p.type, p.name, p.country) for p in list(authors)[-2:]]
+        self.assertEqual(expected, actual)
+
+
 class AggregateLogic(BaseCase):
     def setUp(self):
         # 13964 v1,v2,v3
@@ -53,6 +106,7 @@ class AggregateLogic(BaseCase):
     def test_num_versions(self):
         "ensure our version calculations are correct"
         expected_versions = {
+            # expected ver, expected poa, expected vor
             13964: (3, 2, 1),
             14850: (1, 0, 1),
             15378: (3, 1, 2),

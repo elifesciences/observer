@@ -1,3 +1,4 @@
+from rfc3339 import rfc3339
 import os
 from os.path import join
 import copy
@@ -6,6 +7,8 @@ from datetime import datetime
 import pytz
 import itertools
 import logging
+import tempfile
+import shutil
 
 LOG = logging.getLogger(__name__)
 
@@ -14,6 +17,16 @@ def ensure(assertion, msg, *args):
     get compiled away with -O flags"""
     if not assertion:
         raise AssertionError(msg % args)
+
+def delall(ddict, lst):
+    "mutator. "
+    def delkey(key):
+        try:
+            del ddict[key]
+            return True
+        except KeyError:
+            return False
+    return list(zip(lst, lmap(delkey, lst)))
 
 def listfiles(path, ext_list=None):
     "returns a list of absolute paths for given dir"
@@ -54,6 +67,13 @@ def todt(val):
             LOG.debug("got an aware dt that isn't in utc: %r", dt)
             return dt.astimezone(pytz.utc)
     return dt
+
+def ymdhms(dt):
+    "returns an rfc3339 representation of a datetime object"
+    if dt:
+        dt = todt(dt) # convert to utc, etc
+        return rfc3339(dt, utc=True)
+
 
 def subdict(dt, ks):
     "returns a copy of the given dictionary `dt` with only the keys `ks` included"
@@ -119,12 +139,13 @@ def pad_msid(msid):
 
 EXCLUDE_ME = 0xDEADBEEF
 
-def create_or_update(Model, orig_data, key_list, create=True, update=True, commit=True, **overrides):
+def create_or_update(Model, orig_data, key_list=None, create=True, update=True, commit=True, **overrides):
     inst = None
     created = updated = False
     data = {}
     data.update(orig_data)
     data.update(overrides)
+    key_list = key_list or data.keys()
     try:
         # try and find an entry of Model using the key fields in the given data
         inst = Model.objects.get(**subdict(data, key_list))
@@ -145,3 +166,8 @@ def create_or_update(Model, orig_data, key_list, create=True, update=True, commi
     # it is possible to neither create nor update.
     # in this case if the model cannot be found then None is returned: (None, False, False)
     return (inst, created, updated)
+
+def tempdir():
+    # usage: tempdir, killer = tempdir(); killer()
+    name = tempfile.mkdtemp()
+    return (name, lambda: shutil.rmtree(name))

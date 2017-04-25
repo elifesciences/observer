@@ -6,7 +6,7 @@ import json
 from et3 import render
 from et3.extract import path as p
 from . import utils, models
-from .utils import lmap, lfilter, create_or_update
+from .utils import lmap, lfilter, create_or_update, delall
 from kids.cache import cache
 import logging
 
@@ -147,6 +147,30 @@ def find_author_name(art):
         return nom['preferred']
     return nom
 
+# todo: add to et3?
+def foreach(desc):
+    def wrap(data):
+        return [render.render_item(desc, row) for row in data]
+    return wrap
+
+# todo: add to et3?
+def pp(*pobjs):
+    def wrapper(data):
+        for i, pobj in enumerate(pobjs):
+            try:
+                return pobj(data)
+            except BaseException as err:
+                if (i + 1) == len(pobjs): # if this is the last p-obj ..
+                    raise # die.
+                continue
+    return wrapper
+
+AUTHOR_DESC = {
+    'type': [p('type')],
+    'name': [pp(p('name.preferred'), p('name', None))],
+    'country': [p('affiliations.0.address.components.country', None)]
+}
+
 DESC = {
     #'journal_name': [p('journal.title')],
     'journal_name': ['elife'],
@@ -185,6 +209,11 @@ DESC = {
     'days_publication_to_current_version': [ado, calc_pub_to_current],
 
     'has_digest': [has_key('digest')],
+
+    #
+
+    'subjects': [p('subjects'), lambda sl: [{'name': v['id'], 'label': v['name']} for v in sl]],
+    'authors': [p('authors', []), foreach(AUTHOR_DESC)]
 }
 
 # calculated from art history response
@@ -248,20 +277,52 @@ def upsert_ajson(article_data):
     }
     return create_or_update(models.ArticleJSON, article_data, ['msid', 'version'])
 
+def extract_children(mush):
+    known_children = {
+        'subjects': {'Model': models.Subject, 'key_list': ["name"]},
+        'authors': {'Model': models.Author},
+    }
+
+    created_children = {}
+    for key, kwargs in known_children.items():
+        data = mush[key]
+        if not isinstance(data, list):
+            data = [data]
+
+        objects = []
+        for row in data:
+            kwargs['orig_data'] = row
+            objects.append(create_or_update(**kwargs)[0])
+
+        created_children[key] = objects
+
+    delall(mush, known_children.keys())
+
+    return mush, created_children
+
 @transaction.atomic
 def regenerate(msid):
     "scrapes the stored article data to (re)generate a models.Article object"
-    def flatten_av(avobj):
+
+    models.Article.objects.filter(msid=msid).delete() # destroy what we have
+
+    for avobj in models.ArticleJSON.objects.filter(msid=msid).order_by('version'): # ASC
         article_history_data = {} # eh
         article_data = avobj.ajson
         LOG.info('regenerating %s v%s' % (article_data['id'], article_data['version']))
         mush = flatten_article_json(article_data, article_history_data)
+
+        # extract sub-objects from the article data, insert/update them, re-attach as objects
+        article_data, children = extract_children(mush)
+
         article_presave_checks(article_data, mush)
-        artobj, _, _ = create_or_update(models.Article, mush, ['msid'])
-        return artobj
-    avl = models.ArticleJSON.objects.filter(msid=msid).order_by('version') # ASC
-    models.Article.objects.filter(msid=msid).delete() # destroy what we have
-    return lmap(flatten_av, avl)
+        artobj = create_or_update(models.Article, mush, ['msid'])[0]
+
+    for childtype, childobjs in children.items():
+        prop = getattr(artobj, childtype)
+        prop.add(*childobjs)
+
+    return artobj # return the final artobj
 
 @transaction.atomic
 def regenerate_many(msid_list):

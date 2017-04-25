@@ -2,7 +2,6 @@ import sys, json
 from django.core.management.base import BaseCommand
 import logging
 from observer import logic, ingest_logic
-from observer.utils import lmap
 
 LOG = logging.getLogger(__name__)
 

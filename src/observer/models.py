@@ -41,11 +41,42 @@ def decision_codes():
         ('simple-withdraw', 'SW')
     ]
 
+
+class Subject(models.Model):
+    name = CharField(max_length=150, primary_key=True)
+    label = CharField(max_length=150)
+
+    class Meta:
+        ordering = ('name',) # alphabetically, asc
+
+    def __str__(self):
+        return self.name
+
+    def __repr__(self):
+        return '<Subject "%s">' % self
+
+class Author(models.Model):
+    type = models.CharField(max_length=50)
+    name = models.CharField(max_length=255)
+    country = models.CharField(max_length=150, null=True)
+
+    class Meta:
+        ordering = ('name',)
+
+    def __str__(self):
+        return self.name
+
+    def __repr__(self):
+        return '<Author "%s">' % self
+
 class Article(models.Model):
     journal_name = CharField(max_length=255)
     msid = PositiveIntegerField(unique=True, help_text="article identifier from beginning of submission process right through to end of publication.")
     title = CharField(max_length=255, null=True)
     doi = CharField(max_length=255)
+
+    subjects = models.ManyToManyField(Subject)
+    authors = models.ManyToManyField(Author)
 
     abstract = TextField(null=True)
     author_line = TextField(null=True, help_text="abbreviated way of referring to the article's authors")
