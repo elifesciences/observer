@@ -7,6 +7,8 @@ from datetime import datetime
 import pytz
 import itertools
 import logging
+import tempfile
+import shutil
 
 LOG = logging.getLogger(__name__)
 
@@ -164,3 +166,8 @@ def create_or_update(Model, orig_data, key_list=None, create=True, update=True, 
     # it is possible to neither create nor update.
     # in this case if the model cannot be found then None is returned: (None, False, False)
     return (inst, created, updated)
+
+def tempdir():
+    # usage: tempdir, killer = tempdir(); killer()
+    name = tempfile.mkdtemp()
+    return (name, lambda: shutil.rmtree(name))
