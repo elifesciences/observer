@@ -153,6 +153,11 @@ def foreach(desc):
         return [render.render_item(desc, row) for row in data]
     return wrap
 
+def fltr(fn):
+    def wrap(lst):
+        return lfilter(fn, lst)
+    return wrap
+
 # todo: add to et3?
 def pp(*pobjs):
     def wrapper(data):
@@ -213,7 +218,7 @@ DESC = {
     #
 
     'subjects': [p('subjects'), lambda sl: [{'name': v['id'], 'label': v['name']} for v in sl]],
-    'authors': [p('authors', []), foreach(AUTHOR_DESC)]
+    'authors': [p('authors', []), foreach(AUTHOR_DESC), fltr(lambda a: a['country'])]
 }
 
 # calculated from art history response
@@ -324,9 +329,15 @@ def regenerate(msid):
 
     return artobj # return the final artobj
 
-@transaction.atomic
 def regenerate_many(msid_list):
-    return lmap(regenerate, msid_list)
+    @transaction.atomic
+    def _regenerate(sub_msid_list):
+        lmap(regenerate, sub_msid_list)
+        LOG.info("committing %s articles" % len(sub_msid_list))
+    lmap(_regenerate, utils.partition(msid_list, 25)) # commits every 100 items
+
+def regenerate_all():
+    regenerate_many(models.ArticleJSON.objects.values_list('msid', flat=True))
 
 #
 # upsert from file/dir of article-json

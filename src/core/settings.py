@@ -107,6 +107,12 @@ DATABASES = {
     }
 }
 
+#
+#
+#
+
+API_URL = cfg('general.api-url')
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 

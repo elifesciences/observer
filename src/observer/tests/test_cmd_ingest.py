@@ -8,7 +8,7 @@ from observer import models, utils
 
 class Cmd(BaseCase):
     def setUp(self):
-        self.nom = 'ingest'
+        self.nom = 'load_from_fs'
         self.ajson_fixture = join(self.fixture_dir, 'ajson', 'elife-13964-v1.xml.json')
         self.num_unique_articles = 4
         self.temp_dir, self.temp_dir_cleaner = utils.tempdir()
