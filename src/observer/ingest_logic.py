@@ -333,6 +333,9 @@ def regenerate(msid):
 def regenerate_many(msid_list):
     return lmap(regenerate, msid_list)
 
+def regenerate_all():
+    return lmap(regenerate, models.ArticleJSON.objects.values_list('msid', flat=True))
+
 #
 # upsert from file/dir of article-json
 #
