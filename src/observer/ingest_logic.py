@@ -332,7 +332,7 @@ def regenerate(msid):
 def regenerate_many(msid_list):
     @transaction.atomic
     def _regenerate(sub_msid_list):
-        res = lmap(regenerate, sub_msid_list)
+        lmap(regenerate, sub_msid_list)
         LOG.info("committing %s articles" % len(sub_msid_list))
     lmap(_regenerate, utils.partition(msid_list, 25)) # commits every 100 items
 
