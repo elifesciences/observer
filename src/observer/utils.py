@@ -79,6 +79,16 @@ def subdict(dt, ks):
     "returns a copy of the given dictionary `dt` with only the keys `ks` included"
     return {k: v for k, v in dt.items() if k in ks}
 
+# http://stackoverflow.com/questions/434287/what-is-the-most-pythonic-way-to-iterate-over-a-list-in-chunks
+def partition(seq, size):
+    res = []
+    for el in seq:
+        res.append(el)
+        if len(res) == size:
+            yield res
+            res = []
+    if res:
+        yield res
 
 # http://stackoverflow.com/questions/7204805/dictionaries-of-dictionaries-merge/7205107#7205107
 def _merge(a, b, path=None):

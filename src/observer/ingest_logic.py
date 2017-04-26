@@ -329,12 +329,15 @@ def regenerate(msid):
 
     return artobj # return the final artobj
 
-@transaction.atomic
 def regenerate_many(msid_list):
-    return lmap(regenerate, msid_list)
+    @transaction.atomic
+    def _regenerate(sub_msid_list):
+        res = lmap(regenerate, sub_msid_list)
+        LOG.info("committing %s articles" % len(sub_msid_list))
+    lmap(_regenerate, utils.partition(msid_list, 25)) # commits every 100 items
 
 def regenerate_all():
-    return lmap(regenerate, models.ArticleJSON.objects.values_list('msid', flat=True))
+    regenerate_many(models.ArticleJSON.objects.values_list('msid', flat=True))
 
 #
 # upsert from file/dir of article-json
