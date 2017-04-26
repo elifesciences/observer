@@ -4,7 +4,7 @@ import math
 import requests
 from collections import OrderedDict
 from observer.ingest_logic import upsert_ajson, regenerate_many
-
+from django.conf import settings
 import requests_cache
 from datetime import timedelta
 import logging
@@ -23,7 +23,7 @@ requests_cache.install_cache(**{
 def consume(endpoint, usrparams={}):
     params = {'per-page': 100, 'page': 1}
     params.update(usrparams)
-    url = "https://prod--gateway.elifesciences.org/" + endpoint.strip('/')
+    url = settings.API_URL + "/" + endpoint.strip('/')
     LOG.info('fetching %s params %s' % (url, params))
     resp = requests.get(url, params)
     if resp.status_code == 200:
