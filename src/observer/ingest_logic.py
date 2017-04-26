@@ -153,6 +153,11 @@ def foreach(desc):
         return [render.render_item(desc, row) for row in data]
     return wrap
 
+def fltr(fn):
+    def wrap(lst):
+        return lfilter(fn, lst)
+    return wrap
+
 # todo: add to et3?
 def pp(*pobjs):
     def wrapper(data):
@@ -213,7 +218,7 @@ DESC = {
     #
 
     'subjects': [p('subjects'), lambda sl: [{'name': v['id'], 'label': v['name']} for v in sl]],
-    'authors': [p('authors', []), foreach(AUTHOR_DESC)]
+    'authors': [p('authors', []), foreach(AUTHOR_DESC), fltr(lambda a: a['country'])]
 }
 
 # calculated from art history response
