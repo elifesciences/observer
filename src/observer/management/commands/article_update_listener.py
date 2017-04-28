@@ -18,6 +18,7 @@ class Command(BaseCommand):
 
             def action(event):
                 try:
+                    LOG.debug("handling event %s" % event)
                     msid = json.loads(event)['id']
                     ingest_logic.download_article_versions(msid)
                     ingest_logic.regenerate(msid)
@@ -28,6 +29,7 @@ class Command(BaseCommand):
                 except BaseException as err:
                     LOG.exception("unhandled exception attempting to download and regenerate article %s", msid)
 
+            LOG.info("attempting connection %s ...", settings.ARTICLE_EVENT_QUEUE)
             lmap(action, inc.poll(inc.queue(settings.ARTICLE_EVENT_QUEUE)))
 
         except ValueError as err:
