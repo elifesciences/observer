@@ -216,7 +216,7 @@ DESC = {
 
     #
 
-    'subjects': [p('subjects'), lambda sl: [{'name': v['id'], 'label': v['name']} for v in sl]],
+    'subjects': [p('subjects', []), lambda sl: [{'name': v['id'], 'label': v['name']} for v in sl]],
     'authors': [p('authors', []), foreach(AUTHOR_DESC), fltr(lambda a: a['country'])]
 }
 
