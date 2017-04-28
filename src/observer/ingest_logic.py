@@ -1,5 +1,4 @@
 import os
-#from os.path import join
 from functools import partial
 from django.db import transaction
 import json
@@ -7,7 +6,7 @@ from et3 import render
 from et3.extract import path as p
 from . import utils, models
 from .utils import lmap, lfilter, create_or_update, delall
-from kids.cache import cache
+#from kids.cache import cache
 import logging
 
 LOG = logging.getLogger(__name__)
@@ -62,7 +61,7 @@ def calc_num_vor(args):
         return art['version'] - artobj.num_poa_versions
     return EXCLUDE_ME
 
-@cache
+#@cache
 def ao(ad):
     "returns the stored Article Object (ao) for the given row"
     msid = ad['id']
@@ -250,8 +249,14 @@ def flatten_article_json(article_data, article_history_data=None):
         article_history_data = {}
     data = article_data
     data['history'] = article_history_data
-    struct = render.render_item(DESC, data)
-    return struct
+    return render.render_item(DESC, data)
+
+'''
+
+# things actually *appear* to be faster without caching. disabling for now
+def clear_caches():
+    ao.cache_clear()
+'''
 
 #
 #
@@ -305,9 +310,12 @@ def extract_children(mush):
 
     return mush, created_children
 
-@transaction.atomic
-def regenerate(msid):
-    "scrapes the stored article data to (re)generate a models.Article object"
+
+def _regenerate(msid):
+    """scrapes the stored article data to (re)generate a models.Article object
+
+    don't use this function directly, it has no transaction support
+    """
 
     models.Article.objects.filter(msid=msid).delete() # destroy what we have
 
@@ -327,17 +335,25 @@ def regenerate(msid):
         prop = getattr(artobj, childtype)
         prop.add(*childobjs)
 
+    # clear_caches()
+
     return artobj # return the final artobj
 
-def regenerate_many(msid_list):
+@transaction.atomic
+def regenerate(msid):
+    "use this when regenerating individual or small numbers of articles."
+    return _regenerate(msid)
+
+def regenerate_many(msid_list, batches_of=25):
+    "commits articles in batches of 25 by default"
     @transaction.atomic
-    def _regenerate(sub_msid_list):
-        lmap(regenerate, sub_msid_list)
+    def regen(sub_msid_list):
+        lmap(_regenerate, sub_msid_list)
         LOG.info("committing %s articles" % len(sub_msid_list))
-    lmap(_regenerate, utils.partition(msid_list, 25)) # commits every 100 items
+    lmap(regen, utils.partition(msid_list, batches_of))
 
 def regenerate_all():
-    regenerate_many(models.ArticleJSON.objects.values_list('msid', flat=True))
+    regenerate_many(models.ArticleJSON.objects.defer('ajson').values_list('msid', flat=True))
 
 #
 # upsert from file/dir of article-json
@@ -364,4 +380,4 @@ def bulk_file_upsert(article_json_dir):
     "insert/update ArticleJSON from a directory of files"
     paths = sorted(utils.listfiles(article_json_dir, ['.json']))
     msid_list = sorted(set(lmap(partial(file_upsert, regen=False, quiet=True), paths)))
-    return lmap(regenerate, msid_list)
+    return regenerate_many(msid_list)

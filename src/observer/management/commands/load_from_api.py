@@ -50,7 +50,8 @@ def download_all_article_versions():
         msid_ver_idx = download_snippets()
 
         LOG.info("%s articles to fetch" % len(msid_ver_idx))
-        for msid, latest_version in sorted(msid_ver_idx.items(), key=lambda x: x[0]):
+        idx = sorted(msid_ver_idx.items(), key=lambda x: x[0], reverse=True)
+        for msid, latest_version in idx:
             LOG.info(' %s versions to fetch' % latest_version)
 
             # download each version and stick into observer
