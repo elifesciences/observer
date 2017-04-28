@@ -1,4 +1,5 @@
 import sys, json
+import requests
 from django.conf import settings
 from django.core.management.base import BaseCommand
 import logging
@@ -16,9 +17,16 @@ class Command(BaseCommand):
                 raise ValueError("no queue name found. a queue name can be set in your 'app.cfg'. see example file 'elife.cfg'")
 
             def action(event):
-                msid = json.loads(event)['id']
-                ingest_logic.download_article_versions(msid)
-                ingest_logic.regenerate(msid)
+                try:
+                    msid = json.loads(event)['id']
+                    ingest_logic.download_article_versions(msid)
+                    ingest_logic.regenerate(msid)
+
+                except requests.exceptions.RequestException as err:
+                    LOG.error("failed to fetch article %s: %s", msid, err)
+
+                except BaseException as err:
+                    LOG.exception("unhandled exception attempting to download and regenerate article %s", msid)
 
             lmap(action, inc.poll(inc.queue(settings.ARTICLE_EVENT_QUEUE)))
 
