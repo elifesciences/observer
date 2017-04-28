@@ -12,8 +12,6 @@ class Command(BaseCommand):
         parser.add_argument('--target', required=True, action='store')
 
     def handle(self, *args, **options):
-        self.log_context = {}
-
         original_target = options['target']
         target = os.path.abspath(os.path.expanduser(original_target))
 
