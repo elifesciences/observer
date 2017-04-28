@@ -1,8 +1,9 @@
-import sys
+import sys, json
 from django.conf import settings
 from django.core.management.base import BaseCommand
 import logging
-from observer import inc
+from observer import inc, ingest_logic
+from observer.utils import lmap
 
 LOG = logging.getLogger(__name__)
 
@@ -13,7 +14,13 @@ class Command(BaseCommand):
         try:
             if not settings.ARTICLE_EVENT_QUEUE:
                 raise ValueError("no queue name found. a queue name can be set in your 'app.cfg'. see example file 'elife.cfg'")
-            inc.poll(inc.queue(settings.ARTICLE_EVENT_QUEUE))
+
+            def action(event):
+                msid = json.loads(event)['id']
+                ingest_logic.download_article_versions(msid)
+                ingest_logic.regenerate(msid)
+
+            lmap(action, inc.poll(inc.queue(settings.ARTICLE_EVENT_QUEUE)))
 
         except ValueError as err:
             LOG.error(err)

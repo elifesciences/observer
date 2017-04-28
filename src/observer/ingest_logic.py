@@ -1,7 +1,10 @@
-import os
+import os, sys, math, json
 from functools import partial
 from django.db import transaction
-import json
+import requests
+from django.conf import settings
+import requests_cache
+from datetime import timedelta
 from et3 import render
 from et3.extract import path as p
 from . import utils, models, logic
@@ -356,7 +359,67 @@ def regenerate_all():
     regenerate_many(logic.known_articles())
 
 #
-# upsert from file/dir of article-json
+# upsert article-json from api
+#
+
+if settings.ENV not in ['prod', 'continuumtest']:
+    requests_cache.install_cache(**{
+        'cache_name': '/tmp/api-cache',
+        'backend': 'sqlite',
+        'fast_save': True,
+        'extension': '.sqlite3',
+        # https://requests-cache.readthedocs.io/en/latest/user_guide.html#expiration
+        'expire_after': timedelta(hours=24)
+    })
+
+def consume(endpoint, usrparams={}):
+    params = {'per-page': 100, 'page': 1}
+    params.update(usrparams)
+    url = settings.API_URL + "/" + endpoint.strip('/')
+    LOG.info('fetching %s params %s' % (url, params))
+    resp = requests.get(url, params)
+    resp.raise_for_status()
+    return resp.json()
+
+def mkidx():
+    "downloads *all* article snippets to create an msid:version index"
+    ini = consume("articles", {'per-page': 1})
+    per_page = 100.0
+    num_pages = math.ceil(ini["total"] / per_page)
+    msid_ver_idx = {} # ll: {09560: 1, ...}
+    LOG.info("%s pages to fetch" % num_pages)
+    for page in range(1, num_pages):
+        resp = consume("articles", {'page': page})
+        for snippet in resp["items"]:
+            msid_ver_idx[snippet["id"]] = snippet["version"]
+    return msid_ver_idx
+
+def _download_versions(msid, latest_version):
+    LOG.info(' %s versions to fetch' % latest_version)
+    version_range = range(1, latest_version + 1)
+    lmap(lambda version: upsert_ajson(consume("articles/%s/versions/%s" % (msid, version))), version_range)
+
+def download_article_versions(msid):
+    "loads *all* versions of given article from the api"
+    resp = consume("articles/%s/versions" % msid)
+    return _download_versions(msid, len(resp["versions"]))
+
+def download_all_article_versions():
+    "loads *all* versions of *all* articles from the api"
+    try:
+        msid_ver_idx = mkidx()
+        LOG.info("%s articles to fetch" % len(msid_ver_idx))
+        idx = sorted(msid_ver_idx.items(), key=lambda x: x[0], reverse=True)
+        for msid, latest_version in idx:
+            _download_versions(msid, latest_version)
+
+    except KeyboardInterrupt:
+        print("\nctrl-c caught, quitting.\ndownload progress has been saved")
+        sys.exit(1)
+
+
+#
+# upsert article-json from file/dir
 #
 
 def file_upsert(path, regen=True, quiet=False):
