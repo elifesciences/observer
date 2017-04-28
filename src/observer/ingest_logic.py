@@ -4,7 +4,7 @@ from django.db import transaction
 import json
 from et3 import render
 from et3.extract import path as p
-from . import utils, models
+from . import utils, models, logic
 from .utils import lmap, lfilter, create_or_update, delall
 #from kids.cache import cache
 import logging
@@ -353,7 +353,7 @@ def regenerate_many(msid_list, batches_of=25):
     lmap(regen, utils.partition(msid_list, batches_of))
 
 def regenerate_all():
-    regenerate_many(models.ArticleJSON.objects.defer('ajson').values_list('msid', flat=True))
+    regenerate_many(logic.known_articles())
 
 #
 # upsert from file/dir of article-json

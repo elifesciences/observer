@@ -159,3 +159,4 @@ class ArticleJSON(models.Model):
 
     class Meta:
         unique_together = ('msid', 'version')
+        ordering = ('-msid', 'version') # [09561 v1, 09561 v2, 09560 v1]
