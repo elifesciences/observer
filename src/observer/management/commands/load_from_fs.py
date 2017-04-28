@@ -35,7 +35,7 @@ class Command(BaseCommand):
             sys.exit(1)
 
         except:
-            LOG.exception("unhandled exception attempting to ingest article", extra=self.log_context)
+            LOG.exception("unhandled exception attempting to ingest article")
             raise
 
         sys.exit(0)

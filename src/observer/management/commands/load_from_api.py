@@ -66,10 +66,6 @@ def download_all_article_versions():
 class Command(BaseCommand):
     help = "a terrifically sequential and SLOW way to load ALL elife articles and versions"
 
-    def add_arguments(self, parser):
-        #parser.add_argument('--target', required=True, action='store')
-        pass
-
     def handle(self, *args, **options):
         download_all_article_versions()
         regenerate_all()
