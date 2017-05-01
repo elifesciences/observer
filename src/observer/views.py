@@ -14,7 +14,7 @@ import logging
 LOG = logging.getLogger(__name__)
 
 def request_args(request, **overrides):
-    opts = {'per_page': 28, 'page_num': 1, 'order_direction': 'ASC', 'min_per_page': 1, 'max_per_page': 100}
+    opts = {'per_page': 28, 'page_num': 1, 'order_direction': 'DESC', 'min_per_page': 1, 'max_per_page': 100}
     opts.update(overrides)
 
     def ispositiveint(v):
