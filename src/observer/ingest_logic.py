@@ -362,7 +362,7 @@ def regenerate_all():
 # upsert article-json from api
 #
 
-if settings.ENV not in ['prod', 'continuumtest']:
+if settings.DEBUG:
     requests_cache.install_cache(**{
         'cache_name': '/tmp/api-cache',
         'backend': 'sqlite',
