@@ -53,6 +53,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'django_markdown2', # landing page is rendered markdown
+
     'observer',
 )
 

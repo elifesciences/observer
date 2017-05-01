@@ -7,17 +7,45 @@ This project uses the [Python programming language](https://www.python.org/),
 the [Django web framework](https://www.djangoproject.com/) and a
 [relational database](https://en.wikipedia.org/wiki/Relational_database_management_system).
 
-[Github repo](https://github.com/elifesciences/observer/).
+[Github repository](https://github.com/elifesciences/observer/).
 
-## RSS
+## Reports
 
-The URLs look like:
+A report URL looks like:
 
-    /reportname/
+* /report/reportname/
 
-For example, if you wanted all articles published:
+For example, if you wanted the latest articles published, the url would look like:
 
-    /latest-articles/
+* [/report/latest-articles/](https://observer.elifesciences.org/report/latest-articles/)
+
+Reports are paginated and ordered and you can page through their results. For example:
+
+* [/report/latest-articles/?page=20](https://observer.elifesciences.org/report/latest-articles/?page=20)
+    
+returns the twentieth page of the latest articles. And:
+
+* [/report/latest-articles/?page=20&per-page=100](https://observer.elifesciences.org/report/latest-articles/?page=20&per-page=100)
+
+returns you results 2000 through 2100.
+
+### latest articles report
+
+The [latest-articles](https://observer.elifesciences.org/report/latest-articles/) report is:
+
+* all articles, regardless of status (PoA or VoR)
+* 28 articles per page
+* ordered by the date and time the article was first published
+* with most recent articles first
+
+### upcoming articles report
+
+The [upcoming-articles](https://observer.elifesciences.org/report/upcoming-articles/) report is:
+
+* all articles whose status is PoA (Publish on Accept)
+* 28 articles per page
+* ordered by the date and time the article was first published
+* with most recent PoA articles first
 
 ## installation
 
@@ -35,6 +63,7 @@ this is 'libpqxx', on Ubuntu this is 'libpq-dev'.
 
 [code](https://github.com/elifesciences/observer/blob/master/install.sh)  
 
+    git pull
     ./install.sh
 
 ## testing 
@@ -48,7 +77,7 @@ this is 'libpqxx', on Ubuntu this is 'libpq-dev'.
 [code](https://github.com/elifesciences/observer/blob/master/manage.sh)
 
     ./manage.sh runserver
-    firefox http://127.0.0.1:8000/api/docs/
+    firefox http://127.0.0.1:8000/
 
 ## Copyright & Licence
 
