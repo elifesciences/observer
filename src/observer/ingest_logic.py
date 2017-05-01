@@ -1,4 +1,4 @@
-import os, sys, math, json
+import os, math, json
 from functools import partial
 from django.db import transaction
 import requests
@@ -20,10 +20,13 @@ EXCLUDE_ME = 0xDEADBEEF
 class StateError(Exception):
     pass
 
+'''
+# unused
 def doi2msid(doi):
     "doi to manuscript id used in EJP"
     prefix = '10.7554/eLife.'
     return doi[len(prefix):].lstrip('0')
+'''
 
 def msid2doi(msid):
     assert len(str(msid)) <= 5, "given msid is too long: %r" % msid
@@ -406,16 +409,11 @@ def download_article_versions(msid):
 
 def download_all_article_versions():
     "loads *all* versions of *all* articles from the api"
-    try:
-        msid_ver_idx = mkidx()
-        LOG.info("%s articles to fetch" % len(msid_ver_idx))
-        idx = sorted(msid_ver_idx.items(), key=lambda x: x[0], reverse=True)
-        for msid, latest_version in idx:
-            _download_versions(msid, latest_version)
-
-    except KeyboardInterrupt:
-        print("\nctrl-c caught, quitting.\ndownload progress has been saved")
-        sys.exit(1)
+    msid_ver_idx = mkidx()
+    LOG.info("%s articles to fetch" % len(msid_ver_idx))
+    idx = sorted(msid_ver_idx.items(), key=lambda x: x[0], reverse=True)
+    for msid, latest_version in idx:
+        _download_versions(msid, latest_version)
 
 
 #

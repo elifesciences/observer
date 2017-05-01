@@ -82,20 +82,19 @@ def article_to_rss_entry(art):
     return item
 
 def format_report(report, context):
-    try:
-        report.update(context) # yes, this nukes any conflicting keys in the report
-        report['title'] = 'eLife: ' + report['title']
-        feed = mkfeed(report)
-        add_many_entries(feed, map(article_to_rss_entry, report['items'])) # deliberate use of lazy map
-        return feed.rss_str(pretty=True).decode('utf-8')
-    except BaseException as e:
-        LOG.exception("unhandled exception formatting report %r", report)
-        raise
+    "formats given report as RSS xml"
+    report.update(context) # yes, this nukes any conflicting keys in the report
+    report['title'] = 'eLife: ' + report['title']
+    feed = mkfeed(report)
+    add_many_entries(feed, map(article_to_rss_entry, report['items'])) # deliberate use of lazy map
+    return feed.rss_str(pretty=True).decode('utf-8')
 
 #
 #
 #
 
+'''
+# works, but no coverage
 if __name__ == '__main__':
     demo_report = {
         'title': 'a demonstration',
@@ -117,3 +116,4 @@ if __name__ == '__main__':
     #entryobj = add_entry(feed, entry)
     # entryobj.dc.dc_date('2017-01-01')
     print(feed.rss_str(pretty=True).decode('utf8'))
+'''

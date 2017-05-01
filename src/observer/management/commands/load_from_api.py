@@ -6,6 +6,11 @@ class Command(BaseCommand):
     help = "a terrifically sequential and SLOW way to load ALL elife articles and versions"
 
     def handle(self, *args, **options):
-        download_all_article_versions()
-        regenerate_all()
+        try:
+            download_all_article_versions()
+            regenerate_all()
+        except KeyboardInterrupt:
+            print("\nctrl-c caught, quitting.\ndownload progress has been saved")
+            sys.exit(1)
+
         sys.exit(0)
