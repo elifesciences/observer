@@ -8,10 +8,6 @@ LOG = logging.getLogger(__name__)
 class Command(BaseCommand):
     help = 'regenerates Article data from database'
 
-    def add_arguments(self, parser):
-        #parser.add_argument('--msid', required=True, action='store')
-        pass
-
     def handle(self, *args, **options):
         try:
             ingest_logic.regenerate_all()

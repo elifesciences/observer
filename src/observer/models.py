@@ -50,10 +50,10 @@ class Subject(models.Model):
         ordering = ('name',) # alphabetically, asc
 
     def __str__(self):
-        return self.name
+        return self.label
 
     def __repr__(self):
-        return '<Subject "%s">' % self
+        return '<Subject "%s">' % self.name
 
 class Author(models.Model):
     type = models.CharField(max_length=50)
@@ -151,6 +151,12 @@ class Article(models.Model):
     datetime_record_created = DateTimeField(auto_now_add=True)
     datetime_record_updated = DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return "%05d" % self.msid
+
+    def __repr__(self):
+        return '<Article "%s">' % self
+
 
 class ArticleJSON(models.Model):
     msid = PositiveSmallIntegerField()
@@ -160,3 +166,9 @@ class ArticleJSON(models.Model):
     class Meta:
         unique_together = ('msid', 'version')
         ordering = ('-msid', 'version') # [09561 v1, 09561 v2, 09560 v1]
+
+    def __str__(self):
+        return "%05d v%s" % (self.msid, self.version)
+
+    def __repr__(self):
+        return '<ArticleJSON "%s">' % self

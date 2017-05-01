@@ -12,6 +12,12 @@ import shutil
 
 LOG = logging.getLogger(__name__)
 
+def first(x):
+    try:
+        return x[0]
+    except IndexError:
+        return None
+
 def ensure(assertion, msg, *args):
     """intended as a convenient replacement for `assert` statements that
     get compiled away with -O flags"""

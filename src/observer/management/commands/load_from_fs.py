@@ -12,8 +12,6 @@ class Command(BaseCommand):
         parser.add_argument('--target', required=True, action='store')
 
     def handle(self, *args, **options):
-        self.log_context = {}
-
         original_target = options['target']
         target = os.path.abspath(os.path.expanduser(original_target))
 
@@ -37,7 +35,7 @@ class Command(BaseCommand):
             sys.exit(1)
 
         except:
-            LOG.exception("unhandled exception attempting to ingest article", extra=self.log_context)
+            LOG.exception("unhandled exception attempting to ingest article")
             raise
 
         sys.exit(0)
