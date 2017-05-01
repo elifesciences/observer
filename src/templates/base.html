@@ -1,0 +1,14 @@
+{% load staticfiles %}<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>{{ html_title }}</title>
+<!-- http://jasonm23.github.io/markdown-css-themes/markdown7.css -->
+<link href="{% static "css/markdown7.css" %}" rel="stylesheet" type="text/css" />
+<base target="_blank">
+</head>
+
+<body>{% block page-body %}{% endblock %}</body>
+
+</html>

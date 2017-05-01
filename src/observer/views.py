@@ -1,13 +1,14 @@
+from os.path import join
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 from django.shortcuts import Http404  # , get_object_or_404
-
+from django.conf import settings
 from et3.render import render_item
 from et3.extract import path as p
 from et3.utils import uppercase
 from observer import models
+from annoying.decorators import render_to
 from .utils import ensure, isint
-
 from . import reports, rss
 import logging
 
@@ -80,6 +81,13 @@ def format_report(report, format, context):
 #
 # views
 #
+
+@render_to("landing.html")
+def landing(request):
+    return {
+        'html_title': 'Observer - article reports',
+        'readme': open(join(settings.PROJECT_DIR, 'README.md')).read()
+    }
 
 def report(request, name, format='rss'):
     try:
