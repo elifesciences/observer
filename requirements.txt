@@ -6,7 +6,7 @@ django-annoying==0.10.3
 et3==1.5
 feedgen==0.5.1
 green==2.5.0
-hg+https://bitbucket.org/lskibinski/rfc3339
+rfc3339==5.2
 ipython==5.1.0
 kids.cache==0.0.4
 psycopg2==2.7.1
