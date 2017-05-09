@@ -80,6 +80,10 @@ def ymdhms(dt):
         dt = todt(dt) # convert to utc, etc
         return rfc3339(dt, utc=True)
 
+def ymd(dt):
+    if dt:
+        dt = todt(dt)
+        return dt.strftime("%Y-%m-%d")
 
 def subdict(dt, ks):
     "returns a copy of the given dictionary `dt` with only the keys `ks` included"
