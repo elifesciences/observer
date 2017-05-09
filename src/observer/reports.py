@@ -6,8 +6,8 @@ from functools import wraps
 KNOWN_SERIALISATIONS = JSON, CSV, RSS = 'JSON', 'CSV', 'RSS'
 
 SERIALISATIONS = 'serialisations'
-ORDER_BY, DEFAULT_ORDER = 'order_by', 'order'
-ORDER, PER_PAGE = 'order', 'per_page'
+ORDER, ORDER_BY = 'order', 'order_by'
+PER_PAGE = 'per_page'
 NO_PAGINATION = 0
 DESC, ASC = 'DESC', 'ASC'
 
@@ -70,7 +70,7 @@ def upcoming_articles():
     SERIALISATIONS: [CSV],
     PER_PAGE: NO_PAGINATION,
     ORDER_BY: 'msid',
-    DEFAULT_ORDER: ASC,
+    ORDER: ASC,
 
     #'headers': ['msid', 'poa', 'vor'] # published.csv on lax has no headers, but this could be specified here?
 })
