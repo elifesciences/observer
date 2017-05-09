@@ -60,7 +60,7 @@ def add_many_entries(fg, item_list):
 #
 
 def article_to_rss_entry(art):
-    "coerce a models.Article object to something suitable for the feedgen entry model"
+    "serialise a models.Article object to an rss item entry"
     item = utils.to_dict(art)
 
     # extract the entry bits
