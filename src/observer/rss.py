@@ -1,4 +1,5 @@
 #from . import models
+from django.http import HttpResponse
 from feedgen.feed import FeedGenerator
 import logging
 
@@ -87,7 +88,8 @@ def format_report(report, context):
     report['title'] = 'eLife: ' + report['title']
     feed = mkfeed(report)
     add_many_entries(feed, map(article_to_rss_entry, report['items'])) # deliberate use of lazy map
-    return feed.rss_str(pretty=True).decode('utf-8')
+    body = feed.rss_str(pretty=True).decode('utf-8')
+    return HttpResponse(body, content_type='text/xml')
 
 #
 #

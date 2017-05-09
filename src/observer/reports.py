@@ -84,7 +84,7 @@ def published_research_article_index():
     return models.Article.objects \
         .exclude(type__in=['article-commentary', 'editorial', 'book-review', 'discussion', 'correction']) \
         .order_by('msid') \
-        .value_list('msid', 'datetime_poa_published', 'datetime_vor_published')
+        .values_list('msid', 'datetime_poa_published', 'datetime_vor_published')
 
 #
 #
@@ -96,7 +96,7 @@ def known_report_idx():
     return {
         'latest-articles': latest_articles,
         'upcoming-articles': upcoming_articles,
-        #'published-research-article-index': published_research_article_index,
+        'published-research-article-index': published_research_article_index,
     }
 
 def get_report(name):

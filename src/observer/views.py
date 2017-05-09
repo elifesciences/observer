@@ -8,10 +8,10 @@ from et3.extract import path as p
 from et3.utils import uppercase
 from annoying.decorators import render_to
 from .utils import ensure, isint
-from . import reports, rss
+from . import reports, rss, csv
 import logging
 
-from .reports import PER_PAGE, ORDER, SERIALISATIONS, NO_PAGINATION, ORDER_BY, RSS
+from .reports import PER_PAGE, ORDER, SERIALISATIONS, NO_PAGINATION, ORDER_BY, RSS, CSV
 
 LOG = logging.getLogger(__name__)
 
@@ -50,7 +50,7 @@ def request_args(request, report_meta, **overrides):
     }
     if opts[PER_PAGE] == NO_PAGINATION:
         # if no user per-page has been specified + report explicitly defaults to no pagination, return all results
-        desc['per_page'] = NO_PAGINATION
+        desc['per_page'] = [NO_PAGINATION]
     return render_item(desc, request.GET)
 
 def chop(q, page, per_page, order, order_by):
@@ -92,6 +92,7 @@ def format_report(report, rargs, context):
     # the report has been executed at this point
     known_formats = {
         RSS: rss.format_report,
+        CSV: csv.format_report,
     }
     return known_formats[report['format']](report, context)
 
@@ -118,13 +119,14 @@ def report(request, name):
 
         # truncate report results, enforce any user ordering
         report_paginated = paginate_report_results(report, rargs)
+
         # additional things to pass to whatever is rendering the report
         # keys here will override any found in the report
         context = {
             'link': "https://data.elifesciences.org" + reverse('report', kwargs={'name': name}),
         }
-        report_formatted = format_report(report_paginated, rargs, context)
-        return HttpResponse(report_formatted, content_type='text/xml')
+        return format_report(report_paginated, rargs, context)
+
     except BaseException:
         LOG.exception("unhandled exception")
         return HttpResponse("server error attempting to handle your request", status=500)
