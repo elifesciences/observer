@@ -28,4 +28,3 @@ class One(BaseCase):
             bits = row.decode('utf8').split(',') # this particular report has no quoted comma values
             self.assertEqual(len(bits), 3)
             int(bits[0]) # first bit is an msid
-
