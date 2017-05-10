@@ -38,7 +38,7 @@ def request_args(request, report_meta, **overrides):
 
     def isin(lst):
         def fn(val):
-            ensure(val in lst, "value %r is not in %r" % (val, lst))
+            ensure(val in lst, "%r not found in list: [%s]" % (val, ', '.join(lst)))
             return val
         return fn
 
@@ -108,22 +108,30 @@ def landing(request):
         'readme': open(join(settings.PROJECT_DIR, 'README.md')).read()
     }
 
-def report(request, name):
+def report(request, name, format_hint=None):
     try:
         report = reports.get_report(name)
     except KeyError:
         raise Http404("report not found")
     try:
         # extract and validate any params user has given us
-        rargs = request_args(request, report.meta)
+        overrides = {}
+        if format_hint:
+            overrides['format'] = format_hint
+        rargs = request_args(request, report.meta, **overrides)
 
+    except AssertionError as err:
+        LOG.exception("bad user request")
+        return HttpResponse("bad request: %s" % err, status=400)
+
+    try:
         # truncate report results, enforce any user ordering
         report_paginated = paginate_report_results(report, rargs)
 
         # additional things to pass to whatever is rendering the report
         # keys here will override any found in the report
         context = {
-            'link': "https://data.elifesciences.org" + reverse('report', kwargs={'name': name}),
+            'link': "https://observer.elifesciences.org" + reverse('report', kwargs={'name': name}),
         }
         return format_report(report_paginated, rargs, context)
 

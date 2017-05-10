@@ -25,7 +25,7 @@ def report(meta):
 def article_meta(**kwargs):
     "returns standard metadata most reports returning models.Article objects will need"
     meta = {
-        SERIALISATIONS: [RSS],
+        SERIALISATIONS: [RSS, CSV],
         ORDER_BY: 'datetime_version_published',
         ORDER: DESC,
         PER_PAGE: 28,
@@ -84,7 +84,7 @@ def published_research_article_index():
     return models.Article.objects \
         .exclude(type__in=['article-commentary', 'editorial', 'book-review', 'discussion', 'correction']) \
         .order_by('msid') \
-        .values_list('msid', 'datetime_poa_published', 'datetime_vor_published')
+        .values('msid', 'datetime_poa_published', 'datetime_vor_published')
 
 #
 #
