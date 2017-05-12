@@ -5,7 +5,7 @@ from observer import ingest_logic as logic, models, utils
 
 class Logic(BaseCase):
     def setUp(self):
-        self.unique_article_count = 4
+        self.unique_article_count = 5
         self.article_json = join(self.fixture_dir, 'ajson', 'elife-13964-v1.xml.json')
 
     def test_flatten(self):

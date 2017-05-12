@@ -1,4 +1,5 @@
 from . import models
+from .utils import ensure
 from functools import wraps
 
 # utils
@@ -84,11 +85,21 @@ def published_research_article_index():
     return models.Article.objects \
         .exclude(type__in=['article-commentary', 'editorial', 'book-review', 'discussion', 'correction']) \
         .order_by('msid') \
-        .values('msid', 'datetime_poa_published', 'datetime_vor_published')
+        .values_list('msid', 'datetime_poa_published', 'datetime_vor_published')
 
 #
 #
 #
+
+def format_report(report, format, context):
+    from . import rss, csv
+    # the report has been executed at this point
+    known_formats = {
+        RSS: rss.format_report,
+        CSV: csv.format_report,
+    }
+    ensure(format in report[SERIALISATIONS], "unsupported format %r for report %s" % (format, report))
+    return known_formats[format](report, context)
 
 # replace these with some fancy introspection of the reports module
 

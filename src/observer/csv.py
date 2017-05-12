@@ -1,7 +1,10 @@
+from django.http import HttpResponse
+from collections import OrderedDict
+import itertools
 import csv as csvpy
 from datetime import date, datetime
 from . import models, utils
-from functools import partial
+#from functools import partial
 
 # https://docs.djangoproject.com/en/1.11/howto/outputting-csv/
 from django.http import StreamingHttpResponse
@@ -13,12 +16,16 @@ class Echo(object):
         """Write the value by returning it, instead of storing in a buffer."""
         return value
 
-def streaming_csv_response(filename, rows, writer=None):
+def streaming_csv_response(filename, rows, headers):
     pseudo_buffer = Echo()
-
-    writer = (writer or csvpy.writer)(pseudo_buffer)
-    response = StreamingHttpResponse((writer.writerow(row) for row in rows),
-                                     content_type="text/csv")
+    writer = csvpy.DictWriter(pseudo_buffer, fieldnames=headers)
+    header = OrderedDict(zip(headers, headers))
+    body = []
+    if not utils.isint(list(headers)[0]):
+        # assumption will fail on reports whose first header in the header row is an integer
+        body.append((writer.writerow(row) for row in [header]))
+    body.append((writer.writerow(row) for row in rows))
+    response = StreamingHttpResponse(itertools.chain.from_iterable(body), content_type="text/csv")
     response['Content-Disposition'] = 'attachment; filename="%s.csv"' % filename
     return response
 
@@ -36,59 +43,34 @@ def coerce(val):
         return lu[type(val)](val)
     return val
 
-def format_dict(row):
-    # alphabetical sorting
-    return sorted(utils.val_map(coerce, row).items())
+def format_list(row):
+    # returns an OrderedDict mapping of column numbers : column values
+    return OrderedDict(zip(range(0, len(row)), map(coerce, row)))
 
-def format_list(row, headers):
-    if not headers:
-        headers = range(1, len(row))
-    return zip(headers, map(coerce, row))
-    
-    lu = {
-        datetime: utils.ymd
-    }
-    return [val if not lu.get(type(val)) else lu[type(val)](val) for val in row]
+def format_dict(row):
+    return utils.val_map(coerce, row)
 
 def format_article(art):
     return format_dict(utils.to_dict(art))
 
-def format_row(row, context):
-    "the output of this function must be a list of pairs, [(key, val), (key, val), etc]"
-    idx = {
-        dict: format_dict,
-        models.Article: format_article,
-    }
-    default = partial(format_list, context.get('headers'))
-    return idx.get(type(row), default)(row)
-
-'''
-arghj! not getting anywhere with this code.
-
-intent is:
-
-you pass format_report a report
-a report contains an 'items' key
-'items' is a queryset
-each result in queryset is either an object, a dict or a list
-each type gets it's own formatter
-each of the values emitted needs to go through the coercer
-headers can optionally be present
-if present, use those. results are limited to the keys specified
-if not present, peek into the first row of results and use those keys, ordered alphabetically
-if not present and row is a list of values, emit no headers, assume ordering is correct
-
-
-
-'''
-
-
 def format_report(report, context):
-    rows = map(partial(format_row, context=context), report['items'])
-    filename = report['title'].replace(' ', '-').lower()
-    
-    peek = next(rows)
-    headers = map(utils.first, peek)
+    # sniff the result types
+    items_qs = report['items']
+    peek = items_qs.first()
+    if not peek:
+        # no results
+        # we could return a 204, but that's more REST-ful
+        # and we're making an effort to avoid cleverness here
+        return HttpResponse(status=200)
 
-    rows = itertools.chain([peek], rows)
-    return streaming_csv_response(filename, rows, csvpy.DictWriter)
+    formatters = {
+        tuple: format_list,
+        dict: format_dict,
+        models.Article: format_article
+    }
+    formatterfn = formatters[type(peek)]
+    headers = formatterfn(peek).keys()
+
+    rows = map(formatterfn, items_qs) # still lazy
+    filename = report['title'].replace(' ', '-').lower()
+    return streaming_csv_response(filename, rows, headers)
