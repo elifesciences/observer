@@ -1,32 +1,32 @@
 {
   "-meta": {
-    "location": "https://raw.githubusercontent.com/elifesciences/elife-article-xml/60e488fb2f97bf71c6b7a2864b745f4afb1376e8/articles/elife-13964-v1.xml",
+    "location": "https://raw.githubusercontent.com/elifesciences/elife-article-xml/60e488fb2f97bf71c6b7a2864b745f4afb1376e8/articles/elife-20125-v1.xml",
     "patched": true
   },
   "-history": {
-    "received": "2015-12-21T00:00:00Z",
-    "accepted": "2016-05-06T00:00:00Z"
+    "received": "2016-07-28T00:00:00Z",
+    "accepted": "2016-08-30T00:00:00Z"
   },
   "status": "poa",
-  "id": "13964",
+  "id": "20125",
   "version": 1,
-  "type": "short-report",
-  "doi": "10.7554/eLife.13964",
-  "authorLine": "Zineb Mounir et al",
-  "title": "ERG signaling in prostate cancer is driven through PRMT5-dependent methylation of the androgen receptor",
-  "published": "2016-05-16T00:00:00Z",
-  "versionDate": "2016-05-16T00:00:00Z",
+  "type": "research-article",
+  "doi": "10.7554/eLife.20125",
+  "authorLine": "Andrew T Timberlake et al",
+  "title": "Two locus inheritance of non-syndromic midline craniosynostosis via rare <i>SMAD6</i> and common <i>BMP2</i> alleles",
+  "published": "2016-09-08T00:00:00Z",
+  "versionDate": "2016-09-08T00:00:00Z",
   "volume": 5,
-  "elocationId": "e13964",
-  "pdf": "https://cdn.elifesciences.org/articles/13964/elife-13964-v1.pdf",
+  "elocationId": "e20125",
+  "pdf": "https://cdn.elifesciences.org/articles/20125/elife-20125-v1.pdf",
   "subjects": [
     {
-      "id": "cancer-biology",
-      "name": "Cancer Biology"
+      "id": "genes-chromosomes",
+      "name": "Genes and Chromosomes"
     },
     {
-      "id": "cell-biology",
-      "name": "Cell Biology"
+      "id": "genomics-evolutionary-biology",
+      "name": "Genomics and Evolutionary Biology"
     }
   ],
   "researchOrganisms": [
@@ -36,35 +36,37 @@
     "content": [
       {
         "type": "paragraph",
-        "text": "The <i>TMPRSS2:ERG</i> gene fusion is common in androgen receptor (AR) positive prostate cancers, yet its function remains poorly understood. From a screen for functionally relevant ERG interactors, we identify the arginine methyltransferase PRMT5. ERG recruits PRMT5 to AR-target genes, where PRMT5 methylates AR on arginine 761. This attenuates AR recruitment and transcription of genes expressed in differentiated prostate epithelium. The AR-inhibitory function of PRMT5 is restricted to <i>TMPRSS2:ERG</i>-positive prostate cancer cells. Mutation of this methylation site on AR results in a transcriptionally hyperactive AR, suggesting that the proliferative effects of ERG and PRMT5 are mediated through attenuating AR's ability to induce genes normally involved in lineage differentiation. This provides a rationale for targeting PRMT5 in <i>TMPRSS2:ERG</i> positive prostate cancers. Moreover, methylation of AR at arginine 761 highlights a mechanism for how the ERG oncogene may coax AR towards inducing proliferation versus differentiation."
+        "text": "Premature fusion of the cranial sutures (craniosynostosis), affecting 1 in 2,000 newborns, is treated surgically in infancy to prevent adverse neurologic outcomes. To identify mutations contributing to common non-syndromic midline (sagittal and metopic) craniosynostosis, we performed exome sequencing of 132 parent-offspring trios and 59 additional probands. Thirteen probands (7%) had damaging <i>de novo</i> or rare transmitted mutations in <i>SMAD6</i>, an inhibitor of BMP - induced osteoblast differentiation (P &lt; 10-20). <i>SMAD6</i> mutations nonetheless showed striking incomplete penetrance (&lt;60%). Genotypes of a common variant near <i>BMP2</i> that is strongly associated with midline craniosynostosis explained nearly all the phenotypic variation in these kindreds, with highly significant evidence of genetic interaction between these loci via both association and analysis of linkage. This epistatic interaction of rare and common variants defines the most frequent cause of midline craniosynostosis and has implications for the genetic basis of other diseases."
       }
     ]
   },
   "copyright": {
     "license": "CC-BY-4.0",
-    "holder": "Mounir et al",
+    "holder": "Timberlake et al",
     "statement": "This article is distributed under the terms of the <a href=\"http://creativecommons.org/licenses/by/4.0/\">Creative Commons Attribution License</a> permitting unrestricted use and redistribution provided that the original author and source are credited."
   },
   "authors": [
     {
       "type": "person",
       "name": {
-        "preferred": "Zineb Mounir",
-        "index": "Mounir, Zineb"
+        "preferred": "Andrew T Timberlake",
+        "index": "Timberlake, Andrew T"
       },
+      "orcid": "0000-0002-8926-9692",
       "affiliations": [
         {
           "name": [
-            "Genentech"
+            "Department of Genetics",
+            "Howard Hughes Medical Institute, Yale University School of Medicine"
           ],
           "address": {
             "formatted": [
-              "South San Francisco",
+              "New Haven",
               "United States"
             ],
             "components": {
               "locality": [
-                "South San Francisco"
+                "New Haven"
               ],
               "country": "United States"
             }
@@ -76,23 +78,23 @@
     {
       "type": "person",
       "name": {
-        "preferred": "Joshua M Korn",
-        "index": "Korn, Joshua M"
+        "preferred": "Jungmin Choi",
+        "index": "Choi, Jungmin"
       },
       "affiliations": [
         {
           "name": [
-            "Department of Oncology",
-            "Novartis Institutes for BioMedical Research"
+            "Department of Genetics",
+            "Howard Hughes Medical Institute, Yale University School of Medicine"
           ],
           "address": {
             "formatted": [
-              "Cambridge",
+              "New Haven",
               "United States"
             ],
             "components": {
               "locality": [
-                "Cambridge"
+                "New Haven"
               ],
               "country": "United States"
             }
@@ -104,23 +106,23 @@
     {
       "type": "person",
       "name": {
-        "preferred": "Thomas Westerling",
-        "index": "Westerling, Thomas"
+        "preferred": "Samir Zaidi",
+        "index": "Zaidi, Samir"
       },
       "affiliations": [
         {
           "name": [
-            "Department of Medical Oncology, Center for Functional Cancer Epigenetics, Dana-Farber Cancer Institute",
-            "Harvard Medical School"
+            "Department of Genetics",
+            "Howard Hughes Medical Institute, Yale University School of Medicine"
           ],
           "address": {
             "formatted": [
-              "Boston",
+              "New Haven",
               "United States"
             ],
             "components": {
               "locality": [
-                "Boston"
+                "New Haven"
               ],
               "country": "United States"
             }
@@ -132,23 +134,23 @@
     {
       "type": "person",
       "name": {
-        "preferred": "Fallon Lin",
-        "index": "Lin, Fallon"
+        "preferred": "Qiongshi Lu",
+        "index": "Lu, Qiongshi"
       },
       "affiliations": [
         {
           "name": [
-            "Department of Oncology",
-            "Novartis Institutes for BioMedical Research"
+            "Department of Biostatistics",
+            "Yale University School of Medicine"
           ],
           "address": {
             "formatted": [
-              "Cambridge",
+              "New Haven",
               "United States"
             ],
             "components": {
               "locality": [
-                "Cambridge"
+                "New Haven"
               ],
               "country": "United States"
             }
@@ -160,23 +162,23 @@
     {
       "type": "person",
       "name": {
-        "preferred": "Christina A Kirby",
-        "index": "Kirby, Christina A"
+        "preferred": "Carol Nelson-Williams",
+        "index": "Nelson-Williams, Carol"
       },
       "affiliations": [
         {
           "name": [
-            "Center for Proteomic Chemistry",
-            "Novartis Institutes for BioMedical Research"
+            "Department of Genetics",
+            "Howard Hughes Medical Institute, Yale University School of Medicine"
           ],
           "address": {
             "formatted": [
-              "Cambridge",
+              "New Haven",
               "United States"
             ],
             "components": {
               "locality": [
-                "Cambridge"
+                "New Haven"
               ],
               "country": "United States"
             }
@@ -188,23 +190,23 @@
     {
       "type": "person",
       "name": {
-        "preferred": "Markus Schirle",
-        "index": "Schirle, Markus"
+        "preferred": "Eric D Brooks",
+        "index": "Brooks, Eric D"
       },
       "affiliations": [
         {
           "name": [
-            "Developmental and Molecular Pathways",
-            "Novartis Institutes for Biomedical Research"
+            "Section of Plastic and Reconstructive Surgery, Department of Surgery",
+            "Yale University School of Medicine"
           ],
           "address": {
             "formatted": [
-              "Cambridge",
+              "New Haven",
               "United States"
             ],
             "components": {
               "locality": [
-                "Cambridge"
+                "New Haven"
               ],
               "country": "United States"
             }
@@ -216,23 +218,23 @@
     {
       "type": "person",
       "name": {
-        "preferred": "Gregg McAllister",
-        "index": "McAllister, Gregg"
+        "preferred": "Kaya Bilguvar",
+        "index": "Bilguvar, Kaya"
       },
       "affiliations": [
         {
           "name": [
-            "Developmental and Molecular Pathways",
-            "Novartis Institutes for Biomedical Research"
+            "Department of Genetics",
+            "Yale University School of Medicine"
           ],
           "address": {
             "formatted": [
-              "Cambridge",
+              "New Haven",
               "United States"
             ],
             "components": {
               "locality": [
-                "Cambridge"
+                "New Haven"
               ],
               "country": "United States"
             }
@@ -244,23 +246,23 @@
     {
       "type": "person",
       "name": {
-        "preferred": "Greg Hoffman",
-        "index": "Hoffman, Greg"
+        "preferred": "Irina Tikhonova",
+        "index": "Tikhonova, Irina"
       },
       "affiliations": [
         {
           "name": [
-            "Developmental and Molecular Pathways",
-            "Novartis Institutes for Biomedical Research"
+            "Yale Center for Genome Analysis",
+            "Yale University School of Medicine"
           ],
           "address": {
             "formatted": [
-              "Cambridge",
+              "New Haven",
               "United States"
             ],
             "components": {
               "locality": [
-                "Cambridge"
+                "New Haven"
               ],
               "country": "United States"
             }
@@ -272,23 +274,23 @@
     {
       "type": "person",
       "name": {
-        "preferred": "Nadire Ramadan",
-        "index": "Ramadan, Nadire"
+        "preferred": "Shrikant Mane",
+        "index": "Mane, Shrikant"
       },
       "affiliations": [
         {
           "name": [
-            "Developmental and Molecular Pathways",
-            "Novartis Institutes for Biomedical Research"
+            "Department of Genetics",
+            "Yale University School of Medicine"
           ],
           "address": {
             "formatted": [
-              "Cambridge",
+              "New Haven",
               "United States"
             ],
             "components": {
               "locality": [
-                "Cambridge"
+                "New Haven"
               ],
               "country": "United States"
             }
@@ -300,22 +302,23 @@
     {
       "type": "person",
       "name": {
-        "preferred": "Anke Hartung",
-        "index": "Hartung, Anke"
+        "preferred": "Jenny F Yang",
+        "index": "Yang, Jenny F"
       },
       "affiliations": [
         {
           "name": [
-            "Organovo"
+            "Section of Plastic and Reconstructive Surgery, Department of Surgery",
+            "Yale University School of Medicine"
           ],
           "address": {
             "formatted": [
-              "San Diego",
+              "New Haven",
               "United States"
             ],
             "components": {
               "locality": [
-                "San Diego"
+                "New Haven"
               ],
               "country": "United States"
             }
@@ -327,23 +330,23 @@
     {
       "type": "person",
       "name": {
-        "preferred": "Yan Feng",
-        "index": "Feng, Yan"
+        "preferred": "Rajendra Sawh-Martinez",
+        "index": "Sawh-Martinez, Rajendra"
       },
       "affiliations": [
         {
           "name": [
-            "Developmental and Molecular Pathways",
-            "Novartis Institutes for Biomedical Research"
+            "Section of Plastic and Reconstructive Surgery, Department of Surgery",
+            "Yale University School of Medicine"
           ],
           "address": {
             "formatted": [
-              "Cambridge",
+              "New Haven",
               "United States"
             ],
             "components": {
               "locality": [
-                "Cambridge"
+                "New Haven"
               ],
               "country": "United States"
             }
@@ -355,23 +358,23 @@
     {
       "type": "person",
       "name": {
-        "preferred": "David Randal Kipp",
-        "index": "Kipp, David Randal"
+        "preferred": "Sarah Persing",
+        "index": "Persing, Sarah"
       },
       "affiliations": [
         {
           "name": [
-            "Oncology",
-            "NIBR"
+            "Section of Plastic and Reconstructive Surgery, Department of Surgery",
+            "Yale University School of Medicine"
           ],
           "address": {
             "formatted": [
-              "Cambridge",
+              "New Haven",
               "United States"
             ],
             "components": {
               "locality": [
-                "Cambridge"
+                "New Haven"
               ],
               "country": "United States"
             }
@@ -383,23 +386,23 @@
     {
       "type": "person",
       "name": {
-        "preferred": "Christopher Quinn",
-        "index": "Quinn, Christopher"
+        "preferred": "Elizabeth G Zellner",
+        "index": "Zellner, Elizabeth G"
       },
       "affiliations": [
         {
           "name": [
-            "Oncology",
-            "NIBR"
+            "Section of Plastic and Reconstructive Surgery, Department of Surgery",
+            "Yale University School of Medicine"
           ],
           "address": {
             "formatted": [
-              "Cambridge",
+              "New Haven",
               "United States"
             ],
             "components": {
               "locality": [
-                "Cambridge"
+                "New Haven"
               ],
               "country": "United States"
             }
@@ -411,23 +414,23 @@
     {
       "type": "person",
       "name": {
-        "preferred": "Michelle Fodor",
-        "index": "Fodor, Michelle"
+        "preferred": "Erin Loring",
+        "index": "Loring, Erin"
       },
       "affiliations": [
         {
           "name": [
-            "Oncology",
-            "NIBR"
+            "Department of Genetics",
+            "Howard Hughes Medical Institute, Yale University School of Medicine"
           ],
           "address": {
             "formatted": [
-              "Cambridge",
+              "New Haven",
               "United States"
             ],
             "components": {
               "locality": [
-                "Cambridge"
+                "New Haven"
               ],
               "country": "United States"
             }
@@ -439,23 +442,23 @@
     {
       "type": "person",
       "name": {
-        "preferred": "Jason Baird",
-        "index": "Baird, Jason"
+        "preferred": "Carolyn Chuang",
+        "index": "Chuang, Carolyn"
       },
       "affiliations": [
         {
           "name": [
-            "Oncology",
-            "NIBR"
+            "Section of Plastic and Reconstructive Surgery, Department of Surgery",
+            "Yale University School of Medicine"
           ],
           "address": {
             "formatted": [
-              "Cambridge",
+              "New Haven",
               "United States"
             ],
             "components": {
               "locality": [
-                "Cambridge"
+                "New Haven"
               ],
               "country": "United States"
             }
@@ -467,50 +470,22 @@
     {
       "type": "person",
       "name": {
-        "preferred": "Marie Schoumacher",
-        "index": "Schoumacher, Marie"
+        "preferred": "Amy Galm",
+        "index": "Galm, Amy"
       },
       "affiliations": [
         {
           "name": [
-            "Laboratoires Servier"
+            "Craniosynostosis and Positional Plagiocephaly Support"
           ],
           "address": {
             "formatted": [
-              "Neuilly-sur-Seine",
-              "France"
-            ],
-            "components": {
-              "locality": [
-                "Neuilly-sur-Seine"
-              ],
-              "country": "France"
-            }
-          }
-        }
-      ],
-      "competingInterests": "The authors declare that no competing interests exist."
-    },
-    {
-      "type": "person",
-      "name": {
-        "preferred": "Ronald Meyer",
-        "index": "Meyer, Ronald"
-      },
-      "affiliations": [
-        {
-          "name": [
-            "Department of Oncology",
-            "Novartis Institutes for Biomedical Research"
-          ],
-          "address": {
-            "formatted": [
-              "Cambridge",
+              "New York",
               "United States"
             ],
             "components": {
               "locality": [
-                "Cambridge"
+                "New York"
               ],
               "country": "United States"
             }
@@ -522,23 +497,23 @@
     {
       "type": "person",
       "name": {
-        "preferred": "James Deeds",
-        "index": "Deeds, James"
+        "preferred": "Peter W Hashim",
+        "index": "Hashim, Peter W"
       },
       "affiliations": [
         {
           "name": [
-            "Department of Oncology",
-            "Novartis Institutes for Biomedical Research"
+            "Section of Plastic and Reconstructive Surgery, Department of Surgery",
+            "Yale University School of Medicine"
           ],
           "address": {
             "formatted": [
-              "Cambridge",
+              "New Haven",
               "United States"
             ],
             "components": {
               "locality": [
-                "Cambridge"
+                "New Haven"
               ],
               "country": "United States"
             }
@@ -550,22 +525,23 @@
     {
       "type": "person",
       "name": {
-        "preferred": "Gilles Buchwalter",
-        "index": "Buchwalter, Gilles"
+        "preferred": "Derek M Steinbacher",
+        "index": "Steinbacher, Derek M"
       },
       "affiliations": [
         {
           "name": [
-            "Celgene Avilomics Research"
+            "Section of Plastic and Reconstructive Surgery, Department of Surgery",
+            "Yale University School of Medicine"
           ],
           "address": {
             "formatted": [
-              "Bedford",
+              "New Haven",
               "United States"
             ],
             "components": {
               "locality": [
-                "Bedford"
+                "New Haven"
               ],
               "country": "United States"
             }
@@ -577,23 +553,23 @@
     {
       "type": "person",
       "name": {
-        "preferred": "Travis Stams",
-        "index": "Stams, Travis"
+        "preferred": "Michael L DiLuna",
+        "index": "DiLuna, Michael L"
       },
       "affiliations": [
         {
           "name": [
-            "Center for Proteomic Chemistry",
-            "Novartis Institutes for Biomedical Research"
+            "Department of Neurosurgery",
+            "Yale University School of Medicine"
           ],
           "address": {
             "formatted": [
-              "Cambridge",
+              "New Haven",
               "United States"
             ],
             "components": {
               "locality": [
-                "Cambridge"
+                "New Haven"
               ],
               "country": "United States"
             }
@@ -605,23 +581,23 @@
     {
       "type": "person",
       "name": {
-        "preferred": "Nicholas Keen",
-        "index": "Keen, Nicholas"
+        "preferred": "Charles C Duncan",
+        "index": "Duncan, Charles C"
       },
       "affiliations": [
         {
           "name": [
-            "Department of Oncology",
-            "Novartis Institutes for Biomedical Research"
+            "Department of Neurosurgery",
+            "Yale University School of Medicine"
           ],
           "address": {
             "formatted": [
-              "Cambridge",
+              "New Haven",
               "United States"
             ],
             "components": {
               "locality": [
-                "Cambridge"
+                "New Haven"
               ],
               "country": "United States"
             }
@@ -633,23 +609,23 @@
     {
       "type": "person",
       "name": {
-        "preferred": "William R Sellers",
-        "index": "Sellers, William R"
+        "preferred": "Kevin A Pelphrey",
+        "index": "Pelphrey, Kevin A"
       },
       "affiliations": [
         {
           "name": [
-            "Department of Oncology",
-            "Novartis Institutes for BioMedical Research"
+            "Child Study Center",
+            "Yale University School of Medicine"
           ],
           "address": {
             "formatted": [
-              "Cambridge",
+              "New Haven",
               "United States"
             ],
             "components": {
               "locality": [
-                "Cambridge"
+                "New Haven"
               ],
               "country": "United States"
             }
@@ -661,23 +637,23 @@
     {
       "type": "person",
       "name": {
-        "preferred": "Myles Brown",
-        "index": "Brown, Myles"
+        "preferred": "Hongyu Zhao",
+        "index": "Zhao, Hongyu"
       },
       "affiliations": [
         {
           "name": [
-            "Department of Medical Oncology, Center for Functional Cancer Epigenetics, Dana-Farber Cancer Institute",
-            "Harvard Medical School"
+            "Department of Biostatistics",
+            "Yale University School of Medicine"
           ],
           "address": {
             "formatted": [
-              "Boston",
+              "New Haven",
               "United States"
             ],
             "components": {
               "locality": [
-                "Boston"
+                "New Haven"
               ],
               "country": "United States"
             }
@@ -689,22 +665,51 @@
     {
       "type": "person",
       "name": {
-        "preferred": "Raymond A Pagliarini",
-        "index": "Pagliarini, Raymond A"
+        "preferred": "John A Persing",
+        "index": "Persing, John A"
       },
       "affiliations": [
         {
           "name": [
-            "Celgene Avilomics Research"
+            "Section of Plastic and Reconstructive Surgery, Department of Surgery",
+            "Yale University School of Medicine"
           ],
           "address": {
             "formatted": [
-              "Bedford",
+              "New Haven",
               "United States"
             ],
             "components": {
               "locality": [
-                "Bedford"
+                "New Haven"
+              ],
+              "country": "United States"
+            }
+          }
+        }
+      ],
+      "competingInterests": "The authors declare that no competing interests exist."
+    },
+    {
+      "type": "person",
+      "name": {
+        "preferred": "Richard P Lifton",
+        "index": "Lifton, Richard P"
+      },
+      "affiliations": [
+        {
+          "name": [
+            "Department of Genetics",
+            "Howard Hughes Medical Institute, Yale University School of Medicine"
+          ],
+          "address": {
+            "formatted": [
+              "New Haven",
+              "United States"
+            ],
+            "components": {
+              "locality": [
+                "New Haven"
               ],
               "country": "United States"
             }
@@ -712,7 +717,7 @@
         }
       ],
       "emailAddresses": [
-        "raymond.pagliarini@novartis.com"
+        "richard.lifton@yale.edu"
       ],
       "competingInterests": "The authors declare that no competing interests exist."
     }
@@ -721,14 +726,14 @@
     {
       "type": "person",
       "name": {
-        "preferred": "Scott A Armstrong",
-        "index": "Armstrong, Scott A"
+        "preferred": "David Ginsburg",
+        "index": "Ginsburg, David"
       },
       "role": "Reviewing Editor",
       "affiliations": [
         {
           "name": [
-            "Memorial Sloan Kettering Cancer Center"
+            "Howard Hughes Medical Institute, University of Michigan"
           ],
           "address": {
             "formatted": [
@@ -742,15 +747,115 @@
       ]
     }
   ],
+  "ethics": [
+    {
+      "type": "paragraph",
+      "text": "Human subjects: All participants or their parents provided written informed consent to participate in a study of genetic causes of craniosynostosis in their family. Written consent was obtained for publication of patient photographs. The study protocol was approved by the Yale Human Investigation Committee Institutional Review Board."
+    }
+  ],
+  "funding": {
+    "awards": [
+      {
+        "id": "par-1",
+        "source": {
+          "name": [
+            "Yale Center for Mendelian Genomics"
+          ]
+        },
+        "awardId": "NIH M#UM1HG006504-05",
+        "recipients": [
+          {
+            "type": "person",
+            "name": {
+              "preferred": "Shrikant Mane",
+              "index": "Mane, Shrikant"
+            }
+          }
+        ]
+      },
+      {
+        "id": "par-2",
+        "source": {
+          "name": [
+            "Maxillofacial Surgeons Foundation/ASMS"
+          ]
+        },
+        "awardId": "M#M156301",
+        "recipients": [
+          {
+            "type": "person",
+            "name": {
+              "preferred": "John A Persing",
+              "index": "Persing, John A"
+            }
+          }
+        ]
+      },
+      {
+        "id": "par-3",
+        "source": {
+          "name": [
+            "NIH Medical Scientist Training Program"
+          ]
+        },
+        "awardId": "NIH/NIGMS T32GM007205",
+        "recipients": [
+          {
+            "type": "person",
+            "name": {
+              "preferred": "Samir Zaidi",
+              "index": "Zaidi, Samir"
+            }
+          }
+        ]
+      },
+      {
+        "id": "par-4",
+        "source": {
+          "funderId": "10.13039/100000011",
+          "name": [
+            "Howard Hughes Medical Institute"
+          ]
+        },
+        "recipients": [
+          {
+            "type": "person",
+            "name": {
+              "preferred": "Richard P Lifton",
+              "index": "Lifton, Richard P"
+            }
+          }
+        ]
+      }
+    ],
+    "statement": "The funders had no role in study design, data collection and interpretation, or the decision to submit the work for publication."
+  },
   "additionalFiles": [
     {
       "mediaType": "application/zip",
-      "uri": "https://cdn.elifesciences.org/articles/13964/elife-13964-supp-v1.zip",
-      "filename": "elife-13964-supp-v1.zip",
+      "uri": "https://cdn.elifesciences.org/articles/20125/elife-20125-supp-v1.zip",
+      "filename": "elife-20125-supp-v1.zip",
       "id": "SD1-data",
       "title": "Supplementary file 1."
     }
   ],
+  "dataSets": {
+    "generated": [
+      {
+        "id": "dataro1",
+        "date": "2016",
+        "authors": [
+          {
+            "type": "group",
+            "name": "Timberlake et al. "
+          }
+        ],
+        "title": "Yale Center for Mendelian Genomics",
+        "details": "Publicly available at the dbGaP (accession no: phs000744)",
+        "uri": "http://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs000744.v2.p1"
+      }
+    ]
+  },
   "stage": "published",
   "statusDate": "2099-01-01T00:00:00Z"
 }

@@ -1,6 +1,6 @@
 {
   "-meta": {
-    "location": "https://raw.githubusercontent.com/elifesciences/elife-article-xml/694f91de44ebc7cc61aba8be0982b7613cac8c3f/articles/elife-15378-v1.xml",
+    "location": "https://raw.githubusercontent.com/elifesciences/elife-article-xml/60e488fb2f97bf71c6b7a2864b745f4afb1376e8/articles/elife-15378-v1.xml",
     "patched": true
   },
   "-history": {
@@ -18,7 +18,7 @@
   "versionDate": "2016-07-29T00:00:00Z",
   "volume": 5,
   "elocationId": "e15378",
-  "pdf": "https://publishing-cdn.elifesciences.org/15378/elife-15378-v1.pdf",
+  "pdf": "https://cdn.elifesciences.org/articles/15378/elife-15378-v1.pdf",
   "subjects": [
     {
       "id": "neuroscience",
@@ -301,7 +301,7 @@
   "additionalFiles": [
     {
       "mediaType": "application/zip",
-      "uri": "https://publishing-cdn.elifesciences.org/15378/elife-15378-supp-v1.zip",
+      "uri": "https://cdn.elifesciences.org/articles/15378/elife-15378-supp-v1.zip",
       "filename": "elife-15378-supp-v1.zip",
       "id": "SD1-data",
       "title": "Supplementary file 1."
