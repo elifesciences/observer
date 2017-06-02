@@ -76,7 +76,7 @@ def article_to_rss_entry(art):
 
     # wrangle
     item['id'] = "https://dx.doi.org/" + item['link']
-    item['link'] = {'href': "https://beta.elifesciences.org/articles/" + utils.pad_msid(art.msid)}
+    item['link'] = {'href': "https://elifesciences.org/articles/" + utils.pad_msid(art.msid)}
     item['author'] = [{'name': a.name, 'email': art.author_email} for a in art.authors.all()]
     item['category'] = [{'term': c.name, 'label': c.label} for c in art.subjects.all()]
     item['dc:dc_date'] = utils.ymdhms(item['pubdate'])
