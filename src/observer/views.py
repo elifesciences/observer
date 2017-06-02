@@ -1,3 +1,4 @@
+import copy
 from os.path import join
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
@@ -94,6 +95,7 @@ def format_report(report, rargs, context):
         RSS: rss.format_report,
         CSV: csv.format_report,
     }
+    report = copy.deepcopy(report)
     return known_formats[report['format']](report, context)
 
 
