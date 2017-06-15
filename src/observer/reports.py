@@ -1,4 +1,4 @@
-from . import models
+from . import models, rss, csv
 from .utils import ensure
 from functools import wraps
 
@@ -92,7 +92,6 @@ def published_research_article_index():
 #
 
 def format_report(report, format, context):
-    from . import rss, csv
     # the report has been executed at this point
     known_formats = {
         RSS: rss.format_report,
