@@ -1,4 +1,3 @@
-import copy
 from os.path import join
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
@@ -12,8 +11,7 @@ from .utils import ensure, isint
 from . import reports
 import logging
 
-from .reports import PER_PAGE, ORDER, SERIALISATIONS, NO_PAGINATION, ORDER_BY, RSS, CSV
-from observer import rss, csv
+from .reports import PER_PAGE, ORDER, SERIALISATIONS, NO_PAGINATION, ORDER_BY
 
 LOG = logging.getLogger(__name__)
 
@@ -89,16 +87,6 @@ def paginate_report_results(report, rargs):
     report.update(rargs)
 
     return report
-
-def format_report(report, rargs, context):
-    # the report has been executed at this point
-    known_formats = {
-        RSS: rss.format_report,
-        CSV: csv.format_report,
-    }
-    report = copy.deepcopy(report)
-    return known_formats[report['format']](report, context)
-
 
 #
 # views

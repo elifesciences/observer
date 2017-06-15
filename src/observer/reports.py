@@ -1,3 +1,4 @@
+import copy
 from . import models, rss, csv
 from .utils import ensure
 from functools import wraps
@@ -98,6 +99,7 @@ def format_report(report, format, context):
         CSV: csv.format_report,
     }
     ensure(format in report[SERIALISATIONS], "unsupported format %r for report %s" % (format, report))
+    report = copy.deepcopy(report)
     return known_formats[format](report, context)
 
 # replace these with some fancy introspection of the reports module
