@@ -12,7 +12,8 @@ from .utils import ensure, isint
 from . import reports
 import logging
 
-from .reports import PER_PAGE, ORDER, SERIALISATIONS, NO_PAGINATION, ORDER_BY
+from .reports import PER_PAGE, ORDER, SERIALISATIONS, NO_PAGINATION, ORDER_BY, RSS, CSV
+from observer import rss, csv
 
 LOG = logging.getLogger(__name__)
 
