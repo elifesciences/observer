@@ -32,7 +32,7 @@ if [ $print_coverage -eq 1 ]; then
     if [ $covered -lt 80 ]; then
         coverage html
         echo
-        echo "FAILED this project requires at least 80% coverage, got $covered"
+        echo -e "\e[31mFAILED\e[0m this project requires at least 80% coverage, got $covered"
         echo
         exit 1
     fi
