@@ -84,7 +84,7 @@ class Four(BaseCase):
         for report_name, reportfn in reports.known_report_idx().items():
             url = reverse('report', kwargs={'name': report_name})
             for format in reportfn.meta['serialisations']:
-                furl = url + ".%s" % format.lower()
+                furl = url + ".%s" % format.lower() # ll /report/latest-articles.csv
                 resp = self.c.get(furl)  # , {'format': format}) # no explicit param is provided
                 self.assertEqual(resp.status_code, 200, "report at %r returned non-200 response" % url)
 
@@ -99,4 +99,23 @@ class Four(BaseCase):
 
     def test_report_format_param_overrides_format_hint(self):
         "the format parameter wins when providing both a file extension format hint and a format param"
-        pass
+
+        for report_name, reportfn in reports.known_report_idx().items():
+            url = reverse('report', kwargs={'name': report_name})
+            for format in reportfn.meta['serialisations']:
+                # nothing has a .foo ext, it should be ignored in favour of the format
+                furl = url + ".foo" # ll /report/latest-articles.foo
+                resp1 = self.c.get(furl)
+                self.assertEqual(resp1.status_code, 400) # bad request
+
+                resp2 = self.c.get(furl, {'format': format}) # good request, provide an explicit format param
+                self.assertEqual(resp2.status_code, 200, "report at %r returned non-200 response" % url)
+
+                # test the content
+                if format == reports.CSV:
+                    # it's a list of strings with commas in it.
+                    list(resp2.streaming_content)[0].decode('utf8').split(',')[0]
+                elif format == reports.RSS:
+                    # it's an xml doc
+                    prefix = "<?xml version='1.0' encoding='UTF-8'?>"
+                    resp2.content.decode('utf8').startswith(prefix)
