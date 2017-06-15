@@ -10,8 +10,6 @@ find src/ -regex "\(.*__pycache__.*\|*.py[co]\)" -delete
 
 echo "pyflakes"
 pyflakes ./src/
-# disabled until pylint supports Python 3.6
-# https://github.com/PyCQA/pylint/issues/1113
 
 echo "pylint"
 pylint -E ./src/observer/** --load-plugins=pylint_django --disable=E1103 2> /dev/null
