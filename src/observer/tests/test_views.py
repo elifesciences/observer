@@ -63,6 +63,14 @@ class Three(BaseCase):
         resp = self.c.get("/")
         self.assertEqual(resp.status_code, 200)
 
+    def test_slashes_not_appended(self):
+        "ensure a slash is not appended to the end of a url"
+        url = reverse('report', kwargs={'name': 'latest-articles'})
+        self.assertFalse(url.endswith('/'))
+        # ensure we go directly to the url without redirecting to a slash suffixed one
+        resp = self.c.get(url, follow=False)
+        self.assertEqual(resp.status_code, 200)
+
 class Four(BaseCase):
     def setUp(self):
         self.c = Client()
