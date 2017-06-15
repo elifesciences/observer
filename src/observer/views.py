@@ -1,3 +1,4 @@
+import copy
 from os.path import join
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
@@ -87,6 +88,16 @@ def paginate_report_results(report, rargs):
     report.update(rargs)
 
     return report
+
+def format_report(report, rargs, context):
+    # the report has been executed at this point
+    known_formats = {
+        RSS: rss.format_report,
+        CSV: csv.format_report,
+    }
+    report = copy.deepcopy(report)
+    return known_formats[report['format']](report, context)
+
 
 #
 # views

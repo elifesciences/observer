@@ -30,6 +30,13 @@ class Command(BaseCommand):
                     LOG.exception("unhandled exception attempting to download and regenerate article %s", msid)
 
             LOG.info("attempting connection %s ...", settings.ARTICLE_EVENT_QUEUE)
+
+            try:
+                import newrelic.agent
+                action = newrelic.agent.background_task()(action)
+            except ImportError:
+                pass
+
             lmap(action, inc.poll(inc.queue(settings.ARTICLE_EVENT_QUEUE)))
 
         except ValueError as err:
