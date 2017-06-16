@@ -1,3 +1,4 @@
+from functools import partial
 from rfc3339 import rfc3339
 import os
 from os.path import join
@@ -12,11 +13,14 @@ import shutil
 
 LOG = logging.getLogger(__name__)
 
-def first(x):
+def nth(x, n):
     try:
-        return x[0]
+        return x[n]
     except IndexError:
         return None
+
+first = partial(nth, n=0)
+second = partial(nth, n=1)
 
 def ensure(assertion, msg, *args):
     """intended as a convenient replacement for `assert` statements that
@@ -51,6 +55,12 @@ def isint(v):
 
 lmap = lambda func, *iterable: list(map(func, *iterable))
 lfilter = lambda func, *iterable: list(filter(func, *iterable))
+
+def val_map(fn, d):
+    return {k: fn(v) for k, v in d.items()}
+
+def key_map(fn, d):
+    return {fn(k): v for k, v in d.items()}
 
 def todt(val):
     "turn almost any formatted datetime string into a UTC datetime object"

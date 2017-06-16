@@ -17,7 +17,11 @@ find src/ -name '*.pyc' -delete
 
 # called by test.sh
 #./src/manage.py test --testrunner=green.djangorunner.DjangoRunner "$@"
-coverage run --source='src/' --omit='*/tests/*,*/migrations/*' src/manage.py test "$module" --no-input
+#coverage run --source='src/' --omit='*/tests/*,*/migrations/*' src/manage.py test "$module" --no-input
+coverage run \
+    --source='src/' \
+    --omit='*/tests/*,*/migrations/*,src/core/settings.py,src/core/wsgi.py,src/manage.py,src/observer/apps.py' \
+    src/manage.py test "$module" --no-input
 #echo "* passed tests"
 
 #GREEN_CONFIG=.green ./src/manage.py test "$module" --testrunner=green.djangorunner.DjangoRunner --no-input -v 3
@@ -29,10 +33,10 @@ if [ $print_coverage -eq 1 ]; then
     coverage report
     # is only run if tests pass
     covered=$(coverage report | grep TOTAL | awk '{print $4}' | sed 's/%//')
-    if [ $covered -lt 79 ]; then
+    if [ $covered -lt 80 ]; then
         coverage html
         echo
-        echo "FAILED this project requires at least 79% coverage, got $covered"
+        echo -e "\e[31mFAILED\e[0m this project requires at least 80% coverage, got $covered"
         echo
         exit 1
     fi

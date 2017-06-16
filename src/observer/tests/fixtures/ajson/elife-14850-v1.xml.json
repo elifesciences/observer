@@ -1,6 +1,6 @@
 {
   "-meta": {
-    "location": "https://raw.githubusercontent.com/elifesciences/elife-article-xml/694f91de44ebc7cc61aba8be0982b7613cac8c3f/articles/elife-14850-v1.xml",
+    "location": "https://raw.githubusercontent.com/elifesciences/elife-article-xml/60e488fb2f97bf71c6b7a2864b745f4afb1376e8/articles/elife-14850-v1.xml",
     "patched": true
   },
   "-history": {
@@ -18,7 +18,7 @@
   "versionDate": "2016-07-21T00:00:00Z",
   "volume": 5,
   "elocationId": "e14850",
-  "pdf": "https://publishing-cdn.elifesciences.org/14850/elife-14850-v1.pdf",
+  "pdf": "https://cdn.elifesciences.org/articles/14850/elife-14850-v1.pdf",
   "subjects": [
     {
       "id": "cell-biology",
@@ -423,19 +423,16 @@
               "image": {
                 "source": {
                   "mediaType": "image/jpeg",
-                  "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-fig1-v1.jpg/full/full/0/default.jpg",
+                  "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-fig1-v1.tif/full/full/0/default.jpg",
                   "filename": "elife-14850-fig1-v1.jpg"
                 },
                 "alt": "",
+                "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-fig1-v1.tif",
                 "size": {
                   "width": 3239,
                   "height": 3506
-                },
-                "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-fig1-v1.jpg",
-                "filename": "elife-14850-fig1-v1.jpg"
-              },
-              "uri": "https://publishing-cdn.elifesciences.org/14850/elife-14850-fig1-v1.jpg",
-              "alt": ""
+                }
+              }
             },
             {
               "type": "video",
@@ -450,7 +447,7 @@
                 }
               ],
               "width": 528,
-              "image": "https://publishing-cdn.elifesciences.org/14850/elife-14850-media1.jpg",
+              "image": "https://cdn.elifesciences.org/articles/14850/elife-14850-media1.jpg",
               "height": 181,
               "sources": [
                 {
@@ -473,7 +470,6 @@
                   "filename": "elife-14850-media1.jpg"
                 },
                 "alt": "",
-                "filename": "elife-14850-media1.jpg",
                 "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-media1.jpg",
                 "size": {
                   "width": 528,
@@ -498,7 +494,7 @@
                 }
               ],
               "width": 480,
-              "image": "https://publishing-cdn.elifesciences.org/14850/elife-14850-media2.jpg",
+              "image": "https://cdn.elifesciences.org/articles/14850/elife-14850-media2.jpg",
               "height": 138,
               "sources": [
                 {
@@ -521,7 +517,6 @@
                   "filename": "elife-14850-media2.jpg"
                 },
                 "alt": "",
-                "filename": "elife-14850-media2.jpg",
                 "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-media2.jpg",
                 "size": {
                   "width": 480,
@@ -555,16 +550,15 @@
               "image": {
                 "source": {
                   "mediaType": "image/jpeg",
-                  "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-fig2-v1.jpg/full/full/0/default.jpg",
+                  "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-fig2-v1.tif/full/full/0/default.jpg",
                   "filename": "elife-14850-fig2-v1.jpg"
                 },
                 "alt": "",
+                "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-fig2-v1.tif",
                 "size": {
                   "width": 3143,
                   "height": 3635
-                },
-                "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-fig2-v1.jpg",
-                "filename": "elife-14850-fig2-v1.jpg"
+                }
               },
               "supplements": [
                 {
@@ -582,23 +576,18 @@
                   "image": {
                     "source": {
                       "mediaType": "image/jpeg",
-                      "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-fig2-figsupp1-v1.jpg/full/full/0/default.jpg",
+                      "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-fig2-figsupp1-v1.tif/full/full/0/default.jpg",
                       "filename": "elife-14850-fig2-figsupp1-v1.jpg"
                     },
                     "alt": "",
+                    "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-fig2-figsupp1-v1.tif",
                     "size": {
                       "width": 3136,
                       "height": 3466
-                    },
-                    "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-fig2-figsupp1-v1.jpg",
-                    "filename": "elife-14850-fig2-figsupp1-v1.jpg"
-                  },
-                  "uri": "https://publishing-cdn.elifesciences.org/14850/elife-14850-fig2-figsupp1-v1.jpg",
-                  "alt": ""
+                    }
+                  }
                 }
-              ],
-              "uri": "https://publishing-cdn.elifesciences.org/14850/elife-14850-fig2-v1.jpg",
-              "alt": ""
+              ]
             },
             {
               "type": "video",
@@ -613,7 +602,7 @@
                 }
               ],
               "width": 960,
-              "image": "https://publishing-cdn.elifesciences.org/14850/elife-14850-media3.jpg",
+              "image": "https://cdn.elifesciences.org/articles/14850/elife-14850-media3.jpg",
               "height": 305,
               "sources": [
                 {
@@ -636,7 +625,6 @@
                   "filename": "elife-14850-media3.jpg"
                 },
                 "alt": "",
-                "filename": "elife-14850-media3.jpg",
                 "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-media3.jpg",
                 "size": {
                   "width": 960,
@@ -661,7 +649,7 @@
                 }
               ],
               "width": 400,
-              "image": "https://publishing-cdn.elifesciences.org/14850/elife-14850-media4.jpg",
+              "image": "https://cdn.elifesciences.org/articles/14850/elife-14850-media4.jpg",
               "height": 150,
               "sources": [
                 {
@@ -684,7 +672,6 @@
                   "filename": "elife-14850-media4.jpg"
                 },
                 "alt": "",
-                "filename": "elife-14850-media4.jpg",
                 "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-media4.jpg",
                 "size": {
                   "width": 400,
@@ -705,7 +692,7 @@
                 }
               ],
               "width": 512,
-              "image": "https://publishing-cdn.elifesciences.org/14850/elife-14850-media5.jpg",
+              "image": "https://cdn.elifesciences.org/articles/14850/elife-14850-media5.jpg",
               "height": 179,
               "sources": [
                 {
@@ -728,7 +715,6 @@
                   "filename": "elife-14850-media5.jpg"
                 },
                 "alt": "",
-                "filename": "elife-14850-media5.jpg",
                 "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-media5.jpg",
                 "size": {
                   "width": 512,
@@ -766,19 +752,16 @@
               "image": {
                 "source": {
                   "mediaType": "image/jpeg",
-                  "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-fig3-v1.jpg/full/full/0/default.jpg",
+                  "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-fig3-v1.tif/full/full/0/default.jpg",
                   "filename": "elife-14850-fig3-v1.jpg"
                 },
                 "alt": "",
+                "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-fig3-v1.tif",
                 "size": {
                   "width": 3154,
                   "height": 4091
-                },
-                "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-fig3-v1.jpg",
-                "filename": "elife-14850-fig3-v1.jpg"
-              },
-              "uri": "https://publishing-cdn.elifesciences.org/14850/elife-14850-fig3-v1.jpg",
-              "alt": ""
+                }
+              }
             },
             {
               "type": "paragraph",
@@ -797,7 +780,7 @@
                 }
               ],
               "width": 336,
-              "image": "https://publishing-cdn.elifesciences.org/14850/elife-14850-media6.jpg",
+              "image": "https://cdn.elifesciences.org/articles/14850/elife-14850-media6.jpg",
               "height": 323,
               "sources": [
                 {
@@ -820,7 +803,6 @@
                   "filename": "elife-14850-media6.jpg"
                 },
                 "alt": "",
-                "filename": "elife-14850-media6.jpg",
                 "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-media6.jpg",
                 "size": {
                   "width": 336,
@@ -845,7 +827,7 @@
                 }
               ],
               "width": 768,
-              "image": "https://publishing-cdn.elifesciences.org/14850/elife-14850-media7.jpg",
+              "image": "https://cdn.elifesciences.org/articles/14850/elife-14850-media7.jpg",
               "height": 238,
               "sources": [
                 {
@@ -868,7 +850,6 @@
                   "filename": "elife-14850-media7.jpg"
                 },
                 "alt": "",
-                "filename": "elife-14850-media7.jpg",
                 "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-media7.jpg",
                 "size": {
                   "width": 768,
@@ -909,7 +890,7 @@
                 }
               ],
               "width": 592,
-              "image": "https://publishing-cdn.elifesciences.org/14850/elife-14850-media8.jpg",
+              "image": "https://cdn.elifesciences.org/articles/14850/elife-14850-media8.jpg",
               "height": 196,
               "sources": [
                 {
@@ -932,7 +913,6 @@
                   "filename": "elife-14850-media8.jpg"
                 },
                 "alt": "",
-                "filename": "elife-14850-media8.jpg",
                 "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-media8.jpg",
                 "size": {
                   "width": 592,
@@ -966,19 +946,16 @@
               "image": {
                 "source": {
                   "mediaType": "image/jpeg",
-                  "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-fig4-v1.jpg/full/full/0/default.jpg",
+                  "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-fig4-v1.tif/full/full/0/default.jpg",
                   "filename": "elife-14850-fig4-v1.jpg"
                 },
                 "alt": "",
+                "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-fig4-v1.tif",
                 "size": {
                   "width": 3203,
                   "height": 4106
-                },
-                "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-fig4-v1.jpg",
-                "filename": "elife-14850-fig4-v1.jpg"
-              },
-              "uri": "https://publishing-cdn.elifesciences.org/14850/elife-14850-fig4-v1.jpg",
-              "alt": ""
+                }
+              }
             },
             {
               "type": "video",
@@ -993,7 +970,7 @@
                 }
               ],
               "width": 1200,
-              "image": "https://publishing-cdn.elifesciences.org/14850/elife-14850-media9.jpg",
+              "image": "https://cdn.elifesciences.org/articles/14850/elife-14850-media9.jpg",
               "height": 364,
               "sources": [
                 {
@@ -1016,7 +993,6 @@
                   "filename": "elife-14850-media9.jpg"
                 },
                 "alt": "",
-                "filename": "elife-14850-media9.jpg",
                 "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-media9.jpg",
                 "size": {
                   "width": 1200,
@@ -1050,16 +1026,15 @@
               "image": {
                 "source": {
                   "mediaType": "image/jpeg",
-                  "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-fig5-v1.jpg/full/full/0/default.jpg",
+                  "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-fig5-v1.tif/full/full/0/default.jpg",
                   "filename": "elife-14850-fig5-v1.jpg"
                 },
                 "alt": "",
+                "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-fig5-v1.tif",
                 "size": {
                   "width": 2845,
                   "height": 2789
-                },
-                "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-fig5-v1.jpg",
-                "filename": "elife-14850-fig5-v1.jpg"
+                }
               },
               "supplements": [
                 {
@@ -1077,23 +1052,18 @@
                   "image": {
                     "source": {
                       "mediaType": "image/jpeg",
-                      "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-fig5-figsupp1-v1.jpg/full/full/0/default.jpg",
+                      "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-fig5-figsupp1-v1.tif/full/full/0/default.jpg",
                       "filename": "elife-14850-fig5-figsupp1-v1.jpg"
                     },
                     "alt": "",
+                    "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-fig5-figsupp1-v1.tif",
                     "size": {
                       "width": 1902,
                       "height": 3333
-                    },
-                    "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-fig5-figsupp1-v1.jpg",
-                    "filename": "elife-14850-fig5-figsupp1-v1.jpg"
-                  },
-                  "uri": "https://publishing-cdn.elifesciences.org/14850/elife-14850-fig5-figsupp1-v1.jpg",
-                  "alt": ""
+                    }
+                  }
                 }
-              ],
-              "uri": "https://publishing-cdn.elifesciences.org/14850/elife-14850-fig5-v1.jpg",
-              "alt": ""
+              ]
             },
             {
               "type": "paragraph",
@@ -1129,16 +1099,15 @@
               "image": {
                 "source": {
                   "mediaType": "image/jpeg",
-                  "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-fig6-v1.jpg/full/full/0/default.jpg",
+                  "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-fig6-v1.tif/full/full/0/default.jpg",
                   "filename": "elife-14850-fig6-v1.jpg"
                 },
                 "alt": "",
+                "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-fig6-v1.tif",
                 "size": {
                   "width": 2418,
                   "height": 2926
-                },
-                "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-fig6-v1.jpg",
-                "filename": "elife-14850-fig6-v1.jpg"
+                }
               },
               "supplements": [
                 {
@@ -1156,19 +1125,16 @@
                   "image": {
                     "source": {
                       "mediaType": "image/jpeg",
-                      "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-fig6-figsupp1-v1.jpg/full/full/0/default.jpg",
+                      "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-fig6-figsupp1-v1.tif/full/full/0/default.jpg",
                       "filename": "elife-14850-fig6-figsupp1-v1.jpg"
                     },
                     "alt": "",
+                    "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-fig6-figsupp1-v1.tif",
                     "size": {
                       "width": 3233,
                       "height": 2593
-                    },
-                    "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-fig6-figsupp1-v1.jpg",
-                    "filename": "elife-14850-fig6-figsupp1-v1.jpg"
-                  },
-                  "uri": "https://publishing-cdn.elifesciences.org/14850/elife-14850-fig6-figsupp1-v1.jpg",
-                  "alt": ""
+                    }
+                  }
                 },
                 {
                   "type": "image",
@@ -1185,23 +1151,18 @@
                   "image": {
                     "source": {
                       "mediaType": "image/jpeg",
-                      "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-fig6-figsupp2-v1.jpg/full/full/0/default.jpg",
+                      "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-fig6-figsupp2-v1.tif/full/full/0/default.jpg",
                       "filename": "elife-14850-fig6-figsupp2-v1.jpg"
                     },
                     "alt": "",
+                    "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-fig6-figsupp2-v1.tif",
                     "size": {
                       "width": 1878,
                       "height": 1931
-                    },
-                    "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-fig6-figsupp2-v1.jpg",
-                    "filename": "elife-14850-fig6-figsupp2-v1.jpg"
-                  },
-                  "uri": "https://publishing-cdn.elifesciences.org/14850/elife-14850-fig6-figsupp2-v1.jpg",
-                  "alt": ""
+                    }
+                  }
                 }
-              ],
-              "uri": "https://publishing-cdn.elifesciences.org/14850/elife-14850-fig6-v1.jpg",
-              "alt": ""
+              ]
             },
             {
               "type": "video",
@@ -1216,7 +1177,7 @@
                 }
               ],
               "width": 320,
-              "image": "https://publishing-cdn.elifesciences.org/14850/elife-14850-media10.jpg",
+              "image": "https://cdn.elifesciences.org/articles/14850/elife-14850-media10.jpg",
               "height": 156,
               "sources": [
                 {
@@ -1239,7 +1200,6 @@
                   "filename": "elife-14850-media10.jpg"
                 },
                 "alt": "",
-                "filename": "elife-14850-media10.jpg",
                 "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-media10.jpg",
                 "size": {
                   "width": 320,
@@ -1303,7 +1263,7 @@
                 }
               ],
               "width": 352,
-              "image": "https://publishing-cdn.elifesciences.org/14850/elife-14850-media11.jpg",
+              "image": "https://cdn.elifesciences.org/articles/14850/elife-14850-media11.jpg",
               "height": 200,
               "sources": [
                 {
@@ -1326,7 +1286,6 @@
                   "filename": "elife-14850-media11.jpg"
                 },
                 "alt": "",
-                "filename": "elife-14850-media11.jpg",
                 "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-media11.jpg",
                 "size": {
                   "width": 352,
@@ -1353,19 +1312,16 @@
               "image": {
                 "source": {
                   "mediaType": "image/jpeg",
-                  "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-fig7-v1.jpg/full/full/0/default.jpg",
+                  "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-fig7-v1.tif/full/full/0/default.jpg",
                   "filename": "elife-14850-fig7-v1.jpg"
                 },
                 "alt": "",
+                "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-fig7-v1.tif",
                 "size": {
                   "width": 2446,
                   "height": 3004
-                },
-                "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-fig7-v1.jpg",
-                "filename": "elife-14850-fig7-v1.jpg"
-              },
-              "uri": "https://publishing-cdn.elifesciences.org/14850/elife-14850-fig7-v1.jpg",
-              "alt": ""
+                }
+              }
             },
             {
               "type": "paragraph",
@@ -1384,7 +1340,7 @@
                 }
               ],
               "width": 384,
-              "image": "https://publishing-cdn.elifesciences.org/14850/elife-14850-media12.jpg",
+              "image": "https://cdn.elifesciences.org/articles/14850/elife-14850-media12.jpg",
               "height": 198,
               "sources": [
                 {
@@ -1407,7 +1363,6 @@
                   "filename": "elife-14850-media12.jpg"
                 },
                 "alt": "",
-                "filename": "elife-14850-media12.jpg",
                 "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-media12.jpg",
                 "size": {
                   "width": 384,
@@ -1451,19 +1406,16 @@
           "image": {
             "source": {
               "mediaType": "image/jpeg",
-              "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-fig8-v1.jpg/full/full/0/default.jpg",
+              "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-fig8-v1.tif/full/full/0/default.jpg",
               "filename": "elife-14850-fig8-v1.jpg"
             },
             "alt": "",
+            "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-fig8-v1.tif",
             "size": {
               "width": 3270,
               "height": 2633
-            },
-            "uri": "https://prod--cdn-iiif.elifesciences.org/lax:14850/elife-14850-fig8-v1.jpg",
-            "filename": "elife-14850-fig8-v1.jpg"
-          },
-          "uri": "https://publishing-cdn.elifesciences.org/14850/elife-14850-fig8-v1.jpg",
-          "alt": ""
+            }
+          }
         },
         {
           "type": "paragraph",

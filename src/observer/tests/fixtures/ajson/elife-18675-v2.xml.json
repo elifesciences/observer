@@ -1,6 +1,6 @@
 {
   "-meta": {
-    "location": "https://raw.githubusercontent.com/elifesciences/elife-article-xml/694f91de44ebc7cc61aba8be0982b7613cac8c3f/articles/elife-18675-v2.xml",
+    "location": "https://raw.githubusercontent.com/elifesciences/elife-article-xml/60e488fb2f97bf71c6b7a2864b745f4afb1376e8/articles/elife-18675-v2.xml",
     "patched": true
   },
   "-history": {
@@ -17,7 +17,7 @@
   "published": "2016-08-23T00:00:00Z",
   "volume": 5,
   "elocationId": "e18675",
-  "pdf": "https://publishing-cdn.elifesciences.org/18675/elife-18675-v2.pdf",
+  "pdf": "https://cdn.elifesciences.org/articles/18675/elife-18675-v2.pdf",
   "subjects": [
     {
       "id": "biochemistry",
@@ -399,7 +399,7 @@
   "additionalFiles": [
     {
       "mediaType": "application/zip",
-      "uri": "https://publishing-cdn.elifesciences.org/18675/elife-18675-supp-v2.zip",
+      "uri": "https://cdn.elifesciences.org/articles/18675/elife-18675-supp-v2.zip",
       "filename": "elife-18675-supp-v2.zip",
       "id": "SD1-data",
       "title": "Supplementary file 1."

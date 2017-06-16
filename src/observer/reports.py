@@ -1,4 +1,6 @@
-from . import models
+import copy
+from . import models, rss, csv
+from .utils import ensure
 from functools import wraps
 
 # utils
@@ -25,7 +27,7 @@ def report(meta):
 def article_meta(**kwargs):
     "returns standard metadata most reports returning models.Article objects will need"
     meta = {
-        SERIALISATIONS: [RSS],
+        SERIALISATIONS: [RSS, CSV],
         ORDER_BY: 'datetime_version_published',
         ORDER: DESC,
         PER_PAGE: 28,
@@ -89,6 +91,16 @@ def published_research_article_index():
 #
 #
 #
+
+def format_report(report, format, context):
+    # the report has been executed at this point
+    known_formats = {
+        RSS: rss.format_report,
+        CSV: csv.format_report,
+    }
+    ensure(format in report[SERIALISATIONS], "unsupported format %r for report %s" % (format, report))
+    report = copy.deepcopy(report)
+    return known_formats[format](report, context)
 
 # replace these with some fancy introspection of the reports module
 

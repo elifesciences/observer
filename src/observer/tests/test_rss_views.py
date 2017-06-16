@@ -65,7 +65,7 @@ class Two(BaseCase):
         pass
 
     def test_report_paginated(self):
-        expected_articles = 4 # 4 articles, 11 article versions
+        expected_articles = 5 # 5 articles, 12 article versions
         self.assertEqual(models.Article.objects.count(), expected_articles)
 
         url = reverse('report', kwargs={'name': 'latest-articles'})

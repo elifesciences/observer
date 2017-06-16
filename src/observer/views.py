@@ -1,4 +1,3 @@
-import copy
 from os.path import join
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
@@ -9,10 +8,10 @@ from et3.extract import path as p
 from et3.utils import uppercase
 from annoying.decorators import render_to
 from .utils import ensure, isint
-from . import reports, rss, csv
+from . import reports
 import logging
 
-from .reports import PER_PAGE, ORDER, SERIALISATIONS, NO_PAGINATION, ORDER_BY, RSS, CSV
+from .reports import PER_PAGE, ORDER, SERIALISATIONS, NO_PAGINATION, ORDER_BY
 
 LOG = logging.getLogger(__name__)
 
@@ -39,7 +38,7 @@ def request_args(request, report_meta, **overrides):
 
     def isin(lst):
         def fn(val):
-            ensure(val in lst, "value %r is not in %r" % (val, lst))
+            ensure(val in lst, "%r not found in list: [%s]" % (val, ', '.join(lst)))
             return val
         return fn
 
@@ -89,16 +88,6 @@ def paginate_report_results(report, rargs):
 
     return report
 
-def format_report(report, rargs, context):
-    # the report has been executed at this point
-    known_formats = {
-        RSS: rss.format_report,
-        CSV: csv.format_report,
-    }
-    report = copy.deepcopy(report)
-    return known_formats[report['format']](report, context)
-
-
 #
 # views
 #
@@ -110,24 +99,32 @@ def landing(request):
         'readme': open(join(settings.PROJECT_DIR, 'README.md')).read()
     }
 
-def report(request, name):
+def report(request, name, format_hint=None):
     try:
         report = reports.get_report(name)
     except KeyError:
         raise Http404("report not found")
     try:
         # extract and validate any params user has given us
-        rargs = request_args(request, report.meta)
+        overrides = {}
+        if format_hint:
+            overrides['format'] = format_hint
+        rargs = request_args(request, report.meta, **overrides)
 
+    except AssertionError as err:
+        LOG.exception("bad user request")
+        return HttpResponse("bad request: %s" % err, status=400)
+
+    try:
         # truncate report results, enforce any user ordering
         report_paginated = paginate_report_results(report, rargs)
 
         # additional things to pass to whatever is rendering the report
         # keys here will override any found in the report
         context = {
-            'link': "https://data.elifesciences.org" + reverse('report', kwargs={'name': name}),
+            'link': "https://observer.elifesciences.org" + reverse('report', kwargs={'name': name}),
         }
-        return format_report(report_paginated, rargs, context)
+        return reports.format_report(report_paginated, rargs['format'], context)
 
     except BaseException:
         LOG.exception("unhandled exception")
