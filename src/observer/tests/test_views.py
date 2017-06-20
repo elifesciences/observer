@@ -71,17 +71,6 @@ class Three(BaseCase):
         resp = self.c.get(url, follow=False)
         self.assertEqual(resp.status_code, 200)
 
-    def test_temporary_urls_work(self):
-        "urls with slashes are supported temporarily as well"
-        temp_urls = [
-            reverse('temp-report', kwargs={'name': 'latest-articles'}),
-            reverse('temp-report', kwargs={'name': 'upcoming-articles'})
-        ]
-        for url in temp_urls:
-            #print(url) # ll: /report/latest-articles/
-            resp = self.c.get(url, follow=False)
-            self.assertEqual(resp.status_code, 200)
-
 class Four(BaseCase):
     def setUp(self):
         self.c = Client()
