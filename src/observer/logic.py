@@ -5,5 +5,5 @@ def known_articles():
     "returns a query set of manuscript_ids from newest to oldest"
     return models.ArticleJSON.objects \
         .values_list('msid', flat=True) \
-        .order_by('-msid') \
+        .order_by('-msid', 'version') \
         .distinct()

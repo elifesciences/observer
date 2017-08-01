@@ -1,23 +1,13 @@
 {
-  "-meta": {
-    "location": "https://raw.githubusercontent.com/elifesciences/elife-article-xml/60e488fb2f97bf71c6b7a2864b745f4afb1376e8/articles/elife-13964-v2.xml",
-    "patched": true
-  },
-  "-history": {
-    "received": "2015-12-21T00:00:00Z",
-    "accepted": "2016-05-06T00:00:00Z"
-  },
-  "status": "poa",
-  "id": "13964",
-  "version": 2,
-  "type": "short-report",
-  "doi": "10.7554/eLife.13964",
-  "authorLine": "Zineb Mounir et al",
-  "title": "ERG signaling in prostate cancer is driven through PRMT5-dependent methylation of the androgen receptor",
-  "published": "2016-05-16T00:00:00Z",
   "volume": 5,
-  "elocationId": "e13964",
-  "pdf": "https://cdn.elifesciences.org/articles/13964/elife-13964-v2.pdf",
+  "abstract": {
+    "content": [
+      {
+        "text": "The <i>TMPRSS2:ERG</i> gene fusion is common in androgen receptor (AR) positive prostate cancers, yet its function remains poorly understood. From a screen for functionally relevant ERG interactors, we identify the arginine methyltransferase PRMT5. ERG recruits PRMT5 to AR-target genes, where PRMT5 methylates AR on arginine 761. This attenuates AR recruitment and transcription of genes expressed in differentiated prostate epithelium. The AR-inhibitory function of PRMT5 is restricted to <i>TMPRSS2:ERG</i>-positive prostate cancer cells. Mutation of this methylation site on AR results in a transcriptionally hyperactive AR, suggesting that the proliferative effects of ERG and PRMT5 are mediated through attenuating AR's ability to induce genes normally involved in lineage differentiation. This provides a rationale for targeting PRMT5 in <i>TMPRSS2:ERG</i> positive prostate cancers. Moreover, methylation of AR at arginine 761 highlights a mechanism for how the ERG oncogene may coax AR towards inducing proliferation versus differentiation.",
+        "type": "paragraph"
+      }
+    ]
+  },
   "subjects": [
     {
       "id": "cancer-biology",
@@ -28,29 +18,49 @@
       "name": "Cell Biology"
     }
   ],
-  "researchOrganisms": [
-    "Human"
+  "stage": "published",
+  "pdf": "https://cdn.elifesciences.org/articles/13964/elife-13964-v2.pdf",
+  "additionalFiles": [
+    {
+      "id": "SD1-data",
+      "mediaType": "application/zip",
+      "filename": "elife-13964-supp-v2.zip",
+      "uri": "https://cdn.elifesciences.org/articles/13964/elife-13964-supp-v2.zip",
+      "title": "Supplementary file 1."
+    }
   ],
-  "abstract": {
-    "content": [
-      {
-        "type": "paragraph",
-        "text": "The <i>TMPRSS2:ERG</i> gene fusion is common in androgen receptor (AR) positive prostate cancers, yet its function remains poorly understood. From a screen for functionally relevant ERG interactors, we identify the arginine methyltransferase PRMT5. ERG recruits PRMT5 to AR-target genes, where PRMT5 methylates AR on arginine 761. This attenuates AR recruitment and transcription of genes expressed in differentiated prostate epithelium. The AR-inhibitory function of PRMT5 is restricted to <i>TMPRSS2:ERG</i>-positive prostate cancer cells. Mutation of this methylation site on AR results in a transcriptionally hyperactive AR, suggesting that the proliferative effects of ERG and PRMT5 are mediated through attenuating AR's ability to induce genes normally involved in lineage differentiation. This provides a rationale for targeting PRMT5 in <i>TMPRSS2:ERG</i> positive prostate cancers. Moreover, methylation of AR at arginine 761 highlights a mechanism for how the ERG oncogene may coax AR towards inducing proliferation versus differentiation."
-      }
-    ]
-  },
-  "copyright": {
-    "license": "CC-BY-4.0",
-    "holder": "Mounir et al",
-    "statement": "This article is distributed under the terms of the <a href=\"http://creativecommons.org/licenses/by/4.0/\">Creative Commons Attribution License</a> permitting unrestricted use and redistribution provided that the original author and source are credited."
-  },
+  "statusDate": "2016-05-16T00:00:00Z",
   "authors": [
     {
+      "competingInterests": "The authors declare that no competing interests exist.",
+      "affiliations": [
+        {
+          "name": [
+            "Department of Oncology",
+            "Novartis Institutes for BioMedical Research"
+          ],
+          "address": {
+            "formatted": [
+              "Cambridge",
+              "United States"
+            ],
+            "components": {
+              "locality": [
+                "Cambridge"
+              ],
+              "country": "United States"
+            }
+          }
+        }
+      ],
       "type": "person",
       "name": {
         "preferred": "Zineb Mounir",
         "index": "Mounir, Zineb"
-      },
+      }
+    },
+    {
+      "competingInterests": "The authors declare that no competing interests exist.",
       "affiliations": [
         {
           "name": [
@@ -71,42 +81,14 @@
           }
         }
       ],
-      "competingInterests": "The authors declare that no competing interests exist."
-    },
-    {
       "type": "person",
       "name": {
         "preferred": "Joshua M Korn",
         "index": "Korn, Joshua M"
-      },
-      "affiliations": [
-        {
-          "name": [
-            "Department of Oncology",
-            "Novartis Institutes for BioMedical Research"
-          ],
-          "address": {
-            "formatted": [
-              "Cambridge",
-              "United States"
-            ],
-            "components": {
-              "locality": [
-                "Cambridge"
-              ],
-              "country": "United States"
-            }
-          }
-        }
-      ],
-      "competingInterests": "The authors declare that no competing interests exist."
+      }
     },
     {
-      "type": "person",
-      "name": {
-        "preferred": "Thomas Westerling",
-        "index": "Westerling, Thomas"
-      },
+      "competingInterests": "The authors declare that no competing interests exist.",
       "affiliations": [
         {
           "name": [
@@ -127,14 +109,14 @@
           }
         }
       ],
-      "competingInterests": "The authors declare that no competing interests exist."
-    },
-    {
       "type": "person",
       "name": {
-        "preferred": "Fallon Lin",
-        "index": "Lin, Fallon"
-      },
+        "preferred": "Thomas Westerling",
+        "index": "Westerling, Thomas"
+      }
+    },
+    {
+      "competingInterests": "The authors declare that no competing interests exist.",
       "affiliations": [
         {
           "name": [
@@ -155,14 +137,14 @@
           }
         }
       ],
-      "competingInterests": "The authors declare that no competing interests exist."
-    },
-    {
       "type": "person",
       "name": {
-        "preferred": "Christina A Kirby",
-        "index": "Kirby, Christina A"
-      },
+        "preferred": "Fallon Lin",
+        "index": "Lin, Fallon"
+      }
+    },
+    {
+      "competingInterests": "The authors declare that no competing interests exist.",
       "affiliations": [
         {
           "name": [
@@ -183,14 +165,42 @@
           }
         }
       ],
-      "competingInterests": "The authors declare that no competing interests exist."
+      "type": "person",
+      "name": {
+        "preferred": "Christina A Kirby",
+        "index": "Kirby, Christina A"
+      }
     },
     {
+      "competingInterests": "The authors declare that no competing interests exist.",
+      "affiliations": [
+        {
+          "name": [
+            "Developmental and Molecular Pathways",
+            "Novartis Institutes for Biomedical Research"
+          ],
+          "address": {
+            "formatted": [
+              "Cambridge",
+              "United States"
+            ],
+            "components": {
+              "locality": [
+                "Cambridge"
+              ],
+              "country": "United States"
+            }
+          }
+        }
+      ],
       "type": "person",
       "name": {
         "preferred": "Markus Schirle",
         "index": "Schirle, Markus"
-      },
+      }
+    },
+    {
+      "competingInterests": "The authors declare that no competing interests exist.",
       "affiliations": [
         {
           "name": [
@@ -211,14 +221,14 @@
           }
         }
       ],
-      "competingInterests": "The authors declare that no competing interests exist."
-    },
-    {
       "type": "person",
       "name": {
         "preferred": "Gregg McAllister",
         "index": "McAllister, Gregg"
-      },
+      }
+    },
+    {
+      "competingInterests": "The authors declare that no competing interests exist.",
       "affiliations": [
         {
           "name": [
@@ -239,14 +249,14 @@
           }
         }
       ],
-      "competingInterests": "The authors declare that no competing interests exist."
-    },
-    {
       "type": "person",
       "name": {
         "preferred": "Greg Hoffman",
         "index": "Hoffman, Greg"
-      },
+      }
+    },
+    {
+      "competingInterests": "The authors declare that no competing interests exist.",
       "affiliations": [
         {
           "name": [
@@ -267,42 +277,14 @@
           }
         }
       ],
-      "competingInterests": "The authors declare that no competing interests exist."
-    },
-    {
       "type": "person",
       "name": {
         "preferred": "Nadire Ramadan",
         "index": "Ramadan, Nadire"
-      },
-      "affiliations": [
-        {
-          "name": [
-            "Developmental and Molecular Pathways",
-            "Novartis Institutes for Biomedical Research"
-          ],
-          "address": {
-            "formatted": [
-              "Cambridge",
-              "United States"
-            ],
-            "components": {
-              "locality": [
-                "Cambridge"
-              ],
-              "country": "United States"
-            }
-          }
-        }
-      ],
-      "competingInterests": "The authors declare that no competing interests exist."
+      }
     },
     {
-      "type": "person",
-      "name": {
-        "preferred": "Anke Hartung",
-        "index": "Hartung, Anke"
-      },
+      "competingInterests": "The authors declare that no competing interests exist.",
       "affiliations": [
         {
           "name": [
@@ -323,14 +305,14 @@
           }
         }
       ],
-      "competingInterests": "The authors declare that no competing interests exist."
-    },
-    {
       "type": "person",
       "name": {
-        "preferred": "Yan Feng",
-        "index": "Feng, Yan"
-      },
+        "preferred": "Anke Hartung",
+        "index": "Hartung, Anke"
+      }
+    },
+    {
+      "competingInterests": "The authors declare that no competing interests exist.",
       "affiliations": [
         {
           "name": [
@@ -351,14 +333,42 @@
           }
         }
       ],
-      "competingInterests": "The authors declare that no competing interests exist."
+      "type": "person",
+      "name": {
+        "preferred": "Yan Feng",
+        "index": "Feng, Yan"
+      }
     },
     {
+      "competingInterests": "The authors declare that no competing interests exist.",
+      "affiliations": [
+        {
+          "name": [
+            "Oncology",
+            "NIBR"
+          ],
+          "address": {
+            "formatted": [
+              "Cambridge",
+              "United States"
+            ],
+            "components": {
+              "locality": [
+                "Cambridge"
+              ],
+              "country": "United States"
+            }
+          }
+        }
+      ],
       "type": "person",
       "name": {
         "preferred": "David Randal Kipp",
         "index": "Kipp, David Randal"
-      },
+      }
+    },
+    {
+      "competingInterests": "The authors declare that no competing interests exist.",
       "affiliations": [
         {
           "name": [
@@ -379,14 +389,14 @@
           }
         }
       ],
-      "competingInterests": "The authors declare that no competing interests exist."
-    },
-    {
       "type": "person",
       "name": {
         "preferred": "Christopher Quinn",
         "index": "Quinn, Christopher"
-      },
+      }
+    },
+    {
+      "competingInterests": "The authors declare that no competing interests exist.",
       "affiliations": [
         {
           "name": [
@@ -407,14 +417,14 @@
           }
         }
       ],
-      "competingInterests": "The authors declare that no competing interests exist."
-    },
-    {
       "type": "person",
       "name": {
         "preferred": "Michelle Fodor",
         "index": "Fodor, Michelle"
-      },
+      }
+    },
+    {
+      "competingInterests": "The authors declare that no competing interests exist.",
       "affiliations": [
         {
           "name": [
@@ -435,42 +445,14 @@
           }
         }
       ],
-      "competingInterests": "The authors declare that no competing interests exist."
-    },
-    {
       "type": "person",
       "name": {
         "preferred": "Jason Baird",
         "index": "Baird, Jason"
-      },
-      "affiliations": [
-        {
-          "name": [
-            "Oncology",
-            "NIBR"
-          ],
-          "address": {
-            "formatted": [
-              "Cambridge",
-              "United States"
-            ],
-            "components": {
-              "locality": [
-                "Cambridge"
-              ],
-              "country": "United States"
-            }
-          }
-        }
-      ],
-      "competingInterests": "The authors declare that no competing interests exist."
+      }
     },
     {
-      "type": "person",
-      "name": {
-        "preferred": "Marie Schoumacher",
-        "index": "Schoumacher, Marie"
-      },
+      "competingInterests": "The authors declare that no competing interests exist.",
       "affiliations": [
         {
           "name": [
@@ -491,14 +473,42 @@
           }
         }
       ],
-      "competingInterests": "The authors declare that no competing interests exist."
+      "type": "person",
+      "name": {
+        "preferred": "Marie Schoumacher",
+        "index": "Schoumacher, Marie"
+      }
     },
     {
+      "competingInterests": "The authors declare that no competing interests exist.",
+      "affiliations": [
+        {
+          "name": [
+            "Department of Oncology",
+            "Novartis Institutes for Biomedical Research"
+          ],
+          "address": {
+            "formatted": [
+              "Cambridge",
+              "United States"
+            ],
+            "components": {
+              "locality": [
+                "Cambridge"
+              ],
+              "country": "United States"
+            }
+          }
+        }
+      ],
       "type": "person",
       "name": {
         "preferred": "Ronald Meyer",
         "index": "Meyer, Ronald"
-      },
+      }
+    },
+    {
+      "competingInterests": "The authors declare that no competing interests exist.",
       "affiliations": [
         {
           "name": [
@@ -519,42 +529,14 @@
           }
         }
       ],
-      "competingInterests": "The authors declare that no competing interests exist."
-    },
-    {
       "type": "person",
       "name": {
         "preferred": "James Deeds",
         "index": "Deeds, James"
-      },
-      "affiliations": [
-        {
-          "name": [
-            "Department of Oncology",
-            "Novartis Institutes for Biomedical Research"
-          ],
-          "address": {
-            "formatted": [
-              "Cambridge",
-              "United States"
-            ],
-            "components": {
-              "locality": [
-                "Cambridge"
-              ],
-              "country": "United States"
-            }
-          }
-        }
-      ],
-      "competingInterests": "The authors declare that no competing interests exist."
+      }
     },
     {
-      "type": "person",
-      "name": {
-        "preferred": "Gilles Buchwalter",
-        "index": "Buchwalter, Gilles"
-      },
+      "competingInterests": "The authors declare that no competing interests exist.",
       "affiliations": [
         {
           "name": [
@@ -575,14 +557,14 @@
           }
         }
       ],
-      "competingInterests": "The authors declare that no competing interests exist."
-    },
-    {
       "type": "person",
       "name": {
-        "preferred": "Travis Stams",
-        "index": "Stams, Travis"
-      },
+        "preferred": "Gilles Buchwalter",
+        "index": "Buchwalter, Gilles"
+      }
+    },
+    {
+      "competingInterests": "The authors declare that no competing interests exist.",
       "affiliations": [
         {
           "name": [
@@ -603,14 +585,14 @@
           }
         }
       ],
-      "competingInterests": "The authors declare that no competing interests exist."
-    },
-    {
       "type": "person",
       "name": {
-        "preferred": "Nicholas Keen",
-        "index": "Keen, Nicholas"
-      },
+        "preferred": "Travis Stams",
+        "index": "Stams, Travis"
+      }
+    },
+    {
+      "competingInterests": "The authors declare that no competing interests exist.",
       "affiliations": [
         {
           "name": [
@@ -631,14 +613,14 @@
           }
         }
       ],
-      "competingInterests": "The authors declare that no competing interests exist."
-    },
-    {
       "type": "person",
       "name": {
-        "preferred": "William R Sellers",
-        "index": "Sellers, William R"
-      },
+        "preferred": "Nicholas Keen",
+        "index": "Keen, Nicholas"
+      }
+    },
+    {
+      "competingInterests": "The authors declare that no competing interests exist.",
       "affiliations": [
         {
           "name": [
@@ -659,14 +641,14 @@
           }
         }
       ],
-      "competingInterests": "The authors declare that no competing interests exist."
-    },
-    {
       "type": "person",
       "name": {
-        "preferred": "Myles Brown",
-        "index": "Brown, Myles"
-      },
+        "preferred": "William R Sellers",
+        "index": "Sellers, William R"
+      }
+    },
+    {
+      "competingInterests": "The authors declare that no competing interests exist.",
       "affiliations": [
         {
           "name": [
@@ -687,14 +669,14 @@
           }
         }
       ],
-      "competingInterests": "The authors declare that no competing interests exist."
-    },
-    {
       "type": "person",
       "name": {
-        "preferred": "Raymond A Pagliarini",
-        "index": "Pagliarini, Raymond A"
-      },
+        "preferred": "Myles Brown",
+        "index": "Brown, Myles"
+      }
+    },
+    {
+      "competingInterests": "The authors declare that no competing interests exist.",
       "affiliations": [
         {
           "name": [
@@ -715,20 +697,26 @@
           }
         }
       ],
-      "emailAddresses": [
-        "raymond.pagliarini@novartis.com"
-      ],
-      "competingInterests": "The authors declare that no competing interests exist."
-    }
-  ],
-  "reviewers": [
-    {
       "type": "person",
       "name": {
-        "preferred": "Scott A Armstrong",
-        "index": "Armstrong, Scott A"
+        "preferred": "Raymond A Pagliarini",
+        "index": "Pagliarini, Raymond A"
       },
-      "role": "Reviewing Editor",
+      "emailAddresses": [
+        "raymond.pagliarini@novartis.com"
+      ]
+    }
+  ],
+  "version": 2,
+  "type": "short-report",
+  "researchOrganisms": [
+    "Human"
+  ],
+  "published": "2016-05-16T00:00:00Z",
+  "versionDate": "2016-05-18T00:00:00Z",
+  "doi": "10.7554/eLife.13964",
+  "reviewers": [
+    {
       "affiliations": [
         {
           "name": [
@@ -743,19 +731,23 @@
             }
           }
         }
-      ]
+      ],
+      "type": "person",
+      "name": {
+        "preferred": "Scott A Armstrong",
+        "index": "Armstrong, Scott A"
+      },
+      "role": "Reviewing Editor"
     }
   ],
-  "additionalFiles": [
-    {
-      "mediaType": "application/zip",
-      "uri": "https://cdn.elifesciences.org/articles/13964/elife-13964-supp-v2.zip",
-      "filename": "elife-13964-supp-v2.zip",
-      "id": "SD1-data",
-      "title": "Supplementary file 1."
-    }
-  ],
-  "stage": "published",
-  "statusDate": "2099-01-01T00:00:00Z",
-  "versionDate": "2099-01-01T00:00:00Z"
+  "id": "13964",
+  "status": "poa",
+  "copyright": {
+    "holder": "Mounir et al.",
+    "statement": "This article is distributed under the terms of the <a href=\"http://creativecommons.org/licenses/by/4.0/\">Creative Commons Attribution License</a> permitting unrestricted use and redistribution provided that the original author and source are credited.",
+    "license": "CC-BY-4.0"
+  },
+  "title": "ERG signaling in prostate cancer is driven through PRMT5-dependent methylation of the androgen receptor",
+  "authorLine": "Zineb Mounir et al.",
+  "elocationId": "e13964"
 }
