@@ -5,7 +5,6 @@ home=$(pwd)
 
 function scrape {
     regex=".*elife-([0-9]{5})\-v([0-9]{1})\.xml$"
-
     cd $scraper
     target=$1
     shift # pop first arg
