@@ -1,54 +1,169 @@
 {
-  "-meta": {
-    "location": "https://raw.githubusercontent.com/elifesciences/elife-article-xml/60e488fb2f97bf71c6b7a2864b745f4afb1376e8/articles/elife-15378-v1.xml",
-    "patched": true
+  "abstract": {
+    "content": [
+      {
+        "text": "We demonstrate that human motor memories can be artificially tagged and later retrieved by noninvasive transcranial direct-current stimulation (tDCS). Participants learned to adapt reaching movements to two conflicting dynamical environments that were each associated with a different tDCS polarity (anodal or cathodal tDCS) on the sensorimotor cortex. That is, we sought to determine whether divergent background activity levels within the sensorimotor cortex (anodal: higher activity; cathodal: lower activity) give rise to distinct motor memories. After a training session, application of each tDCS polarity automatically resulted in the retrieval of the motor memory corresponding to that polarity. These results reveal that artificial modulation of neural activity in the sensorimotor cortex through tDCS can act as a context for the formation and recollection of motor memories.",
+        "type": "paragraph"
+      }
+    ]
   },
-  "-history": {
-    "received": "2016-02-19T00:00:00Z",
-    "accepted": "2016-07-28T00:00:00Z"
-  },
-  "status": "poa",
-  "id": "15378",
-  "version": 1,
-  "type": "research-article",
-  "doi": "10.7554/eLife.15378",
-  "authorLine": "Daichi Nozaki et al",
-  "title": "Tagging motor memories with transcranial direct current stimulation allows later artificially-controlled retrieval",
-  "published": "2016-07-29T00:00:00Z",
-  "versionDate": "2016-07-29T00:00:00Z",
-  "volume": 5,
-  "elocationId": "e15378",
   "pdf": "https://cdn.elifesciences.org/articles/15378/elife-15378-v1.pdf",
+  "additionalFiles": [
+    {
+      "id": "SD1-data",
+      "mediaType": "application/zip",
+      "filename": "elife-15378-supp-v1.zip",
+      "uri": "https://cdn.elifesciences.org/articles/15378/elife-15378-supp-v1.zip",
+      "title": "Supplementary file 1."
+    }
+  ],
+  "statusDate": "2016-07-29T00:00:00Z",
+  "funding": {
+    "statement": "The funders had no role in study design, data collection and interpretation, or the decision to submit the work for publication.",
+    "awards": [
+      {
+        "id": "par-1",
+        "source": {
+          "name": [
+            "Ministry of Education, Culture, Sports, Science, and Technology"
+          ],
+          "funderId": "10.13039/501100001700"
+        },
+        "recipients": [
+          {
+            "name": {
+              "preferred": "Daichi Nozaki",
+              "index": "Nozaki, Daichi"
+            },
+            "type": "person"
+          },
+          {
+            "name": {
+              "preferred": "Masaya Hirashima",
+              "index": "Hirashima, Masaya"
+            },
+            "type": "person"
+          }
+        ],
+        "awardId": "KAKENHI A26242062"
+      },
+      {
+        "id": "par-2",
+        "source": {
+          "name": [
+            "NEXT Program"
+          ]
+        },
+        "recipients": [
+          {
+            "name": {
+              "preferred": "Daichi Nozaki",
+              "index": "Nozaki, Daichi"
+            },
+            "type": "person"
+          }
+        ],
+        "awardId": "LS034"
+      },
+      {
+        "id": "par-3",
+        "source": {
+          "name": [
+            "Japan Society for the Promotion of Science"
+          ],
+          "funderId": "10.13039/501100001691"
+        },
+        "recipients": [
+          {
+            "name": {
+              "preferred": "Daichi Nozaki",
+              "index": "Nozaki, Daichi"
+            },
+            "type": "person"
+          },
+          {
+            "name": {
+              "preferred": "Jean-Jacques Orban de Xivry",
+              "index": "Orban de Xivry, Jean-Jacques"
+            },
+            "type": "person"
+          }
+        ],
+        "awardId": "Japan-Belgium Research Cooperative Program"
+      },
+      {
+        "id": "par-4",
+        "source": {
+          "name": [
+            "Brains Back to Brussels fellowship"
+          ]
+        },
+        "recipients": [
+          {
+            "name": {
+              "preferred": "Jean-Jacques Orban de Xivry",
+              "index": "Orban de Xivry, Jean-Jacques"
+            },
+            "type": "person"
+          }
+        ]
+      }
+    ]
+  },
+  "versionDate": "2016-07-29T00:00:00Z",
+  "elocationId": "e15378",
+  "reviewers": [
+    {
+      "affiliations": [
+        {
+          "name": [
+            "University of California, Berkeley"
+          ],
+          "address": {
+            "formatted": [
+              "United States"
+            ],
+            "components": {
+              "country": "United States"
+            }
+          }
+        }
+      ],
+      "type": "person",
+      "name": {
+        "preferred": "Richard Ivry",
+        "index": "Ivry, Richard"
+      },
+      "role": "Reviewing Editor"
+    }
+  ],
+  "volume": 5,
+  "status": "poa",
   "subjects": [
     {
       "id": "neuroscience",
       "name": "Neuroscience"
     }
   ],
-  "researchOrganisms": [
-    "Human"
+  "authorLine": "Daichi Nozaki et al.",
+  "stage": "published",
+  "ethics": [
+    {
+      "text": "Human subjects: The experiments were conducted in accordance with the Declaration of Helsinki. The ethics committee from The University of Tokyo approved all experimental procedures. Prior to the experiments, participants provided informed consent.",
+      "type": "paragraph"
+    }
   ],
-  "abstract": {
-    "content": [
-      {
-        "type": "paragraph",
-        "text": "We demonstrate that human motor memories can be artificially tagged and later retrieved by noninvasive transcranial direct-current stimulation (tDCS). Participants learned to adapt reaching movements to two conflicting dynamical environments that were each associated with a different tDCS polarity (anodal or cathodal tDCS) on the sensorimotor cortex. That is, we sought to determine whether divergent background activity levels within the sensorimotor cortex (anodal: higher activity; cathodal: lower activity) give rise to distinct motor memories. After a training session, application of each tDCS polarity automatically resulted in the retrieval of the motor memory corresponding to that polarity. These results reveal that artificial modulation of neural activity in the sensorimotor cortex through tDCS can act as a context for the formation and recollection of motor memories."
-      }
-    ]
-  },
-  "copyright": {
-    "license": "CC-BY-4.0",
-    "holder": "Nozaki et al",
-    "statement": "This article is distributed under the terms of the <a href=\"http://creativecommons.org/licenses/by/4.0/\">Creative Commons Attribution License</a> permitting unrestricted use and redistribution provided that the original author and source are credited."
-  },
   "authors": [
     {
-      "type": "person",
+      "orcid": "0000-0002-1338-8337",
+      "competingInterests": "The authors declare that no competing interests exist.",
       "name": {
         "preferred": "Daichi Nozaki",
         "index": "Nozaki, Daichi"
       },
-      "orcid": "0000-0002-1338-8337",
+      "emailAddresses": [
+        "nozaki@p.u-tokyo.ac.jp"
+      ],
       "affiliations": [
         {
           "name": [
@@ -69,18 +184,11 @@
           }
         }
       ],
-      "emailAddresses": [
-        "nozaki@p.u-tokyo.ac.jp"
-      ],
-      "competingInterests": "The authors declare that no competing interests exist."
+      "type": "person"
     },
     {
-      "type": "person",
-      "name": {
-        "preferred": "Atsushi Yokoi",
-        "index": "Yokoi, Atsushi"
-      },
       "orcid": "0000-0002-7428-3344",
+      "competingInterests": "The authors declare that no competing interests exist.",
       "affiliations": [
         {
           "name": [
@@ -101,14 +209,14 @@
           }
         }
       ],
-      "competingInterests": "The authors declare that no competing interests exist."
-    },
-    {
       "type": "person",
       "name": {
-        "preferred": "Takahiro Kimura",
-        "index": "Kimura, Takahiro"
-      },
+        "preferred": "Atsushi Yokoi",
+        "index": "Yokoi, Atsushi"
+      }
+    },
+    {
+      "competingInterests": "The authors declare that no competing interests exist.",
       "affiliations": [
         {
           "name": [
@@ -129,14 +237,14 @@
           }
         }
       ],
-      "competingInterests": "The authors declare that no competing interests exist."
-    },
-    {
       "type": "person",
       "name": {
-        "preferred": "Masaya Hirashima",
-        "index": "Hirashima, Masaya"
-      },
+        "preferred": "Takahiro Kimura",
+        "index": "Kimura, Takahiro"
+      }
+    },
+    {
+      "competingInterests": "The authors declare that no competing interests exist.",
       "affiliations": [
         {
           "name": [
@@ -157,15 +265,15 @@
           }
         }
       ],
-      "competingInterests": "The authors declare that no competing interests exist."
-    },
-    {
       "type": "person",
       "name": {
-        "preferred": "Jean-Jacques Orban de Xivry",
-        "index": "Orban de Xivry, Jean-Jacques"
-      },
+        "preferred": "Masaya Hirashima",
+        "index": "Hirashima, Masaya"
+      }
+    },
+    {
       "orcid": "0000-0002-4603-7939",
+      "competingInterests": "The authors declare that no competing interests exist.",
       "affiliations": [
         {
           "name": [
@@ -186,127 +294,25 @@
           }
         }
       ],
-      "competingInterests": "The authors declare that no competing interests exist."
-    }
-  ],
-  "reviewers": [
-    {
       "type": "person",
       "name": {
-        "preferred": "Richard Ivry",
-        "index": "Ivry, Richard"
-      },
-      "role": "Reviewing Editor",
-      "affiliations": [
-        {
-          "name": [
-            "University of California, Berkeley"
-          ],
-          "address": {
-            "formatted": [
-              "United States"
-            ],
-            "components": {
-              "country": "United States"
-            }
-          }
-        }
-      ]
-    }
-  ],
-  "ethics": [
-    {
-      "type": "paragraph",
-      "text": "Human subjects: The experiments were conducted in accordance with the Declaration of Helsinki. The ethics committee from The University of Tokyo approved all experimental procedures. Prior to the experiments, participants provided informed consent."
-    }
-  ],
-  "funding": {
-    "awards": [
-      {
-        "id": "par-1",
-        "source": {
-          "funderId": "10.13039/501100001700",
-          "name": [
-            "Ministry of Education, Culture, Sports, Science, and Technology"
-          ]
-        },
-        "awardId": "KAKENHI A26242062",
-        "recipients": [
-          {
-            "type": "person",
-            "name": {
-              "preferred": "Masaya Hirashima",
-              "index": "Hirashima, Masaya"
-            }
-          }
-        ]
-      },
-      {
-        "id": "par-2",
-        "source": {
-          "name": [
-            "NEXT Program"
-          ]
-        },
-        "awardId": "LS034",
-        "recipients": [
-          {
-            "type": "person",
-            "name": {
-              "preferred": "Daichi Nozaki",
-              "index": "Nozaki, Daichi"
-            }
-          }
-        ]
-      },
-      {
-        "id": "par-3",
-        "source": {
-          "funderId": "10.13039/501100001691",
-          "name": [
-            "Japan Society for the Promotion of Science"
-          ]
-        },
-        "awardId": "Japan-Belgium Research Cooperative Program",
-        "recipients": [
-          {
-            "type": "person",
-            "name": {
-              "preferred": "Jean-Jacques Orban de Xivry",
-              "index": "Orban de Xivry, Jean-Jacques"
-            }
-          }
-        ]
-      },
-      {
-        "id": "par-4",
-        "source": {
-          "name": [
-            "Brains Back to Brussels fellowship"
-          ]
-        },
-        "recipients": [
-          {
-            "type": "person",
-            "name": {
-              "preferred": "Jean-Jacques Orban de Xivry",
-              "index": "Orban de Xivry, Jean-Jacques"
-            }
-          }
-        ]
+        "preferred": "Jean-Jacques Orban de Xivry",
+        "index": "Orban de Xivry, Jean-Jacques"
       }
-    ],
-    "statement": "The funders had no role in study design, data collection and interpretation, or the decision to submit the work for publication."
-  },
-  "additionalFiles": [
-    {
-      "mediaType": "application/zip",
-      "uri": "https://cdn.elifesciences.org/articles/15378/elife-15378-supp-v1.zip",
-      "filename": "elife-15378-supp-v1.zip",
-      "id": "SD1-data",
-      "title": "Supplementary file 1."
     }
   ],
-  "stage": "published",
-  "statusDate": "2099-01-01T00:00:00Z"
+  "version": 1,
+  "type": "research-article",
+  "researchOrganisms": [
+    "Human"
+  ],
+  "published": "2016-07-29T00:00:00Z",
+  "doi": "10.7554/eLife.15378",
+  "title": "Tagging motor memories with transcranial direct current stimulation allows later artificially-controlled retrieval",
+  "id": "15378",
+  "copyright": {
+    "holder": "Nozaki et al.",
+    "statement": "This article is distributed under the terms of the <a href=\"http://creativecommons.org/licenses/by/4.0/\">Creative Commons Attribution License</a> permitting unrestricted use and redistribution provided that the original author and source are credited.",
+    "license": "CC-BY-4.0"
+  }
 }

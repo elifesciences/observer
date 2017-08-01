@@ -126,10 +126,10 @@ class AggregateLogic(BaseCase):
 
     def test_calc_poa_published(self):
         poa_pubdates = {
-            '13964': '2016-05-16T00:00:00',
+            '13964': '2016-05-16T00:00:00Z',
             '14850': None, # no poa
-            '15378': '2016-07-29T00:00:00',
-            '18675': '2016-08-23T00:00:00'
+            '15378': '2016-07-29T00:00:00Z',
+            '18675': '2016-08-23T00:00:00Z'
         }
         for msid, expected_dt in poa_pubdates.items():
             obj = models.Article.objects.get(msid=msid)
@@ -137,10 +137,10 @@ class AggregateLogic(BaseCase):
 
     def test_calc_vor_published(self):
         vor_pubdates = {
-            '13964': '2016-05-16T00:00:00',
-            '14850': '2016-07-21T00:00:00',
-            '15378': '2016-07-29T00:00:00',
-            '18675': '2016-08-23T00:00:00'
+            '13964': '2016-06-15T00:00:00Z',
+            '14850': '2016-07-21T00:00:00Z',
+            '15378': '2016-08-22T16:00:29Z',
+            '18675': '2016-09-16T10:13:54Z'
         }
         for msid, expected_dt in vor_pubdates.items():
             obj = models.Article.objects.get(msid=msid)

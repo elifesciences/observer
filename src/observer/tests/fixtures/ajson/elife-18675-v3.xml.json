@@ -1,23 +1,142 @@
 {
-  "-meta": {
-    "location": "https://raw.githubusercontent.com/elifesciences/elife-article-xml/60e488fb2f97bf71c6b7a2864b745f4afb1376e8/articles/elife-18675-v3.xml",
-    "patched": true
+  "abstract": {
+    "content": [
+      {
+        "text": "In their active GTP-bound form, Rab proteins interact with proteins termed effector molecules. In this study we have thoroughly characterised a Rab effector domain that is present in proteins of the Mical and EHBP families, both known to act in endosomal trafficking. Within our study, we show that these effectors display a preference for Rab8 family proteins (Rab8, 10, 13 and 15) and that some of the effector domains can bind two Rab proteins via separate binding sites. Structural analysis allowed us to explain the specificity towards Rab8 family members and the presence of two similar Rab binding sites that must have evolved via gene duplication. This study is the first to thoroughly characterise a Rab effector protein that contains two separate Rab binding sites within a single domain, allowing Micals and EHBPs to bind two Rabs simultaneously,  thus suggesting previously unknown functions of these effector molecules in endosomal trafficking.",
+        "type": "paragraph"
+      }
+    ]
   },
-  "-history": {
-    "received": "2016-06-10T00:00:00Z",
-    "accepted": "2016-08-22T00:00:00Z"
-  },
-  "status": "poa",
-  "id": "18675",
-  "version": 3,
-  "type": "research-article",
-  "doi": "10.7554/eLife.18675",
-  "authorLine": "Amrita Rai et al",
-  "title": "bMERB domains are bivalent Rab8 family effectors evolved by gene duplication",
-  "published": "2016-08-23T00:00:00Z",
-  "volume": 5,
-  "elocationId": "e18675",
   "pdf": "https://cdn.elifesciences.org/articles/18675/elife-18675-v3.pdf",
+  "additionalFiles": [
+    {
+      "id": "SD1-data",
+      "mediaType": "application/zip",
+      "filename": "elife-18675-supp-v3.zip",
+      "uri": "https://cdn.elifesciences.org/articles/18675/elife-18675-supp-v3.zip",
+      "title": "Supplementary file 1."
+    }
+  ],
+  "statusDate": "2016-08-23T00:00:00Z",
+  "funding": {
+    "statement": "The funders had no role in study design, data collection and interpretation, or the decision to submit the work for publication.",
+    "awards": [
+      {
+        "id": "par-1",
+        "source": {
+          "name": [
+            "Max-Planck-Gesellschaft"
+          ],
+          "funderId": "10.13039/501100004189"
+        },
+        "recipients": [
+          {
+            "name": {
+              "preferred": "Amrita Rai",
+              "index": "Rai, Amrita"
+            },
+            "type": "person"
+          },
+          {
+            "name": {
+              "preferred": "Roger S Goody",
+              "index": "Goody, Roger S"
+            },
+            "type": "person"
+          },
+          {
+            "name": {
+              "preferred": "Emerich Mihai Gazdag",
+              "index": "Gazdag, Emerich Mihai"
+            },
+            "type": "person"
+          },
+          {
+            "name": {
+              "preferred": "Matthias P Müller",
+              "index": "Müller, Matthias P"
+            },
+            "type": "person"
+          }
+        ],
+        "awardId": "No grant number"
+      },
+      {
+        "id": "par-2",
+        "source": {
+          "name": [
+            "Deutsche Forschungsgemeinschaft"
+          ],
+          "funderId": "10.13039/501100001659"
+        },
+        "recipients": [
+          {
+            "name": {
+              "preferred": "Roger S Goody",
+              "index": "Goody, Roger S"
+            },
+            "type": "person"
+          },
+          {
+            "name": {
+              "preferred": "Matthias P Müller",
+              "index": "Müller, Matthias P"
+            },
+            "type": "person"
+          }
+        ],
+        "awardId": "SFB642, project A4"
+      },
+      {
+        "id": "par-3",
+        "source": {
+          "name": [
+            "Deutsche Forschungsgemeinschaft"
+          ],
+          "funderId": "10.13039/501100001659"
+        },
+        "recipients": [
+          {
+            "name": {
+              "preferred": "Aymelt Itzen",
+              "index": "Itzen, Aymelt"
+            },
+            "type": "person"
+          }
+        ],
+        "awardId": "SFB1035, project B05"
+      }
+    ]
+  },
+  "versionDate": "2016-08-25T12:00:22Z",
+  "elocationId": "e18675",
+  "reviewers": [
+    {
+      "affiliations": [
+        {
+          "name": [
+            "Max Planck Institute for Biophysical Chemistry"
+          ],
+          "address": {
+            "formatted": [
+              "Germany"
+            ],
+            "components": {
+              "country": "Germany"
+            }
+          }
+        }
+      ],
+      "type": "person",
+      "name": {
+        "preferred": "Reinhard Jahn",
+        "index": "Jahn, Reinhard"
+      },
+      "role": "Reviewing Editor"
+    }
+  ],
+  "volume": 5,
+  "status": "poa",
   "subjects": [
     {
       "id": "biochemistry",
@@ -28,29 +147,39 @@
       "name": "Biophysics and Structural Biology"
     }
   ],
-  "researchOrganisms": [
-    "Human"
-  ],
-  "abstract": {
-    "content": [
-      {
-        "type": "paragraph",
-        "text": "In their active GTP-bound form, Rab proteins interact with proteins termed effector molecules. In this study we have thoroughly characterised a Rab effector domain that is present in proteins of the Mical and EHBP families, both known to act in endosomal trafficking. Within our study, we show that these effectors display a preference for Rab8 family proteins (Rab8, 10, 13 and 15) and that some of the effector domains can bind two Rab proteins via separate binding sites. Structural analysis allowed us to explain the specificity towards Rab8 family members and the presence of two similar Rab binding sites that must have evolved via gene duplication. This study is the first to thoroughly characterise a Rab effector protein that contains two separate Rab binding sites within a single domain, allowing Micals and EHBPs to bind two Rabs simultaneously,  thus suggesting previously unknown functions of these effector molecules in endosomal trafficking."
-      }
-    ]
-  },
-  "copyright": {
-    "license": "CC-BY-4.0",
-    "holder": "Rai et al",
-    "statement": "This article is distributed under the terms of the <a href=\"http://creativecommons.org/licenses/by/4.0/\">Creative Commons Attribution License</a> permitting unrestricted use and redistribution provided that the original author and source are credited."
-  },
+  "authorLine": "Amrita Rai et al.",
+  "stage": "published",
   "authors": [
     {
+      "competingInterests": "The authors declare that no competing interests exist.",
+      "affiliations": [
+        {
+          "name": [
+            "Department of Structural Biochemistry",
+            "Max Planck Institute of Molecular Physiology"
+          ],
+          "address": {
+            "formatted": [
+              "Dortmund",
+              "Germany"
+            ],
+            "components": {
+              "locality": [
+                "Dortmund"
+              ],
+              "country": "Germany"
+            }
+          }
+        }
+      ],
       "type": "person",
       "name": {
         "preferred": "Amrita Rai",
         "index": "Rai, Amrita"
-      },
+      }
+    },
+    {
+      "competingInterests": "The authors declare that no competing interests exist.",
       "affiliations": [
         {
           "name": [
@@ -71,14 +200,14 @@
           }
         }
       ],
-      "competingInterests": "The authors declare that no competing interests exist."
-    },
-    {
       "type": "person",
       "name": {
         "preferred": "Anastasia Oprisko",
         "index": "Oprisko, Anastasia"
-      },
+      }
+    },
+    {
+      "competingInterests": "The authors declare that no competing interests exist.",
       "affiliations": [
         {
           "name": [
@@ -99,14 +228,14 @@
           }
         }
       ],
-      "competingInterests": "The authors declare that no competing interests exist."
-    },
-    {
       "type": "person",
       "name": {
         "preferred": "Jeremy Campos",
         "index": "Campos, Jeremy"
-      },
+      }
+    },
+    {
+      "competingInterests": "The authors declare that no competing interests exist.",
       "affiliations": [
         {
           "name": [
@@ -127,14 +256,14 @@
           }
         }
       ],
-      "competingInterests": "The authors declare that no competing interests exist."
-    },
-    {
       "type": "person",
       "name": {
         "preferred": "Yangxue Fu",
         "index": "Fu, Yangxue"
-      },
+      }
+    },
+    {
+      "competingInterests": "The authors declare that no competing interests exist.",
       "affiliations": [
         {
           "name": [
@@ -155,42 +284,14 @@
           }
         }
       ],
-      "competingInterests": "The authors declare that no competing interests exist."
-    },
-    {
       "type": "person",
       "name": {
         "preferred": "Timon Friese",
         "index": "Friese, Timon"
-      },
-      "affiliations": [
-        {
-          "name": [
-            "Department of Structural Biochemistry",
-            "Max Planck Institute of Molecular Physiology"
-          ],
-          "address": {
-            "formatted": [
-              "Dortmund",
-              "Germany"
-            ],
-            "components": {
-              "locality": [
-                "Dortmund"
-              ],
-              "country": "Germany"
-            }
-          }
-        }
-      ],
-      "competingInterests": "The authors declare that no competing interests exist."
+      }
     },
     {
-      "type": "person",
-      "name": {
-        "preferred": "Aymelt Itzen",
-        "index": "Itzen, Aymelt"
-      },
+      "competingInterests": "The authors declare that no competing interests exist.",
       "affiliations": [
         {
           "name": [
@@ -211,15 +312,22 @@
           }
         }
       ],
-      "competingInterests": "The authors declare that no competing interests exist."
+      "type": "person",
+      "name": {
+        "preferred": "Aymelt Itzen",
+        "index": "Itzen, Aymelt"
+      }
     },
     {
-      "type": "person",
+      "orcid": "0000-0002-0772-0444",
+      "competingInterests": "The authors declare that no competing interests exist.",
       "name": {
         "preferred": "Roger S Goody",
         "index": "Goody, Roger S"
       },
-      "orcid": "0000-0002-0772-0444",
+      "emailAddresses": [
+        "goody@mpi-dortmund.mpg.de"
+      ],
       "affiliations": [
         {
           "name": [
@@ -240,49 +348,49 @@
           }
         }
       ],
-      "emailAddresses": [
-        "goody@mpi-dortmund.mpg.de"
-      ],
-      "competingInterests": "The authors declare that no competing interests exist."
+      "type": "person"
     },
     {
+      "competingInterests": "The authors declare that no competing interests exist.",
+      "affiliations": [
+        {
+          "name": [
+            "Department of Structural Biochemistry",
+            "Max Planck Institute of Molecular Physiology"
+          ],
+          "address": {
+            "formatted": [
+              "Dortmund",
+              "Germany"
+            ],
+            "components": {
+              "locality": [
+                "Dortmund"
+              ],
+              "country": "Germany"
+            }
+          }
+        }
+      ],
       "type": "person",
       "name": {
         "preferred": "Emerich Mihai Gazdag",
         "index": "Gazdag, Emerich Mihai"
       },
-      "affiliations": [
-        {
-          "name": [
-            "Department of Structural Biochemistry",
-            "Max Planck Institute of Molecular Physiology"
-          ],
-          "address": {
-            "formatted": [
-              "Dortmund",
-              "Germany"
-            ],
-            "components": {
-              "locality": [
-                "Dortmund"
-              ],
-              "country": "Germany"
-            }
-          }
-        }
-      ],
       "emailAddresses": [
         "emerich-mihai.gazdag@mpi-dortmund.mpg.de"
-      ],
-      "competingInterests": "The authors declare that no competing interests exist."
+      ]
     },
     {
-      "type": "person",
+      "orcid": "0000-0002-1529-8933",
+      "competingInterests": "The authors declare that no competing interests exist.",
       "name": {
         "preferred": "Matthias P Müller",
         "index": "Müller, Matthias P"
       },
-      "orcid": "0000-0002-1529-8933",
+      "emailAddresses": [
+        "matthias.mueller@mpi-dortmund.mpg.de"
+      ],
       "affiliations": [
         {
           "name": [
@@ -303,109 +411,21 @@
           }
         }
       ],
-      "emailAddresses": [
-        "matthias.mueller@mpi-dortmund.mpg.de"
-      ],
-      "competingInterests": "The authors declare that no competing interests exist."
+      "type": "person"
     }
   ],
-  "reviewers": [
-    {
-      "type": "person",
-      "name": {
-        "preferred": "Reinhard Jahn",
-        "index": "Jahn, Reinhard"
-      },
-      "role": "Reviewing Editor",
-      "affiliations": [
-        {
-          "name": [
-            "Max Planck Institute for Biophysical Chemistry"
-          ],
-          "address": {
-            "formatted": [
-              "Germany"
-            ],
-            "components": {
-              "country": "Germany"
-            }
-          }
-        }
-      ]
-    }
+  "version": 3,
+  "type": "research-article",
+  "researchOrganisms": [
+    "Human"
   ],
-  "funding": {
-    "awards": [
-      {
-        "id": "par-1",
-        "source": {
-          "funderId": "10.13039/501100004189",
-          "name": [
-            "Max-Planck-Gesellschaft"
-          ]
-        },
-        "awardId": "No grant number",
-        "recipients": [
-          {
-            "type": "person",
-            "name": {
-              "preferred": "Matthias P Müller",
-              "index": "Müller, Matthias P"
-            }
-          }
-        ]
-      },
-      {
-        "id": "par-2",
-        "source": {
-          "funderId": "10.13039/501100001659",
-          "name": [
-            "Deutsche Forschungsgemeinschaft"
-          ]
-        },
-        "awardId": "SFB642, project A4",
-        "recipients": [
-          {
-            "type": "person",
-            "name": {
-              "preferred": "Matthias P Müller",
-              "index": "Müller, Matthias P"
-            }
-          }
-        ]
-      },
-      {
-        "id": "par-3",
-        "source": {
-          "funderId": "10.13039/501100001659",
-          "name": [
-            "Deutsche Forschungsgemeinschaft"
-          ]
-        },
-        "awardId": "SFB1035, project B05",
-        "recipients": [
-          {
-            "type": "person",
-            "name": {
-              "preferred": "Aymelt Itzen",
-              "index": "Itzen, Aymelt"
-            }
-          }
-        ]
-      }
-    ],
-    "statement": "The funders had no role in study design, data collection and interpretation, or the decision to submit the work for publication."
-  },
-  "additionalFiles": [
-    {
-      "mediaType": "application/zip",
-      "uri": "https://cdn.elifesciences.org/articles/18675/elife-18675-supp-v3.zip",
-      "filename": "elife-18675-supp-v3.zip",
-      "id": "SD1-data",
-      "title": "Supplementary file 1."
-    }
-  ],
-  "stage": "published",
-  "statusDate": "2099-01-01T00:00:00Z",
-  "versionDate": "2099-01-01T00:00:00Z"
+  "published": "2016-08-23T00:00:00Z",
+  "doi": "10.7554/eLife.18675",
+  "title": "bMERB domains are bivalent Rab8 family effectors evolved by gene duplication",
+  "id": "18675",
+  "copyright": {
+    "holder": "Rai et al.",
+    "statement": "This article is distributed under the terms of the <a href=\"http://creativecommons.org/licenses/by/4.0/\">Creative Commons Attribution License</a> permitting unrestricted use and redistribution provided that the original author and source are credited.",
+    "license": "CC-BY-4.0"
+  }
 }

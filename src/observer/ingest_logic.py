@@ -114,7 +114,7 @@ def calc_pub_to_current(v):
 #
 
 def calc_poa_published(args):
-    "returns the date the poa was first published. None if never published"
+    "returns the date the *poa* was *first* published. None if never published"
     art_struct, art_obj = args
     if art_struct['version'] == 1 and art_struct['status'] == models.POA:
         # ideal case, v1 POA
@@ -123,14 +123,15 @@ def calc_poa_published(args):
     return EXCLUDE_ME
 
 def calc_vor_published(args):
-    "returns the date the poa was first published. None if never published"
+    "returns the date the *vor* was *first* published. None if never published"
     art_struct, art_obj = args
     if art_struct['version'] == 1 and art_struct['status'] == models.VOR:
-        # ideal case
+        # ideal case, v1 VOR
         return art_struct['published']
     # consult previous obj
     if art_obj and art_obj.status == models.POA and art_struct['status'] == models.VOR:
-        return art_struct['published']
+        # previous obj is a POA
+        return art_struct['versionDate']
     # can't calculate, ignore
     return EXCLUDE_ME
 
