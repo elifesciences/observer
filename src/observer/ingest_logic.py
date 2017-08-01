@@ -131,7 +131,7 @@ def calc_vor_published(args):
     # consult previous obj
     if art_obj and art_obj.status == models.POA and art_struct['status'] == models.VOR:
         # previous obj is a POA
-        return art_struct['published']
+        return art_struct['versionDate']
     # can't calculate, ignore
     return EXCLUDE_ME
 
