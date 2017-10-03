@@ -82,6 +82,7 @@ class Two(BaseCase):
         "ensure report is ordered correctly"
         url = reverse('report', kwargs={'name': 'latest-articles'})
         resp = self.c.get(url)
+        self.assertEqual(resp.status_code, 200)
         xml = resp.content.decode('utf-8')
 
         regex = r"<dc:date>(.+)</dc:date>"
@@ -109,3 +110,9 @@ class Two(BaseCase):
         def rdf(d1, d2):
             return d1 if d1 >= d2 else d2
         self.assertEqual(reduce(rdf, date_list), date_list[-1])
+
+    def test_report_keeps_query_count_low(self):
+        # worse case is 23 without prefetching
+        magic_num = 17 # after django fanciness
+        with self.assertNumQueries(magic_num):
+            self.c.get(reverse('report', kwargs={'name': 'latest-articles'}))
