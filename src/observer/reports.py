@@ -49,8 +49,9 @@ def latest_articles():
     * returns -all- articles
     * ordered by the date the first version was published, most recent to least recent
     """
-    return models.Article.objects.prefetch_related('subjects', 'authors').all().order_by('-datetime_published')
-
+    return models.Article.objects \
+        .all() \
+        .order_by('-datetime_published')
 
 @report(article_meta(
     title='upcoming articles',

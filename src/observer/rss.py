@@ -87,7 +87,9 @@ def format_report(report, context):
     report.update(context) # yes, this nukes any conflicting keys in the report
     report['title'] = 'eLife: ' + report['title']
     feed = mkfeed(report)
-    add_many_entries(feed, map(article_to_rss_entry, report['items'])) # deliberate use of lazy map
+    query = report['items']
+    query = query.prefetch_related('subjects', 'authors')
+    add_many_entries(feed, map(article_to_rss_entry, query)) # deliberate use of lazy map
     body = feed.rss_str(pretty=True).decode('utf-8')
     return HttpResponse(body, content_type='text/xml')
 

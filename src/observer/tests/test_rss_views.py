@@ -113,6 +113,11 @@ class Two(BaseCase):
 
     def test_report_keeps_query_count_low(self):
         # worse case is 23 without prefetching
-        magic_num = 17 # after django fanciness
+        magic_num = 15 # after django fanciness
         with self.assertNumQueries(magic_num):
             self.c.get(reverse('report', kwargs={'name': 'latest-articles'}))
+
+        # worse case is 9 without prefetching
+        magic_num = 7
+        with self.assertNumQueries(magic_num):
+            self.c.get(reverse('report', kwargs={'name': 'upcoming-articles'}))
