@@ -49,9 +49,7 @@ def latest_articles():
     * returns -all- articles
     * ordered by the date the first version was published, most recent to least recent
     """
-    return models.Article.objects \
-        .all() \
-        .order_by('-datetime_published')
+    return models.Article.objects.all().order_by('-datetime_published')
 
 @report(article_meta(
     title='upcoming articles',
@@ -99,7 +97,7 @@ def format_report(report, format, context):
         RSS: rss.format_report,
         CSV: csv.format_report,
     }
-    ensure(format in report[SERIALISATIONS], "unsupported format %r for report %s" % (format, report))
+    ensure(format in report[SERIALISATIONS], "unsupported format %r for report %s" % (format, report['title']))
     report = copy.deepcopy(report)
     return known_formats[format](report, context)
 

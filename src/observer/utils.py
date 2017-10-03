@@ -135,12 +135,12 @@ def deepmerge(a, b, path=None):
     return _merge(a, b, path)
 
 
-def to_dict(instance):
+def to_dict(instance, descend_into_mn_fields=False):
     from django.db.models.fields.related import ManyToManyField
     opts = instance._meta
     data = {}
     for f in opts.concrete_fields + opts.many_to_many:
-        if isinstance(f, ManyToManyField):
+        if isinstance(f, ManyToManyField) and descend_into_mn_fields:
             if instance.pk is None:
                 data[f.name] = []
             else:
