@@ -82,6 +82,7 @@ class Two(BaseCase):
         "ensure report is ordered correctly"
         url = reverse('report', kwargs={'name': 'latest-articles'})
         resp = self.c.get(url)
+        self.assertEqual(resp.status_code, 200)
         xml = resp.content.decode('utf-8')
 
         regex = r"<dc:date>(.+)</dc:date>"
@@ -109,3 +110,23 @@ class Two(BaseCase):
         def rdf(d1, d2):
             return d1 if d1 >= d2 else d2
         self.assertEqual(reduce(rdf, date_list), date_list[-1])
+
+    def test_report_keeps_query_count_low(self):
+        # worse case here is 12 without prefetching
+        magic_num = 4 # after django fanciness
+        with self.assertNumQueries(magic_num):
+            self.c.get(reverse('report', kwargs={'name': 'latest-articles'}))
+
+        # worse case is also 4 without prefetching
+        magic_num = 4
+        with self.assertNumQueries(magic_num):
+            self.c.get(reverse('report', kwargs={'name': 'upcoming-articles'}))
+
+        # with a simple csv report that doesn't descend into many-to-many fields, we can whittle a
+        # request down to just 3 requests
+        paginate = 1
+        csv_peek = 1
+        csv_generation = 1
+        num = paginate + csv_peek + csv_generation
+        with self.assertNumQueries(num):
+            self.c.get(reverse('report', kwargs={'name': 'latest-articles'}), {'format': 'csv'})
