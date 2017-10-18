@@ -21,6 +21,7 @@ def nth(x, n):
 
 first = partial(nth, n=0)
 second = partial(nth, n=1)
+third = partial(nth, n=2)
 
 def ensure(assertion, msg, *args):
     """intended as a convenient replacement for `assert` statements that

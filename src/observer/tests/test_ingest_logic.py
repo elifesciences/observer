@@ -145,3 +145,17 @@ class AggregateLogic(BaseCase):
         for msid, expected_dt in vor_pubdates.items():
             obj = models.Article.objects.get(msid=msid)
             self.assertEqual(obj.datetime_vor_published, utils.todt(expected_dt), "failed to calculate vor for %s" % msid)
+
+    def test_subjects_scraped(self):
+        "subject slugs are scraped and are in alphabetical order"
+        subjects = {
+            '13964': ['cancer-biology', 'cell-biology'],
+            '14850': ['cell-biology', 'immunology'],
+            '15378': ['neuroscience', None, None], # subjects 2 and 3 should be empty
+            '18675': ['biochemistry', 'biophysics-structural-biology']
+        }
+        for msid, expected_subjects in subjects.items():
+            obj = models.Article.objects.get(msid=msid)
+            for i, subj in enumerate(expected_subjects):
+                actual_subj = getattr(obj, 'subject%s' % (i + 1))
+                self.assertEqual(subj, actual_subj)

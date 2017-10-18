@@ -145,6 +145,10 @@ class Article(models.Model):
 
     has_digest = NullBooleanField(null=True, help_text="Null/None means I don't know!")
 
+    subject1 = CharField(max_length=50, null=True)
+    subject2 = CharField(max_length=50, null=True)
+    subject3 = CharField(max_length=50, null=True)
+
     class Meta:
         db_table = 'articles'
 

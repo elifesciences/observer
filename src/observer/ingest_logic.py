@@ -8,7 +8,7 @@ from datetime import timedelta
 from et3 import render
 from et3.extract import path as p
 from . import utils, models, logic
-from .utils import lmap, lfilter, create_or_update, delall
+from .utils import lmap, lfilter, create_or_update, delall, first, second, third
 #from kids.cache import cache
 import logging
 
@@ -81,6 +81,13 @@ def todt(v):
     if v == EXCLUDE_ME:
         return v
     return utils.todt(v)
+
+def key(k):
+    def wrap(v):
+        if isinstance(v, dict):
+            return v.get(k)
+        return v
+    return wrap
 
 # shift to et3?
 def _or(v):
@@ -224,6 +231,11 @@ DESC = {
     #
 
     'subjects': [p('subjects', []), lambda sl: [{'name': v['id'], 'label': v['name']} for v in sl]],
+
+    'subject1': [p('subjects', []), first, key('id')],
+    'subject2': [p('subjects', []), second, key('id')],
+    'subject3': [p('subjects', []), third, key('id')],
+
     'authors': [p('authors', []), foreach(AUTHOR_DESC), fltr(lambda a: a['country'])]
 }
 
