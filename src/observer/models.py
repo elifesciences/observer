@@ -163,7 +163,7 @@ class Article(models.Model):
 
 
 class ArticleJSON(models.Model):
-    msid = PositiveSmallIntegerField()
+    msid = PositiveIntegerField()
     version = PositiveSmallIntegerField()
     ajson = JSONField()
 
