@@ -339,7 +339,7 @@ def _regenerate(msid):
     models.Article.objects.filter(msid=msid).delete() # destroy what we have
 
     children = {}
-    
+
     for avobj in models.ArticleJSON.objects.filter(msid=msid).order_by('version'): # ASC
         article_history_data = {} # eh
         article_data = avobj.ajson
