@@ -338,6 +338,8 @@ def _regenerate(msid):
 
     models.Article.objects.filter(msid=msid).delete() # destroy what we have
 
+    children = {}
+    
     for avobj in models.ArticleJSON.objects.filter(msid=msid).order_by('version'): # ASC
         article_history_data = {} # eh
         article_data = avobj.ajson
@@ -350,11 +352,11 @@ def _regenerate(msid):
         article_presave_checks(article_data, mush)
         artobj = create_or_update(models.Article, mush, ['msid'])[0]
 
+    # associates any child objects extracted with the article (not av)
+    # ll: article.subjects.add(subj1, subj2, ..., subjN)
     for childtype, childobjs in children.items():
         prop = getattr(artobj, childtype)
         prop.add(*childobjs)
-
-    # clear_caches()
 
     return artobj # return the final artobj
 
