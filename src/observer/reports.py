@@ -2,6 +2,10 @@ import copy
 from . import models, rss, csv
 from .utils import ensure
 from functools import wraps
+from et3.utils import do_all_if_tuple as mapfn
+from .logic import verified_subjects
+from slugify import slugify
+
 
 # utils
 
@@ -50,6 +54,22 @@ def latest_articles():
     * ordered by the date the first version was published, most recent to least recent
     """
     return models.Article.objects.all().order_by('-datetime_published')
+
+@report(article_meta(
+    title="latest articles by subject",
+    description="Articles published by eLife, filtered by given subjects",
+    params={
+        'subjects': [lambda req: req.getlist('subjects'), tuple, mapfn(slugify), verified_subjects],
+    }
+))
+def latest_articles_by_subject(subjects=None):
+    """
+    the latest articles (by subject) report:
+    * returns all articles in the given subject field
+    * ordered by the date the first version was published, most recent to least recent
+    """
+    ensure(subjects, "at least one subject must be provided")
+    return models.Article.objects.all().filter(subjects__name__in=subjects).order_by('-datetime_published')
 
 @report(article_meta(
     title='upcoming articles',
@@ -106,6 +126,7 @@ def format_report(report, format, context):
 def known_report_idx():
     return {
         'latest-articles': latest_articles,
+        'latest-articles-by-subject': latest_articles_by_subject,
         'upcoming-articles': upcoming_articles,
         'published-research-article-index': published_research_article_index,
     }

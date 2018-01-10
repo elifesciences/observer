@@ -48,7 +48,7 @@ class Two(BaseCase):
         ingest_logic.regenerate_all()
 
     def test_reports(self):
-        "all known reports in all support formats can be hit with a successful response"
+        "all known reports in all supported formats can be hit with a successful response"
         for report_name, reportfn in reports.known_report_idx().items():
             url = reverse('report', kwargs={'name': report_name})
             for format in reportfn.meta['serialisations']:

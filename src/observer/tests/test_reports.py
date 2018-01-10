@@ -14,13 +14,13 @@ class One(BaseCase):
         self.assertEqual(404, resp.status_code)
 
     def test_report_decorator(self):
-        "test the `report` decorator modifies the functions attributes and return value correctly"
+        "test the `report` decorator modifies the function's attributes and return value correctly"
         expected_attrs = {
             'title': 'pants',
             'description': 'party'
         }
 
-        meta = copy.deepcopy(expected_attrs) # just in case report modifies anything. it doesn'.
+        meta = copy.deepcopy(expected_attrs) # just in case report modifies anything. it doesn't.
 
         @reports.report(meta)
         def foo():
@@ -35,6 +35,9 @@ class One(BaseCase):
         expected_result['items'] = [1, 2, 3]
         self.assertEqual(foo(), expected_result)
 
+    def test_report_decorator_params(self):
+        ""
+        self.fail()
 class Foo(BaseCase):
     def test_published_csv(self):
         pass

@@ -42,6 +42,7 @@ def request_args(request, report_meta, **overrides):
             return val
         return fn
 
+    # these affect the result of calling the report function
     desc = {
         'page': [p('page', opts['page_num']), ispositiveint],
         'per_page': [p('per-page', opts['per_page']), ispositiveint, inrange(opts['min_per_page'], opts['max_per_page'])],
@@ -51,7 +52,26 @@ def request_args(request, report_meta, **overrides):
     if opts[PER_PAGE] == NO_PAGINATION:
         # if no user per-page has been specified + report explicitly defaults to no pagination, return all results
         desc['per_page'] = [NO_PAGINATION]
-    return render_item(desc, request.GET)
+
+
+
+    # todo: all messed up`
+    # these are given to the report function as parameters
+    # it's up to the report to describe the params it needs
+    if 'params' in report_meta:
+        desc['_params'] = report_meta['params']
+
+    print(desc)
+
+    res = render_item(desc, request.GET)
+
+    print(res)
+
+
+
+
+
+    return res
 
 def chop(q, page, per_page, order, order_by):
     """orders and chops a query into pages, returning the total of the original query and a query object"""
@@ -75,7 +95,11 @@ def paginate_report_results(report, rargs):
     # TODO: shift this into request_args one day
     order_by = report.meta[ORDER_BY]
 
-    report = report() # results will stay lazy until realised
+    
+    report = report(*rargs['_params']) # results will stay lazy until realised
+
+    print(report)
+    
     # this gives us an opportunity to chop them up and enforce any ordering
 
     def vals(d, ks):
@@ -111,10 +135,6 @@ def report(request, name, format_hint=None):
             overrides['format'] = format_hint
         rargs = request_args(request, report.meta, **overrides)
 
-    except AssertionError as err:
-        return HttpResponse("bad request: %s" % err, status=400)
-
-    try:
         # truncate report results, enforce any user ordering
         report_paginated = paginate_report_results(report, rargs)
 
@@ -124,6 +144,9 @@ def report(request, name, format_hint=None):
             'link': "https://observer.elifesciences.org" + reverse('report', kwargs={'name': name}),
         }
         return reports.format_report(report_paginated, rargs['format'], context)
+
+    except AssertionError as err:
+        return HttpResponse("bad request: %s" % err, status=400)
 
     except BaseException:
         LOG.exception("unhandled exception")
