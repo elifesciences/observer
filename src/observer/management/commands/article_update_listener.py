@@ -24,7 +24,8 @@ class Command(BaseCommand):
                     ingest_logic.regenerate(msid)
 
                 except requests.exceptions.RequestException as err:
-                    LOG.error("failed to fetch article %s: %s", msid, err)
+                    log = LOG.warn if err.response.status_code == 404 else LOG.error
+                    log("failed to fetch article %s: %s", msid, err)
 
                 except BaseException as err:
                     LOG.exception("unhandled exception attempting to download and regenerate article %s", msid)
