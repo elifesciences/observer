@@ -19,8 +19,8 @@ elifePipeline {
                     stackname: 'observer--end2end',
                     revision: commit,
                     folder: '/srv/observer',
-                    marker: 'observer',
-                ]
+                ],
+                marker: 'observer'
             )
         }
      
