@@ -112,7 +112,6 @@ def report(request, name, format_hint=None):
         rargs = request_args(request, report.meta, **overrides)
 
     except AssertionError as err:
-        LOG.exception("bad user request")
         return HttpResponse("bad request: %s" % err, status=400)
 
     try:
