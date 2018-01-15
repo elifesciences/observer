@@ -29,8 +29,9 @@ def doi2msid(doi):
 '''
 
 def msid2doi(msid):
-    assert len(str(msid)) <= 5, "given msid is too long: %r" % msid
     assert utils.isint(msid), "given msid must be an integer: %r" % msid
+    msid = int(msid)
+    assert msid > 0, "given msid must be a positive integer: %r" % msid
     return '10.7554/eLife.%05d' % int(msid)
 
 def wrangle_dt_published(art):
