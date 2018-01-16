@@ -16,7 +16,7 @@ def http_dummy_params(reportfn):
         kwargs = reduce(utils.update, kwargs.values())
     return kwargs
 
-def dummy_params(reportfn, http=False):
+def dummy_params(reportfn):
     param_map = {
         'subjects': ['cell-biology']
     }
