@@ -70,7 +70,7 @@ The dates and times of publication for all articles published at eLife. If an ar
 
 ## installation
 
-[code](https://github.com/elifesciences/observer/blob/master/install.sh)  
+[code](https://github.com/elifesciences/observer/blob/master/install.sh)
 
     git clone https://github.com/elifesciences/observer
     cd observer
@@ -82,14 +82,14 @@ this is 'libpqxx', on Ubuntu this is 'libpq-dev'.
 
 ## updating
 
-[code](https://github.com/elifesciences/observer/blob/master/install.sh)  
+[code](https://github.com/elifesciences/observer/blob/master/install.sh)
 
     git pull
     ./install.sh
 
 ## testing 
 
-[code](https://github.com/elifesciences/observer/blob/master/src/observer/tests/)  
+[code](https://github.com/elifesciences/observer/blob/master/src/observer/tests/)
 
     ./test.sh
 
