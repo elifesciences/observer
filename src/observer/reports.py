@@ -86,7 +86,7 @@ def upcoming_articles():
 
 @report(article_meta(
     title='published research article index',
-    'description': 'The dates and times of publication for all _research_ articles published at eLife. If an article had a POA version, the date and time of the POA version is included.',
+    description='The dates and times of publication for all _research_ articles published at eLife. If an article had a POA version, the date and time of the POA version is included.',
     serialisations=[CSV],
     per_page=NO_PAGINATION,
     order_by='msid',
