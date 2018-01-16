@@ -38,7 +38,7 @@ def request_args(request, report_meta, **overrides):
 
     def isin(lst):
         def fn(val):
-            ensure(val in lst, "%r not found in list: [%s]" % (val, ', '.join(lst)))
+            ensure(val in lst, "value not found in list %s" % (', '.join(lst),))
             return val
         return fn
 
@@ -129,7 +129,7 @@ def report(request, name, format_hint=None):
         return reports.format_report(report_paginated, rargs['format'], context)
 
     except AssertionError as err:
-        return HttpResponse("bad request", status=400)
+        return HttpResponse("bad request: %s" % err, status=400)
 
     except BaseException:
         LOG.exception("unhandled exception")
