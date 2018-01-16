@@ -1,16 +1,36 @@
 from os.path import join
 from django.test import Client
 from .base import BaseCase
-from observer import reports, ingest_logic, models
+from observer import reports, ingest_logic, models, utils
 from django.core.urlresolvers import reverse
 from observer.utils import listfiles, lmap
+from functools import reduce
+
+def http_dummy_params(reportfn):
+    param_map = {
+        'subjects': {'subject': 'cell-biology'}
+    }
+    kwargs = {}
+    if reportfn.meta['params']:
+        kwargs = utils.subdict(param_map, reportfn.meta['params'].keys())
+        kwargs = reduce(utils.update, kwargs.values())
+    return kwargs
+
+def dummy_params(reportfn, http=False):
+    param_map = {
+        'subjects': ['cell-biology']
+    }
+    kwargs = {}
+    if reportfn.meta['params']:
+        kwargs = utils.subdict(param_map, reportfn.meta['params'].keys())
+    return kwargs
 
 class Zero(BaseCase):
     def test_reports_no_data(self):
         "an unpopulated observer instance doesn't break when empty"
         self.assertEqual(models.Article.objects.count(), 0)
         for report_name, reportfn in reports.known_report_idx().items():
-            report = reportfn()
+            report = reportfn(**dummy_params(reportfn))
             for format in report['serialisations']:
                 context = {}
                 resp = reports.format_report(report, format, context)
@@ -30,7 +50,7 @@ class One(BaseCase):
     def test_reports(self):
         "all known reports can be formatted with results"
         for report_name, reportfn in reports.known_report_idx().items():
-            report = reportfn()
+            report = reportfn(**dummy_params(reportfn))
             for format in report['serialisations']:
                 context = {}
                 resp = reports.format_report(report, format, context)
@@ -52,7 +72,9 @@ class Two(BaseCase):
         for report_name, reportfn in reports.known_report_idx().items():
             url = reverse('report', kwargs={'name': report_name})
             for format in reportfn.meta['serialisations']:
-                resp = self.c.get(url, {'format': format})
+                args = {'format': format}
+                args.update(http_dummy_params(reportfn))
+                resp = self.c.get(url, args)
                 self.assertEqual(resp.status_code, 200, "report at %r returned non-200 response" % url)
 
 class Three(BaseCase):
@@ -80,12 +102,11 @@ class Four(BaseCase):
 
     def test_report_format_hint(self):
         "providing a file extension to a report name is the same as providing ?format=foo"
-
         for report_name, reportfn in reports.known_report_idx().items():
             url = reverse('report', kwargs={'name': report_name})
             for format in reportfn.meta['serialisations']:
                 furl = url + ".%s" % format.lower() # ll /report/latest-articles.csv
-                resp = self.c.get(furl)  # , {'format': format}) # no explicit param is provided
+                resp = self.c.get(furl, http_dummy_params(reportfn))  # , {'format': format}) # deliberate, no explicit param is provided
                 self.assertEqual(resp.status_code, 200, "report at %r returned non-200 response" % url)
 
                 # test the content
@@ -105,10 +126,12 @@ class Four(BaseCase):
             for format in reportfn.meta['serialisations']:
                 # nothing has a .foo ext, it should be ignored in favour of the format
                 furl = url + ".foo" # ll /report/latest-articles.foo
-                resp1 = self.c.get(furl)
+                resp1 = self.c.get(furl, http_dummy_params(reportfn))
                 self.assertEqual(resp1.status_code, 400) # bad request
 
-                resp2 = self.c.get(furl, {'format': format}) # good request, provide an explicit format param
+                args = {'format': format}
+                args.update(http_dummy_params(reportfn))
+                resp2 = self.c.get(furl, args) # good request, provide an explicit format param
                 self.assertEqual(resp2.status_code, 200, "report at %r returned non-200 response" % url)
 
                 # test the content

@@ -10,10 +10,6 @@ from slugify import slugify
 # utils
 
 KNOWN_SERIALISATIONS = JSON, CSV, RSS = 'JSON', 'CSV', 'RSS'
-
-SERIALISATIONS = 'serialisations'
-ORDER, ORDER_BY = 'order', 'order_by'
-PER_PAGE = 'per_page'
 NO_PAGINATION = 0
 DESC, ASC = 'DESC', 'ASC'
 
@@ -31,10 +27,11 @@ def report(meta):
 def article_meta(**kwargs):
     "returns standard metadata most reports returning models.Article objects will need"
     meta = {
-        SERIALISATIONS: [RSS, CSV],
-        ORDER_BY: 'datetime_version_published',
-        ORDER: DESC,
-        PER_PAGE: 28,
+        'serialisations': [RSS, CSV],
+        'order_by': 'datetime_version_published',
+        'order': DESC,
+        'per_page': 28,
+        'params': None
     }
     meta.update(kwargs)
     return meta
@@ -59,7 +56,7 @@ def latest_articles():
     title="latest articles by subject",
     description="Articles published by eLife, filtered by given subjects",
     params={
-        'subjects': [lambda req: req.getlist('subjects'), tuple, mapfn(slugify), verified_subjects],
+        'subjects': [lambda req: req.getlist('subject'), tuple, mapfn(slugify), verified_subjects, list],
     }
 ))
 def latest_articles_by_subject(subjects=None):
@@ -68,7 +65,8 @@ def latest_articles_by_subject(subjects=None):
     * returns all articles in the given subject field
     * ordered by the date the first version was published, most recent to least recent
     """
-    ensure(subjects, "at least one subject must be provided")
+    valid_subjects = models.Subject.objects.values_list('name', flat=True) # not executed until realised
+    ensure(subjects, "at least one valid subject must be provided. valid subjects: %s" % ', '.join(valid_subjects))
     return models.Article.objects.all().filter(subjects__name__in=subjects).order_by('-datetime_published')
 
 @report(article_meta(
@@ -85,16 +83,15 @@ def upcoming_articles():
         .filter(status=models.POA) \
         .order_by('-datetime_published')
 
-@report({
-    'title': 'published research article index',
-    'description': 'the POA and VOR dates for all published research articles',
-    SERIALISATIONS: [CSV],
-    PER_PAGE: NO_PAGINATION,
-    ORDER_BY: 'msid',
-    ORDER: ASC,
-
+@report(article_meta(
+    title='published research article index',
+    description='the POA and VOR dates for all published research articles',
+    serialisations=[CSV],
+    per_page=NO_PAGINATION,
+    order_by='msid',
+    order=ASC,
     #'headers': ['msid', 'poa', 'vor'] # published.csv on lax has no headers, but this could be specified here?
-})
+))
 def published_research_article_index():
     """
     the published research article index report:
@@ -117,7 +114,7 @@ def format_report(report, format, context):
         RSS: rss.format_report,
         CSV: csv.format_report,
     }
-    ensure(format in report[SERIALISATIONS], "unsupported format %r for report %s" % (format, report['title']))
+    ensure(format in report['serialisations'], "unsupported format %r for report %s" % (format, report['title']))
     report = copy.deepcopy(report)
     return known_formats[format](report, context)
 

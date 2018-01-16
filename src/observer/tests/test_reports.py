@@ -34,10 +34,3 @@ class One(BaseCase):
         expected_result = copy.deepcopy(meta)
         expected_result['items'] = [1, 2, 3]
         self.assertEqual(foo(), expected_result)
-
-    def test_report_decorator_params(self):
-        ""
-        self.fail()
-class Foo(BaseCase):
-    def test_published_csv(self):
-        pass
