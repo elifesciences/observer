@@ -1,6 +1,4 @@
 import sys
-from os.path import join
-from django.conf import settings
 from django.core.management.base import BaseCommand
 import logging
 from observer import views
@@ -12,10 +10,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         try:
-            with open(join(settings.PROJECT_DIR, 'README.md'), 'w') as readme:
-                readme.write(views.readme_markdown())
-            LOG.info("wrote README.md")
-
+            self.stdout.write(views.readme_markdown())
         except:
             LOG.exception("unhandled exception attempting to write README.md file")
             raise
