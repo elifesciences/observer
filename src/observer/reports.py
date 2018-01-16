@@ -108,15 +108,15 @@ def published_research_article_index():
 #
 #
 
-def format_report(report, format, context):
+def format_report(report, serialisation, context):
     # the report has been executed at this point
     known_formats = {
         RSS: rss.format_report,
         CSV: csv.format_report,
     }
-    ensure(format in report['serialisations'], "unsupported format %r for report %s" % (format, report['title']))
+    ensure(serialisation in report['serialisations'], "unsupported format %r for report %s" % (format, report['title']))
     report = copy.deepcopy(report)
-    return known_formats[format](report, context)
+    return known_formats[serialisation](report, context)
 
 # replace these with some fancy introspection of the reports module
 
