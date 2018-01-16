@@ -1,8 +1,7 @@
-from os.path import join
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
+from django.template.loader import render_to_string
 from django.shortcuts import Http404  # , get_object_or_404
-from django.conf import settings
 from et3.render import render_item
 from et3.extract import path as p
 from et3.utils import uppercase
@@ -92,11 +91,17 @@ def paginate_report_results(report, rargs):
 # views
 #
 
+def readme_markdown():
+    context = {
+        'reports': reports.report_meta(),
+    }
+    return render_to_string('README.md.template', context)
+
 @render_to("landing.html")
 def landing(request):
     return {
         'html_title': 'Observer - article reports',
-        'readme': open(join(settings.PROJECT_DIR, 'README.md')).read()
+        'readme': readme_markdown()
     }
 
 def report(request, name, format_hint=None):

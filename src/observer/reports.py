@@ -2,6 +2,7 @@ import copy
 from . import models, rss, csv
 from .utils import ensure
 from functools import wraps
+from collections import OrderedDict
 
 # utils
 
@@ -41,7 +42,7 @@ def article_meta(**kwargs):
 
 @report(article_meta(
     title="latest articles",
-    description="Articles published in eLife",
+    description="All of the latest articles published at eLife, including in-progress POA (publish-on-accept) articles.",
 ))
 def latest_articles():
     """
@@ -53,7 +54,7 @@ def latest_articles():
 
 @report(article_meta(
     title='upcoming articles',
-    description='eLife PAP articles',
+    description="The latest eLife POA (publish-on-accept) articles. These articles are in-progress and their final VOR (version-of-record) is still being produced.",
 ))
 def upcoming_articles():
     """
@@ -67,7 +68,7 @@ def upcoming_articles():
 
 @report({
     'title': 'published research article index',
-    'description': 'the POA and VOR dates for all published research articles',
+    'description': 'The dates and times of publication for all articles published at eLife. If an article had a POA version, the date and time of the POA version is included.',
     SERIALISATIONS: [CSV],
     PER_PAGE: NO_PAGINATION,
     ORDER_BY: 'msid',
@@ -104,11 +105,27 @@ def format_report(report, format, context):
 # replace these with some fancy introspection of the reports module
 
 def known_report_idx():
-    return {
-        'latest-articles': latest_articles,
-        'upcoming-articles': upcoming_articles,
-        'published-research-article-index': published_research_article_index,
+    return OrderedDict([
+        ('latest-articles', latest_articles),
+        ('upcoming-articles', upcoming_articles),
+        ('published-research-article-index', published_research_article_index),
+    ])
+
+def _report_meta(reportfn):
+    labels = {
+        'datetime_version_published': 'date and time this _version_ of article was published',
+        'msid': 'eLife manuscript ID',
+        DESC: '_most_ recent to least recent',
+        ASC: '_least_ recent to most recent'
     }
+    meta = copy.deepcopy(reportfn.meta)
+    meta['params'] = list((meta.get('params') or {})) # remove the param wrangling description
+    meta['order_by_label'] = labels[meta['order_by']]
+    meta['order_label'] = labels[meta['order']]
+    return meta
+
+def report_meta():
+    return OrderedDict([(name, _report_meta(fn)) for name, fn in known_report_idx().items()])
 
 def get_report(name):
     return known_report_idx()[name]
