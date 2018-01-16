@@ -17,60 +17,44 @@ A report URL looks like:
 
 For example, if you wanted the latest articles published, the url would look like:
 
-* [/report/latest-articles](/report/latest-articles)
+* [/report/latest-articles]({% url 'report' 'latest-articles'%})
 
 Reports are paginated and ordered and you can page through their results. For example:
 
-* [/report/latest-articles?page=20](/report/latest-articles?page=20)
+* [/report/latest-articles?page=20]({% url 'report' 'latest-articles'%}?page=20)
 
 returns the twentieth page of the latest articles. And:
 
-* [/report/latest-articles?page=20&per-page=100](/report/latest-articles?page=20&per-page=100)
+* [/report/latest-articles?page=20&per-page=100]({% url 'report' 'latest-articles'%}?page=20&per-page=100)
 
 returns you results 2000 through 2100.
 
 Reports have a default format and often have more than one format. For example:
 
-* [/report/latest-articles](/report/latest-articles)
+* [/report/latest-articles]({% url 'report' 'latest-articles'%})
 
 is formatted as RSS. The `latest-articles` report also supports plain CSV:
 
-* [/report/latest-articles?format=csv](/report/latest-articles?format=csv)
+* [{% url 'report' 'latest-articles'%}?format=csv]({% url 'report' 'latest-articles'%}?format=csv)
 
 or, as a simple format hint:
 
-* [/report/latest-articles.csv](/report/latest-articles.csv)
+* [{% url 'report' 'latest-articles' 'csv' %}]({% url 'report' 'latest-articles' 'csv' %})
 
 ## available reports
+{% for slug, meta in reports.items %}
+#### {{ meta.title }} report
 
-#### latest articles report
+{{ meta.description }}
 
-All of the latest articles published at eLife, including in-progress POA (publish-on-accept) articles.
-
-* [RSS](/report/latest-articles.rss), [CSV](/report/latest-articles.csv)  formats
-* ordered by date and time this _version_ of article was published (_most_ recent to least recent)
-* 28 articles per page (default) [50pp](/report/latest-articles?per-page=50) [100pp](/report/latest-articles?per-page=100)
-
-#### upcoming articles report
-
-The latest eLife POA (publish-on-accept) articles. These articles are in-progress and their final VOR (version-of-record) is still being produced.
-
-* [RSS](/report/upcoming-articles.rss), [CSV](/report/upcoming-articles.csv)  formats
-* ordered by date and time this _version_ of article was published (_most_ recent to least recent)
-* 28 articles per page (default) [50pp](/report/upcoming-articles?per-page=50) [100pp](/report/upcoming-articles?per-page=100)
-
-#### published research article index report
-
-The dates and times of publication for all articles published at eLife. If an article had a POA version, the date and time of the POA version is included.
-
-* [CSV](/report/published-research-article-index.csv)  formats
-* ordered by eLife manuscript ID (_least_ recent to most recent)
-
-
+* {% for s in meta.serialisations %}[{{ s }}]({% url 'report' slug s|lower %}){% if not forloop.last %},{% endif %} {% endfor %} formats
+* ordered by {{ meta.order_by_label }} ({{ meta.order_label }})
+{% if meta.per_page != 0 %}* {{ meta.per_page }} articles per page (default) [50pp]({% url 'report' slug %}?per-page=50) [100pp]({% url 'report' slug %}?per-page=100){% endif %}
+{% if meta.params %}* accepts these extra parameters: {{ meta.params }}{% endif %}{% endfor %}
 
 ## installation
 
-[code](https://github.com/elifesciences/observer/blob/master/install.sh)
+[code](https://github.com/elifesciences/observer/blob/master/install.sh)  
 
     git clone https://github.com/elifesciences/observer
     cd observer
@@ -82,14 +66,14 @@ this is 'libpqxx', on Ubuntu this is 'libpq-dev'.
 
 ## updating
 
-[code](https://github.com/elifesciences/observer/blob/master/install.sh)
+[code](https://github.com/elifesciences/observer/blob/master/install.sh)  
 
     git pull
     ./install.sh
 
 ## testing 
 
-[code](https://github.com/elifesciences/observer/blob/master/src/observer/tests/)
+[code](https://github.com/elifesciences/observer/blob/master/src/observer/tests/)  
 
     ./test.sh
 
@@ -102,7 +86,7 @@ this is 'libpqxx', on Ubuntu this is 'libpq-dev'.
 
 ## Copyright & Licence
 
-Copyright 2017 eLife Sciences. Licensed under the [GPLv3](LICENCE.txt)
+Copyright 2018 eLife Sciences. Licensed under the [GPLv3](LICENCE.txt)
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

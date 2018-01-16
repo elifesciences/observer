@@ -1,6 +1,6 @@
 from annoying.fields import JSONField
 from django.db import models
-from django.db.models import PositiveSmallIntegerField, PositiveIntegerField, CharField, DateTimeField, TextField, NullBooleanField, EmailField
+from django.db.models import BigIntegerField, PositiveSmallIntegerField, PositiveIntegerField, CharField, DateTimeField, TextField, NullBooleanField, EmailField
 
 POA, VOR = 'poa', 'vor'
 UNKNOWN_TYPE = 'unknown-type'
@@ -71,7 +71,7 @@ class Author(models.Model):
 
 class Article(models.Model):
     journal_name = CharField(max_length=255)
-    msid = PositiveIntegerField(unique=True, help_text="article identifier from beginning of submission process right through to end of publication.")
+    msid = BigIntegerField(unique=True, help_text="article identifier from beginning of submission process right through to end of publication.")
     title = CharField(max_length=255, null=True)
     doi = CharField(max_length=255)
 
@@ -163,7 +163,7 @@ class Article(models.Model):
 
 
 class ArticleJSON(models.Model):
-    msid = PositiveIntegerField()
+    msid = BigIntegerField()
     version = PositiveSmallIntegerField()
     ajson = JSONField()
 
