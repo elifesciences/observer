@@ -283,6 +283,7 @@ def clear_caches():
 #
 
 def article_presave_checks(given_data, flat_data):
+    "business logic checks before we save the flattened data"
     mush = flat_data
 
     orig_art = getartobj(mush['msid'])
@@ -298,12 +299,13 @@ def article_presave_checks(given_data, flat_data):
         if new_ver != 1:
             raise StateError("refusing to create article with non v1 article data (v%s). articles must be created in order!" % new_ver)
 
-def upsert_ajson(article_data):
+def upsert_ajson(data_type, article_data):
     "insert/update ArticleJSON from a dictionary of article data"
     article_data = {
         'msid': article_data['id'],
         'version': article_data['version'],
-        'ajson': article_data
+        'ajson': article_data,
+        'ajson_type': data_type
     }
     return create_or_update(models.ArticleJSON, article_data, ['msid', 'version'])
 
@@ -416,7 +418,7 @@ def mkidx():
 def _download_versions(msid, latest_version):
     LOG.info(' %s versions to fetch' % latest_version)
     version_range = range(1, latest_version + 1)
-    lmap(lambda version: upsert_ajson(consume("articles/%s/versions/%s" % (msid, version))), version_range)
+    lmap(lambda version: upsert_ajson(models.LAX_AJSON, consume("articles/%s/versions/%s" % (msid, version))), version_range)
 
 def download_article_versions(msid):
     "loads *all* versions of given article from the api"
@@ -443,7 +445,7 @@ def file_upsert(path, regen=True, quiet=False):
             raise ValueError("can't handle path %r" % path)
         LOG.info('loading %s', path)
         article_data = json.load(open(path, 'r'))
-        ajson = upsert_ajson(article_data)[0]
+        ajson = upsert_ajson(models.LAX_AJSON, article_data)[0]
         if regen:
             regenerate(ajson.msid)
         return ajson.msid

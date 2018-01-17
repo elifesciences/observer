@@ -161,11 +161,22 @@ class Article(models.Model):
     def __repr__(self):
         return '<Article "%s">' % self
 
+LAX_AJSON, METRICS_SUMMARY = 'lax-ajson', 'elife-metrics-summary'
+
+def ajson_type_choices():
+    return [
+        (LAX_AJSON, 'lax article json'),
+        # we don't serve certain dates with the article-json for some reason
+        # this means we must do two calls and store two different types of data >:(
+        #('lax-version-history', 'lax article version history'),
+        (METRICS_SUMMARY, 'elife-metrics summary data')
+    ]
 
 class ArticleJSON(models.Model):
     msid = BigIntegerField()
     version = PositiveSmallIntegerField()
     ajson = JSONField()
+    ajson_type = CharField(max_length=25, choices=ajson_type_choices(), null=False, blank=False)
 
     class Meta:
         unique_together = ('msid', 'version')
