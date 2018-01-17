@@ -89,13 +89,23 @@ class Metrics(BaseCase):
         pass
 
     def test_metrics_summary_consume(self):
-        "metrics can be downloaded and turned into ArticleJSON"
+        "an article's metrics summary can be downloaded and turned into ArticleJSON"
         expected = {"msid": 9560, "views": 227050, "downloads": 16438, "crossref": 101, "pubmed": 21, "scopus": 52}
         self.assertEqual(0, models.ArticleJSON.objects.count())
         with patch('observer.ingest_logic.consume', return_value=expected):
             logic.download_article_metrics(9560)
         self.assertEqual(1, models.ArticleJSON.objects.count())
 
+    def test_metrics_summary_consume_all(self):
+        "all metrics summaries can be downloaded and turned into ArticleJSON records"
+        expected = json.load(open(join(self.fixture_dir, 'metrics-summary', 'many.json'), 'r'))
+        with patch('observer.ingest_logic.consume', return_value=expected):
+            logic.download_all_article_metrics()
+        self.assertEqual(100, models.ArticleJSON.objects.count())
+
+        # ensure data is correct
+        expected = {"msid": 90560, "views": 11, "downloads": 0, "crossref": 0, "pubmed": 0, "scopus": 0}
+        self.assertEqual(models.ArticleJSON.objects.get(msid=90560).ajson, expected)
 
 class AggregateLogic(BaseCase):
     def setUp(self):

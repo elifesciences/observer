@@ -299,15 +299,15 @@ def article_presave_checks(given_data, flat_data):
         if new_ver != 1:
             raise StateError("refusing to create article with non v1 article data (v%s). articles must be created in order!" % new_ver)
 
-def upsert_ajson(data_type, article_data):
+def upsert_ajson(msid, version, data_type, article_data):
     "insert/update ArticleJSON from a dictionary of article data"
     article_data = {
-        'msid': article_data['id'],
-        'version': article_data['version'],
+        'msid': msid,
+        'version': version,
         'ajson': article_data,
         'ajson_type': data_type
     }
-    article_data['version'] and ensure(article_data['version'] > 0, "'version' in ArticleJSON must be as a positive integer")
+    version and ensure(version > 0, "'version' in ArticleJSON must be as a positive integer")
     return create_or_update(models.ArticleJSON, article_data, ['msid', 'version'])
 
 def extract_children(mush):
@@ -410,7 +410,7 @@ def mkidx():
     num_pages = math.ceil(ini["total"] / per_page)
     msid_ver_idx = {} # ll: {09560: 1, ...}
     LOG.info("%s pages to fetch" % num_pages)
-    for page in range(1, num_pages):
+    for page in range(1, num_pages): # TODO: do we have an off-by-1 here?? shift this pagination bs into something generic
         resp = consume("articles", {'page': page})
         for snippet in resp["items"]:
             msid_ver_idx[snippet["id"]] = snippet["version"]
@@ -419,7 +419,10 @@ def mkidx():
 def _download_versions(msid, latest_version):
     LOG.info(' %s versions to fetch' % latest_version)
     version_range = range(1, latest_version + 1)
-    lmap(lambda version: upsert_ajson(models.LAX_AJSON, consume("articles/%s/versions/%s" % (msid, version))), version_range)
+
+    def fetch(version):
+        upsert_ajson(msid, version, models.LAX_AJSON, consume("articles/%s/versions/%s" % (msid, version)))
+    lmap(fetch, version_range)
 
 def download_article_versions(msid):
     "loads *all* versions of given article via API"
@@ -428,22 +431,38 @@ def download_article_versions(msid):
 
 def download_all_article_versions():
     "loads *all* versions of *all* articles via API"
-    msid_ver_idx = mkidx()
+    msid_ver_idx = mkidx() # urgh. this sucks. lax needs a /summary endpoint too
     LOG.info("%s articles to fetch" % len(msid_ver_idx))
     idx = sorted(msid_ver_idx.items(), key=lambda x: x[0], reverse=True)
     for msid, latest_version in idx:
         _download_versions(msid, latest_version)
 
+#
+# metrics data
+#
+
+def _upsert_metrics_ajson(data):
+    version = None
+    upsert_ajson(data['msid'], version, models.METRICS_SUMMARY, data)
+
 def download_article_metrics(msid):
     "loads *all* metrics for given article via API"
-    data = consume("metrics/summary/%s" % msid)
-    utils.renkeys(data, [('msid', 'id')])
-    data['version'] = None # this data isn't attached to any specific version
-    upsert_ajson(models.METRICS_SUMMARY, data)
+    _upsert_metrics_ajson(consume("metrics/article/%s/summary" % msid))
 
 def download_all_article_metrics():
     "loads *all* metrics for *all* articles via API"
-    pass
+    # calls `consume` until all results are consumed
+    ini = consume("articles", {'per-page': 1})
+    per_page = 100.0
+    num_pages = math.ceil(ini["totalArticles"] / per_page)
+    LOG.info("%s pages to fetch" % num_pages)
+    results = []
+    for page in range(1, num_pages + 1):
+        resp = consume("metrics/article/summary", {'page': page})
+        results.extend(resp['summaries'])
+    # TODO: atomically
+    lmap(_upsert_metrics_ajson, results)
+    return results
 
 #
 # upsert article-json from file/dir
@@ -456,7 +475,7 @@ def file_upsert(path, regen=True, quiet=False):
             raise ValueError("can't handle path %r" % path)
         LOG.info('loading %s', path)
         article_data = json.load(open(path, 'r'))
-        ajson = upsert_ajson(models.LAX_AJSON, article_data)[0]
+        ajson = upsert_ajson(article_data['id'], article_data['version'], models.LAX_AJSON, article_data)[0]
         if regen:
             regenerate(ajson.msid)
         return ajson.msid

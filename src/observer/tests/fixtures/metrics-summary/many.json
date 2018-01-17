@@ -1,0 +1,805 @@
+{
+  "summaries": [
+    {
+      "msid": 90560,
+      "views": 11,
+      "downloads": 0,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 42476,
+      "views": 1,
+      "downloads": 0,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 40165,
+      "views": 1,
+      "downloads": 0,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 40164,
+      "views": 1,
+      "downloads": 0,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 34752,
+      "views": 41,
+      "downloads": 0,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 34573,
+      "views": 47,
+      "downloads": 0,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 34572,
+      "views": 55,
+      "downloads": 0,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 34464,
+      "views": 27,
+      "downloads": 0,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 34231,
+      "views": 1,
+      "downloads": 0,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 33792,
+      "views": 492,
+      "downloads": 59,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 33738,
+      "views": 70,
+      "downloads": 0,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 33682,
+      "views": 714,
+      "downloads": 69,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 33660,
+      "views": 2093,
+      "downloads": 866,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 33650,
+      "views": 1423,
+      "downloads": 158,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 33604,
+      "views": 648,
+      "downloads": 71,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 33591,
+      "views": 665,
+      "downloads": 72,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 33590,
+      "views": 1061,
+      "downloads": 137,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 33511,
+      "views": 214,
+      "downloads": 8,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 33442,
+      "views": 862,
+      "downloads": 291,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 33415,
+      "views": 381,
+      "downloads": 124,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 33413,
+      "views": 77,
+      "downloads": 0,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 33383,
+      "views": 552,
+      "downloads": 71,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 33333,
+      "views": 817,
+      "downloads": 196,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 33323,
+      "views": 536,
+      "downloads": 110,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 33312,
+      "views": 2123,
+      "downloads": 146,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 33307,
+      "views": 41,
+      "downloads": 0,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 33298,
+      "views": 1892,
+      "downloads": 255,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 33292,
+      "views": 879,
+      "downloads": 275,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 33274,
+      "views": 1847,
+      "downloads": 456,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 33219,
+      "views": 701,
+      "downloads": 78,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 33217,
+      "views": 1,
+      "downloads": 0,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 33173,
+      "views": 98,
+      "downloads": 0,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 33125,
+      "views": 819,
+      "downloads": 170,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 33111,
+      "views": 875,
+      "downloads": 228,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 33066,
+      "views": 2722,
+      "downloads": 315,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 33035,
+      "views": 399,
+      "downloads": 44,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 32902,
+      "views": 74,
+      "downloads": 0,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 32783,
+      "views": 805,
+      "downloads": 89,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 32764,
+      "views": 1,
+      "downloads": 0,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 32763,
+      "views": 869,
+      "downloads": 139,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 32762,
+      "views": 1336,
+      "downloads": 171,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 32742,
+      "views": 393,
+      "downloads": 69,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 32728,
+      "views": 1163,
+      "downloads": 170,
+      "crossref": 1,
+      "pubmed": 1,
+      "scopus": 0
+    },
+    {
+      "msid": 32724,
+      "views": 4159,
+      "downloads": 1343,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 32715,
+      "views": 3965,
+      "downloads": 388,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 32709,
+      "views": 491,
+      "downloads": 73,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 32703,
+      "views": 1101,
+      "downloads": 125,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 32657,
+      "views": 509,
+      "downloads": 85,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 32640,
+      "views": 489,
+      "downloads": 106,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 32637,
+      "views": 3,
+      "downloads": 0,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 32625,
+      "views": 2,
+      "downloads": 0,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 32537,
+      "views": 1094,
+      "downloads": 232,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 32516,
+      "views": 100,
+      "downloads": 0,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 32497,
+      "views": 501,
+      "downloads": 97,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 32494,
+      "views": 1,
+      "downloads": 0,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 32493,
+      "views": 9192,
+      "downloads": 1011,
+      "crossref": 2,
+      "pubmed": 2,
+      "scopus": 0
+    },
+    {
+      "msid": 32492,
+      "views": 1,
+      "downloads": 0,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 32486,
+      "views": 331,
+      "downloads": 44,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 32481,
+      "views": 1008,
+      "downloads": 309,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 32473,
+      "views": 1069,
+      "downloads": 142,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 32437,
+      "views": 3298,
+      "downloads": 236,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 32436,
+      "views": 684,
+      "downloads": 141,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 32420,
+      "views": 682,
+      "downloads": 159,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 32418,
+      "views": 460,
+      "downloads": 69,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 32417,
+      "views": 1007,
+      "downloads": 197,
+      "crossref": 1,
+      "pubmed": 1,
+      "scopus": 0
+    },
+    {
+      "msid": 32353,
+      "views": 703,
+      "downloads": 170,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 32342,
+      "views": 60,
+      "downloads": 0,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 32337,
+      "views": 902,
+      "downloads": 152,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 32330,
+      "views": 2871,
+      "downloads": 296,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 32273,
+      "views": 579,
+      "downloads": 76,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 32177,
+      "views": 1168,
+      "downloads": 282,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 32137,
+      "views": 408,
+      "downloads": 127,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 32073,
+      "views": 3667,
+      "downloads": 120,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 32064,
+      "views": 891,
+      "downloads": 96,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 32061,
+      "views": 129,
+      "downloads": 0,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 32056,
+      "views": 581,
+      "downloads": 139,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 32054,
+      "views": 204,
+      "downloads": 60,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 32041,
+      "views": 364,
+      "downloads": 48,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 32038,
+      "views": 1337,
+      "downloads": 311,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 32032,
+      "views": 417,
+      "downloads": 128,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 32027,
+      "views": 2819,
+      "downloads": 873,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 32016,
+      "views": 1785,
+      "downloads": 88,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 32015,
+      "views": 828,
+      "downloads": 77,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 32014,
+      "views": 1721,
+      "downloads": 87,
+      "crossref": 2,
+      "pubmed": 1,
+      "scopus": 0
+    },
+    {
+      "msid": 32012,
+      "views": 2889,
+      "downloads": 94,
+      "crossref": 2,
+      "pubmed": 1,
+      "scopus": 0
+    },
+    {
+      "msid": 32011,
+      "views": 2382,
+      "downloads": 133,
+      "crossref": 2,
+      "pubmed": 1,
+      "scopus": 0
+    },
+    {
+      "msid": 32010,
+      "views": 925,
+      "downloads": 82,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 32009,
+      "views": 753,
+      "downloads": 63,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 32000,
+      "views": 1,
+      "downloads": 0,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 31993,
+      "views": 721,
+      "downloads": 182,
+      "crossref": 1,
+      "pubmed": 1,
+      "scopus": 0
+    },
+    {
+      "msid": 31991,
+      "views": 1111,
+      "downloads": 282,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 31936,
+      "views": 300,
+      "downloads": 60,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 31926,
+      "views": 447,
+      "downloads": 61,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 31924,
+      "views": 300,
+      "downloads": 55,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 31911,
+      "views": 1195,
+      "downloads": 136,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 31816,
+      "views": 1001,
+      "downloads": 104,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 31812,
+      "views": 755,
+      "downloads": 146,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 31808,
+      "views": 1092,
+      "downloads": 165,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 31804,
+      "views": 1555,
+      "downloads": 245,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    },
+    {
+      "msid": 31781,
+      "views": 1181,
+      "downloads": 137,
+      "crossref": 0,
+      "pubmed": 0,
+      "scopus": 0
+    }
+  ],
+  "totalArticles": 100
+}
