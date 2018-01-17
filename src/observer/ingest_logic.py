@@ -8,7 +8,7 @@ from datetime import timedelta
 from et3 import render
 from et3.extract import path as p
 from . import utils, models, logic
-from .utils import lmap, lfilter, create_or_update, delall, first, second, third
+from .utils import lmap, lfilter, create_or_update, delall, first, second, third, ensure
 #from kids.cache import cache
 import logging
 
@@ -307,6 +307,7 @@ def upsert_ajson(data_type, article_data):
         'ajson': article_data,
         'ajson_type': data_type
     }
+    article_data['version'] and ensure(article_data['version'] > 0, "'version' in ArticleJSON must be as a positive integer")
     return create_or_update(models.ArticleJSON, article_data, ['msid', 'version'])
 
 def extract_children(mush):
@@ -343,7 +344,7 @@ def _regenerate(msid):
 
     children = {}
 
-    for avobj in models.ArticleJSON.objects.filter(msid=msid).order_by('version'): # ASC
+    for avobj in models.ArticleJSON.objects.filter(msid=msid, ajson_type=models.LAX_AJSON).order_by('version'): # ASC
         article_history_data = {} # eh
         article_data = avobj.ajson
         LOG.info('regenerating %s v%s' % (article_data['id'], article_data['version']))
@@ -421,18 +422,28 @@ def _download_versions(msid, latest_version):
     lmap(lambda version: upsert_ajson(models.LAX_AJSON, consume("articles/%s/versions/%s" % (msid, version))), version_range)
 
 def download_article_versions(msid):
-    "loads *all* versions of given article from the api"
+    "loads *all* versions of given article via API"
     resp = consume("articles/%s/versions" % msid)
-    return _download_versions(msid, len(resp["versions"]))
+    _download_versions(msid, len(resp["versions"]))
 
 def download_all_article_versions():
-    "loads *all* versions of *all* articles from the api"
+    "loads *all* versions of *all* articles via API"
     msid_ver_idx = mkidx()
     LOG.info("%s articles to fetch" % len(msid_ver_idx))
     idx = sorted(msid_ver_idx.items(), key=lambda x: x[0], reverse=True)
     for msid, latest_version in idx:
         _download_versions(msid, latest_version)
 
+def download_article_metrics(msid):
+    "loads *all* metrics for given article via API"
+    data = consume("metrics/summary/%s" % msid)
+    utils.renkeys(data, [('msid', 'id')])
+    data['version'] = None # this data isn't attached to any specific version
+    upsert_ajson(models.METRICS_SUMMARY, data)
+
+def download_all_article_metrics():
+    "loads *all* metrics for *all* articles via API"
+    pass
 
 #
 # upsert article-json from file/dir

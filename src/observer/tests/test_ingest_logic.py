@@ -2,6 +2,7 @@ import json
 from os.path import join
 from .base import BaseCase
 from observer import ingest_logic as logic, models, utils
+from unittest.mock import patch
 
 class Logic(BaseCase):
     def setUp(self):
@@ -82,6 +83,18 @@ class Authors(BaseCase):
         ]
         actual = [(p.type, p.name, p.country) for p in list(authors)[-2:]]
         self.assertEqual(expected, actual)
+
+class Metrics(BaseCase):
+    def setUp(self):
+        pass
+
+    def test_metrics_summary_consume(self):
+        "metrics can be downloaded and turned into ArticleJSON"
+        expected = {"msid": 9560, "views": 227050, "downloads": 16438, "crossref": 101, "pubmed": 21, "scopus": 52}
+        self.assertEqual(0, models.ArticleJSON.objects.count())
+        with patch('observer.ingest_logic.consume', return_value=expected):
+            logic.download_article_metrics(9560)
+        self.assertEqual(1, models.ArticleJSON.objects.count())
 
 
 class AggregateLogic(BaseCase):

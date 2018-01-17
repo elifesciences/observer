@@ -174,7 +174,7 @@ def ajson_type_choices():
 
 class ArticleJSON(models.Model):
     msid = BigIntegerField()
-    version = PositiveSmallIntegerField()
+    version = PositiveSmallIntegerField(null=True, blank=True)
     ajson = JSONField()
     ajson_type = CharField(max_length=25, choices=ajson_type_choices(), null=False, blank=False)
 
