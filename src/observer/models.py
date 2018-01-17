@@ -43,7 +43,7 @@ def decision_codes():
 
 
 class Subject(models.Model):
-    name = CharField(max_length=150, primary_key=True)
+    name = CharField(max_length=150, primary_key=True) # slug
     label = CharField(max_length=150)
 
     class Meta:

@@ -1,16 +1,16 @@
 import copy
-from . import models, rss, csv
-from .utils import ensure
+from . import models, rss, csv, logic
+from .utils import ensure, subdict
 from functools import wraps
 from collections import OrderedDict
+from et3.utils import do_all_if_tuple as mapfn
+from .logic import verified_subjects
+from slugify import slugify
+
 
 # utils
 
 KNOWN_SERIALISATIONS = JSON, CSV, RSS = 'JSON', 'CSV', 'RSS'
-
-SERIALISATIONS = 'serialisations'
-ORDER, ORDER_BY = 'order', 'order_by'
-PER_PAGE = 'per_page'
 NO_PAGINATION = 0
 DESC, ASC = 'DESC', 'ASC'
 
@@ -28,10 +28,11 @@ def report(meta):
 def article_meta(**kwargs):
     "returns standard metadata most reports returning models.Article objects will need"
     meta = {
-        SERIALISATIONS: [RSS, CSV],
-        ORDER_BY: 'datetime_version_published',
-        ORDER: DESC,
-        PER_PAGE: 28,
+        'serialisations': [RSS, CSV],
+        'order_by': 'datetime_version_published',
+        'order': DESC,
+        'per_page': 28,
+        'params': None
     }
     meta.update(kwargs)
     return meta
@@ -53,6 +54,23 @@ def latest_articles():
     return models.Article.objects.all().order_by('-datetime_published')
 
 @report(article_meta(
+    title="latest articles by subject",
+    description="Articles published by eLife, filtered by given subjects",
+    params={
+        'subjects': [lambda req: req.getlist('subject'), tuple, mapfn(slugify), verified_subjects, list],
+    }
+))
+def latest_articles_by_subject(subjects=None):
+    """
+    the latest articles (by subject) report:
+    * returns all articles in the given subject field
+    * ordered by the date the first version was published, most recent to least recent
+    """
+    valid_subjects = models.Subject.objects.values_list('name', flat=True) # not executed until realised
+    ensure(subjects, "at least one valid subject must be provided. valid subjects: %s" % ', '.join(valid_subjects))
+    return models.Article.objects.all().filter(subjects__name__in=subjects).order_by('-datetime_published')
+
+@report(article_meta(
     title='upcoming articles',
     description="The latest eLife POA (publish-on-accept) articles. These articles are in-progress and their final VOR (version-of-record) is still being produced.",
 ))
@@ -66,16 +84,15 @@ def upcoming_articles():
         .filter(status=models.POA) \
         .order_by('-datetime_published')
 
-@report({
-    'title': 'published research article index',
-    'description': 'The dates and times of publication for all articles published at eLife. If an article had a POA version, the date and time of the POA version is included.',
-    SERIALISATIONS: [CSV],
-    PER_PAGE: NO_PAGINATION,
-    ORDER_BY: 'msid',
-    ORDER: ASC,
-
+@report(article_meta(
+    title='published research article index',
+    description='The dates and times of publication for all _research_ articles published at eLife. If an article had a POA version, the date and time of the POA version is included.',
+    serialisations=[CSV],
+    per_page=NO_PAGINATION,
+    order_by='msid',
+    order=ASC,
     #'headers': ['msid', 'poa', 'vor'] # published.csv on lax has no headers, but this could be specified here?
-})
+))
 def published_research_article_index():
     """
     the published research article index report:
@@ -92,21 +109,22 @@ def published_research_article_index():
 #
 #
 
-def format_report(report, format, context):
+def format_report(report, serialisation, context):
     # the report has been executed at this point
     known_formats = {
         RSS: rss.format_report,
         CSV: csv.format_report,
     }
-    ensure(format in report[SERIALISATIONS], "unsupported format %r for report %s" % (format, report['title']))
+    ensure(serialisation in report['serialisations'], "unsupported format %r for report %s" % (format, report['title']))
     report = copy.deepcopy(report)
-    return known_formats[format](report, context)
+    return known_formats[serialisation](report, context)
 
 # replace these with some fancy introspection of the reports module
 
 def known_report_idx():
     return OrderedDict([
         ('latest-articles', latest_articles),
+        ('latest-articles-by-subject', latest_articles_by_subject),
         ('upcoming-articles', upcoming_articles),
         ('published-research-article-index', published_research_article_index),
     ])
@@ -118,8 +136,12 @@ def _report_meta(reportfn):
         DESC: '_most_ recent to least recent',
         ASC: '_least_ recent to most recent'
     }
+    url_to_kwarg_params = {
+        'subjects': ('subject', ', '.join(logic.simple_subjects()))
+    }
     meta = copy.deepcopy(reportfn.meta)
     meta['params'] = list((meta.get('params') or {})) # remove the param wrangling description
+    meta['http_params'] = list(subdict(url_to_kwarg_params, meta['params']).values())
     meta['order_by_label'] = labels[meta['order_by']]
     meta['order_label'] = labels[meta['order']]
     return meta

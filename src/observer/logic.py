@@ -7,3 +7,13 @@ def known_articles():
         .values_list('msid', flat=True) \
         .order_by('-msid') \
         .distinct()
+
+def simple_subjects():
+    "returns a flat list of subject names"
+    return models.Subject.objects.values_list('name', flat=True) # ['foo', 'bar', 'baz']
+
+def verified_subjects(string_list):
+    "given a list of subject slugs, returns only those present in the database"
+    return models.Subject.objects \
+        .filter(name__in=string_list) \
+        .values_list('name', flat=True) # ['foo', 'bar', 'baz']

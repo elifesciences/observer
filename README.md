@@ -51,6 +51,15 @@ All of the latest articles published at eLife, including in-progress POA (publis
 * ordered by date and time this _version_ of article was published (_most_ recent to least recent)
 * 28 articles per page (default) [50pp](/report/latest-articles?per-page=50) [100pp](/report/latest-articles?per-page=100)
 
+#### latest articles by subject report
+
+Articles published by eLife, filtered by given subjects
+
+* [RSS](/report/latest-articles-by-subject.rss), [CSV](/report/latest-articles-by-subject.csv)  formats
+* ordered by date and time this _version_ of article was published (_most_ recent to least recent)
+* 28 articles per page (default) [50pp](/report/latest-articles-by-subject?per-page=50) [100pp](/report/latest-articles-by-subject?per-page=100)
+* accepts these extra parameters: subject (cancer-biology, cell-biology, epidemiology-global-health, genes-chromosomes, genomics-evolutionary-biology, human-biology-medicine) 
+
 #### upcoming articles report
 
 The latest eLife POA (publish-on-accept) articles. These articles are in-progress and their final VOR (version-of-record) is still being produced.
@@ -61,12 +70,10 @@ The latest eLife POA (publish-on-accept) articles. These articles are in-progres
 
 #### published research article index report
 
-The dates and times of publication for all articles published at eLife. If an article had a POA version, the date and time of the POA version is included.
+The dates and times of publication for all _research_ articles published at eLife. If an article had a POA version, the date and time of the POA version is included.
 
 * [CSV](/report/published-research-article-index.csv)  formats
 * ordered by eLife manuscript ID (_least_ recent to most recent)
-
-
 
 ## installation
 
@@ -102,7 +109,7 @@ this is 'libpqxx', on Ubuntu this is 'libpq-dev'.
 
 ## Copyright & Licence
 
-Copyright 2017 eLife Sciences. Licensed under the [GPLv3](LICENCE.txt)
+Copyright 2018 eLife Sciences. Licensed under the [GPLv3](LICENCE.txt)
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

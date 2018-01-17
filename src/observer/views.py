@@ -10,18 +10,18 @@ from .utils import ensure, isint
 from . import reports
 import logging
 
-from .reports import PER_PAGE, ORDER, SERIALISATIONS, NO_PAGINATION, ORDER_BY
+from .reports import NO_PAGINATION, ASC, DESC
 
 LOG = logging.getLogger(__name__)
 
 def request_args(request, report_meta, **overrides):
     opts = {
-        'per_page': report_meta[PER_PAGE],
+        'per_page': report_meta['per_page'],
         'page_num': 1,
-        'order': report_meta[ORDER], # ll: 'ASC'
+        'order': report_meta['order'], # ll: 'ASC'
         'min_per_page': 1,
         'max_per_page': 100, # ignored if report disables pagination
-        'format': report_meta[SERIALISATIONS][0] # default format is the first
+        'format': report_meta['serialisations'][0] # default format is the first
     }
     opts.update(overrides)
 
@@ -37,19 +37,25 @@ def request_args(request, report_meta, **overrides):
 
     def isin(lst):
         def fn(val):
-            ensure(val in lst, "%r not found in list: [%s]" % (val, ', '.join(lst)))
+            ensure(val in lst, "value not found in list %s" % (', '.join(lst),))
             return val
         return fn
 
+    # these affect the result of calling the report function
     desc = {
         'page': [p('page', opts['page_num']), ispositiveint],
         'per_page': [p('per-page', opts['per_page']), ispositiveint, inrange(opts['min_per_page'], opts['max_per_page'])],
-        'order': [p('order', opts['order']), uppercase, isin(['ASC', 'DESC'])],
-        'format': [p('format', opts['format']), uppercase, isin(report_meta[SERIALISATIONS])]
+        'order': [p('order', opts['order']), uppercase, isin([ASC, DESC])],
+        'format': [p('format', opts['format']), uppercase, isin(report_meta['serialisations'])]
     }
-    if opts[PER_PAGE] == NO_PAGINATION:
+    if opts['per_page'] == NO_PAGINATION:
         # if no user per-page has been specified + report explicitly defaults to no pagination, return all results
         desc['per_page'] = [NO_PAGINATION]
+
+    # 'params' can be specified in the article metadata.
+    # these are given to the report function as keyword parameters
+    desc['kwargs'] = report_meta.get('params') or {}
+
     return render_item(desc, request.GET)
 
 def chop(q, page, per_page, order, order_by):
@@ -57,7 +63,7 @@ def chop(q, page, per_page, order, order_by):
     total = q.count()
 
     # switch directions if descending (default ASC)
-    if order == 'DESC':
+    if order == DESC:
         order_by = '-' + order_by
 
     q = q.order_by(order_by)
@@ -71,10 +77,11 @@ def chop(q, page, per_page, order, order_by):
     return total, q
 
 def paginate_report_results(report, rargs):
-    # TODO: shift this into request_args one day
-    order_by = report.meta[ORDER_BY]
+    # TODO: shift this into request_args
+    order_by = report.meta['order_by']
 
-    report = report() # results will stay lazy until realised
+    report = report(**rargs['kwargs']) # results will stay lazy until realised
+
     # this gives us an opportunity to chop them up and enforce any ordering
 
     def vals(d, ks):
@@ -116,10 +123,6 @@ def report(request, name, format_hint=None):
             overrides['format'] = format_hint
         rargs = request_args(request, report.meta, **overrides)
 
-    except AssertionError as err:
-        return HttpResponse("bad request: %s" % err, status=400)
-
-    try:
         # truncate report results, enforce any user ordering
         report_paginated = paginate_report_results(report, rargs)
 
@@ -129,6 +132,9 @@ def report(request, name, format_hint=None):
             'link': "https://observer.elifesciences.org" + reverse('report', kwargs={'name': name}),
         }
         return reports.format_report(report_paginated, rargs['format'], context)
+
+    except AssertionError as err:
+        return HttpResponse("bad request: %s" % err, status=400)
 
     except BaseException:
         LOG.exception("unhandled exception")

@@ -16,6 +16,7 @@ pylint==1.6.4
 pylint-django==0.7.2
 python-dateutil==2.5.3
 python-json-logger==0.1.5
+python-slugify==1.2.4
 pytz==2017.2
 requests==2.13.0
 requests-cache==0.4.13
