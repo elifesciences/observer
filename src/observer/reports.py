@@ -1,6 +1,6 @@
 import copy
-from . import models, rss, csv
-from .utils import ensure
+from . import models, rss, csv, logic
+from .utils import ensure, subdict
 from functools import wraps
 from collections import OrderedDict
 from et3.utils import do_all_if_tuple as mapfn
@@ -136,8 +136,12 @@ def _report_meta(reportfn):
         DESC: '_most_ recent to least recent',
         ASC: '_least_ recent to most recent'
     }
+    url_to_kwarg_params = {
+        'subjects': ('subject', ', '.join(logic.simple_subjects()))
+    }
     meta = copy.deepcopy(reportfn.meta)
     meta['params'] = list((meta.get('params') or {})) # remove the param wrangling description
+    meta['http_params'] = list(subdict(url_to_kwarg_params, meta['params']).values())
     meta['order_by_label'] = labels[meta['order_by']]
     meta['order_label'] = labels[meta['order']]
     return meta

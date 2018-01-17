@@ -41,20 +41,20 @@ or, as a simple format hint:
 
 * [{% url 'report' 'latest-articles' 'csv' %}]({% url 'report' 'latest-articles' 'csv' %})
 
-## available reports
-{% for slug, meta in reports.items %}
+## available reports{% for slug, meta in reports.items %}
+
 #### {{ meta.title }} report
 
 {{ meta.description }}
 
 * {% for s in meta.serialisations %}[{{ s }}]({% url 'report' slug s|lower %}){% if not forloop.last %},{% endif %} {% endfor %} formats
-* ordered by {{ meta.order_by_label }} ({{ meta.order_label }})
-{% if meta.per_page != 0 %}* {{ meta.per_page }} articles per page (default) [50pp]({% url 'report' slug %}?per-page=50) [100pp]({% url 'report' slug %}?per-page=100){% endif %}
-{% if meta.params %}* accepts these extra parameters: {{ meta.params }}{% endif %}{% endfor %}
+* ordered by {{ meta.order_by_label }} ({{ meta.order_label }}){% if meta.per_page != 0 %}
+* {{ meta.per_page }} articles per page (default) [50pp]({% url 'report' slug %}?per-page=50) [100pp]({% url 'report' slug %}?per-page=100){% endif %}{% if meta.params %}
+* accepts these extra parameters: {% for param, example in meta.http_params %}{{ param }} ({{ example }}){% if not forloop.last %},{% endif %} {% endfor %}{% endif %}{% endfor %}
 
 ## installation
 
-[code](https://github.com/elifesciences/observer/blob/master/install.sh)  
+[code](https://github.com/elifesciences/observer/blob/master/install.sh)
 
     git clone https://github.com/elifesciences/observer
     cd observer
@@ -66,14 +66,14 @@ this is 'libpqxx', on Ubuntu this is 'libpq-dev'.
 
 ## updating
 
-[code](https://github.com/elifesciences/observer/blob/master/install.sh)  
+[code](https://github.com/elifesciences/observer/blob/master/install.sh)
 
     git pull
     ./install.sh
 
 ## testing 
 
-[code](https://github.com/elifesciences/observer/blob/master/src/observer/tests/)  
+[code](https://github.com/elifesciences/observer/blob/master/src/observer/tests/)
 
     ./test.sh
 
