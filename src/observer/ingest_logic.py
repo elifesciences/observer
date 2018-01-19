@@ -441,8 +441,16 @@ def download_all_article_versions():
 # metrics data
 #
 
+# TODO: shift this to elife-metrics
+from math import ceil
+def byte_length(i):
+    return ceil(i.bit_length() / 8.0)
+
 def _upsert_metrics_ajson(data):
     version = None
+    if byte_length(data['msid']) > 8: # big ints in sqlite3 are 64 bits/8 bytes large
+        LOG.error("bad data encountered, cannot store row: %s", data)
+        return
     upsert_ajson(data['msid'], version, models.METRICS_SUMMARY, data)
 
 def download_article_metrics(msid):
@@ -452,16 +460,22 @@ def download_article_metrics(msid):
 def download_all_article_metrics():
     "loads *all* metrics for *all* articles via API"
     # calls `consume` until all results are consumed
-    ini = consume("articles", {'per-page': 1})
+    ini = consume("metrics/article/summary", {'per-page': 1})
     per_page = 100.0
     num_pages = math.ceil(ini["totalArticles"] / per_page)
     LOG.info("%s pages to fetch" % num_pages)
     results = []
+    import requests # remove
     for page in range(1, num_pages + 1):
-        resp = consume("metrics/article/summary", {'page': page})
-        results.extend(resp['summaries'])
-    # TODO: atomically
-    lmap(_upsert_metrics_ajson, results)
+        try:
+            resp = consume("metrics/article/summary", {'page': page})
+            results.extend(resp['summaries'])
+        # temporary catch, remove
+        except requests.exceptions.RequestException as err:
+            LOG.error("failed to fetch page of summaries: %s", err)
+
+    with transaction.atomic():
+        lmap(_upsert_metrics_ajson, results)
     return results
 
 #
