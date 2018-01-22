@@ -408,7 +408,8 @@ def mkidx():
     num_pages = math.ceil(ini["total"] / per_page)
     msid_ver_idx = {} # ll: {09560: 1, ...}
     LOG.info("%s pages to fetch" % num_pages)
-    for page in range(1, num_pages): # TODO: do we have an off-by-1 here?? shift this pagination bs into something generic
+    # for page in range(1, num_pages): # TODO: do we have an off-by-1 here?? shift this pagination into something generic
+    for page in range(1, num_pages + 1):
         resp = consume("articles", {'page': page})
         for snippet in resp["items"]:
             msid_ver_idx[snippet["id"]] = snippet["version"]
@@ -448,8 +449,11 @@ def _upsert_metrics_ajson(data):
 
 def download_article_metrics(msid):
     "loads *all* metrics for *specific* article via API"
-    data = consume("metrics/article/%s/summary" % msid)
-    _upsert_metrics_ajson(data['summaries'][0])
+    try:
+        data = consume("metrics/article/%s/summary" % msid)
+        _upsert_metrics_ajson(data['summaries'][0]) # guaranteed to have either 1 result or 404
+    except requests.exceptions.RequestException as err:
+        LOG.error("failed to fetch page of summaries: %s", err)
 
 def download_all_article_metrics():
     "loads *all* metrics for *all* articles via API"
@@ -459,12 +463,10 @@ def download_all_article_metrics():
     num_pages = math.ceil(ini["totalArticles"] / per_page)
     LOG.info("%s pages to fetch" % num_pages)
     results = []
-    import requests # remove
     for page in range(1, num_pages + 1):
         try:
             resp = consume("metrics/article/summary", {'page': page})
             results.extend(resp['summaries'])
-        # temporary catch, remove
         except requests.exceptions.RequestException as err:
             LOG.error("failed to fetch page of summaries: %s", err)
 
