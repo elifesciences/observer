@@ -1,16 +1,13 @@
 import os, math, json
 from functools import partial
 from django.db import transaction
-import requests
-from django.conf import settings
-import requests_cache
-from datetime import timedelta
 from et3 import render
 from et3.extract import path as p
 from . import utils, models, logic
 from .utils import lmap, lfilter, create_or_update, delall, first, second, third
 #from kids.cache import cache
 import logging
+from .consume import consume
 
 LOG = logging.getLogger(__name__)
 
@@ -380,25 +377,6 @@ def regenerate_all():
 #
 # upsert article-json from api
 #
-
-if settings.DEBUG:
-    requests_cache.install_cache(**{
-        'cache_name': '/tmp/api-cache',
-        'backend': 'sqlite',
-        'fast_save': True,
-        'extension': '.sqlite3',
-        # https://requests-cache.readthedocs.io/en/latest/user_guide.html#expiration
-        'expire_after': timedelta(hours=24)
-    })
-
-def consume(endpoint, usrparams={}):
-    params = {'per-page': 100, 'page': 1}
-    params.update(usrparams)
-    url = settings.API_URL + "/" + endpoint.strip('/')
-    LOG.info('fetching %s params %s' % (url, params))
-    resp = requests.get(url, params)
-    resp.raise_for_status()
-    return resp.json()
 
 def mkidx():
     "downloads *all* article snippets to create an msid:version index"
