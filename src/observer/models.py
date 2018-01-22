@@ -138,6 +138,9 @@ class Article(models.Model):
     num_views = PositiveIntegerField(default=0)
     num_downloads = PositiveIntegerField(default=0)
     num_citations = PositiveIntegerField(default=0)
+    num_citations_crossref = PositiveIntegerField(default=0)
+    num_citations_pubmed = PositiveIntegerField(default=0)
+    num_citations_scopus = PositiveIntegerField(default=0)
 
     # pdf_url
     # xml_url

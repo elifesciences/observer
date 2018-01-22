@@ -9,7 +9,6 @@ from et3 import render
 from et3.extract import path as p
 from . import utils, models, logic
 from .utils import lmap, lfilter, create_or_update, delall, first, second, third, ensure
-#from kids.cache import cache
 import logging
 
 LOG = logging.getLogger(__name__)
@@ -68,7 +67,6 @@ def calc_num_vor(args):
         return art['version'] - artobj.num_poa_versions
     return EXCLUDE_ME
 
-#@cache
 def ao(ad):
     "returns the stored Article Object (ao) for the given row"
     msid = ad['id']
@@ -174,6 +172,7 @@ def fltr(fn):
 
 # todo: add to et3?
 def pp(*pobjs):
+    "returns the value at the first path that doesn't cause an error or raises the last error if all are in error"
     def wrapper(data):
         for i, pobj in enumerate(pobjs):
             try:
@@ -205,7 +204,7 @@ DESC = {
     'author_email': [find_author, p('emailAddresses.0', None)],
 
     'impact_statement': [p('impactStatement', None)],
-    'type': [p('type'), _or(models.UNKNOWN_TYPE)],
+    'type': [p('type'), _or(models.UNKNOWN_TYPE)], # TODO: good reason we're not using `p('type', models.UNKNOWN_TYPE)` ?
     'volume': [p('volume')],
     'num_authors': [p('authors', []), len],
     'num_references': [p('references', []), len],
@@ -258,25 +257,20 @@ ART_HISTORY = {
 
 # calculated from art metrics
 ART_POPULARITY = {
-    'num_views': [],
-    'num_downloads': [],
-    'num_citations': [],
+    'num_views': [p('metrics.views', 0)],
+    'num_downloads': [p('metrics.downloads', 0)],
+    'num_citations': [(p('metrics.crossref', 0), p('metrics.pubmed', 0), p('metrics.scopus', 0)), max], # source with highest number of citations
+    'num_citations_crossref': [p('metrics.crossref', 0)],
+    'num_citations_pubmed': [p('metrics.pubmed', 0)],
+    'num_citations_scopus': [p('metrics.scopus', 0)]
 }
+DESC.update(ART_POPULARITY)
 
-def flatten_article_json(article_data, article_history_data=None):
+def flatten_article_json(data, history=None, metrics=None):
     "takes article-json and squishes it into something obs can digest"
-    if not article_history_data:
-        article_history_data = {}
-    data = article_data
-    data['history'] = article_history_data
+    data['history'] = history or {} # EJP
+    data['metrics'] = metrics or {} # elife-metrics
     return render.render_item(DESC, data)
-
-'''
-
-# things actually *appear* to be faster without caching. disabling for now
-def clear_caches():
-    ao.cache_clear()
-'''
 
 #
 #
@@ -342,13 +336,17 @@ def _regenerate(msid):
 
     models.Article.objects.filter(msid=msid).delete() # destroy what we have
 
-    children = {}
+    try:
+        metrics_data = models.ArticleJSON.objects.get(msid=msid, ajson_type=models.METRICS_SUMMARY).ajson
+    except models.ArticleJSON.DoesNotExist:
+        metrics_data = {}
 
-    for avobj in models.ArticleJSON.objects.filter(msid=msid, ajson_type=models.LAX_AJSON).order_by('version'): # ASC
-        article_history_data = {} # eh
-        article_data = avobj.ajson
+    # iterate through each of the versions of the article json we have from lax, lowest to highest
+    children = {}
+    for ajson in models.ArticleJSON.objects.filter(msid=msid, ajson_type=models.LAX_AJSON).order_by('version'): # ASC
+        article_data = ajson.ajson
         LOG.info('regenerating %s v%s' % (article_data['id'], article_data['version']))
-        mush = flatten_article_json(article_data, article_history_data)
+        mush = flatten_article_json(article_data, metrics=metrics_data)
 
         # extract sub-objects from the article data, insert/update them, re-attach as objects
         article_data, children = extract_children(mush)
@@ -441,21 +439,17 @@ def download_all_article_versions():
 # metrics data
 #
 
-# TODO: shift this to elife-metrics
-from math import ceil
-def byte_length(i):
-    return ceil(i.bit_length() / 8.0)
-
 def _upsert_metrics_ajson(data):
     version = None
-    if byte_length(data['msid']) > 8: # big ints in sqlite3 are 64 bits/8 bytes large
-        LOG.error("bad data encountered, cannot store row: %s", data)
+    if utils.byte_length(data['msid']) > 8: # big ints in sqlite3 are 64 bits/8 bytes large
+        LOG.error("bad data encountered, cannot store msid: %s", data['msid'])
         return
     upsert_ajson(data['msid'], version, models.METRICS_SUMMARY, data)
 
 def download_article_metrics(msid):
-    "loads *all* metrics for given article via API"
-    _upsert_metrics_ajson(consume("metrics/article/%s/summary" % msid))
+    "loads *all* metrics for *specific* article via API"
+    data = consume("metrics/article/%s/summary" % msid)
+    _upsert_metrics_ajson(data['summaries'][0])
 
 def download_all_article_metrics():
     "loads *all* metrics for *all* articles via API"
