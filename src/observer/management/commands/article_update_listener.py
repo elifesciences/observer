@@ -4,6 +4,7 @@ from django.core.management.base import BaseCommand
 import logging
 from observer import inc, ingest_logic
 from observer.utils import lmap
+import requests
 
 LOG = logging.getLogger(__name__)
 
@@ -21,6 +22,10 @@ class Command(BaseCommand):
                     msid = json.loads(event)['id']
                     ingest_logic.download_article_versions(msid)
                     ingest_logic.regenerate(msid)
+
+                except requests.exceptions.RequestException as err:
+                    log = LOG.warn if err.response.status_code == 404 else LOG.error
+                    log("failed to fetch article %s: %s", msid, err)
 
                 except BaseException as err:
                     LOG.exception("unhandled exception attempting to download and regenerate article %s", msid)
