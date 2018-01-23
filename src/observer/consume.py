@@ -17,6 +17,12 @@ if settings.DEBUG:
         'expire_after': timedelta(hours=24)
     })
 
+def _giveup(err):
+    "accepts the exception and returns a truthy value if the exception should not be retried"
+    if err.response.status_code == 404:
+        LOG.warn("object at %s not found, not re-attempting request", err)
+        return True
+
 def _giving_up(details):
     LOG.error("request %s failed after %s attempts", details['args'][0], details['tries'])
 
@@ -27,19 +33,14 @@ def _retrying(details):
     backoff.expo,
     requests.exceptions.RequestException,
     max_tries=5,
+    giveup=_giveup,
     on_backoff=_retrying,
     on_giveup=_giving_up)
 def requests_get(*args, **kwargs):
     "requests.get wrapper that handles attempts to re-try a request on error EXCEPT on 404 responses"
-    try:
-        resp = requests.get(*args, **kwargs)
-        resp.raise_for_status()
-        return resp
-    except requests.exceptions.RequestException as err:
-        if err.response.status_code == 404:
-            LOG.warn("object at %s not found, not re-attempting request", args[0])
-        else:
-            raise # caught by backoff
+    resp = requests.get(*args, **kwargs)
+    resp.raise_for_status()
+    return resp
 
 def consume(endpoint, usrparams={}):
     params = {'per-page': 100, 'page': 1}
