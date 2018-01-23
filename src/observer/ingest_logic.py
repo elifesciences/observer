@@ -342,7 +342,7 @@ def _regenerate(msid):
         metrics_data = {}
 
     # iterate through each of the versions of the article json we have from lax, lowest to highest
-    children = {}
+    children, artobj = {}, None
     for ajson in models.ArticleJSON.objects.filter(msid=msid, ajson_type=models.LAX_AJSON).order_by('version'): # ASC
         article_data = ajson.ajson
         LOG.info('regenerating %s v%s' % (article_data['id'], article_data['version']))
@@ -442,10 +442,12 @@ def download_all_article_versions():
 
 def _upsert_metrics_ajson(data):
     version = None
-    if utils.byte_length(data['msid']) > 8: # big ints in sqlite3 are 64 bits/8 bytes large
-        LOG.error("bad data encountered, cannot store msid: %s", data['msid'])
-        return
-    upsert_ajson(data['msid'], version, models.METRICS_SUMMARY, data)
+    # big ints in sqlite3 are 64 bits/8 bytes large
+    try:
+        ensure(utils.byte_length(data['msid']) <= 8, "bad data encountered, cannot store msid: %s", data['msid'])
+        upsert_ajson(data['msid'], version, models.METRICS_SUMMARY, data)
+    except AssertionError as err:
+        LOG.error(err)    
 
 def download_article_metrics(msid):
     "loads *all* metrics for *specific* article via API"
