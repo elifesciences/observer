@@ -2,7 +2,9 @@ import json
 from os.path import join
 from .base import BaseCase
 from observer import ingest_logic as logic, models, utils
+from unittest import mock
 from unittest.mock import patch
+from observer.ingest_logic import p, pp
 
 class Logic(BaseCase):
     def setUp(self):
@@ -31,6 +33,50 @@ class Logic(BaseCase):
         self.assertEqual(models.ArticleJSON.objects.count(), 0)
         logic.file_upsert(self.article_json)
         self.assertEqual(models.ArticleJSON.objects.count(), 1)
+
+
+class LogicFns(BaseCase):
+    def test_find_author(self):
+        cases = [
+            ({'authors': []}, {}), # no authors -> empty dict
+            ({'authors': [{'emailAddresses': True}]}, {'emailAddresses': True}), # one 'author' -> same author returned
+            ({'authors': [{'emailAddresses': True}, {'emailAddresses': False}]}, {'emailAddresses': True}), # multiple authors -> first author returned
+        ]
+        for given, expected in cases:
+            self.assertEqual(logic.find_author(given), expected)
+
+    def test_find_author_name(self):
+        cases = [
+            ({'authors': []}, None), # no authors -> no name found
+            # one 'author', no preferred name -> first author first name returned
+            ({'authors': [{'emailAddresses': True, 'name': 'pants'}]}, 'pants'),
+            # multiple authors -> first author first name returned
+            ({'authors': [{'emailAddresses': True, 'name': 'pants'}, {'emailAddresses': False, 'name': 'party'}]}, 'pants'),
+            # one 'author' w.preferred name -> first author preferred name returned
+            ({'authors': [{'emailAddresses': True, 'name': {'preferred': 'party'}}]}, 'party'),
+        ]
+        for given, expected in cases:
+            self.assertEqual(logic.find_author_name(given), expected, "failed on: %s" % given)
+
+    def test_pp(self):
+        struct = {'foo': {'bar': 'pants.party'}}
+        cases = [
+            (pp(p('foo.bar'), p('bar.baz')), 'pants.party'),
+            (pp(p('bar.baz'), p('foo.bar')), 'pants.party'),
+
+            (pp(p('foo.baz'), p('bar.foo', 0xFABBEEF)), 0xFABBEEF),
+        ]
+        for given, expected in cases:
+            self.assertEqual(given(struct), expected, "failed on: %s" % given)
+
+        case = pp(p('foo.baz'), p('bar.foo'))
+        self.assertRaises(KeyError, case, struct)
+
+    def test_consume(self):
+        expected = {'omg': 'pants'}
+        mock_request = mock.MagicMock(json=lambda: expected)
+        with patch('requests.get', return_value=mock_request):
+            self.assertEqual(logic.consume("whatever"), expected)
 
 class Subjects(BaseCase):
     def setUp(self):

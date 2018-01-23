@@ -19,14 +19,6 @@ EXCLUDE_ME = 0xDEADBEEF
 class StateError(Exception):
     pass
 
-'''
-# unused
-def doi2msid(doi):
-    "doi to manuscript id used in EJP"
-    prefix = '10.7554/eLife.'
-    return doi[len(prefix):].lstrip('0')
-'''
-
 def msid2doi(msid):
     assert utils.isint(msid), "given msid must be an integer: %r" % msid
     msid = int(msid)
@@ -447,7 +439,7 @@ def _upsert_metrics_ajson(data):
         ensure(utils.byte_length(data['msid']) <= 8, "bad data encountered, cannot store msid: %s", data['msid'])
         upsert_ajson(data['msid'], version, models.METRICS_SUMMARY, data)
     except AssertionError as err:
-        LOG.error(err)    
+        LOG.error(err)
 
 def download_article_metrics(msid):
     "loads *all* metrics for *specific* article via API"
