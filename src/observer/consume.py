@@ -20,11 +20,12 @@ if settings.DEBUG:
 def _giveup(err):
     "accepts the exception and returns a truthy value if the exception should not be retried"
     if err.response.status_code == 404:
-        LOG.warn("object at %s not found, not re-attempting request", err)
+        # too noisy
+        #LOG.warn("object at %s not found, not re-attempting request", err)
         return True
 
 def _giving_up(details):
-    LOG.error("request %s failed after %s attempts", details['args'][0], details['tries'])
+    LOG.warn("request %s failed after %s attempts", details['args'][0], details['tries'])
 
 def _retrying(details):
     LOG.warn("re-attempting request: %s", details['args'][0])
