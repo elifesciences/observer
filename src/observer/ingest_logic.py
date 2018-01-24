@@ -7,6 +7,7 @@ from . import utils, models, logic
 from .utils import lmap, lfilter, create_or_update, delall, first, second, third, ensure
 import logging
 from .consume import consume
+import requests
 
 LOG = logging.getLogger(__name__)
 
