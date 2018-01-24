@@ -4,8 +4,7 @@ from django.db import transaction
 from et3 import render
 from et3.extract import path as p
 from . import utils, models, logic
-from .utils import lmap, lfilter, create_or_update, delall, first, second, third
-#from kids.cache import cache
+from .utils import lmap, lfilter, create_or_update, delall, first, second, third, ensure
 import logging
 from .consume import consume
 
@@ -16,14 +15,6 @@ EXCLUDE_ME = 0xDEADBEEF
 
 class StateError(Exception):
     pass
-
-'''
-# unused
-def doi2msid(doi):
-    "doi to manuscript id used in EJP"
-    prefix = '10.7554/eLife.'
-    return doi[len(prefix):].lstrip('0')
-'''
 
 def msid2doi(msid):
     assert utils.isint(msid), "given msid must be an integer: %r" % msid
@@ -65,7 +56,6 @@ def calc_num_vor(args):
         return art['version'] - artobj.num_poa_versions
     return EXCLUDE_ME
 
-#@cache
 def ao(ad):
     "returns the stored Article Object (ao) for the given row"
     msid = ad['id']
@@ -171,6 +161,7 @@ def fltr(fn):
 
 # todo: add to et3?
 def pp(*pobjs):
+    "returns the value at the first path that doesn't cause an error or raises the last error if all are in error"
     def wrapper(data):
         for i, pobj in enumerate(pobjs):
             try:
@@ -202,7 +193,7 @@ DESC = {
     'author_email': [find_author, p('emailAddresses.0', None)],
 
     'impact_statement': [p('impactStatement', None)],
-    'type': [p('type'), _or(models.UNKNOWN_TYPE)],
+    'type': [p('type'), _or(models.UNKNOWN_TYPE)], # TODO: good reason we're not using `p('type', models.UNKNOWN_TYPE)` ?
     'volume': [p('volume')],
     'num_authors': [p('authors', []), len],
     'num_references': [p('references', []), len],
@@ -255,31 +246,27 @@ ART_HISTORY = {
 
 # calculated from art metrics
 ART_POPULARITY = {
-    'num_views': [],
-    'num_downloads': [],
-    'num_citations': [],
+    'num_views': [p('metrics.views', 0)],
+    'num_downloads': [p('metrics.downloads', 0)],
+    'num_citations': [(p('metrics.crossref', 0), p('metrics.pubmed', 0), p('metrics.scopus', 0)), max], # source with highest number of citations
+    'num_citations_crossref': [p('metrics.crossref', 0)],
+    'num_citations_pubmed': [p('metrics.pubmed', 0)],
+    'num_citations_scopus': [p('metrics.scopus', 0)]
 }
+DESC.update(ART_POPULARITY)
 
-def flatten_article_json(article_data, article_history_data=None):
+def flatten_article_json(data, history=None, metrics=None):
     "takes article-json and squishes it into something obs can digest"
-    if not article_history_data:
-        article_history_data = {}
-    data = article_data
-    data['history'] = article_history_data
+    data['history'] = history or {} # EJP
+    data['metrics'] = metrics or {} # elife-metrics
     return render.render_item(DESC, data)
-
-'''
-
-# things actually *appear* to be faster without caching. disabling for now
-def clear_caches():
-    ao.cache_clear()
-'''
 
 #
 #
 #
 
 def article_presave_checks(given_data, flat_data):
+    "business logic checks before we save the flattened data"
     mush = flat_data
 
     orig_art = getartobj(mush['msid'])
@@ -295,13 +282,15 @@ def article_presave_checks(given_data, flat_data):
         if new_ver != 1:
             raise StateError("refusing to create article with non v1 article data (v%s). articles must be created in order!" % new_ver)
 
-def upsert_ajson(article_data):
+def upsert_ajson(msid, version, data_type, article_data):
     "insert/update ArticleJSON from a dictionary of article data"
     article_data = {
-        'msid': article_data['id'],
-        'version': article_data['version'],
-        'ajson': article_data
+        'msid': msid,
+        'version': version,
+        'ajson': article_data,
+        'ajson_type': data_type
     }
+    version and ensure(version > 0, "'version' in ArticleJSON must be as a positive integer")
     return create_or_update(models.ArticleJSON, article_data, ['msid', 'version'])
 
 def extract_children(mush):
@@ -336,13 +325,17 @@ def _regenerate(msid):
 
     models.Article.objects.filter(msid=msid).delete() # destroy what we have
 
-    children = {}
+    try:
+        metrics_data = models.ArticleJSON.objects.get(msid=msid, ajson_type=models.METRICS_SUMMARY).ajson
+    except models.ArticleJSON.DoesNotExist:
+        metrics_data = {}
 
-    for avobj in models.ArticleJSON.objects.filter(msid=msid).order_by('version'): # ASC
-        article_history_data = {} # eh
-        article_data = avobj.ajson
+    # iterate through each of the versions of the article json we have from lax, lowest to highest
+    children, artobj = {}, None
+    for ajson in models.ArticleJSON.objects.filter(msid=msid, ajson_type=models.LAX_AJSON).order_by('version'): # ASC
+        article_data = ajson.ajson
         LOG.info('regenerating %s v%s' % (article_data['id'], article_data['version']))
-        mush = flatten_article_json(article_data, article_history_data)
+        mush = flatten_article_json(article_data, metrics=metrics_data)
 
         # extract sub-objects from the article data, insert/update them, re-attach as objects
         article_data, children = extract_children(mush)
@@ -385,7 +378,8 @@ def mkidx():
     num_pages = math.ceil(ini["total"] / per_page)
     msid_ver_idx = {} # ll: {09560: 1, ...}
     LOG.info("%s pages to fetch" % num_pages)
-    for page in range(1, num_pages):
+    # for page in range(1, num_pages): # TODO: do we have an off-by-1 here?? shift this pagination into something generic
+    for page in range(1, num_pages + 1):
         resp = consume("articles", {'page': page})
         for snippet in resp["items"]:
             msid_ver_idx[snippet["id"]] = snippet["version"]
@@ -394,21 +388,63 @@ def mkidx():
 def _download_versions(msid, latest_version):
     LOG.info(' %s versions to fetch' % latest_version)
     version_range = range(1, latest_version + 1)
-    lmap(lambda version: upsert_ajson(consume("articles/%s/versions/%s" % (msid, version))), version_range)
+
+    def fetch(version):
+        upsert_ajson(msid, version, models.LAX_AJSON, consume("articles/%s/versions/%s" % (msid, version)))
+    lmap(fetch, version_range)
 
 def download_article_versions(msid):
-    "loads *all* versions of given article from the api"
+    "loads *all* versions of given article via API"
     resp = consume("articles/%s/versions" % msid)
-    return _download_versions(msid, len(resp["versions"]))
+    _download_versions(msid, len(resp["versions"]))
 
 def download_all_article_versions():
-    "loads *all* versions of *all* articles from the api"
-    msid_ver_idx = mkidx()
+    "loads *all* versions of *all* articles via API"
+    msid_ver_idx = mkidx() # urgh. this sucks. lax needs a /summary endpoint too
     LOG.info("%s articles to fetch" % len(msid_ver_idx))
     idx = sorted(msid_ver_idx.items(), key=lambda x: x[0], reverse=True)
     for msid, latest_version in idx:
         _download_versions(msid, latest_version)
 
+#
+# metrics data
+#
+
+def _upsert_metrics_ajson(data):
+    version = None
+    # big ints in sqlite3 are 64 bits/8 bytes large
+    try:
+        ensure(utils.byte_length(data['msid']) <= 8, "bad data encountered, cannot store msid: %s", data['msid'])
+        upsert_ajson(data['msid'], version, models.METRICS_SUMMARY, data)
+    except AssertionError as err:
+        LOG.error(err)
+
+def download_article_metrics(msid):
+    "loads *all* metrics for *specific* article via API"
+    try:
+        data = consume("metrics/article/%s/summary" % msid)
+        _upsert_metrics_ajson(data['summaries'][0]) # guaranteed to have either 1 result or 404
+    except requests.exceptions.RequestException as err:
+        LOG.error("failed to fetch page of summaries: %s", err)
+
+def download_all_article_metrics():
+    "loads *all* metrics for *all* articles via API"
+    # calls `consume` until all results are consumed
+    ini = consume("metrics/article/summary", {'per-page': 1})
+    per_page = 100.0
+    num_pages = math.ceil(ini["totalArticles"] / per_page)
+    LOG.info("%s pages to fetch" % num_pages)
+    results = []
+    for page in range(1, num_pages + 1):
+        try:
+            resp = consume("metrics/article/summary", {'page': page})
+            results.extend(resp['summaries'])
+        except requests.exceptions.RequestException as err:
+            LOG.error("failed to fetch page of summaries: %s", err)
+
+    with transaction.atomic():
+        lmap(_upsert_metrics_ajson, results)
+    return results
 
 #
 # upsert article-json from file/dir
@@ -421,7 +457,7 @@ def file_upsert(path, regen=True, quiet=False):
             raise ValueError("can't handle path %r" % path)
         LOG.info('loading %s', path)
         article_data = json.load(open(path, 'r'))
-        ajson = upsert_ajson(article_data)[0]
+        ajson = upsert_ajson(article_data['id'], article_data['version'], models.LAX_AJSON, article_data)[0]
         if regen:
             regenerate(ajson.msid)
         return ajson.msid

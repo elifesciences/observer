@@ -138,6 +138,9 @@ class Article(models.Model):
     num_views = PositiveIntegerField(default=0)
     num_downloads = PositiveIntegerField(default=0)
     num_citations = PositiveIntegerField(default=0)
+    num_citations_crossref = PositiveIntegerField(default=0)
+    num_citations_pubmed = PositiveIntegerField(default=0)
+    num_citations_scopus = PositiveIntegerField(default=0)
 
     # pdf_url
     # xml_url
@@ -161,11 +164,22 @@ class Article(models.Model):
     def __repr__(self):
         return '<Article "%s">' % self
 
+LAX_AJSON, METRICS_SUMMARY = 'lax-ajson', 'elife-metrics-summary'
+
+def ajson_type_choices():
+    return [
+        (LAX_AJSON, 'lax article json'),
+        # we don't serve certain dates with the article-json for some reason
+        # this means we must do two calls and store two different types of data >:(
+        #('lax-version-history', 'lax article version history'),
+        (METRICS_SUMMARY, 'elife-metrics summary data')
+    ]
 
 class ArticleJSON(models.Model):
     msid = BigIntegerField()
-    version = PositiveSmallIntegerField()
+    version = PositiveSmallIntegerField(null=True, blank=True)
     ajson = JSONField()
+    ajson_type = CharField(max_length=25, choices=ajson_type_choices(), null=False, blank=False)
 
     class Meta:
         unique_together = ('msid', 'version')

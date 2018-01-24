@@ -10,6 +10,7 @@ import itertools
 import logging
 import tempfile
 import shutil
+from math import ceil
 
 LOG = logging.getLogger(__name__)
 
@@ -205,3 +206,7 @@ def tempdir():
     # usage: tempdir, killer = tempdir(); killer()
     name = tempfile.mkdtemp()
     return (name, lambda: shutil.rmtree(name))
+
+# TODO: shift this to elife-metrics
+def byte_length(i):
+    return ceil(i.bit_length() / 8.0)

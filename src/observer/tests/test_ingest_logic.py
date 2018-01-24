@@ -2,6 +2,9 @@ import json
 from os.path import join
 from .base import BaseCase
 from observer import ingest_logic as logic, models, utils
+from unittest import mock
+from unittest.mock import patch
+from observer.ingest_logic import p, pp
 
 class Logic(BaseCase):
     def setUp(self):
@@ -30,6 +33,50 @@ class Logic(BaseCase):
         self.assertEqual(models.ArticleJSON.objects.count(), 0)
         logic.file_upsert(self.article_json)
         self.assertEqual(models.ArticleJSON.objects.count(), 1)
+
+
+class LogicFns(BaseCase):
+    def test_find_author(self):
+        cases = [
+            ({'authors': []}, {}), # no authors -> empty dict
+            ({'authors': [{'emailAddresses': True}]}, {'emailAddresses': True}), # one 'author' -> same author returned
+            ({'authors': [{'emailAddresses': True}, {'emailAddresses': False}]}, {'emailAddresses': True}), # multiple authors -> first author returned
+        ]
+        for given, expected in cases:
+            self.assertEqual(logic.find_author(given), expected)
+
+    def test_find_author_name(self):
+        cases = [
+            ({'authors': []}, None), # no authors -> no name found
+            # one 'author', no preferred name -> first author first name returned
+            ({'authors': [{'emailAddresses': True, 'name': 'pants'}]}, 'pants'),
+            # multiple authors -> first author first name returned
+            ({'authors': [{'emailAddresses': True, 'name': 'pants'}, {'emailAddresses': False, 'name': 'party'}]}, 'pants'),
+            # one 'author' w.preferred name -> first author preferred name returned
+            ({'authors': [{'emailAddresses': True, 'name': {'preferred': 'party'}}]}, 'party'),
+        ]
+        for given, expected in cases:
+            self.assertEqual(logic.find_author_name(given), expected, "failed on: %s" % given)
+
+    def test_pp(self):
+        struct = {'foo': {'bar': 'pants.party'}}
+        cases = [
+            (pp(p('foo.bar'), p('bar.baz')), 'pants.party'),
+            (pp(p('bar.baz'), p('foo.bar')), 'pants.party'),
+
+            (pp(p('foo.baz'), p('bar.foo', 0xFABBEEF)), 0xFABBEEF),
+        ]
+        for given, expected in cases:
+            self.assertEqual(given(struct), expected, "failed on: %s" % given)
+
+        case = pp(p('foo.baz'), p('bar.foo'))
+        self.assertRaises(KeyError, case, struct)
+
+    def test_consume(self):
+        expected = {'omg': 'pants'}
+        mock_request = mock.MagicMock(json=lambda: expected)
+        with patch('requests.get', return_value=mock_request):
+            self.assertEqual(logic.consume("whatever"), expected)
 
 class Subjects(BaseCase):
     def setUp(self):
@@ -83,6 +130,28 @@ class Authors(BaseCase):
         actual = [(p.type, p.name, p.country) for p in list(authors)[-2:]]
         self.assertEqual(expected, actual)
 
+class Metrics(BaseCase):
+    def setUp(self):
+        pass
+
+    def test_metrics_summary_consume(self):
+        "an article's metrics summary can be downloaded and turned into ArticleJSON"
+        expected = {"summaries": [{"msid": 9560, "views": 227161, "downloads": 16443, "crossref": 101, "pubmed": 21, "scopus": 52}], "totalArticles": 1}
+        self.assertEqual(0, models.ArticleJSON.objects.count())
+        with patch('observer.ingest_logic.consume', return_value=expected):
+            logic.download_article_metrics(9560)
+        self.assertEqual(1, models.ArticleJSON.objects.count())
+
+    def test_metrics_summary_consume_all(self):
+        "all metrics summaries can be downloaded and turned into ArticleJSON records"
+        expected = json.load(open(join(self.fixture_dir, 'metrics-summary', 'many.json'), 'r'))
+        with patch('observer.ingest_logic.consume', return_value=expected):
+            logic.download_all_article_metrics()
+        self.assertEqual(100, models.ArticleJSON.objects.count())
+
+        # ensure data is correct
+        expected = {"msid": 90560, "views": 11, "downloads": 0, "crossref": 0, "pubmed": 0, "scopus": 0}
+        self.assertEqual(models.ArticleJSON.objects.get(msid=90560).ajson, expected)
 
 class AggregateLogic(BaseCase):
     def setUp(self):
