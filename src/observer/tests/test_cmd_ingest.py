@@ -51,3 +51,11 @@ class Cmd(BaseCase):
         errcode, stdout = call_command(*args)
         self.assertEqual(errcode, 1)
         self.assertEqual(models.Article.objects.count(), 0)
+
+    def test_ingest_selective_msids(self):
+        "specific articles can be ingested"
+        self.fail()
+
+    def test_ingest_selective_targets(self):
+        "specific targets (lax, elife-metrics) can be specified"
+        self.fail()
