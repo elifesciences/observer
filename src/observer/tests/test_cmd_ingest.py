@@ -1,4 +1,3 @@
-from unittest.mock import patch
 import os
 from os.path import join
 import json
