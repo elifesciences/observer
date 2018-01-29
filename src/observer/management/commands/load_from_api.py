@@ -12,7 +12,7 @@ from functools import partial
 LAX, METRICS = TARGETS = ['lax', 'elife-metrics']
 
 class Command(BaseCommand):
-    help = "a terrifically sequential and SLOW way to load ALL elife articles and versions"
+    help = "loads ALL elife articles and versions and metrics summary"
 
     def add_arguments(self, parser):
         parser.add_argument('--msid', nargs='+', type=int, required=False)
@@ -35,7 +35,8 @@ class Command(BaseCommand):
                 (METRICS, dl_metrics),
             ])
 
-            fnlist = (subdict(targets, options['target']) or targets).values()
+            targetlist = options['target'] or []
+            fnlist = (subdict(targets, targetlist) or targets).values()
             [fn() for fn in fnlist]
 
             regen()
