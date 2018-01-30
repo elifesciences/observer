@@ -66,6 +66,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'core.middleware.DownstreamCaching',
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -113,6 +115,8 @@ DATABASES = {
 #
 #
 #
+
+KONG_AUTH_HEADER = 'KONG-Authenticated'
 
 API_URL = cfg('general.api-url')
 ARTICLE_EVENT_QUEUE = cfg('sqs.queue-name', None) # ll: observer--ci, observer--prod, observer--2017-04-282
