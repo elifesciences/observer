@@ -116,8 +116,6 @@ DATABASES = {
 #
 #
 
-KONG_AUTH_HEADER = 'KONG-Authenticated'
-
 API_URL = cfg('general.api-url')
 ARTICLE_EVENT_QUEUE = cfg('sqs.queue-name', None) # ll: observer--ci, observer--prod, observer--2017-04-282
 

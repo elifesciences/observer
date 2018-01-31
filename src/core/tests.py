@@ -17,12 +17,12 @@ class DownstreamCaching(TestCase):
         resp = self.c.get(self.url)
         for header in expected_headers:
             self.assertTrue(resp.has_header(header), "header %r not found in response" % header)
-
+            
     def test_cache_headers_not_in_response(self):
         cases = [
             'expires',
             'last-modified',
-            'prama'
+            'prama' # HTTP/1.0
         ]
         resp = self.c.get(self.url)
         for header in cases:

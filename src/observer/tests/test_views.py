@@ -142,3 +142,14 @@ class Four(BaseCase):
                     # it's an xml doc
                     prefix = "<?xml version='1.0' encoding='UTF-8'?>"
                     resp2.content.decode('utf8').startswith(prefix)
+
+class Five(BaseCase):
+    def setUp(self):
+        self.c = Client()
+
+    def test_ping(self):
+        resp = self.c.get(reverse('ping'))
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(resp['content-type'], 'text/plain; charset=UTF-8')
+        self.assertEqual(resp['cache-control'], 'must-revalidate, no-cache, no-store, private')
+        self.assertEqual(resp.content.decode('utf-8'), 'pong')
