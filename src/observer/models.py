@@ -1,6 +1,10 @@
 from annoying.fields import JSONField
 from django.db import models
-from django.db.models import BigIntegerField, PositiveSmallIntegerField, PositiveIntegerField, CharField, DateTimeField, TextField, NullBooleanField, EmailField
+from django.db.models import (
+    BigIntegerField, PositiveSmallIntegerField, PositiveIntegerField,
+    CharField, DateTimeField, TextField, NullBooleanField, EmailField,
+    ManyToManyField
+)
 
 POA, VOR = 'poa', 'vor'
 UNKNOWN_TYPE = 'unknown-type'
@@ -164,7 +168,11 @@ class Article(models.Model):
     def __repr__(self):
         return '<Article "%s">' % self
 
+# TODO: rename ArticleJSON to something generic
+# ContentJSON ?
+
 LAX_AJSON, METRICS_SUMMARY = 'lax-ajson', 'elife-metrics-summary'
+PRESSPACKAGE = 'presspackage-id'
 
 def ajson_type_choices():
     return [
@@ -172,7 +180,11 @@ def ajson_type_choices():
         # we don't serve certain dates with the article-json for some reason
         # this means we must do two calls and store two different types of data >:(
         #('lax-version-history', 'lax article version history'),
-        (METRICS_SUMMARY, 'elife-metrics summary data')
+        (METRICS_SUMMARY, 'elife-metrics summary data'),
+
+        # ---
+
+        (PRESSPACKAGE, 'presspackage summary data'),
     ]
 
 class ArticleJSON(models.Model):
@@ -190,3 +202,23 @@ class ArticleJSON(models.Model):
 
     def __repr__(self):
         return '<ArticleJSON "%s">' % self
+
+# TODO - this would require scraping full press package data
+# class PressPackageContact(models.Model):
+#    id = CharField(max_length=150, primary_key=True)
+#    name = CharField(max_length=150)
+
+class PressPackage(models.Model):
+    id = CharField(max_length=8, primary_key=True)
+    title = CharField(max_length=255)
+    published = DateTimeField()
+    subjects = ManyToManyField(Subject, blank=True, help_text="subjects this press package mentions directly")
+    # TODO - this would require scraping full press package data
+    #articles = ManyToManyField(Article, blank=True, help_text="articles this press package mentions directly")
+    #contacts = ManyToManyField(PressPackageContact, blank=True)
+
+    def __str__(self):
+        return self.title
+
+    def __repr__(self):
+        return '<PressPackage %r>' % self.id

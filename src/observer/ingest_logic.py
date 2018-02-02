@@ -415,6 +415,7 @@ def _upsert_metrics_ajson(data):
     version = None
     # big ints in sqlite3 are 64 bits/8 bytes large
     try:
+        # TODO: shift this check elsewhere, db field validation checking perhaps
         ensure(utils.byte_length(data['msid']) <= 8, "bad data encountered, cannot store msid: %s", data['msid'])
         upsert_ajson(data['msid'], version, models.METRICS_SUMMARY, data)
     except AssertionError as err:
@@ -428,6 +429,9 @@ def download_article_metrics(msid):
     except requests.exceptions.RequestException as err:
         LOG.error("failed to fetch page of summaries: %s", err)
 
+#def download_article_metrics(msid):
+#    consume.single("metrics/article/{id}/summary", id=msid)
+        
 def download_all_article_metrics():
     "loads *all* metrics for *all* articles via API"
     # calls `consume` until all results are consumed
@@ -446,6 +450,20 @@ def download_all_article_metrics():
     with transaction.atomic():
         lmap(_upsert_metrics_ajson, results)
     return results
+
+#def download_all_article_metrics():
+#    consume.all("metrics/article/summary")
+
+#
+# presspackages
+#
+
+def download_presspackage(ppid):
+    "download a specific press package"
+    return first(consume.single("presspackage/{id}", id=ppid))
+
+def download_all_presspackages():
+    consume.all("presspackage")
 
 #
 # upsert article-json from file/dir
