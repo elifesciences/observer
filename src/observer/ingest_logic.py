@@ -3,10 +3,9 @@ from functools import partial
 from django.db import transaction
 from et3 import render
 from et3.extract import path as p
-from . import utils, models, logic
+from . import utils, models, logic, consume
 from .utils import lmap, lfilter, create_or_update, delall, first, second, third, ensure
 import logging
-from .consume import consume
 import requests
 
 LOG = logging.getLogger(__name__)
@@ -374,14 +373,14 @@ def regenerate_all():
 
 def mkidx():
     "downloads *all* article snippets to create an msid:version index"
-    ini = consume("articles", {'per-page': 1})
+    ini = consume.consume("articles", {'per-page': 1})
     per_page = 100.0
     num_pages = math.ceil(ini["total"] / per_page)
     msid_ver_idx = {} # ll: {09560: 1, ...}
     LOG.info("%s pages to fetch" % num_pages)
     # for page in range(1, num_pages): # TODO: do we have an off-by-1 here?? shift this pagination into something generic
     for page in range(1, num_pages + 1):
-        resp = consume("articles", {'page': page})
+        resp = consume.consume("articles", {'page': page})
         for snippet in resp["items"]:
             msid_ver_idx[snippet["id"]] = snippet["version"]
     return msid_ver_idx
@@ -391,12 +390,12 @@ def _download_versions(msid, latest_version):
     version_range = range(1, latest_version + 1)
 
     def fetch(version):
-        upsert_ajson(msid, version, models.LAX_AJSON, consume("articles/%s/versions/%s" % (msid, version)))
+        upsert_ajson(msid, version, models.LAX_AJSON, consume.consume("articles/%s/versions/%s" % (msid, version)))
     lmap(fetch, version_range)
 
 def download_article_versions(msid):
     "loads *all* versions of given article via API"
-    resp = consume("articles/%s/versions" % msid)
+    resp = consume.consume("articles/%s/versions" % msid)
     _download_versions(msid, len(resp["versions"]))
 
 def download_all_article_versions():
@@ -424,25 +423,25 @@ def _upsert_metrics_ajson(data):
 def download_article_metrics(msid):
     "loads *all* metrics for *specific* article via API"
     try:
-        data = consume("metrics/article/%s/summary" % msid)
+        data = consume.consume("metrics/article/%s/summary" % msid)
         _upsert_metrics_ajson(data['summaries'][0]) # guaranteed to have either 1 result or 404
     except requests.exceptions.RequestException as err:
         LOG.error("failed to fetch page of summaries: %s", err)
 
-#def download_article_metrics(msid):
+# def download_article_metrics(msid):
 #    consume.single("metrics/article/{id}/summary", id=msid)
-        
+
 def download_all_article_metrics():
     "loads *all* metrics for *all* articles via API"
     # calls `consume` until all results are consumed
-    ini = consume("metrics/article/summary", {'per-page': 1})
+    ini = consume.consume("metrics/article/summary", {'per-page': 1})
     per_page = 100.0
     num_pages = math.ceil(ini["totalArticles"] / per_page)
     LOG.info("%s pages to fetch" % num_pages)
     results = []
     for page in range(1, num_pages + 1):
         try:
-            resp = consume("metrics/article/summary", {'page': page})
+            resp = consume.consume("metrics/article/summary", {'page': page})
             results.extend(resp['summaries'])
         except requests.exceptions.RequestException as err:
             LOG.error("failed to fetch page of summaries: %s", err)
@@ -451,19 +450,26 @@ def download_all_article_metrics():
         lmap(_upsert_metrics_ajson, results)
     return results
 
-#def download_all_article_metrics():
+# def download_all_article_metrics():
 #    consume.all("metrics/article/summary")
 
 #
 # presspackages
 #
 
+def ppidfn(v):
+    try:
+        return int(v['id'], 16)
+    except BaseException as err:
+        raise AssertionError("couldn't extract a press-package ID from %r: %s" % (v, err))
+
 def download_presspackage(ppid):
     "download a specific press package"
-    return first(consume.single("presspackage/{id}", id=ppid))
+    ppidfn({'id': ppid}) # we can validate the given ppid immediately
+    return first(consume.single("press-packages/{id}", ppidfn, id=ppid))
 
 def download_all_presspackages():
-    consume.all("presspackage")
+    consume.all("press-packages", ppidfn)
 
 #
 # upsert article-json from file/dir
