@@ -94,15 +94,15 @@ def paginate_report_results(report, rargs):
 
     return report
 
-#
-# views
-#
-
 def readme_markdown():
     context = {
         'reports': reports.report_meta(),
     }
     return render_to_string('README.md.template', context)
+
+#
+# views
+#
 
 @render_to("landing.html")
 def landing(request):
@@ -110,6 +110,12 @@ def landing(request):
         'html_title': 'Observer - article reports',
         'readme': readme_markdown()
     }
+
+def ping(request):
+    "returns a test response for monitoring, *never* to be cached"
+    resp = HttpResponse('pong', content_type='text/plain; charset=UTF-8')
+    resp['Cache-Control'] = 'must-revalidate, no-cache, no-store, private'
+    return resp
 
 def report(request, name, format_hint=None):
     try:
