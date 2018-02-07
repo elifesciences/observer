@@ -4,7 +4,7 @@ from django.db import transaction
 from et3 import render
 from et3.extract import path as p
 from . import utils, models, logic, consume
-from .utils import lmap, lfilter, create_or_update, delall, first, second, third, ensure
+from .utils import lmap, lfilter, create_or_update, delall, first, second, third, ensure, do_all_atomically
 import logging
 import requests
 
@@ -172,6 +172,10 @@ def pp(*pobjs):
                 continue
     return wrapper
 
+#
+#
+#
+
 AUTHOR_DESC = {
     'type': [p('type')],
     'name': [pp(p('name.preferred'), p('name', None))],
@@ -317,7 +321,7 @@ def extract_children(mush):
     return mush, created_children
 
 
-def _regenerate(msid):
+def _regenerate_article(msid):
     """scrapes the stored article data to (re)generate a models.Article object
 
     don't use this function directly, it has no transaction support
@@ -352,20 +356,16 @@ def _regenerate(msid):
     return artobj # return the final artobj
 
 @transaction.atomic
-def regenerate(msid):
+def regenerate_article(msid):
     "use this when regenerating individual or small numbers of articles."
-    return _regenerate(msid)
+    return _regenerate_article(msid)
 
-def regenerate_many(msid_list, batches_of=25):
+def regenerate_many_articles(msid_list, batches_of=25):
     "commits articles in batches of 25 by default"
-    @transaction.atomic
-    def regen(sub_msid_list):
-        lmap(_regenerate, sub_msid_list)
-        LOG.info("committing %s articles" % len(sub_msid_list))
-    lmap(regen, utils.partition(msid_list, batches_of))
+    do_all_atomically(_regenerate_article, msid_list, batches_of)
 
-def regenerate_all():
-    regenerate_many(logic.known_articles())
+def regenerate_all_articles():
+    regenerate_many_articles(logic.known_articles())
 
 #
 # upsert article-json from api
@@ -457,19 +457,56 @@ def download_all_article_metrics():
 # presspackages
 #
 
-def ppidfn(v):
+# cache
+def ppid(v):
     try:
-        return int(v['id'], 16)
+        return int(v, 16)
     except BaseException as err:
-        raise AssertionError("couldn't extract a press-package ID from %r: %s" % (v, err))
+        raise AssertionError("couldn't generate a press-package ID from %r: %s" % (v, err))
 
-def download_presspackage(ppid):
+def ppidfn(v):
+    return ppid(v['id'])
+
+PP_DESC = {
+    'id': [p('id'), ppid],
+    'idstr': [p('idstr')],
+    'title': [p('title')],
+    'published': [p('published'), todt],
+    'updated': [p('updated'), todt]
+}
+
+def _regenerate_presspackage(id):
+    "creates PressPackage records with no transaction"
+    data = models.ArticleJSON.objects.get(id=ppid(id))
+    mush = render.render_item(PP_DESC, data)
+    return first(create_or_update(models.PressPackage, mush, ['id', 'idstr']))
+
+@transaction.atomic
+def regenerate_presspackage(ppid):
+    return _regenerate_presspackage(ppid)
+
+def regenerate_many_presspackages(ppidlist):
+    return do_all_atomically(_regenerate_presspackage, ppidlist)
+
+def regenerate_all_presspackages():
+    return regenerate_many_presspackages(map(ppid, logic.known_presspackages()))
+
+def download_presspackage(id):
     "download a specific press package"
-    ppidfn({'id': ppid}) # we can validate the given ppid immediately
-    return first(consume.single("press-packages/{id}", ppidfn, id=ppid))
+    ppid(id) # we can validate the given ppid immediately
+    return first(consume.single("press-packages/{id}", ppidfn, id=id))
 
 def download_all_presspackages():
     consume.all("press-packages", ppidfn)
+
+
+#
+#
+#
+
+def regenerate_all():
+    regenerate_all_articles()
+    regenerate_all_presspackages()
 
 #
 # upsert article-json from file/dir
@@ -484,7 +521,7 @@ def file_upsert(path, regen=True, quiet=False):
         article_data = json.load(open(path, 'r'))
         ajson = upsert_ajson(article_data['id'], article_data['version'], models.LAX_AJSON, article_data)[0]
         if regen:
-            regenerate(ajson.msid)
+            regenerate_article(ajson.msid)
         return ajson.msid
     except Exception as err:
         LOG.exception("failed to insert article-json %r: %s", path, err)
@@ -496,4 +533,4 @@ def bulk_file_upsert(article_json_dir):
     "insert/update ArticleJSON from a directory of files"
     paths = sorted(utils.listfiles(article_json_dir, ['.json']))
     msid_list = sorted(set(lmap(partial(file_upsert, regen=False, quiet=True), paths)))
-    return regenerate_many(msid_list)
+    return regenerate_many_articles(msid_list)

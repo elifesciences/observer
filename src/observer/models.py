@@ -209,9 +209,11 @@ class ArticleJSON(models.Model):
 #    name = CharField(max_length=150)
 
 class PressPackage(models.Model):
-    id = CharField(max_length=8, primary_key=True)
+    id = PositiveIntegerField(primary_key=True)
+    idstr = CharField(max_length=8, unique=True, help_text="original stringified hex id of press package")
     title = CharField(max_length=255)
     published = DateTimeField()
+    updated = DateTimeField()
     subjects = ManyToManyField(Subject, blank=True, help_text="subjects this press package mentions directly")
     # TODO - this would require scraping full press package data
     #articles = ManyToManyField(Article, blank=True, help_text="articles this press package mentions directly")
