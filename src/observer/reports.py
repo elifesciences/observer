@@ -105,6 +105,23 @@ def published_research_article_index():
         .order_by('msid') \
         .values_list('msid', 'datetime_poa_published', 'datetime_vor_published')
 
+@report({
+    'title': "profile counts",
+    'description': "Daily record of the total number of profiles",
+    'serialisations': [CSV],
+    'per_page': NO_PAGINATION,
+    'order_by': 'timestamp',
+    'order': DESC,
+    'params': None
+})
+def profile_counts():
+    """
+    the latest profiles count report:
+    * returns -all- articles
+    * ordered by the timestamp it was captured, most recent to least recent
+    """
+    return models.ProfileCount.objects.all()
+
 #
 #
 #
@@ -127,12 +144,14 @@ def known_report_idx():
         ('latest-articles-by-subject', latest_articles_by_subject),
         ('upcoming-articles', upcoming_articles),
         ('published-research-article-index', published_research_article_index),
+        ('profile-counts', profile_counts),
     ])
 
 def _report_meta(reportfn):
     labels = {
         'datetime_version_published': 'date and time this _version_ of article was published',
         'msid': 'eLife manuscript ID',
+        'timestamp': 'date and time this item was inserted',
         DESC: '_most_ recent to least recent',
         ASC: '_least_ recent to most recent'
     }
