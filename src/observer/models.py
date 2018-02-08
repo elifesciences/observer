@@ -190,3 +190,16 @@ class ArticleJSON(models.Model):
 
     def __repr__(self):
         return '<ArticleJSON "%s">' % self
+
+class ProfileCount(models.Model):
+    total = PositiveIntegerField(null=False, blank=False)
+    timestamp = DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ('-timestamp',)
+
+    def __str__(self):
+        return "%s" % self.total
+
+    def __repr__(self):
+        return '<ProfileCount "%s">' % self
