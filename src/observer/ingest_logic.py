@@ -167,7 +167,8 @@ def pp(*pobjs):
         for i, pobj in enumerate(pobjs):
             try:
                 return pobj(data)
-            except BaseException as err:
+            # ./src/observer/ingest_logic.py:170: local variable 'err' is assigned to but never used (removed err)
+            except BaseException:
                 if (i + 1) == len(pobjs): # if this is the last p-obj ..
                     raise # die.
                 continue
@@ -473,3 +474,11 @@ def bulk_file_upsert(article_json_dir):
     paths = sorted(utils.listfiles(article_json_dir, ['.json']))
     msid_list = sorted(set(lmap(partial(file_upsert, regen=False, quiet=True), paths)))
     return regenerate_many(msid_list)
+
+def download_profiles_count():
+    "load profile count data via API"
+    resp = consume("profiles")
+    upsert_profiles_count(resp.get('total', 0))
+
+def upsert_profiles_count(total):
+    return create_or_update(models.ProfileCount, {'total': total})

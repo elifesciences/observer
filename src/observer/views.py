@@ -87,7 +87,9 @@ def paginate_report_results(report, rargs):
     def vals(d, ks):
         return [d[k] for k in ks]
 
-    report['count'], report['items'] = chop(report['items'], *vals(rargs, ['page', 'per_page', 'order']), order_by)
+    # ./src/observer/views.py:90: only named arguments may follow *expression (had to name order_by arg)
+    report['count'], report['items'] = chop(report['items'],
+                                            *vals(rargs, ['page', 'per_page', 'order']), order_by=order_by)
 
     # update the report with any user overrides
     report.update(rargs)
