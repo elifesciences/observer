@@ -167,7 +167,8 @@ def pp(*pobjs):
         for i, pobj in enumerate(pobjs):
             try:
                 return pobj(data)
-            except BaseException as err:
+            # ./src/observer/ingest_logic.py:170: local variable 'err' is assigned to but never used (removed err)
+            except BaseException:
                 if (i + 1) == len(pobjs): # if this is the last p-obj ..
                     raise # die.
                 continue
