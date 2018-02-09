@@ -151,7 +151,7 @@ class PressPackages(BaseCase):
         ppid = "81d42f7d"
         expected = self.jsonfix('presspackages', ppid + '.json')
         with patch('observer.consume.consume', return_value=expected):
-            pp = logic.download_presspackage(id)
+            pp = logic.download_presspackage(ppid)
             self.assertEqual(models.ArticleJSON.objects.count(), 1)
 
         expected_attrs = {
@@ -163,24 +163,12 @@ class PressPackages(BaseCase):
         for attr, expected in expected_attrs.items():
             self.assertEqual(getattr(pp, attr), expected)
 
-    def test_download_single_presspackage_bad_id(self):
-        id = 'ZZZZZ'
-        self.assertRaises(AssertionError, logic.download_presspackage, id)
-
     def test_download_many_presspackages(self):
         expected = self.jsonfix('presspackages', 'many.json')
         expected['total'] = 100
         with patch('observer.consume.consume', return_value=expected):
             logic.download_all_presspackages()
         self.assertEqual(models.ArticleJSON.objects.count(), 100)
-
-    def test_download_many_presspackages_single_bad_id(self):
-        expected = self.jsonfix('presspackages', 'many.json')
-        expected['total'] = 100
-        expected['items'][50]['id'] = 'ZZZZZ'
-        with patch('observer.consume.consume', return_value=expected):
-            logic.download_all_presspackages()
-        self.assertEqual(models.ArticleJSON.objects.count(), 99) # minus one bad egg
 
 
 class AggregateLogic(BaseCase):

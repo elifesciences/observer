@@ -480,10 +480,9 @@ def regenerate_many_presspackages(ppidlist):
 def regenerate_all_presspackages():
     return regenerate_many_presspackages(logic.known_presspackages())
 
-def download_presspackage(id):
+def download_presspackage(ppid):
     "download a specific press package"
-    # hexstr2int(id) # we can validate the given ppid immediately
-    return first(consume.single("press-packages/{id}", id=id))
+    return first(consume.single("press-packages/{id}", id=ppid))
 
 def download_all_presspackages():
     consume.all("press-packages")
