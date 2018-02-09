@@ -218,10 +218,3 @@ def tempdir():
 # TODO: shift this to elife-metrics
 def byte_length(i):
     return ceil(i.bit_length() / 8.0)
-
-# cachable
-def hexstr2int(v):
-    try:
-        return int(v, 16)
-    except BaseException as err:
-        raise AssertionError("couldn't generate an integer from %r: %s" % (v, err))

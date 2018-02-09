@@ -189,9 +189,13 @@ def ajson_type_choices():
         (PROFILE, 'profiles'),
     ]
 
+CTYPE_FORMATTER = {
+    LAX_AJSON: "{obj.msid:05d} v{obj.version}"
+}
+
 class ArticleJSON(models.Model):
-    msid = BigIntegerField()
-    version = PositiveSmallIntegerField(null=True, blank=True)
+    msid = CharField(max_length=25)
+    version = PositiveSmallIntegerField(null=True, blank=True) # only used by Article objects
     ajson = JSONField()
     ajson_type = CharField(max_length=25, choices=ajson_type_choices(), null=False, blank=False)
 
@@ -200,10 +204,13 @@ class ArticleJSON(models.Model):
         ordering = ('-msid', 'version') # [09561 v1, 09561 v2, 09560 v1]
 
     def __str__(self):
-        return "%05d v%s" % (self.msid, self.version)
+        default = "{obj.msid}"
+        string = CTYPE_FORMATTER.get(self.ajson_type, default)
+        return string.format(obj=self)
 
     def __repr__(self):
         return '<ArticleJSON "%s">' % self
+
 
 # TODO - this would require scraping full press package data
 # class PressPackageContact(models.Model):
@@ -211,8 +218,7 @@ class ArticleJSON(models.Model):
 #    name = CharField(max_length=150)
 
 class PressPackage(models.Model):
-    id = PositiveIntegerField(primary_key=True)
-    idstr = CharField(max_length=8, unique=True, help_text="original stringified hex id of press package")
+    id = CharField(max_length=8, primary_key=True)
     title = CharField(max_length=255)
     published = DateTimeField()
     updated = DateTimeField()
@@ -249,6 +255,9 @@ class Profile(models.Model):
     # four groups of four digits seperated by hyphens
     orcid = CharField(max_length=19)
 
+    # WARN: this is data used in reports that cannot be re-created from the API
+    # it doesn't exist anywhere else. all other data in observer can be re-scraped and re-generated except this.
+    # as such, it doesn't belong here but in the profiles db
     datetime_record_created = DateTimeField(auto_now_add=True, help_text="added to the *observer database*, not date of profile creation")
 
     class Meta:

@@ -4,24 +4,18 @@ from observer.utils import first, create_or_update
 
 class One(BaseCase):
     def setUp(self):
-        data = {
-            'msid': 666,
-            'journal_name': 'eLife',
-            'datetime_version_published': '2001-01-01'
-        }
-        self.article = first(create_or_update(models.Article, data, ['msid']))
-
-        data = {'type': 'person', 'name': "John Jameson", "country": "uk"}
-        self.author = first(create_or_update(models.Author, data, ['id']))
-
-        data = {'name': 'pants', 'label': 'Pants'}
-        self.subject = first(create_or_update(models.Subject, data, ['id']))
-
-        data = {'msid': 666, 'version': 1, 'ajson': 'pantsparty'}
-        self.ajson = first(create_or_update(models.ArticleJSON, data, ['id']))
-
         #data = {'total': 12345}
         #self.profile_count = first(create_or_update(models.ProfileCount, data, ['id']))
+
+        data = [
+            ('article', models.Article, {'msid': 666, 'journal_name': 'eLife', 'datetime_version_published': '2001-01-01'}, ['msid']),
+            ('author', models.Author, {'type': 'person', 'name': "John Jameson", "country": "uk"}, ['id']),
+            ('subject', models.Subject, {'name': 'pants', 'label': 'Pants'}, ['id']),
+            ('ajson', models.ArticleJSON, {'msid': 666, 'version': 1, 'ajson': 'pantsparty', 'ajson_type': models.LAX_AJSON}, ['id']),
+        ]
+        for row in data:
+            setattr(self, row[0], first(create_or_update(*row[1:])))
+        
 
     def tearDown(self):
         pass

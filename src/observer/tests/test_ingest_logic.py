@@ -148,15 +148,15 @@ class Metrics(BaseCase):
 
 class PressPackages(BaseCase):
     def test_download_single_presspackage(self):
-        id = "81d42f7d"
-        expected = self.jsonfix('presspackages', id + '.json')
+        ppid = "81d42f7d"
+        expected = self.jsonfix('presspackages', ppid + '.json')
         with patch('observer.consume.consume', return_value=expected):
             pp = logic.download_presspackage(id)
             self.assertEqual(models.ArticleJSON.objects.count(), 1)
 
         expected_attrs = {
             'version': None,
-            'msid': int(id, 16),
+            'msid': ppid,
             'ajson_type': 'press-packages-id',
             'ajson': expected
         }

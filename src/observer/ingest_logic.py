@@ -4,7 +4,7 @@ from django.db import transaction
 from et3 import render
 from et3.extract import path as p
 from . import utils, models, logic, consume
-from .utils import lmap, lfilter, create_or_update, delall, first, second, third, ensure, do_all_atomically, hexstr2int
+from .utils import lmap, lfilter, create_or_update, delall, first, second, third, ensure, do_all_atomically
 import logging
 import requests
 
@@ -458,19 +458,15 @@ def download_all_article_metrics():
 #
 
 PP_DESC = {
-    'id': [p('id'), hexstr2int],
-    'idstr': [p('idstr')],
+    'id': [p('id')],
     'title': [p('title')],
     'published': [p('published'), todt],
     'updated': [p('updated'), todt]
 }
 
-def ppidfn(v):
-    return hexstr2int(v['id'])
-
-def _regenerate_presspackage(id):
+def _regenerate_presspackage(ppid):
     "creates PressPackage records with no transaction"
-    data = models.ArticleJSON.objects.get(id=hexstr2int(id))
+    data = models.ArticleJSON.objects.get(id=ppid)
     mush = render.render_item(PP_DESC, data)
     return first(create_or_update(models.PressPackage, mush, ['id', 'idstr']))
 
@@ -482,15 +478,15 @@ def regenerate_many_presspackages(ppidlist):
     return do_all_atomically(_regenerate_presspackage, ppidlist)
 
 def regenerate_all_presspackages():
-    return regenerate_many_presspackages(map(hexstr2int, logic.known_presspackages()))
+    return regenerate_many_presspackages(logic.known_presspackages())
 
 def download_presspackage(id):
     "download a specific press package"
-    hexstr2int(id) # we can validate the given ppid immediately
-    return first(consume.single("press-packages/{id}", ppidfn, id=id))
+    #hexstr2int(id) # we can validate the given ppid immediately
+    return first(consume.single("press-packages/{id}", id=id))
 
 def download_all_presspackages():
-    consume.all("press-packages", ppidfn)
+    consume.all("press-packages")
 
 
 #
@@ -509,7 +505,7 @@ PF_DESC = {
 }
 
 def _regenerate_profile(pfid):
-    data = models.ArticleJSON.objects.get(id=hexstr2int(id))
+    data = models.ArticleJSON.objects.get(id=pfid)
     mush = render.render_item(PF_DESC, data)
     return first(create_or_update(models.Profile, mush, ['id']))
 
@@ -523,14 +519,11 @@ def regenerate_many_profiles(pfidlist):
 def regenerate_all_profiles():
     return regenerate_many_profiles(logic.known_profiles())
 
-def pfidfn(v):
-    return hexstr2int(v['id'])
-
 def download_profile(pfid):
     return consume.single("profiles/{id}", id=pfid)
 
 def download_all_profiles():
-    return consume.all("profiles", pfidfn)
+    return consume.all("profiles")
 
 '''
 def download_profiles_count():
