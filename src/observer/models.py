@@ -233,21 +233,6 @@ class PressPackage(models.Model):
     def __repr__(self):
         return '<PressPackage %r>' % self.id
 
-'''
-class ProfileCount(models.Model):
-    total = PositiveIntegerField(null=False, blank=False)
-    timestamp = DateTimeField(auto_now_add=True)
-
-    class Meta:
-        ordering = ('-timestamp',)
-
-    def __str__(self):
-        return "%s" % self.total
-
-    def __repr__(self):
-        return '<ProfileCount "%s">' % self
-'''
-
 class Profile(models.Model):
     id = CharField(max_length=8, primary_key=True)
     name = CharField(max_length=255)
@@ -267,4 +252,4 @@ class Profile(models.Model):
         return self.orcid or self.id
 
     def __repr__(self):
-        return "<Profile %r>" % self
+        return '<Profile "%s">' % self
