@@ -11,6 +11,7 @@ import logging
 import tempfile
 import shutil
 from math import ceil
+from django.db import transaction
 
 LOG = logging.getLogger(__name__)
 
@@ -171,6 +172,13 @@ def take(n, items):
 
 def pad_msid(msid):
     return '%05d' % int(msid)
+
+def do_all_atomically(fn, idlist, batches_of=25):
+    @transaction.atomic
+    def _(sub_list):
+        lmap(fn, sub_list)
+        LOG.info("comitting %s objects" % len(sub_list))
+    return lmap(_, partition(idlist, batches_of))
 
 EXCLUDE_ME = 0xDEADBEEF
 
