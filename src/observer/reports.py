@@ -6,6 +6,8 @@ from collections import OrderedDict
 from et3.utils import do_all_if_tuple as mapfn
 from .logic import verified_subjects
 from slugify import slugify
+from django.db.models import Count
+from django.db.models.functions import TruncDay
 
 
 # utils
@@ -104,24 +106,28 @@ def published_research_article_index():
         .exclude(type__in=['article-commentary', 'editorial', 'book-review', 'discussion', 'correction']) \
         .order_by('msid') \
         .values_list('msid', 'datetime_poa_published', 'datetime_vor_published')
-'''
+
 @report({
     'title': "profile counts",
     'description': "Daily record of the total number of profiles",
     'serialisations': [CSV],
     'per_page': NO_PAGINATION,
-    'order_by': 'timestamp',
+    'order_by': 'day',
     'order': DESC,
     'params': None
 })
-def profile_counts():
+def profile_count():
     """
     the latest profiles count report:
-    * returns -all- articles
-    * ordered by the timestamp it was captured, most recent to least recent
+    * returns a daily count of profiles
+    * ordered by the day it was captured, most recent to least recent
     """
-    return models.ProfileCount.objects.all()
-'''
+    return models.Profile.objects \
+        .annotate(day=TruncDay('datetime_record_created')) \
+        .values('day') \
+        .annotate(count=Count('id')) \
+        .order_by()
+
 #
 #
 #
@@ -144,14 +150,14 @@ def known_report_idx():
         ('latest-articles-by-subject', latest_articles_by_subject),
         ('upcoming-articles', upcoming_articles),
         ('published-research-article-index', published_research_article_index),
-        #('profile-counts', profile_counts),
+        ('profile-count', profile_count),
     ])
 
 def _report_meta(reportfn):
     labels = {
         'datetime_version_published': 'date and time this _version_ of article was published',
         'msid': 'eLife manuscript ID',
-        'timestamp': 'date and time this item was inserted',
+        'day': 'year, month and day',
         DESC: '_most_ recent to least recent',
         ASC: '_least_ recent to most recent'
     }

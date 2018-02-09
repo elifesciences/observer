@@ -1,8 +1,10 @@
 import copy
 from .base import BaseCase
-from observer import reports
+from observer import reports, ingest_logic, models
 from django.test import Client
 from django.core.urlresolvers import reverse
+from unittest import mock
+from datetime import datetime, timedelta
 
 class One(BaseCase):
     def setUp(self):
@@ -34,3 +36,20 @@ class One(BaseCase):
         expected_result = copy.deepcopy(meta)
         expected_result['items'] = [1, 2, 3]
         self.assertEqual(foo(), expected_result)
+
+    def test_profile_counts(self):
+        expected = self.jsonfix('profiles', 'many.json')
+        expected['total'] = 100
+        with mock.patch('observer.consume.consume', return_value=expected):
+            ingest_logic.download_all_profiles()
+            ingest_logic.regenerate_all_profiles()
+
+        today = datetime.now()
+        yesterday = today - timedelta(days=1)
+        models.Profile.objects.filter(id="pxl5don5").update(datetime_record_created=yesterday)
+
+        results = reports.profile_count()['items']
+
+        self.assertEqual(len(results), 2) # two groups, yesterday and today
+        self.assertEqual(results[0]['count'], 1) # just the Profile we shifted above
+        self.assertEqual(results[1]['count'], 19) # the result of the fixture

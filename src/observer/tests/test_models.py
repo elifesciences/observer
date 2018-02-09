@@ -15,7 +15,6 @@ class One(BaseCase):
         ]
         for row in data:
             setattr(self, row[0], first(create_or_update(*row[1:])))
-        
 
     def tearDown(self):
         pass

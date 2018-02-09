@@ -127,8 +127,8 @@ def single(endpoint, idfn=None, **kwargs):
 
 def all(endpoint, idfn=None, **kwargs):
     ini = consume(endpoint, {'per-page': 1})
-    per_page = 100.0
-    num_pages = math.ceil(ini["total"] / per_page)
+    per_page = 100
+    num_pages = math.ceil(ini["total"] / float(per_page))
     idfn = idfn or default_idfn
     LOG.info("%s pages to fetch" % num_pages)
 

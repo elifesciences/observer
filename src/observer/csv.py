@@ -53,9 +53,6 @@ def format_dict(row):
 def format_article(art):
     return format_dict(utils.to_dict(art))
 
-def format_profile_count(profiles_count):
-    return format_dict(utils.to_dict(profiles_count))
-
 def format_report(report, context):
     # sniff the result types
     items_qs = report['items']
@@ -70,7 +67,6 @@ def format_report(report, context):
         tuple: format_list,
         dict: format_dict,
         models.Article: format_article,
-        # models.ProfileCount: format_profile_count,
     }
     formatterfn = formatters[type(peek)]
     headers = formatterfn(peek).keys()

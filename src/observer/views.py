@@ -87,7 +87,8 @@ def paginate_report_results(report, rargs):
     def vals(d, ks):
         return [d[k] for k in ks]
 
-    # ./src/observer/views.py:90: only named arguments may follow *expression (had to name order_by arg)
+    # TODO: order_by here is a bit gnarly.
+    # see: https://github.com/elifesciences/elife-metrics/blob/develop/src/metrics/api_v2_logic.py#L7
     report['count'], report['items'] = chop(report['items'],
                                             *vals(rargs, ['page', 'per_page', 'order']), order_by=order_by)
 

@@ -466,7 +466,7 @@ PP_DESC = {
 
 def _regenerate_presspackage(ppid):
     "creates PressPackage records with no transaction"
-    data = models.ArticleJSON.objects.get(id=ppid)
+    data = models.ArticleJSON.objects.get(msid=ppid).ajson
     mush = render.render_item(PP_DESC, data)
     return first(create_or_update(models.PressPackage, mush, ['id', 'idstr']))
 
@@ -482,7 +482,7 @@ def regenerate_all_presspackages():
 
 def download_presspackage(id):
     "download a specific press package"
-    #hexstr2int(id) # we can validate the given ppid immediately
+    # hexstr2int(id) # we can validate the given ppid immediately
     return first(consume.single("press-packages/{id}", id=id))
 
 def download_all_presspackages():
@@ -500,12 +500,12 @@ def trunc(len):
 
 PF_DESC = {
     'id': [p('id')],
-    'orcid': [p('orcid')],
+    'orcid': [p('orcid', None)],
     'name': [p('name'), trunc(255)],
 }
 
 def _regenerate_profile(pfid):
-    data = models.ArticleJSON.objects.get(id=pfid)
+    data = models.ArticleJSON.objects.get(msid=pfid).ajson
     mush = render.render_item(PF_DESC, data)
     return first(create_or_update(models.Profile, mush, ['id']))
 
@@ -524,17 +524,6 @@ def download_profile(pfid):
 
 def download_all_profiles():
     return consume.all("profiles")
-
-'''
-def download_profiles_count():
-    "load profile count data via API"
-    resp = consume.consume("profiles")
-    upsert_profiles_count(resp.get('total', 0))
-
-def upsert_profiles_count(total):
-    return create_or_update(models.ProfileCount, {'total': total})
-
-'''
 
 #
 #

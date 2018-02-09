@@ -253,7 +253,7 @@ class Profile(models.Model):
     name = CharField(max_length=255)
     # https://support.orcid.org/knowledgebase/articles/116780-structure-of-the-orcid-identifier
     # four groups of four digits seperated by hyphens
-    orcid = CharField(max_length=19)
+    orcid = CharField(max_length=19, null=True, blank=True)
 
     # WARN: this is data used in reports that cannot be re-created from the API
     # it doesn't exist anywhere else. all other data in observer can be re-scraped and re-generated except this.
@@ -264,7 +264,7 @@ class Profile(models.Model):
         ordering = ('-datetime_record_created',)
 
     def __str__(self):
-        return self.orcid
+        return self.orcid or self.id
 
     def __repr__(self):
         return "<Profile %r>" % self
