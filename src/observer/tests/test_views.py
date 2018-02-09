@@ -4,7 +4,7 @@ from .base import BaseCase
 from observer import reports, ingest_logic, models, utils
 from django.core.urlresolvers import reverse
 from observer.utils import listfiles, lmap
-from functools import reduce
+from functools import reduce, partial
 
 def http_dummy_params(reportfn):
     param_map = {
@@ -96,8 +96,13 @@ class Three(BaseCase):
 class Four(BaseCase):
     def setUp(self):
         self.c = Client()
-        for path in listfiles(join(self.fixture_dir, 'ajson'), ['.json']):
-            ingest_logic.file_upsert(path)
+
+        fixtures = {
+            models.LAX_AJSON: listfiles(join(self.fixture_dir, 'ajson'), ['.json']),
+            models.PROFILE: [join(self.fixture_dir, 'profiles', 'ssiyns7x.json')]
+        }
+        for group, pathlist in fixtures.items():
+            lmap(partial(ingest_logic.file_upsert, ctype=group, regen=False), pathlist)
         ingest_logic.regenerate_all()
 
     def test_report_format_hint(self):
@@ -142,12 +147,7 @@ class Four(BaseCase):
                 # test the content
                 if format == reports.CSV:
                     # it's a list of strings with commas in it.
-                    try:
-                        list(resp2.streaming_content)[0].decode('utf8').split(',')[0]
-                    except AttributeError:
-                        # AttributeError: 'HttpResponse' object has no attribute 'streaming_content'
-                        # profiles count view currently raises this
-                        pass
+                    list(resp2.streaming_content)[0].decode('utf8').split(',')[0]
                 elif format == reports.RSS:
                     # it's an xml doc
                     prefix = "<?xml version='1.0' encoding='UTF-8'?>"

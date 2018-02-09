@@ -107,15 +107,14 @@ def published_research_article_index():
         .order_by('msid') \
         .values_list('msid', 'datetime_poa_published', 'datetime_vor_published')
 
-@report({
-    'title': "profile counts",
-    'description': "Daily record of the total number of profiles",
-    'serialisations': [CSV],
-    'per_page': NO_PAGINATION,
-    'order_by': 'day',
-    'order': DESC,
-    'params': None
-})
+@report(article_meta(
+    title="daily profile counts",
+    description="Daily record of the total number of profiles",
+    serialisations=[CSV],
+    per_page=NO_PAGINATION,
+    order_by='day',
+    order=DESC
+))
 def profile_count():
     """
     the latest profiles count report:

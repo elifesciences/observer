@@ -532,22 +532,32 @@ def download_all_profiles():
 def regenerate_all():
     regenerate_all_articles()
     regenerate_all_presspackages()
+    regenerate_all_profiles()
 
 #
 # upsert article-json from file/dir
+# this is used mostly for testing. consider shifting there
+# the load_from_fs command isn't really used anymore
 #
 
-def file_upsert(path, regen=True, quiet=False):
+def file_upsert(path, ctype=models.LAX_AJSON, regen=True, quiet=False):
     "insert/update ArticleJSON from a file"
     try:
         if not os.path.isfile(path):
             raise ValueError("can't handle path %r" % path)
         LOG.info('loading %s', path)
         article_data = json.load(open(path, 'r'))
-        ajson = upsert_ajson(article_data['id'], article_data['version'], models.LAX_AJSON, article_data)[0]
-        if regen:
-            regenerate_article(ajson.msid)
+        if ctype == models.LAX_AJSON:
+            ajson = upsert_ajson(article_data['id'], article_data['version'], ctype, article_data)[0]
+            if regen:
+                regenerate_article(ajson.msid)
+        else:
+            ajson = consume.upsert(article_data['id'], ctype, article_data)[0]
+            if regen:
+                regenerate_all()
+
         return ajson.msid
+
     except Exception as err:
         LOG.exception("failed to insert article-json %r: %s", path, err)
         if not quiet:
