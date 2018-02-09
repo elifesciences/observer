@@ -15,6 +15,9 @@ def known_articles():
 def known_presspackages():
     return known_blah(models.PRESSPACKAGE)
 
+def known_profiles():
+    return known_blah(models.PROFILE)
+
 def simple_subjects():
     "returns a flat list of subject names"
     return models.Subject.objects.values_list('name', flat=True) # ['foo', 'bar', 'baz']

@@ -70,7 +70,7 @@ def format_report(report, context):
         tuple: format_list,
         dict: format_dict,
         models.Article: format_article,
-        models.ProfileCount: format_profile_count,
+        #models.ProfileCount: format_profile_count,
     }
     formatterfn = formatters[type(peek)]
     headers = formatterfn(peek).keys()

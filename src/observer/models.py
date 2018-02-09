@@ -173,6 +173,7 @@ class Article(models.Model):
 
 LAX_AJSON, METRICS_SUMMARY = 'lax-ajson', 'elife-metrics-summary'
 PRESSPACKAGE = 'presspackage-id'
+PROFILE = 'profile-id'
 
 def ajson_type_choices():
     return [
@@ -185,6 +186,7 @@ def ajson_type_choices():
         # ---
 
         (PRESSPACKAGE, 'presspackage summary data'),
+        (PROFILE, 'profiles'),
     ]
 
 class ArticleJSON(models.Model):
@@ -225,6 +227,7 @@ class PressPackage(models.Model):
     def __repr__(self):
         return '<PressPackage %r>' % self.id
 
+'''
 class ProfileCount(models.Model):
     total = PositiveIntegerField(null=False, blank=False)
     timestamp = DateTimeField(auto_now_add=True)
@@ -237,3 +240,22 @@ class ProfileCount(models.Model):
 
     def __repr__(self):
         return '<ProfileCount "%s">' % self
+'''
+
+class Profile(models.Model):
+    id = CharField(max_length=8, primary_key=True)
+    name = CharField(max_length=255)
+    # https://support.orcid.org/knowledgebase/articles/116780-structure-of-the-orcid-identifier
+    # four groups of four digits seperated by hyphens
+    orcid = CharField(max_length=19)
+
+    datetime_record_created = DateTimeField(auto_now_add=True, help_text="added to the *observer database*, not date of profile creation")
+
+    class Meta:
+        ordering = ('-datetime_record_created',)
+
+    def __str__(self):
+        return self.orcid
+
+    def __repr__(self):
+        return "<Profile %r>" % self

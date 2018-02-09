@@ -99,6 +99,7 @@ def content_type_from_endpoint(endpoint):
     # we don't store pages of results but individual items
     singular = {
         'press-packages': 'press-package-id',
+        'profiles': 'profile-id',
         #'articles-id-versions': 'articles-id-versions-version', # version history endpoint isn't stored
         'metrics-article-summary': 'metrics-article-id-summary',
     }

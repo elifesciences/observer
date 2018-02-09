@@ -4,7 +4,7 @@ from django.db import transaction
 from et3 import render
 from et3.extract import path as p
 from . import utils, models, logic, consume
-from .utils import lmap, lfilter, create_or_update, delall, first, second, third, ensure, do_all_atomically
+from .utils import lmap, lfilter, create_or_update, delall, first, second, third, ensure, do_all_atomically, hexstr2int
 import logging
 import requests
 
@@ -457,27 +457,20 @@ def download_all_article_metrics():
 # presspackages
 #
 
-# cache
-def ppid(v):
-    try:
-        return int(v, 16)
-    except BaseException as err:
-        raise AssertionError("couldn't generate a press-package ID from %r: %s" % (v, err))
-
-def ppidfn(v):
-    return ppid(v['id'])
-
 PP_DESC = {
-    'id': [p('id'), ppid],
+    'id': [p('id'), hexstr2int],
     'idstr': [p('idstr')],
     'title': [p('title')],
     'published': [p('published'), todt],
     'updated': [p('updated'), todt]
 }
 
+def ppidfn(v):
+    return hexstr2int(v['id'])
+
 def _regenerate_presspackage(id):
     "creates PressPackage records with no transaction"
-    data = models.ArticleJSON.objects.get(id=ppid(id))
+    data = models.ArticleJSON.objects.get(id=hexstr2int(id))
     mush = render.render_item(PP_DESC, data)
     return first(create_or_update(models.PressPackage, mush, ['id', 'idstr']))
 
@@ -489,11 +482,11 @@ def regenerate_many_presspackages(ppidlist):
     return do_all_atomically(_regenerate_presspackage, ppidlist)
 
 def regenerate_all_presspackages():
-    return regenerate_many_presspackages(map(ppid, logic.known_presspackages()))
+    return regenerate_many_presspackages(map(hexstr2int, logic.known_presspackages()))
 
 def download_presspackage(id):
     "download a specific press package"
-    ppid(id) # we can validate the given ppid immediately
+    hexstr2int(id) # we can validate the given ppid immediately
     return first(consume.single("press-packages/{id}", ppidfn, id=id))
 
 def download_all_presspackages():
@@ -502,16 +495,53 @@ def download_all_presspackages():
 
 #
 # profiles
-# 
+#
 
+def trunc(len):
+    def _(v):
+        return str(v)[:len]
+    return _
 
+PF_DESC = {
+    'id': [p('id')],
+    'orcid': [p('orcid')],
+    'name': [p('name'), trunc(255)],
+}
+
+def _regenerate_profile(pfid):
+    data = models.ArticleJSON.objects.get(id=hexstr2int(id))
+    mush = render.render_item(PF_DESC, data)
+    return first(create_or_update(models.Profile, mush, ['id']))
+
+@transaction.atomic
+def regenerate_profile(pfid):
+    return _regenerate_profile(pfid)
+
+def regenerate_many_profiles(pfidlist):
+    return do_all_atomically(_regenerate_profile, pfidlist)
+
+def regenerate_all_profiles():
+    return regenerate_many_profiles(logic.known_profiles())
+
+def pfidfn(v):
+    return hexstr2int(v['id'])
+
+def download_profile(pfid):
+    return consume.single("profiles/{id}", id=pfid)
+
+def download_all_profiles():
+    return consume.all("profiles", pfidfn)
+
+'''
 def download_profiles_count():
     "load profile count data via API"
-    resp = consume("profiles")
+    resp = consume.consume("profiles")
     upsert_profiles_count(resp.get('total', 0))
 
 def upsert_profiles_count(total):
     return create_or_update(models.ProfileCount, {'total': total})
+
+'''
 
 #
 #

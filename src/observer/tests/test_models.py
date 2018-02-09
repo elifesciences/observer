@@ -20,8 +20,8 @@ class One(BaseCase):
         data = {'msid': 666, 'version': 1, 'ajson': 'pantsparty'}
         self.ajson = first(create_or_update(models.ArticleJSON, data, ['id']))
 
-        data = {'total': 12345}
-        self.profile_count = first(create_or_update(models.ProfileCount, data, ['id']))
+        #data = {'total': 12345}
+        #self.profile_count = first(create_or_update(models.ProfileCount, data, ['id']))
 
     def tearDown(self):
         pass
@@ -34,7 +34,7 @@ class One(BaseCase):
             (self.author, '<Author "John Jameson">', 'John Jameson'),
             (self.subject, '<Subject "pants">', 'Pants'),
             (self.ajson, '<ArticleJSON "00666 v1">', "00666 v1"),
-            (self.profile_count, '<ProfileCount "12345">', "12345"),
+            #(self.profile_count, '<ProfileCount "12345">', "12345"),
         ]
         for obj, expected_repr, expected_str in cases:
             self.assertEqual(repr(obj), expected_repr)

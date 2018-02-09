@@ -104,7 +104,7 @@ def published_research_article_index():
         .exclude(type__in=['article-commentary', 'editorial', 'book-review', 'discussion', 'correction']) \
         .order_by('msid') \
         .values_list('msid', 'datetime_poa_published', 'datetime_vor_published')
-
+'''
 @report({
     'title': "profile counts",
     'description': "Daily record of the total number of profiles",
@@ -121,7 +121,7 @@ def profile_counts():
     * ordered by the timestamp it was captured, most recent to least recent
     """
     return models.ProfileCount.objects.all()
-
+'''
 #
 #
 #
@@ -144,7 +144,7 @@ def known_report_idx():
         ('latest-articles-by-subject', latest_articles_by_subject),
         ('upcoming-articles', upcoming_articles),
         ('published-research-article-index', published_research_article_index),
-        ('profile-counts', profile_counts),
+        #('profile-counts', profile_counts),
     ])
 
 def _report_meta(reportfn):
