@@ -170,6 +170,33 @@ class PressPackages(BaseCase):
             logic.download_all_presspackages()
         self.assertEqual(models.ArticleJSON.objects.count(), 100)
 
+        logic.regenerate_all_presspackages()
+        self.assertEqual(models.PressPackage.objects.count(), 100)
+
+
+class ProfileCount(BaseCase):
+    def setUp(self):
+        pass
+
+    def test_download_single_profile(self):
+        pfid = 'ssiyns7x'
+        expected = self.jsonfix('profiles', pfid + '.json')
+        with patch('observer.consume.consume', return_value=expected):
+            logic.download_profile(pfid)
+        self.assertEqual(models.ArticleJSON.objects.count(), 1)
+
+        logic.regenerate_all_profiles()
+        self.assertEqual(models.Profile.objects.count(), 1)
+
+    def test_download_many_profiles(self):
+        expected = self.jsonfix('profiles', 'many.json')
+        expected['total'] = 100
+        with patch('observer.consume.consume', return_value=expected):
+            logic.download_all_profiles()
+        self.assertEqual(models.ArticleJSON.objects.count(), 100)
+
+        logic.regenerate_all_profiles()
+        self.assertEqual(models.Profile.objects.count(), 100)
 
 class AggregateLogic(BaseCase):
     def setUp(self):
@@ -246,14 +273,3 @@ class AggregateLogic(BaseCase):
             for i, subj in enumerate(expected_subjects):
                 actual_subj = getattr(obj, 'subject%s' % (i + 1))
                 self.assertEqual(subj, actual_subj)
-'''
-class ProfileCount(BaseCase):
-    def setUp(self):
-        pass
-
-    def test_profile_count_created(self):
-        COUNT = 12345
-        logic.upsert_profiles_count(COUNT)
-        profile_count = models.ProfileCount.objects.first()
-        self.assertEqual(profile_count.total, COUNT)
-'''

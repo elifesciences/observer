@@ -461,7 +461,7 @@ PP_DESC = {
     'id': [p('id')],
     'title': [p('title')],
     'published': [p('published'), todt],
-    'updated': [p('updated'), todt]
+    'updated': [p('updated', None), todt] # f0114f21 missing an updated date
 }
 
 def _regenerate_presspackage(ppid):

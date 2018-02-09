@@ -52,4 +52,4 @@ class One(BaseCase):
 
         self.assertEqual(len(results), 2) # two groups, yesterday and today
         self.assertEqual(results[0]['count'], 1) # just the Profile we shifted above
-        self.assertEqual(results[1]['count'], 19) # the result of the fixture
+        self.assertEqual(results[1]['count'], 99) # the result of the fixture

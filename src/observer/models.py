@@ -172,8 +172,8 @@ class Article(models.Model):
 # ContentJSON ?
 
 LAX_AJSON, METRICS_SUMMARY = 'lax-ajson', 'elife-metrics-summary'
-PRESSPACKAGE = 'presspackage-id'
-PROFILE = 'profile-id'
+PRESSPACKAGE = 'press-packages-id'
+PROFILE = 'profiles-id'
 
 def ajson_type_choices():
     return [
@@ -221,7 +221,7 @@ class PressPackage(models.Model):
     id = CharField(max_length=8, primary_key=True)
     title = CharField(max_length=255)
     published = DateTimeField()
-    updated = DateTimeField()
+    updated = DateTimeField(blank=True, null=True)
     subjects = ManyToManyField(Subject, blank=True, help_text="subjects this press package mentions directly")
     # TODO - this would require scraping full press package data
     #articles = ManyToManyField(Article, blank=True, help_text="articles this press package mentions directly")

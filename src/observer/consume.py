@@ -87,31 +87,20 @@ def upsert_all(content_type, rows, idfn):
 # generic content consumption
 #
 
+# this whole function is a bit sucky
 def content_type_from_endpoint(endpoint):
-    # /article/id/version/v  => article-obj-version-ver
-    # /article/id/version    => article-obj-version
-    # /article/id            => article-obj
-    # /presspackage          => presspackage
-    # /presspackage/id       => presspackage-obj
-    val = slugify(endpoint) # presspackage/id => presspackage-id
+    val = slugify(endpoint) # press-packages/{id} => press-packages-id
 
-    # many -> single
-    # we don't store pages of results but individual items
-    singular = {
-        'press-packages': 'press-package-id',
-        'profiles': 'profile-id',
-        #'articles-id-versions': 'articles-id-versions-version', # version history endpoint isn't stored
-        'metrics-article-summary': 'metrics-article-id-summary',
-    }
-    val = singular.get(val, val)
-
-    # backsupport
     aliases = {
+        # summary endpoints converted to individual items
+        'profiles': models.PROFILE,
+        'press-packages': models.PRESSPACKAGE,
+
+        # backsupport
         'articles-id-versions-version': models.LAX_AJSON,
-        'metrics-article-id-summary': models.METRICS_SUMMARY
+        'metrics-article-summary': models.METRICS_SUMMARY
     }
     val = aliases.get(val, val)
-
     return val
 
 def single(endpoint, idfn=None, **kwargs):
