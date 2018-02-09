@@ -22,6 +22,8 @@ class Command(BaseCommand):
             dl_profiles = logic.download_all_profiles
             regen = logic.regenerate_all
 
+            # TODO: observer isn't as article-centric any more
+            # this section might need altering
             msidlist = options['msid']
             if msidlist:
                 dl_ajson = partial(lmap, logic.download_article_versions, msidlist)
