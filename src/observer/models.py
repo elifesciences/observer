@@ -235,10 +235,10 @@ class PressPackage(models.Model):
 
 class Profile(models.Model):
     id = CharField(max_length=8, primary_key=True)
-    name = CharField(max_length=255)
+    #name = CharField(max_length=255) # disabled in anticipation of GDPR
     # https://support.orcid.org/knowledgebase/articles/116780-structure-of-the-orcid-identifier
     # four groups of four digits seperated by hyphens
-    orcid = CharField(max_length=19, null=True, blank=True)
+    #orcid = CharField(max_length=19, null=True, blank=True) # disabled in anticipation of GDPR
 
     # WARN: this is data used in reports that cannot be re-created from the API
     # it doesn't exist anywhere else. all other data in observer can be re-scraped and re-generated except this.
@@ -249,7 +249,7 @@ class Profile(models.Model):
         ordering = ('-datetime_record_created',)
 
     def __str__(self):
-        return self.orcid or self.id
+        return self.id
 
     def __repr__(self):
         return '<Profile "%s">' % self

@@ -499,8 +499,9 @@ def trunc(len):
 
 PF_DESC = {
     'id': [p('id')],
-    'orcid': [p('orcid', None)],
-    'name': [p('name'), trunc(255)],
+    # disabled in anticipation of GDPR
+    #'orcid': [p('orcid', None)],
+    #'name': [p('name'), trunc(255)],
 }
 
 def _regenerate_profile(pfid):
