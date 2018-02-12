@@ -2,7 +2,7 @@ from django.views.decorators.cache import patch_cache_control
 from django.utils.cache import patch_vary_headers
 
 MAX_AGE = 60 * 5
-MAX_STALE =  (60 * 60) * 24
+MAX_STALE = (60 * 60) * 24
 
 class DownstreamCaching(object):
     def __init__(self, get_response):

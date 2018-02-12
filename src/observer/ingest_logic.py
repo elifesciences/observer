@@ -447,6 +447,27 @@ def download_all_article_metrics():
         lmap(_upsert_metrics_ajson, results)
     return results
 
+
+#
+#
+#
+
+def download_regenerate_article(msid):
+    try:
+        download_article_versions(msid)
+        regenerate(msid)
+
+    except requests.exceptions.RequestException as err:
+        log = LOG.warn if err.response.status_code == 404 else LOG.error
+        log("failed to fetch article %s: %s", msid, err) # probably an unpublished article.
+
+    except BaseException as err:
+        LOG.exception("unhandled exception attempting to download and regenerate article %s", msid)
+
+def download_regenerate_presspackage(ppid):
+    LOG.info("received updated event for presspackage")
+
+
 #
 # upsert article-json from file/dir
 #

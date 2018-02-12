@@ -117,7 +117,7 @@ DATABASES = {
 #
 
 API_URL = cfg('general.api-url')
-ARTICLE_EVENT_QUEUE = cfg('sqs.queue-name', None) # ll: observer--ci, observer--prod, observer--2017-04-282
+EVENT_QUEUE = cfg('sqs.queue-name', None) # ll: observer--ci, observer--prod, observer--2017-04-282
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
