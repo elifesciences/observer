@@ -1,6 +1,10 @@
 from annoying.fields import JSONField
 from django.db import models
-from django.db.models import BigIntegerField, PositiveSmallIntegerField, PositiveIntegerField, CharField, DateTimeField, TextField, NullBooleanField, EmailField
+from django.db.models import (
+    BigIntegerField, PositiveSmallIntegerField, PositiveIntegerField,
+    CharField, DateTimeField, TextField, NullBooleanField, EmailField,
+    ManyToManyField
+)
 
 POA, VOR = 'poa', 'vor'
 UNKNOWN_TYPE = 'unknown-type'
@@ -164,7 +168,12 @@ class Article(models.Model):
     def __repr__(self):
         return '<Article "%s">' % self
 
+# TODO: rename ArticleJSON to something generic
+# ContentJSON ?
+
 LAX_AJSON, METRICS_SUMMARY = 'lax-ajson', 'elife-metrics-summary'
+PRESSPACKAGE = 'press-packages-id'
+PROFILE = 'profiles-id'
 
 def ajson_type_choices():
     return [
@@ -172,12 +181,21 @@ def ajson_type_choices():
         # we don't serve certain dates with the article-json for some reason
         # this means we must do two calls and store two different types of data >:(
         #('lax-version-history', 'lax article version history'),
-        (METRICS_SUMMARY, 'elife-metrics summary data')
+        (METRICS_SUMMARY, 'elife-metrics summary data'),
+
+        # ---
+
+        (PRESSPACKAGE, 'presspackage summary data'),
+        (PROFILE, 'profiles'),
     ]
 
+CTYPE_FORMATTER = {
+    LAX_AJSON: "{obj.msid:05d} v{obj.version}"
+}
+
 class ArticleJSON(models.Model):
-    msid = BigIntegerField()
-    version = PositiveSmallIntegerField(null=True, blank=True)
+    msid = CharField(max_length=25)
+    version = PositiveSmallIntegerField(null=True, blank=True) # only used by Article objects
     ajson = JSONField()
     ajson_type = CharField(max_length=25, choices=ajson_type_choices(), null=False, blank=False)
 
@@ -186,7 +204,52 @@ class ArticleJSON(models.Model):
         ordering = ('-msid', 'version') # [09561 v1, 09561 v2, 09560 v1]
 
     def __str__(self):
-        return "%05d v%s" % (self.msid, self.version)
+        default = "{obj.msid}"
+        string = CTYPE_FORMATTER.get(self.ajson_type, default)
+        return string.format(obj=self)
 
     def __repr__(self):
         return '<ArticleJSON "%s">' % self
+
+
+# TODO - this would require scraping full press package data
+# class PressPackageContact(models.Model):
+#    id = CharField(max_length=150, primary_key=True)
+#    name = CharField(max_length=150)
+
+class PressPackage(models.Model):
+    id = CharField(max_length=8, primary_key=True)
+    title = CharField(max_length=255)
+    published = DateTimeField()
+    updated = DateTimeField(blank=True, null=True)
+    subjects = ManyToManyField(Subject, blank=True, help_text="subjects this press package mentions directly")
+    # TODO - this would require scraping full press package data
+    #articles = ManyToManyField(Article, blank=True, help_text="articles this press package mentions directly")
+    #contacts = ManyToManyField(PressPackageContact, blank=True)
+
+    def __str__(self):
+        return self.title
+
+    def __repr__(self):
+        return '<PressPackage %r>' % self.id
+
+class Profile(models.Model):
+    id = CharField(max_length=8, primary_key=True)
+    #name = CharField(max_length=255) # disabled in anticipation of GDPR
+    # https://support.orcid.org/knowledgebase/articles/116780-structure-of-the-orcid-identifier
+    # four groups of four digits seperated by hyphens
+    #orcid = CharField(max_length=19, null=True, blank=True) # disabled in anticipation of GDPR
+
+    # WARN: this is data used in reports that cannot be re-created from the API
+    # it doesn't exist anywhere else. all other data in observer can be re-scraped and re-generated except this.
+    # as such, it doesn't belong here but in the profiles db
+    datetime_record_created = DateTimeField(auto_now_add=True, help_text="added to the *observer database*, not date of profile creation")
+
+    class Meta:
+        ordering = ('-datetime_record_created',)
+
+    def __str__(self):
+        return self.id
+
+    def __repr__(self):
+        return '<Profile "%s">' % self

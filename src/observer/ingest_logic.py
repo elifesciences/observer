@@ -3,10 +3,9 @@ from functools import partial
 from django.db import transaction
 from et3 import render
 from et3.extract import path as p
-from . import utils, models, logic
-from .utils import lmap, lfilter, create_or_update, delall, first, second, third, ensure
+from . import utils, models, logic, consume
+from .utils import lmap, lfilter, create_or_update, delall, first, second, third, ensure, do_all_atomically
 import logging
-from .consume import consume
 import requests
 
 LOG = logging.getLogger(__name__)
@@ -167,11 +166,15 @@ def pp(*pobjs):
         for i, pobj in enumerate(pobjs):
             try:
                 return pobj(data)
-            except BaseException as err:
+            except BaseException:
                 if (i + 1) == len(pobjs): # if this is the last p-obj ..
                     raise # die.
                 continue
     return wrapper
+
+#
+#
+#
 
 AUTHOR_DESC = {
     'type': [p('type')],
@@ -318,7 +321,7 @@ def extract_children(mush):
     return mush, created_children
 
 
-def _regenerate(msid):
+def _regenerate_article(msid):
     """scrapes the stored article data to (re)generate a models.Article object
 
     don't use this function directly, it has no transaction support
@@ -353,20 +356,16 @@ def _regenerate(msid):
     return artobj # return the final artobj
 
 @transaction.atomic
-def regenerate(msid):
+def regenerate_article(msid):
     "use this when regenerating individual or small numbers of articles."
-    return _regenerate(msid)
+    return _regenerate_article(msid)
 
-def regenerate_many(msid_list, batches_of=25):
+def regenerate_many_articles(msid_list, batches_of=25):
     "commits articles in batches of 25 by default"
-    @transaction.atomic
-    def regen(sub_msid_list):
-        lmap(_regenerate, sub_msid_list)
-        LOG.info("committing %s articles" % len(sub_msid_list))
-    lmap(regen, utils.partition(msid_list, batches_of))
+    do_all_atomically(_regenerate_article, msid_list, batches_of)
 
-def regenerate_all():
-    regenerate_many(logic.known_articles())
+def regenerate_all_articles():
+    regenerate_many_articles(logic.known_articles())
 
 #
 # upsert article-json from api
@@ -374,14 +373,14 @@ def regenerate_all():
 
 def mkidx():
     "downloads *all* article snippets to create an msid:version index"
-    ini = consume("articles", {'per-page': 1})
+    ini = consume.consume("articles", {'per-page': 1})
     per_page = 100.0
     num_pages = math.ceil(ini["total"] / per_page)
     msid_ver_idx = {} # ll: {09560: 1, ...}
     LOG.info("%s pages to fetch" % num_pages)
     # for page in range(1, num_pages): # TODO: do we have an off-by-1 here?? shift this pagination into something generic
     for page in range(1, num_pages + 1):
-        resp = consume("articles", {'page': page})
+        resp = consume.consume("articles", {'page': page})
         for snippet in resp["items"]:
             msid_ver_idx[snippet["id"]] = snippet["version"]
     return msid_ver_idx
@@ -391,12 +390,12 @@ def _download_versions(msid, latest_version):
     version_range = range(1, latest_version + 1)
 
     def fetch(version):
-        upsert_ajson(msid, version, models.LAX_AJSON, consume("articles/%s/versions/%s" % (msid, version)))
+        upsert_ajson(msid, version, models.LAX_AJSON, consume.consume("articles/%s/versions/%s" % (msid, version)))
     lmap(fetch, version_range)
 
 def download_article_versions(msid):
     "loads *all* versions of given article via API"
-    resp = consume("articles/%s/versions" % msid)
+    resp = consume.consume("articles/%s/versions" % msid)
     _download_versions(msid, len(resp["versions"]))
 
 def download_all_article_versions():
@@ -415,6 +414,7 @@ def _upsert_metrics_ajson(data):
     version = None
     # big ints in sqlite3 are 64 bits/8 bytes large
     try:
+        # TODO: shift this check elsewhere, db field validation checking perhaps
         ensure(utils.byte_length(data['msid']) <= 8, "bad data encountered, cannot store msid: %s", data['msid'])
         upsert_ajson(data['msid'], version, models.METRICS_SUMMARY, data)
     except AssertionError as err:
@@ -423,22 +423,25 @@ def _upsert_metrics_ajson(data):
 def download_article_metrics(msid):
     "loads *all* metrics for *specific* article via API"
     try:
-        data = consume("metrics/article/%s/summary" % msid)
+        data = consume.consume("metrics/article/%s/summary" % msid)
         _upsert_metrics_ajson(data['summaries'][0]) # guaranteed to have either 1 result or 404
     except requests.exceptions.RequestException as err:
         LOG.error("failed to fetch page of summaries: %s", err)
 
+# def download_article_metrics(msid):
+#    consume.single("metrics/article/{id}/summary", id=msid)
+
 def download_all_article_metrics():
     "loads *all* metrics for *all* articles via API"
     # calls `consume` until all results are consumed
-    ini = consume("metrics/article/summary", {'per-page': 1})
+    ini = consume.consume("metrics/article/summary", {'per-page': 1})
     per_page = 100.0
     num_pages = math.ceil(ini["totalArticles"] / per_page)
     LOG.info("%s pages to fetch" % num_pages)
     results = []
     for page in range(1, num_pages + 1):
         try:
-            resp = consume("metrics/article/summary", {'page': page})
+            resp = consume.consume("metrics/article/summary", {'page': page})
             results.extend(resp['summaries'])
         except requests.exceptions.RequestException as err:
             LOG.error("failed to fetch page of summaries: %s", err)
@@ -447,21 +450,114 @@ def download_all_article_metrics():
         lmap(_upsert_metrics_ajson, results)
     return results
 
+# def download_all_article_metrics():
+#    consume.all("metrics/article/summary")
+
 #
-# upsert article-json from file/dir
+# presspackages
 #
 
-def file_upsert(path, regen=True, quiet=False):
+PP_DESC = {
+    'id': [p('id')],
+    'title': [p('title')],
+    'published': [p('published'), todt],
+    'updated': [p('updated', None), todt] # f0114f21 missing an updated date
+}
+
+def _regenerate_presspackage(ppid):
+    "creates PressPackage records with no transaction"
+    data = models.ArticleJSON.objects.get(msid=ppid).ajson
+    mush = render.render_item(PP_DESC, data)
+    return first(create_or_update(models.PressPackage, mush, ['id', 'idstr']))
+
+@transaction.atomic
+def regenerate_presspackage(ppid):
+    return _regenerate_presspackage(ppid)
+
+def regenerate_many_presspackages(ppidlist):
+    return do_all_atomically(_regenerate_presspackage, ppidlist)
+
+def regenerate_all_presspackages():
+    return regenerate_many_presspackages(logic.known_presspackages())
+
+def download_presspackage(ppid):
+    "download a specific press package"
+    return first(consume.single("press-packages/{id}", id=ppid))
+
+def download_all_presspackages():
+    consume.all("press-packages")
+
+
+#
+# profiles
+#
+
+def trunc(len):
+    def _(v):
+        return str(v)[:len]
+    return _
+
+PF_DESC = {
+    'id': [p('id')],
+    # disabled in anticipation of GDPR
+    #'orcid': [p('orcid', None)],
+    #'name': [p('name'), trunc(255)],
+}
+
+def _regenerate_profile(pfid):
+    data = models.ArticleJSON.objects.get(msid=pfid).ajson
+    mush = render.render_item(PF_DESC, data)
+    return first(create_or_update(models.Profile, mush, ['id']))
+
+@transaction.atomic
+def regenerate_profile(pfid):
+    return _regenerate_profile(pfid)
+
+def regenerate_many_profiles(pfidlist):
+    return do_all_atomically(_regenerate_profile, pfidlist)
+
+def regenerate_all_profiles():
+    return regenerate_many_profiles(logic.known_profiles())
+
+def download_profile(pfid):
+    return consume.single("profiles/{id}", id=pfid)
+
+def download_all_profiles():
+    return consume.all("profiles")
+
+#
+#
+#
+
+def regenerate_all():
+    regenerate_all_articles()
+    regenerate_all_presspackages()
+    regenerate_all_profiles()
+
+#
+# upsert article-json from file/dir
+# this is used mostly for testing. consider shifting there
+# the load_from_fs command isn't really used anymore
+#
+
+def file_upsert(path, ctype=models.LAX_AJSON, regen=True, quiet=False):
     "insert/update ArticleJSON from a file"
     try:
         if not os.path.isfile(path):
             raise ValueError("can't handle path %r" % path)
         LOG.info('loading %s', path)
         article_data = json.load(open(path, 'r'))
-        ajson = upsert_ajson(article_data['id'], article_data['version'], models.LAX_AJSON, article_data)[0]
-        if regen:
-            regenerate(ajson.msid)
+        if ctype == models.LAX_AJSON:
+            ajson = upsert_ajson(article_data['id'], article_data['version'], ctype, article_data)[0]
+            if regen:
+                regenerate_article(ajson.msid)
+        else:
+            ajson = consume.upsert(article_data['id'], ctype, article_data)[0]
+            if regen:
+                regenerate_all()
+
         return ajson.msid
+
     except Exception as err:
         LOG.exception("failed to insert article-json %r: %s", path, err)
         if not quiet:
@@ -472,4 +568,4 @@ def bulk_file_upsert(article_json_dir):
     "insert/update ArticleJSON from a directory of files"
     paths = sorted(utils.listfiles(article_json_dir, ['.json']))
     msid_list = sorted(set(lmap(partial(file_upsert, regen=False, quiet=True), paths)))
-    return regenerate_many(msid_list)
+    return regenerate_many_articles(msid_list)
