@@ -1,4 +1,3 @@
-from django.http import HttpResponse
 from collections import OrderedDict
 import itertools
 import csv as csvpy
@@ -61,12 +60,12 @@ def format_report(report, context):
         # no results
         # we could return a 204, but that's more REST-ful
         # and we're making an effort to avoid cleverness here
-        return HttpResponse(status=200)
+        return StreamingHttpResponse([], content_type="text/csv")
 
     formatters = {
         tuple: format_list,
         dict: format_dict,
-        models.Article: format_article
+        models.Article: format_article,
     }
     formatterfn = formatters[type(peek)]
     headers = formatterfn(peek).keys()

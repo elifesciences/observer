@@ -3,7 +3,7 @@ backoff==1.4.3
 boto3==1.4.4
 coverage==4.1
 Django==1.11
-django-annoying==0.10.3
+django-annoying==0.10.4
 et3==1.5
 feedgen==0.5.1
 green==2.5.0

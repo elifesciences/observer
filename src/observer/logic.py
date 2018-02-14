@@ -1,12 +1,22 @@
 # from observer import ingest_logic # DONT DO THIS - circular dependencies.
 from observer import models
 
-def known_articles():
-    "returns a query set of manuscript_ids from newest to oldest"
+def known_content(blah):
     return models.ArticleJSON.objects \
+        .filter(ajson_type=blah) \
         .values_list('msid', flat=True) \
         .order_by('-msid') \
         .distinct()
+
+def known_articles():
+    "returns a query set of manuscript_ids from newest to oldest"
+    return known_content(models.LAX_AJSON)
+
+def known_presspackages():
+    return known_content(models.PRESSPACKAGE)
+
+def known_profiles():
+    return known_content(models.PROFILE)
 
 def simple_subjects():
     "returns a flat list of subject names"

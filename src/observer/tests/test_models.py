@@ -4,21 +4,16 @@ from observer.utils import first, create_or_update
 
 class One(BaseCase):
     def setUp(self):
-        data = {
-            'msid': 666,
-            'journal_name': 'eLife',
-            'datetime_version_published': '2001-01-01'
-        }
-        self.article = first(create_or_update(models.Article, data, ['msid']))
-
-        data = {'type': 'person', 'name': "John Jameson", "country": "uk"}
-        self.author = first(create_or_update(models.Author, data, ['id']))
-
-        data = {'name': 'pants', 'label': 'Pants'}
-        self.subject = first(create_or_update(models.Subject, data, ['id']))
-
-        data = {'msid': 666, 'version': 1, 'ajson': 'pantsparty'}
-        self.ajson = first(create_or_update(models.ArticleJSON, data, ['id']))
+        data = [
+            ('article', models.Article, {'msid': 666, 'journal_name': 'eLife', 'datetime_version_published': '2001-01-01'}, ['msid']),
+            ('author', models.Author, {'type': 'person', 'name': "John Jameson", "country": "uk"}, ['id']),
+            ('subject', models.Subject, {'name': 'pants', 'label': 'Pants'}, ['id']),
+            ('ajson', models.ArticleJSON, {'msid': 666, 'version': 1, 'ajson': 'pantsparty', 'ajson_type': models.LAX_AJSON}, ['id']),
+            #('profile', models.Profile, {'id': 'foo', 'name': 'Bar', 'orcid': "0000-0001-5910-5972"}, ['id']),
+            ('profile', models.Profile, {'id': 'foo'}, ['id']),
+        ]
+        for row in data:
+            setattr(self, row[0], first(create_or_update(*row[1:])))
 
     def tearDown(self):
         pass
@@ -31,6 +26,8 @@ class One(BaseCase):
             (self.author, '<Author "John Jameson">', 'John Jameson'),
             (self.subject, '<Subject "pants">', 'Pants'),
             (self.ajson, '<ArticleJSON "00666 v1">', "00666 v1"),
+            #(self.profile, '<Profile "0000-0001-5910-5972">', "0000-0001-5910-5972"),
+            (self.profile, '<Profile "foo">', "foo"),
         ]
         for obj, expected_repr, expected_str in cases:
             self.assertEqual(repr(obj), expected_repr)
