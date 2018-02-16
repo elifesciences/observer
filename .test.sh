@@ -33,7 +33,7 @@ if [ $print_coverage -eq 1 ]; then
     coverage report
     # is only run if tests pass
     covered=$(coverage report | grep TOTAL | awk '{print $4}' | sed 's/%//')
-    if [ $covered -lt 80 ]; then
+    if [ $covered -lt 79 ]; then
         coverage html
         echo
         echo -e "\e[31mFAILED\e[0m this project requires at least 80% coverage, got $covered"
