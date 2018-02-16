@@ -549,7 +549,17 @@ def download_regenerate_article(msid):
         LOG.exception("unhandled exception attempting to download and regenerate article %s", msid)
 
 def download_regenerate_presspackage(ppid):
-    LOG.info("received updated event for presspackage")
+    try:
+        LOG.info("update event for presspackage %s", ppid)
+        download_presspackage(ppid)
+        regenerate_presspackage(ppid)
+
+    except requests.exceptions.RequestException as err:
+        log = LOG.warn if err.response.status_code == 404 else LOG.error
+        log("failed to fetch presspackage %s: %s", ppid, err) # probably an unpublished presspackage ...?
+
+    except BaseException as err:
+        LOG.exception("unhandled exception attempting to download and regenerate presspackage %s", ppid)
 
 
 #
