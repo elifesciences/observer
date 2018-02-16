@@ -71,6 +71,29 @@ class LogicFns(BaseCase):
         case = pp(p('foo.baz'), p('bar.foo'))
         self.assertRaises(KeyError, case, struct)
 
+class Article(BaseCase):
+    def setUp(self):
+        pass
+
+    def test_upsert_ajson_msid_type(self):
+        "integer and string values for msid are supported"
+        ajson = {}
+        cases = [
+            # msid, version, type, data
+            (1234, 1, models.LAX_AJSON, ajson), # integer msid
+            ('1234', 1, models.LAX_AJSON, ajson), # string msid
+
+            (720609628398071589300, 1, models.LAX_AJSON, ajson),
+            ('720609628398071589300', 1, models.LAX_AJSON, ajson),
+        ]
+        for args in cases:
+            logic.upsert_ajson(*args)
+        self.assertEqual(2, models.ArticleJSON.objects.count())
+
+#
+#
+#
+
 class Subjects(BaseCase):
     def setUp(self):
         pass

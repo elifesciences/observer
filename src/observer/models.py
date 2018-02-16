@@ -189,10 +189,6 @@ def ajson_type_choices():
         (PROFILE, 'profiles'),
     ]
 
-CTYPE_FORMATTER = {
-    LAX_AJSON: "{obj.msid:05d} v{obj.version}"
-}
-
 class ArticleJSON(models.Model):
     msid = CharField(max_length=25)
     version = PositiveSmallIntegerField(null=True, blank=True) # only used by Article objects
@@ -204,9 +200,9 @@ class ArticleJSON(models.Model):
         ordering = ('-msid', 'version') # [09561 v1, 09561 v2, 09560 v1]
 
     def __str__(self):
-        default = "{obj.msid}"
-        string = CTYPE_FORMATTER.get(self.ajson_type, default)
-        return string.format(obj=self)
+        if self.ajson_type == LAX_AJSON:
+            return "{msid:05d} v{version}".format(msid=int(self.msid), version=self.version)
+        return "{obj.msid}".format(obj=self)
 
     def __repr__(self):
         return '<ArticleJSON "%s">' % self
@@ -235,10 +231,10 @@ class PressPackage(models.Model):
 
 class Profile(models.Model):
     id = CharField(max_length=8, primary_key=True)
-    #name = CharField(max_length=255) # disabled in anticipation of GDPR
+    # name = CharField(max_length=255) # disabled in anticipation of GDPR
     # https://support.orcid.org/knowledgebase/articles/116780-structure-of-the-orcid-identifier
     # four groups of four digits seperated by hyphens
-    #orcid = CharField(max_length=19, null=True, blank=True) # disabled in anticipation of GDPR
+    # orcid = CharField(max_length=19, null=True, blank=True) # disabled in anticipation of GDPR
 
     # WARN: this is data used in reports that cannot be re-created from the API
     # it doesn't exist anywhere else. all other data in observer can be re-scraped and re-generated except this.

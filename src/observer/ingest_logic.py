@@ -289,7 +289,7 @@ def article_presave_checks(given_data, flat_data):
 def upsert_ajson(msid, version, data_type, article_data):
     "insert/update ArticleJSON from a dictionary of article data"
     article_data = {
-        'msid': msid,
+        'msid': str(msid),
         'version': version,
         'ajson': article_data,
         'ajson_type': data_type
@@ -324,19 +324,17 @@ def extract_children(mush):
 def _regenerate_article(msid):
     """scrapes the stored article data to (re)generate a models.Article object
 
-    don't use this function directly, it has no transaction support
-    """
+    don't use this function directly, it has no transaction support"""
 
     models.Article.objects.filter(msid=msid).delete() # destroy what we have
-
     try:
-        metrics_data = models.ArticleJSON.objects.get(msid=msid, ajson_type=models.METRICS_SUMMARY).ajson
+        metrics_data = models.ArticleJSON.objects.get(msid=str(msid), ajson_type=models.METRICS_SUMMARY).ajson
     except models.ArticleJSON.DoesNotExist:
         metrics_data = {}
 
     # iterate through each of the versions of the article json we have from lax, lowest to highest
     children, artobj = {}, None
-    for ajson in models.ArticleJSON.objects.filter(msid=msid, ajson_type=models.LAX_AJSON).order_by('version'): # ASC
+    for ajson in models.ArticleJSON.objects.filter(msid=str(msid), ajson_type=models.LAX_AJSON).order_by('version'): # ASC
         article_data = ajson.ajson
         LOG.info('regenerating %s v%s' % (article_data['id'], article_data['version']))
         mush = flatten_article_json(article_data, metrics=metrics_data)
@@ -386,7 +384,7 @@ def mkidx():
     return msid_ver_idx
 
 def _download_versions(msid, latest_version):
-    LOG.info(' %s versions to fetch' % latest_version)
+    LOG.info('%s versions to fetch' % latest_version)
     version_range = range(1, latest_version + 1)
 
     def fetch(version):
@@ -533,6 +531,36 @@ def regenerate_all():
     regenerate_all_articles()
     regenerate_all_presspackages()
     regenerate_all_profiles()
+
+#
+#
+#
+
+def download_regenerate_article(msid):
+    try:
+        download_article_versions(msid)
+        regenerate_article(msid)
+
+    except requests.exceptions.RequestException as err:
+        log = LOG.warn if err.response.status_code == 404 else LOG.error
+        log("failed to fetch article %s: %s", msid, err) # probably an unpublished article.
+
+    except BaseException as err:
+        LOG.exception("unhandled exception attempting to download and regenerate article %s", msid)
+
+def download_regenerate_presspackage(ppid):
+    try:
+        LOG.info("update event for presspackage %s", ppid)
+        download_presspackage(ppid)
+        regenerate_presspackage(ppid)
+
+    except requests.exceptions.RequestException as err:
+        log = LOG.warn if err.response.status_code == 404 else LOG.error
+        log("failed to fetch presspackage %s: %s", ppid, err) # probably an unpublished presspackage ...?
+
+    except BaseException as err:
+        LOG.exception("unhandled exception attempting to download and regenerate presspackage %s", ppid)
+
 
 #
 # upsert article-json from file/dir
