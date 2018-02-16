@@ -21,7 +21,8 @@ class Command(BaseCommand):
             try:
                 LOG.debug("handling event %s" % event)
                 event = json.loads(event)
-                objid = event['id']
+                # rule: event id will always be a string
+                objid = str(event['id'])
                 handlers = {
                     'article': download_regenerate_article,
                     'presspackage': download_regenerate_presspackage,

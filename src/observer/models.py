@@ -189,10 +189,6 @@ def ajson_type_choices():
         (PROFILE, 'profiles'),
     ]
 
-CTYPE_FORMATTER = {
-    LAX_AJSON: "{obj.msid:05d} v{obj.version}"
-}
-
 class ArticleJSON(models.Model):
     msid = CharField(max_length=25)
     version = PositiveSmallIntegerField(null=True, blank=True) # only used by Article objects
@@ -204,9 +200,9 @@ class ArticleJSON(models.Model):
         ordering = ('-msid', 'version') # [09561 v1, 09561 v2, 09560 v1]
 
     def __str__(self):
-        default = "{obj.msid}"
-        string = CTYPE_FORMATTER.get(self.ajson_type, default)
-        return string.format(obj=self)
+        if self.ajson_type == LAX_AJSON:
+            return "{msid:05d} v{version}".format(msid=int(self.msid), version=self.version)
+        return "{obj.msid}".format(obj=self)
 
     def __repr__(self):
         return '<ArticleJSON "%s">' % self

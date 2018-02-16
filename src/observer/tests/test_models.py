@@ -13,7 +13,8 @@ class One(BaseCase):
             ('profile', models.Profile, {'id': 'foo'}, ['id']),
         ]
         for row in data:
-            setattr(self, row[0], first(create_or_update(*row[1:])))
+            obj = first(create_or_update(*row[1:]))
+            setattr(self, row[0], self.freshen(obj))
 
     def tearDown(self):
         pass
