@@ -27,3 +27,7 @@ function scrape {
 }
 
 scrape ajson elife-13964- elife-14850- elife-15378- elife-18675- elife-20125-v1
+
+echo "fetching presspackages"
+curl -s https://api.elifesciences.org/press-packages?per-page=100 | jq . > presspackages/many.json
+curl -s https://api.elifesciences.org/press-packages/81d42f7d | jq . > presspackages/81d42f7d.json
