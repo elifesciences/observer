@@ -30,7 +30,7 @@ class Command(BaseCommand):
                 dl_metrics = partial(lmap, logic.download_article_metrics, msidlist)
                 # dl_presspackages = ...
                 # dl_profiles = ...
-                regen = partial(lmap, logic.regenerate, msidlist)
+                regen = partial(lmap, logic.regenerate_article, msidlist)
 
             targets = OrderedDict([
                 (LAX, dl_ajson),
