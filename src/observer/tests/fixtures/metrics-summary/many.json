@@ -1,5 +1,5 @@
 {
-  "summaries": [
+  "items": [
     {
       "msid": 90560,
       "views": 11,
@@ -801,5 +801,5 @@
       "scopus": 0
     }
   ],
-  "totalArticles": 100
+  "total": 100
 }
