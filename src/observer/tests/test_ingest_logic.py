@@ -152,7 +152,7 @@ class Metrics(BaseCase):
 
     def test_metrics_summary_consume(self):
         "an article's metrics summary can be downloaded and turned into ArticleJSON"
-        expected = {"summaries": [{"msid": 9560, "views": 227161, "downloads": 16443, "crossref": 101, "pubmed": 21, "scopus": 52}], "totalArticles": 1}
+        expected = {"items": [{"msid": 9560, "views": 227161, "downloads": 16443, "crossref": 101, "pubmed": 21, "scopus": 52}], "total": 1}
         self.assertEqual(0, models.ArticleJSON.objects.count())
         with patch('observer.consume.consume', return_value=expected):
             logic.download_article_metrics(9560)
