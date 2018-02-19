@@ -125,7 +125,7 @@ def profile_count():
         .annotate(day=TruncDay('datetime_record_created')) \
         .values('day') \
         .annotate(count=Count('id')) \
-        .order_by()
+        .order_by('-day')
 
 #
 #
