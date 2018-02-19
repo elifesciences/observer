@@ -413,8 +413,8 @@ def _upsert_metrics_ajson(data):
     # big ints in sqlite3 are 64 bits/8 bytes large
     try:
         # TODO: shift this check elsewhere, db field validation checking perhaps
-        ensure(utils.byte_length(data['msid']) <= 8, "bad data encountered, cannot store msid: %s", data['msid'])
-        upsert_ajson(data['msid'], version, models.METRICS_SUMMARY, data)
+        ensure(utils.byte_length(data['id']) <= 8, "bad data encountered, cannot store msid: %s", data['id'])
+        upsert_ajson(data['id'], version, models.METRICS_SUMMARY, data)
     except AssertionError as err:
         LOG.error(err)
 
