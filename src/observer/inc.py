@@ -1,5 +1,10 @@
+import json
 import boto3
 import logging
+from .ingest_logic import (
+    download_regenerate_article,
+    download_regenerate_presspackage
+)
 
 # tell boto to pipe down
 logging.getLogger('botocore').setLevel(logging.WARN)
@@ -39,3 +44,31 @@ def poll(queue_obj):
         finally:
             # failing while handling a message will see the message deleted regardless
             message.delete()
+
+def handler(json_event):
+    try:
+        # parse event
+        LOG.info("handling event %s" % json_event)
+        event = json.loads(json_event)
+        # rule: event id will always be a string
+        event_id, event_type = event['id'], event['type']
+        event_id = str(event_id)
+    except (KeyError, ValueError):
+        LOG.error("skipping unparseable event: %s", str(json_event)[:50])
+        return None # important
+
+    try:
+        # process event
+        handlers = {
+            'article': download_regenerate_article,
+            'presspackage': download_regenerate_presspackage,
+
+            '-unhandled-': lambda _: LOG.warn("sinking event for unhandled type: %s", event_type),
+        }
+        fn = handlers[event_type if event_type in handlers else '-unhandled-']
+        fn(event_id)
+
+    except BaseException as err:
+        LOG.exception("unhandled exception handling event %s", event)
+
+    return None # important, ensures results don't accumulate
