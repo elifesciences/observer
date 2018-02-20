@@ -413,8 +413,8 @@ def _upsert_metrics_ajson(data):
     # big ints in sqlite3 are 64 bits/8 bytes large
     try:
         # TODO: shift this check elsewhere, db field validation checking perhaps
-        ensure(utils.byte_length(data['msid']) <= 8, "bad data encountered, cannot store msid: %s", data['msid'])
-        upsert_ajson(data['msid'], version, models.METRICS_SUMMARY, data)
+        ensure(utils.byte_length(data['id']) <= 8, "bad data encountered, cannot store msid: %s", data['id'])
+        upsert_ajson(data['id'], version, models.METRICS_SUMMARY, data)
     except AssertionError as err:
         LOG.error(err)
 
@@ -422,7 +422,7 @@ def download_article_metrics(msid):
     "loads *all* metrics for *specific* article via API"
     try:
         data = consume.consume("metrics/article/%s/summary" % msid)
-        _upsert_metrics_ajson(data['summaries'][0]) # guaranteed to have either 1 result or 404
+        _upsert_metrics_ajson(data['items'][0]) # guaranteed to have either 1 result or 404
     except requests.exceptions.RequestException as err:
         LOG.error("failed to fetch page of summaries: %s", err)
 
@@ -434,13 +434,13 @@ def download_all_article_metrics():
     # calls `consume` until all results are consumed
     ini = consume.consume("metrics/article/summary", {'per-page': 1})
     per_page = 100.0
-    num_pages = math.ceil(ini["totalArticles"] / per_page)
+    num_pages = math.ceil(ini["total"] / per_page)
     LOG.info("%s pages to fetch" % num_pages)
     results = []
     for page in range(1, num_pages + 1):
         try:
             resp = consume.consume("metrics/article/summary", {'page': page})
-            results.extend(resp['summaries'])
+            results.extend(resp['items'])
         except requests.exceptions.RequestException as err:
             LOG.error("failed to fetch page of summaries: %s", err)
 

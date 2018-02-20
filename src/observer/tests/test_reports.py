@@ -1,6 +1,6 @@
 import copy
 from .base import BaseCase
-from observer import reports, ingest_logic, models
+from observer import reports, ingest_logic, models, utils
 from django.test import Client
 from django.core.urlresolvers import reverse
 from unittest import mock
@@ -48,8 +48,12 @@ class One(BaseCase):
         yesterday = today - timedelta(days=1)
         models.Profile.objects.filter(id="pxl5don5").update(datetime_record_created=yesterday)
 
-        results = reports.profile_count()['items']
+        results = [(utils.ymd(x['day']), x['count']) for x in reports.profile_count()['items']]
 
         self.assertEqual(len(results), 2) # two groups, yesterday and today
-        self.assertEqual(results[0]['count'], 1) # just the Profile we shifted above
-        self.assertEqual(results[1]['count'], 99) # the result of the fixture
+
+        expected = [
+            (utils.ymd(today), 99), # most recent
+            (utils.ymd(yesterday), 1), # least recent
+        ]
+        self.assertEqual(expected, results)

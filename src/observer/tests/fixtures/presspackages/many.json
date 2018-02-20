@@ -1,1 +1,1325 @@
-{"total":122,"items":[{"id":"81d42f7d","title":"eLife enhances open annotation with Hypothesis to promote scientific discussion online","published":"2018-01-31T12:22:03Z","impactStatement":"The open-source Hypothesis software has been extensively customised for use by eLife and other publishers, with new features giving publishers more control over its implementation on their sites."},{"id":"555af7fa","title":"Study suggests new approach for targeting cancer-causing protein, RAS: attack from outside the cell","published":"2018-01-23T17:46:37Z","impactStatement":"Attacking mutated RAS proteins on cancer cells from the outside-in could be a viable therapeutic approach for previously \u2018undruggable\u2019 cancer targets.","subjects":[{"id":"biochemistry","name":"Biochemistry"},{"id":"cancer-biology","name":"Cancer Biology"}]},{"id":"0a33d264","title":"Mosquito bite frequency influences malaria spread","published":"2018-01-23T17:39:10Z","impactStatement":"New study suggests variation in the frequency of mosquito bites within regions and even households is likely to play a key role in the success of malaria control efforts.","subjects":[{"id":"epidemiology-global-health","name":"Epidemiology and Global Health"}]},{"id":"3219867b","title":"Can we develop new topical drugs by learning how our skin communicates with the nervous system?","published":"2018-01-16T16:50:59Z","impactStatement":"Researchers shed new light on the communication between our skin, nerve cells and brain that gives us our sense of touch.","subjects":[{"id":"neuroscience","name":"Neuroscience"}]},{"id":"bd74e3b6","title":"Genetic analysis predicts future threat from MERS virus","published":"2018-01-16T16:40:36Z","impactStatement":"While Middle East respiratory syndrome coronavirus (MERS-CoV) does not appear to present an imminent global threat, researchers encourage continued genomic surveillance of the virus.","subjects":[{"id":"epidemiology-global-health","name":"Epidemiology and Global Health"},{"id":"genomics-evolutionary-biology","name":"Genomics and Evolutionary Biology"}]},{"id":"db666e95","title":"eLife welcomes early-career researcher to its Board of Directors","published":"2018-01-11T09:52:21Z","impactStatement":"The new board member will help oversee the strategic direction of eLife and support the organisation in its mission."},{"id":"b3368dfe","title":"Study finds cancer cells manipulate fat metabolism for survival","published":"2017-12-19T15:49:21Z","impactStatement":"Discovery of new survival strategy in tumour cells reveals potential drug target for future cancer treatments.","subjects":[{"id":"biochemistry","name":"Biochemistry"},{"id":"cancer-biology","name":"Cancer Biology"}]},{"id":"93da95fe","title":"New insight into unique plant chemical could inform future drug development","published":"2017-12-12T23:18:40Z","impactStatement":"Study addresses the question of how natural plant chemicals called glucosinolates evolve the ability to interact with genes in humans.","subjects":[{"id":"genomics-evolutionary-biology","name":"Genomics and Evolutionary Biology"},{"id":"plant-biology","name":"Plant Biology"}]},{"id":"581e811f","title":"Live 3D imaging highlights cellular activity during embryonic heart development","published":"2017-12-05T16:18:46Z","impactStatement":"Imaging technique reveals three phases of heart-tube formation in mouse embryos, and could help increase our\u003Cspan lang=\u0022EN\u0022 xml:lang=\u0022EN\u0022\u003E\u003Cspan\u003E\u003Cspan\u003E understanding of normal heart development and how abnormalities occur in newborns.\u003C\/span\u003E\u003C\/span\u003E\u003C\/span\u003E","subjects":[{"id":"developmental-biology-stem-cells","name":"Developmental Biology and Stem Cells"}]},{"id":"6531a9a9","title":"Scientists show migration boosts survival in songbirds","published":"2017-11-21T13:58:58Z","impactStatement":"Study provides important new insights on the evolution of migration in blackbirds.","subjects":[{"id":"ecology","name":"Ecology"}]},{"id":"cbbbb7ff","title":"New gene expression analysis paves way for improved disease diagnosis and treatment","published":"2017-11-14T13:35:03Z","impactStatement":"Study provides new insight on the deficiency of a biological process called oxidative phosphorylation and could aid in future diagnosis and treatment strategies.","subjects":[{"id":"biochemistry","name":"Biochemistry"},{"id":"cell-biology","name":"Cell Biology"}]},{"id":"63ec1698","title":"eLife welcomes the Knut and Alice Wallenberg Foundation as a new funder-partner","published":"2017-11-09T12:52:36Z","impactStatement":"Leading Swedish research funder joins nonprofit coalition."},{"id":"c3e19811","title":"New model of newborn gut development reveals crucial role of microbiota","published":"2017-11-07T17:01:12Z","impactStatement":"A new system reproduces the physiology of the immature human intestine, enabling research into a range of host-microbe interactions to understand their role in health and disease.","subjects":[{"id":"developmental-biology-stem-cells","name":"Developmental Biology and Stem Cells"},{"id":"microbiology-infectious-disease","name":"Microbiology and Infectious Disease"}]},{"id":"0820e5dd","title":"Slight electrical brain stimulation strengthens human memory","published":"2017-10-24T11:13:31Z","updated":"2017-10-25T11:13:31Z","impactStatement":"Evidence that low-current electrical stimulation can enhance our memory could pave the way for treating patients with chronic memory impairment.","subjects":[{"id":"human-biology-medicine","name":"Human Biology and Medicine"},{"id":"neuroscience","name":"Neuroscience"}]},{"id":"a3bfe7f2","title":"eLife welcomes new Chair of its Early-Career Advisory Group","published":"2017-09-27T13:37:34Z","impactStatement":"The new Chair will help ensure the voice of junior researchers continues to be heard within the organisation."},{"id":"67d013c4","title":"eLife and Collaborative Knowledge Foundation partner to deliver open-source submission and peer-review platform","published":"2017-09-20T13:05:13Z","impactStatement":"The new platform will help streamline communications between authors, editors and reviewers at all stages of the submission and review process."},{"id":"e6038800","title":"eLife supports development of open technology stack for publishing reproducible manuscripts online","published":"2017-09-07T09:45:14Z","impactStatement":"The Reproducible Document Stack will ultimately allow authors to submit their manuscripts in a format that includes embedded code blocks and computed outputs, and for publishers to preserve these assets in an enhanced version of the published online article."},{"id":"e6156bde","title":"Intensive workouts boost children\u2019s brains","published":"2017-08-22T16:33:23Z","impactStatement":"A new study reveals that short bursts of high-intensity exercise can improve working memory and cognitive control in children.","subjects":[{"id":"human-biology-medicine","name":"Human Biology and Medicine"},{"id":"neuroscience","name":"Neuroscience"}]},{"id":"779a3695","title":"Gut microbes influence life expectancy","published":"2017-08-22T16:17:39Z","impactStatement":"Researchers reveal that transplanting gut bacteria from young African turquoise killifish into middle-aged fish increases the longevity of these animals, presenting a potential new intervention to enhance lifespan in other organisms.","subjects":[{"id":"genomics-evolutionary-biology","name":"Genomics and Evolutionary Biology"},{"id":"microbiology-infectious-disease","name":"Microbiology and Infectious Disease"}]},{"id":"d635008f","title":"Major database mining project seeks to improve drug side effect reporting","published":"2017-08-08T21:46:34Z","impactStatement":"New research shows that while FAERS provides a solid frame for reporting, it also contains redundancies and biases that affect the ability to analyse and interpret the data.","subjects":[{"id":"human-biology-medicine","name":"Human Biology and Medicine"}]},{"id":"aa251902","title":"Heartbeats could hold key to understanding babies\u2019 inner world","published":"2017-08-08T13:28:00Z","impactStatement":"A novel experiment reveals that babies as young as five months old are aware of their own heartbeats.","subjects":[{"id":"neuroscience","name":"Neuroscience"}]},{"id":"b206e2ae","title":"Knee joint signals bones to grow","published":"2017-07-25T14:49:12Z","impactStatement":"Researchers suggest neighboring cells in nearby joints help control bone growth in mice.","subjects":[{"id":"developmental-biology-stem-cells","name":"Developmental Biology and Stem Cells"}]},{"id":"f87f62a7","title":"eLife joins Substance Consortium to support development of open-source online content-editing tools","published":"2017-07-24T12:59:17Z","impactStatement":"By joining the consortium, eLife will support the introduction of innovative new tools to help expand the current online open scholarly infrastructure."},{"id":"9eb16f1c","title":"Availability of open reference data nears 50% as major societies and influential publishers endorse the Initiative for Open Citations","published":"2017-07-11T15:27:30Z","impactStatement":"In the three months following the Initiative for Open Citations\u0027 launch, the percentage of articles with open reference data has moved from 40% to over 45%."},{"id":"e210b64d","title":"Insect \u2018anti-antiaphrodisiac\u2019 tells males when females are ready to mate","published":"2017-07-11T12:43:37Z","impactStatement":"Scientists discover a pheromone released by female plant bugs that counters the effects of an antiaphrodisiac found in the male\u0027s semen.","subjects":[{"id":"ecology","name":"Ecology"},{"id":"genomics-evolutionary-biology","name":"Genomics and Evolutionary Biology"}]},{"id":"63898359","title":"Hormonal changes during early development limit lifespan in mice","published":"2017-07-05T14:19:05Z","impactStatement":"Researchers discover early exposure to growth hormone negatively impacts lifespan, particularly in males.","subjects":[{"id":"developmental-biology-stem-cells","name":"Developmental Biology and Stem Cells"}]},{"id":"e44a094f","title":"ScienceFair: new desktop app with eLife Lens helps research and discovery continue offline","published":"2017-06-29T13:41:56Z","impactStatement":"ScienceFair allows users to access and consume science from their desktop using peer-to-peer technology."},{"id":"88e0286a","title":"New results from cancer reproducibility project released","published":"2017-06-27T12:20:44Z","impactStatement":"The assessment of eLife editors is that the new studies from the Reproducibility Project: Cancer Biology have reproduced important parts of the original papers.","subjects":[{"id":"cancer-biology","name":"Cancer Biology"},{"id":"biochemistry","name":"Biochemistry"}]},{"id":"fbb92d1e","title":"Scientists capture first images of shortest non-repetitive genome sequence in 3D","published":"2017-06-13T16:10:50Z","impactStatement":"A research team has pushed the ability of a molecular diagnostic technique to image a specific segment of the genome in super resolution.","subjects":[{"id":"genes-chromosomes","name":"Genes and Chromosomes"}]},{"id":"f0114f21","title":"eLife improves online reading for scientists with modern user experience design","published":"2017-06-01T11:54:27Z","impactStatement":"The new eLife website uses the latest in web design to deliver the best possible reading experience for users across multiple devices \u2013 and the code is completely open."},{"id":"4421c8ef","title":"Humans rely more on \u2018inferred\u2019 visual objects than \u2018real\u2019 ones","published":"2017-05-16T09:00:00Z","updated":"2017-05-19T10:52:21Z","subjects":[{"id":"human-biology-medicine","name":"Human Biology and Medicine"},{"id":"neuroscience","name":"Neuroscience"}]},{"id":"89f88128","title":"Metabolic markers accurately diagnose typhoid fever","published":"2017-05-09T08:00:00Z","updated":"2017-05-11T09:17:07Z","subjects":[{"id":"biochemistry","name":"Biochemistry"},{"id":"microbiology-infectious-disease","name":"Microbiology and Infectious Disease"},{"id":"epidemiology-global-health","name":"Epidemiology and Global Health"}]},{"id":"9b1814ab","title":"Viral fossils reveal how our ancestors may have eliminated an ancient infection","published":"2017-04-11T13:00:00Z","updated":"2017-04-26T12:55:14Z","subjects":[{"id":"genomics-evolutionary-biology","name":"Genomics and Evolutionary Biology"},{"id":"microbiology-infectious-disease","name":"Microbiology and Infectious Disease"}]},{"id":"92c836c3","title":"Legionella bacteria\u2019s escape route revealed","published":"2017-04-11T09:00:00Z","updated":"2017-04-26T12:55:14Z","subjects":[{"id":"biochemistry","name":"Biochemistry"},{"id":"biophysics-structural-biology","name":"Biophysics and Structural Biology"}]},{"id":"d63e2e42","title":"Initiative for Open Citations (I4OC) launches with early success","published":"2017-04-06T08:15:34Z","updated":"2017-06-01T08:15:34Z","impactStatement":"There is fresh momentum in the scholarly publishing world to open up data on the citations that link research publications."},{"id":"b3dbbf20","title":"\u0027Flying syringes\u0027 could detect emerging infectious diseases","published":"2017-03-28T09:00:00Z","updated":"2017-04-26T12:55:14Z","subjects":[{"id":"ecology","name":"Ecology"},{"id":"epidemiology-global-health","name":"Epidemiology and Global Health"}]},{"id":"62f94d3b","title":"Fruit flies halt reproduction during infection","published":"2017-03-07T08:00:00Z","updated":"2017-04-26T12:55:14Z","subjects":[{"id":"immunology","name":"Immunology"},{"id":"neuroscience","name":"Neuroscience"}]},{"id":"8bfa8745","title":"We collect ORCIDs from authors of accepted papers at proofing","published":"2017-03-07T07:53:20Z","updated":"2017-06-01T07:53:20Z","impactStatement":"Collecting ORCIDs at an early stage supports our efforts to simplify the authentication process."},{"id":"12200d53","title":"Scientists find genetic mutations that drive antibiotic resistance","published":"2017-02-21T17:00:00Z","updated":"2017-04-26T12:55:14Z","subjects":[{"id":"genomics-evolutionary-biology","name":"Genomics and Evolutionary Biology"},{"id":"microbiology-infectious-disease","name":"Microbiology and Infectious Disease"}]},{"id":"a4f12de7","title":"How habitat destruction figures in long-term survival plans","published":"2017-02-21T09:00:00Z","updated":"2017-04-26T12:55:14Z","subjects":[{"id":"computational-systems-biology","name":"Computational and Systems Biology"},{"id":"ecology","name":"Ecology"}]},{"id":"e8005070","title":"Scientists reveal how the brain maintains useful memories","published":"2017-02-14T17:00:00Z","updated":"2017-04-26T12:55:14Z","subjects":[{"id":"neuroscience","name":"Neuroscience"}]},{"id":"a6cf08ae","title":"Scientists identify two brain networks influencing how we make decisions","published":"2017-02-01T14:25:32Z","updated":"2017-04-26T12:55:14Z","subjects":[{"id":"neuroscience","name":"Neuroscience"}]},{"id":"62fdae51","title":"Habitat features and social behaviour impact how baboons move as a group","published":"2017-01-31T09:00:00Z","updated":"2017-04-26T12:55:14Z","subjects":[{"id":"ecology","name":"Ecology"}]},{"id":"1164fd2c","title":"Dyslexia linked to shorter memory trace of previous stimuli","published":"2017-01-24T08:00:00Z","updated":"2017-04-26T12:55:14Z","subjects":[{"id":"neuroscience","name":"Neuroscience"}]},{"id":"45f81c61","title":"First results of cancer reproducibility project released","published":"2017-01-19T13:00:00Z","updated":"2017-04-26T12:55:14Z","impactStatement":"The first five papers from the Reproducibility Project: Cancer Biology are part of an effort to study reproducibility in this field in a transparent way.","subjects":[{"id":"cancer-biology","name":"Cancer Biology"}]},{"id":"b906d134","title":"Risk of tree species disappearing in central Africa \u2018a major concern\u2019, say researchers","published":"2017-01-17T09:00:00Z","updated":"2017-04-26T12:55:14Z","subjects":[{"id":"ecology","name":"Ecology"},{"id":"plant-biology","name":"Plant Biology"}]},{"id":"48dd7034","title":"Amazonia\u0027s best and worst areas for carbon recovery revealed","published":"2016-12-20T09:00:00Z","updated":"2017-04-26T12:55:14Z","subjects":[{"id":"ecology","name":"Ecology"}]},{"id":"a58d4c21","title":"New footprints hint at early human ancestor\u2019s social behaviour","published":"2016-12-14T09:00:00Z","updated":"2017-04-26T12:55:14Z","impactStatement":"Footprints discovered in Tanzania give new insight into our ancient ancestor, \u003Ci\u003EAustralopithecus afarensis\u003C\/i\u003E, the same species as the famous fossil Lucy.","subjects":[{"id":"genomics-evolutionary-biology","name":"Genomics and Evolutionary Biology"}]},{"id":"1e2461d1","title":"Ants communicate by mouth-to-mouth fluid exchange","published":"2016-11-29T15:24:29Z","updated":"2017-04-26T12:55:14Z","impactStatement":"The process in ants of transferring fluids to each other mouth-to-mouth is more than just a means of food-sharing.","subjects":[{"id":"genomics-evolutionary-biology","name":"Genomics and Evolutionary Biology"}]},{"id":"f6487082","title":"Protein and salt drive post-meal sleepiness","published":"2016-11-22T17:00:00Z","updated":"2017-04-26T12:55:14Z","impactStatement":"High levels of protein and salt in our food can cause longer naps after eating.","subjects":[{"id":"neuroscience","name":"Neuroscience"}]},{"id":"1dbdecc7","title":"New protein provides critical link between aging and age-dependent disease","published":"2016-11-15T17:55:43Z","updated":"2017-04-26T12:55:14Z","subjects":[{"id":"genomics-evolutionary-biology","name":"Genomics and Evolutionary Biology"}]},{"id":"dc5105c7","title":"Scientists \u2018plug in\u2019 to circuitry behind sex in male fruit flies","published":"2016-11-15T17:52:33Z","updated":"2017-04-26T12:55:14Z","subjects":[{"id":"neuroscience","name":"Neuroscience"}]},{"id":"6fe54f6e","title":"How fake hand foxes brain","published":"2016-10-20T12:22:51Z","updated":"2017-04-26T12:55:14Z","impactStatement":"Researchers explain the changes that occur in the brain during the rubber hand illusion, creating a feeling of disembodiment from the hand.","subjects":[{"id":"neuroscience","name":"Neuroscience"}]},{"id":"88194ef7","title":"Females react differently than males to social isolation","published":"2016-10-11T17:00:00Z","updated":"2017-04-26T12:55:14Z","subjects":[{"id":"neuroscience","name":"Neuroscience"}]},{"id":"26defce6","title":"Diabetes opens floodgates to fructose","published":"2016-10-11T13:00:00Z","updated":"2017-04-26T12:55:14Z","subjects":[{"id":"biochemistry","name":"Biochemistry"},{"id":"cell-biology","name":"Cell Biology"}]},{"id":"a87a058c","title":"Overlooked plants defy drought","published":"2016-10-04T17:00:00Z","updated":"2017-04-26T12:55:14Z","subjects":[{"id":"developmental-biology-stem-cells","name":"Developmental Biology and Stem Cells"},{"id":"plant-biology","name":"Plant Biology"}]},{"id":"7e7220f6","title":"eLife partners with Hypothes.is to advance open scholarly annotation","published":"2016-09-14T11:10:11Z","updated":"2017-06-22T11:10:11Z","impactStatement":"The move will bring publishers and researchers an open annotation platform to create annotations for personal use, or as part of conversations with private groups or the general public."},{"id":"ed5d36ac","title":"Surprise discovery in the blink of an eye","published":"2016-08-23T16:58:01Z","updated":"2017-04-26T12:55:14Z","subjects":[{"id":"human-biology-medicine","name":"Human Biology and Medicine"},{"id":"neuroscience","name":"Neuroscience"}]},{"id":"51dbadf9","title":"How sleep deprivation harms memory","published":"2016-08-23T16:48:44Z","updated":"2017-04-26T12:55:14Z","subjects":[{"id":"neuroscience","name":"Neuroscience"}]},{"id":"47c4658d","title":"HIV is not a super-spreader of drug-resistant tuberculosis","published":"2016-08-09T16:52:03Z","updated":"2017-04-26T12:55:14Z","subjects":[{"id":"genomics-evolutionary-biology","name":"Genomics and Evolutionary Biology"},{"id":"microbiology-infectious-disease","name":"Microbiology and Infectious Disease"}]},{"id":"525adda1","title":"Echo templates aid mental mapping in bats","published":"2016-08-02T09:00:00Z","updated":"2017-04-26T12:55:14Z","subjects":[{"id":"computational-systems-biology","name":"Computational and Systems Biology"},{"id":"ecology","name":"Ecology"}]},{"id":"4f3abb74","title":"Dutch men and Latvian women tallest in world according to 100-year global height study","published":"2016-07-26T15:50:04Z","updated":"2017-04-26T12:55:14Z","impactStatement":"The largest ever height study provides substantial insight into the global heights of young adult men and women between 1914 and 2014.","subjects":[{"id":"epidemiology-global-health","name":"Epidemiology and Global Health"}]},{"id":"6b912d50","title":"Travel broadens chimps\u0027 horizons too","published":"2016-07-19T17:00:00Z","updated":"2017-04-26T12:55:14Z","impactStatement":"Researchers discover that travel fosters greater tool use for foraging in chimpanzees.","subjects":[{"id":"ecology","name":"Ecology"}]},{"id":"b723d37f","title":"How birds unlock their super-sense, ultraviolet vision","published":"2016-07-12T16:44:30Z","updated":"2017-04-26T12:55:14Z","subjects":[{"id":"biochemistry","name":"Biochemistry"},{"id":"neuroscience","name":"Neuroscience"}]},{"id":"b61fc4bd","title":"New brainstem model reveals how brains control breathing","published":"2016-07-05T17:00:00Z","updated":"2017-04-26T12:55:14Z","subjects":[{"id":"computational-systems-biology","name":"Computational and Systems Biology"},{"id":"neuroscience","name":"Neuroscience"}]},{"id":"8390df1a","title":"Insights into the neurons that cause symptoms of Rett syndrome could guide search for new therapies","published":"2016-06-24T10:41:15Z","updated":"2017-04-26T12:55:14Z","subjects":[{"id":"neuroscience","name":"Neuroscience"}]},{"id":"35c91197","title":"Scientists reveal sub-Saharan Africa\u2019s legacy of past migrations over last 4,000 years","published":"2016-06-22T17:00:00Z","updated":"2017-04-26T12:55:14Z","subjects":[{"id":"genomics-evolutionary-biology","name":"Genomics and Evolutionary Biology"}]},{"id":"a9eebb0e","title":"New plant engineering method could help fill demand for crucial malaria drug","published":"2016-06-14T17:00:00Z","updated":"2017-04-26T12:55:14Z","subjects":[{"id":"biochemistry","name":"Biochemistry"},{"id":"plant-biology","name":"Plant Biology"}]},{"id":"8ee45992","title":"Research funders renew commitment to transforming science publishing","published":"2016-06-02T07:35:09Z","updated":"2017-06-01T07:35:09Z","impactStatement":"Non-profit eLife receives a second round of funding."},{"id":"c34a440d","title":"Flatworms left in sunlight spur investigations into rare metabolic disorders","published":"2016-05-31T17:00:00Z","updated":"2017-04-26T12:55:14Z","subjects":[{"id":"biochemistry","name":"Biochemistry"},{"id":"cell-biology","name":"Cell Biology"}]},{"id":"ecac3e6a","title":"eLife welcomes new member to its Board of Directors","published":"2016-05-24T07:17:20Z","updated":"2017-06-01T07:17:20Z","impactStatement":"eLife\u0027s new board member will direct the initiative in its aim to help scientists accelerate discovery by reshaping science publishing."},{"id":"e3eae701","title":"Study suggests new treatment for seizures","published":"2016-05-10T15:10:56Z","updated":"2017-04-26T12:55:14Z","subjects":[{"id":"neuroscience","name":"Neuroscience"}]},{"id":"aeff594c","title":"Threat of novel swine flu viruses in pigs and humans","published":"2016-04-26T12:31:43Z","updated":"2017-04-26T12:55:14Z","subjects":[{"id":"epidemiology-global-health","name":"Epidemiology and Global Health"},{"id":"microbiology-infectious-disease","name":"Microbiology and Infectious Disease"}]},{"id":"8c2dcd41","title":"Where next for Zika virus?","published":"2016-04-20T14:37:09Z","updated":"2017-04-26T12:55:14Z","impactStatement":"A study led by the University of Oxford maps the global environmental suitability for the spread of Zika virus.","subjects":[{"id":"epidemiology-global-health","name":"Epidemiology and Global Health"},{"id":"microbiology-infectious-disease","name":"Microbiology and Infectious Disease"}]},{"id":"23c3e358","title":"Double advantage of potential new diabetes treatment","published":"2016-04-20T14:30:00Z","updated":"2017-04-26T12:55:14Z","subjects":[{"id":"human-biology-medicine","name":"Human Biology and Medicine"}]},{"id":"f2c4bd4e","title":"Tropical birds develop \u2018superfast\u2019 wing muscles for mating, not flying","published":"2016-04-13T08:15:00Z","updated":"2017-04-26T12:55:14Z","subjects":[{"id":"ecology","name":"Ecology"},{"id":"neuroscience","name":"Neuroscience"}]},{"id":"dfbd87b2","title":"Deadly flatworm\u2019s skin rejuvenation may explain its long-term survival in humans","published":"2016-03-22T17:00:00Z","updated":"2017-04-26T12:55:14Z","subjects":[{"id":"developmental-biology-stem-cells","name":"Developmental Biology and Stem Cells"},{"id":"microbiology-infectious-disease","name":"Microbiology and Infectious Disease"}]},{"id":"fd576be3","title":"Scientists reveal how animals find their way \u2018in the dark\u2019","published":"2016-03-22T16:45:00Z","updated":"2017-04-26T12:55:14Z","subjects":[{"id":"neuroscience","name":"Neuroscience"}]},{"id":"e314b0f1","title":"Complex learning dismantles barriers in the brain","published":"2016-03-15T18:04:11Z","updated":"2017-04-26T12:55:14Z","impactStatement":"Intensive training in a complex task can overcome the divisions of the separate areas in our brain dedicated to specific senses.","subjects":[{"id":"neuroscience","name":"Neuroscience"}]},{"id":"98827cf9","title":"Similarities in fruit fly nervous systems transform view of metamorphosis","published":"2016-03-15T17:49:18Z","updated":"2017-04-26T12:55:14Z","subjects":[{"id":"developmental-biology-stem-cells","name":"Developmental Biology and Stem Cells"},{"id":"neuroscience","name":"Neuroscience"}]},{"id":"df8aed2a","title":"Groundbreaking text mining project highlights \u2018gender gap\u2019 in scientific research","published":"2016-03-11T16:46:39Z","updated":"2017-04-26T12:55:14Z","impactStatement":"An analysis of 15,000 mouse studies showed that around half of them failed to report the sex and age of the animals involved, highlighting the issue of reproducibility in scientific research.","subjects":[{"id":"computational-systems-biology","name":"Computational and Systems Biology"}]},{"id":"6037db7b","title":"Drug-resistant genes spread through environment, not meat products","published":"2016-03-11T16:12:27Z","updated":"2017-04-26T12:55:14Z","subjects":[{"id":"epidemiology-global-health","name":"Epidemiology and Global Health"},{"id":"microbiology-infectious-disease","name":"Microbiology and Infectious Disease"}]},{"id":"c9fb0f94","title":"Scientists uncover history of ancient viruses as far back as 30 million years ago","published":"2016-03-08T17:45:00Z","updated":"2017-04-26T12:55:14Z","subjects":[{"id":"genomics-evolutionary-biology","name":"Genomics and Evolutionary Biology"},{"id":"microbiology-infectious-disease","name":"Microbiology and Infectious Disease"}]},{"id":"e1fc02fc","title":"Studies explain adolescents\u2019 vulnerability to addictive drugs","published":"2016-03-01T14:41:38Z","updated":"2017-04-26T12:55:14Z","subjects":[{"id":"neuroscience","name":"Neuroscience"}]},{"id":"0b5b66a1","title":"Slime can see","published":"2016-02-10T17:30:00Z","updated":"2017-04-26T12:55:14Z","impactStatement":"Researchers reveal that bacterial cells act as the equivalent of a microscopic eyeball or the world\u2019s oldest and smallest camera eye.","subjects":[{"id":"biophysics-structural-biology","name":"Biophysics and Structural Biology"},{"id":"microbiology-infectious-disease","name":"Microbiology and Infectious Disease"}]},{"id":"ca7d0e9b","title":"Scientists\u2019 robotically driven system could reduce cost of discovering drug and target interactions","published":"2016-02-10T17:15:00Z","updated":"2017-04-26T12:55:14Z","subjects":[{"id":"cell-biology","name":"Cell Biology"},{"id":"computational-systems-biology","name":"Computational and Systems Biology"}]},{"id":"b645dd8d","title":"Scientists create imaging \u2018toolkit\u0027 to help identify new brain tumour drug targets","published":"2016-02-02T17:00:00Z","updated":"2017-04-26T12:55:14Z","subjects":[{"id":"neuroscience","name":"Neuroscience"}]},{"id":"0673e545","title":"Scientists prove key aspect of evolutionary theory","published":"2016-01-26T09:00:00Z","updated":"2017-04-26T12:55:14Z","subjects":[{"id":"genomics-evolutionary-biology","name":"Genomics and Evolutionary Biology"},{"id":"microbiology-infectious-disease","name":"Microbiology and Infectious Disease"}]},{"id":"488608fd","title":"Study illuminates new design strategies for optogenetic tools","published":"2016-01-12T17:00:00Z","updated":"2017-04-26T12:55:14Z","subjects":[{"id":"biochemistry","name":"Biochemistry"},{"id":"biophysics-structural-biology","name":"Biophysics and Structural Biology"}]},{"id":"633a92dd","title":"Being anxious could be good for you -- in a crisis","published":"2016-01-08T17:00:00Z","updated":"2017-04-26T12:55:14Z","impactStatement":"Researchers identify for the first time specific regions of the brain involved in the apparent \u0027sixth sense\u0027 we have for danger.","subjects":[{"id":"neuroscience","name":"Neuroscience"}]},{"id":"012a1b86","title":"Generous mothers receive less nagging","published":"2016-01-06T17:00:00Z","updated":"2017-04-26T12:55:14Z","impactStatement":"In social species, such as mice and humans, mothers will be nagged less by their offspring if they are already generous providers.","subjects":[{"id":"genomics-evolutionary-biology","name":"Genomics and Evolutionary Biology"}]},{"id":"ec733c9a","title":"Could 2016 be a bad year for the malaria parasite in Africa?","published":"2015-12-31T17:00:00Z","updated":"2017-04-26T12:55:14Z","subjects":[{"id":"epidemiology-global-health","name":"Epidemiology and Global Health"},{"id":"ecology","name":"Ecology"}]},{"id":"ed0048d9","title":"Midnight munchies mangle memory","published":"2015-12-22T17:00:00Z","updated":"2017-04-26T12:55:14Z","impactStatement":"Researchers discover that eating late at night can negatively impact learning and memory.","subjects":[{"id":"neuroscience","name":"Neuroscience"}]},{"id":"14c3f653","title":"\u0022Hunger hormone\u0022 is boosted by restricted meal times","published":"2015-12-16T17:00:00Z","updated":"2017-04-26T12:55:14Z","impactStatement":"Scientists identify how the hunger hormone ghrelin allows rats to eat more when faced with restricted feeding schedules.","subjects":[{"id":"neuroscience","name":"Neuroscience"}]},{"id":"23543235","title":"Scientists warn light pollution can stop coral from spawning","published":"2015-12-15T17:30:00Z","updated":"2017-04-26T12:55:14Z","impactStatement":"Researchers discover that exposure to artificial light hinders reproduction in coral.","subjects":[{"id":"ecology","name":"Ecology"}]},{"id":"a4769bff","title":"Golden discovery of novel imaging technique captures beauty of metal-labeled neurons in 3D","published":"2015-12-15T17:00:00Z","updated":"2017-04-26T12:55:14Z","subjects":[{"id":"neuroscience","name":"Neuroscience"}]},{"id":"80445e0a","title":"Hummingbirds rely on raw power, not physique, to outmanoeuvre rivals","published":"2015-11-19T13:00:00Z","updated":"2017-04-26T12:55:14Z","subjects":[{"id":"ecology","name":"Ecology"},{"id":"neuroscience","name":"Neuroscience"}]},{"id":"dff1a0d2","title":"First insights into changes to developing brain caused by gene associated with autism","published":"2015-11-17T13:00:00Z","updated":"2017-04-26T12:55:14Z","subjects":[{"id":"neuroscience","name":"Neuroscience"}]},{"id":"5a0eb7c9","title":"New test for ancient DNA authenticity throws doubt on Stone Age wheat trade","published":"2015-11-03T08:00:00Z","updated":"2017-04-26T12:55:14Z","subjects":[{"id":"genomics-evolutionary-biology","name":"Genomics and Evolutionary Biology"},{"id":"plant-biology","name":"Plant Biology"}]},{"id":"9f5b9ed9","title":"Early hospitalisation key to survival for Ebola victims in the Democratic Republic of the Congo","published":"2015-11-03T08:00:00Z","updated":"2017-04-26T12:55:14Z","subjects":[{"id":"epidemiology-global-health","name":"Epidemiology and Global Health"}]}]}
+{
+  "total": 122,
+  "items": [
+    {
+      "id": "81d42f7d",
+      "title": "eLife enhances open annotation with Hypothesis to promote scientific discussion online",
+      "published": "2018-01-31T12:22:03Z",
+      "impactStatement": "The open-source Hypothesis software has been extensively customised for use by eLife and other publishers, with new features giving publishers more control over its implementation on their sites."
+    },
+    {
+      "id": "555af7fa",
+      "title": "Study suggests new approach for targeting cancer-causing protein, RAS: attack from outside the cell",
+      "published": "2018-01-23T17:46:37Z",
+      "impactStatement": "Attacking mutated RAS proteins on cancer cells from the outside-in could be a viable therapeutic approach for previously ‘undruggable’ cancer targets.",
+      "subjects": [
+        {
+          "id": "biochemistry-chemical-biology",
+          "name": "Biochemistry and Chemical Biology"
+        },
+        {
+          "id": "cancer-biology",
+          "name": "Cancer Biology"
+        }
+      ]
+    },
+    {
+      "id": "0a33d264",
+      "title": "Mosquito bite frequency influences malaria spread",
+      "published": "2018-01-23T17:39:10Z",
+      "impactStatement": "New study suggests variation in the frequency of mosquito bites within regions and even households is likely to play a key role in the success of malaria control efforts.",
+      "subjects": [
+        {
+          "id": "epidemiology-global-health",
+          "name": "Epidemiology and Global Health"
+        }
+      ]
+    },
+    {
+      "id": "3219867b",
+      "title": "Can we develop new topical drugs by learning how our skin communicates with the nervous system?",
+      "published": "2018-01-16T16:50:59Z",
+      "impactStatement": "Researchers shed new light on the communication between our skin, nerve cells and brain that gives us our sense of touch.",
+      "subjects": [
+        {
+          "id": "neuroscience",
+          "name": "Neuroscience"
+        }
+      ]
+    },
+    {
+      "id": "bd74e3b6",
+      "title": "Genetic analysis predicts future threat from MERS virus",
+      "published": "2018-01-16T16:40:36Z",
+      "impactStatement": "While Middle East respiratory syndrome coronavirus (MERS-CoV) does not appear to present an imminent global threat, researchers encourage continued genomic surveillance of the virus.",
+      "subjects": [
+        {
+          "id": "epidemiology-global-health",
+          "name": "Epidemiology and Global Health"
+        },
+        {
+          "id": "genomics-evolutionary-biology",
+          "name": "Genomics and Evolutionary Biology"
+        }
+      ]
+    },
+    {
+      "id": "db666e95",
+      "title": "eLife welcomes early-career researcher to its Board of Directors",
+      "published": "2018-01-11T09:52:21Z",
+      "impactStatement": "The new board member will help oversee the strategic direction of eLife and support the organisation in its mission."
+    },
+    {
+      "id": "b3368dfe",
+      "title": "Study finds cancer cells manipulate fat metabolism for survival",
+      "published": "2017-12-19T15:49:21Z",
+      "impactStatement": "Discovery of new survival strategy in tumour cells reveals potential drug target for future cancer treatments.",
+      "subjects": [
+        {
+          "id": "biochemistry-chemical-biology",
+          "name": "Biochemistry and Chemical Biology"
+        },
+        {
+          "id": "cancer-biology",
+          "name": "Cancer Biology"
+        }
+      ]
+    },
+    {
+      "id": "93da95fe",
+      "title": "New insight into unique plant chemical could inform future drug development",
+      "published": "2017-12-12T23:18:40Z",
+      "impactStatement": "Study addresses the question of how natural plant chemicals called glucosinolates evolve the ability to interact with genes in humans.",
+      "subjects": [
+        {
+          "id": "genomics-evolutionary-biology",
+          "name": "Genomics and Evolutionary Biology"
+        },
+        {
+          "id": "plant-biology",
+          "name": "Plant Biology"
+        }
+      ]
+    },
+    {
+      "id": "581e811f",
+      "title": "Live 3D imaging highlights cellular activity during embryonic heart development",
+      "published": "2017-12-05T16:18:46Z",
+      "impactStatement": "Imaging technique reveals three phases of heart-tube formation in mouse embryos, and could help increase our<span lang=\"EN\" xml:lang=\"EN\"><span><span> understanding of normal heart development and how abnormalities occur in newborns.</span></span></span>",
+      "subjects": [
+        {
+          "id": "developmental-biology-stem-cells",
+          "name": "Developmental Biology and Stem Cells"
+        }
+      ]
+    },
+    {
+      "id": "6531a9a9",
+      "title": "Scientists show migration boosts survival in songbirds",
+      "published": "2017-11-21T13:58:58Z",
+      "impactStatement": "Study provides important new insights on the evolution of migration in blackbirds.",
+      "subjects": [
+        {
+          "id": "ecology",
+          "name": "Ecology"
+        }
+      ]
+    },
+    {
+      "id": "cbbbb7ff",
+      "title": "New gene expression analysis paves way for improved disease diagnosis and treatment",
+      "published": "2017-11-14T13:35:03Z",
+      "impactStatement": "Study provides new insight on the deficiency of a biological process called oxidative phosphorylation and could aid in future diagnosis and treatment strategies.",
+      "subjects": [
+        {
+          "id": "biochemistry-chemical-biology",
+          "name": "Biochemistry and Chemical Biology"
+        },
+        {
+          "id": "cell-biology",
+          "name": "Cell Biology"
+        }
+      ]
+    },
+    {
+      "id": "63ec1698",
+      "title": "eLife welcomes the Knut and Alice Wallenberg Foundation as a new funder-partner",
+      "published": "2017-11-09T12:52:36Z",
+      "impactStatement": "Leading Swedish research funder joins nonprofit coalition."
+    },
+    {
+      "id": "c3e19811",
+      "title": "New model of newborn gut development reveals crucial role of microbiota",
+      "published": "2017-11-07T17:01:12Z",
+      "impactStatement": "A new system reproduces the physiology of the immature human intestine, enabling research into a range of host-microbe interactions to understand their role in health and disease.",
+      "subjects": [
+        {
+          "id": "developmental-biology-stem-cells",
+          "name": "Developmental Biology and Stem Cells"
+        },
+        {
+          "id": "microbiology-infectious-disease",
+          "name": "Microbiology and Infectious Disease"
+        }
+      ]
+    },
+    {
+      "id": "0820e5dd",
+      "title": "Slight electrical brain stimulation strengthens human memory",
+      "published": "2017-10-24T11:13:31Z",
+      "updated": "2017-10-25T11:13:31Z",
+      "impactStatement": "Evidence that low-current electrical stimulation can enhance our memory could pave the way for treating patients with chronic memory impairment.",
+      "subjects": [
+        {
+          "id": "human-biology-medicine",
+          "name": "Human Biology and Medicine"
+        },
+        {
+          "id": "neuroscience",
+          "name": "Neuroscience"
+        }
+      ]
+    },
+    {
+      "id": "a3bfe7f2",
+      "title": "eLife welcomes new Chair of its Early-Career Advisory Group",
+      "published": "2017-09-27T13:37:34Z",
+      "impactStatement": "The new Chair will help ensure the voice of junior researchers continues to be heard within the organisation."
+    },
+    {
+      "id": "67d013c4",
+      "title": "eLife and Collaborative Knowledge Foundation partner to deliver open-source submission and peer-review platform",
+      "published": "2017-09-20T13:05:13Z",
+      "impactStatement": "The new platform will help streamline communications between authors, editors and reviewers at all stages of the submission and review process."
+    },
+    {
+      "id": "e6038800",
+      "title": "eLife supports development of open technology stack for publishing reproducible manuscripts online",
+      "published": "2017-09-07T09:45:14Z",
+      "impactStatement": "The Reproducible Document Stack will ultimately allow authors to submit their manuscripts in a format that includes embedded code blocks and computed outputs, and for publishers to preserve these assets in an enhanced version of the published online article."
+    },
+    {
+      "id": "e6156bde",
+      "title": "Intensive workouts boost children’s brains",
+      "published": "2017-08-22T16:33:23Z",
+      "impactStatement": "A new study reveals that short bursts of high-intensity exercise can improve working memory and cognitive control in children.",
+      "subjects": [
+        {
+          "id": "human-biology-medicine",
+          "name": "Human Biology and Medicine"
+        },
+        {
+          "id": "neuroscience",
+          "name": "Neuroscience"
+        }
+      ]
+    },
+    {
+      "id": "779a3695",
+      "title": "Gut microbes influence life expectancy",
+      "published": "2017-08-22T16:17:39Z",
+      "impactStatement": "Researchers reveal that transplanting gut bacteria from young African turquoise killifish into middle-aged fish increases the longevity of these animals, presenting a potential new intervention to enhance lifespan in other organisms.",
+      "subjects": [
+        {
+          "id": "genomics-evolutionary-biology",
+          "name": "Genomics and Evolutionary Biology"
+        },
+        {
+          "id": "microbiology-infectious-disease",
+          "name": "Microbiology and Infectious Disease"
+        }
+      ]
+    },
+    {
+      "id": "d635008f",
+      "title": "Major database mining project seeks to improve drug side effect reporting",
+      "published": "2017-08-08T21:46:34Z",
+      "impactStatement": "New research shows that while FAERS provides a solid frame for reporting, it also contains redundancies and biases that affect the ability to analyse and interpret the data.",
+      "subjects": [
+        {
+          "id": "human-biology-medicine",
+          "name": "Human Biology and Medicine"
+        }
+      ]
+    },
+    {
+      "id": "aa251902",
+      "title": "Heartbeats could hold key to understanding babies’ inner world",
+      "published": "2017-08-08T13:28:00Z",
+      "impactStatement": "A novel experiment reveals that babies as young as five months old are aware of their own heartbeats.",
+      "subjects": [
+        {
+          "id": "neuroscience",
+          "name": "Neuroscience"
+        }
+      ]
+    },
+    {
+      "id": "b206e2ae",
+      "title": "Knee joint signals bones to grow",
+      "published": "2017-07-25T14:49:12Z",
+      "impactStatement": "Researchers suggest neighboring cells in nearby joints help control bone growth in mice.",
+      "subjects": [
+        {
+          "id": "developmental-biology-stem-cells",
+          "name": "Developmental Biology and Stem Cells"
+        }
+      ]
+    },
+    {
+      "id": "f87f62a7",
+      "title": "eLife joins Substance Consortium to support development of open-source online content-editing tools",
+      "published": "2017-07-24T12:59:17Z",
+      "impactStatement": "By joining the consortium, eLife will support the introduction of innovative new tools to help expand the current online open scholarly infrastructure."
+    },
+    {
+      "id": "9eb16f1c",
+      "title": "Availability of open reference data nears 50% as major societies and influential publishers endorse the Initiative for Open Citations",
+      "published": "2017-07-11T15:27:30Z",
+      "impactStatement": "In the three months following the Initiative for Open Citations' launch, the percentage of articles with open reference data has moved from 40% to over 45%.",
+      "subjects": [
+        {
+          "id": "biochemistry-chemical-biology",
+          "name": "Biochemistry and Chemical Biology"
+        }
+      ]
+    },
+    {
+      "id": "e210b64d",
+      "title": "Insect ‘anti-antiaphrodisiac’ tells males when females are ready to mate",
+      "published": "2017-07-11T12:43:37Z",
+      "impactStatement": "Scientists discover a pheromone released by female plant bugs that counters the effects of an antiaphrodisiac found in the male's semen.",
+      "subjects": [
+        {
+          "id": "ecology",
+          "name": "Ecology"
+        },
+        {
+          "id": "genomics-evolutionary-biology",
+          "name": "Genomics and Evolutionary Biology"
+        }
+      ]
+    },
+    {
+      "id": "63898359",
+      "title": "Hormonal changes during early development limit lifespan in mice",
+      "published": "2017-07-05T14:19:05Z",
+      "impactStatement": "Researchers discover early exposure to growth hormone negatively impacts lifespan, particularly in males.",
+      "subjects": [
+        {
+          "id": "developmental-biology-stem-cells",
+          "name": "Developmental Biology and Stem Cells"
+        }
+      ]
+    },
+    {
+      "id": "e44a094f",
+      "title": "ScienceFair: new desktop app with eLife Lens helps research and discovery continue offline",
+      "published": "2017-06-29T13:41:56Z",
+      "impactStatement": "ScienceFair allows users to access and consume science from their desktop using peer-to-peer technology."
+    },
+    {
+      "id": "88e0286a",
+      "title": "New results from cancer reproducibility project released",
+      "published": "2017-06-27T12:20:44Z",
+      "impactStatement": "The assessment of eLife editors is that the new studies from the Reproducibility Project: Cancer Biology have reproduced important parts of the original papers.",
+      "subjects": [
+        {
+          "id": "cancer-biology",
+          "name": "Cancer Biology"
+        },
+        {
+          "id": "biochemistry-chemical-biology",
+          "name": "Biochemistry and Chemical Biology"
+        }
+      ]
+    },
+    {
+      "id": "fbb92d1e",
+      "title": "Scientists capture first images of shortest non-repetitive genome sequence in 3D",
+      "published": "2017-06-13T16:10:50Z",
+      "impactStatement": "A research team has pushed the ability of a molecular diagnostic technique to image a specific segment of the genome in super resolution.",
+      "subjects": [
+        {
+          "id": "genes-chromosomes",
+          "name": "Genes and Chromosomes"
+        }
+      ]
+    },
+    {
+      "id": "f0114f21",
+      "title": "eLife improves online reading for scientists with modern user experience design",
+      "published": "2017-06-01T11:54:27Z",
+      "impactStatement": "The new eLife website uses the latest in web design to deliver the best possible reading experience for users across multiple devices – and the code is completely open."
+    },
+    {
+      "id": "4421c8ef",
+      "title": "Humans rely more on ‘inferred’ visual objects than ‘real’ ones",
+      "published": "2017-05-16T09:00:00Z",
+      "updated": "2017-05-19T10:52:21Z",
+      "subjects": [
+        {
+          "id": "human-biology-medicine",
+          "name": "Human Biology and Medicine"
+        },
+        {
+          "id": "neuroscience",
+          "name": "Neuroscience"
+        }
+      ]
+    },
+    {
+      "id": "89f88128",
+      "title": "Metabolic markers accurately diagnose typhoid fever",
+      "published": "2017-05-09T08:00:00Z",
+      "updated": "2017-05-11T09:17:07Z",
+      "subjects": [
+        {
+          "id": "biochemistry-chemical-biology",
+          "name": "Biochemistry and Chemical Biology"
+        },
+        {
+          "id": "microbiology-infectious-disease",
+          "name": "Microbiology and Infectious Disease"
+        },
+        {
+          "id": "epidemiology-global-health",
+          "name": "Epidemiology and Global Health"
+        }
+      ]
+    },
+    {
+      "id": "9b1814ab",
+      "title": "Viral fossils reveal how our ancestors may have eliminated an ancient infection",
+      "published": "2017-04-11T13:00:00Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "subjects": [
+        {
+          "id": "genomics-evolutionary-biology",
+          "name": "Genomics and Evolutionary Biology"
+        },
+        {
+          "id": "microbiology-infectious-disease",
+          "name": "Microbiology and Infectious Disease"
+        }
+      ]
+    },
+    {
+      "id": "92c836c3",
+      "title": "Legionella bacteria’s escape route revealed",
+      "published": "2017-04-11T09:00:00Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "subjects": [
+        {
+          "id": "biochemistry-chemical-biology",
+          "name": "Biochemistry and Chemical Biology"
+        },
+        {
+          "id": "biophysics-structural-biology",
+          "name": "Biophysics and Structural Biology"
+        }
+      ]
+    },
+    {
+      "id": "d63e2e42",
+      "title": "Initiative for Open Citations (I4OC) launches with early success",
+      "published": "2017-04-06T08:15:34Z",
+      "updated": "2017-06-01T08:15:34Z",
+      "impactStatement": "There is fresh momentum in the scholarly publishing world to open up data on the citations that link research publications.",
+      "subjects": [
+        {
+          "id": "biochemistry-chemical-biology",
+          "name": "Biochemistry and Chemical Biology"
+        }
+      ]
+    },
+    {
+      "id": "b3dbbf20",
+      "title": "'Flying syringes' could detect emerging infectious diseases",
+      "published": "2017-03-28T09:00:00Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "subjects": [
+        {
+          "id": "ecology",
+          "name": "Ecology"
+        },
+        {
+          "id": "epidemiology-global-health",
+          "name": "Epidemiology and Global Health"
+        }
+      ]
+    },
+    {
+      "id": "62f94d3b",
+      "title": "Fruit flies halt reproduction during infection",
+      "published": "2017-03-07T08:00:00Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "subjects": [
+        {
+          "id": "immunology-inflammation",
+          "name": "Immunology and Inflammation"
+        },
+        {
+          "id": "neuroscience",
+          "name": "Neuroscience"
+        }
+      ]
+    },
+    {
+      "id": "8bfa8745",
+      "title": "We collect ORCIDs from authors of accepted papers at proofing",
+      "published": "2017-03-07T07:53:20Z",
+      "updated": "2017-06-01T07:53:20Z",
+      "impactStatement": "Collecting ORCIDs at an early stage supports our efforts to simplify the authentication process."
+    },
+    {
+      "id": "12200d53",
+      "title": "Scientists find genetic mutations that drive antibiotic resistance",
+      "published": "2017-02-21T17:00:00Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "subjects": [
+        {
+          "id": "genomics-evolutionary-biology",
+          "name": "Genomics and Evolutionary Biology"
+        },
+        {
+          "id": "microbiology-infectious-disease",
+          "name": "Microbiology and Infectious Disease"
+        }
+      ]
+    },
+    {
+      "id": "a4f12de7",
+      "title": "How habitat destruction figures in long-term survival plans",
+      "published": "2017-02-21T09:00:00Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "subjects": [
+        {
+          "id": "computational-systems-biology",
+          "name": "Computational and Systems Biology"
+        },
+        {
+          "id": "ecology",
+          "name": "Ecology"
+        }
+      ]
+    },
+    {
+      "id": "e8005070",
+      "title": "Scientists reveal how the brain maintains useful memories",
+      "published": "2017-02-14T17:00:00Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "subjects": [
+        {
+          "id": "neuroscience",
+          "name": "Neuroscience"
+        }
+      ]
+    },
+    {
+      "id": "a6cf08ae",
+      "title": "Scientists identify two brain networks influencing how we make decisions",
+      "published": "2017-02-01T14:25:32Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "subjects": [
+        {
+          "id": "neuroscience",
+          "name": "Neuroscience"
+        }
+      ]
+    },
+    {
+      "id": "62fdae51",
+      "title": "Habitat features and social behaviour impact how baboons move as a group",
+      "published": "2017-01-31T09:00:00Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "subjects": [
+        {
+          "id": "ecology",
+          "name": "Ecology"
+        }
+      ]
+    },
+    {
+      "id": "1164fd2c",
+      "title": "Dyslexia linked to shorter memory trace of previous stimuli",
+      "published": "2017-01-24T08:00:00Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "subjects": [
+        {
+          "id": "neuroscience",
+          "name": "Neuroscience"
+        }
+      ]
+    },
+    {
+      "id": "45f81c61",
+      "title": "First results of cancer reproducibility project released",
+      "published": "2017-01-19T13:00:00Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "impactStatement": "The first five papers from the Reproducibility Project: Cancer Biology are part of an effort to study reproducibility in this field in a transparent way.",
+      "subjects": [
+        {
+          "id": "cancer-biology",
+          "name": "Cancer Biology"
+        }
+      ]
+    },
+    {
+      "id": "b906d134",
+      "title": "Risk of tree species disappearing in central Africa ‘a major concern’, say researchers",
+      "published": "2017-01-17T09:00:00Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "subjects": [
+        {
+          "id": "ecology",
+          "name": "Ecology"
+        },
+        {
+          "id": "plant-biology",
+          "name": "Plant Biology"
+        }
+      ]
+    },
+    {
+      "id": "48dd7034",
+      "title": "Amazonia's best and worst areas for carbon recovery revealed",
+      "published": "2016-12-20T09:00:00Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "subjects": [
+        {
+          "id": "ecology",
+          "name": "Ecology"
+        }
+      ]
+    },
+    {
+      "id": "a58d4c21",
+      "title": "New footprints hint at early human ancestor’s social behaviour",
+      "published": "2016-12-14T09:00:00Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "impactStatement": "Footprints discovered in Tanzania give new insight into our ancient ancestor, <i>Australopithecus afarensis</i>, the same species as the famous fossil Lucy.",
+      "subjects": [
+        {
+          "id": "genomics-evolutionary-biology",
+          "name": "Genomics and Evolutionary Biology"
+        }
+      ]
+    },
+    {
+      "id": "1e2461d1",
+      "title": "Ants communicate by mouth-to-mouth fluid exchange",
+      "published": "2016-11-29T15:24:29Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "impactStatement": "The process in ants of transferring fluids to each other mouth-to-mouth is more than just a means of food-sharing.",
+      "subjects": [
+        {
+          "id": "genomics-evolutionary-biology",
+          "name": "Genomics and Evolutionary Biology"
+        }
+      ]
+    },
+    {
+      "id": "f6487082",
+      "title": "Protein and salt drive post-meal sleepiness",
+      "published": "2016-11-22T17:00:00Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "impactStatement": "High levels of protein and salt in our food can cause longer naps after eating.",
+      "subjects": [
+        {
+          "id": "neuroscience",
+          "name": "Neuroscience"
+        }
+      ]
+    },
+    {
+      "id": "1dbdecc7",
+      "title": "New protein provides critical link between aging and age-dependent disease",
+      "published": "2016-11-15T17:55:43Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "subjects": [
+        {
+          "id": "genomics-evolutionary-biology",
+          "name": "Genomics and Evolutionary Biology"
+        }
+      ]
+    },
+    {
+      "id": "dc5105c7",
+      "title": "Scientists ‘plug in’ to circuitry behind sex in male fruit flies",
+      "published": "2016-11-15T17:52:33Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "subjects": [
+        {
+          "id": "neuroscience",
+          "name": "Neuroscience"
+        }
+      ]
+    },
+    {
+      "id": "6fe54f6e",
+      "title": "How fake hand foxes brain",
+      "published": "2016-10-20T12:22:51Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "impactStatement": "Researchers explain the changes that occur in the brain during the rubber hand illusion, creating a feeling of disembodiment from the hand.",
+      "subjects": [
+        {
+          "id": "neuroscience",
+          "name": "Neuroscience"
+        }
+      ]
+    },
+    {
+      "id": "88194ef7",
+      "title": "Females react differently than males to social isolation",
+      "published": "2016-10-11T17:00:00Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "subjects": [
+        {
+          "id": "neuroscience",
+          "name": "Neuroscience"
+        }
+      ]
+    },
+    {
+      "id": "26defce6",
+      "title": "Diabetes opens floodgates to fructose",
+      "published": "2016-10-11T13:00:00Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "subjects": [
+        {
+          "id": "biochemistry-chemical-biology",
+          "name": "Biochemistry and Chemical Biology"
+        },
+        {
+          "id": "cell-biology",
+          "name": "Cell Biology"
+        }
+      ]
+    },
+    {
+      "id": "a87a058c",
+      "title": "Overlooked plants defy drought",
+      "published": "2016-10-04T17:00:00Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "subjects": [
+        {
+          "id": "developmental-biology-stem-cells",
+          "name": "Developmental Biology and Stem Cells"
+        },
+        {
+          "id": "plant-biology",
+          "name": "Plant Biology"
+        }
+      ]
+    },
+    {
+      "id": "7e7220f6",
+      "title": "eLife partners with Hypothes.is to advance open scholarly annotation",
+      "published": "2016-09-14T11:10:11Z",
+      "updated": "2017-06-22T11:10:11Z",
+      "impactStatement": "The move will bring publishers and researchers an open annotation platform to create annotations for personal use, or as part of conversations with private groups or the general public."
+    },
+    {
+      "id": "ed5d36ac",
+      "title": "Surprise discovery in the blink of an eye",
+      "published": "2016-08-23T16:58:01Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "subjects": [
+        {
+          "id": "human-biology-medicine",
+          "name": "Human Biology and Medicine"
+        },
+        {
+          "id": "neuroscience",
+          "name": "Neuroscience"
+        }
+      ]
+    },
+    {
+      "id": "51dbadf9",
+      "title": "How sleep deprivation harms memory",
+      "published": "2016-08-23T16:48:44Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "subjects": [
+        {
+          "id": "neuroscience",
+          "name": "Neuroscience"
+        }
+      ]
+    },
+    {
+      "id": "47c4658d",
+      "title": "HIV is not a super-spreader of drug-resistant tuberculosis",
+      "published": "2016-08-09T16:52:03Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "subjects": [
+        {
+          "id": "genomics-evolutionary-biology",
+          "name": "Genomics and Evolutionary Biology"
+        },
+        {
+          "id": "microbiology-infectious-disease",
+          "name": "Microbiology and Infectious Disease"
+        }
+      ]
+    },
+    {
+      "id": "525adda1",
+      "title": "Echo templates aid mental mapping in bats",
+      "published": "2016-08-02T09:00:00Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "subjects": [
+        {
+          "id": "computational-systems-biology",
+          "name": "Computational and Systems Biology"
+        },
+        {
+          "id": "ecology",
+          "name": "Ecology"
+        }
+      ]
+    },
+    {
+      "id": "4f3abb74",
+      "title": "Dutch men and Latvian women tallest in world according to 100-year global height study",
+      "published": "2016-07-26T15:50:04Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "impactStatement": "The largest ever height study provides substantial insight into the global heights of young adult men and women between 1914 and 2014.",
+      "subjects": [
+        {
+          "id": "epidemiology-global-health",
+          "name": "Epidemiology and Global Health"
+        }
+      ]
+    },
+    {
+      "id": "6b912d50",
+      "title": "Travel broadens chimps' horizons too",
+      "published": "2016-07-19T17:00:00Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "impactStatement": "Researchers discover that travel fosters greater tool use for foraging in chimpanzees.",
+      "subjects": [
+        {
+          "id": "ecology",
+          "name": "Ecology"
+        }
+      ]
+    },
+    {
+      "id": "b723d37f",
+      "title": "How birds unlock their super-sense, ultraviolet vision",
+      "published": "2016-07-12T16:44:30Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "subjects": [
+        {
+          "id": "biochemistry-chemical-biology",
+          "name": "Biochemistry and Chemical Biology"
+        },
+        {
+          "id": "neuroscience",
+          "name": "Neuroscience"
+        }
+      ]
+    },
+    {
+      "id": "b61fc4bd",
+      "title": "New brainstem model reveals how brains control breathing",
+      "published": "2016-07-05T17:00:00Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "subjects": [
+        {
+          "id": "computational-systems-biology",
+          "name": "Computational and Systems Biology"
+        },
+        {
+          "id": "neuroscience",
+          "name": "Neuroscience"
+        }
+      ]
+    },
+    {
+      "id": "8390df1a",
+      "title": "Insights into the neurons that cause symptoms of Rett syndrome could guide search for new therapies",
+      "published": "2016-06-24T10:41:15Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "subjects": [
+        {
+          "id": "neuroscience",
+          "name": "Neuroscience"
+        }
+      ]
+    },
+    {
+      "id": "35c91197",
+      "title": "Scientists reveal sub-Saharan Africa’s legacy of past migrations over last 4,000 years",
+      "published": "2016-06-22T17:00:00Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "subjects": [
+        {
+          "id": "genomics-evolutionary-biology",
+          "name": "Genomics and Evolutionary Biology"
+        }
+      ]
+    },
+    {
+      "id": "a9eebb0e",
+      "title": "New plant engineering method could help fill demand for crucial malaria drug",
+      "published": "2016-06-14T17:00:00Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "subjects": [
+        {
+          "id": "biochemistry-chemical-biology",
+          "name": "Biochemistry and Chemical Biology"
+        },
+        {
+          "id": "plant-biology",
+          "name": "Plant Biology"
+        }
+      ]
+    },
+    {
+      "id": "8ee45992",
+      "title": "Research funders renew commitment to transforming science publishing",
+      "published": "2016-06-02T07:35:09Z",
+      "updated": "2017-06-01T07:35:09Z",
+      "impactStatement": "Non-profit eLife receives a second round of funding."
+    },
+    {
+      "id": "c34a440d",
+      "title": "Flatworms left in sunlight spur investigations into rare metabolic disorders",
+      "published": "2016-05-31T17:00:00Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "subjects": [
+        {
+          "id": "biochemistry-chemical-biology",
+          "name": "Biochemistry and Chemical Biology"
+        },
+        {
+          "id": "cell-biology",
+          "name": "Cell Biology"
+        }
+      ]
+    },
+    {
+      "id": "ecac3e6a",
+      "title": "eLife welcomes new member to its Board of Directors",
+      "published": "2016-05-24T07:17:20Z",
+      "updated": "2017-06-01T07:17:20Z",
+      "impactStatement": "eLife's new board member will direct the initiative in its aim to help scientists accelerate discovery by reshaping science publishing."
+    },
+    {
+      "id": "e3eae701",
+      "title": "Study suggests new treatment for seizures",
+      "published": "2016-05-10T15:10:56Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "subjects": [
+        {
+          "id": "neuroscience",
+          "name": "Neuroscience"
+        }
+      ]
+    },
+    {
+      "id": "aeff594c",
+      "title": "Threat of novel swine flu viruses in pigs and humans",
+      "published": "2016-04-26T12:31:43Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "subjects": [
+        {
+          "id": "epidemiology-global-health",
+          "name": "Epidemiology and Global Health"
+        },
+        {
+          "id": "microbiology-infectious-disease",
+          "name": "Microbiology and Infectious Disease"
+        }
+      ]
+    },
+    {
+      "id": "8c2dcd41",
+      "title": "Where next for Zika virus?",
+      "published": "2016-04-20T14:37:09Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "impactStatement": "A study led by the University of Oxford maps the global environmental suitability for the spread of Zika virus.",
+      "subjects": [
+        {
+          "id": "epidemiology-global-health",
+          "name": "Epidemiology and Global Health"
+        },
+        {
+          "id": "microbiology-infectious-disease",
+          "name": "Microbiology and Infectious Disease"
+        }
+      ]
+    },
+    {
+      "id": "23c3e358",
+      "title": "Double advantage of potential new diabetes treatment",
+      "published": "2016-04-20T14:30:00Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "subjects": [
+        {
+          "id": "human-biology-medicine",
+          "name": "Human Biology and Medicine"
+        }
+      ]
+    },
+    {
+      "id": "f2c4bd4e",
+      "title": "Tropical birds develop ‘superfast’ wing muscles for mating, not flying",
+      "published": "2016-04-13T08:15:00Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "subjects": [
+        {
+          "id": "ecology",
+          "name": "Ecology"
+        },
+        {
+          "id": "neuroscience",
+          "name": "Neuroscience"
+        }
+      ]
+    },
+    {
+      "id": "dfbd87b2",
+      "title": "Deadly flatworm’s skin rejuvenation may explain its long-term survival in humans",
+      "published": "2016-03-22T17:00:00Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "subjects": [
+        {
+          "id": "developmental-biology-stem-cells",
+          "name": "Developmental Biology and Stem Cells"
+        },
+        {
+          "id": "microbiology-infectious-disease",
+          "name": "Microbiology and Infectious Disease"
+        }
+      ]
+    },
+    {
+      "id": "fd576be3",
+      "title": "Scientists reveal how animals find their way ‘in the dark’",
+      "published": "2016-03-22T16:45:00Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "subjects": [
+        {
+          "id": "neuroscience",
+          "name": "Neuroscience"
+        }
+      ]
+    },
+    {
+      "id": "e314b0f1",
+      "title": "Complex learning dismantles barriers in the brain",
+      "published": "2016-03-15T18:04:11Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "impactStatement": "Intensive training in a complex task can overcome the divisions of the separate areas in our brain dedicated to specific senses.",
+      "subjects": [
+        {
+          "id": "neuroscience",
+          "name": "Neuroscience"
+        }
+      ]
+    },
+    {
+      "id": "98827cf9",
+      "title": "Similarities in fruit fly nervous systems transform view of metamorphosis",
+      "published": "2016-03-15T17:49:18Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "subjects": [
+        {
+          "id": "developmental-biology-stem-cells",
+          "name": "Developmental Biology and Stem Cells"
+        },
+        {
+          "id": "neuroscience",
+          "name": "Neuroscience"
+        }
+      ]
+    },
+    {
+      "id": "df8aed2a",
+      "title": "Groundbreaking text mining project highlights ‘gender gap’ in scientific research",
+      "published": "2016-03-11T16:46:39Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "impactStatement": "An analysis of 15,000 mouse studies showed that around half of them failed to report the sex and age of the animals involved, highlighting the issue of reproducibility in scientific research.",
+      "subjects": [
+        {
+          "id": "computational-systems-biology",
+          "name": "Computational and Systems Biology"
+        }
+      ]
+    },
+    {
+      "id": "6037db7b",
+      "title": "Drug-resistant genes spread through environment, not meat products",
+      "published": "2016-03-11T16:12:27Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "subjects": [
+        {
+          "id": "epidemiology-global-health",
+          "name": "Epidemiology and Global Health"
+        },
+        {
+          "id": "microbiology-infectious-disease",
+          "name": "Microbiology and Infectious Disease"
+        }
+      ]
+    },
+    {
+      "id": "c9fb0f94",
+      "title": "Scientists uncover history of ancient viruses as far back as 30 million years ago",
+      "published": "2016-03-08T17:45:00Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "subjects": [
+        {
+          "id": "genomics-evolutionary-biology",
+          "name": "Genomics and Evolutionary Biology"
+        },
+        {
+          "id": "microbiology-infectious-disease",
+          "name": "Microbiology and Infectious Disease"
+        }
+      ]
+    },
+    {
+      "id": "e1fc02fc",
+      "title": "Studies explain adolescents’ vulnerability to addictive drugs",
+      "published": "2016-03-01T14:41:38Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "subjects": [
+        {
+          "id": "neuroscience",
+          "name": "Neuroscience"
+        }
+      ]
+    },
+    {
+      "id": "0b5b66a1",
+      "title": "Slime can see",
+      "published": "2016-02-10T17:30:00Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "impactStatement": "Researchers reveal that bacterial cells act as the equivalent of a microscopic eyeball or the world’s oldest and smallest camera eye.",
+      "subjects": [
+        {
+          "id": "biophysics-structural-biology",
+          "name": "Biophysics and Structural Biology"
+        },
+        {
+          "id": "microbiology-infectious-disease",
+          "name": "Microbiology and Infectious Disease"
+        }
+      ]
+    },
+    {
+      "id": "ca7d0e9b",
+      "title": "Scientists’ robotically driven system could reduce cost of discovering drug and target interactions",
+      "published": "2016-02-10T17:15:00Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "subjects": [
+        {
+          "id": "cell-biology",
+          "name": "Cell Biology"
+        },
+        {
+          "id": "computational-systems-biology",
+          "name": "Computational and Systems Biology"
+        }
+      ]
+    },
+    {
+      "id": "b645dd8d",
+      "title": "Scientists create imaging ‘toolkit' to help identify new brain tumour drug targets",
+      "published": "2016-02-02T17:00:00Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "subjects": [
+        {
+          "id": "neuroscience",
+          "name": "Neuroscience"
+        }
+      ]
+    },
+    {
+      "id": "0673e545",
+      "title": "Scientists prove key aspect of evolutionary theory",
+      "published": "2016-01-26T09:00:00Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "subjects": [
+        {
+          "id": "genomics-evolutionary-biology",
+          "name": "Genomics and Evolutionary Biology"
+        },
+        {
+          "id": "microbiology-infectious-disease",
+          "name": "Microbiology and Infectious Disease"
+        }
+      ]
+    },
+    {
+      "id": "488608fd",
+      "title": "Study illuminates new design strategies for optogenetic tools",
+      "published": "2016-01-12T17:00:00Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "subjects": [
+        {
+          "id": "biochemistry-chemical-biology",
+          "name": "Biochemistry and Chemical Biology"
+        },
+        {
+          "id": "biophysics-structural-biology",
+          "name": "Biophysics and Structural Biology"
+        }
+      ]
+    },
+    {
+      "id": "633a92dd",
+      "title": "Being anxious could be good for you -- in a crisis",
+      "published": "2016-01-08T17:00:00Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "impactStatement": "Researchers identify for the first time specific regions of the brain involved in the apparent 'sixth sense' we have for danger.",
+      "subjects": [
+        {
+          "id": "neuroscience",
+          "name": "Neuroscience"
+        }
+      ]
+    },
+    {
+      "id": "012a1b86",
+      "title": "Generous mothers receive less nagging",
+      "published": "2016-01-06T17:00:00Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "impactStatement": "In social species, such as mice and humans, mothers will be nagged less by their offspring if they are already generous providers.",
+      "subjects": [
+        {
+          "id": "genomics-evolutionary-biology",
+          "name": "Genomics and Evolutionary Biology"
+        }
+      ]
+    },
+    {
+      "id": "ec733c9a",
+      "title": "Could 2016 be a bad year for the malaria parasite in Africa?",
+      "published": "2015-12-31T17:00:00Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "subjects": [
+        {
+          "id": "epidemiology-global-health",
+          "name": "Epidemiology and Global Health"
+        },
+        {
+          "id": "ecology",
+          "name": "Ecology"
+        }
+      ]
+    },
+    {
+      "id": "ed0048d9",
+      "title": "Midnight munchies mangle memory",
+      "published": "2015-12-22T17:00:00Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "impactStatement": "Researchers discover that eating late at night can negatively impact learning and memory.",
+      "subjects": [
+        {
+          "id": "neuroscience",
+          "name": "Neuroscience"
+        }
+      ]
+    },
+    {
+      "id": "14c3f653",
+      "title": "\"Hunger hormone\" is boosted by restricted meal times",
+      "published": "2015-12-16T17:00:00Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "impactStatement": "Scientists identify how the hunger hormone ghrelin allows rats to eat more when faced with restricted feeding schedules.",
+      "subjects": [
+        {
+          "id": "neuroscience",
+          "name": "Neuroscience"
+        }
+      ]
+    },
+    {
+      "id": "23543235",
+      "title": "Scientists warn light pollution can stop coral from spawning",
+      "published": "2015-12-15T17:30:00Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "impactStatement": "Researchers discover that exposure to artificial light hinders reproduction in coral.",
+      "subjects": [
+        {
+          "id": "ecology",
+          "name": "Ecology"
+        }
+      ]
+    },
+    {
+      "id": "a4769bff",
+      "title": "Golden discovery of novel imaging technique captures beauty of metal-labeled neurons in 3D",
+      "published": "2015-12-15T17:00:00Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "subjects": [
+        {
+          "id": "neuroscience",
+          "name": "Neuroscience"
+        }
+      ]
+    },
+    {
+      "id": "80445e0a",
+      "title": "Hummingbirds rely on raw power, not physique, to outmanoeuvre rivals",
+      "published": "2015-11-19T13:00:00Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "subjects": [
+        {
+          "id": "ecology",
+          "name": "Ecology"
+        },
+        {
+          "id": "neuroscience",
+          "name": "Neuroscience"
+        }
+      ]
+    },
+    {
+      "id": "dff1a0d2",
+      "title": "First insights into changes to developing brain caused by gene associated with autism",
+      "published": "2015-11-17T13:00:00Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "subjects": [
+        {
+          "id": "neuroscience",
+          "name": "Neuroscience"
+        }
+      ]
+    },
+    {
+      "id": "5a0eb7c9",
+      "title": "New test for ancient DNA authenticity throws doubt on Stone Age wheat trade",
+      "published": "2015-11-03T08:00:00Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "subjects": [
+        {
+          "id": "genomics-evolutionary-biology",
+          "name": "Genomics and Evolutionary Biology"
+        },
+        {
+          "id": "plant-biology",
+          "name": "Plant Biology"
+        }
+      ]
+    },
+    {
+      "id": "9f5b9ed9",
+      "title": "Early hospitalisation key to survival for Ebola victims in the Democratic Republic of the Congo",
+      "published": "2015-11-03T08:00:00Z",
+      "updated": "2017-04-26T12:55:14Z",
+      "subjects": [
+        {
+          "id": "epidemiology-global-health",
+          "name": "Epidemiology and Global Health"
+        }
+      ]
+    }
+  ]
+}
