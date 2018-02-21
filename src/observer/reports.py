@@ -6,7 +6,7 @@ from collections import OrderedDict
 from et3.utils import do_all_if_tuple as mapfn
 from .logic import verified_subjects
 from slugify import slugify
-from django.db.models import Count
+from django.db.models import Count, OuterRef, Subquery, Sum
 from django.db.models.functions import TruncDay
 
 
@@ -121,11 +121,45 @@ def profile_count():
     * returns a daily count of profiles
     * ordered by the day it was captured, most recent to least recent
     """
+    '''
     return models.Profile.objects \
         .annotate(day=TruncDay('datetime_record_created')) \
         .values('day') \
         .annotate(count=Count('id')) \
         .order_by('-day')
+    '''
+    # all 'id' values older than the date in the parent query
+    prev_records = models.Profile.objects \
+        .filter(datetime_record_created__lte=OuterRef('datetime_record_created')) \
+        .order_by() \
+        .values('id')
+
+    # results are aggregated by YMD and the count of `
+    q = models.Profile.objects \
+        .annotate(day=TruncDay('datetime_record_created')) \
+        .values('day') \
+        .annotate(count=Count(Subquery(prev_records))) \
+        .order_by('-day')
+
+    #print(q.query)
+
+    #TODO: works in psql
+    # https://stackoverflow.com/questions/35781669/clean-way-to-use-postgresql-window-functions-in-django-orm
+    q = '''SELECT datetime_record_created, sum(count(id)) OVER (ORDER BY datetime_record_created)
+FROM observer_profile
+GROUP BY datetime_record_created
+order by datetime_record_created desc'''
+
+    from django.db import connection
+    with connection.cursor() as cursor:
+        cursor.execute(q)
+        return cursor.fetchall()
+    
+
+    print(list(q))
+    
+    return q
+
 
 #
 #

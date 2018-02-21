@@ -2,9 +2,10 @@ from annoying.fields import JSONField
 from django.db import models
 from django.db.models import (
     BigIntegerField, PositiveSmallIntegerField, PositiveIntegerField,
-    CharField, DateTimeField, TextField, NullBooleanField, EmailField,
+    CharField, DateTimeField, DateField, TextField, NullBooleanField, EmailField,
     ManyToManyField
 )
+from django.utils import timezone
 
 POA, VOR = 'poa', 'vor'
 UNKNOWN_TYPE = 'unknown-type'
@@ -239,7 +240,7 @@ class Profile(models.Model):
     # WARN: this is data used in reports that cannot be re-created from the API
     # it doesn't exist anywhere else. all other data in observer can be re-scraped and re-generated except this.
     # as such, it doesn't belong here but in the profiles db
-    datetime_record_created = DateTimeField(auto_now_add=True, help_text="added to the *observer database*, not date of profile creation")
+    datetime_record_created = DateField(default=timezone.now, help_text="added to the *observer database*, not date of profile creation")
 
     class Meta:
         ordering = ('-datetime_record_created',)
