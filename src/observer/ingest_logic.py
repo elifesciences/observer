@@ -360,7 +360,16 @@ def regenerate_article(msid):
 
 def regenerate_many_articles(msid_list, batches_of=25):
     "commits articles in batches of 25 by default"
-    do_all_atomically(_regenerate_article, msid_list, batches_of)
+    def safe_regen(msid):
+        try:
+            # this is a nested transaction!
+            # this is important for articles because they must be ingested in order
+            # and rolled back as a logical group. 
+            # if one version of an article fails, they all do, but the parent transaction is not
+            return regenerate_article(msid)
+        except (AssertionError, KeyError) as err:
+            LOG.error("bad data encountered, skipping regeneration of %s" % msid)
+    do_all_atomically(safe_regen, msid_list, batches_of)
 
 def regenerate_all_articles():
     regenerate_many_articles(logic.known_articles())
@@ -592,8 +601,9 @@ def file_upsert(path, ctype=models.LAX_AJSON, regen=True, quiet=False):
             raise
 
 @transaction.atomic
-def bulk_file_upsert(article_json_dir):
+def bulk_file_upsert(article_json_dir, regen=True):
     "insert/update ArticleJSON from a directory of files"
     paths = sorted(utils.listfiles(article_json_dir, ['.json']))
     msid_list = sorted(set(lmap(partial(file_upsert, regen=False, quiet=True), paths)))
-    return regenerate_many_articles(msid_list)
+    if regen:
+        regenerate_many_articles(msid_list)
