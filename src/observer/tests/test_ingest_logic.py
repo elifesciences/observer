@@ -8,6 +8,7 @@ from observer.ingest_logic import p, pp
 class Logic(BaseCase):
     def setUp(self):
         self.unique_article_count = 5
+        self.article_fixture_count = 12
         self.article_json = join(self.fixture_dir, 'ajson', 'elife-13964-v1.xml.json')
 
     def test_flatten(self):
@@ -32,6 +33,28 @@ class Logic(BaseCase):
         self.assertEqual(models.ArticleJSON.objects.count(), 0)
         logic.file_upsert(self.article_json)
         self.assertEqual(models.ArticleJSON.objects.count(), 1)
+
+    def test_bulk_regenerate_ajson(self):
+        "an error involving regenerating one article doesn't affect all articles in transaction"
+        self.assertEqual(models.Article.objects.count(), 0)
+        logic.bulk_file_upsert(join(self.fixture_dir, 'ajson'), regen=False)
+
+        # no articles, expected json data
+        self.assertEqual(0, models.Article.objects.count())
+        self.assertEqual(self.article_fixture_count, models.ArticleJSON.objects.count())
+
+        # skitch a fixture
+        notajson = {'pants': 'party'}
+        randajson = models.ArticleJSON.objects.filter(msid='13964', version=2)[0] # 13964 has three versions.
+        randajson.ajson = notajson
+        randajson.save()
+
+        # now we regenerate and one less than expected is expected
+        logic.regenerate_all_articles()
+        self.assertEqual(self.unique_article_count - 1, models.Article.objects.count())
+
+        # v1 and v3 would have been ingested fine but all should be rolled back when any one fails
+        self.assertRaises(models.Article.DoesNotExist, models.Article.objects.get, msid=13964)
 
 
 class LogicFns(BaseCase):
