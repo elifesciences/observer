@@ -11,7 +11,7 @@ except ImportError:
     from . import utils
 
 def set_obj_attrs(obj, data):
-    def set(obj, key, val):
+    def _set(obj, key, val):
         if ':' in key:
             # namespaced setter, assumes ns has been loaded
             ns, key = key.split(':', 1)
@@ -22,7 +22,7 @@ def set_obj_attrs(obj, data):
                 setter(row)
         else:
             getattr(obj, key)(val)
-    [set(obj, key, val) for key, val in data.items()]
+    [_set(obj, key, val) for key, val in data.items()]
 
 def mkfeed(report):
     fg = FeedGenerator()
@@ -92,32 +92,3 @@ def format_report(report, context):
     add_many_entries(feed, map(article_to_rss_entry, query)) # deliberate use of lazy map
     body = feed.rss_str(pretty=True).decode('utf-8')
     return HttpResponse(body, content_type='text/xml')
-
-#
-#
-#
-
-'''
-# works, but no coverage
-if __name__ == '__main__':
-    demo_report = {
-        'title': 'a demonstration',
-        'id': 'data.elifesciences.org/latest.rss',
-        'description': 'this is a simple asdf'
-    }
-    entry = {
-        'title': 'item title',
-        'link': {'href': 'some id'},
-        'dc:dc_date': '2017-01-01',
-        'category': [
-            {'term': 'foo', 'label': 'Foo'},
-            {'term': 'foo', 'label': 'Foo'}
-        ]
-    }
-
-    feed = mkfeed(demo_report)
-    add_entry(feed, entry)
-    #entryobj = add_entry(feed, entry)
-    # entryobj.dc.dc_date('2017-01-01')
-    print(feed.rss_str(pretty=True).decode('utf8'))
-'''

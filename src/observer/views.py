@@ -76,11 +76,11 @@ def chop(q, page, per_page, order, order_by):
 
     return total, q
 
-def paginate_report_results(report, rargs):
+def paginate_report_results(reportfn, rargs):
     # TODO: shift this into request_args
-    order_by = report.meta['order_by']
+    order_by = reportfn.meta['order_by']
 
-    report = report(**rargs['kwargs']) # results will stay lazy until realised
+    report_data = reportfn(**rargs['kwargs']) # results will stay lazy until realised
 
     # this gives us an opportunity to chop them up and enforce any ordering
 
@@ -89,13 +89,13 @@ def paginate_report_results(report, rargs):
 
     # TODO: order_by here is a bit gnarly.
     # see: https://github.com/elifesciences/elife-metrics/blob/develop/src/metrics/api_v2_logic.py#L7
-    report['count'], report['items'] = chop(report['items'],
-                                            *vals(rargs, ['page', 'per_page', 'order']), order_by=order_by)
+    report_data['count'], report_data['items'] = \
+        chop(report_data['items'], *vals(rargs, ['page', 'per_page', 'order']), order_by=order_by)
 
     # update the report with any user overrides
-    report.update(rargs)
+    report_data.update(rargs)
 
-    return report
+    return report_data
 
 def readme_markdown():
     context = {
@@ -122,7 +122,7 @@ def ping(request):
 
 def report(request, name, format_hint=None):
     try:
-        report = reports.get_report(name)
+        reportfn = reports.get_report(name)
     except KeyError:
         raise Http404("report not found")
     try:
@@ -130,10 +130,10 @@ def report(request, name, format_hint=None):
         overrides = {}
         if format_hint:
             overrides['format'] = format_hint
-        rargs = request_args(request, report.meta, **overrides)
+        rargs = request_args(request, reportfn.meta, **overrides)
 
         # truncate report results, enforce any user ordering
-        report_paginated = paginate_report_results(report, rargs)
+        report_paginated = paginate_report_results(reportfn, rargs)
 
         # additional things to pass to whatever is rendering the report
         # keys here will override any found in the report

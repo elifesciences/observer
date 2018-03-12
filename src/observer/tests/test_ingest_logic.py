@@ -206,7 +206,7 @@ class PressPackages(BaseCase):
         ppid = "81d42f7d"
         expected = self.jsonfix('presspackages', ppid + '.json')
         with patch('observer.consume.consume', return_value=expected):
-            pp = logic.download_presspackage(ppid)
+            ppobj = logic.download_presspackage(ppid)
             self.assertEqual(models.ArticleJSON.objects.count(), 1)
 
         expected_attrs = {
@@ -216,7 +216,7 @@ class PressPackages(BaseCase):
             'ajson': expected
         }
         for attr, expected in expected_attrs.items():
-            self.assertEqual(getattr(pp, attr), expected)
+            self.assertEqual(getattr(ppobj, attr), expected)
 
     def test_download_many_presspackages(self):
         expected = self.jsonfix('presspackages', 'many.json')

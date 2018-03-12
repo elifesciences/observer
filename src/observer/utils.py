@@ -48,7 +48,7 @@ def listfiles(path, ext_list=None):
         path_list = filter(lambda path: os.path.splitext(path)[1] in ext_list, path_list)
     return sorted(filter(os.path.isfile, path_list))
 
-def update(d1, d2):
+def dict_update(d1, d2):
     d1.update(d2)
     return d1
 
