@@ -1,5 +1,7 @@
 # from observer import ingest_logic # DONT DO THIS - circular dependencies.
 from observer import models
+from django.db.models import IntegerField
+from django.db.models.functions import Cast
 
 def known_content(blah):
     return models.ArticleJSON.objects \
@@ -10,7 +12,12 @@ def known_content(blah):
 
 def known_articles():
     "returns a query set of manuscript_ids from newest to oldest"
-    return known_content(models.LAX_AJSON)
+    return models.ArticleJSON.objects \
+      .filter(ajson_type=models.LAX_AJSON) \
+      .annotate(msid_as_int=Cast('msid', IntegerField())) \
+      .values_list('msid_as_int', flat=True) \
+      .order_by('-msid_as_int') \
+      .distinct()
 
 def known_presspackages():
     return known_content(models.PRESSPACKAGE)
