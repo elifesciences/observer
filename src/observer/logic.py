@@ -13,11 +13,11 @@ def known_content(blah):
 def known_articles():
     "returns a query set of manuscript_ids from newest to oldest"
     return models.ArticleJSON.objects \
-      .filter(ajson_type=models.LAX_AJSON) \
-      .annotate(msid_as_int=Cast('msid', IntegerField())) \
-      .values_list('msid_as_int', flat=True) \
-      .order_by('-msid_as_int') \
-      .distinct()
+        .filter(ajson_type=models.LAX_AJSON) \
+        .annotate(msid_as_int=Cast('msid', IntegerField())) \
+        .values_list('msid_as_int', flat=True) \
+        .order_by('-msid_as_int') \
+        .distinct()
 
 def known_presspackages():
     return known_content(models.PRESSPACKAGE)
