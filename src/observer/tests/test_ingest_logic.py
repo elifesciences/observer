@@ -113,6 +113,15 @@ class Article(BaseCase):
             logic.upsert_ajson(*args)
         self.assertEqual(2, models.ArticleJSON.objects.count())
 
+    def test_id_normalised(self):
+        msid, version, data = '00003', 1, {}
+        logic.upsert_ajson(msid, version, models.LAX_AJSON, data)
+        # JSON was inserted
+        self.assertEqual(models.ArticleJSON.objects.count(), 1)
+        # and it's msid was normalised
+        expected_id = '3'
+        models.ArticleJSON.objects.get(msid=expected_id)
+
 #
 #
 #

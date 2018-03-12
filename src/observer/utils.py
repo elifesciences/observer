@@ -173,6 +173,9 @@ def take(n, items):
 def pad_msid(msid):
     return '%05d' % int(msid)
 
+def norm_msid(msid):
+    return str(msid).lstrip('0')
+
 def do_all_atomically(fn, idlist, batches_of=25):
     @transaction.atomic
     def _(sub_list):

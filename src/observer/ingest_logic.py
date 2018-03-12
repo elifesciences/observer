@@ -289,7 +289,7 @@ def article_presave_checks(given_data, flat_data):
 def upsert_ajson(msid, version, data_type, article_data):
     "insert/update ArticleJSON from a dictionary of article data"
     article_data = {
-        'msid': str(msid),
+        'msid': utils.norm_msid(msid),
         'version': version,
         'ajson': article_data,
         'ajson_type': data_type
@@ -364,7 +364,7 @@ def regenerate_many_articles(msid_list, batches_of=25):
         try:
             # this is a nested transaction!
             # this is important for articles because they must be ingested in order
-            # and rolled back as a logical group. 
+            # and rolled back as a logical group.
             # if one version of an article fails, they all do, but the parent transaction is not
             return regenerate_article(msid)
         except (AssertionError, KeyError) as err:
