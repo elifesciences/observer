@@ -200,12 +200,12 @@ class ArticleJSON(models.Model):
         ordering = ('-msid', 'version') # [09561 v1, 09561 v2, 09560 v1]
 
     def __str__(self):
-        if self.ajson_type == LAX_AJSON:
-            return "{msid:05d} v{version}".format(msid=int(self.msid), version=self.version)
-        return "{obj.msid}".format(obj=self)
+        return self.msid
 
     def __repr__(self):
-        return '<ArticleJSON "%s">' % self
+        if self.version:
+            return '<ArticleJSON %r %sv%s>' % (self.ajson_type, self.msid, self.version)
+        return '<ArticleJSON %r %s>' % (self.ajson_type, self.msid)
 
 
 # TODO - this would require scraping full press package data

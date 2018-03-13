@@ -131,15 +131,15 @@ def profile_count():
 #
 #
 
-def format_report(report, serialisation, context):
+def format_report(report_data, serialisation, context):
     # the report has been executed at this point
     known_formats = {
         RSS: rss.format_report,
         CSV: csv.format_report,
     }
-    ensure(serialisation in report['serialisations'], "unsupported format %r for report %s" % (format, report['title']))
-    report = copy.deepcopy(report)
-    return known_formats[serialisation](report, context)
+    ensure(serialisation in report_data['serialisations'], "unsupported format %r for report %s" % (format, report_data['title']))
+    report_data = copy.deepcopy(report_data)
+    return known_formats[serialisation](report_data, context)
 
 # replace these with some fancy introspection of the reports module
 

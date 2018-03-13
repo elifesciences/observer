@@ -13,7 +13,7 @@ def http_dummy_params(reportfn):
     kwargs = {}
     if reportfn.meta['params']:
         kwargs = utils.subdict(param_map, reportfn.meta['params'].keys())
-        kwargs = reduce(utils.update, kwargs.values())
+        kwargs = reduce(utils.dict_update, kwargs.values())
     return kwargs
 
 def dummy_params(reportfn):
@@ -31,9 +31,9 @@ class Zero(BaseCase):
         self.assertEqual(models.Article.objects.count(), 0)
         for report_name, reportfn in reports.known_report_idx().items():
             report = reportfn(**dummy_params(reportfn))
-            for format in report['serialisations']:
+            for output_format in report['serialisations']:
                 context = {}
-                resp = reports.format_report(report, format, context)
+                resp = reports.format_report(report, output_format, context)
                 # realize any results
                 if resp.streaming:
                     lmap(str, resp.streaming_content)
@@ -51,9 +51,9 @@ class One(BaseCase):
         "all known reports can be formatted with results"
         for report_name, reportfn in reports.known_report_idx().items():
             report = reportfn(**dummy_params(reportfn))
-            for format in report['serialisations']:
+            for output_format in report['serialisations']:
                 context = {}
-                resp = reports.format_report(report, format, context)
+                resp = reports.format_report(report, output_format, context)
                 # realize any results
                 if resp.streaming:
                     lmap(str, resp.streaming_content)
@@ -71,8 +71,8 @@ class Two(BaseCase):
         "all known reports in all supported formats can be hit with a successful response"
         for report_name, reportfn in reports.known_report_idx().items():
             url = reverse('report', kwargs={'name': report_name})
-            for format in reportfn.meta['serialisations']:
-                args = {'format': format}
+            for output_format in reportfn.meta['serialisations']:
+                args = {'format': output_format}
                 args.update(http_dummy_params(reportfn))
                 resp = self.c.get(url, args)
                 self.assertEqual(resp.status_code, 200, "report at %r returned non-200 response" % url)
@@ -109,16 +109,16 @@ class Four(BaseCase):
         "providing a file extension to a report name is the same as providing ?format=foo"
         for report_name, reportfn in reports.known_report_idx().items():
             url = reverse('report', kwargs={'name': report_name})
-            for format in reportfn.meta['serialisations']:
-                furl = url + ".%s" % format.lower() # ll /report/latest-articles.csv
+            for output_format in reportfn.meta['serialisations']:
+                furl = url + ".%s" % output_format.lower() # ll /report/latest-articles.csv
                 resp = self.c.get(furl, http_dummy_params(reportfn))  # , {'format': format}) # deliberate, no explicit param is provided
                 self.assertEqual(resp.status_code, 200, "report at %r returned non-200 response" % url)
 
                 # test the content
-                if format == reports.CSV:
+                if output_format == reports.CSV:
                     # it's a list of strings with commas in it.
                     list(resp.streaming_content)[0].decode('utf8').split(',')[0]
-                elif format == reports.RSS:
+                elif output_format == reports.RSS:
                     # it's an xml doc
                     prefix = "<?xml version='1.0' encoding='UTF-8'?>"
                     resp.content.decode('utf8').startswith(prefix)
@@ -128,22 +128,22 @@ class Four(BaseCase):
 
         for report_name, reportfn in reports.known_report_idx().items():
             url = reverse('report', kwargs={'name': report_name})
-            for format in reportfn.meta['serialisations']:
+            for output_format in reportfn.meta['serialisations']:
                 # nothing has a .foo ext, it should be ignored in favour of the format
                 furl = url + ".foo" # ll /report/latest-articles.foo
                 resp1 = self.c.get(furl, http_dummy_params(reportfn))
                 self.assertEqual(resp1.status_code, 400) # bad request
 
-                args = {'format': format}
+                args = {'format': output_format}
                 args.update(http_dummy_params(reportfn))
                 resp2 = self.c.get(furl, args) # good request, provide an explicit format param
                 self.assertEqual(resp2.status_code, 200, "report at %r returned non-200 response" % url)
 
                 # test the content
-                if format == reports.CSV:
+                if output_format == reports.CSV:
                     # it's a list of strings with commas in it.
                     list(resp2.streaming_content)[0].decode('utf8').split(',')[0]
-                elif format == reports.RSS:
+                elif output_format == reports.RSS:
                     # it's an xml doc
                     prefix = "<?xml version='1.0' encoding='UTF-8'?>"
                     resp2.content.decode('utf8').startswith(prefix)

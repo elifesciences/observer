@@ -61,9 +61,9 @@ def consume(endpoint, usrparams={}):
 def default_idfn(row):
     return row['id']
 
-def upsert(id, content_type, content):
+def upsert(iid, content_type, content):
     data = {
-        'msid': id,
+        'msid': iid,
         'version': None,
         'ajson': content,
         'ajson_type': content_type
@@ -73,11 +73,11 @@ def upsert(id, content_type, content):
 def upsert_all(content_type, rows, idfn):
     def do_safely(row):
         try:
-            id = idfn(row)
+            iid = idfn(row)
         except Exception as err:
-            LOG.error("failed to extract id from row: %s", row)
+            LOG.error("failed to extract item id from row: %s", row)
             return
-        return upsert(id, content_type, row)
+        return upsert(iid, content_type, row)
 
     with transaction.atomic():
         utils.lmap(do_safely, rows)
@@ -114,7 +114,7 @@ def single(endpoint, idfn=None, **kwargs):
     idfn = idfn or default_idfn
     return upsert(idfn(data), content_type, data)
 
-def all(endpoint, idfn=None, **kwargs):
+def allitems(endpoint, idfn=None, **kwargs):
     ini = consume(endpoint, {'per-page': 1})
     per_page = 100
     num_pages = math.ceil(ini["total"] / float(per_page))

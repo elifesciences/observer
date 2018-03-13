@@ -130,9 +130,9 @@ def calc_vor_published(args):
     # can't calculate, ignore
     return EXCLUDE_ME
 
-def has_key(key):
+def has_key(k):
     def fn(v):
-        return key in v
+        return k in v
     return fn
 
 def find_author(art):
@@ -289,7 +289,7 @@ def article_presave_checks(given_data, flat_data):
 def upsert_ajson(msid, version, data_type, article_data):
     "insert/update ArticleJSON from a dictionary of article data"
     article_data = {
-        'msid': str(msid),
+        'msid': utils.norm_msid(msid),
         'version': version,
         'ajson': article_data,
         'ajson_type': data_type
@@ -304,8 +304,8 @@ def extract_children(mush):
     }
 
     created_children = {}
-    for key, kwargs in known_children.items():
-        data = mush[key]
+    for name, kwargs in known_children.items():
+        data = mush[name]
         if not isinstance(data, list):
             data = [data]
 
@@ -314,7 +314,7 @@ def extract_children(mush):
             kwargs['orig_data'] = row
             objects.append(create_or_update(**kwargs)[0])
 
-        created_children[key] = objects
+        created_children[name] = objects
 
     delall(mush, known_children.keys())
 
@@ -364,7 +364,7 @@ def regenerate_many_articles(msid_list, batches_of=25):
         try:
             # this is a nested transaction!
             # this is important for articles because they must be ingested in order
-            # and rolled back as a logical group. 
+            # and rolled back as a logical group.
             # if one version of an article fails, they all do, but the parent transaction is not
             return regenerate_article(msid)
         except (AssertionError, KeyError) as err:
@@ -492,16 +492,16 @@ def download_presspackage(ppid):
     return first(consume.single("press-packages/{id}", id=ppid))
 
 def download_all_presspackages():
-    consume.all("press-packages")
+    consume.allitems("press-packages")
 
 
 #
 # profiles
 #
 
-def trunc(len):
+def trunc(length):
     def _(v):
-        return str(v)[:len]
+        return str(v)[:length]
     return _
 
 PF_DESC = {
@@ -530,7 +530,7 @@ def download_profile(pfid):
     return consume.single("profiles/{id}", id=pfid)
 
 def download_all_profiles():
-    return consume.all("profiles")
+    return consume.allitems("profiles")
 
 #
 #
