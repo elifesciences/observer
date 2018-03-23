@@ -30,6 +30,7 @@ def wrangle_dt_published(art):
     return EXCLUDE_ME
 
 def getartobj(msid):
+    raise StateError("scraping may no longer involve querying the database. all data neccessary to scrape must be passed in at et3.render time")
     try:
         return models.Article.objects.get(msid=msid)
     except models.Article.DoesNotExist:
@@ -259,8 +260,9 @@ ART_POPULARITY = {
 }
 DESC.update(ART_POPULARITY)
 
-def flatten_article_json(data, history=None, metrics=None):
+def flatten_article_json(data, known_versions=[], history=None, metrics=None):
     "takes article-json and squishes it into something obs can digest"
+    data['known-versions'] = known_versions # raw article json the scrape can use to inspect historical values
     data['history'] = history or {} # EJP
     data['metrics'] = metrics or {} # elife-metrics
     return render.render_item(DESC, data)
@@ -297,6 +299,10 @@ def upsert_ajson(msid, version, data_type, article_data):
     version and ensure(version > 0, "'version' in ArticleJSON must be as a positive integer")
     return create_or_update(models.ArticleJSON, article_data, ['msid', 'version'])
 
+#
+#
+#
+
 def extract_children(mush):
     known_children = {
         'subjects': {'Model': models.Subject, 'key_list': ["name"]},
@@ -320,10 +326,66 @@ def extract_children(mush):
 
     return mush, created_children
 
+def extract_children2(mush):
+    known_children = {
+        'subjects': {'Model': models.Subject, 'key_list': ["name"]},
+        'authors': {'Model': models.Author},
+    }
 
-def _regenerate_article(msid):
+    children = []
+    for childtype, kwargs in known_children.items():
+        data = mush[childtype]
+        if not isinstance(data, list):
+            data = [data] # TODO sometimes it's not a list? investigate
+
+        children.append([(childtype, utils.dict_update(kwargs, {'orig_data': row}, immutable=True)) for row in data])
+
+    # remove the children from the mush, they must be saved separately
+    delall(mush, known_children.keys())
+    return mush, children
+
+def extract_article(msid):
+    article_data = models.ArticleJSON.objects.filter(msid=str(msid), ajson_type=models.LAX_AJSON).order_by('version') # ASC
+    if not article_data.count():
+        return None
+
+    try:
+        metrics_data = models.ArticleJSON.objects.get(msid=str(msid), ajson_type=models.METRICS_SUMMARY).ajson
+    except models.ArticleJSON.DoesNotExist:
+        metrics_data = {}
+
+    # ajson for all known versions of this article
+    article_version_data = [ajsonobj.ajson for ajsonobj in article_data]
+
+    # the most recent known version of this article
+    # scrape has access to historical versions too
+    article_data = article_version_data[-1]
+
+    LOG.info('extracting %s' % article_data)
+    mush = flatten_article_json(article_data, known_versions=article_version_data, metrics=metrics_data)
+
+    # extract sub-objects from the article data
+    mush, children = extract_children2(mush)
+
+    queue = []
+
+    # article to be saved goes first
+    queue.append({'Model': models.Article, 'orig_data': mush, 'key_list': ['msid']})
+    queue.extend(children) # when a list of maps are encountered, it's assumed previous result is parent
+
+    return queue
+
+
+def _regenerate_article2(msid):
+    object_list = extract_article(msid)
+    with transaction.atomic():
+        # destroy what we have, if anything. updating may be dangerous
+        models.Article.objects.filter(msid=msid).delete()
+        utils.save_objects(object_list)
+        return models.Article.objects.get(msid=msid)
+
+def _regenerate_article1(msid):
     """scrapes the stored article data to (re)generate a models.Article object
-
     don't use this function directly, it has no transaction support"""
 
     models.Article.objects.filter(msid=msid).delete() # destroy what we have
@@ -353,10 +415,12 @@ def _regenerate_article(msid):
 
     return artobj # return the final artobj
 
-@transaction.atomic
+_regenerate_article = _regenerate_article2
+
+
 def regenerate_article(msid):
     "use this when regenerating individual or small numbers of articles."
-    return _regenerate_article(msid)
+    return _regenerate_article2(msid)
 
 def regenerate_many_articles(msid_list, batches_of=25):
     "commits articles in batches of 25 by default"

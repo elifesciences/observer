@@ -25,6 +25,11 @@ first = partial(nth, n=0)
 second = partial(nth, n=1)
 third = partial(nth, n=2)
 
+def deepcopy(d):
+    # copy.deepcopy is exceptionally slow!
+    # TODO: replace this wrapper with a faster implementation
+    return copy.deepcopy(d)
+
 def ensure(assertion, msg, *args):
     """intended as a convenient replacement for `assert` statements that
     get compiled away with -O flags"""
@@ -32,7 +37,7 @@ def ensure(assertion, msg, *args):
         raise AssertionError(msg % args)
 
 def delall(ddict, lst):
-    "mutator. "
+    "mutator."
     def delkey(key):
         try:
             del ddict[key]
@@ -48,7 +53,9 @@ def listfiles(path, ext_list=None):
         path_list = filter(lambda path: os.path.splitext(path)[1] in ext_list, path_list)
     return sorted(filter(os.path.isfile, path_list))
 
-def dict_update(d1, d2):
+def dict_update(d1, d2, immutable=False):
+    if immutable:
+        d1 = deepcopy(d1)
     d1.update(d2)
     return d1
 
@@ -137,7 +144,7 @@ def _merge(a, b, path=None):
 
 def deepmerge(a, b, path=None):
     "merges 'b' into a copy of 'a'"
-    a = copy.deepcopy(a)
+    a = deepcopy(a)
     return _merge(a, b, path)
 
 
@@ -212,6 +219,36 @@ def create_or_update(Model, orig_data, key_list=None, create=True, update=True, 
     # it is possible to neither create nor update.
     # in this case if the model cannot be found then None is returned: (None, False, False)
     return (inst, created, updated)
+
+
+def save_objects(queue):
+    """saves a list of objects, or list of pairs of name:objects. complements create_or_update().
+    each item in queue is either a dictionary of keyword arguments to create_or_update or a list
+    of pairs like (relation name, create_or_update kwargs).
+    each object is saved in order and lists of pairs are treated as children to the previous object.
+    children are saved as: previous-object.relation = list-of-children
+
+    deeply nested children are not possible"""
+    prev_obj = None
+    for kwargs in queue:
+        if isinstance(kwargs, dict):
+            # a single object, easy
+            prev_obj = create_or_update(**kwargs)[0]
+        elif isinstance(kwargs, list):
+            # a list of objects belonging to previous obj
+            ensure(prev_obj, "a list of children cannot precede the parent!")
+            children = kwargs # ll: [('subjects', [{'model': models.Subject, 'orig_data': ..., 'keys': [...]}]), ('authors', [...])]
+
+            for childtype, childkwargs_list in children:
+                childobjs = [create_or_update(**childkwargs)[0] for childkwargs in childkwargs_list]
+                # attach children to parent
+                prop = getattr(prev_obj, childtype) # ll: getattr(article, 'subjects')
+                # ll: article.subjects.add(subj1, subj2, ..., subjN)
+                prop.add(*childobjs)
+            # re-save the previous object
+            prev_obj.save()
+        else:
+            LOG.warn("skipping unknown data of type %r" % type(kwargs))
 
 def tempdir():
     # usage: tempdir, killer = tempdir(); killer()
