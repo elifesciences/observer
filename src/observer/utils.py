@@ -24,6 +24,7 @@ def nth(x, n):
 first = partial(nth, n=0)
 second = partial(nth, n=1)
 third = partial(nth, n=2)
+last = partial(nth, n=-1)
 
 def deepcopy(d):
     # copy.deepcopy is exceptionally slow!
@@ -238,13 +239,20 @@ def save_objects(queue):
             # a list of objects belonging to previous obj
             ensure(prev_obj, "a list of children cannot precede the parent!")
             children = kwargs # ll: [('subjects', [{'model': models.Subject, 'orig_data': ..., 'keys': [...]}]), ('authors', [...])]
+            #print("got %s children for %r" % (len(children), prev_obj))
 
-            for childtype, childkwargs_list in children:
-                childobjs = [create_or_update(**childkwargs)[0] for childkwargs in childkwargs_list]
-                # attach children to parent
-                prop = getattr(prev_obj, childtype) # ll: getattr(article, 'subjects')
-                # ll: article.subjects.add(subj1, subj2, ..., subjN)
-                prop.add(*childobjs)
+            child_idx = {}
+            for childkwargs in children:
+                key = childkwargs.pop('parent-relation')
+                childobj = create_or_update(**childkwargs)[0]
+                child_list = child_idx.get(key, [])
+                child_list.append(childobj)
+                child_idx[key] = child_list
+
+            # attach children to parent
+            # ll: article.subjects.add(subj1, subj2, ..., subjN)
+            for relationship, childobj_list in child_idx.items():
+                getattr(prev_obj, relationship).add(*childobj_list)
             # re-save the previous object
             prev_obj.save()
         else:
