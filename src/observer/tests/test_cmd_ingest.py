@@ -3,6 +3,7 @@ from os.path import join
 import json
 from .base import BaseCase, call_command
 from observer import models, utils
+from unittest import skip
 
 class LoadFromFS(BaseCase):
     def setUp(self):
@@ -38,6 +39,8 @@ class LoadFromFS(BaseCase):
         self.assertEqual(errcode, 1)
         self.assertEqual(models.Article.objects.count(), 0)
 
+    @skip("test is obsolete as ingestion has changed from scraping each article version in "
+          "order to scraping 'an article' with article version fixtures from database")
     def test_ingest_from_cli_bad_article(self):
         self.assertEqual(models.Article.objects.count(), 0)
         data = json.load(open(self.ajson_fixture, 'r'))

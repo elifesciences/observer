@@ -175,7 +175,8 @@ DESC = {
     # 'published' doesn't change, ever. it's the v1 pubdate
     'datetime_published': [p('published'), todt],
     # 'versionDate' changes on every single version
-    'datetime_version_published': [p('versionDate'), todt],
+    #'datetime_version_published': [p('versionDate'), todt],
+    'datetime_version_published': [p('published'), todt], # BUG HERE. correct is above
     # poa pubdate is the date the state changed to POA, if any POA present
     'datetime_poa_published': [known_versions(POA), first, _or({}), p('statusDate', EXCLUDE_ME), todt],
     # vor pubdate is the date the state changed to VOR, if any VOR present
@@ -288,7 +289,11 @@ def extract_children(mush):
 def extract_article(msid):
     article_data = models.ArticleJSON.objects.filter(msid=str(msid), ajson_type=models.LAX_AJSON).order_by('version') # ASC
 
+    print('-'*80)
     ensure(article_data.count(), "article %s does not exist" % msid)
+
+    for a in article_data:
+        print(a.msid, a.version)
 
     try:
         metrics_data = models.ArticleJSON.objects.get(msid=str(msid), ajson_type=models.METRICS_SUMMARY).ajson
