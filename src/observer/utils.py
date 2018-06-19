@@ -222,13 +222,10 @@ def create_or_update(Model, orig_data, key_list=None, create=True, update=True, 
     return (inst, created, updated)
 
 def save_objects(queue):
-    """saves a list of objects, or list of pairs of name:objects. complements create_or_update().
-    each item in queue is either a dictionary of keyword arguments to create_or_update or a list
-    of pairs like (relation name, create_or_update kwargs).
-    each object is saved in order and lists of pairs are treated as children to the previous object.
-    children are saved as: previous-object.relation = list-of-children
-
-    deeply nested children are not possible"""
+    """complements create_or_update(), saves a list of pairs of (parent, children-list)
+    each parent and each child are the kwargs to be passed to `create_or_update`.
+    each child requires an extra kwarg 'parent-relation' which will be used to 'attach' the 
+    child to the parent."""
     for parent_kwargs, children in queue:
         ensure(isinstance(children, list), "'children' must be a list.")
         parent = create_or_update(**parent_kwargs)[0]
