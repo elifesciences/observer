@@ -269,7 +269,8 @@ def extract_article(msid):
     # scrape has access to historical versions too
     article_data = article_version_data[-1]
 
-    LOG.info('extracting %s' % article_data)
+    # TODO: other objects need one of these lines. it's currently just 'committing N objects\ncommiting N objects\n...'
+    LOG.info('extracting %s' % article_data.get('id', '???'))
     article_mush = flatten_article_json(article_data, known_version_list=article_version_data, metrics=metrics_data)
 
     # extract sub-objects from the article data
