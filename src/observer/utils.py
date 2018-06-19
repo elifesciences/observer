@@ -221,7 +221,6 @@ def create_or_update(Model, orig_data, key_list=None, create=True, update=True, 
     # in this case if the model cannot be found then None is returned: (None, False, False)
     return (inst, created, updated)
 
-
 def save_objects(queue):
     """saves a list of objects, or list of pairs of name:objects. complements create_or_update().
     each item in queue is either a dictionary of keyword arguments to create_or_update or a list
@@ -230,33 +229,25 @@ def save_objects(queue):
     children are saved as: previous-object.relation = list-of-children
 
     deeply nested children are not possible"""
-    prev_obj = None
-    for kwargs in queue:
-        if isinstance(kwargs, dict):
-            # a single object, easy
-            prev_obj = create_or_update(**kwargs)[0]
-        elif isinstance(kwargs, list):
-            # a list of objects belonging to previous obj
-            ensure(prev_obj, "a list of children cannot precede the parent!")
-            children = kwargs # ll: [('subjects', [{'model': models.Subject, 'orig_data': ..., 'keys': [...]}]), ('authors', [...])]
-            #print("got %s children for %r" % (len(children), prev_obj))
+    for parent_kwargs, children in queue:
+        ensure(isinstance(children, list), "'children' must be a list.")
+        parent = create_or_update(**parent_kwargs)[0]
 
-            child_idx = {}
-            for childkwargs in children:
-                key = childkwargs.pop('parent-relation')
-                childobj = create_or_update(**childkwargs)[0]
-                child_list = child_idx.get(key, [])
-                child_list.append(childobj)
-                child_idx[key] = child_list
+        child_idx = {}
+        for child_kwargs in children:
+            ensure('parent-relation' in child_kwargs, "child is missing synthetic 'parent-relation' key.")
+            key = child_kwargs.pop('parent-relation') # ll: 'subjects', 'authors', etc
+            childobj = create_or_update(**child_kwargs)[0]
+            child_list = child_idx.get(key, [])
+            child_list.append(childobj)
+            child_idx[key] = child_list
 
-            # attach children to parent
-            # ll: article.subjects.add(subj1, subj2, ..., subjN)
-            for relationship, childobj_list in child_idx.items():
-                getattr(prev_obj, relationship).add(*childobj_list)
-            # re-save the previous object
-            prev_obj.save()
-        else:
-            LOG.warn("skipping unknown data of type %r" % type(kwargs))
+        # attach children to parent
+        # ll: article.subjects.add(subj1, subj2, ..., subjN)
+        for relationship, childobj_list in child_idx.items():
+            getattr(parent, relationship).add(*childobj_list)
+        # re-save the parent
+        parent.save()
 
 def tempdir():
     # usage: tempdir, killer = tempdir(); killer()

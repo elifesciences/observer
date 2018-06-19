@@ -22,22 +22,6 @@ def msid2doi(msid):
     assert msid > 0, "given msid must be a positive integer: %r" % msid
     return '10.7554/eLife.%05d' % int(msid)
 
-def getartobj(msid):
-    raise StateError("scraping may no longer involve querying the database. all data neccessary to scrape must be passed in at et3.render time")
-    try:
-        return models.Article.objects.get(msid=msid)
-    except models.Article.DoesNotExist:
-        return None
-
-def ao(ad):
-    "returns the stored Article Object (ao) for the given row"
-    msid = ad['id']
-    return getartobj(msid)
-
-def ado(ad):
-    "returns the Article Data and stored article Object as a pair"
-    return ad, ao(ad)
-
 def todt(v):
     if v == EXCLUDE_ME:
         return v
@@ -56,16 +40,16 @@ def _or(v):
         return x if x else v
     return fn
 
-calc_sub_to_acc = 0
-calc_sub_to_rev = 0
-calc_sub_to_prod = 0
-calc_sub_to_pub = 0
-calc_acc_to_rev = 0
-calc_acc_to_prod = 0
-calc_acc_to_pub = 0
-calc_rev_to_prod = 0
-calc_rev_to_pub = 0
-calc_prod_to_pub = 0
+#calc_sub_to_acc = 0
+#calc_sub_to_rev = 0
+#calc_sub_to_prod = 0
+#calc_sub_to_pub = 0
+#calc_acc_to_rev = 0
+#calc_acc_to_prod = 0
+#calc_acc_to_pub = 0
+#calc_rev_to_prod = 0
+#calc_rev_to_pub = 0
+#calc_prod_to_pub = 0
 
 def calc_pub_to_current(art):
     "the number of days between first publication and current publication"
@@ -73,6 +57,8 @@ def calc_pub_to_current(art):
     if not kv or len(kv) == 1:
         return None # cannot be calculated
     v1dt = todt(first(kv)['published'])
+    # TODO: data bug!
+    # vNdt = todt(last(kv)['versionDate']) # this is correct
     vNdt = todt(last(kv)['published'])
     return (vNdt - v1dt).days
 
@@ -99,8 +85,7 @@ def find_author_name(art):
     return nom
 
 # todo: add to et3?
-# todo: rename, it's not general purpose
-def foreach(desc):
+def foreach_render(desc):
     "renders description for each item in iterable"
     def wrap(data):
         return [render.render_item(desc, row) for row in data]
@@ -175,8 +160,9 @@ DESC = {
     # 'published' doesn't change, ever. it's the v1 pubdate
     'datetime_published': [p('published'), todt],
     # 'versionDate' changes on every single version
-    #'datetime_version_published': [p('versionDate'), todt],
-    'datetime_version_published': [p('published'), todt], # BUG HERE. correct is above
+    # TODO: data bug!
+    #'datetime_version_published': [p('versionDate'), todt], # correct
+    'datetime_version_published': [p('published'), todt],
     # poa pubdate is the date the state changed to POA, if any POA present
     'datetime_poa_published': [known_versions(POA), first, _or({}), p('statusDate', EXCLUDE_ME), todt],
     # vor pubdate is the date the state changed to VOR, if any VOR present
@@ -195,24 +181,24 @@ DESC = {
     'subject2': [p('subjects', []), second, key('id')],
     'subject3': [p('subjects', []), third, key('id')],
 
-    'authors': [p('authors', []), foreach(AUTHOR_DESC), fltr(lambda a: a['country'])]
+    'authors': [p('authors', []), foreach_render(AUTHOR_DESC), fltr(lambda a: a['country'])]
 }
 
 # calculated from art history response
-ART_HISTORY = {
-    #'num_revisions': [],
-    'datetime_accept_decision': [p('history.received', None), todt],
-    'days_submission_to_acceptance': [ao, calc_sub_to_acc],
-    'days_submission_to_review': [ao, calc_sub_to_rev],
-    'days_submission_to_production': [ao, calc_sub_to_prod],
-    'days_submission_to_publication': [ao, calc_sub_to_pub],
-    'days_accepted_to_review': [ao, calc_acc_to_rev],
-    'days_accepted_to_production': [ao, calc_acc_to_prod],
-    'days_accepted_to_publication': [ao, calc_acc_to_pub],
-    'days_review_to_production': [ao, calc_rev_to_prod],
-    'days_review_to_publication': [ao, calc_rev_to_pub],
-    'days_production_to_publication': [ao, calc_prod_to_pub],
-}
+# ART_HISTORY = {
+#    #'num_revisions': [],
+#    'datetime_accept_decision': [p('history.received', None), todt],
+#    'days_submission_to_acceptance': [ao, calc_sub_to_acc],
+#    'days_submission_to_review': [ao, calc_sub_to_rev],
+#    'days_submission_to_production': [ao, calc_sub_to_prod],
+#    'days_submission_to_publication': [ao, calc_sub_to_pub],
+#    'days_accepted_to_review': [ao, calc_acc_to_rev],
+#    'days_accepted_to_production': [ao, calc_acc_to_prod],
+#    'days_accepted_to_publication': [ao, calc_acc_to_pub],
+#    'days_review_to_production': [ao, calc_rev_to_prod],
+#    'days_review_to_publication': [ao, calc_rev_to_pub],
+#    'days_production_to_publication': [ao, calc_prod_to_pub],
+#}
 
 # calculated from art metrics
 ART_POPULARITY = {
@@ -235,23 +221,6 @@ def flatten_article_json(data, known_version_list=[], history=None, metrics=None
 #
 #
 #
-
-def article_presave_checks(given_data, flat_data):
-    "business logic checks before we save the flattened data"
-    mush = flat_data
-
-    orig_art = getartobj(mush['msid'])
-    new_ver = mush['current_version']
-    if orig_art:
-        # article exists, ensure we're not replacing newer with older content
-        orig_ver = orig_art.current_version
-        if new_ver < orig_ver:
-            raise StateError("refusing to replace new article data (v%s) with old article data (v%s)" %
-                             (orig_ver, new_ver))
-    else:
-        # article does not exist, ensure we're inserting v1 content
-        if new_ver != 1:
-            raise StateError("refusing to create article with non v1 article data (v%s). articles must be created in order!" % new_ver)
 
 def upsert_ajson(msid, version, data_type, article_data):
     "insert/update ArticleJSON from a dictionary of article data"
@@ -277,8 +246,6 @@ def extract_children(mush):
     children = []
     for childtype, kwargs in known_children.items():
         data = mush[childtype]
-        if not isinstance(data, list):
-            data = [data] # TODO sometimes it's not a list? investigate
 
         children.extend([utils.dict_update(kwargs, {'orig_data': row, 'parent-relation': childtype}, immutable=True) for row in data])
 
@@ -288,12 +255,7 @@ def extract_children(mush):
 
 def extract_article(msid):
     article_data = models.ArticleJSON.objects.filter(msid=str(msid), ajson_type=models.LAX_AJSON).order_by('version') # ASC
-
-    print('-'*80)
     ensure(article_data.count(), "article %s does not exist" % msid)
-
-    for a in article_data:
-        print(a.msid, a.version)
 
     try:
         metrics_data = models.ArticleJSON.objects.get(msid=str(msid), ajson_type=models.METRICS_SUMMARY).ajson
@@ -313,13 +275,8 @@ def extract_article(msid):
     # extract sub-objects from the article data
     article_mush, children = extract_children(article_mush)
 
-    queue = []
-
-    # article to be saved goes first
-    queue.append({'Model': models.Article, 'orig_data': article_mush, 'key_list': ['msid']})
-    queue.append(children) # when a list of maps are encountered, it's assumed previous result is parent
-
-    return queue
+    parent = {'Model': models.Article, 'orig_data': article_mush, 'key_list': ['msid']}
+    return [(parent, children)]
 
 def _regenerate_article(msid):
     object_list = extract_article(msid)
