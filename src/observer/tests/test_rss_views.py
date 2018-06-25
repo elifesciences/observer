@@ -58,7 +58,7 @@ class Two(BaseCase):
     def setUp(self):
         self.c = Client()
         for path in listfiles(join(self.fixture_dir, 'ajson'), ['.json']):
-            ingest_logic.file_upsert(path)
+            ingest_logic.file_upsert(path, regen=False)
         ingest_logic.regenerate_all()
 
     def tearDown(self):
@@ -97,7 +97,7 @@ class Two(BaseCase):
         self.assertEqual(reduce(rdf, date_list), date_list[-1])
 
     def test_report_ordered_reverse(self):
-        "ensure report is ordered correctly"
+        "ensure report is ordered correctly. reports are ordered by original date published"
         url = reverse('report', kwargs={'name': 'latest-articles'})
         resp = self.c.get(url, {'order': 'ASC'})
         xml = resp.content.decode('utf-8')

@@ -24,6 +24,12 @@ def nth(x, n):
 first = partial(nth, n=0)
 second = partial(nth, n=1)
 third = partial(nth, n=2)
+last = partial(nth, n=-1)
+
+def deepcopy(d):
+    # copy.deepcopy is exceptionally slow!
+    # TODO: replace this wrapper with a faster implementation
+    return copy.deepcopy(d)
 
 def ensure(assertion, msg, *args):
     """intended as a convenient replacement for `assert` statements that
@@ -32,7 +38,7 @@ def ensure(assertion, msg, *args):
         raise AssertionError(msg % args)
 
 def delall(ddict, lst):
-    "mutator. "
+    "mutator."
     def delkey(key):
         try:
             del ddict[key]
@@ -48,7 +54,9 @@ def listfiles(path, ext_list=None):
         path_list = filter(lambda path: os.path.splitext(path)[1] in ext_list, path_list)
     return sorted(filter(os.path.isfile, path_list))
 
-def dict_update(d1, d2):
+def dict_update(d1, d2, immutable=False):
+    if immutable:
+        d1 = deepcopy(d1)
     d1.update(d2)
     return d1
 
@@ -137,7 +145,7 @@ def _merge(a, b, path=None):
 
 def deepmerge(a, b, path=None):
     "merges 'b' into a copy of 'a'"
-    a = copy.deepcopy(a)
+    a = deepcopy(a)
     return _merge(a, b, path)
 
 
@@ -212,6 +220,31 @@ def create_or_update(Model, orig_data, key_list=None, create=True, update=True, 
     # it is possible to neither create nor update.
     # in this case if the model cannot be found then None is returned: (None, False, False)
     return (inst, created, updated)
+
+def save_objects(queue):
+    """complements create_or_update(), saves a list of pairs of (parent, children-list)
+    each parent and each child are the kwargs to be passed to `create_or_update`.
+    each child requires an extra kwarg 'parent-relation' which will be used to 'attach' the
+    child to the parent."""
+    for parent_kwargs, children in queue:
+        ensure(isinstance(children, list), "'children' must be a list.")
+        parent = create_or_update(**parent_kwargs)[0]
+
+        child_idx = {}
+        for child_kwargs in children:
+            ensure('parent-relation' in child_kwargs, "child is missing synthetic 'parent-relation' key.")
+            key = child_kwargs.pop('parent-relation') # ll: 'subjects', 'authors', etc
+            childobj = create_or_update(**child_kwargs)[0]
+            child_list = child_idx.get(key, [])
+            child_list.append(childobj)
+            child_idx[key] = child_list
+
+        # attach children to parent
+        # ll: article.subjects.add(subj1, subj2, ..., subjN)
+        for relationship, childobj_list in child_idx.items():
+            getattr(parent, relationship).add(*childobj_list)
+        # re-save the parent
+        parent.save()
 
 def tempdir():
     # usage: tempdir, killer = tempdir(); killer()
