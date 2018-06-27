@@ -48,7 +48,7 @@ or, as a simple format hint:
 All of the latest articles published at eLife, including in-progress POA (publish-on-accept) articles.
 
 * [RSS](/report/latest-articles.rss), [CSV](/report/latest-articles.csv)  formats
-* ordered by date and time this _version_ of article was published (_most_ recent to least recent)
+* ordered by date and time this article was _first_ published (_most_ recent to least recent)
 * 28 articles per page (default) [50pp](/report/latest-articles?per-page=50) [100pp](/report/latest-articles?per-page=100)
 
 #### latest articles by subject report
@@ -56,16 +56,16 @@ All of the latest articles published at eLife, including in-progress POA (publis
 Articles published by eLife, filtered by given subjects
 
 * [RSS](/report/latest-articles-by-subject.rss), [CSV](/report/latest-articles-by-subject.csv)  formats
-* ordered by date and time this _version_ of article was published (_most_ recent to least recent)
+* ordered by date and time this article was _first_ published (_most_ recent to least recent)
 * 28 articles per page (default) [50pp](/report/latest-articles-by-subject?per-page=50) [100pp](/report/latest-articles-by-subject?per-page=100)
-* accepts these extra parameters: subject (cancer-biology, cell-biology, epidemiology-global-health, genes-chromosomes, genomics-evolutionary-biology, human-biology-medicine) 
+* accepts these extra parameters: subject () 
 
 #### upcoming articles report
 
 The latest eLife POA (publish-on-accept) articles. These articles are in-progress and their final VOR (version-of-record) is still being produced.
 
 * [RSS](/report/upcoming-articles.rss), [CSV](/report/upcoming-articles.csv)  formats
-* ordered by date and time this _version_ of article was published (_most_ recent to least recent)
+* ordered by date and time this article was _first_ published (_most_ recent to least recent)
 * 28 articles per page (default) [50pp](/report/upcoming-articles?per-page=50) [100pp](/report/upcoming-articles?per-page=100)
 
 #### published research article index report
@@ -74,6 +74,13 @@ The dates and times of publication for all _research_ articles published at eLif
 
 * [CSV](/report/published-research-article-index.csv)  formats
 * ordered by eLife manuscript ID (_least_ recent to most recent)
+
+#### daily profile counts report
+
+Daily record of the total number of profiles
+
+* [CSV](/report/profile-count.csv)  formats
+* ordered by year, month and day (_most_ recent to least recent)
 
 ## installation
 
