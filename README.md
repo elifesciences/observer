@@ -58,7 +58,7 @@ Articles published by eLife, filtered by given subjects
 * [RSS](/report/latest-articles-by-subject.rss), [CSV](/report/latest-articles-by-subject.csv)  formats
 * ordered by date and time this article was _first_ published (_most_ recent to least recent)
 * 28 articles per page (default) [50pp](/report/latest-articles-by-subject?per-page=50) [100pp](/report/latest-articles-by-subject?per-page=100)
-* accepts these extra parameters: subject () 
+* accepts these extra parameters: subject (cancer-biology, cell-biology, epidemiology-global-health, genes-chromosomes, genomics-evolutionary-biology, human-biology-medicine)
 
 #### upcoming articles report
 
