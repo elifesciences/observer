@@ -57,9 +57,7 @@ def calc_pub_to_current(art):
     if not kv or len(kv) == 1:
         return None # cannot be calculated
     v1dt = todt(first(kv)['published'])
-    # TODO: data bug!
-    # vNdt = todt(last(kv)['versionDate']) # this is correct
-    vNdt = todt(last(kv)['published'])
+    vNdt = todt(last(kv)['versionDate'])
     return (vNdt - v1dt).days
 
 #

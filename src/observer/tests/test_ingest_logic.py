@@ -261,6 +261,17 @@ class AggregateLogic(BaseCase):
         # 18675 v1,v2,v3,v4
         logic.bulk_file_upsert(join(self.fixture_dir, 'ajson'))
 
+    def test_calc_pub_to_current(self):
+        cases = [
+            # (msid, expected days)
+            # (13964, # is actually fubar
+            (15378, 35), # days
+            (18675, 24), # days
+        ]
+        for msid, expected_num_days in cases:
+            art = models.Article.objects.get(msid=msid)
+            self.assertEqual(expected_num_days, art.days_publication_to_current_version)
+
     def test_num_authors(self):
         expected_authors = {
             '13964': 24,
