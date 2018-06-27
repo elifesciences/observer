@@ -158,9 +158,7 @@ DESC = {
     # 'published' doesn't change, ever. it's the v1 pubdate
     'datetime_published': [p('published'), todt],
     # 'versionDate' changes on every single version
-    # TODO: data bug!
-    #'datetime_version_published': [p('versionDate'), todt], # correct
-    'datetime_version_published': [p('published'), todt],
+    'datetime_version_published': [p('versionDate'), todt],
     # poa pubdate is the date the state changed to POA, if any POA present
     'datetime_poa_published': [known_versions(POA), first, _or({}), p('statusDate', EXCLUDE_ME), todt],
     # vor pubdate is the date the state changed to VOR, if any VOR present
