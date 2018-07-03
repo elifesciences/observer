@@ -31,7 +31,10 @@ def article_meta(**kwargs):
     "returns standard metadata most reports returning models.Article objects will need"
     meta = {
         'serialisations': [RSS, CSV],
-        'order_by': 'datetime_version_published',
+        # 2018-06-27: changed from 'datetime_version_published' to 'datetime_published'
+        # there was a bug where the field 'datetime_version_published' was being set to the 'datetime_published' value
+        # this change preserves the behaviour that has been in service for ~12 months now
+        'order_by': 'datetime_published',
         'order': DESC,
         'per_page': 28,
         'params': None
@@ -154,6 +157,7 @@ def known_report_idx():
 
 def _report_meta(reportfn):
     labels = {
+        'datetime_published': 'date and time this article was _first_ published',
         'datetime_version_published': 'date and time this _version_ of article was published',
         'msid': 'eLife manuscript ID',
         'day': 'year, month and day',

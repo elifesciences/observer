@@ -4,6 +4,8 @@ from .base import BaseCase
 from observer import ingest_logic as logic, models, utils
 from unittest.mock import patch
 from observer.ingest_logic import p, pp
+from datetime import datetime
+import pytz
 
 class Logic(BaseCase):
     def setUp(self):
@@ -261,6 +263,17 @@ class AggregateLogic(BaseCase):
         # 18675 v1,v2,v3,v4
         logic.bulk_file_upsert(join(self.fixture_dir, 'ajson'))
 
+    def test_calc_pub_to_current(self):
+        cases = [
+            # (msid, expected days)
+            # (13964, # is actually fubar
+            (15378, 35), # days
+            (18675, 24), # days
+        ]
+        for msid, expected_num_days in cases:
+            art = models.Article.objects.get(msid=msid)
+            self.assertEqual(expected_num_days, art.days_publication_to_current_version)
+
     def test_num_authors(self):
         expected_authors = {
             '13964': 24,
@@ -293,6 +306,19 @@ class AggregateLogic(BaseCase):
                 print('failed on', msid, 'with vers', vers)
                 raise err
 
+    def test_datetime_version_published(self):
+        "this field is the date of the most recent version of this article"
+        cases = [
+            (13964, datetime(year=2016, month=6, day=15, tzinfo=pytz.utc)),
+            (14850, datetime(year=2016, month=7, day=21, tzinfo=pytz.utc)),
+            (15378, datetime(year=2016, month=9, day=2, hour=14, minute=51, second=0, tzinfo=pytz.utc)),
+            (18675, datetime(year=2016, month=9, day=16, hour=10, minute=13, second=54, tzinfo=pytz.utc)),
+            (20125, datetime(year=2016, month=9, day=8, tzinfo=pytz.utc)),
+        ]
+        for msid, expected_version_date in cases:
+            art = models.Article.objects.get(msid=msid)
+            self.assertEqual(expected_version_date, art.datetime_version_published)
+            
     def test_calc_poa_published(self):
         poa_pubdates = {
             '13964': '2016-05-16T00:00:00Z',
