@@ -24,7 +24,7 @@ class Command(BaseCommand):
             LOG.error("failed to ingest article, bad data: %s", err)
             sys.exit(1)
 
-        except:
+        except BaseException:
             LOG.exception("unhandled exception attempting to ingest article")
             raise
 

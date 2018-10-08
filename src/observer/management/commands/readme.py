@@ -11,7 +11,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         try:
             self.stdout.write(views.readme_markdown())
-        except:
+        except BaseException:
             LOG.exception("unhandled exception attempting to write README.md file")
             raise
 

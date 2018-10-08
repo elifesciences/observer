@@ -74,7 +74,7 @@ def upsert_all(content_type, rows, idfn):
     def do_safely(row):
         try:
             iid = idfn(row)
-        except Exception as err:
+        except Exception:
             LOG.error("failed to extract item id from row: %s", row)
             return
         return upsert(iid, content_type, row)
