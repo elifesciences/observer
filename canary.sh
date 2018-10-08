@@ -5,7 +5,7 @@ set -e
 
 # reload the virtualenv
 rm -rf venv/
-virtualenv --python=`which python3.5` venv
+. mkvenv.sh
 source venv/bin/activate
 pip install -r requirements.txt
 
@@ -15,9 +15,4 @@ pip-review --pre # preview the upgrades
 echo "[any key to continue ...]"
 read -p "$*"
 pip-review --auto --pre # update everything
-
 pip freeze > new-requirements.txt
-
-# run the tests
-python src/manage.py migrate
-./src/manage.py test src/
