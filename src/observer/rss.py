@@ -48,7 +48,9 @@ def mkfeed(report):
     return fg
 
 def add_entry(fg, item):
-    entry = fg.add_entry()
+    # default order of insertion changed in 0.6 to 'prepend'
+    # https://github.com/lkiesow/python-feedgen/blob/1b301f67adf4e2f0367579a6c41f72ee524b9380/feedgen/feed.py#L999
+    entry = fg.add_entry(order='append')
     set_obj_attrs(entry, item)
     return entry
 

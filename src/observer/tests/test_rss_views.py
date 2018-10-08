@@ -1,4 +1,3 @@
-from functools import reduce
 from datetime import datetime
 from observer.utils import listfiles
 import re
@@ -81,20 +80,22 @@ class Two(BaseCase):
     def test_report_ordered(self):
         "ensure report is ordered correctly"
         url = reverse('report', kwargs={'name': 'latest-articles'})
-        resp = self.c.get(url)
+        resp = self.c.get(url, {'order': 'DESC'})
         self.assertEqual(resp.status_code, 200)
         xml = resp.content.decode('utf-8')
 
         regex = r"<dc:date>(.+)</dc:date>"
-        date_list = lmap(lambda dt: datetime.strptime(dt[:10], "%Y-%m-%d"), re.findall(regex, xml))
+        actual = lmap(lambda dt: datetime.strptime(dt[:10], "%Y-%m-%d"), re.findall(regex, xml))
 
-        # given two dates, returns the smallest
-        # the result of reducing a list of dates should be the last element in the list
-        def rdf(d1, d2):
-            if not d2: # guard
-                return d1
-            return d2 if d1 >= d2 else d1
-        self.assertEqual(reduce(rdf, date_list), date_list[-1])
+        expected = [
+            datetime(2016, 9, 8, 0, 0),
+            datetime(2016, 8, 23, 0, 0),
+            datetime(2016, 7, 29, 0, 0),
+            datetime(2016, 7, 21, 0, 0),
+            datetime(2016, 5, 16, 0, 0)
+        ]
+
+        self.assertEqual(actual, expected)
 
     def test_report_ordered_reverse(self):
         "ensure report is ordered correctly. reports are ordered by original date published"
@@ -103,13 +104,16 @@ class Two(BaseCase):
         xml = resp.content.decode('utf-8')
 
         regex = r"<dc:date>(.+)</dc:date>"
-        date_list = lmap(lambda dt: datetime.strptime(dt[:10], "%Y-%m-%d"), re.findall(regex, xml))
+        actual = lmap(lambda dt: datetime.strptime(dt[:10], "%Y-%m-%d"), re.findall(regex, xml))
 
-        # given two dates, returns the largest
-        # the result of reducing a list of dates should be the last element in the list
-        def rdf(d1, d2):
-            return d1 if d1 >= d2 else d2
-        self.assertEqual(reduce(rdf, date_list), date_list[-1])
+        expected = [
+            datetime(2016, 5, 16, 0, 0),
+            datetime(2016, 7, 21, 0, 0),
+            datetime(2016, 7, 29, 0, 0),
+            datetime(2016, 8, 23, 0, 0),
+            datetime(2016, 9, 8, 0, 0)
+        ]
+        self.assertEqual(actual, expected)
 
     def test_report_keeps_query_count_low(self):
         # worse case here is 12 without prefetching

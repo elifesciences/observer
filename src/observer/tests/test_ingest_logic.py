@@ -318,7 +318,7 @@ class AggregateLogic(BaseCase):
         for msid, expected_version_date in cases:
             art = models.Article.objects.get(msid=msid)
             self.assertEqual(expected_version_date, art.datetime_version_published)
-            
+
     def test_calc_poa_published(self):
         poa_pubdates = {
             '13964': '2016-05-16T00:00:00Z',

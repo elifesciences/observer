@@ -68,7 +68,7 @@ def handler(json_event):
         fn = handlers[event_type if event_type in handlers else '-unhandled-']
         fn(event_id)
 
-    except BaseException as err:
+    except BaseException:
         LOG.exception("unhandled exception handling event %s", event)
 
     return None # important, ensures results don't accumulate

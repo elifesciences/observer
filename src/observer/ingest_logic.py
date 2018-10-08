@@ -126,7 +126,7 @@ AUTHOR_DESC = {
 }
 
 DESC = {
-    #'journal_name': [p('journal.title')],
+    # 'journal_name': [p('journal.title')],
     'journal_name': ['elife'],
     'msid': [p('id'), int],
     'title': [p('title')],
@@ -194,7 +194,7 @@ DESC = {
 #    'days_review_to_production': [ao, calc_rev_to_prod],
 #    'days_review_to_publication': [ao, calc_rev_to_pub],
 #    'days_production_to_publication': [ao, calc_prod_to_pub],
-#}
+# }
 
 # calculated from art metrics
 ART_POPULARITY = {
@@ -296,7 +296,7 @@ def regenerate_many_articles(msid_list, batches_of=25):
             # and rolled back as a logical group.
             # if one version of an article fails, they all do, but the parent transaction is not
             return regenerate_article(msid)
-        except (AssertionError, KeyError) as err:
+        except (AssertionError, KeyError):
             LOG.error("bad data encountered, skipping regeneration of %s" % msid)
     do_all_atomically(safe_regen, msid_list, batches_of)
 
@@ -436,8 +436,8 @@ def trunc(length):
 PF_DESC = {
     'id': [p('id')],
     # disabled in anticipation of GDPR
-    #'orcid': [p('orcid', None)],
-    #'name': [p('name'), trunc(255)],
+    # 'orcid': [p('orcid', None)],
+    # 'name': [p('name'), trunc(255)],
 }
 
 def _regenerate_profile(pfid):
@@ -483,7 +483,7 @@ def download_regenerate_article(msid):
         log = LOG.warn if err.response.status_code == 404 else LOG.error
         log("failed to fetch article %s: %s", msid, err) # probably an unpublished article.
 
-    except BaseException as err:
+    except BaseException:
         LOG.exception("unhandled exception attempting to download and regenerate article %s", msid)
 
 def download_regenerate_presspackage(ppid):
@@ -496,7 +496,7 @@ def download_regenerate_presspackage(ppid):
         log = LOG.warn if err.response.status_code == 404 else LOG.error
         log("failed to fetch presspackage %s: %s", ppid, err) # probably an unpublished presspackage ...?
 
-    except BaseException as err:
+    except BaseException:
         LOG.exception("unhandled exception attempting to download and regenerate presspackage %s", ppid)
 
 
