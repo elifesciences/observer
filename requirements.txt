@@ -19,7 +19,7 @@ python-dateutil==2.7.3
 python-json-logger==0.1.9
 python-slugify==1.2.6
 pytz==2018.5
-requests==2.19.1
+requests==2.20.0
 requests-cache==0.4.13
 rfc3339==6.0
 uWSGI==2.0.17.1
