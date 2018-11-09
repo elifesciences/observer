@@ -96,7 +96,7 @@ def upcoming_articles():
     per_page=NO_PAGINATION,
     order_by='msid',
     order=ASC,
-    # 'headers': ['msid', 'poa', 'vor'] # published.csv on lax has no headers, but this could be specified here?
+    headers=['manuscript_id', 'poa_published_date', 'vor_published_date'],
 ))
 def published_research_article_index():
     """

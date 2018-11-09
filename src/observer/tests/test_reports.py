@@ -1,6 +1,7 @@
 import copy
 from .base import BaseCase
 from observer import reports, ingest_logic, models, utils
+from observer.utils import todt
 from django.test import Client
 from django.core.urlresolvers import reverse
 from unittest import mock
@@ -36,6 +37,29 @@ class One(BaseCase):
         expected_result = copy.deepcopy(meta)
         expected_result['items'] = [1, 2, 3]
         self.assertEqual(foo(), expected_result)
+
+    def test_published_research_article_index_with_headers(self):
+        fixtures = [
+            {'msid': 123, 'current_version': 2, 'type': 'research-article',
+             'datetime_poa_published': todt('2001-01-01'), 'datetime_vor_published': todt('2001-01-02')},
+
+            {'msid': 456, 'current_version': 2, 'type': 'research-article',
+             'datetime_poa_published': todt('2001-02-03'), 'datetime_vor_published': todt('2001-02-04')},
+        ]
+        for f in fixtures:
+            f['doi'] = ''
+            f['datetime_version_published'] = todt('1970-01-01') # obviously wrong, doesn't matter here
+            utils.create_or_update(models.Article, f, ['msid'])
+
+        report = self.c.get(reverse('report', kwargs={'name': 'published-research-article-index'}))
+        report = [row.decode('utf8').strip().split(',') for row in report]
+
+        expected = [
+            ['manuscript_id', 'poa_published_date', 'vor_published_date'],
+            ['123', '2001-01-01 00:00:00+00:00', '2001-01-02 00:00:00+00:00'],
+            ['456', '2001-02-03 00:00:00+00:00', '2001-02-04 00:00:00+00:00']
+        ]
+        self.assertEqual(expected, report)
 
     def test_profile_counts(self):
         expected = self.jsonfix('profiles', 'many.json')
