@@ -44,7 +44,7 @@ def coerce(val):
     return val
 
 def format_list(row, headers=None):
-    if header:
+    if headers:
         return OrderedDict(zip(headers, row))
     # returns an OrderedDict mapping of column numbers : column values
     return OrderedDict(zip(range(0, len(row)), map(coerce, row)))

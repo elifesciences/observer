@@ -42,7 +42,7 @@ class One(BaseCase):
         fixtures = [
             {'msid': 123, 'current_version': 2, 'type': 'research-article',
              'datetime_poa_published': todt('2001-01-01'), 'datetime_vor_published': todt('2001-01-02')},
-            
+
             {'msid': 456, 'current_version': 2, 'type': 'research-article',
              'datetime_poa_published': todt('2001-02-03'), 'datetime_vor_published': todt('2001-02-04')},
         ]
