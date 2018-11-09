@@ -22,9 +22,9 @@ class Int(BaseCase):
     def test_a_csv_report(self):
         "a report that is known to support csv rendering can do so outside of http request/response"
         report, context = reports.published_research_article_index(), {}
-        # result is actually a StreamingHttpResponse, but can be traversed like an iterator
-        result = csv.format_report(report, context)
-        for row in result:
+        # result is a StreamingHttpResponse, but can be realised like an iterator
+        result = list(csv.format_report(report, context))
+        for row in result[1:]: # skip header
             bits = row.decode('utf8').split(',')
             self.assertEqual(len(bits), 3)
             int(bits[0])
@@ -45,7 +45,7 @@ class Ext(BaseCase):
         resp = self.c.get(url)
         self.assertEqual(resp.status_code, 200)
 
-        for row in resp.streaming_content:
+        for row in list(resp.streaming_content)[1:]: # skip header
             bits = row.decode('utf8').split(',') # this particular report has no quoted comma values
             self.assertEqual(len(bits), 3)
             int(bits[0]) # first bit is an msid

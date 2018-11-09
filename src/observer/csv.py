@@ -3,7 +3,7 @@ import itertools
 import csv as csvpy
 from datetime import date, datetime
 from . import models, utils
-#from functools import partial
+from functools import partial
 
 # https://docs.djangoproject.com/en/1.11/howto/outputting-csv/
 from django.http import StreamingHttpResponse
@@ -21,7 +21,8 @@ def streaming_csv_response(filename, rows, headers):
     header = OrderedDict(zip(headers, headers))
     body = []
     if not utils.isint(list(headers)[0]):
-        # assumption will fail on reports whose first header in the header row is an integer
+        # bit of a kludge.
+        # assumption fails when first header in header row is an int
         body.append((writer.writerow(row) for row in [header]))
     body.append((writer.writerow(row) for row in rows))
     response = StreamingHttpResponse(itertools.chain.from_iterable(body), content_type="text/csv")
@@ -42,14 +43,18 @@ def coerce(val):
         return lu[type(val)](val)
     return val
 
-def format_list(row):
+def format_list(row, headers=None):
+    if header:
+        return OrderedDict(zip(headers, row))
     # returns an OrderedDict mapping of column numbers : column values
     return OrderedDict(zip(range(0, len(row)), map(coerce, row)))
 
-def format_dict(row):
+def format_dict(row, headers=None):
+    # todo: check given header matches keys in row
+    # or wait until csv.DictWriter complains?
     return utils.val_map(coerce, row)
 
-def format_article(art):
+def format_article(art, headers=None):
     return format_dict(utils.to_dict(art))
 
 def format_report(report, context):
@@ -62,14 +67,17 @@ def format_report(report, context):
         # and we're making an effort to avoid cleverness here
         return StreamingHttpResponse([], content_type="text/csv")
 
+    headers = report.get('headers')
+
+    # these always return a dictionary version of the row
     formatters = {
         tuple: format_list,
         dict: format_dict,
         models.Article: format_article,
     }
-    formatterfn = formatters[type(peek)]
-    headers = formatterfn(peek).keys()
+    formatterfn = partial(formatters[type(peek)], headers=headers)
 
     rows = map(formatterfn, items_qs) # still lazy
+    headers = headers or formatterfn(peek).keys()
     filename = report['title'].replace(' ', '-').lower()
     return streaming_csv_response(filename, rows, headers)
