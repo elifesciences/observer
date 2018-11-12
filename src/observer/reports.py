@@ -1,5 +1,5 @@
 import copy
-from . import models, rss, csv, logic
+from . import models, rss, csv, logic, json_rows
 from .utils import ensure, subdict
 from functools import wraps
 from collections import OrderedDict
@@ -92,7 +92,7 @@ def upcoming_articles():
 @report(article_meta(
     title='published research article index',
     description='The dates and times of publication for all _research_ articles published at eLife. If an article had a POA version, the date and time of the POA version is included.',
-    serialisations=[CSV],
+    serialisations=[CSV, JSON],
     per_page=NO_PAGINATION,
     order_by='msid',
     order=ASC,
@@ -137,6 +137,7 @@ def profile_count():
 def format_report(report_data, serialisation, context):
     # the report has been executed at this point
     known_formats = {
+        JSON: json_rows.format_report,
         RSS: rss.format_report,
         CSV: csv.format_report,
     }
