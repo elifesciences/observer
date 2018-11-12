@@ -5,14 +5,14 @@ from observer import utils, ingest_logic
 from django.test import Client
 from django.core.urlresolvers import reverse
 
-class One(base.BaseCase):
+class JsonLinesResponse(base.BaseCase):
     def setUp(self):
         self.c = Client()
         for path in utils.listfiles(join(self.fixture_dir, 'ajson'), ['.json']):
             ingest_logic.file_upsert(path)
         ingest_logic.regenerate_all()
 
-    def test_response(self):
+    def test_json_lines_response(self):
         url = reverse('report', kwargs={'name': 'published-research-article-index'})
         resp = self.c.get(url, {'format': 'json'})
         self.assertEqual(resp.status_code, 200)
