@@ -162,7 +162,7 @@ def to_dict(instance, descend_into_mn_fields=False):
             data[f.name] = f.value_from_object(instance)
     return data
 
-def safe_json_dumps(data, **kwargs):
+def json_dumps(data, **kwargs):
     "handles serialisation of certain objects. unserialisable objects become '[unserialisable]'"
     def coerce(val):
         "coerce a value to a serialisable value"
@@ -173,8 +173,8 @@ def safe_json_dumps(data, **kwargs):
         if type(val) in lu:
             return lu[type(val)](val)
 
-        #raise TypeError('Object of type %s with value of %s is not JSON serializable' % (type(obj), repr(obj)))
-        return "[unserialisable]"
+        raise TypeError('Object of type %s with value of %s is not JSON serializable' % (type(data), repr(data)))
+
     return json.dumps(data, default=coerce, **kwargs)
 
 def renkey(ddict, oldkey, newkey):

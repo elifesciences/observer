@@ -5,7 +5,7 @@ from django.http import StreamingHttpResponse
 
 def streaming_response(filename, rows):
     body = []
-    body.append((utils.safe_json_dumps(row) + "\n") for row in rows)
+    body.append((utils.json_dumps(row) + "\n") for row in rows)
     response = StreamingHttpResponse(itertools.chain.from_iterable(body), content_type="application/json")
     response['Content-Disposition'] = 'attachment; filename="%s.rows.json"' % filename
     return response
