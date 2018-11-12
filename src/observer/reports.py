@@ -1,5 +1,5 @@
 import copy
-from . import models, rss, csv, logic, json_rows
+from . import models, rss, csv, logic, json_lines
 from .utils import ensure, subdict
 from functools import wraps
 from collections import OrderedDict
@@ -137,7 +137,7 @@ def profile_count():
 def format_report(report_data, serialisation, context):
     # the report has been executed at this point
     known_formats = {
-        JSON: json_rows.format_report,
+        JSON: json_lines.format_report,
         RSS: rss.format_report,
         CSV: csv.format_report,
     }
