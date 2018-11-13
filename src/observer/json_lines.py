@@ -6,7 +6,7 @@ from django.http import StreamingHttpResponse
 def streaming_response(filename, rows):
     body = []
     body.append((utils.json_dumps(row) + "\n") for row in rows)
-    response = StreamingHttpResponse(itertools.chain.from_iterable(body), content_type="application/json")
+    response = StreamingHttpResponse(itertools.chain.from_iterable(body), content_type="application/x-ndjson")
     response['Content-Disposition'] = 'attachment; filename="%s.rows.json"' % filename
     return response
 
@@ -16,7 +16,7 @@ def format_report(report, context):
     peek = items_qs.first()
     if not peek:
         # no results
-        return StreamingHttpResponse([], content_type="application/json")
+        return StreamingHttpResponse([], content_type="application/x-ndjson")
 
     # we might be able to something more-clever later for reports without explicit headers
     #headers = headers or formatterfn(peek).keys()
