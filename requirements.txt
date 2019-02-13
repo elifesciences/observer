@@ -2,7 +2,7 @@ autopep8==1.4
 backoff==1.6.0
 boto3==1.9.18
 coverage==4.5.1
-Django==1.11.18
+Django==1.11.19
 django-annoying==0.10.4
 django-markdown2==0.3.1
 et3==1.5.1
