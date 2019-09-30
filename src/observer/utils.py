@@ -81,22 +81,21 @@ def todt(val):
     if val is None:
         return None
 
-    if not isinstance(val, datetime):
-        dt = parser.parse(val, fuzzy=False)
-    else:
+    if isinstance(val, datetime):
         dt = val # don't attempt to parse, work with what we have
-
-    if not dt.tzinfo:
-        # no timezone (naive), assume UTC and make it explicit
-        LOG.debug("encountered naive timestamp %r from %r. UTC assumed.", dt, val)
-        return pytz.utc.localize(dt)
-
     else:
-        # ensure tz is UTC
+        dt = parser.parse(val, fuzzy=False)
+
+    if dt.tzinfo:
         if dt.tzinfo != pytz.utc:
-            LOG.debug("got an aware dt that isn't in utc: %r", dt)
+            LOG.debug("got an aware dt that isn't in UTC: %r", dt)
             return dt.astimezone(pytz.utc)
-    return dt
+        # already has a utc timezone
+        return dt
+
+    # no timezone (naive), assume UTC and make it explicit
+    LOG.debug("encountered naive timestamp %r from %r. UTC assumed.", dt, val)
+    return pytz.utc.localize(dt)
 
 def ymdhms(dt):
     "returns an rfc3339 representation of a datetime object"
