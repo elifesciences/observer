@@ -6,7 +6,7 @@ Django==1.11.27
 django-annoying==0.10.4
 django-markdown2==0.3.1
 et3==1.5.1
-feedgen==0.7.0
+feedgen==0.9.0
 green==2.13.0
 ipython-genutils==0.2.0
 kids.cache==0.0.7
