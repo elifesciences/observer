@@ -58,7 +58,7 @@ Articles published by eLife, filtered by given subjects
 * [RSS](/report/latest-articles-by-subject.rss), [CSV](/report/latest-articles-by-subject.csv)  formats
 * ordered by date and time this article was _first_ published (_most_ recent to least recent)
 * 28 articles per page (default) [50pp](/report/latest-articles-by-subject?per-page=50) [100pp](/report/latest-articles-by-subject?per-page=100)
-* accepts these extra parameters: subject (cancer-biology, cell-biology, epidemiology-global-health, genes-chromosomes, genomics-evolutionary-biology, human-biology-medicine)
+* accepts these extra parameters: subject (biochemistry, biophysics-structural-biology, cancer-biology, cell-biology, genes-chromosomes, genomics-evolutionary-biology, immunology, neuroscience) 
 
 #### upcoming articles report
 
@@ -68,11 +68,18 @@ The latest eLife POA (publish-on-accept) articles. These articles are in-progres
 * ordered by date and time this article was _first_ published (_most_ recent to least recent)
 * 28 articles per page (default) [50pp](/report/upcoming-articles?per-page=50) [100pp](/report/upcoming-articles?per-page=100)
 
+#### published article index report
+
+The dates and times of publication for all articles published at eLife. If an article had a POA version, the date and time of the POA version is included.
+
+* [CSV](/report/published-article-index.csv), [JSON](/report/published-article-index.json)  formats
+* ordered by eLife manuscript ID (_least_ recent to most recent)
+
 #### published research article index report
 
 The dates and times of publication for all _research_ articles published at eLife. If an article had a POA version, the date and time of the POA version is included.
 
-* [CSV](/report/published-research-article-index.csv)  formats
+* [CSV](/report/published-research-article-index.csv), [JSON](/report/published-research-article-index.json)  formats
 * ordered by eLife manuscript ID (_least_ recent to most recent)
 
 #### daily profile counts report
@@ -96,10 +103,23 @@ this is 'libpqxx', on Ubuntu this is 'libpq-dev'.
 
 ## updating
 
+### installation
+
 [code](https://github.com/elifesciences/observer/blob/master/install.sh)
 
     git pull
     ./install.sh
+
+### documents
+
+[code](https://github.com/elifesciences/observer/blob/master/regenerate-readme.sh)
+
+    ./regenerate-readme.sh
+
+### reports
+
+See [updating reports](https://github.com/elifesciences/observer/blob/master/updating-reports.md) on instructions for 
+modifying reports.
 
 ## testing 
 
@@ -112,11 +132,11 @@ this is 'libpqxx', on Ubuntu this is 'libpq-dev'.
 [code](https://github.com/elifesciences/observer/blob/master/manage.sh)
 
     ./manage.sh runserver
-    firefox http://127.0.0.1:8000/
+    xdg-open http://127.0.0.1:8000/
 
 ## Copyright & Licence
 
-Copyright 2018 eLife Sciences. Licensed under the [GPLv3](LICENCE.txt)
+Copyright 2020 eLife Sciences. Licensed under the [GPLv3](LICENCE.txt)
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

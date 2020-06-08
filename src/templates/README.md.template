@@ -66,10 +66,23 @@ this is 'libpqxx', on Ubuntu this is 'libpq-dev'.
 
 ## updating
 
+### installation
+
 [code](https://github.com/elifesciences/observer/blob/master/install.sh)
 
     git pull
     ./install.sh
+
+### documents
+
+[code](https://github.com/elifesciences/observer/blob/master/regenerate-readme.sh)
+
+    ./regenerate-readme.sh
+
+### reports
+
+See [updating reports](https://github.com/elifesciences/observer/blob/master/updating-reports.md) on instructions for 
+modifying reports.
 
 ## testing 
 
@@ -82,11 +95,11 @@ this is 'libpqxx', on Ubuntu this is 'libpq-dev'.
 [code](https://github.com/elifesciences/observer/blob/master/manage.sh)
 
     ./manage.sh runserver
-    firefox http://127.0.0.1:8000/
+    xdg-open http://127.0.0.1:8000/
 
 ## Copyright & Licence
 
-Copyright 2018 eLife Sciences. Licensed under the [GPLv3](LICENCE.txt)
+Copyright {{ copyright_year }} eLife Sciences. Licensed under the [GPLv3](LICENCE.txt)
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
