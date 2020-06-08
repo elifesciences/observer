@@ -118,7 +118,7 @@ this is 'libpqxx', on Ubuntu this is 'libpq-dev'.
 
 ### reports
 
-See [updating reports](./updating-reports.md) on instructions for 
+See [updating reports](https://github.com/elifesciences/observer/blob/master/updating-reports.md) on instructions for 
 modifying reports.
 
 ## testing 

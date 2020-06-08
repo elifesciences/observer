@@ -1,3 +1,4 @@
+from datetime import date
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 from django.template.loader import render_to_string
@@ -100,6 +101,7 @@ def paginate_report_results(reportfn, rargs):
 def readme_markdown():
     context = {
         'reports': reports.report_meta(),
+        'copyright_year': date.today().year,
     }
     return render_to_string('README.md.template', context)
 

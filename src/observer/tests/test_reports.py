@@ -39,6 +39,7 @@ class One(BaseCase):
         self.assertEqual(foo(), expected_result)
 
     def test_published_article_index_with_headers(self):
+        "all articles in database are returned as a CSV with the correct data."
         fixtures = [
             {'msid': 123,
              'current_version': 2,
@@ -59,8 +60,8 @@ class One(BaseCase):
              'datetime_vor_published': todt('2001-03-06')},
         ]
         for f in fixtures:
-            f['doi'] = ''
-            f['datetime_version_published'] = todt('1970-01-01') # obviously wrong, doesn't matter here
+            f['doi'] = '' # 'doi' is required but it can be an empty string. doesn't affect report.
+            f['datetime_version_published'] = todt('1970-01-01') # doesn't affect report
             utils.create_or_update(models.Article, f, ['msid'])
 
         report = self.c.get(reverse('report', kwargs={'name': 'published-article-index'}))
@@ -75,6 +76,7 @@ class One(BaseCase):
         self.assertEqual(expected, report)
 
     def test_published_research_article_index_with_headers(self):
+        "all *research* articles in database are returned as a CSV with the correct data."
         fixtures = [
             {'msid': 123,
              'current_version': 2,
@@ -95,8 +97,8 @@ class One(BaseCase):
              'datetime_vor_published': todt('2001-03-06')},
         ]
         for f in fixtures:
-            f['doi'] = ''
-            f['datetime_version_published'] = todt('1970-01-01') # obviously wrong, doesn't matter here
+            f['doi'] = '' # 'doi' is required but it can be an empty string. doesn't affect report.
+            f['datetime_version_published'] = todt('1970-01-01') # doesn't affect report
             utils.create_or_update(models.Article, f, ['msid'])
 
         report = self.c.get(reverse('report', kwargs={'name': 'published-research-article-index'}))

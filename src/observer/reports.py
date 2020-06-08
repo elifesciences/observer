@@ -121,8 +121,8 @@ def published_research_article_index():
 ))
 def published_article_index():
     """
-    the published research article index report:
-    * returns all articles EXCEPT commentaries, editorials, book reviews, discussions and corrections
+    the published article index report:
+    * returns all articles
     * ordered by the manuscript id, smallest to largest (ASC)
     * has just three values per row: msid, date first poa published, date first vor published
     """
