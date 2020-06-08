@@ -111,6 +111,26 @@ def published_research_article_index():
         .values_list('msid', 'datetime_poa_published', 'datetime_vor_published')
 
 @report(article_meta(
+    title='published article index',
+    description='The dates and times of publication for all articles published at eLife. If an article had a POA version, the date and time of the POA version is included.',
+    serialisations=[CSV, JSON],
+    per_page=NO_PAGINATION,
+    order_by='msid',
+    order=ASC,
+    headers=['manuscript_id', 'poa_published_date', 'vor_published_date'],
+))
+def published_article_index():
+    """
+    the published research article index report:
+    * returns all articles EXCEPT commentaries, editorials, book reviews, discussions and corrections
+    * ordered by the manuscript id, smallest to largest (ASC)
+    * has just three values per row: msid, date first poa published, date first vor published
+    """
+    return models.Article.objects \
+        .order_by('msid') \
+        .values_list('msid', 'datetime_poa_published', 'datetime_vor_published')
+
+@report(article_meta(
     title="daily profile counts",
     description="Daily record of the total number of profiles",
     serialisations=[CSV],
@@ -152,6 +172,7 @@ def known_report_idx():
         ('latest-articles', latest_articles),
         ('latest-articles-by-subject', latest_articles_by_subject),
         ('upcoming-articles', upcoming_articles),
+        ('published-article-index', published_article_index),
         ('published-research-article-index', published_research_article_index),
         ('profile-count', profile_count),
     ])
