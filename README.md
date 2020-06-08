@@ -103,15 +103,23 @@ this is 'libpqxx', on Ubuntu this is 'libpq-dev'.
 
 ## updating
 
+### installation
+
 [code](https://github.com/elifesciences/observer/blob/master/install.sh)
 
     git pull
     ./install.sh
 
-## updating documents
+### documents
 
-This README is staticly generated using the 
-[regenerate-readme.sh script](https://github.com/elifesciences/observer/blob/master/regenerate-readme.sh).
+[code](https://github.com/elifesciences/observer/blob/master/regenerate-readme.sh)
+
+    ./regenerate-readme.sh
+
+### reports
+
+See [updating reports](./updating-reports.md) on instructions for 
+modifying reports.
 
 ## testing 
 
@@ -124,7 +132,7 @@ This README is staticly generated using the
 [code](https://github.com/elifesciences/observer/blob/master/manage.sh)
 
     ./manage.sh runserver
-    firefox http://127.0.0.1:8000/
+    xdg-open http://127.0.0.1:8000/
 
 ## Copyright & Licence
 
