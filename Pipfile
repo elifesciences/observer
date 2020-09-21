@@ -1,0 +1,39 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[requires]
+python_version = "3.6"
+
+[packages]
+backoff = "==1.6.0"
+boto3 = "==1.9.18"
+django-annoying = "==0.10.4"
+django-markdown2 = "==0.3.1"
+et3 = "==1.5.1"
+feedgen = "==0.9.0"
+"kids.cache" = "==0.0.7"
+newrelic = "==4.4.1.104"
+psycopg2 = "==2.8.3"
+python-dateutil = "==2.7.3"
+python-json-logger = "==0.1.9"
+python-slugify = "==1.2.6"
+pytz = "==2018.5"
+requests = "==2.20.0"
+requests-cache = "==0.4.13"
+rfc3339 = "==6.0"
+Django = "==1.11.29"
+ipython_genutils = "==0.2.0"
+uWSGI = "==2.0.17.1"
+
+[dev-packages]
+pyflakes = "==2.0.0"
+pylint = "==2.4.1"
+pylint-django = "==2.0.11"
+# pylint-plugin-utils is a dependency for pylint-django, but 
+# pylint-django hasn't bumped it yet to support changes in pylint 2.4
+pylint-plugin-utils = "==0.6"
+green = "==2.13.0"
+coverage = "==4.5.1"
+autopep8 = "==1.4"
