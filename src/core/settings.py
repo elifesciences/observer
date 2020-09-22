@@ -72,9 +72,6 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'core.urls'
 
-# https://docs.djangoproject.com/en/1.10/ref/middleware/#module-django.middleware.common
-USE_ETAGS = True
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

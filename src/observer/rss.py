@@ -73,7 +73,7 @@ def article_to_rss_entry(art):
     utils.renkeys(item, [
         ('doi', 'link'),
         ('abstract', 'description'),
-        ('datetime_published', 'pubdate'),
+        ('datetime_published', 'pubDate'),
     ])
 
     # wrangle
@@ -81,7 +81,7 @@ def article_to_rss_entry(art):
     item['link'] = {'href': "https://elifesciences.org/articles/" + utils.pad_msid(art.msid)}
     item['author'] = [{'name': a.name, 'email': art.author_email} for a in art.authors.all()]
     item['category'] = [{'term': c.name, 'label': c.label} for c in art.subjects.all()]
-    item['dc:dc_date'] = utils.ymdhms(item['pubdate'])
+    item['dc:dc_date'] = utils.ymdhms(item['pubDate'])
     return item
 
 def format_report(report, context):

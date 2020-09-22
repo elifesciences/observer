@@ -12,7 +12,6 @@ class DownstreamCaching(TestCase):
     def test_cache_headers_in_response(self):
         expected_headers = [
             'vary', # redundant
-            'etag',
             'cache-control'
         ]
         resp = self.c.get(self.url)

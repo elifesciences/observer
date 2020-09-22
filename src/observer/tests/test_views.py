@@ -2,7 +2,7 @@ from os.path import join
 from django.test import Client
 from .base import BaseCase
 from observer import reports, ingest_logic, models, utils
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from observer.utils import listfiles, lmap
 from functools import reduce, partial
 

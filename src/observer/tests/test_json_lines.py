@@ -3,7 +3,7 @@ from os.path import join
 from . import base
 from observer import utils, ingest_logic
 from django.test import Client
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 class JsonLinesResponse(base.BaseCase):
     def setUp(self):

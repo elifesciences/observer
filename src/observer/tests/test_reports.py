@@ -3,7 +3,7 @@ from .base import BaseCase
 from observer import reports, ingest_logic, models, utils
 from observer.utils import todt
 from django.test import Client
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from unittest import mock
 from datetime import datetime, timedelta
 
