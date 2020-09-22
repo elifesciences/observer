@@ -8,7 +8,7 @@ certifi==2020.6.20
 chardet==3.0.4
 colorama==0.4.3
 coverage==4.5.4
-Django==1.11.29
+Django==2.2.16
 django-annoying==0.10.6
 django-markdown2==0.3.1
 et3==1.5.1
@@ -38,6 +38,7 @@ requests-cache==0.4.13
 rfc3339==6.0
 s3transfer==0.3.3
 six==1.15.0
+sqlparse==0.3.1
 toml==0.10.1
 typed-ast==1.4.1
 Unidecode==1.1.1

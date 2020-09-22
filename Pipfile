@@ -23,7 +23,7 @@ pytz = "*"
 requests = "~=2.20"
 requests-cache = "==0.4.13"
 rfc3339 = "==6.0"
-Django = "==1.11.29"
+Django = "==2.2.*"
 uWSGI = "*"
 
 [dev-packages]

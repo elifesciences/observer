@@ -4,7 +4,7 @@ import re
 from os.path import join
 from .base import BaseCase
 from django.test import Client
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from observer import ingest_logic, models
 from observer.utils import lmap
 
@@ -131,6 +131,13 @@ class Two(BaseCase):
         paginate = 1
         csv_peek = 1
         csv_generation = 1
-        num = paginate + csv_peek + csv_generation
+        #num = paginate + csv_peek + csv_generation
+        # 2020-09: changed in Django 2.0
+        # two additional queries are now happening in the CSV version of this report, one for Author and one for Subject.
+        # this is possibly because of new support for foreign key constraints in SQLite and those tables are now properly join'ed
+        # causing two additional queries. If so, this means that postgresql has been doing five queries all along
+        author_lu = 1
+        subject_lu = 1
+        num = paginate + csv_peek + csv_generation + author_lu + subject_lu
         with self.assertNumQueries(num):
             self.c.get(reverse('report', kwargs={'name': 'latest-articles'}), {'format': 'csv'})

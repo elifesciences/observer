@@ -1,5 +1,5 @@
 from datetime import date
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.http import HttpResponse
 from django.template.loader import render_to_string
 from django.shortcuts import Http404  # , get_object_or_404

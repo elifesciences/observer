@@ -1,11 +1,7 @@
-#from functools import reduce
-#from datetime import datetime
-#from observer.utils import listfiles
-#import re
 from os.path import join
 from .base import BaseCase
 from django.test import Client
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from observer import ingest_logic, csv, reports
 from observer.utils import listfiles
 
