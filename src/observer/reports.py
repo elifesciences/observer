@@ -158,6 +158,8 @@ def profile_count():
     title="EJP, new POA articles",
     description="All POA articles ordered by the date and time they were first published, most recent POA articles to least recent.",
     serialisations=[JSON],
+    order_by='datetime_poa_published',
+    order=DESC,
     headers=['manuscript-id', 'first-published-date', 'article-title', 'article-type'],
 ))
 def ejp_new_poa_articles():
@@ -175,6 +177,8 @@ def ejp_new_poa_articles():
     title="EJP, new and updated VOR articles",
     description="All new and updated VOR articles ordered by their updated date, most recent VOR articles to least recent.",
     serialisations=[JSON],
+    order_by='datetime_version_published',
+    order=DESC,
     headers=['manuscript-id',
              'first-published-date', 'latest-published-date', 'first-vor-published-date',
              'article-title', 'article-type'],
@@ -222,7 +226,9 @@ def known_report_idx():
 def _report_meta(reportfn):
     labels = {
         'datetime_published': 'date and time this article was _first_ published',
-        'datetime_version_published': 'date and time this _version_ of article was published',
+        # poa published will always be the same as first published
+        'datetime_poa_published': 'date and time this article was _first_ published',
+        'datetime_version_published': 'date and time this _version_ of the article was published',
         'msid': 'eLife manuscript ID',
         'day': 'year, month and day',
         DESC: '_most_ recent to least recent',
