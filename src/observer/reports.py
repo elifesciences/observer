@@ -53,7 +53,7 @@ def article_meta(**kwargs):
 def latest_articles():
     """
     the latest articles report:
-    * returns -all- articles
+    * returns all articles
     * ordered by the date the first version was published, most recent to least recent
     """
     return models.Article.objects.all().order_by('-datetime_published')
@@ -151,6 +151,48 @@ def profile_count():
         .order_by('-day')
 
 #
+# ejp reports
+#
+
+@report(article_meta(
+    title="EJP, new POA articles",
+    description="All POA articles ordered by the date and time they were first published, most recent POA articles to least recent.",
+    serialisations=[JSON],
+    headers=['manuscript-id', 'first-published-date', 'article-title', 'article-type'],
+))
+def ejp_new_poa_articles():
+    """
+    the new POA articles for EJP report:
+    * returns articles that have a POA version
+    * ordered by the date and time the first POA version was published, most recent to least recent
+    """
+    return models.Article.objects \
+        .filter(num_poa_versions__gte=1) \
+        .order_by('-datetime_poa_published') \
+        .values_list('msid', 'datetime_poa_published', 'title', 'type')
+
+@report(article_meta(
+    title="EJP, new and updated VOR articles",
+    description="All new and updated VOR articles ordered by their updated date, most recent VOR articles to least recent.",
+    serialisations=[JSON],
+    headers=['manuscript-id',
+             'first-published-date', 'latest-published-date', 'first-vor-published-date',
+             'article-title', 'article-type'],
+))
+def ejp_new_and_updated_vor_articles():
+    """
+    the new and updated VOR articles for EJP report:
+    * returns articles that have at least one VOR version
+    * ordered by the date and time of the latest version published, most recent to least recent
+    """
+    return models.Article.objects \
+        .filter(num_vor_versions__gte=1) \
+        .order_by('-datetime_version_published') \
+        .values_list('msid',
+                     'datetime_published', 'datetime_version_published', 'datetime_vor_published',
+                     'title', 'type')
+
+#
 #
 #
 
@@ -165,8 +207,6 @@ def format_report(report_data, serialisation, context):
     report_data = copy.deepcopy(report_data)
     return known_formats[serialisation](report_data, context)
 
-# replace these with some fancy introspection of the reports module
-
 def known_report_idx():
     return OrderedDict([
         ('latest-articles', latest_articles),
@@ -175,6 +215,8 @@ def known_report_idx():
         ('published-article-index', published_article_index),
         ('published-research-article-index', published_research_article_index),
         ('profile-count', profile_count),
+        ('ejp-new-poa-articles', ejp_new_poa_articles),
+        ('ejp-new-and-updated-vor-articles', ejp_new_and_updated_vor_articles),
     ])
 
 def _report_meta(reportfn):
