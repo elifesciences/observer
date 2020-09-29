@@ -151,20 +151,20 @@ def profile_count():
         .order_by('-day')
 
 #
-# ejp reports
+# exeter reports
 #
 
 @report(article_meta(
-    title="EJP, new POA articles",
+    title="Exeter, new POA articles",
     description="All POA articles ordered by the date and time they were first published, most recent POA articles to least recent.",
     serialisations=[JSON],
     order_by='datetime_poa_published',
     order=DESC,
     headers=['manuscript-id', 'first-published-date', 'article-title', 'article-type'],
 ))
-def ejp_new_poa_articles():
+def exeter_new_poa_articles():
     """
-    the new POA articles for EJP report:
+    the new POA articles for Exeter report:
     * returns articles that have a POA version
     * ordered by the date and time the first POA version was published, most recent to least recent
     """
@@ -174,7 +174,7 @@ def ejp_new_poa_articles():
         .values_list('msid', 'datetime_poa_published', 'title', 'type')
 
 @report(article_meta(
-    title="EJP, new and updated VOR articles",
+    title="Exeter, new and updated VOR articles",
     description="All new and updated VOR articles ordered by their updated date, most recent VOR articles to least recent.",
     serialisations=[JSON],
     order_by='datetime_version_published',
@@ -183,9 +183,9 @@ def ejp_new_poa_articles():
              'first-published-date', 'latest-published-date', 'first-vor-published-date',
              'article-title', 'article-type'],
 ))
-def ejp_new_and_updated_vor_articles():
+def exeter_new_and_updated_vor_articles():
     """
-    the new and updated VOR articles for EJP report:
+    the new and updated VOR articles for Exeter report:
     * returns articles that have at least one VOR version
     * ordered by the date and time of the latest version published, most recent to least recent
     """
@@ -219,8 +219,8 @@ def known_report_idx():
         ('published-article-index', published_article_index),
         ('published-research-article-index', published_research_article_index),
         ('profile-count', profile_count),
-        ('ejp-new-poa-articles', ejp_new_poa_articles),
-        ('ejp-new-and-updated-vor-articles', ejp_new_and_updated_vor_articles),
+        ('exeter-new-poa-articles', exeter_new_poa_articles),
+        ('exeter-new-and-updated-vor-articles', exeter_new_and_updated_vor_articles),
     ])
 
 def _report_meta(reportfn):

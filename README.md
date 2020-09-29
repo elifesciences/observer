@@ -89,21 +89,21 @@ Daily record of the total number of profiles
 * [CSV](/report/profile-count.csv)  formats
 * ordered by year, month and day (_most_ recent to least recent)
 
-#### EJP, new POA articles report
+#### Exeter, new POA articles report
 
 All POA articles ordered by the date and time they were first published, most recent POA articles to least recent.
 
-* [JSON](/report/ejp-new-poa-articles.json)  formats
+* [JSON](/report/exeter-new-poa-articles.json)  formats
 * ordered by date and time this article was _first_ published (_most_ recent to least recent)
-* 28 articles per page (default) [50pp](/report/ejp-new-poa-articles?per-page=50) [100pp](/report/ejp-new-poa-articles?per-page=100)
+* 28 articles per page (default) [50pp](/report/exeter-new-poa-articles?per-page=50) [100pp](/report/exeter-new-poa-articles?per-page=100)
 
-#### EJP, new and updated VOR articles report
+#### Exeter, new and updated VOR articles report
 
 All new and updated VOR articles ordered by their updated date, most recent VOR articles to least recent.
 
-* [JSON](/report/ejp-new-and-updated-vor-articles.json)  formats
+* [JSON](/report/exeter-new-and-updated-vor-articles.json)  formats
 * ordered by date and time this _version_ of the article was published (_most_ recent to least recent)
-* 28 articles per page (default) [50pp](/report/ejp-new-and-updated-vor-articles?per-page=50) [100pp](/report/ejp-new-and-updated-vor-articles?per-page=100)
+* 28 articles per page (default) [50pp](/report/exeter-new-and-updated-vor-articles?per-page=50) [100pp](/report/exeter-new-and-updated-vor-articles?per-page=100)
 
 ## installation
 
