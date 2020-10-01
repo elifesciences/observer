@@ -160,7 +160,7 @@ def profile_count():
     serialisations=[JSON],
     order_by='datetime_poa_published',
     order=DESC,
-    headers=['manuscript-id', 'first-published-date', 'article-title', 'article-type'],
+    headers=['doi', 'first-published-date', 'article-title', 'article-type'],
 ))
 def exeter_new_poa_articles():
     """
@@ -171,7 +171,7 @@ def exeter_new_poa_articles():
     return models.Article.objects \
         .filter(num_poa_versions__gte=1) \
         .order_by('-datetime_poa_published') \
-        .values_list('msid', 'datetime_poa_published', 'title', 'type')
+        .values_list('doi', 'datetime_poa_published', 'title', 'type')
 
 @report(article_meta(
     title="Exeter, new and updated VOR articles",
@@ -179,7 +179,7 @@ def exeter_new_poa_articles():
     serialisations=[JSON],
     order_by='datetime_version_published',
     order=DESC,
-    headers=['manuscript-id',
+    headers=['doi',
              'first-published-date', 'latest-published-date', 'first-vor-published-date',
              'article-title', 'article-type'],
 ))
@@ -192,7 +192,7 @@ def exeter_new_and_updated_vor_articles():
     return models.Article.objects \
         .filter(num_vor_versions__gte=1) \
         .order_by('-datetime_version_published') \
-        .values_list('msid',
+        .values_list('doi',
                      'datetime_published', 'datetime_version_published', 'datetime_vor_published',
                      'title', 'type')
 
