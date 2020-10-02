@@ -1,7 +1,12 @@
 #!/bin/bash
+# run full or partial test suite:
+#   ./.test.sh
+# or
+#   ./.test.sh observer.tests.test_rss_views
 
-set -e # everything must pass
+set -e
 
+# quick check for syntax errors
 pyflakes src/
 
 args="$@"
@@ -12,23 +17,17 @@ if [ ! -z "$args" ]; then
     print_coverage=0
 fi
 
-# remove any old compiled python files
+# remove any old compiled python files that interfere with test discovery
 find src/ -name '*.pyc' -delete
 
-# called by test.sh
-#./src/manage.py test --testrunner=green.djangorunner.DjangoRunner "$@"
-#coverage run --source='src/' --omit='*/tests/*,*/migrations/*' src/manage.py test "$module" --no-input
+# run the tests
 coverage run \
     --source='src/' \
     --omit='*/tests/*,*/migrations/*,src/core/settings.py,src/core/wsgi.py,src/manage.py,src/observer/apps.py' \
     src/manage.py test "$module" --no-input
-#echo "* passed tests"
 
-#GREEN_CONFIG=.green ./src/manage.py test "$module" --testrunner=green.djangorunner.DjangoRunner --no-input -v 3
-
-
-# run coverage test
-# only report coverage if we're running a complete set of tests
+# print test coverage
+# BUT only if we're running a complete set of tests
 if [ $print_coverage -eq 1 ]; then
     coverage report
     # is only run if tests pass
@@ -41,5 +40,3 @@ if [ $print_coverage -eq 1 ]; then
         exit 1
     fi
 fi
-
-echo "[✓] .test.sh"

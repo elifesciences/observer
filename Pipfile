@@ -33,6 +33,5 @@ pylint-django = "~=2.0"
 # pylint-plugin-utils is a dependency for pylint-django, but 
 # pylint-django hasn't bumped it yet to support changes in pylint 2.4
 pylint-plugin-utils = "~=0.6"
-green = "~=2.13"
 coverage = "~=4.5"
 autopep8 = "~=1.4"

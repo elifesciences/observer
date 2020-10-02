@@ -1,16 +1,15 @@
-#from . import models
 from django.http import HttpResponse
+from django.db import models
 from feedgen.feed import FeedGenerator
 import logging
+from . import utils
 
 LOG = logging.getLogger(__name__)
 
-try:
-    import utils
-except ImportError:
-    from . import utils
-
 def set_obj_attrs(obj, data):
+    """given a FeedGen `obj`, insert given `data` into it.
+    for each key in given `data` there should be a corresponding 'setter' in the `obj`.
+    FeedGen object setters support namespaces as well as lists of values."""
     def _set(obj, key, val):
         if ':' in key:
             # namespaced setter, assumes ns has been loaded
@@ -26,16 +25,18 @@ def set_obj_attrs(obj, data):
 
 def mkfeed(report):
     fg = FeedGenerator()
-    fg.load_extension('dc', atom=True, rss=True)
+    fg.load_extension('dc')
+    #fg.load_extension('webfeeds')
 
     # extract the report bits
-    data = utils.subdict(report, ['id', 'title', 'description', 'link'])
+    data = utils.subdict(report, ['id', 'title', 'description', 'link', 'lastBuildDate'])
 
     # rename some bits
     # data = utils.rename(data, [('owner', 'author')]) # for example
 
-    # wrangle some more bits
-    data['link'] = {'href': 'https://elifesciences.org', 'rel': 'self'}
+    # link: "The URL to the HTML website corresponding to the channel" for example "http://www.goupstate.com/"
+    # https://www.rssboard.org/rss-specification
+    data['link'] = data.get('link') or {'href': 'https://elifesciences.org'} #, 'rel': 'self'}
 
     # add some defaults
     data['language'] = 'en'
@@ -55,6 +56,8 @@ def add_entry(fg, item):
     return entry
 
 def add_many_entries(fg, item_list):
+    # note: what is the point of the laziness if this list construction realises it?
+    # was it a py2 -> py3 conversion error?
     [add_entry(fg, item) for item in utils.take(250, item_list)]
 
 
@@ -84,13 +87,20 @@ def article_to_rss_entry(art):
     item['dc:dc_date'] = utils.ymdhms(item['pubDate'])
     return item
 
-def format_report(report, context):
+def _format_report(report, context):
     "formats given report as RSS xml"
     report.update(context) # yes, this nukes any conflicting keys in the report
-    report['title'] = 'eLife: ' + report['title']
+    report['title'] = 'eLife: ' + report.get('title', 'untitled')
     feed = mkfeed(report)
-    query = report['items']
-    query = query.prefetch_related('subjects', 'authors')
-    add_many_entries(feed, map(article_to_rss_entry, query)) # deliberate use of lazy map
-    body = feed.rss_str(pretty=True).decode('utf-8')
-    return HttpResponse(body, content_type='text/xml')
+    items = report.get('items', [])
+
+    if isinstance(items, models.QuerySet):
+        query = items # this is a `models.SomeModel.objects.foo` queryset
+        query = query.prefetch_related('subjects', 'authors')
+        items = map(article_to_rss_entry, query) # deliberate use of lazy `map`
+
+    add_many_entries(feed, items)
+    return feed.rss_str(pretty=True).decode('utf-8')
+
+def format_report(report, context):
+    return HttpResponse(_format_report(report, context), content_type='text/xml')
