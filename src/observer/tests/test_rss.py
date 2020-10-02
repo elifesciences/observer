@@ -5,16 +5,17 @@ import unittest
 
 class FeedlyFeeds(unittest.TestCase):
     maxDiff = None
-    
+
     def setUp(self):
         pass
-        
+
     def test_feed(self):
         expected = open(join(base.BaseCase.fixture_dir, "feedly--dummy.rss")).read()
         report = {'title': 'feedly test feed',
                   'description': 'a dummy feed to test the additional features Feedly provides',
                   'lastBuildDate': utils.todt("2001-01-01"),
                   'link': {'href': 'https://example.org', 'rel': 'self'},
+                  'webfeeds:accentColor': 'green',
                   'items': [{'title': 'test entry 1',
                              'description': "Cras eleifend iaculis accumsan. Ut quis eleifend magna, in porta eros. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Praesent sollicitudin, nibh non gravida finibus, tellus ipsum consectetur neque, a porttitor massa est porttitor elit. Ut suscipit eros urna.",
                              'link': {'href': 'https://example.org/123.html'},
@@ -24,7 +25,7 @@ class FeedlyFeeds(unittest.TestCase):
                                           {'label': 'category 2', 'term': 'bar'}],
                              'pubDate': utils.todt('2001-02-03'),
                              'dc:dc_date': utils.ymdhms(utils.todt('2001-02-03')),
-                             
+
                              },
 
                             {'title': 'test entry 2',
@@ -36,7 +37,7 @@ class FeedlyFeeds(unittest.TestCase):
                                           {'label': 'category 4', 'term': 'bup'}],
                              'pubDate': utils.todt('2001-03-04'),
                              'dc:dc_date': utils.ymdhms(utils.todt('2001-04-04')),
-                             
+
                              }]
                   }
         context = {}

@@ -3,8 +3,75 @@ from django.db import models
 from feedgen.feed import FeedGenerator
 import logging
 from . import utils
+import feedgen.ext.base
+import feedgen.util
 
 LOG = logging.getLogger(__name__)
+
+def attr_name(elem):
+    return "_feedlyelem_%s" % elem
+
+class Feedly(feedgen.ext.base.BaseExtension):
+    _ns = 'http://webfeeds.org/rss/1.0'
+
+    def __init__(self):
+        self.elem_list = [
+            'accentColor',
+            'analytics',
+            'cover',
+            'wordmark',
+            'icon',
+            'partial',
+            'deprecated',
+            'promotion']
+        for elem in self.elem_list:
+            setattr(self, attr_name(elem), None) # self._feedlyelem_accentColor = None
+
+        LOG.info("init")
+
+        def setter_template(inst, elem):
+            LOG.info("creating setter %s", elem)
+            attr = attr_name(elem)
+
+            def setter(value, replace=True):
+                LOG.info("setter hit for field %r with value %r", attr, value)
+                if value is not None:
+                    if not isinstance(value, list):
+                        value = [value]
+                    if replace or not getattr(inst, attr):
+                        setattr(inst, attr, [])
+                    setattr(self, attr, getattr(self, attr) + value)
+                return getattr(self, attr)
+            return setter
+
+        for elem in self.elem_list:
+            setattr(self, elem, setter_template(self, elem))
+
+    def extend_ns(self):
+        return {'webfeeds': self._ns}
+
+    # from: https://github.com/lkiesow/python-feedgen/blob/master/feedgen/ext/dc.py#L47
+    def _extend_xml(self, xml_element):
+        for elem in self.elem_list:
+            for val in getattr(self, attr_name(elem)) or []:
+                node = feedgen.util.xml_elem('{%s}%s' % (self._ns, elem), xml_element)
+                node.text = val
+
+    def extend_atom(self, atom_feed):
+        self._extend_xml(atom_feed)
+        return atom_feed
+
+    def extend_rss(self, rss_feed):
+        channel = rss_feed[0]
+        self._extend_xml(channel)
+        return rss_feed
+
+class FeedlyEntry(feedgen.ext.base.BaseEntryExtension):
+    pass
+
+#
+#
+#
 
 def set_obj_attrs(obj, data):
     """given a FeedGen `obj`, insert given `data` into it.
@@ -26,17 +93,21 @@ def set_obj_attrs(obj, data):
 def mkfeed(report):
     fg = FeedGenerator()
     fg.load_extension('dc')
-    #fg.load_extension('webfeeds')
+    fg.register_extension(**{'namespace': 'webfeeds',
+                             'extension_class_feed': Feedly,
+                             'extension_class_entry': FeedlyEntry})
 
     # extract the report bits
-    data = utils.subdict(report, ['id', 'title', 'description', 'link', 'lastBuildDate'])
+    data = utils.subdict(report, ['id', 'title', 'description', 'link', 'lastBuildDate',
+                                  'webfeeds:accentColor',
+                                  ])
 
     # rename some bits
     # data = utils.rename(data, [('owner', 'author')]) # for example
 
     # link: "The URL to the HTML website corresponding to the channel" for example "http://www.goupstate.com/"
     # https://www.rssboard.org/rss-specification
-    data['link'] = data.get('link') or {'href': 'https://elifesciences.org'} #, 'rel': 'self'}
+    data['link'] = data.get('link') or {'href': 'https://elifesciences.org'}  # , 'rel': 'self'}
 
     # add some defaults
     data['language'] = 'en'

@@ -140,7 +140,7 @@ def report(request, name, format_hint=None):
         # additional things to pass to whatever is rendering the report
         # keys here will override any found in the report
         context = {
-            #'link': "https://observer.elifesciences.org" + reverse('report', kwargs={'name': name}),
+            # 'link': "https://observer.elifesciences.org" + reverse('report', kwargs={'name': name}),
             'self-link': "https://observer.elifesciences.org" + reverse('report', kwargs={'name': name}),
         }
         return reports.format_report(report_paginated, rargs['format'], context)
