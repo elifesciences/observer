@@ -9,8 +9,11 @@
     <generator>observer (using python-feedgen)</generator>
     <language>en</language>
     <lastBuildDate>Mon, 01 Jan 2001 00:00:00 +0000</lastBuildDate>
-    <webfeeds:accentColor>green</webfeeds:accentColor>
+    <webfeeds:accentColor>66ff00</webfeeds:accentColor>
     <webfeeds:analytics id="123" engine="GoogleAnalytics"/>
+    <webfeeds:cover image="https://observer.elifesciences.org/static/large-rectangular-image.png"/>
+    <webfeeds:wordmark>https://observer.elifesciences.org/static/small-rectangular-image.png</webfeeds:wordmark>
+    <webfeeds:icon>https://observer.elifesciences.org/static/apple-touch-icon.png</webfeeds:icon>
     <item>
       <title>test entry 1</title>
       <link>https://example.org/123.html</link>
@@ -19,9 +22,9 @@
       <guid isPermaLink="false">123</guid>
       <category>category 1</category>
       <category>category 2</category>
-      <pubDate>Sat, 03 Feb 2001 00:00:00 +0000</pubDate>
-      <dc:date>2001-02-03T00:00:00Z</dc:date>
-      <webfeeds:featuredImage url="foo" height="100px" width="100px" type="jpeg"/>
+      <pubDate>Wed, 30 Sep 2020 00:00:00 +0000</pubDate>
+      <dc:date>2020-09-30T00:00:00Z</dc:date>
+      <webfeeds:featuredImage url="https://observer.elifesciences.org/static/reference-horizontal-M-35.png" height="619" width="1100" type="image/png"/>
     </item>
     <item>
       <title>test entry 2</title>
@@ -31,8 +34,9 @@
       <guid isPermaLink="false">456</guid>
       <category>category 3</category>
       <category>category 4</category>
-      <pubDate>Sun, 04 Mar 2001 00:00:00 +0000</pubDate>
-      <dc:date>2001-04-04T00:00:00Z</dc:date>
+      <pubDate>Tue, 29 Sep 2020 00:00:00 +0000</pubDate>
+      <dc:date>2020-09-29T00:00:00Z</dc:date>
+      <webfeeds:featuredImage url="https://observer.elifesciences.org/static/reference-vertical-G-50.png" height="877" width="617" type="image/png"/>
     </item>
   </channel>
 </rss>

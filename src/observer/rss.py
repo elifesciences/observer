@@ -71,10 +71,10 @@ class Feedly(FeedlyBaseExtension):
             ('promotion', [])
         ]
         self.setup()
-        
+
     def extend_rss(self, feed):
         """extends the RSS 'channel' element rather than the 'rss' element"""
-        channel = feed[0] 
+        channel = feed[0]
         self._extend_xml(channel)
         return feed
 
@@ -116,7 +116,7 @@ def mkfeed(report):
     # extract the report bits
     # also serves as a whitelist of allowed elements
     data = utils.subdict(report, ['id', 'title', 'description', 'link', 'lastBuildDate',
-                                  'webfeeds:accentColor', 'webfeeds:analytics', 'webfeeds:cover', 'webfeeds:icon'
+                                  'webfeeds:accentColor', 'webfeeds:analytics', 'webfeeds:cover', 'webfeeds:icon', 'webfeeds:wordmark'
                                   ])
 
     # rename some bits
