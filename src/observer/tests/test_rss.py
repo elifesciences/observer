@@ -4,12 +4,12 @@ from observer import rss, utils
 import unittest
 
 class FeedlyFeeds(unittest.TestCase):
-    maxDiff = None
 
     def setUp(self):
         pass
 
-    def test_feed(self):
+    def test_feedly_feed(self):
+        "a feed built from simple data can generate a feed with Feedly fields"
         expected = open(join(base.BaseCase.fixture_dir, "feedly--dummy.rss")).read()
         report = {'title': 'feedly test feed',
                   'description': 'a dummy feed to test the additional features Feedly provides',
@@ -38,9 +38,7 @@ class FeedlyFeeds(unittest.TestCase):
                              'category': [{'label': 'category 1', 'term': 'foo'},
                                           {'label': 'category 2', 'term': 'bar'}],
                              'pubDate': utils.todt('2020-09-30'),
-                             'dc:dc_date': utils.ymdhms(utils.todt('2020-09-30')),
-
-                             },
+                             'dc:dc_date': utils.ymdhms(utils.todt('2020-09-30'))},
 
                             {'title': 'test entry 2',
                              'description': "Morbi fringilla fringilla urna, vitae suscipit felis vehicula quis. Vestibulum vitae quam augue. Etiam ligula felis, venenatis ut consequat vel, semper non tortor. Quisque vestibulum tellus vel tortor vulputate posuere. Pellentesque imperdiet lorem sit amet libero lobortis pellentesque. Aliquam congue consectetur dolor, eget egestas eros pulvinar id.",
@@ -54,9 +52,8 @@ class FeedlyFeeds(unittest.TestCase):
                              'category': [{'label': 'category 3', 'term': 'baz'},
                                           {'label': 'category 4', 'term': 'bup'}],
                              'pubDate': utils.todt('2020-09-29'),
-                             'dc:dc_date': utils.ymdhms(utils.todt('2020-09-29')),
-
-                             }]
+                             'dc:dc_date': utils.ymdhms(utils.todt('2020-09-29'))}
+                            ]
                   }
         context = {}
         actual = rss._format_report(report, context)

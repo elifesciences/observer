@@ -9,6 +9,7 @@ import feedgen.util
 LOG = logging.getLogger(__name__)
 
 def attr_name(elem):
+    "the special object attribute name that follows the naming of all other feedgen extensions"
     return "_feedlyelem_%s" % elem
 
 class FeedlyBaseExtension(feedgen.ext.base.BaseExtension):
@@ -16,11 +17,12 @@ class FeedlyBaseExtension(feedgen.ext.base.BaseExtension):
 
     def setup(self):
         for elem, _ in self.elem_list:
-            setattr(self, attr_name(elem), None) # self._feedlyelem_accentColor = None
+            setattr(self, attr_name(elem), None) # => `self._feedlyelem_accentColor = None`
 
         def setter_template(inst, elem):
+            """extending a BaseExtension object means writing a tonne of boilerplate accessors.
+            this creates setters for each of the `self.elem_list` list of elements."""
             attr = attr_name(elem)
-
             def setter(value, replace=True):
                 if value is not None:
                     if not isinstance(value, list):
@@ -92,7 +94,8 @@ class FeedlyEntry(FeedlyBaseExtension):
 def set_obj_attrs(obj, data):
     """given a FeedGen `obj`, insert given `data` into it.
     for each key in given `data` there should be a corresponding 'setter' in the `obj`.
-    FeedGen object setters support namespaces as well as lists of values."""
+    FeedGen object setters support namespaces as well as lists of values.
+    Works for simple values but doesn't support setters with additional attributes (like `link`)."""
     def _set(obj, key, val):
         if ':' in key:
             # namespaced setter, assumes ns has been loaded
@@ -103,7 +106,7 @@ def set_obj_attrs(obj, data):
             for row in val:
                 setter(row)
         else:
-            getattr(obj, key)(val)
+            setter(val)
     [_set(obj, key, val) for key, val in data.items()]
 
 def mkfeed(report):
@@ -124,7 +127,7 @@ def mkfeed(report):
 
     # link: "The URL to the HTML website corresponding to the channel" for example "http://www.goupstate.com/"
     # https://www.rssboard.org/rss-specification
-    data['link'] = data.get('link') or {'href': 'https://elifesciences.org'}  # , 'rel': 'self'}
+    data['link'] = data.get('link') or {'href': 'https://elifesciences.org'}
 
     # add some defaults
     data['language'] = 'en'
@@ -133,6 +136,12 @@ def mkfeed(report):
     # set the attributes
     # http://lkiesow.github.io/python-feedgen/#create-a-feed
     set_obj_attrs(fg, data)
+
+    # the above setter magic works for most of the attributes most of the time,
+    # but there are some exceptions:
+
+    if 'self-link' in report:
+        fg.link(href=report['self-link'], rel='self')
 
     return fg
 
@@ -144,8 +153,10 @@ def add_entry(fg, item):
     return entry
 
 def add_many_entries(fg, item_list):
-    # note: what is the point of the laziness if this list construction realises it?
-    # was it a py2 -> py3 conversion error?
+    """adds each of the items in `item_list` to the given FeedGen object `fg`.
+    lazy sequences are realised."""
+    # why 250? pagination of (lazy) Django QuerySets should have happened by this point (max 100),
+    # but just in case ...
     [add_entry(fg, item) for item in utils.take(250, item_list)]
 
 
@@ -176,7 +187,7 @@ def article_to_rss_entry(art):
     return item
 
 def _format_report(report, context):
-    "formats given report as RSS xml"
+    "generates an RSS feed from the given `report` and `context` data, returning XML content as a string"
     report.update(context) # yes, this nukes any conflicting keys in the report
     report['title'] = 'eLife: ' + report.get('title', 'untitled')
     feed = mkfeed(report)
@@ -191,4 +202,5 @@ def _format_report(report, context):
     return feed.rss_str(pretty=True).decode('utf-8')
 
 def format_report(report, context):
+    "generates an RSS feed from the given `report` and `context` data, returning an HttpResponse."
     return HttpResponse(_format_report(report, context), content_type='text/xml')
