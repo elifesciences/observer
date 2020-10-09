@@ -1,0 +1,14 @@
+[run]
+omit = 
+    src/core/wsgi.py
+    src/core/settings.py
+    src/observer/admin.py
+    src/observer/apps.py
+    src/manage.py
+    */tests/*
+    */migrations/*
+
+[report]
+omit =
+    */tests/*
+    */migrations/*
