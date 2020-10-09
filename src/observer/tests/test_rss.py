@@ -4,6 +4,7 @@ from observer import rss, utils
 import unittest
 
 class FeedlyFeeds(unittest.TestCase):
+    maxDiff = None
 
     def setUp(self):
         pass
@@ -14,7 +15,8 @@ class FeedlyFeeds(unittest.TestCase):
         report = {'title': 'feedly test feed',
                   'description': 'a dummy feed to test the additional features Feedly provides',
                   'lastBuildDate': utils.todt("2001-01-01"),
-                  'link': {'href': 'https://example.org', 'rel': 'self'},
+                  'link': {'href': 'https://example.org'},
+                  'self-link': 'https://example.org/dummy.rss',
                   'webfeeds:accentColor': '66ff00', # bright green
                   'webfeeds:analytics': {'id': '123', 'engine': 'GoogleAnalytics'},
                   # "large rectangular image"

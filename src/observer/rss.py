@@ -133,15 +133,15 @@ def mkfeed(report):
     data['language'] = 'en'
     data['generator'] = 'observer (using python-feedgen)'
 
+    # the setter magic will work for most of the attributes most of the time,
+    # but there are some exceptions.
+    # order matters as well, so the below doesn't work if called *after* the setter magic.
+    if 'self-link' in report:
+        fg.link(href=report['self-link'], rel='self', replace=False)
+
     # set the attributes
     # http://lkiesow.github.io/python-feedgen/#create-a-feed
     set_obj_attrs(fg, data)
-
-    # the above setter magic works for most of the attributes most of the time,
-    # but there are some exceptions:
-
-    if 'self-link' in report:
-        fg.link(href=report['self-link'], rel='self')
 
     return fg
 
