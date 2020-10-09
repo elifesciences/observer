@@ -1,16 +1,101 @@
-#from . import models
 from django.http import HttpResponse
+from django.db import models
 from feedgen.feed import FeedGenerator
 import logging
+from . import utils
+import feedgen.ext.base
+import feedgen.util
 
 LOG = logging.getLogger(__name__)
 
-try:
-    import utils
-except ImportError:
-    from . import utils
+def attr_name(elem):
+    "the special object attribute name that follows the naming of all other feedgen extensions"
+    return "_feedlyelem_%s" % elem
+
+class FeedlyBaseExtension(feedgen.ext.base.BaseExtension):
+    _ns = 'http://webfeeds.org/rss/1.0'
+
+    def setup(self):
+        for elem, _ in self.elem_list:
+            setattr(self, attr_name(elem), None) # => `self._feedlyelem_accentColor = None`
+
+        def setter_template(inst, elem):
+            """extending a BaseExtension object means writing a tonne of boilerplate accessors.
+            this creates setters for each of the `self.elem_list` list of elements."""
+            attr = attr_name(elem)
+            def setter(value, replace=True):
+                if value is not None:
+                    if not isinstance(value, list):
+                        value = [value]
+                    if replace or not getattr(inst, attr):
+                        setattr(inst, attr, [])
+                    setattr(self, attr, getattr(self, attr) + value)
+                return getattr(self, attr)
+            return setter
+
+        for elem, _ in self.elem_list:
+            setattr(self, elem, setter_template(self, elem))
+
+    def extend_ns(self):
+        return {'webfeeds': self._ns}
+
+    # from: https://github.com/lkiesow/python-feedgen/blob/master/feedgen/ext/dc.py#L47
+    def _extend_xml(self, xml_element):
+        for elem, attr_list in self.elem_list:
+            for val in getattr(self, attr_name(elem)) or []:
+                node = feedgen.util.xml_elem('{%s}%s' % (self._ns, elem), xml_element)
+                if attr_list:
+                    assert isinstance(val, dict), "element %r has attributes that must be set: %s" % (elem, attr_list)
+                    for attr in attr_list:
+                        node.set(attr, val[attr])
+                else:
+                    node.text = val
+
+    def extend_atom(self, element):
+        self._extend_xml(element)
+        return element
+
+    def extend_rss(self, element):
+        self._extend_xml(element)
+        return element
+
+class Feedly(FeedlyBaseExtension):
+    def __init__(self):
+        self.elem_list = [
+            # (elem, attr-list)
+            ('accentColor', []),
+            ('analytics', ['id', 'engine']),
+            ('cover', ['image']),
+            ('wordmark', []),
+            ('icon', []),
+            ('partial', []),
+            ('deprecated', []),
+            ('promotion', [])
+        ]
+        self.setup()
+
+    def extend_rss(self, feed):
+        """extends the RSS 'channel' element rather than the 'rss' element"""
+        channel = feed[0]
+        self._extend_xml(channel)
+        return feed
+
+class FeedlyEntry(FeedlyBaseExtension):
+    def __init__(self):
+        self.elem_list = [
+            ('featuredImage', ['url', 'height', 'width', 'type']),
+        ]
+        self.setup()
+
+#
+#
+#
 
 def set_obj_attrs(obj, data):
+    """given a FeedGen `obj`, insert given `data` into it.
+    for each key in given `data` there should be a corresponding 'setter' in the `obj`.
+    FeedGen object setters support namespaces as well as lists of values.
+    Works for simple values but doesn't support setters with additional attributes (like `link`)."""
     def _set(obj, key, val):
         if ':' in key:
             # namespaced setter, assumes ns has been loaded
@@ -21,25 +106,38 @@ def set_obj_attrs(obj, data):
             for row in val:
                 setter(row)
         else:
-            getattr(obj, key)(val)
+            setter(val)
     [_set(obj, key, val) for key, val in data.items()]
 
 def mkfeed(report):
     fg = FeedGenerator()
-    fg.load_extension('dc', atom=True, rss=True)
+    fg.load_extension('dc')
+    fg.register_extension(**{'namespace': 'webfeeds',
+                             'extension_class_feed': Feedly,
+                             'extension_class_entry': FeedlyEntry})
 
     # extract the report bits
-    data = utils.subdict(report, ['id', 'title', 'description', 'link'])
+    # also serves as a whitelist of allowed elements
+    data = utils.subdict(report, ['id', 'title', 'description', 'link', 'lastBuildDate',
+                                  'webfeeds:accentColor', 'webfeeds:analytics', 'webfeeds:cover', 'webfeeds:icon', 'webfeeds:wordmark'
+                                  ])
 
     # rename some bits
     # data = utils.rename(data, [('owner', 'author')]) # for example
 
-    # wrangle some more bits
-    data['link'] = {'href': 'https://elifesciences.org', 'rel': 'self'}
+    # link: "The URL to the HTML website corresponding to the channel" for example "http://www.goupstate.com/"
+    # https://www.rssboard.org/rss-specification
+    data['link'] = data.get('link') or {'href': 'https://elifesciences.org'}
 
     # add some defaults
     data['language'] = 'en'
     data['generator'] = 'observer (using python-feedgen)'
+
+    # the setter magic will work for most of the attributes most of the time,
+    # but there are some exceptions.
+    # order matters as well, so the below doesn't work if called *after* the setter magic.
+    if 'self-link' in report:
+        fg.link(href=report['self-link'], rel='self', replace=False)
 
     # set the attributes
     # http://lkiesow.github.io/python-feedgen/#create-a-feed
@@ -55,6 +153,10 @@ def add_entry(fg, item):
     return entry
 
 def add_many_entries(fg, item_list):
+    """adds each of the items in `item_list` to the given FeedGen object `fg`.
+    lazy sequences are realised."""
+    # why 250? pagination of (lazy) Django QuerySets should have happened by this point (max 100),
+    # but just in case ...
     [add_entry(fg, item) for item in utils.take(250, item_list)]
 
 
@@ -84,13 +186,21 @@ def article_to_rss_entry(art):
     item['dc:dc_date'] = utils.ymdhms(item['pubDate'])
     return item
 
-def format_report(report, context):
-    "formats given report as RSS xml"
+def _format_report(report, context):
+    "generates an RSS feed from the given `report` and `context` data, returning XML content as a string"
     report.update(context) # yes, this nukes any conflicting keys in the report
-    report['title'] = 'eLife: ' + report['title']
+    report['title'] = 'eLife: ' + report.get('title', 'untitled')
     feed = mkfeed(report)
-    query = report['items']
-    query = query.prefetch_related('subjects', 'authors')
-    add_many_entries(feed, map(article_to_rss_entry, query)) # deliberate use of lazy map
-    body = feed.rss_str(pretty=True).decode('utf-8')
-    return HttpResponse(body, content_type='text/xml')
+    items = report.get('items', [])
+
+    if isinstance(items, models.QuerySet):
+        query = items # this is a `models.SomeModel.objects.foo` queryset
+        query = query.prefetch_related('subjects', 'authors')
+        items = map(article_to_rss_entry, query) # deliberate use of lazy `map`
+
+    add_many_entries(feed, items)
+    return feed.rss_str(pretty=True).decode('utf-8')
+
+def format_report(report, context):
+    "generates an RSS feed from the given `report` and `context` data, returning an HttpResponse."
+    return HttpResponse(_format_report(report, context), content_type='text/xml')

@@ -1,28 +1,26 @@
-# file generated 2020-09-22 - see update-dependencies.sh
+# file generated 2020-10-02 - see update-dependencies.sh
 astroid==2.4.2
 autopep8==1.5.4
 backoff==1.10.0
-boto3==1.15.2
-botocore==1.18.2
+boto3==1.15.10
+botocore==1.18.10
 certifi==2020.6.20
 chardet==3.0.4
-colorama==0.4.3
 coverage==4.5.4
 Django==2.2.16
 django-annoying==0.10.6
 django-markdown2==0.3.1
 et3==1.5.1
 feedgen==0.9.0
-green==2.16.1
 idna==2.10
-isort==5.5.3
+isort==5.5.4
 jmespath==0.10.0
 kids.cache==0.0.7
 lazy-object-proxy==1.4.3
 lxml==4.5.2
 markdown2==2.3.9
 mccabe==0.6.1
-newrelic==5.18.0.148
+newrelic==5.20.0.149
 psycopg2==2.8.6
 pycodestyle==2.6.0
 pyflakes==2.2.0

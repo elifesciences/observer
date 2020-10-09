@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:webfeeds="http://webfeeds.org/rss/1.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0">
+  <channel>
+    <title>eLife: feedly test feed</title>
+    <link>https://example.org</link>
+    <description>a dummy feed to test the additional features Feedly provides</description>
+    <atom:link href="https://example.org/dummy.rss" rel="self"/>
+    <docs>http://www.rssboard.org/rss-specification</docs>
+    <generator>observer (using python-feedgen)</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 01 Jan 2001 00:00:00 +0000</lastBuildDate>
+    <webfeeds:accentColor>66ff00</webfeeds:accentColor>
+    <webfeeds:analytics id="123" engine="GoogleAnalytics"/>
+    <webfeeds:cover image="https://observer.elifesciences.org/static/large-rectangular-image.png"/>
+    <webfeeds:wordmark>https://observer.elifesciences.org/static/small-rectangular-image.png</webfeeds:wordmark>
+    <webfeeds:icon>https://observer.elifesciences.org/static/apple-touch-icon.png</webfeeds:icon>
+    <item>
+      <title>test entry 1</title>
+      <link>https://example.org/123.html</link>
+      <description>Cras eleifend iaculis accumsan. Ut quis eleifend magna, in porta eros. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Praesent sollicitudin, nibh non gravida finibus, tellus ipsum consectetur neque, a porttitor massa est porttitor elit. Ut suscipit eros urna.</description>
+      <author>j.everyman@example.org (John Everyman)</author>
+      <guid isPermaLink="false">123</guid>
+      <category>category 1</category>
+      <category>category 2</category>
+      <pubDate>Wed, 30 Sep 2020 00:00:00 +0000</pubDate>
+      <dc:date>2020-09-30T00:00:00Z</dc:date>
+      <webfeeds:featuredImage url="https://observer.elifesciences.org/static/reference-horizontal-M-35.png" height="619" width="1100" type="image/png"/>
+    </item>
+    <item>
+      <title>test entry 2</title>
+      <link>https://example.org/456.html</link>
+      <description>Morbi fringilla fringilla urna, vitae suscipit felis vehicula quis. Vestibulum vitae quam augue. Etiam ligula felis, venenatis ut consequat vel, semper non tortor. Quisque vestibulum tellus vel tortor vulputate posuere. Pellentesque imperdiet lorem sit amet libero lobortis pellentesque. Aliquam congue consectetur dolor, eget egestas eros pulvinar id.</description>
+      <author>j.everywoman@example.org (Jane Everywoman)</author>
+      <guid isPermaLink="false">456</guid>
+      <category>category 3</category>
+      <category>category 4</category>
+      <pubDate>Tue, 29 Sep 2020 00:00:00 +0000</pubDate>
+      <dc:date>2020-09-29T00:00:00Z</dc:date>
+      <webfeeds:featuredImage url="https://observer.elifesciences.org/static/reference-vertical-G-50.png" height="877" width="617" type="image/png"/>
+    </item>
+  </channel>
+</rss>
