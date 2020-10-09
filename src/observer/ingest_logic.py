@@ -208,7 +208,7 @@ ART_POPULARITY = {
 DESC.update(ART_POPULARITY)
 
 def flatten_article_json(data, known_version_list=[], history=None, metrics=None):
-    "takes article-json and squishes it into something obs can digest"
+    "takes article-json and squishes it into something observer can digest"
     data['known-versions'] = known_version_list # raw article json the scrape can use to inspect historical values
     data['history'] = history or {} # EJP
     data['metrics'] = metrics or {} # elife-metrics
@@ -219,15 +219,15 @@ def flatten_article_json(data, known_version_list=[], history=None, metrics=None
 #
 
 def upsert_ajson(msid, version, data_type, article_data):
-    "insert/update ArticleJSON from a dictionary of article data"
+    "insert/update RawJSON from a dictionary of article data"
     article_data = {
         'msid': utils.norm_msid(msid),
         'version': version,
         'ajson': article_data,
         'ajson_type': data_type
     }
-    version and ensure(version > 0, "'version' in ArticleJSON must be as a positive integer")
-    return create_or_update(models.ArticleJSON, article_data, ['msid', 'version'])
+    version and ensure(version > 0, "'version' in RawJSON must be as a positive integer")
+    return create_or_update(models.RawJSON, article_data, ['msid', 'version'])
 
 #
 #
@@ -250,12 +250,12 @@ def extract_children(mush):
     return mush, children
 
 def extract_article(msid):
-    article_data = models.ArticleJSON.objects.filter(msid=str(msid), ajson_type=models.LAX_AJSON).order_by('version') # ASC
+    article_data = models.RawJSON.objects.filter(msid=str(msid), ajson_type=models.LAX_AJSON).order_by('version') # ASC
     ensure(article_data.count(), "article %s does not exist" % msid)
 
     try:
-        metrics_data = models.ArticleJSON.objects.get(msid=str(msid), ajson_type=models.METRICS_SUMMARY).ajson
-    except models.ArticleJSON.DoesNotExist:
+        metrics_data = models.RawJSON.objects.get(msid=str(msid), ajson_type=models.METRICS_SUMMARY).ajson
+    except models.RawJSON.DoesNotExist:
         metrics_data = {}
 
     # ajson for all known versions of this article
@@ -283,6 +283,7 @@ def _regenerate_article(msid):
         utils.save_objects(object_list)
         return models.Article.objects.get(msid=msid)
 
+#@transaction.atomic # shouldn't that have this?
 def regenerate_article(msid):
     "use this when regenerating individual or small numbers of articles."
     return _regenerate_article(msid)
@@ -402,7 +403,7 @@ PP_DESC = {
 
 def _regenerate_presspackage(ppid):
     "creates PressPackage records with no transaction"
-    data = models.ArticleJSON.objects.get(msid=ppid).ajson
+    data = models.RawJSON.objects.get(msid=ppid).ajson
     mush = render.render_item(PP_DESC, data)
     return first(create_or_update(models.PressPackage, mush, ['id', 'idstr']))
 
@@ -421,7 +422,7 @@ def download_presspackage(ppid):
     return first(consume.single("press-packages/{id}", id=ppid))
 
 def download_all_presspackages():
-    consume.allitems("press-packages")
+    consume.all_items("press-packages")
 
 
 #
@@ -441,7 +442,7 @@ PF_DESC = {
 }
 
 def _regenerate_profile(pfid):
-    data = models.ArticleJSON.objects.get(msid=pfid).ajson
+    data = models.RawJSON.objects.get(msid=pfid).ajson
     mush = render.render_item(PF_DESC, data)
     return first(create_or_update(models.Profile, mush, ['id']))
 
@@ -449,8 +450,8 @@ def _regenerate_profile(pfid):
 def regenerate_profile(pfid):
     return _regenerate_profile(pfid)
 
-def regenerate_many_profiles(pfidlist):
-    return do_all_atomically(_regenerate_profile, pfidlist)
+def regenerate_many_profiles(pfid_list):
+    return do_all_atomically(_regenerate_profile, pfid_list)
 
 def regenerate_all_profiles():
     return regenerate_many_profiles(logic.known_profiles())
@@ -459,7 +460,58 @@ def download_profile(pfid):
     return consume.single("profiles/{id}", id=pfid)
 
 def download_all_profiles():
-    return consume.allitems("profiles")
+    return consume.all_items("profiles")
+
+#
+# digests
+#
+
+def thumbnail_dimensions(xy):
+    width, height = xy
+    return width, height
+
+def build_iiif_link(args):
+    thumbnail_uri, width, height = args
+    new_width, new_height = thumbnail_dimensions((width, height))
+    new_uri = 'http://example.org/width/%s/height/%s.jpeg' % (new_width, new_height)
+    return new_uri
+
+DIGEST_DESC = {
+    'id': [p('id'), int],
+    'title': [p('title')],
+    'impact_statement': [p('impactStatement')],
+    'image_uri': [(p('image.thumbnail.uri'), p('image.thumbnail.size.width'), p('image.thumbnail.size.height')), build_iiif_link],
+    'image_width': [(p('image.thumbnail.size.width'), p('image.thumbnail.size.width')), thumbnail_dimensions, first],
+    'image_height': [(p('image.thumbnail.size.width'), p('image.thumbnail.size.width')), thumbnail_dimensions, last],
+    # we could hardcode this, it's always going to be image/jpeg
+    'image_mime': [p('image.thumbnail.source.mediaType')],
+    'datetime_published': [p('published')],
+    'datetime_updated': [p('updated')],
+}
+
+def flatten_digest_json(data):
+    return render.render_item(DIGEST_DESC, data)
+
+def _regenerate_digest(digest_id):
+    data = models.RawJSON.objects.get(msid=digest_id).ajson
+    mush = flatten_digest_json(data)
+    return first(create_or_update(models.PressPackage, mush, ['id', 'idstr']))
+
+@transaction.atomic
+def regenerate_digest(digest_id):
+    _regenerate_digest(digest_id)
+
+def regenerate_many_digests(digest_id_list):
+    return do_all_atomically(_regenerate_digest, digest_id_list)
+
+def regenerate_all_digests():
+    return consume.all_items("digests")
+
+def download_digest(digest_id):
+    return consume.single("digests/{id}", id=digest_id)
+
+def download_all_digests():
+    return consume.all_items('digests')
 
 #
 #
@@ -469,10 +521,13 @@ def regenerate_all():
     regenerate_all_articles()
     regenerate_all_presspackages()
     regenerate_all_profiles()
+    regenerate_all_digests()
 
 #
 #
 #
+
+# TODO: moosh these into one function
 
 def download_regenerate_article(msid):
     try:
@@ -499,6 +554,19 @@ def download_regenerate_presspackage(ppid):
     except BaseException:
         LOG.exception("unhandled exception attempting to download and regenerate presspackage %s", ppid)
 
+def download_regenerate_digest(digest_id):
+    try:
+        LOG.info("update event for digests %s", digest_id)
+        download_digest(digest_id)
+        regenerate_digest(digest_id)
+
+    except requests.exceptions.RequestException as err:
+        log = LOG.warn if err.response.status_code == 404 else LOG.error
+        log("failed to fetch digest %s: %s", digest_id, err) # probably an unpublished digest ...?
+
+    except BaseException:
+        LOG.exception("unhandled exception attempting to download and regenerate digest %s", digest_id)
+        
 
 #
 # upsert article-json from file/dir
@@ -507,7 +575,7 @@ def download_regenerate_presspackage(ppid):
 #
 
 def file_upsert(path, ctype=models.LAX_AJSON, regen=True, quiet=False):
-    "insert/update ArticleJSON from a file"
+    "insert/update RawJSON from a file"
     try:
         if not os.path.isfile(path):
             raise ValueError("can't handle path %r" % path)
@@ -531,7 +599,7 @@ def file_upsert(path, ctype=models.LAX_AJSON, regen=True, quiet=False):
 
 @transaction.atomic
 def bulk_file_upsert(article_json_dir, regen=True):
-    "insert/update ArticleJSON from a directory of files"
+    "insert/update RawJSON from a directory of files"
     paths = sorted(utils.listfiles(article_json_dir, ['.json']))
     msid_list = sorted(set(lmap(partial(file_upsert, regen=False, quiet=True), paths)))
     if regen:

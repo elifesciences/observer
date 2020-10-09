@@ -21,24 +21,24 @@ class One(BaseCase):
         self.assertEqual(1, models.Article.objects.count())
         models.Article.objects.get(msid=msid)
 
-    def test_handling_unhandled_event(self):
-        "unhandled events should issue a warning"
-        dummy_event = json.dumps({'type': 'pants', 'id': 'party'})
-        with patch('observer.inc.LOG') as mock_logger:
+def test_handling_unhandled_event():
+    "unhandled events should issue a warning"
+    dummy_event = json.dumps({'type': 'pants', 'id': 'party'})
+    with patch('observer.inc.LOG') as mock_logger:
+        inc.handler(dummy_event)
+        assert mock_logger.warn.called
+
+def test_handling_malformed_json():
+    "malformed events should issue an error"
+    bad_event = 'foo'
+    with patch('observer.inc.LOG') as mock_logger:
+        inc.handler(bad_event)
+        assert mock_logger.error.called
+
+def test_handling_unexpected_error():
+    "handlers that cause an exception log an exception"
+    dummy_event = json.dumps({'type': 'presspackage', 'id': 'whatevs'})
+    with patch('observer.inc.LOG') as mock:
+        with patch('observer.ingest_logic.download_regenerate_presspackage', side_effect=RuntimeError('no pants')):
             inc.handler(dummy_event)
-            self.assertTrue(mock_logger.warn.called)
-
-    def test_handling_malformed_json(self):
-        "malformed events should issue an error"
-        bad_event = 'foo'
-        with patch('observer.inc.LOG') as mock_logger:
-            inc.handler(bad_event)
-            self.assertTrue(mock_logger.error.called)
-
-    def test_handling_unexpected_error(self):
-        "handlers that cause an exception log an exception"
-        dummy_event = json.dumps({'type': 'presspackage', 'id': 'whatevs'})
-        with patch('observer.inc.LOG') as mock:
-            with patch('observer.inc.download_regenerate_presspackage', side_effect=RuntimeError('no pants')):
-                inc.handler(dummy_event)
-                self.assertTrue(mock.exception.called)
+            assert mock.exception.called

@@ -4,6 +4,9 @@ from django.test import TestCase
 from io import StringIO
 from django.core.management import call_command as dj_call_command
 
+THIS_DIR = os.path.dirname(os.path.realpath(__file__))
+FIXTURE_DIR = os.path.join(THIS_DIR, 'fixtures')
+
 def call_command(*args, **kwargs):
     stdout = StringIO()
     try:
@@ -14,8 +17,8 @@ def call_command(*args, **kwargs):
     raise AssertionError("management commands should always throw a systemexit()")
 
 class BaseCase(TestCase):
-    this_dir = os.path.dirname(os.path.realpath(__file__))
-    fixture_dir = os.path.join(this_dir, 'fixtures')
+    this_dir = THIS_DIR
+    fixture_dir = FIXTURE_DIR
 
     def freshen(self, obj):
         return type(obj).objects.get(pk=obj.pk)

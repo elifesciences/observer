@@ -1,13 +1,13 @@
 import json
 from os.path import join
-from .base import BaseCase
+from . import base
 from observer import ingest_logic as logic, models, utils
 from unittest.mock import patch
 from observer.ingest_logic import p, pp
 from datetime import datetime
 import pytz
 
-class Logic(BaseCase):
+class Logic(base.BaseCase):
     def setUp(self):
         self.unique_article_count = 5
         self.article_fixture_count = 12
@@ -59,7 +59,7 @@ class Logic(BaseCase):
         self.assertRaises(models.Article.DoesNotExist, models.Article.objects.get, msid=13964)
 
 
-class LogicFns(BaseCase):
+class LogicFns(base.BaseCase):
     def test_find_author(self):
         cases = [
             ({'authors': []}, {}), # no authors -> empty dict
@@ -96,7 +96,7 @@ class LogicFns(BaseCase):
         case = pp(p('foo.baz'), p('bar.foo'))
         self.assertRaises(KeyError, case, struct)
 
-class Article(BaseCase):
+class Article(base.BaseCase):
     def setUp(self):
         pass
 
@@ -128,7 +128,7 @@ class Article(BaseCase):
 #
 #
 
-class Subjects(BaseCase):
+class Subjects(base.BaseCase):
     def setUp(self):
         pass
 
@@ -150,7 +150,7 @@ class Subjects(BaseCase):
         subjects = [(s.name, s.label) for s in art.subjects.all()]
         self.assertEqual(subjects, expected)
 
-class Authors(BaseCase):
+class Authors(base.BaseCase):
     def setUp(self):
         pass
 
@@ -180,7 +180,7 @@ class Authors(BaseCase):
         actual = [(p.type, p.name, p.country) for p in list(authors)[-2:]]
         self.assertEqual(expected, actual)
 
-class Metrics(BaseCase):
+class Metrics(base.BaseCase):
     def setUp(self):
         pass
 
@@ -203,7 +203,7 @@ class Metrics(BaseCase):
         expected = {"id": 90560, "views": 11, "downloads": 0, "crossref": 0, "pubmed": 0, "scopus": 0}
         self.assertEqual(models.ArticleJSON.objects.get(msid=90560).ajson, expected)
 
-class PressPackages(BaseCase):
+class PressPackages(base.BaseCase):
     def test_download_single_presspackage(self):
         ppid = "81d42f7d"
         expected = self.jsonfix('presspackages', ppid + '.json')
@@ -231,7 +231,7 @@ class PressPackages(BaseCase):
         self.assertEqual(models.PressPackage.objects.count(), 100)
 
 
-class ProfileCount(BaseCase):
+class ProfileCount(base.BaseCase):
     def setUp(self):
         pass
 
@@ -255,7 +255,7 @@ class ProfileCount(BaseCase):
         logic.regenerate_all_profiles()
         self.assertEqual(models.Profile.objects.count(), 100)
 
-class AggregateLogic(BaseCase):
+class AggregateLogic(base.BaseCase):
     def setUp(self):
         # 13964 v1,v2,v3
         # 14850 v1
@@ -354,3 +354,21 @@ class AggregateLogic(BaseCase):
             for i, subj in enumerate(expected_subjects):
                 actual_subj = getattr(obj, 'subject%s' % (i + 1))
                 self.assertEqual(subj, actual_subj)
+
+#
+# digests
+#
+
+def test_flatten_digest():
+    fixture = json.load(open(join(base.FIXTURE_DIR, 'digests', '59885.json'), 'r'))
+    expected = {'id': 59885,
+                'title': 'Splitting up',
+                'impact_statement': 'Changes in protein levels during cell division reveal how the process is carefully controlled.',
+                'image_uri': 'http://example.org/width/805/height/653.jpeg',
+                'image_width': 805,
+                'image_height': 805,
+                'image_mime': 'image/jpeg',
+                'datetime_published': '2020-10-01T13:28:04Z',
+                'datetime_updated': '2020-10-01T13:28:31Z'}
+    actual = logic.flatten_digest_json(fixture)
+    assert expected == actual

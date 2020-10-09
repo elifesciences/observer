@@ -1,0 +1,84 @@
+{
+  "id": "59885",
+  "title": "Splitting up",
+  "impactStatement": "Changes in protein levels during cell division reveal how the process is carefully controlled.",
+  "stage": "published",
+  "published": "2020-10-01T13:28:04Z",
+  "updated": "2020-10-01T13:28:31Z",
+  "image": {
+    "thumbnail": {
+      "alt": "",
+      "uri": "https://iiif.elifesciences.org/digests/59885%2Fdigest-59885.png",
+      "size": {
+        "width": 805,
+        "height": 653
+      },
+      "source": {
+        "uri": "https://iiif.elifesciences.org/digests/59885%2Fdigest-59885.png/full/full/0/default.jpg",
+        "filename": "digest-59885.png",
+        "mediaType": "image/jpeg"
+      }
+    }
+  },
+  "subjects": [
+    {
+      "id": "cell-biology",
+      "name": "Cell Biology"
+    }
+  ],
+  "content": [
+    {
+      "type": "image",
+      "image": {
+        "alt": "",
+        "uri": "https://iiif.elifesciences.org/digests/59885%2Fdigest-59885.png",
+        "size": {
+          "width": 805,
+          "height": 653
+        },
+        "source": {
+          "uri": "https://iiif.elifesciences.org/digests/59885%2Fdigest-59885.png/full/full/0/default.jpg",
+          "filename": "digest-59885.png",
+          "mediaType": "image/jpeg"
+        }
+      },
+      "caption": [
+        {
+          "text": "Cell dividing, with the DNA shown in red. Image credit: Zeiss Microscopy (CC BY 2.0)",
+          "type": "paragraph"
+        }
+      ]
+    },
+    {
+      "text": "New cells are made when a single cell duplicates its DNA and divides into two cells, distributing the DNA equally between them, in a process called mitosis. The splitting of the two copies of DNA happens through a series of controlled events known as mitotic exit. Previous research has suggested that mitotic exit relies on both the destruction of specific proteins and the removal of tags called phosphate groups from other proteins. Phosphate groups modify how proteins behave and their removal can trigger changes in a protein’s activity.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Although protein destruction and phosphate group removal were known to be important to mitotic exit, it was not understood how they are coordinated in the cell to ensure the correct order of events. Holder et al. have used a technique called mass spectrometry to monitor the level of thousands of proteins, and any tags attached to them, during mitotic exit in human cells grown in the laboratory.",
+      "type": "paragraph"
+    },
+    {
+      "text": "The experiments revealed that the destruction of a single protein, known as cyclin B, plays a major role in triggering subsequent events. The removal of cyclin B activates enzymes known as phosphatases, which remove phosphate groups from proteins. Phosphatases then act on a wide range of proteins in a specific order that depends on the environment surrounding the phosphate group. This ‘chain’ of phosphatase activity determines the order of events during mitotic exit.",
+      "type": "paragraph"
+    },
+    {
+      "text": "The findings of Holder et al. contribute to the basic understanding of how mitotic exit works. Errors in the process can affect the stability of a cell’s genome, contributing to diseases such as cancer. In the future, this may help to identify what goes wrong in these cases and potential avenues for developing treatments.",
+      "type": "paragraph"
+    }
+  ],
+  "relatedContent": [
+    {
+      "id": "59885",
+      "doi": "10.7554/eLife.59885",
+      "type": "research-article",
+      "stage": "preview",
+      "title": "Ordered dephosphorylation initiated by the selective proteolysis of cyclin B drives mitotic exit",
+      "status": "vor",
+      "volume": 9,
+      "version": 2,
+      "published": "2020-09-01T00:00:00Z",
+      "authorLine": "James Holder et al.",
+      "elocationId": "e59885"
+    }
+  ]
+}

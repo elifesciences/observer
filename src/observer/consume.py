@@ -87,21 +87,22 @@ def upsert_all(content_type, rows, idfn):
 # generic content consumption
 #
 
-# this whole function is a bit sucky
 def content_type_from_endpoint(endpoint):
+    """given an API `endpoint` like `press-packages/{id}`, returns a slugified version like `press-packages-id`.
+    if a given API `endpoint` doesn't exist, it's value is looked up in a map of aliases.
+    for example, `digests` is aliased `digests-id`."""
     val = slugify(endpoint) # press-packages/{id} => press-packages-id
-
     aliases = {
-        # summary endpoints converted to individual items
+        # summary endpoints
         'profiles': models.PROFILE,
         'press-packages': models.PRESSPACKAGE,
+        'digests': models.DIGEST,
 
-        # backsupport
+        # backwards support
         'articles-id-versions-version': models.LAX_AJSON,
         'metrics-article-summary': models.METRICS_SUMMARY
     }
-    val = aliases.get(val, val)
-    return val
+    return aliases.get(val, val)
 
 def single(endpoint, idfn=None, **kwargs):
     content_type = content_type_from_endpoint(endpoint)
@@ -114,10 +115,10 @@ def single(endpoint, idfn=None, **kwargs):
     idfn = idfn or default_idfn
     return upsert(idfn(data), content_type, data)
 
-def allitems(endpoint, idfn=None, **kwargs):
-    ini = consume(endpoint, {'per-page': 1})
+def all_items(endpoint, idfn=None, **kwargs):
+    initial = consume(endpoint, {'per-page': 1})
     per_page = 100
-    num_pages = math.ceil(ini["total"] / float(per_page))
+    num_pages = math.ceil(initial["total"] / float(per_page))
     idfn = idfn or default_idfn
     LOG.info("%s pages to fetch" % num_pages)
 
