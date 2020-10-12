@@ -241,9 +241,11 @@ def extract_children(mush):
 
     children = []
     for childtype, kwargs in known_children.items():
-        data = mush[childtype]
-
-        children.extend([utils.dict_update(kwargs, {'orig_data': row, 'parent-relation': childtype}, immutable=True) for row in data])
+        # if 'subjects' in 'digest'
+        # if 'authors' in 'article'
+        if childtype in mush:
+            data = mush[childtype]
+            children.extend([utils.dict_update(kwargs, {'orig_data': row, 'parent-relation': childtype}, immutable=True) for row in data])
 
     # remove the children from the mush, they must be saved separately
     delall(mush, known_children.keys())
@@ -405,6 +407,7 @@ def _regenerate_presspackage(ppid):
     "creates PressPackage records with no transaction"
     data = models.RawJSON.objects.get(msid=ppid).ajson
     mush = render.render_item(PP_DESC, data)
+    
     return first(create_or_update(models.PressPackage, mush, ['id', 'idstr']))
 
 @transaction.atomic
@@ -487,6 +490,7 @@ DIGEST_DESC = {
     'image_mime': [p('image.thumbnail.source.mediaType')],
     'datetime_published': [p('published')],
     'datetime_updated': [p('updated')],
+    'subjects': [p('subjects', []), lambda sl: [{'name': v['id'], 'label': v['name']} for v in sl]],
 }
 
 def flatten_digest_json(data):
@@ -495,7 +499,17 @@ def flatten_digest_json(data):
 def _regenerate_digest(digest_id):
     data = models.RawJSON.objects.get(msid=digest_id).ajson
     mush = flatten_digest_json(data)
-    return first(create_or_update(models.Digest, mush, ['id']))
+
+    mush, children = extract_children(mush)
+    parent = {'Model': models.Digest, 'orig_data': mush, 'key_list': ['id']}
+
+    object_list = [(parent, children)]
+
+    with transaction.atomic():
+        # destroy what we have, if anything. updating may be dangerous
+        #models.Digest.objects.filter(id=digest_id).delete()
+        utils.save_objects(object_list)
+        return models.Digest.objects.get(id=digest_id)
 
 @transaction.atomic
 def regenerate_digest(digest_id):

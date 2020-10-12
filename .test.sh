@@ -2,7 +2,7 @@
 # run full or partial test suite:
 #   ./.test.sh
 # or
-#   ./.test.sh -k observer/tests/test_rss_views.py
+#   ./.test.sh observer/tests/test_rss_views.py
 
 set -e
 
