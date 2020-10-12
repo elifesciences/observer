@@ -279,6 +279,24 @@ class Digest(models.Model):
     datetime_record_created = DateTimeField(auto_now_add=True)
     datetime_record_updated = DateTimeField(auto_now=True)
 
+    def thumbnail_dimensions(self, new_width=800):
+        width, height = self.image_width, self.image_height
+        if height > width:
+            (width, height) = (height, width)
+        aspect_ratio = width / height
+        height = new_width / aspect_ratio
+        return int(new_width), int(height)
+
+    def iiif_thumbnail_link(self):
+        uri = self.image_uri
+        new_width, new_height = self.thumbnail_dimensions()
+        region = "full"
+        size = "%s,%s" % (new_width, new_height)
+        rotation = "0" # no rotation
+        quality = "default" # native, color, grey, bitonal
+        image_format = "jpg"
+        return f"{uri}/{region}/{size}/{rotation}/{quality}.{image_format}"
+
     class Meta:
         ordering = ('-datetime_published',)
 

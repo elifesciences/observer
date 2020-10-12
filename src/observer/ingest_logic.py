@@ -471,22 +471,30 @@ def download_all_profiles():
 
 def thumbnail_dimensions(xy):
     width, height = xy
-    return width, height
+    if height > width:
+        (width, height) = (height, width)
+    aspect_ratio = width / height
+    width = 800
+    height = width / aspect_ratio
+    return int(width), int(height)
 
 def build_iiif_link(args):
-    thumbnail_uri, width, height = args
+    uri, width, height = args
     new_width, new_height = thumbnail_dimensions((width, height))
-    new_uri = 'http://example.org/width/%s/height/%s.jpeg' % (new_width, new_height)
-    return new_uri
+    region = "full"
+    size = "%s,%s" % (new_width, new_height)
+    rotation = "0" # no rotation
+    quality = "default" # native, color, grey, bitonal
+    image_format = "jpg"
+    return f"{uri}/{region}/{size}/{rotation}/{quality}.{image_format}"
 
 DIGEST_DESC = {
     'id': [p('id'), int],
     'title': [p('title')],
     'impact_statement': [p('impactStatement')],
-    'image_uri': [(p('image.thumbnail.uri'), p('image.thumbnail.size.width'), p('image.thumbnail.size.height')), build_iiif_link],
-    'image_width': [(p('image.thumbnail.size.width'), p('image.thumbnail.size.width')), thumbnail_dimensions, first],
-    'image_height': [(p('image.thumbnail.size.width'), p('image.thumbnail.size.width')), thumbnail_dimensions, last],
-    # we could hardcode this, it's always going to be image/jpeg
+    'image_uri': [p('image.thumbnail.uri')],
+    'image_width': [p('image.thumbnail.size.width')],
+    'image_height': [p('image.thumbnail.size.height')],
     'image_mime': [p('image.thumbnail.source.mediaType')],
     'datetime_published': [p('published')],
     'datetime_updated': [p('updated')],

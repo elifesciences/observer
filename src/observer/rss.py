@@ -205,11 +205,11 @@ def digest_to_rss_entry(digest):
     item['dc:dc_date'] = utils.ymdhms(item['pubDate'])
     item['category'] = [{'term': subject.name, 'label': subject.label} for subject in digest.subjects.all()]
 
-    image_data = utils.subdict(data, ['image_uri', 'image_width', 'image_height', 'image_mime'])
-    item['webfeeds:featuredImage'] = {'url': image_data['image_uri'],
-                                      'height': str(image_data['image_height']),
-                                      'width': str(image_data['image_width']),
-                                      'type': image_data['image_mime']}
+    thumbnail_width, thumbnail_height = digest.thumbnail_dimensions()
+    item['webfeeds:featuredImage'] = {'url': digest.iiif_thumbnail_link(),
+                                      'height': str(thumbnail_height),
+                                      'width': str(thumbnail_width),
+                                      'type': "image/jpeg"}
 
     return item
 
