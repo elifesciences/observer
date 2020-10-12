@@ -495,7 +495,7 @@ def flatten_digest_json(data):
 def _regenerate_digest(digest_id):
     data = models.RawJSON.objects.get(msid=digest_id).ajson
     mush = flatten_digest_json(data)
-    return first(create_or_update(models.PressPackage, mush, ['id', 'idstr']))
+    return first(create_or_update(models.Digest, mush, ['id']))
 
 @transaction.atomic
 def regenerate_digest(digest_id):
@@ -505,7 +505,7 @@ def regenerate_many_digests(digest_id_list):
     return do_all_atomically(_regenerate_digest, digest_id_list)
 
 def regenerate_all_digests():
-    return consume.all_items("digests")
+    return regenerate_many_digests(logic.known_digests())
 
 def download_digest(digest_id):
     return consume.single("digests/{id}", id=digest_id)

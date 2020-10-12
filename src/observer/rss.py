@@ -1,8 +1,7 @@
 from django.http import HttpResponse
-from django.db import models
 from feedgen.feed import FeedGenerator
 import logging
-from . import utils
+from . import utils, models
 import feedgen.ext.base
 import feedgen.util
 
@@ -186,17 +185,52 @@ def article_to_rss_entry(art):
     item['dc:dc_date'] = utils.ymdhms(item['pubDate'])
     return item
 
+def article_list_to_rss_entry_list(queryset):
+    queryset = queryset.prefetch_related('subjects', 'authors')
+    return map(article_to_rss_entry, queryset) # deliberate use of lazy `map`
+
+def digest_to_rss_entry(digest):
+    data = utils.to_dict(digest)
+    
+    item = utils.subdict(data, [
+        'id', 'title', 'impact_statement',
+        'datetime_published', 'datetime_updated'])
+    utils.renkeys(item, [
+        ('impact_statement', 'description'),
+        ('datetime_published', 'pubDate'),
+        ('datetime_updated', 'updated'),
+    ])
+    item['id'] = "https://elifesciences.org/digests/%s" % item['id']
+    item['dc:dc_date'] = utils.ymdhms(item['pubDate'])
+
+    image_data = utils.subdict(data, ['image_uri', 'image_width', 'image_height', 'image_mime'])
+    item['webfeeds:featuredImage'] = {'url': image_data['image_uri'],
+                                      'height': str(image_data['image_height']),
+                                      'width': str(image_data['image_width']),
+                                      'type': image_data['image_mime']}
+
+    return item
+
+def digest_list_to_rss_entry_list(queryset):
+    return map(digest_to_rss_entry, queryset)
+
+def identity(x):
+    return x
+
 def _format_report(report, context):
     "generates an RSS feed from the given `report` and `context` data, returning XML content as a string"
     report.update(context) # yes, this nukes any conflicting keys in the report
     report['title'] = 'eLife: ' + report.get('title', 'untitled')
     feed = mkfeed(report)
-    items = report.get('items', [])
 
-    if isinstance(items, models.QuerySet):
-        query = items # this is a `models.SomeModel.objects.foo` queryset
-        query = query.prefetch_related('subjects', 'authors')
-        items = map(article_to_rss_entry, query) # deliberate use of lazy `map`
+    dispatch = {
+        models.Article: article_list_to_rss_entry_list,
+        models.Digest: digest_list_to_rss_entry_list,
+    }
+
+    items = report.get('items', [])
+    peek = items[0]
+    items = dispatch[type(peek)](items)
 
     add_many_entries(feed, items)
     return feed.rss_str(pretty=True).decode('utf-8')

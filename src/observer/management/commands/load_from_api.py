@@ -5,7 +5,7 @@ from observer import ingest_logic as logic
 from observer.utils import lmap, subdict
 from functools import partial
 
-LAX, METRICS, PRESSPACKAGES, PROFILES = TARGETS = ['lax', 'elife-metrics', 'press-packages', 'profiles']
+LAX, METRICS, PRESSPACKAGES, PROFILES, DIGESTS = TARGETS = ['lax', 'elife-metrics', 'press-packages', 'profiles', 'digests']
 
 class Command(BaseCommand):
     help = "loads ALL elife articles and versions and metrics summary"
@@ -20,6 +20,7 @@ class Command(BaseCommand):
             dl_metrics = logic.download_all_article_metrics
             dl_presspackages = logic.download_all_presspackages
             dl_profiles = logic.download_all_profiles
+            dl_digests = logic.download_all_digests
             regen = logic.regenerate_all
 
             # TODO: observer isn't as article-centric any more
@@ -37,6 +38,7 @@ class Command(BaseCommand):
                 (METRICS, dl_metrics),
                 (PRESSPACKAGES, dl_presspackages),
                 (PROFILES, dl_profiles),
+                (DIGESTS, dl_digests),
             ])
 
             targetlist = options['target'] or []

@@ -280,10 +280,10 @@ class Digest(models.Model):
     datetime_record_updated = DateTimeField(auto_now=True)
 
     class Meta:
-        pass
+        ordering = ('-datetime_published',)
 
     def __str__(self):
         return self.id
 
     def __repr__(self):
-        return '<Digest %r>' % self
+        return '<Digest "%s">' % self

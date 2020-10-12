@@ -89,6 +89,19 @@ def upcoming_articles():
         .filter(status=models.POA) \
         .order_by('-datetime_published')
 
+# note: 'article_meta' here works because of similar field names
+@report(article_meta(
+    title='digests',
+    description='The latest eLife digests.'
+))
+def digests():
+    return models.Digest.objects \
+        .order_by('-datetime_published')
+
+#
+#
+#
+
 @report(article_meta(
     title='published research article index',
     description='The dates and times of publication for all _research_ articles published at eLife. If an article had a POA version, the date and time of the POA version is included.',
@@ -216,6 +229,7 @@ def known_report_idx():
         ('latest-articles', latest_articles),
         ('latest-articles-by-subject', latest_articles_by_subject),
         ('upcoming-articles', upcoming_articles),
+        ('digests', digests),
         ('published-article-index', published_article_index),
         ('published-research-article-index', published_research_article_index),
         ('profile-count', profile_count),
