@@ -22,6 +22,7 @@ class FeedlyBaseExtension(feedgen.ext.base.BaseExtension):
             """extending a BaseExtension object means writing a tonne of boilerplate accessors.
             this creates setters for each of the `self.elem_list` list of elements."""
             attr = attr_name(elem)
+
             def setter(value, replace=True):
                 if value is not None:
                     if not isinstance(value, list):
@@ -181,7 +182,7 @@ def article_to_rss_entry(art):
     item['id'] = "https://dx.doi.org/" + item['link']
     item['link'] = {'href': "https://elifesciences.org/articles/" + utils.pad_msid(art.msid)}
     item['author'] = [{'name': a.name, 'email': art.author_email} for a in art.authors.all()]
-    item['category'] = [{'term': c.name, 'label': c.label} for c in art.subjects.all()]
+    item['category'] = [{'term': subject.name, 'label': subject.label} for subject in art.subjects.all()]
     item['dc:dc_date'] = utils.ymdhms(item['pubDate'])
     return item
 
@@ -191,7 +192,7 @@ def article_list_to_rss_entry_list(queryset):
 
 def digest_to_rss_entry(digest):
     data = utils.to_dict(digest)
-    
+
     item = utils.subdict(data, [
         'id', 'title', 'impact_statement',
         'datetime_published', 'datetime_updated'])
@@ -202,6 +203,7 @@ def digest_to_rss_entry(digest):
     ])
     item['id'] = "https://elifesciences.org/digests/%s" % item['id']
     item['dc:dc_date'] = utils.ymdhms(item['pubDate'])
+    item['category'] = [{'term': subject.name, 'label': subject.label} for subject in digest.subjects.all()]
 
     image_data = utils.subdict(data, ['image_uri', 'image_width', 'image_height', 'image_mime'])
     item['webfeeds:featuredImage'] = {'url': image_data['image_uri'],
