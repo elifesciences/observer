@@ -115,17 +115,19 @@ class Two(BaseCase):
         ]
         self.assertEqual(actual, expected)
 
-    def test_report_keeps_query_count_low(self):
-        # worse case here is 12 without prefetching
+    def test_report_keeps_query_count_low_1(self):
+        # worse case is *12* without prefetching
         magic_num = 4 # after django fanciness
         with self.assertNumQueries(magic_num):
             self.c.get(reverse('report', kwargs={'name': 'latest-articles'}))
 
-        # worse case is also 4 without prefetching
+    def test_report_keeps_query_count_low_2(self):
+        # worse case is 4 without prefetching
         magic_num = 4
         with self.assertNumQueries(magic_num):
             self.c.get(reverse('report', kwargs={'name': 'upcoming-articles'}))
 
+    def test_report_keeps_query_count_low_3(self):
         # with a simple csv report that doesn't descend into many-to-many fields, we can whittle a
         # request down to just 3 requests
         paginate = 1

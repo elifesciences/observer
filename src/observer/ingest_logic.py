@@ -285,7 +285,7 @@ def _regenerate_article(msid):
         utils.save_objects(object_list)
         return models.Article.objects.get(msid=msid)
 
-#@transaction.atomic # shouldn't that have this?
+# @transaction.atomic # shouldn't that have this?
 def regenerate_article(msid):
     "use this when regenerating individual or small numbers of articles."
     return _regenerate_article(msid)
@@ -407,7 +407,7 @@ def _regenerate_presspackage(ppid):
     "creates PressPackage records with no transaction"
     data = models.RawJSON.objects.get(msid=ppid).ajson
     mush = render.render_item(PP_DESC, data)
-    
+
     return first(create_or_update(models.PressPackage, mush, ['id', 'idstr']))
 
 @transaction.atomic
@@ -507,7 +507,7 @@ def _regenerate_digest(digest_id):
 
     with transaction.atomic():
         # destroy what we have, if anything. updating may be dangerous
-        #models.Digest.objects.filter(id=digest_id).delete()
+        # models.Digest.objects.filter(id=digest_id).delete()
         utils.save_objects(object_list)
         return models.Digest.objects.get(id=digest_id)
 
@@ -580,7 +580,7 @@ def download_regenerate_digest(digest_id):
 
     except BaseException:
         LOG.exception("unhandled exception attempting to download and regenerate digest %s", digest_id)
-        
+
 
 #
 # upsert article-json from file/dir

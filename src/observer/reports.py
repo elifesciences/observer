@@ -92,7 +92,8 @@ def upcoming_articles():
 # note: 'article_meta' here works because of similar field names
 @report(article_meta(
     title='digests',
-    description='The latest eLife digests.'
+    description='The latest eLife digests.',
+    serialisations=[RSS],
 ))
 def digests():
     return models.Digest.objects \

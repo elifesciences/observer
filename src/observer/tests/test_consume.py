@@ -11,17 +11,17 @@ def test_content_type_from_endpoint():
     """given a request, the content-type identifier is correctly generated.
     the content-type identifier is used as an index for `models.ArticleJSON.ajson_type`"""
     cases = [
-            ('/press-packages', 'press-packages-id'),
-            ('/press-packages/{id}', 'press-packages-id'), # specific press package
+        ('/press-packages', 'press-packages-id'),
+        ('/press-packages/{id}', 'press-packages-id'), # specific press package
 
-            ('/profiles', 'profiles-id'),
-            ('/profiles/{id}', 'profiles-id'),
+        ('/profiles', 'profiles-id'),
+        ('/profiles/{id}', 'profiles-id'),
 
-            ('/digests', 'digests-id'),
+        ('/digests', 'digests-id'),
 
-            # exceptions to the rule
-            ('/articles/{id}/versions/{version}', models.LAX_AJSON), # not actually used (yet)
-            ('/metrics/article/summary', models.METRICS_SUMMARY),
+        # exceptions to the rule
+        ('/articles/{id}/versions/{version}', models.LAX_AJSON), # not actually used (yet)
+        ('/metrics/article/summary', models.METRICS_SUMMARY),
     ]
     for given, expected in cases:
         actual = consume.content_type_from_endpoint(given)

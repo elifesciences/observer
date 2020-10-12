@@ -228,11 +228,16 @@ def _format_report(report, context):
     dispatch = {
         models.Article: article_list_to_rss_entry_list,
         models.Digest: digest_list_to_rss_entry_list,
+
+        # if we're given a map of data, assume it's already in the shape we want it in
+        dict: identity
     }
 
     items = report.get('items', [])
-    peek = items[0]
-    items = dispatch[type(peek)](items)
+    obj_type = dict
+    if hasattr(items, 'model'):
+        obj_type = items.model
+    items = dispatch[obj_type](items)
 
     add_many_entries(feed, items)
     return feed.rss_str(pretty=True).decode('utf-8')

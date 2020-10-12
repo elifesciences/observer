@@ -1,6 +1,6 @@
 from os.path import join
 from .base import BaseCase, call_command
-from observer import models, ingest_logic as logic
+from observer import models, ingest_logic
 
 class Cmd(BaseCase):
     def setUp(self):
@@ -18,7 +18,7 @@ class Cmd(BaseCase):
         self.article_json = join(self.fixture_dir, 'ajson', 'elife-13964-v1.xml.json')
 
         # load the ArticleJSON in
-        logic.file_upsert(self.article_json, regen=False)
+        ingest_logic.file_upsert(self.article_json, regen=False)
 
         # ensure no articles exist yet
         self.assertEqual(models.Article.objects.count(), 0)

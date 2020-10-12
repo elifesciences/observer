@@ -275,7 +275,7 @@ class Digest(models.Model):
     datetime_updated = DateTimeField()
 
     subjects = models.ManyToManyField(Subject)
-    
+
     datetime_record_created = DateTimeField(auto_now_add=True)
     datetime_record_updated = DateTimeField(auto_now=True)
 

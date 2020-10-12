@@ -1,7 +1,7 @@
 from collections import OrderedDict
 import sys
 from django.core.management.base import BaseCommand
-from observer import ingest_logic as logic
+from observer import ingest_logic
 from observer.utils import lmap, subdict
 from functools import partial
 
@@ -16,22 +16,22 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         try:
-            dl_ajson = logic.download_all_article_versions
-            dl_metrics = logic.download_all_article_metrics
-            dl_presspackages = logic.download_all_presspackages
-            dl_profiles = logic.download_all_profiles
-            dl_digests = logic.download_all_digests
-            regen = logic.regenerate_all
+            dl_ajson = ingest_logic.download_all_article_versions
+            dl_metrics = ingest_logic.download_all_article_metrics
+            dl_presspackages = ingest_logic.download_all_presspackages
+            dl_profiles = ingest_logic.download_all_profiles
+            dl_digests = ingest_logic.download_all_digests
+            regen = ingest_logic.regenerate_all
 
             # TODO: observer isn't as article-centric any more
             # this section might need altering
             msidlist = options['msid']
             if msidlist:
-                dl_ajson = partial(lmap, logic.download_article_versions, msidlist)
-                dl_metrics = partial(lmap, logic.download_article_metrics, msidlist)
+                dl_ajson = partial(lmap, ingest_logic.download_article_versions, msidlist)
+                dl_metrics = partial(lmap, ingest_logic.download_article_metrics, msidlist)
                 # dl_presspackages = ...
                 # dl_profiles = ...
-                regen = partial(lmap, logic.regenerate_article, msidlist)
+                regen = partial(lmap, ingest_logic.regenerate_article, msidlist)
 
             targets = OrderedDict([
                 (LAX, dl_ajson),
