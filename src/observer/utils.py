@@ -234,7 +234,7 @@ def create_or_update(Model, orig_data, key_list=None, create=True, update=True, 
     return (inst, created, updated)
 
 def save_objects(queue):
-    """complements create_or_update(), saves a list of pairs of (parent, children-list)
+    """complements create_or_update(), saves a list of pairs of (parent, children-list).
     each parent and each child are the kwargs to be passed to `create_or_update`.
     each child requires an extra kwarg 'parent-relation' which will be used to 'attach' the
     child to the parent."""

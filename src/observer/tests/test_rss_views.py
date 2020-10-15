@@ -1,14 +1,15 @@
+import pytest
 from datetime import datetime
 from observer.utils import listfiles
 import re
 from os.path import join
-from .base import BaseCase
+from . import base
 from django.test import Client
 from django.urls import reverse
 from observer import ingest_logic, models
 from observer.utils import lmap
 
-class One(BaseCase):
+class One(base.BaseCase):
     def setUp(self):
         self.c = Client()
 
@@ -53,7 +54,7 @@ class One(BaseCase):
         matches = re.findall(regex, xml)
         self.assertEqual(expected_subjects, len(matches))
 
-class Two(BaseCase):
+class Two(base.BaseCase):
     def setUp(self):
         self.c = Client()
         for path in listfiles(join(self.fixture_dir, 'ajson'), ['.json']):
@@ -115,17 +116,19 @@ class Two(BaseCase):
         ]
         self.assertEqual(actual, expected)
 
-    def test_report_keeps_query_count_low(self):
-        # worse case here is 12 without prefetching
+    def test_report_keeps_query_count_low_1(self):
+        # worse case is *12* without prefetching
         magic_num = 4 # after django fanciness
         with self.assertNumQueries(magic_num):
             self.c.get(reverse('report', kwargs={'name': 'latest-articles'}))
 
-        # worse case is also 4 without prefetching
+    def test_report_keeps_query_count_low_2(self):
+        # worse case is 4 without prefetching
         magic_num = 4
         with self.assertNumQueries(magic_num):
             self.c.get(reverse('report', kwargs={'name': 'upcoming-articles'}))
 
+    def test_report_keeps_query_count_low_3(self):
         # with a simple csv report that doesn't descend into many-to-many fields, we can whittle a
         # request down to just 3 requests
         paginate = 1
@@ -141,3 +144,26 @@ class Two(BaseCase):
         num = paginate + csv_peek + csv_generation + author_lu + subject_lu
         with self.assertNumQueries(num):
             self.c.get(reverse('report', kwargs={'name': 'latest-articles'}), {'format': 'csv'})
+
+class Digests(base.BaseCase):
+    maxDiff = None
+
+    def setUp(self):
+        for path in listfiles(join(self.fixture_dir, 'digests'), ['.json']):
+            ingest_logic.file_upsert(path, ctype=models.DIGEST, regen=True)
+        self.c = Client()
+
+    def tearDown(self):
+        pass
+
+    # freezing time because FeedGen adds a `lastBuildDate` element to the generated
+    # RSS feed that can't be affected from here.
+    @pytest.mark.freeze_time('2020-10-12')
+    def test_digests(self):
+        url = reverse('report', kwargs={'name': 'digests'})
+        resp = self.c.get(url)
+        self.assertEqual(200, resp.status_code)
+
+        expected = open(join(base.FIXTURE_DIR, 'digests', '59885.xml'), 'r').read()
+        actual = resp.content.decode('utf-8')
+        self.assertEqual(expected, actual)

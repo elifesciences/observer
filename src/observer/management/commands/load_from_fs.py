@@ -23,7 +23,7 @@ class Command(BaseCommand):
             fn(target)
 
         except json.JSONDecodeError as err:
-            LOG.error("failed to load your bad data: %s", err)
+            LOG.error("failed to load, bad data: %s", err)
             sys.exit(1)
 
         except ingest_logic.StateError as err:

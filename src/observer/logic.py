@@ -4,6 +4,8 @@ from django.db.models import IntegerField
 from django.db.models.functions import Cast
 
 def known_content(blah):
+    """returns a queryset of object IDs from newest to oldest.
+    note: `ArticleJSON` and it's field `msid` are misleading - this table is used as a general purpose data store now."""
     return models.ArticleJSON.objects \
         .filter(ajson_type=blah) \
         .values_list('msid', flat=True) \
@@ -20,10 +22,16 @@ def known_articles():
         .distinct()
 
 def known_presspackages():
+    "returns a queryset of PressPackage IDs from newest to oldest"
     return known_content(models.PRESSPACKAGE)
 
 def known_profiles():
+    "returns a queryset of Profile IDs from newest to oldest"
     return known_content(models.PROFILE)
+
+def known_digests():
+    "returns a queryset of Digest IDs from newest to oldest"
+    return known_content(models.DIGEST)
 
 def simple_subjects():
     "returns a flat list of subject names"

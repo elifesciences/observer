@@ -1,13 +1,13 @@
 import json
 from os.path import join
-from .base import BaseCase
-from observer import ingest_logic as logic, models, utils
+from . import base
+from observer import ingest_logic, models, utils
 from unittest.mock import patch
 from observer.ingest_logic import p, pp
 from datetime import datetime
 import pytz
 
-class Logic(BaseCase):
+class IngestLogic(base.BaseCase):
     def setUp(self):
         self.unique_article_count = 5
         self.article_fixture_count = 12
@@ -17,29 +17,29 @@ class Logic(BaseCase):
         "a basic transformation of the data is possible without errors"
         article_json = json.load(open(self.article_json, 'r'))
         article_json['version'] = 1 # patch fixture with missing
-        logic.flatten_article_json(article_json)
+        ingest_logic.flatten_article_json(article_json)
 
     def test_upsert(self):
         "a basic upsert is possible"
         self.assertEqual(models.Article.objects.count(), 0)
-        logic.file_upsert(self.article_json)
+        ingest_logic.file_upsert(self.article_json)
         self.assertEqual(models.Article.objects.count(), 1)
 
     def test_bulk_file_upsert(self):
         "we can create/update a sample of our articles across multiple versions"
         self.assertEqual(models.Article.objects.count(), 0)
-        logic.bulk_file_upsert(join(self.fixture_dir, 'ajson'))
+        ingest_logic.bulk_file_upsert(join(self.fixture_dir, 'ajson'))
         self.assertEqual(models.Article.objects.count(), self.unique_article_count)
 
     def test_upsert_ajson(self):
         self.assertEqual(models.ArticleJSON.objects.count(), 0)
-        logic.file_upsert(self.article_json)
+        ingest_logic.file_upsert(self.article_json)
         self.assertEqual(models.ArticleJSON.objects.count(), 1)
 
     def test_bulk_regenerate_ajson(self):
         "an error involving regenerating one article doesn't affect all articles in transaction"
         self.assertEqual(models.Article.objects.count(), 0)
-        logic.bulk_file_upsert(join(self.fixture_dir, 'ajson'), regen=False)
+        ingest_logic.bulk_file_upsert(join(self.fixture_dir, 'ajson'), regen=False)
 
         # no articles, expected json data
         self.assertEqual(0, models.Article.objects.count())
@@ -52,14 +52,14 @@ class Logic(BaseCase):
         randajson.save()
 
         # now we regenerate and one less than expected is expected
-        logic.regenerate_all_articles()
+        ingest_logic.regenerate_all_articles()
         self.assertEqual(self.unique_article_count - 1, models.Article.objects.count())
 
         # v1 and v3 would have been ingested fine but all should be rolled back when any one fails
         self.assertRaises(models.Article.DoesNotExist, models.Article.objects.get, msid=13964)
 
 
-class LogicFns(BaseCase):
+class IngestLogicFns(base.BaseCase):
     def test_find_author(self):
         cases = [
             ({'authors': []}, {}), # no authors -> empty dict
@@ -67,7 +67,7 @@ class LogicFns(BaseCase):
             ({'authors': [{'emailAddresses': True}, {'emailAddresses': False}]}, {'emailAddresses': True}), # multiple authors -> first author returned
         ]
         for given, expected in cases:
-            self.assertEqual(logic.find_author(given), expected)
+            self.assertEqual(ingest_logic.find_author(given), expected)
 
     def test_find_author_name(self):
         cases = [
@@ -80,7 +80,7 @@ class LogicFns(BaseCase):
             ({'authors': [{'emailAddresses': True, 'name': {'preferred': 'party'}}]}, 'party'),
         ]
         for given, expected in cases:
-            self.assertEqual(logic.find_author_name(given), expected, "failed on: %s" % given)
+            self.assertEqual(ingest_logic.find_author_name(given), expected, "failed on: %s" % given)
 
     def test_pp(self):
         struct = {'foo': {'bar': 'pants.party'}}
@@ -96,7 +96,7 @@ class LogicFns(BaseCase):
         case = pp(p('foo.baz'), p('bar.foo'))
         self.assertRaises(KeyError, case, struct)
 
-class Article(BaseCase):
+class Article(base.BaseCase):
     def setUp(self):
         pass
 
@@ -112,12 +112,12 @@ class Article(BaseCase):
             ('720609628398071589300', 1, models.LAX_AJSON, ajson),
         ]
         for args in cases:
-            logic.upsert_ajson(*args)
+            ingest_logic.upsert_ajson(*args)
         self.assertEqual(2, models.ArticleJSON.objects.count())
 
     def test_id_normalised(self):
         msid, version, data = '00003', 1, {}
-        logic.upsert_ajson(msid, version, models.LAX_AJSON, data)
+        ingest_logic.upsert_ajson(msid, version, models.LAX_AJSON, data)
         # JSON was inserted
         self.assertEqual(models.ArticleJSON.objects.count(), 1)
         # and it's msid was normalised
@@ -128,13 +128,13 @@ class Article(BaseCase):
 #
 #
 
-class Subjects(BaseCase):
+class Subjects(base.BaseCase):
     def setUp(self):
         pass
 
     def test_subjects_created(self):
         self.assertEqual(0, models.Subject.objects.count())
-        msid = logic.file_upsert(join(self.fixture_dir, 'ajson', 'elife-13964-v1.xml.json'))
+        msid = ingest_logic.file_upsert(join(self.fixture_dir, 'ajson', 'elife-13964-v1.xml.json'))
         self.assertEqual(2, models.Subject.objects.count())
         art = models.Article.objects.get(msid=msid)
         self.assertEqual(2, art.subjects.count())
@@ -145,24 +145,24 @@ class Subjects(BaseCase):
             ('cancer-biology', 'Cancer Biology'),
             ('cell-biology', 'Cell Biology')
         ]
-        msid = logic.file_upsert(join(self.fixture_dir, 'ajson', 'elife-13964-v1.xml.json'))
+        msid = ingest_logic.file_upsert(join(self.fixture_dir, 'ajson', 'elife-13964-v1.xml.json'))
         art = models.Article.objects.get(msid=msid)
         subjects = [(s.name, s.label) for s in art.subjects.all()]
         self.assertEqual(subjects, expected)
 
-class Authors(BaseCase):
+class Authors(base.BaseCase):
     def setUp(self):
         pass
 
     def test_authors_created(self):
         self.assertEqual(0, models.Author.objects.count())
-        msid = logic.file_upsert(join(self.fixture_dir, 'ajson', 'elife-13964-v1.xml.json'))
+        msid = ingest_logic.file_upsert(join(self.fixture_dir, 'ajson', 'elife-13964-v1.xml.json'))
         self.assertEqual(24, models.Author.objects.count())
         art = models.Article.objects.get(msid=msid)
         self.assertEqual(24, art.authors.count())
 
     def test_authors_data(self):
-        msid = logic.file_upsert(join(self.fixture_dir, 'ajson', 'elife-13964-v1.xml.json'))
+        msid = ingest_logic.file_upsert(join(self.fixture_dir, 'ajson', 'elife-13964-v1.xml.json'))
         art = models.Article.objects.get(msid=msid)
         authors = art.authors.all()
         expected = [
@@ -180,7 +180,7 @@ class Authors(BaseCase):
         actual = [(p.type, p.name, p.country) for p in list(authors)[-2:]]
         self.assertEqual(expected, actual)
 
-class Metrics(BaseCase):
+class Metrics(base.BaseCase):
     def setUp(self):
         pass
 
@@ -189,26 +189,26 @@ class Metrics(BaseCase):
         expected = self.jsonfix('metrics-summary', '9560.json')
         self.assertEqual(0, models.ArticleJSON.objects.count())
         with patch('observer.consume.consume', return_value=expected):
-            logic.download_article_metrics(9560)
+            ingest_logic.download_article_metrics(9560)
         self.assertEqual(1, models.ArticleJSON.objects.count())
 
     def test_metrics_summary_consume_all(self):
         "all metrics summaries can be downloaded and turned into ArticleJSON records"
         expected = self.jsonfix('metrics-summary', 'many.json')
         with patch('observer.consume.consume', return_value=expected):
-            logic.download_all_article_metrics()
+            ingest_logic.download_all_article_metrics()
         self.assertEqual(100, models.ArticleJSON.objects.count())
 
         # ensure data is correct
         expected = {"id": 90560, "views": 11, "downloads": 0, "crossref": 0, "pubmed": 0, "scopus": 0}
         self.assertEqual(models.ArticleJSON.objects.get(msid=90560).ajson, expected)
 
-class PressPackages(BaseCase):
+class PressPackages(base.BaseCase):
     def test_download_single_presspackage(self):
         ppid = "81d42f7d"
         expected = self.jsonfix('presspackages', ppid + '.json')
         with patch('observer.consume.consume', return_value=expected):
-            ppobj = logic.download_presspackage(ppid)
+            ppobj = ingest_logic.download_presspackage(ppid)
             self.assertEqual(models.ArticleJSON.objects.count(), 1)
 
         expected_attrs = {
@@ -224,14 +224,14 @@ class PressPackages(BaseCase):
         expected = self.jsonfix('presspackages', 'many.json')
         expected['total'] = 100
         with patch('observer.consume.consume', return_value=expected):
-            logic.download_all_presspackages()
+            ingest_logic.download_all_presspackages()
         self.assertEqual(models.ArticleJSON.objects.count(), 100)
 
-        logic.regenerate_all_presspackages()
+        ingest_logic.regenerate_all_presspackages()
         self.assertEqual(models.PressPackage.objects.count(), 100)
 
 
-class ProfileCount(BaseCase):
+class ProfileCount(base.BaseCase):
     def setUp(self):
         pass
 
@@ -239,29 +239,29 @@ class ProfileCount(BaseCase):
         pfid = 'ssiyns7x'
         expected = self.jsonfix('profiles', pfid + '.json')
         with patch('observer.consume.consume', return_value=expected):
-            logic.download_profile(pfid)
+            ingest_logic.download_profile(pfid)
         self.assertEqual(models.ArticleJSON.objects.count(), 1)
 
-        logic.regenerate_all_profiles()
+        ingest_logic.regenerate_all_profiles()
         self.assertEqual(models.Profile.objects.count(), 1)
 
     def test_download_many_profiles(self):
         expected = self.jsonfix('profiles', 'many.json')
         expected['total'] = 100
         with patch('observer.consume.consume', return_value=expected):
-            logic.download_all_profiles()
+            ingest_logic.download_all_profiles()
         self.assertEqual(models.ArticleJSON.objects.count(), 100)
 
-        logic.regenerate_all_profiles()
+        ingest_logic.regenerate_all_profiles()
         self.assertEqual(models.Profile.objects.count(), 100)
 
-class AggregateLogic(BaseCase):
+class AggregateIngestLogic(base.BaseCase):
     def setUp(self):
         # 13964 v1,v2,v3
         # 14850 v1
         # 15378 v1,v2,v3
         # 18675 v1,v2,v3,v4
-        logic.bulk_file_upsert(join(self.fixture_dir, 'ajson'))
+        ingest_logic.bulk_file_upsert(join(self.fixture_dir, 'ajson'))
 
     def test_calc_pub_to_current(self):
         cases = [
@@ -354,3 +354,23 @@ class AggregateLogic(BaseCase):
             for i, subj in enumerate(expected_subjects):
                 actual_subj = getattr(obj, 'subject%s' % (i + 1))
                 self.assertEqual(subj, actual_subj)
+
+#
+# digests
+#
+
+def test_flatten_digest():
+    "digest json data is extracted into something Observer can store"
+    fixture = json.load(open(join(base.FIXTURE_DIR, 'digests', '59885.json'), 'r'))
+    expected = {'id': 59885,
+                'title': 'Splitting up',
+                'impact_statement': 'Changes in protein levels during cell division reveal how the process is carefully controlled.',
+                'image_uri': 'https://iiif.elifesciences.org/digests/59885%2Fdigest-59885.png',
+                'image_width': 805,
+                'image_height': 653,
+                'image_mime': 'image/jpeg',
+                'datetime_published': '2020-10-01T13:28:04Z',
+                'datetime_updated': '2020-10-01T13:28:31Z',
+                'subjects': [{'label': 'Cell Biology', 'name': 'cell-biology'}]}
+    actual = ingest_logic.flatten_digest_json(fixture)
+    assert expected == actual

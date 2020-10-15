@@ -6,7 +6,7 @@ from observer import ingest_logic
 LOG = logging.getLogger(__name__)
 
 class Command(BaseCommand):
-    help = 'regenerates Article data from database'
+    help = "regenerates Articles, Subjects, Authors, PressPackages, Profiles and Digests from raw JSON stored in database."
 
     def handle(self, *args, **options):
         try:

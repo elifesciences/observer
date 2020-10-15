@@ -208,7 +208,7 @@ ART_POPULARITY = {
 DESC.update(ART_POPULARITY)
 
 def flatten_article_json(data, known_version_list=[], history=None, metrics=None):
-    "takes article-json and squishes it into something obs can digest"
+    "takes article-json and squishes it into something observer can digest"
     data['known-versions'] = known_version_list # raw article json the scrape can use to inspect historical values
     data['history'] = history or {} # EJP
     data['metrics'] = metrics or {} # elife-metrics
@@ -219,21 +219,26 @@ def flatten_article_json(data, known_version_list=[], history=None, metrics=None
 #
 
 def upsert_ajson(msid, version, data_type, article_data):
-    "insert/update ArticleJSON from a dictionary of article data"
+    "insert/update RawJSON from a dictionary of article data"
     article_data = {
         'msid': utils.norm_msid(msid),
         'version': version,
         'ajson': article_data,
         'ajson_type': data_type
     }
-    version and ensure(version > 0, "'version' in ArticleJSON must be as a positive integer")
-    return create_or_update(models.ArticleJSON, article_data, ['msid', 'version'])
+    version and ensure(version > 0, "'version' in RawJSON must be as a positive integer")
+    return create_or_update(models.RawJSON, article_data, ['msid', 'version'])
 
 #
 #
 #
 
 def extract_children(mush):
+    """given a lump of data (typically from rendering a description),
+    extract the child dependencies into a list of maps that can be passed to `utils.save_objects`.
+
+    Used with article data to extract subjects and authors.
+    Used with digest data to extract subjects."""
     known_children = {
         'subjects': {'Model': models.Subject, 'key_list': ["name"]},
         'authors': {'Model': models.Author},
@@ -241,21 +246,25 @@ def extract_children(mush):
 
     children = []
     for childtype, kwargs in known_children.items():
-        data = mush[childtype]
-
-        children.extend([utils.dict_update(kwargs, {'orig_data': row, 'parent-relation': childtype}, immutable=True) for row in data])
+        # if 'subjects' in 'digest'
+        # if 'authors' in 'article'
+        if childtype in mush:
+            data = mush[childtype]
+            children.extend([utils.dict_update(kwargs, {'orig_data': row, 'parent-relation': childtype}, immutable=True) for row in data])
 
     # remove the children from the mush, they must be saved separately
     delall(mush, known_children.keys())
     return mush, children
 
 def extract_article(msid):
-    article_data = models.ArticleJSON.objects.filter(msid=str(msid), ajson_type=models.LAX_AJSON).order_by('version') # ASC
+    """converts article, metrics, subjects and author data into a list of objects that can be passed to `utils.save_objects`.
+    Most of the data lives in the raw article-json from Lax, but it also combines metrics data from elife-metrics."""
+    article_data = models.RawJSON.objects.filter(msid=str(msid), ajson_type=models.LAX_AJSON).order_by('version') # ASC
     ensure(article_data.count(), "article %s does not exist" % msid)
 
     try:
-        metrics_data = models.ArticleJSON.objects.get(msid=str(msid), ajson_type=models.METRICS_SUMMARY).ajson
-    except models.ArticleJSON.DoesNotExist:
+        metrics_data = models.RawJSON.objects.get(msid=str(msid), ajson_type=models.METRICS_SUMMARY).ajson
+    except models.RawJSON.DoesNotExist:
         metrics_data = {}
 
     # ajson for all known versions of this article
@@ -283,6 +292,9 @@ def _regenerate_article(msid):
         utils.save_objects(object_list)
         return models.Article.objects.get(msid=msid)
 
+# unlike simpler `regenerate_*` functions, article data has stricter transaction rules
+# this is an exception, not the rule.
+# @transaction.atomic
 def regenerate_article(msid):
     "use this when regenerating individual or small numbers of articles."
     return _regenerate_article(msid)
@@ -401,27 +413,36 @@ PP_DESC = {
 }
 
 def _regenerate_presspackage(ppid):
-    "creates PressPackage records with no transaction"
-    data = models.ArticleJSON.objects.get(msid=ppid).ajson
+    "creates a PressPackage record sans transaction (faster)"
+    data = models.RawJSON.objects.get(msid=ppid).ajson
     mush = render.render_item(PP_DESC, data)
     return first(create_or_update(models.PressPackage, mush, ['id', 'idstr']))
 
 @transaction.atomic
 def regenerate_presspackage(ppid):
+    """regenerate a PressPackage record within a transaction.
+    Use this when regenerating individual or small numbers of items.
+    Does not download any content."""
     return _regenerate_presspackage(ppid)
 
-def regenerate_many_presspackages(ppidlist):
-    return do_all_atomically(_regenerate_presspackage, ppidlist)
+def regenerate_many_presspackages(ppid_list):
+    """regenerates many PressPackage records using batched transactions.
+    Use this for large numbers of items.
+    Does not download any content."""
+    return do_all_atomically(_regenerate_presspackage, ppid_list)
 
 def regenerate_all_presspackages():
+    """regenerates *all* PressPackage records using batched transactions.
+    Does not download any content."""
     return regenerate_many_presspackages(logic.known_presspackages())
 
 def download_presspackage(ppid):
-    "download a specific press package"
+    "download and store a specific PressPackage. Does not regenerate item."
     return first(consume.single("press-packages/{id}", id=ppid))
 
 def download_all_presspackages():
-    consume.allitems("press-packages")
+    "download and store *all* PressPackages. Does not regenerate items."
+    consume.all_items("press-packages")
 
 
 #
@@ -441,25 +462,98 @@ PF_DESC = {
 }
 
 def _regenerate_profile(pfid):
-    data = models.ArticleJSON.objects.get(msid=pfid).ajson
+    "creates a Profile record sans transaction (faster)"
+    data = models.RawJSON.objects.get(msid=pfid).ajson
     mush = render.render_item(PF_DESC, data)
     return first(create_or_update(models.Profile, mush, ['id']))
 
 @transaction.atomic
 def regenerate_profile(pfid):
+    """regenerate a Profile record within a transaction.
+    Use this when regenerating individual or small numbers of items.
+    Does not download any content."""
     return _regenerate_profile(pfid)
 
-def regenerate_many_profiles(pfidlist):
-    return do_all_atomically(_regenerate_profile, pfidlist)
+def regenerate_many_profiles(pfid_list):
+    """regenerates many Profile records using batched transactions.
+    Use this for large numbers of items.
+    Does not download any content."""
+    return do_all_atomically(_regenerate_profile, pfid_list)
 
 def regenerate_all_profiles():
+    """regenerates *all* Profile records using batched transactions.
+    Does not download any content."""
     return regenerate_many_profiles(logic.known_profiles())
 
 def download_profile(pfid):
+    "download and store a specific Profile. Does not regenerate item."
     return consume.single("profiles/{id}", id=pfid)
 
 def download_all_profiles():
-    return consume.allitems("profiles")
+    "download and store *all* Profiles. Does not regenerate items."
+    return consume.all_items("profiles")
+
+#
+# digests
+#
+
+DIGEST_DESC = {
+    'id': [p('id'), int],
+    'title': [p('title')],
+    'impact_statement': [p('impactStatement')],
+    'image_uri': [p('image.thumbnail.uri')],
+    'image_width': [p('image.thumbnail.size.width')],
+    'image_height': [p('image.thumbnail.size.height')],
+    'image_mime': [p('image.thumbnail.source.mediaType')],
+    'datetime_published': [p('published')],
+    'datetime_updated': [p('updated')],
+    'subjects': [p('subjects', []), lambda sl: [{'name': v['id'], 'label': v['name']} for v in sl]],
+}
+
+def flatten_digest_json(data):
+    """takes digests json and squishes it into something observer can digest
+    no pun intended."""
+    return render.render_item(DIGEST_DESC, data)
+
+def _regenerate_digest(digest_id):
+    "creates a Digest record sans transaction (faster)"
+    data = models.RawJSON.objects.get(msid=digest_id).ajson
+    mush = flatten_digest_json(data)
+
+    mush, children = extract_children(mush)
+    parent = {'Model': models.Digest, 'orig_data': mush, 'key_list': ['id']}
+
+    object_list = [(parent, children)]
+
+    with transaction.atomic():
+        # destroy what we have, if anything. updating may be dangerous
+        models.Digest.objects.filter(id=digest_id).delete()
+        utils.save_objects(object_list)
+        return models.Digest.objects.get(id=digest_id)
+
+@transaction.atomic
+def regenerate_digest(digest_id):
+    """regenerates a Digest record within a transaction.
+    Use for individual or smaller numbers of items."""
+    _regenerate_digest(digest_id)
+
+def regenerate_many_digests(digest_id_list):
+    """regenerates many Digest records within batched transactions.
+    Does not download any content."""
+    return do_all_atomically(_regenerate_digest, digest_id_list)
+
+def regenerate_all_digests():
+    """regenerate *all* Digest records within batched transactions.
+    Does not download any content."""
+    return regenerate_many_digests(logic.known_digests())
+
+def download_digest(digest_id):
+    "downloads data for a single Digest item."
+    return consume.single("digests/{id}", id=digest_id)
+
+def download_all_digests():
+    "downloads data for *all* Digest items."
+    return consume.all_items('digests')
 
 #
 #
@@ -469,35 +563,55 @@ def regenerate_all():
     regenerate_all_articles()
     regenerate_all_presspackages()
     regenerate_all_profiles()
+    regenerate_all_digests()
 
 #
 #
 #
+
+# TODO: moosh these into one function
 
 def download_regenerate_article(msid):
+    """convenience. Downloads the article versions with the given `msid` and then regenerates it's content.
+    WARN: Does not download metrics data, uses what it exists, if any. (this may be an oversight)"""
     try:
         download_article_versions(msid)
         regenerate_article(msid)
 
     except requests.exceptions.RequestException as err:
-        log = LOG.warn if err.response.status_code == 404 else LOG.error
+        log = LOG.debug if err.response.status_code == 404 else LOG.error
         log("failed to fetch article %s: %s", msid, err) # probably an unpublished article.
 
     except BaseException:
         LOG.exception("unhandled exception attempting to download and regenerate article %s", msid)
 
 def download_regenerate_presspackage(ppid):
+    "convenience. Downloads the PressPackage with the given `ppid` and then regenerates it's content."
     try:
         LOG.info("update event for presspackage %s", ppid)
         download_presspackage(ppid)
         regenerate_presspackage(ppid)
 
     except requests.exceptions.RequestException as err:
-        log = LOG.warn if err.response.status_code == 404 else LOG.error
+        log = LOG.debug if err.response.status_code == 404 else LOG.error
         log("failed to fetch presspackage %s: %s", ppid, err) # probably an unpublished presspackage ...?
 
     except BaseException:
         LOG.exception("unhandled exception attempting to download and regenerate presspackage %s", ppid)
+
+def download_regenerate_digest(digest_id):
+    "convenience. Downloads the Digest with the given `digest_id` and then regenerates it's content."
+    try:
+        LOG.info("update event for digests %s", digest_id)
+        download_digest(digest_id)
+        regenerate_digest(digest_id)
+
+    except requests.exceptions.RequestException as err:
+        log = LOG.debug if err.response.status_code == 404 else LOG.error
+        log("failed to fetch digest %s: %s", digest_id, err) # probably an unpublished digest ...?
+
+    except BaseException:
+        LOG.exception("unhandled exception attempting to download and regenerate digest %s", digest_id)
 
 
 #
@@ -507,7 +621,7 @@ def download_regenerate_presspackage(ppid):
 #
 
 def file_upsert(path, ctype=models.LAX_AJSON, regen=True, quiet=False):
-    "insert/update ArticleJSON from a file"
+    "insert/update RawJSON from a file"
     try:
         if not os.path.isfile(path):
             raise ValueError("can't handle path %r" % path)
@@ -531,7 +645,7 @@ def file_upsert(path, ctype=models.LAX_AJSON, regen=True, quiet=False):
 
 @transaction.atomic
 def bulk_file_upsert(article_json_dir, regen=True):
-    "insert/update ArticleJSON from a directory of files"
+    "insert/update RawJSON from a directory of files"
     paths = sorted(utils.listfiles(article_json_dir, ['.json']))
     msid_list = sorted(set(lmap(partial(file_upsert, regen=False, quiet=True), paths)))
     if regen:

@@ -1,10 +1,7 @@
 import json
 import boto3
 import logging
-from .ingest_logic import (
-    download_regenerate_article,
-    download_regenerate_presspackage
-)
+from . import ingest_logic
 
 # tell boto to pipe down
 logging.getLogger('botocore').setLevel(logging.WARN)
@@ -60,8 +57,9 @@ def handler(json_event):
     try:
         # process event
         handlers = {
-            'article': download_regenerate_article,
-            'presspackage': download_regenerate_presspackage,
+            'article': ingest_logic.download_regenerate_article,
+            'presspackage': ingest_logic.download_regenerate_presspackage,
+            'digest': ingest_logic.download_regenerate_digest,
 
             '-unhandled-': lambda _: LOG.warn("sinking event for unhandled type: %s", event_type),
         }

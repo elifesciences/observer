@@ -3,7 +3,7 @@ from django.db import models
 from django.db.models import (
     BigIntegerField, PositiveSmallIntegerField, PositiveIntegerField,
     CharField, DateTimeField, TextField, NullBooleanField, EmailField,
-    ManyToManyField
+    ManyToManyField, URLField
 )
 
 POA, VOR = 'poa', 'vor'
@@ -169,11 +169,12 @@ class Article(models.Model):
         return '<Article "%s">' % self
 
 # TODO: rename ArticleJSON to something generic
-# ContentJSON ?
+# RawJSON
 
 LAX_AJSON, METRICS_SUMMARY = 'lax-ajson', 'elife-metrics-summary'
 PRESSPACKAGE = 'press-packages-id'
 PROFILE = 'profiles-id'
+DIGEST = 'digests-id'
 
 def ajson_type_choices():
     return [
@@ -187,8 +188,12 @@ def ajson_type_choices():
 
         (PRESSPACKAGE, 'presspackage summary data'),
         (PROFILE, 'profiles'),
+        (DIGEST, 'digests'),
     ]
 
+# TODO: this is confusing as hell now
+# originally it was just article data but now it's a store for response json in general
+# it could probably be replaced with a permanent requests_cache or similar.
 class ArticleJSON(models.Model):
     msid = CharField(max_length=25)
     version = PositiveSmallIntegerField(null=True, blank=True) # only used by Article objects
@@ -206,6 +211,9 @@ class ArticleJSON(models.Model):
         if self.version:
             return '<ArticleJSON %r %sv%s>' % (self.ajson_type, self.msid, self.version)
         return '<ArticleJSON %r %s>' % (self.ajson_type, self.msid)
+
+# temporary until model is properly renamed
+RawJSON = ArticleJSON
 
 
 # TODO - this would require scraping full press package data
@@ -249,3 +257,53 @@ class Profile(models.Model):
 
     def __repr__(self):
         return '<Profile "%s">' % self
+
+DIGEST_IMAGE_MIME_CHOICES = [
+    ('jpg', 'image/jpeg'),
+    ('png', 'image/png'),
+]
+
+class Digest(models.Model):
+    id = CharField(max_length=25, primary_key=True)
+    title = CharField(max_length=255)
+    impact_statement = TextField()
+    image_uri = URLField(max_length=500)
+    image_height = PositiveSmallIntegerField()
+    image_width = PositiveSmallIntegerField()
+    image_mime = CharField(max_length=10, choices=DIGEST_IMAGE_MIME_CHOICES)
+    datetime_published = DateTimeField()
+    datetime_updated = DateTimeField()
+
+    subjects = models.ManyToManyField(Subject)
+
+    datetime_record_created = DateTimeField(auto_now_add=True)
+    datetime_record_updated = DateTimeField(auto_now=True)
+
+    def thumbnail_dimensions(self, thumbnail_width):
+        "returns a set of proportionate `x,y` dimensions for thumbnail given a `thumbnail_width`"
+        width, height = self.image_width, self.image_height
+        if height > width:
+            (width, height) = (height, width)
+        aspect_ratio = width / height
+        height = thumbnail_width / aspect_ratio
+        return int(thumbnail_width), int(height)
+
+    def iiif_thumbnail_link(self, thumbnail_width):
+        "returns a IIIF url to image thumbnail given a `thumbnail_width`"
+        uri = self.image_uri
+        new_width, new_height = self.thumbnail_dimensions(thumbnail_width)
+        region = "full"
+        size = "%s,%s" % (new_width, new_height)
+        rotation = "0" # no rotation
+        quality = "default" # native, color, grey, bitonal
+        image_format = "jpg"
+        return f"{uri}/{region}/{size}/{rotation}/{quality}.{image_format}"
+
+    class Meta:
+        ordering = ('-datetime_published',)
+
+    def __str__(self):
+        return self.id
+
+    def __repr__(self):
+        return '<Digest "%s">' % self

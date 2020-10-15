@@ -99,7 +99,8 @@ class Four(BaseCase):
 
         fixtures = {
             models.LAX_AJSON: listfiles(join(self.fixture_dir, 'ajson'), ['.json']),
-            models.PROFILE: [join(self.fixture_dir, 'profiles', 'ssiyns7x.json')]
+            models.PROFILE: [join(self.fixture_dir, 'profiles', 'ssiyns7x.json')],
+            models.DIGEST: [join(self.fixture_dir, 'digests', '59885.json')],
         }
         for group, pathlist in fixtures.items():
             lmap(partial(ingest_logic.file_upsert, ctype=group, regen=False), pathlist)
@@ -112,7 +113,7 @@ class Four(BaseCase):
             for output_format in reportfn.meta['serialisations']:
                 furl = url + ".%s" % output_format.lower() # ll /report/latest-articles.csv
                 resp = self.c.get(furl, http_dummy_params(reportfn))  # , {'format': format}) # deliberate, no explicit param is provided
-                self.assertEqual(resp.status_code, 200, "report at %r returned non-200 response" % url)
+                self.assertEqual(resp.status_code, 200, "report at %r returned non-200 response" % furl)
 
                 # test the content
                 if output_format == reports.CSV:
@@ -124,7 +125,7 @@ class Four(BaseCase):
                     resp.content.decode('utf8').startswith(prefix)
 
     def test_report_format_param_overrides_format_hint(self):
-        "the format parameter wins when providing both a file extension format hint and a format param"
+        "the `format=` parameter wins when providing both a file extension hint and an explicit parameter"
 
         for report_name, reportfn in reports.known_report_idx().items():
             url = reverse('report', kwargs={'name': report_name})
