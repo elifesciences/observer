@@ -68,7 +68,7 @@ def upsert(iid, content_type, content):
         'ajson': content,
         'ajson_type': content_type
     }
-    return utils.create_or_update(models.ArticleJSON, data, ['msid'])
+    return utils.create_or_update(models.ArticleJSON, data, ['msid', 'ajson_type'])
 
 def upsert_all(content_type, rows, idfn):
     def do_safely(row):
