@@ -110,6 +110,7 @@ def set_obj_attrs(obj, data):
     [_set(obj, key, val) for key, val in data.items()]
 
 def mkfeed(report):
+    "returns an initialised FeedGen object with channel-level attributes set"
     fg = FeedGenerator()
     fg.load_extension('dc')
     fg.register_extension(**{'namespace': 'webfeeds',
@@ -146,6 +147,7 @@ def mkfeed(report):
     return fg
 
 def add_entry(fg, item):
+    "adds a single `item` to the given FeedGen object `fg`."
     # default order of insertion changed in 0.6 to 'prepend'
     # https://github.com/lkiesow/python-feedgen/blob/1b301f67adf4e2f0367579a6c41f72ee524b9380/feedgen/feed.py#L999
     entry = fg.add_entry(order='append')
@@ -153,8 +155,8 @@ def add_entry(fg, item):
     return entry
 
 def add_many_entries(fg, item_list):
-    """adds each of the items in `item_list` to the given FeedGen object `fg`.
-    lazy sequences are realised."""
+    """adds each item in `item_list` to the given FeedGen object `fg`.
+    Any lazy sequences are realised."""
     # why 250? pagination of (lazy) Django QuerySets should have happened by this point (max 100),
     # but just in case ...
     [add_entry(fg, item) for item in utils.take(250, item_list)]
@@ -165,7 +167,7 @@ def add_many_entries(fg, item_list):
 #
 
 def article_to_rss_entry(art):
-    "serialise a models.Article object to an rss item entry"
+    "convert a single Article object to a data structure suitable for FeedGen coercion."
     item = utils.to_dict(art)
 
     # extract the entry bits
@@ -187,10 +189,12 @@ def article_to_rss_entry(art):
     return item
 
 def article_list_to_rss_entry_list(queryset):
+    "converts many Article objects to a list of data structures suitable for FeedGen coercion."
     queryset = queryset.prefetch_related('subjects', 'authors')
     return map(article_to_rss_entry, queryset) # deliberate use of lazy `map`
 
 def digest_to_rss_entry(digest):
+    "converts a single Digest object to a data structure suitable for FeedGen coercion."
     data = utils.to_dict(digest)
 
     item = utils.subdict(data, [
@@ -205,8 +209,9 @@ def digest_to_rss_entry(digest):
     item['dc:dc_date'] = utils.ymdhms(item['pubDate'])
     item['category'] = [{'term': subject.name, 'label': subject.label} for subject in digest.subjects.all()]
 
-    thumbnail_width, thumbnail_height = digest.thumbnail_dimensions()
-    item['webfeeds:featuredImage'] = {'url': digest.iiif_thumbnail_link(),
+    width = 800
+    thumbnail_width, thumbnail_height = digest.thumbnail_dimensions(width)
+    item['webfeeds:featuredImage'] = {'url': digest.iiif_thumbnail_link(width),
                                       'height': str(thumbnail_height),
                                       'width': str(thumbnail_width),
                                       'type': "image/jpeg"}
@@ -214,10 +219,8 @@ def digest_to_rss_entry(digest):
     return item
 
 def digest_list_to_rss_entry_list(queryset):
+    "converts many Digest objects to a list of data structures suitable for FeedGen coercion."
     return map(digest_to_rss_entry, queryset)
-
-def identity(x):
-    return x
 
 def _format_report(report, context):
     "generates an RSS feed from the given `report` and `context` data, returning XML content as a string"
@@ -230,7 +233,7 @@ def _format_report(report, context):
         models.Digest: digest_list_to_rss_entry_list,
 
         # if we're given a map of data, assume it's already in the shape we want it in
-        dict: identity
+        dict: lambda x: x
     }
 
     items = report.get('items', [])

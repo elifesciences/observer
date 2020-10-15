@@ -29,7 +29,6 @@ if [ $print_coverage -eq 0 ]; then
     pytest "$module" -vvv
 else
     pytest "$module" -vvv --cov=src --cov-config=.coveragerc --junitxml=build/junit.xml --override-ini junit_family=xunit1
-    #coverage report
 
     # only run if tests pass
     covered=$(coverage report | grep TOTAL | awk '{print $4}' | sed 's/%//')

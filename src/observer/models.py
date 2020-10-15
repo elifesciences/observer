@@ -279,17 +279,19 @@ class Digest(models.Model):
     datetime_record_created = DateTimeField(auto_now_add=True)
     datetime_record_updated = DateTimeField(auto_now=True)
 
-    def thumbnail_dimensions(self, new_width=800):
+    def thumbnail_dimensions(self, thumbnail_width):
+        "returns a set of proportionate `x,y` dimensions for thumbnail given a `thumbnail_width`"
         width, height = self.image_width, self.image_height
         if height > width:
             (width, height) = (height, width)
         aspect_ratio = width / height
-        height = new_width / aspect_ratio
-        return int(new_width), int(height)
+        height = thumbnail_width / aspect_ratio
+        return int(thumbnail_width), int(height)
 
-    def iiif_thumbnail_link(self):
+    def iiif_thumbnail_link(self, thumbnail_width):
+        "returns a IIIF url to image thumbnail given a `thumbnail_width`"
         uri = self.image_uri
-        new_width, new_height = self.thumbnail_dimensions()
+        new_width, new_height = self.thumbnail_dimensions(thumbnail_width)
         region = "full"
         size = "%s,%s" % (new_width, new_height)
         rotation = "0" # no rotation

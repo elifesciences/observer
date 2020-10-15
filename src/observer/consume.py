@@ -89,7 +89,7 @@ def upsert_all(content_type, rows, idfn):
 
 def content_type_from_endpoint(endpoint):
     """given an API `endpoint` like `press-packages/{id}`, returns a slugified version like `press-packages-id`.
-    if a given API `endpoint` doesn't exist, it's value is looked up in a map of aliases.
+    if the given API `endpoint` doesn't exist in the alias map, it's value is returned as-is.
     for example, `digests` is aliased `digests-id`."""
     val = slugify(endpoint) # press-packages/{id} => press-packages-id
     aliases = {
@@ -105,6 +105,7 @@ def content_type_from_endpoint(endpoint):
     return aliases.get(val, val)
 
 def single(endpoint, idfn=None, **kwargs):
+    "consumes a single item from the API `endpoint` and creates/inserts it into the database."
     content_type = content_type_from_endpoint(endpoint)
     try:
         data = consume(endpoint.format_map(kwargs))
@@ -116,6 +117,9 @@ def single(endpoint, idfn=None, **kwargs):
     return upsert(idfn(data), content_type, data)
 
 def all_items(endpoint, idfn=None, **kwargs):
+    """consumes all items from the given `endpoint` and then creates/inserts them into the database.
+    items are inserted into the database in groups of 100.
+    `idfn` is used to derive the value for `models.RawJSON.ajson_id`."""
     initial = consume(endpoint, {'per-page': 1})
     per_page = 100
     num_pages = math.ceil(initial["total"] / float(per_page))

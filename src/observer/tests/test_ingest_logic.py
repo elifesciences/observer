@@ -360,6 +360,7 @@ class AggregateIngestLogic(base.BaseCase):
 #
 
 def test_flatten_digest():
+    "digest json data is extracted into something Observer can store"
     fixture = json.load(open(join(base.FIXTURE_DIR, 'digests', '59885.json'), 'r'))
     expected = {'id': 59885,
                 'title': 'Splitting up',

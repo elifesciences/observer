@@ -156,6 +156,8 @@ class Digests(base.BaseCase):
     def tearDown(self):
         pass
 
+    # freezing time because FeedGen adds a `lastBuildDate` element to the generated
+    # RSS feed that can't be affected from here.
     @pytest.mark.freeze_time('2020-10-12')
     def test_digests(self):
         url = reverse('report', kwargs={'name': 'digests'})
