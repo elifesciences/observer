@@ -414,7 +414,7 @@ PP_DESC = {
 
 def _regenerate_presspackage(ppid):
     "creates a PressPackage record sans transaction (faster)"
-    data = models.RawJSON.objects.get(msid=ppid).ajson
+    data = models.RawJSON.objects.get(msid=ppid, ajson_type=models.PRESSPACKAGE).ajson
     mush = render.render_item(PP_DESC, data)
     return first(create_or_update(models.PressPackage, mush, ['id', 'idstr']))
 
@@ -463,7 +463,7 @@ PF_DESC = {
 
 def _regenerate_profile(pfid):
     "creates a Profile record sans transaction (faster)"
-    data = models.RawJSON.objects.get(msid=pfid).ajson
+    data = models.RawJSON.objects.get(msid=pfid, ajson_type=models.PROFILE).ajson
     mush = render.render_item(PF_DESC, data)
     return first(create_or_update(models.Profile, mush, ['id']))
 
@@ -517,7 +517,7 @@ def flatten_digest_json(data):
 
 def _regenerate_digest(digest_id):
     "creates a Digest record sans transaction (faster)"
-    data = models.RawJSON.objects.get(msid=digest_id).ajson
+    data = models.RawJSON.objects.get(msid=digest_id, ajson_type=models.DIGEST).ajson
     mush = flatten_digest_json(data)
 
     mush, children = extract_children(mush)
