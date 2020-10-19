@@ -137,8 +137,6 @@ def report(request, name, format_hint=None):
         # truncate report results, enforce any user ordering
         report_paginated = paginate_report_results(reportfn, rargs)
 
-        row_formatter = reportfn.meta.get('row_formatter')
-
         # additional things to pass to whatever is rendering the report.
         # keys here will override any found in the report.
         context = {

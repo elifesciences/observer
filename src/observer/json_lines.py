@@ -21,7 +21,7 @@ def format_report(report, context):
     # we might be able to something more-clever later for reports without explicit headers
     #headers = headers or formatterfn(peek).keys()
 
-    row_formatter = context['row-formatter']
+    row_formatter = context.get('row-formatter')
 
     headers = report.get('headers')
 
