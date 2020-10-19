@@ -8,7 +8,7 @@ from .logic import verified_subjects
 from slugify import slugify
 from django.db.models import Count
 from django.db.models.functions import TruncDay
-
+from datetime import datetime
 
 # utils
 
@@ -168,10 +168,17 @@ def profile_count():
 # exeter reports
 #
 
+def exeter_new_poa_articles_json_row_formatter(row):
+    "per-row value formatting for the `exeter_new_poa_articles` report"
+    row = list(row)
+    row[1] = datetime.date(row[1])
+    return row
+
 @report(article_meta(
     title="Exeter, new POA articles",
     description="All POA articles ordered by the date and time they were first published, most recent POA articles to least recent.",
     serialisations=[JSON],
+    row_formatters={JSON: exeter_new_poa_articles_json_row_formatter},
     order_by='datetime_poa_published',
     order=DESC,
     headers=['doi', 'first-published-date', 'article-title', 'article-type'],
@@ -187,10 +194,19 @@ def exeter_new_poa_articles():
         .order_by('-datetime_poa_published') \
         .values_list('doi', 'datetime_poa_published', 'title', 'type')
 
+def exeter_new_and_updated_vor_articles_json_row_formatter(row):
+    "per-row value formatting for the `exeter_new_and_updated_vor_articles` report"
+    row = list(row)
+    row[1] = datetime.date(row[1])
+    row[2] = datetime.date(row[2])
+    row[3] = datetime.date(row[3])
+    return row
+
 @report(article_meta(
     title="Exeter, new and updated VOR articles",
     description="All new and updated VOR articles ordered by their updated date, most recent VOR articles to least recent.",
     serialisations=[JSON],
+    row_formatters={JSON: exeter_new_and_updated_vor_articles_json_row_formatter},
     order_by='datetime_version_published',
     order=DESC,
     headers=['doi',
