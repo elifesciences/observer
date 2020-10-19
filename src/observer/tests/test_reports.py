@@ -1,3 +1,6 @@
+"""testing of logic specific to reports.py, not individual reports themselves. 
+See `test_views.py` for tests that cover *all* reports and *all* of their supported serialisations."""
+
 import copy
 from .base import BaseCase
 from observer import reports, ingest_logic, models, utils
@@ -38,6 +41,10 @@ class One(BaseCase):
         expected_result['items'] = [1, 2, 3]
         self.assertEqual(foo(), expected_result)
 
+class PublishedArticleIndex(BaseCase):
+    def setUp(self):
+        self.c = Client()
+        
     def test_published_article_index_with_headers(self):
         "all articles in database are returned as a CSV with the correct data."
         fixtures = [
@@ -110,6 +117,10 @@ class One(BaseCase):
             ['456', '2001-02-03 00:00:00+00:00', '2001-02-04 00:00:00+00:00']
         ]
         self.assertEqual(expected, report)
+
+class ProfileCounts(BaseCase):
+    def setUp(self):
+        self.c = Client()
 
     def test_profile_counts(self):
         expected = self.jsonfix('profiles', 'many.json')

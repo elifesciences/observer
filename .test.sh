@@ -6,9 +6,6 @@
 
 set -e
 
-# quick check for syntax errors
-pyflakes src/
-
 args=$@
 module="src"
 print_coverage=1
