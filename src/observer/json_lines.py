@@ -21,8 +21,16 @@ def format_report(report, context):
     # we might be able to something more-clever later for reports without explicit headers
     #headers = headers or formatterfn(peek).keys()
 
+    row_formatter = context['row-formatter']
+
     headers = report.get('headers')
-    rows = map(lambda row: OrderedDict(zip(headers, row)), items_qs)
+
+    def format_row(row):
+        if row_formatter:
+            row = row_formatter(row)
+        return OrderedDict(zip(headers, row))
+
+    rows = map(format_row, items_qs)
 
     filename = report['title'].replace(' ', '-').lower()
     return streaming_response(filename, rows)

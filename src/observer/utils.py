@@ -105,8 +105,11 @@ def ymdhms(dt):
 
 def ymd(dt):
     if dt:
-        dt = todt(dt)
-        return dt.strftime("%Y-%m-%d")
+        formatstr = "%Y-%m-%d"
+        if isinstance(dt, date):
+            # skip timezone coercion, we don't have one
+            return dt.strftime(formatstr)
+        return todt(dt).strftime(formatstr)
 
 def subdict(dt, ks):
     "returns a copy of the given dictionary `dt` with only the keys `ks` included"

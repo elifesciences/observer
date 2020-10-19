@@ -137,13 +137,18 @@ def report(request, name, format_hint=None):
         # truncate report results, enforce any user ordering
         report_paginated = paginate_report_results(reportfn, rargs)
 
-        # additional things to pass to whatever is rendering the report
-        # keys here will override any found in the report
+        row_formatter = reportfn.meta.get('row_formatter')
+
+        # additional things to pass to whatever is rendering the report.
+        # keys here will override any found in the report.
         context = {
             # previously just 'link'
             # in rss there are two 'link' type attributes: a link to the feed itself (rel=self) and a
             # link to the webpage the feed belongs to.
             'self-link': "https://observer.elifesciences.org" + reverse('report', kwargs={'name': name}),
+
+            # per-row value formatter for the requested report format (if any)
+            'row-formatter': reportfn.meta.get('row_formatters', {}).get(rargs['format'])
         }
         return reports.format_report(report_paginated, rargs['format'], context)
 
