@@ -32,9 +32,9 @@ class IngestLogic(base.BaseCase):
         self.assertEqual(models.Article.objects.count(), self.unique_article_count)
 
     def test_upsert_ajson(self):
-        self.assertEqual(models.ArticleJSON.objects.count(), 0)
+        self.assertEqual(models.RawJSON.objects.count(), 0)
         ingest_logic.file_upsert(self.article_json)
-        self.assertEqual(models.ArticleJSON.objects.count(), 1)
+        self.assertEqual(models.RawJSON.objects.count(), 1)
 
     def test_bulk_regenerate_ajson(self):
         "an error involving regenerating one article doesn't affect all articles in transaction"
@@ -43,12 +43,12 @@ class IngestLogic(base.BaseCase):
 
         # no articles, expected json data
         self.assertEqual(0, models.Article.objects.count())
-        self.assertEqual(self.article_fixture_count, models.ArticleJSON.objects.count())
+        self.assertEqual(self.article_fixture_count, models.RawJSON.objects.count())
 
         # skitch a fixture
         notajson = {'pants': 'party'}
-        randajson = models.ArticleJSON.objects.filter(msid='13964', version=2)[0] # 13964 has three versions.
-        randajson.ajson = notajson
+        randajson = models.RawJSON.objects.filter(msid='13964', version=2)[0] # 13964 has three versions.
+        randajson.json = notajson
         randajson.save()
 
         # now we regenerate and one less than expected is expected
@@ -113,16 +113,16 @@ class Article(base.BaseCase):
         ]
         for args in cases:
             ingest_logic.upsert_ajson(*args)
-        self.assertEqual(2, models.ArticleJSON.objects.count())
+        self.assertEqual(2, models.RawJSON.objects.count())
 
     def test_id_normalised(self):
         msid, version, data = '00003', 1, {}
         ingest_logic.upsert_ajson(msid, version, models.LAX_AJSON, data)
         # JSON was inserted
-        self.assertEqual(models.ArticleJSON.objects.count(), 1)
+        self.assertEqual(models.RawJSON.objects.count(), 1)
         # and it's msid was normalised
         expected_id = '3'
-        models.ArticleJSON.objects.get(msid=expected_id)
+        models.RawJSON.objects.get(msid=expected_id)
 
 #
 #
@@ -185,23 +185,23 @@ class Metrics(base.BaseCase):
         pass
 
     def test_metrics_summary_consume(self):
-        "an article's metrics summary can be downloaded and turned into ArticleJSON"
+        "an article's metrics summary can be downloaded and turned into RawJSON"
         expected = self.jsonfix('metrics-summary', '9560.json')
-        self.assertEqual(0, models.ArticleJSON.objects.count())
+        self.assertEqual(0, models.RawJSON.objects.count())
         with patch('observer.consume.consume', return_value=expected):
             ingest_logic.download_article_metrics(9560)
-        self.assertEqual(1, models.ArticleJSON.objects.count())
+        self.assertEqual(1, models.RawJSON.objects.count())
 
     def test_metrics_summary_consume_all(self):
-        "all metrics summaries can be downloaded and turned into ArticleJSON records"
+        "all metrics summaries can be downloaded and turned into RawJSON records"
         expected = self.jsonfix('metrics-summary', 'many.json')
         with patch('observer.consume.consume', return_value=expected):
             ingest_logic.download_all_article_metrics()
-        self.assertEqual(100, models.ArticleJSON.objects.count())
+        self.assertEqual(100, models.RawJSON.objects.count())
 
         # ensure data is correct
         expected = {"id": 90560, "views": 11, "downloads": 0, "crossref": 0, "pubmed": 0, "scopus": 0}
-        self.assertEqual(models.ArticleJSON.objects.get(msid=90560).ajson, expected)
+        self.assertEqual(models.RawJSON.objects.get(msid=90560).json, expected)
 
 class PressPackages(base.BaseCase):
     def test_download_single_presspackage(self):
@@ -209,13 +209,13 @@ class PressPackages(base.BaseCase):
         expected = self.jsonfix('presspackages', ppid + '.json')
         with patch('observer.consume.consume', return_value=expected):
             ppobj = ingest_logic.download_presspackage(ppid)
-            self.assertEqual(models.ArticleJSON.objects.count(), 1)
+            self.assertEqual(models.RawJSON.objects.count(), 1)
 
         expected_attrs = {
             'version': None,
             'msid': ppid,
-            'ajson_type': 'press-packages-id',
-            'ajson': expected
+            'json_type': 'press-packages-id',
+            'json': expected
         }
         for attr, expected in expected_attrs.items():
             self.assertEqual(getattr(ppobj, attr), expected)
@@ -225,7 +225,7 @@ class PressPackages(base.BaseCase):
         expected['total'] = 100
         with patch('observer.consume.consume', return_value=expected):
             ingest_logic.download_all_presspackages()
-        self.assertEqual(models.ArticleJSON.objects.count(), 100)
+        self.assertEqual(models.RawJSON.objects.count(), 100)
 
         ingest_logic.regenerate_all_presspackages()
         self.assertEqual(models.PressPackage.objects.count(), 100)
@@ -240,7 +240,7 @@ class ProfileCount(base.BaseCase):
         expected = self.jsonfix('profiles', pfid + '.json')
         with patch('observer.consume.consume', return_value=expected):
             ingest_logic.download_profile(pfid)
-        self.assertEqual(models.ArticleJSON.objects.count(), 1)
+        self.assertEqual(models.RawJSON.objects.count(), 1)
 
         ingest_logic.regenerate_all_profiles()
         self.assertEqual(models.Profile.objects.count(), 1)
@@ -250,7 +250,7 @@ class ProfileCount(base.BaseCase):
         expected['total'] = 100
         with patch('observer.consume.consume', return_value=expected):
             ingest_logic.download_all_profiles()
-        self.assertEqual(models.ArticleJSON.objects.count(), 100)
+        self.assertEqual(models.RawJSON.objects.count(), 100)
 
         ingest_logic.regenerate_all_profiles()
         self.assertEqual(models.Profile.objects.count(), 100)

@@ -65,10 +65,10 @@ def upsert(iid, content_type, content):
     data = {
         'msid': iid,
         'version': None,
-        'ajson': content,
-        'ajson_type': content_type
+        'json': content,
+        'json_type': content_type
     }
-    return utils.create_or_update(models.ArticleJSON, data, ['msid', 'ajson_type'])
+    return utils.create_or_update(models.RawJSON, data, ['msid', 'json_type'])
 
 def upsert_all(content_type, rows, idfn):
     def do_safely(row):
@@ -119,7 +119,7 @@ def single(endpoint, idfn=None, **kwargs):
 def all_items(endpoint, idfn=None, **kwargs):
     """consumes all items from the given `endpoint` and then creates/inserts them into the database.
     items are inserted into the database in groups of 100.
-    `idfn` is used to derive the value for `models.RawJSON.ajson_id`."""
+    `idfn` is used to derive the value for `models.RawJSON.json_id`."""
     initial = consume(endpoint, {'per-page': 1})
     per_page = 100
     num_pages = math.ceil(initial["total"] / float(per_page))

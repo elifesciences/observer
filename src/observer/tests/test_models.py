@@ -8,8 +8,8 @@ class One(BaseCase):
             ('article', models.Article, {'msid': 666, 'journal_name': 'eLife', 'datetime_version_published': '2001-01-01'}, ['msid']),
             ('author', models.Author, {'type': 'person', 'name': "John Jameson", "country": "uk"}, ['id']),
             ('subject', models.Subject, {'name': 'pants', 'label': 'Pants'}, ['id']),
-            ('ajson', models.ArticleJSON, {'msid': 666, 'version': 1, 'ajson': 'pantsparty', 'ajson_type': models.LAX_AJSON}, ['id']),
-            ('ajson2', models.ArticleJSON, {'msid': 667, 'version': None, 'ajson': 'pantsparty', 'ajson_type': models.METRICS_SUMMARY}, ['id']),
+            ('ajson', models.RawJSON, {'msid': 666, 'version': 1, 'json': 'pantsparty', 'json_type': models.LAX_AJSON}, ['id']),
+            ('ajson2', models.RawJSON, {'msid': 667, 'version': None, 'json': 'pantsparty', 'json_type': models.METRICS_SUMMARY}, ['id']),
             #('profile', models.Profile, {'id': 'foo', 'name': 'Bar', 'orcid': "0000-0001-5910-5972"}, ['id']),
             ('profile', models.Profile, {'id': 'foo'}, ['id']),
         ]
@@ -27,8 +27,8 @@ class One(BaseCase):
             (self.article, '<Article "00666">', '00666'),
             (self.author, '<Author "John Jameson">', 'John Jameson'),
             (self.subject, '<Subject "pants">', 'Pants'),
-            (self.ajson, "<ArticleJSON 'lax-ajson' 666v1>", "666"),
-            (self.ajson2, "<ArticleJSON 'elife-metrics-summary' 667>", "667"),
+            (self.ajson, "<RawJSON 'lax-ajson' 666v1>", "666"),
+            (self.ajson2, "<RawJSON 'elife-metrics-summary' 667>", "667"),
             #(self.profile, '<Profile "0000-0001-5910-5972">', "0000-0001-5910-5972"),
             (self.profile, '<Profile "foo">', "foo"),
         ]

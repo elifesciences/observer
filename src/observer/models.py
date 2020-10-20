@@ -168,15 +168,12 @@ class Article(models.Model):
     def __repr__(self):
         return '<Article "%s">' % self
 
-# TODO: rename ArticleJSON to something generic
-# RawJSON
-
 LAX_AJSON, METRICS_SUMMARY = 'lax-ajson', 'elife-metrics-summary'
 PRESSPACKAGE = 'press-packages-id'
 PROFILE = 'profiles-id'
 DIGEST = 'digests-id'
 
-def ajson_type_choices():
+def json_type_choices():
     return [
         (LAX_AJSON, 'lax article json'),
         # we don't serve certain dates with the article-json for some reason
@@ -191,14 +188,11 @@ def ajson_type_choices():
         (DIGEST, 'digests'),
     ]
 
-# TODO: this is confusing as hell now
-# originally it was just article data but now it's a store for response json in general
-# it could probably be replaced with a permanent requests_cache or similar.
-class ArticleJSON(models.Model):
+class RawJSON(models.Model):
     msid = CharField(max_length=25)
     version = PositiveSmallIntegerField(null=True, blank=True) # only used by Article objects
-    ajson = JSONField()
-    ajson_type = CharField(max_length=25, choices=ajson_type_choices(), null=False, blank=False)
+    json = JSONField()
+    json_type = CharField(max_length=25, choices=json_type_choices(), null=False, blank=False)
 
     class Meta:
         unique_together = ('msid', 'version')
@@ -209,12 +203,8 @@ class ArticleJSON(models.Model):
 
     def __repr__(self):
         if self.version:
-            return '<ArticleJSON %r %sv%s>' % (self.ajson_type, self.msid, self.version)
-        return '<ArticleJSON %r %s>' % (self.ajson_type, self.msid)
-
-# temporary until model is properly renamed
-RawJSON = ArticleJSON
-
+            return '<RawJSON %r %sv%s>' % (self.json_type, self.msid, self.version)
+        return '<RawJSON %r %s>' % (self.json_type, self.msid)
 
 # TODO - this would require scraping full press package data
 # class PressPackageContact(models.Model):

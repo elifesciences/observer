@@ -223,8 +223,8 @@ def upsert_ajson(msid, version, data_type, article_data):
     article_data = {
         'msid': utils.norm_msid(msid),
         'version': version,
-        'ajson': article_data,
-        'ajson_type': data_type
+        'json': article_data,
+        'json_type': data_type
     }
     version and ensure(version > 0, "'version' in RawJSON must be as a positive integer")
     return create_or_update(models.RawJSON, article_data, ['msid', 'version'])
@@ -259,16 +259,16 @@ def extract_children(mush):
 def extract_article(msid):
     """converts article, metrics, subjects and author data into a list of objects that can be passed to `utils.save_objects`.
     Most of the data lives in the raw article-json from Lax, but it also combines metrics data from elife-metrics."""
-    article_data = models.RawJSON.objects.filter(msid=str(msid), ajson_type=models.LAX_AJSON).order_by('version') # ASC
+    article_data = models.RawJSON.objects.filter(msid=str(msid), json_type=models.LAX_AJSON).order_by('version') # ASC
     ensure(article_data.count(), "article %s does not exist" % msid)
 
     try:
-        metrics_data = models.RawJSON.objects.get(msid=str(msid), ajson_type=models.METRICS_SUMMARY).ajson
+        metrics_data = models.RawJSON.objects.get(msid=str(msid), json_type=models.METRICS_SUMMARY).json
     except models.RawJSON.DoesNotExist:
         metrics_data = {}
 
-    # ajson for all known versions of this article
-    article_version_data = [ajsonobj.ajson for ajsonobj in article_data]
+    # json for all known versions of this article
+    article_version_data = [rawjson.json for rawjson in article_data]
 
     # the most recent known version of this article
     # scrape has access to historical versions too
@@ -414,7 +414,7 @@ PP_DESC = {
 
 def _regenerate_presspackage(ppid):
     "creates a PressPackage record sans transaction (faster)"
-    data = models.RawJSON.objects.get(msid=ppid, ajson_type=models.PRESSPACKAGE).ajson
+    data = models.RawJSON.objects.get(msid=ppid, json_type=models.PRESSPACKAGE).json
     mush = render.render_item(PP_DESC, data)
     return first(create_or_update(models.PressPackage, mush, ['id', 'idstr']))
 
@@ -463,7 +463,7 @@ PF_DESC = {
 
 def _regenerate_profile(pfid):
     "creates a Profile record sans transaction (faster)"
-    data = models.RawJSON.objects.get(msid=pfid, ajson_type=models.PROFILE).ajson
+    data = models.RawJSON.objects.get(msid=pfid, json_type=models.PROFILE).json
     mush = render.render_item(PF_DESC, data)
     return first(create_or_update(models.Profile, mush, ['id']))
 
@@ -517,7 +517,7 @@ def flatten_digest_json(data):
 
 def _regenerate_digest(digest_id):
     "creates a Digest record sans transaction (faster)"
-    data = models.RawJSON.objects.get(msid=digest_id, ajson_type=models.DIGEST).ajson
+    data = models.RawJSON.objects.get(msid=digest_id, json_type=models.DIGEST).json
     mush = flatten_digest_json(data)
 
     mush, children = extract_children(mush)
@@ -628,15 +628,15 @@ def file_upsert(path, ctype=models.LAX_AJSON, regen=True, quiet=False):
         LOG.info('loading %s', path)
         article_data = json.load(open(path, 'r'))
         if ctype == models.LAX_AJSON:
-            ajson = upsert_ajson(article_data['id'], article_data['version'], ctype, article_data)[0]
+            rawjson = upsert_ajson(article_data['id'], article_data['version'], ctype, article_data)[0]
             if regen:
-                regenerate_article(ajson.msid)
+                regenerate_article(rawjson.msid)
         else:
-            ajson = consume.upsert(article_data['id'], ctype, article_data)[0]
+            rawjson = consume.upsert(article_data['id'], ctype, article_data)[0]
             if regen:
                 regenerate_all()
 
-        return ajson.msid
+        return rawjson.msid
 
     except Exception as err:
         LOG.exception("failed to insert article-json %r: %s", path, err)
