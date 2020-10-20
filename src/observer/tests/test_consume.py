@@ -12,7 +12,7 @@ def test_consume():
 
 def test_content_type_from_endpoint():
     """given a request, the content-type identifier is correctly generated.
-    the content-type identifier is used as an index for `models.ArticleJSON.ajson_type`"""
+    the content-type identifier is used as an index for `models.RawJSON.json_type`"""
     cases = [
         ('/press-packages', 'press-packages-id'),
         ('/press-packages/{id}', 'press-packages-id'), # specific press package
@@ -35,7 +35,7 @@ class Upsert(base.BaseCase):
         pass
 
     def test_multiple_types_are_upserted(self):
-        "different types of consumed data can be inserted/updated in models.ArticleJSON"
+        "different types of consumed data can be inserted/updated in models.RawJSON"
         cases = [
             # disabled because these two use `ingest_logic.upsert_ajson` rather than `consume.upsert`!
             # TODO: replace `ingest_logic.upsert_ajson` with `consume.upsert`
@@ -57,10 +57,10 @@ class Upsert(base.BaseCase):
                 consume.single(endpoint)
 
         expected = 5 - 2
-        self.assertEqual(expected, models.ArticleJSON.objects.count())
+        self.assertEqual(expected, models.RawJSON.objects.count())
 
     def test_multiple_types_sharing_id_are_upserted(self):
-        "different types of consumed data can be inserted/updated in models.ArticleJSON"
+        "different types of consumed data can be inserted/updated in models.RawJSON"
         cases = [
             # *not* disabled because I'm proving a point
             ('article/1234', 'ajson/elife-13964-v1.xml.json'),
@@ -83,7 +83,7 @@ class Upsert(base.BaseCase):
         expected = 5
 
         insert()
-        self.assertEqual(expected, models.ArticleJSON.objects.count())
+        self.assertEqual(expected, models.RawJSON.objects.count())
 
         insert()
-        self.assertEqual(expected, models.ArticleJSON.objects.count())
+        self.assertEqual(expected, models.RawJSON.objects.count())

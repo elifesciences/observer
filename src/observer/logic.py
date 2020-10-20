@@ -4,18 +4,17 @@ from django.db.models import IntegerField
 from django.db.models.functions import Cast
 
 def known_content(blah):
-    """returns a queryset of object IDs from newest to oldest.
-    note: `ArticleJSON` and it's field `msid` are misleading - this table is used as a general purpose data store now."""
-    return models.ArticleJSON.objects \
-        .filter(ajson_type=blah) \
+    """returns a queryset of object IDs from newest to oldest."""
+    return models.RawJSON.objects \
+        .filter(json_type=blah) \
         .values_list('msid', flat=True) \
         .order_by('-msid') \
         .distinct()
 
 def known_articles():
     "returns a query set of manuscript_ids from newest to oldest"
-    return models.ArticleJSON.objects \
-        .filter(ajson_type=models.LAX_AJSON) \
+    return models.RawJSON.objects \
+        .filter(json_type=models.LAX_AJSON) \
         .annotate(msid_as_int=Cast('msid', IntegerField())) \
         .values_list('msid_as_int', flat=True) \
         .order_by('-msid_as_int') \

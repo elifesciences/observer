@@ -10,7 +10,7 @@ class One(BaseCase):
         fixture = self.jsonfix('ajson', 'elife-13964-v1.xml.json')
         ingest_logic.upsert_ajson(msid, 1, models.LAX_AJSON, fixture)
         self.assertEqual(0, models.Article.objects.count())
-        self.assertEqual(1, models.ArticleJSON.objects.count()) # fixture
+        self.assertEqual(1, models.RawJSON.objects.count()) # fixture
 
         # simulate receiving an event
         dummy_event = json.dumps({'type': 'article', 'id': str(msid)})
