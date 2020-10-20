@@ -147,7 +147,8 @@ DESC = {
 
     # assumes we're ingesting the most recent article!
     # this means bulk ingestion must be done in order
-    # this means we ignore updates to previous versions of an article
+    # this means we ignore updates to previous versions of an article OR
+    # we re-process all versions of an article
     'current_version': [p('version')],
     'status': [p('status')],
 
@@ -556,6 +557,93 @@ def download_all_digests():
     return consume.all_items('digests')
 
 #
+# labs
+# 
+
+LABS_POST_DESC = {
+    'id': [p('id')],
+    'title': [p('title')],
+    'impact_statement': [p('impactStatement')],
+    'image_uri': [p('image.thumbnail.uri')],
+    'image_width': [p('image.thumbnail.size.width')],
+    'image_height': [p('image.thumbnail.size.height')],
+    'image_mime': [p('image.thumbnail.source.mediaType')],
+    'datetime_published': [p('published')],
+}
+
+#
+#
+#
+
+content_descriptions = {
+    models.LABS_POST: {'description': LABS_POST_DESC,
+                       'model': models.LabsPost,
+
+                       # interesting thing here
+                       # rawjson key conflicts. we're download list of summaries plus details as well
+                       # so if a summary is downloaded it will overwrite the detail and vice versa
+                       'api-item': 'labs-posts/{id}',
+                       'api-list': 'labs-posts'},
+}
+
+#
+# generic download and regenerate
+#
+
+def _regenerate_item(content_type, content_id):
+    data = models.RawJSON.objects.get(msid=content_id, json_type=content_type).json
+    
+    description = content_descriptions[content_type]['description']
+    mush = render.render_item(description, data)
+
+    mush, children = extract_children(mush)
+
+    Klass = content_descriptions[content_type]['model']
+    
+    parent = {'Model': Klass, 'orig_data': mush, 'key_list': ['id']}
+    object_list = [(parent, children)]
+
+    def do():
+        Klass.objects.filter(id=content_id).delete()
+        utils.save_objects(object_list)
+        return Klass.objects.get(id=content_id)
+    
+    if children:
+        # if content type has children then it's safest to insert them together.
+        # this negates any efficiency gains by preferring `_regenerate_item` over `regenerate_item`
+        with transaction.atomic():
+            return do()
+    return do()
+
+@transaction.atomic
+def regenerate_item(content_type, content_type_id):
+    return _regenerate_item(content_type, content_type_id)
+
+def regenerate_list(content_type, content_type_id_list):
+    return do_all_atomically(partial(_regenerate_item, content_type), content_type_id_list)
+
+def regenerate(content_type):
+    return regenerate_list(content_type, logic.known_content(content_type))
+
+def download_item(content_type, content_type_id):
+    api = content_descriptions[content_type]['api-item']
+    return consume.single(api, id=content_type_id)
+
+def download_all(content_type):
+    api = content_descriptions[content_type]['api-list']
+    return consume.all_items(api)
+
+def download_regenerate(content_type, content_id):
+    try:
+        download_item(content_type, content_id)
+        regenerate_item(content_type, content_id)
+    except requests.exceptions.RequestException as err:
+        log = LOG.debug if err.response.status_code == 404 else LOG.error
+        log("failed to fetch %r %s: %s", content_type, content_id, err) # "failed to fetch presspackage '1234': 404 Not Found"
+    except BaseException:
+        LOG.exception("unhandled exception attempting to download and regenerate %s %r", content_type, content_id)
+
+#
 #
 #
 
@@ -564,6 +652,9 @@ def regenerate_all():
     regenerate_all_presspackages()
     regenerate_all_profiles()
     regenerate_all_digests()
+
+    for content_type in content_descriptions.keys():
+        regenerate(content_type)
 
 #
 #
@@ -613,6 +704,7 @@ def download_regenerate_digest(digest_id):
     except BaseException:
         LOG.exception("unhandled exception attempting to download and regenerate digest %s", digest_id)
 
+download_regenerate_labspost = partial(download_regenerate, models.LABS_POST)        
 
 #
 # upsert article-json from file/dir

@@ -6,6 +6,24 @@ from django.db.models import (
     ManyToManyField, URLField
 )
 
+# see `observer.consume.content_type_from_endpoint` for these values
+# essentially they are slugified api endpoints, e.g.: `/digests/id` => digests-id
+LAX_AJSON = 'lax-ajson'
+METRICS_SUMMARY = 'elife-metrics-summary'
+PRESSPACKAGE = 'press-packages-id'
+PROFILE = 'profiles-id'
+DIGEST = 'digests-id'
+LABS_POST = 'labs-posts'
+
+MODEL_CHOICES = [
+    ('lax', LAX_AJSON),
+    ('elife-metrics', METRICS_SUMMARY),
+    ('press-packages', PRESSPACKAGE),
+    ('profiles', PROFILE),
+    ('digests', DIGEST),
+    ('labs-post', LABS_POST)
+]
+
 POA, VOR = 'poa', 'vor'
 UNKNOWN_TYPE = 'unknown-type'
 
@@ -168,11 +186,6 @@ class Article(models.Model):
     def __repr__(self):
         return '<Article "%s">' % self
 
-LAX_AJSON, METRICS_SUMMARY = 'lax-ajson', 'elife-metrics-summary'
-PRESSPACKAGE = 'press-packages-id'
-PROFILE = 'profiles-id'
-DIGEST = 'digests-id'
-
 def json_type_choices():
     return [
         (LAX_AJSON, 'lax article json'),
@@ -189,7 +202,7 @@ def json_type_choices():
     ]
 
 class RawJSON(models.Model):
-    msid = CharField(max_length=25)
+    msid = CharField(max_length=25) # todo: rename this field to just 'id'
     version = PositiveSmallIntegerField(null=True, blank=True) # only used by Article objects
     json = JSONField()
     json_type = CharField(max_length=25, choices=json_type_choices(), null=False, blank=False)
@@ -269,26 +282,6 @@ class Digest(models.Model):
     datetime_record_created = DateTimeField(auto_now_add=True)
     datetime_record_updated = DateTimeField(auto_now=True)
 
-    def thumbnail_dimensions(self, thumbnail_width):
-        "returns a set of proportionate `x,y` dimensions for thumbnail given a `thumbnail_width`"
-        width, height = self.image_width, self.image_height
-        if height > width:
-            (width, height) = (height, width)
-        aspect_ratio = width / height
-        height = thumbnail_width / aspect_ratio
-        return int(thumbnail_width), int(height)
-
-    def iiif_thumbnail_link(self, thumbnail_width):
-        "returns a IIIF url to image thumbnail given a `thumbnail_width`"
-        uri = self.image_uri
-        new_width, new_height = self.thumbnail_dimensions(thumbnail_width)
-        region = "full"
-        size = "%s,%s" % (new_width, new_height)
-        rotation = "0" # no rotation
-        quality = "default" # native, color, grey, bitonal
-        image_format = "jpg"
-        return f"{uri}/{region}/{size}/{rotation}/{quality}.{image_format}"
-
     class Meta:
         ordering = ('-datetime_published',)
 
@@ -297,3 +290,25 @@ class Digest(models.Model):
 
     def __repr__(self):
         return '<Digest "%s">' % self
+
+class LabsPost(models.Model):
+    id = CharField(max_length=8, primary_key=True)
+    title = CharField(max_length=255)
+    impact_statement = TextField()
+    image_uri = URLField(max_length=500)
+    image_height = PositiveSmallIntegerField()
+    image_width = PositiveSmallIntegerField()
+    image_mime = CharField(max_length=10, choices=DIGEST_IMAGE_MIME_CHOICES)
+    datetime_published = DateTimeField()
+
+    datetime_record_created = DateTimeField(auto_now_add=True)
+    datetime_record_updated = DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ('-datetime_published',)
+
+    def __str__(self):
+        return self.id
+
+    def __repr__(self):
+        return '<LabsPost "%s">' % self

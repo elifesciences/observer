@@ -161,10 +161,7 @@ def add_many_entries(fg, item_list):
     # but just in case ...
     [add_entry(fg, item) for item in utils.take(250, item_list)]
 
-
-#
-#
-#
+# articles
 
 def article_to_rss_entry(art):
     "convert a single Article object to a data structure suitable for FeedGen coercion."
@@ -193,6 +190,8 @@ def article_list_to_rss_entry_list(queryset):
     queryset = queryset.prefetch_related('subjects', 'authors')
     return map(article_to_rss_entry, queryset) # deliberate use of lazy `map`
 
+# digests
+
 def digest_to_rss_entry(digest):
     "converts a single Digest object to a data structure suitable for FeedGen coercion."
     data = utils.to_dict(digest)
@@ -210,8 +209,9 @@ def digest_to_rss_entry(digest):
     item['category'] = [{'term': subject.name, 'label': subject.label} for subject in digest.subjects.all()]
 
     width = 800
-    thumbnail_width, thumbnail_height = digest.thumbnail_dimensions(width)
-    item['webfeeds:featuredImage'] = {'url': digest.iiif_thumbnail_link(width),
+    thumbnail_width, thumbnail_height = utils.thumbnail_dimensions(width, digest.image_width, digest.image_height)
+    iiif_url = utils.iiif_thumbnail_link(digest.image_uri, thumbnail_width, thumbnail_height)
+    item['webfeeds:featuredImage'] = {'url': iiif_url,
                                       'height': str(thumbnail_height),
                                       'width': str(thumbnail_width),
                                       'type': "image/jpeg"}
@@ -222,6 +222,36 @@ def digest_list_to_rss_entry_list(queryset):
     "converts many Digest objects to a list of data structures suitable for FeedGen coercion."
     return map(digest_to_rss_entry, queryset)
 
+# labs
+
+def labs_post_to_rss_entry(digest):
+    "converts a single Digest object to a data structure suitable for FeedGen coercion."
+    data = utils.to_dict(digest)
+
+    item = utils.subdict(data, [
+        'id', 'title', 'impact_statement',
+        'datetime_published', 'datetime_updated'])
+    utils.renkeys(item, [
+        ('impact_statement', 'description'),
+        ('datetime_published', 'pubDate'),
+        ('datetime_updated', 'updated'),
+    ])
+    item['id'] = "https://elifesciences.org/digests/%s" % item['id']
+    item['dc:dc_date'] = utils.ymdhms(item['pubDate'])
+
+    width = 800
+    thumbnail_width, thumbnail_height = utils.thumbnail_dimensions(width, digest.image_width, digest.image_height)
+    iiif_url = utils.iiif_thumbnail_link(digest.image_uri, thumbnail_width, thumbnail_height)
+    item['webfeeds:featuredImage'] = {'url': iiif_url,
+                                      'height': str(thumbnail_height),
+                                      'width': str(thumbnail_width),
+                                      'type': "image/jpeg"}
+
+    return item
+
+def labs_post_to_rss_entry_list(queryset):
+    return map(labs_post_to_rss_entry, queryset)
+
 def _format_report(report, context):
     "generates an RSS feed from the given `report` and `context` data, returning XML content as a string"
     report.update(context) # yes, this nukes any conflicting keys in the report
@@ -231,6 +261,7 @@ def _format_report(report, context):
     dispatch = {
         models.Article: article_list_to_rss_entry_list,
         models.Digest: digest_list_to_rss_entry_list,
+        models.LabsPost: labs_post_to_rss_entry_list,
 
         # if we're given a map of data, assume it's already in the shape we want it in
         dict: lambda x: x

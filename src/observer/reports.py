@@ -99,6 +99,17 @@ def digests():
     return models.Digest.objects \
         .order_by('-datetime_published')
 
+# note: 'article_meta' here works because of similar field names
+@report(article_meta(
+    title='labs-posts',
+    description='The latest eLife labs-posts.',
+    serialisations=[RSS],
+))
+def labs_posts():
+    return models.LabsPost.objects \
+        .order_by('-datetime_published')
+
+
 #
 #
 #
@@ -247,6 +258,7 @@ def known_report_idx():
         ('latest-articles-by-subject', latest_articles_by_subject),
         ('upcoming-articles', upcoming_articles),
         ('digests', digests),
+        ('labs-posts', labs_posts),
         ('published-article-index', published_article_index),
         ('published-research-article-index', published_research_article_index),
         ('profile-count', profile_count),
