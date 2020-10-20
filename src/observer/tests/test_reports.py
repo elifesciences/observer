@@ -1,4 +1,4 @@
-"""testing of logic specific to reports.py, not individual reports themselves. 
+"""testing of logic specific to reports.py, not individual reports themselves.
 See `test_views.py` for tests that cover *all* reports and *all* of their supported serialisations."""
 
 import copy
@@ -44,7 +44,7 @@ class One(BaseCase):
 class PublishedArticleIndex(BaseCase):
     def setUp(self):
         self.c = Client()
-        
+
     def test_published_article_index_with_headers(self):
         "all articles in database are returned as a CSV with the correct data."
         fixtures = [

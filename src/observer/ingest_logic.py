@@ -561,7 +561,7 @@ def download_all_digests():
 
 #
 # labs
-# 
+#
 
 LABS_POST_DESC = {
     'id': [p('id')],
@@ -617,7 +617,7 @@ def _regenerate_item(content_type, content_id):
     mush, children = extract_children(mush)
 
     Klass = content_descriptions[content_type]['model']
-    
+
     parent = {'Model': Klass, 'orig_data': mush, 'key_list': ['id']}
     object_list = [(parent, children)]
 
@@ -625,7 +625,7 @@ def _regenerate_item(content_type, content_id):
         Klass.objects.filter(id=content_id).delete()
         utils.save_objects(object_list)
         return Klass.objects.get(id=content_id)
-    
+
     if children:
         # if content type has children then it's safest to insert them together.
         # this negates any efficiency gains by preferring `_regenerate_item` over `regenerate_item`
@@ -667,9 +667,9 @@ def download_regenerate(content_type, content_id):
 
 def regenerate_all():
     regenerate_all_articles()
-    #regenerate_all_presspackages()
+    # regenerate_all_presspackages()
     regenerate_all_profiles()
-    #regenerate_all_digests()
+    # regenerate_all_digests()
 
     for content_type in content_descriptions.keys():
         regenerate(content_type)
@@ -693,6 +693,8 @@ def download_regenerate_article(msid):
 
     except BaseException:
         LOG.exception("unhandled exception attempting to download and regenerate article %s", msid)
+
+# pylint: disable=W0105
 '''
 def download_regenerate_presspackage(ppid):
     "convenience. Downloads the PressPackage with the given `ppid` and then regenerates it's content."

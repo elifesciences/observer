@@ -23,14 +23,14 @@ class Command(BaseCommand):
                 print('cannot mix and match targets and lists of ids.')
                 print('choose one target and many IDs or many targets and no IDs')
                 exit(1)
-            
+
             dl_ajson = ingest_logic.download_all_article_versions
             dl_metrics = ingest_logic.download_all_article_metrics
             dl_presspackages = partial(ingest_logic.download_all, models.PRESSPACKAGE)
             dl_profiles = ingest_logic.download_all_profiles
             dl_digests = ingest_logic.download_all_digests
             dl_labs = partial(ingest_logic.download_all, models.LABS_POST)
-            
+
             regen = ingest_logic.regenerate_all
 
             # TODO: observer isn't as article-centric any more
