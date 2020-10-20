@@ -208,7 +208,7 @@ class PressPackages(base.BaseCase):
         ppid = "81d42f7d"
         expected = self.jsonfix('presspackages', ppid + '.json')
         with patch('observer.consume.consume', return_value=expected):
-            ppobj = ingest_logic.download_presspackage(ppid)
+            ppobj = ingest_logic.download_item(models.PRESSPACKAGE, ppid)
             self.assertEqual(models.RawJSON.objects.count(), 1)
 
         expected_attrs = {
@@ -224,10 +224,10 @@ class PressPackages(base.BaseCase):
         expected = self.jsonfix('presspackages', 'many.json')
         expected['total'] = 100
         with patch('observer.consume.consume', return_value=expected):
-            ingest_logic.download_all_presspackages()
+            ingest_logic.download_all(models.PRESSPACKAGE)
         self.assertEqual(models.RawJSON.objects.count(), 100)
 
-        ingest_logic.regenerate_all_presspackages()
+        ingest_logic.regenerate(models.PRESSPACKAGE)
         self.assertEqual(models.PressPackage.objects.count(), 100)
 
 

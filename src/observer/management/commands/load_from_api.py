@@ -26,7 +26,7 @@ class Command(BaseCommand):
             
             dl_ajson = ingest_logic.download_all_article_versions
             dl_metrics = ingest_logic.download_all_article_metrics
-            dl_presspackages = ingest_logic.download_all_presspackages
+            dl_presspackages = partial(ingest_logic.download_all, models.PRESSPACKAGE)
             dl_profiles = ingest_logic.download_all_profiles
             dl_digests = ingest_logic.download_all_digests
             dl_labs = partial(ingest_logic.download_all, models.LABS_POST)

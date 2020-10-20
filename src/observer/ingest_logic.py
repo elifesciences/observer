@@ -413,6 +413,7 @@ PP_DESC = {
     'updated': [p('updated', None), todt] # f0114f21 missing an updated date
 }
 
+'''
 def _regenerate_presspackage(ppid):
     "creates a PressPackage record sans transaction (faster)"
     data = models.RawJSON.objects.get(msid=ppid, json_type=models.PRESSPACKAGE).json
@@ -444,7 +445,7 @@ def download_presspackage(ppid):
 def download_all_presspackages():
     "download and store *all* PressPackages. Does not regenerate items."
     consume.all_items("press-packages")
-
+'''
 
 #
 # profiles
@@ -590,9 +591,14 @@ content_descriptions = {
                        'api-list': 'labs-posts'},
 
     models.DIGEST: {'description': DIGEST_DESC,
-                     'model': models.Digest,
-                     'api-item': 'digests/{id}',
-                     'api-list': 'digests'}
+                    'model': models.Digest,
+                    'api-item': 'digests/{id}',
+                    'api-list': 'digests'},
+
+    models.PRESSPACKAGE: {'description': PP_DESC,
+                          'model': models.PressPackage,
+                          'api-item': 'press-packages/{id}',
+                          'api-list': 'press-packages'},
 
 }
 
@@ -639,7 +645,7 @@ def regenerate(content_type):
 
 def download_item(content_type, content_type_id):
     api = content_descriptions[content_type]['api-item']
-    return consume.single(api, id=content_type_id)
+    return first(consume.single(api, id=content_type_id))
 
 def download_all(content_type):
     api = content_descriptions[content_type]['api-list']
@@ -661,7 +667,7 @@ def download_regenerate(content_type, content_id):
 
 def regenerate_all():
     regenerate_all_articles()
-    regenerate_all_presspackages()
+    #regenerate_all_presspackages()
     regenerate_all_profiles()
     #regenerate_all_digests()
 
@@ -687,7 +693,7 @@ def download_regenerate_article(msid):
 
     except BaseException:
         LOG.exception("unhandled exception attempting to download and regenerate article %s", msid)
-
+'''
 def download_regenerate_presspackage(ppid):
     "convenience. Downloads the PressPackage with the given `ppid` and then regenerates it's content."
     try:
@@ -702,7 +708,6 @@ def download_regenerate_presspackage(ppid):
     except BaseException:
         LOG.exception("unhandled exception attempting to download and regenerate presspackage %s", ppid)
 
-'''
 def download_regenerate_digest(digest_id):
     "convenience. Downloads the Digest with the given `digest_id` and then regenerates it's content."
     try:
@@ -720,6 +725,7 @@ def download_regenerate_digest(digest_id):
 
 download_regenerate_labspost = partial(download_regenerate, models.LABS_POST)
 download_regenerate_digest = partial(download_regenerate, models.DIGEST)
+download_regenerate_presspackage = partial(download_regenerate, models.PRESSPACKAGE)
 
 #
 # upsert article-json from file/dir
