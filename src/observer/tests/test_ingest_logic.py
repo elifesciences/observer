@@ -372,5 +372,5 @@ def test_flatten_digest():
                 'datetime_published': '2020-10-01T13:28:04Z',
                 'datetime_updated': '2020-10-01T13:28:31Z',
                 'subjects': [{'label': 'Cell Biology', 'name': 'cell-biology'}]}
-    actual = ingest_logic.flatten_digest_json(fixture)
+    actual = ingest_logic.flatten_data(models.DIGEST, fixture)
     assert expected == actual

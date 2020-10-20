@@ -511,6 +511,7 @@ DIGEST_DESC = {
     'subjects': [p('subjects', []), lambda sl: [{'name': v['id'], 'label': v['name']} for v in sl]],
 }
 
+'''
 def flatten_digest_json(data):
     """takes digests json and squishes it into something observer can digest
     no pun intended."""
@@ -555,6 +556,7 @@ def download_digest(digest_id):
 def download_all_digests():
     "downloads data for *all* Digest items."
     return consume.all_items('digests')
+'''
 
 #
 # labs
@@ -581,20 +583,30 @@ content_descriptions = {
 
                        # interesting thing here
                        # rawjson key conflicts. we're download list of summaries plus details as well
-                       # so if a summary is downloaded it will overwrite the detail and vice versa
+                       # so if a summary is downloaded it will overwrite the detail and vice versa.
+                       # perhaps a policy of skipping individual items and just consuming *all* summaries for some content types?
+                       # we could indicate this by disabling the api-item key...
                        'api-item': 'labs-posts/{id}',
                        'api-list': 'labs-posts'},
+
+    models.DIGEST: {'description': DIGEST_DESC,
+                     'model': models.Digest,
+                     'api-item': 'digests/{id}',
+                     'api-list': 'digests'}
+
 }
 
 #
 # generic download and regenerate
 #
 
+def flatten_data(content_type, data):
+    description = content_descriptions[content_type]['description']
+    return render.render_item(description, data)
+
 def _regenerate_item(content_type, content_id):
     data = models.RawJSON.objects.get(msid=content_id, json_type=content_type).json
-    
-    description = content_descriptions[content_type]['description']
-    mush = render.render_item(description, data)
+    mush = flatten_data(content_type, data)
 
     mush, children = extract_children(mush)
 
@@ -651,7 +663,7 @@ def regenerate_all():
     regenerate_all_articles()
     regenerate_all_presspackages()
     regenerate_all_profiles()
-    regenerate_all_digests()
+    #regenerate_all_digests()
 
     for content_type in content_descriptions.keys():
         regenerate(content_type)
@@ -690,6 +702,7 @@ def download_regenerate_presspackage(ppid):
     except BaseException:
         LOG.exception("unhandled exception attempting to download and regenerate presspackage %s", ppid)
 
+'''
 def download_regenerate_digest(digest_id):
     "convenience. Downloads the Digest with the given `digest_id` and then regenerates it's content."
     try:
@@ -703,8 +716,10 @@ def download_regenerate_digest(digest_id):
 
     except BaseException:
         LOG.exception("unhandled exception attempting to download and regenerate digest %s", digest_id)
+'''
 
-download_regenerate_labspost = partial(download_regenerate, models.LABS_POST)        
+download_regenerate_labspost = partial(download_regenerate, models.LABS_POST)
+download_regenerate_digest = partial(download_regenerate, models.DIGEST)
 
 #
 # upsert article-json from file/dir
