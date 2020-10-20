@@ -37,8 +37,8 @@ class Upsert(base.BaseCase):
     def test_multiple_types_are_upserted(self):
         "different types of consumed data can be inserted/updated in models.RawJSON"
         cases = [
-            # disabled because these two use `ingest_logic.upsert_ajson` rather than `consume.upsert`!
-            # TODO: replace `ingest_logic.upsert_ajson` with `consume.upsert`
+            # disabled because these two use `ingest_logic.upsert_json` rather than `consume.upsert`!
+            # TODO: replace `ingest_logic.upsert_json` with `consume.upsert`
             #('article/1234', 'ajson/elife-13964-v1.xml.json'),
             #('metrics/1234', 'metrics-summary/9560.json'),
             ('profiles/1234', 'profiles/ssiyns7x.json'),

@@ -31,7 +31,7 @@ class IngestLogic(base.BaseCase):
         ingest_logic.bulk_file_upsert(join(self.fixture_dir, 'ajson'))
         self.assertEqual(models.Article.objects.count(), self.unique_article_count)
 
-    def test_upsert_ajson(self):
+    def test_upsert_json(self):
         self.assertEqual(models.RawJSON.objects.count(), 0)
         ingest_logic.file_upsert(self.article_json)
         self.assertEqual(models.RawJSON.objects.count(), 1)
@@ -100,7 +100,7 @@ class Article(base.BaseCase):
     def setUp(self):
         pass
 
-    def test_upsert_ajson_msid_type(self):
+    def test_upsert_json_msid_type(self):
         "integer and string values for msid are supported"
         ajson = {}
         cases = [
@@ -112,12 +112,12 @@ class Article(base.BaseCase):
             ('720609628398071589300', 1, models.LAX_AJSON, ajson),
         ]
         for args in cases:
-            ingest_logic.upsert_ajson(*args)
+            ingest_logic.upsert_json(*args)
         self.assertEqual(2, models.RawJSON.objects.count())
 
     def test_id_normalised(self):
         msid, version, data = '00003', 1, {}
-        ingest_logic.upsert_ajson(msid, version, models.LAX_AJSON, data)
+        ingest_logic.upsert_json(msid, version, models.LAX_AJSON, data)
         # JSON was inserted
         self.assertEqual(models.RawJSON.objects.count(), 1)
         # and it's msid was normalised

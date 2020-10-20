@@ -218,7 +218,7 @@ def flatten_article_json(data, known_version_list=[], history=None, metrics=None
 #
 #
 
-def upsert_ajson(msid, version, data_type, article_data):
+def upsert_json(msid, version, data_type, article_data):
     "insert/update RawJSON from a dictionary of article data"
     article_data = {
         'msid': utils.norm_msid(msid),
@@ -338,7 +338,7 @@ def _download_versions(msid, latest_version):
     version_range = range(1, latest_version + 1)
 
     def fetch(version):
-        upsert_ajson(msid, version, models.LAX_AJSON, consume.consume("articles/%s/versions/%s" % (msid, version)))
+        upsert_json(msid, version, models.LAX_AJSON, consume.consume("articles/%s/versions/%s" % (msid, version)))
     lmap(fetch, version_range)
 
 def download_article_versions(msid):
@@ -364,7 +364,7 @@ def _upsert_metrics_ajson(data):
     try:
         # TODO: shift this check elsewhere, db field validation checking perhaps
         ensure(utils.byte_length(data['id']) <= 8, "bad data encountered, cannot store msid: %s", data['id'])
-        upsert_ajson(data['id'], version, models.METRICS_SUMMARY, data)
+        upsert_json(data['id'], version, models.METRICS_SUMMARY, data)
     except AssertionError as err:
         LOG.error(err)
 
@@ -434,7 +434,7 @@ def regenerate_many_presspackages(ppid_list):
 def regenerate_all_presspackages():
     """regenerates *all* PressPackage records using batched transactions.
     Does not download any content."""
-    return regenerate_many_presspackages(logic.known_presspackages())
+    return regenerate_many_presspackages(logic.known_content(models.PRESSPACKAGE))
 
 def download_presspackage(ppid):
     "download and store a specific PressPackage. Does not regenerate item."
@@ -483,7 +483,7 @@ def regenerate_many_profiles(pfid_list):
 def regenerate_all_profiles():
     """regenerates *all* Profile records using batched transactions.
     Does not download any content."""
-    return regenerate_many_profiles(logic.known_profiles())
+    return regenerate_many_profiles(logic.known_content(models.PROFILE))
 
 def download_profile(pfid):
     "download and store a specific Profile. Does not regenerate item."
@@ -545,7 +545,7 @@ def regenerate_many_digests(digest_id_list):
 def regenerate_all_digests():
     """regenerate *all* Digest records within batched transactions.
     Does not download any content."""
-    return regenerate_many_digests(logic.known_digests())
+    return regenerate_many_digests(logic.known_content(models.DIGEST))
 
 def download_digest(digest_id):
     "downloads data for a single Digest item."
@@ -628,7 +628,7 @@ def file_upsert(path, ctype=models.LAX_AJSON, regen=True, quiet=False):
         LOG.info('loading %s', path)
         article_data = json.load(open(path, 'r'))
         if ctype == models.LAX_AJSON:
-            rawjson = upsert_ajson(article_data['id'], article_data['version'], ctype, article_data)[0]
+            rawjson = upsert_json(article_data['id'], article_data['version'], ctype, article_data)[0]
             if regen:
                 regenerate_article(rawjson.msid)
         else:

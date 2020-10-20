@@ -8,7 +8,7 @@ class One(BaseCase):
     def test_handling_event(self):
         msid = 13964
         fixture = self.jsonfix('ajson', 'elife-13964-v1.xml.json')
-        ingest_logic.upsert_ajson(msid, 1, models.LAX_AJSON, fixture)
+        ingest_logic.upsert_json(msid, 1, models.LAX_AJSON, fixture)
         self.assertEqual(0, models.Article.objects.count())
         self.assertEqual(1, models.RawJSON.objects.count()) # fixture
 
