@@ -403,51 +403,6 @@ def download_all_article_metrics():
 #    consume.all("metrics/article/summary")
 
 #
-# presspackages
-#
-
-PP_DESC = {
-    'id': [p('id')],
-    'title': [p('title')],
-    'published': [p('published'), todt],
-    'updated': [p('updated', None), todt] # f0114f21 missing an updated date
-}
-
-'''
-def _regenerate_presspackage(ppid):
-    "creates a PressPackage record sans transaction (faster)"
-    data = models.RawJSON.objects.get(msid=ppid, json_type=models.PRESSPACKAGE).json
-    mush = render.render_item(PP_DESC, data)
-    return first(create_or_update(models.PressPackage, mush, ['id', 'idstr']))
-
-@transaction.atomic
-def regenerate_presspackage(ppid):
-    """regenerate a PressPackage record within a transaction.
-    Use this when regenerating individual or small numbers of items.
-    Does not download any content."""
-    return _regenerate_presspackage(ppid)
-
-def regenerate_many_presspackages(ppid_list):
-    """regenerates many PressPackage records using batched transactions.
-    Use this for large numbers of items.
-    Does not download any content."""
-    return do_all_atomically(_regenerate_presspackage, ppid_list)
-
-def regenerate_all_presspackages():
-    """regenerates *all* PressPackage records using batched transactions.
-    Does not download any content."""
-    return regenerate_many_presspackages(logic.known_content(models.PRESSPACKAGE))
-
-def download_presspackage(ppid):
-    "download and store a specific PressPackage. Does not regenerate item."
-    return first(consume.single("press-packages/{id}", id=ppid))
-
-def download_all_presspackages():
-    "download and store *all* PressPackages. Does not regenerate items."
-    consume.all_items("press-packages")
-'''
-
-#
 # profiles
 #
 
@@ -463,37 +418,16 @@ PF_DESC = {
     # 'name': [p('name'), trunc(255)],
 }
 
-def _regenerate_profile(pfid):
-    "creates a Profile record sans transaction (faster)"
-    data = models.RawJSON.objects.get(msid=pfid, json_type=models.PROFILE).json
-    mush = render.render_item(PF_DESC, data)
-    return first(create_or_update(models.Profile, mush, ['id']))
+#
+# presspackages
+#
 
-@transaction.atomic
-def regenerate_profile(pfid):
-    """regenerate a Profile record within a transaction.
-    Use this when regenerating individual or small numbers of items.
-    Does not download any content."""
-    return _regenerate_profile(pfid)
-
-def regenerate_many_profiles(pfid_list):
-    """regenerates many Profile records using batched transactions.
-    Use this for large numbers of items.
-    Does not download any content."""
-    return do_all_atomically(_regenerate_profile, pfid_list)
-
-def regenerate_all_profiles():
-    """regenerates *all* Profile records using batched transactions.
-    Does not download any content."""
-    return regenerate_many_profiles(logic.known_content(models.PROFILE))
-
-def download_profile(pfid):
-    "download and store a specific Profile. Does not regenerate item."
-    return consume.single("profiles/{id}", id=pfid)
-
-def download_all_profiles():
-    "download and store *all* Profiles. Does not regenerate items."
-    return consume.all_items("profiles")
+PP_DESC = {
+    'id': [p('id')],
+    'title': [p('title')],
+    'published': [p('published'), todt],
+    'updated': [p('updated', None), todt] # f0114f21 missing an updated date
+}
 
 #
 # digests
@@ -511,53 +445,6 @@ DIGEST_DESC = {
     'datetime_updated': [p('updated')],
     'subjects': [p('subjects', []), lambda sl: [{'name': v['id'], 'label': v['name']} for v in sl]],
 }
-
-'''
-def flatten_digest_json(data):
-    """takes digests json and squishes it into something observer can digest
-    no pun intended."""
-    return render.render_item(DIGEST_DESC, data)
-
-def _regenerate_digest(digest_id):
-    "creates a Digest record sans transaction (faster)"
-    data = models.RawJSON.objects.get(msid=digest_id, json_type=models.DIGEST).json
-    mush = flatten_digest_json(data)
-
-    mush, children = extract_children(mush)
-    parent = {'Model': models.Digest, 'orig_data': mush, 'key_list': ['id']}
-
-    object_list = [(parent, children)]
-
-    with transaction.atomic():
-        # destroy what we have, if anything. updating may be dangerous
-        models.Digest.objects.filter(id=digest_id).delete()
-        utils.save_objects(object_list)
-        return models.Digest.objects.get(id=digest_id)
-
-@transaction.atomic
-def regenerate_digest(digest_id):
-    """regenerates a Digest record within a transaction.
-    Use for individual or smaller numbers of items."""
-    _regenerate_digest(digest_id)
-
-def regenerate_many_digests(digest_id_list):
-    """regenerates many Digest records within batched transactions.
-    Does not download any content."""
-    return do_all_atomically(_regenerate_digest, digest_id_list)
-
-def regenerate_all_digests():
-    """regenerate *all* Digest records within batched transactions.
-    Does not download any content."""
-    return regenerate_many_digests(logic.known_content(models.DIGEST))
-
-def download_digest(digest_id):
-    "downloads data for a single Digest item."
-    return consume.single("digests/{id}", id=digest_id)
-
-def download_all_digests():
-    "downloads data for *all* Digest items."
-    return consume.all_items('digests')
-'''
 
 #
 # labs
@@ -599,6 +486,11 @@ content_descriptions = {
                           'model': models.PressPackage,
                           'api-item': 'press-packages/{id}',
                           'api-list': 'press-packages'},
+
+    models.PROFILE: {'description': PF_DESC,
+                     'model': models.Profile,
+                     'api-item': 'profiles/{id}',
+                     'api-list': 'profiles'}
 
 }
 
@@ -667,9 +559,6 @@ def download_regenerate(content_type, content_id):
 
 def regenerate_all():
     regenerate_all_articles()
-    # regenerate_all_presspackages()
-    regenerate_all_profiles()
-    # regenerate_all_digests()
 
     for content_type in content_descriptions.keys():
         regenerate(content_type)
@@ -693,37 +582,6 @@ def download_regenerate_article(msid):
 
     except BaseException:
         LOG.exception("unhandled exception attempting to download and regenerate article %s", msid)
-
-# pylint: disable=W0105
-'''
-def download_regenerate_presspackage(ppid):
-    "convenience. Downloads the PressPackage with the given `ppid` and then regenerates it's content."
-    try:
-        LOG.info("update event for presspackage %s", ppid)
-        download_presspackage(ppid)
-        regenerate_presspackage(ppid)
-
-    except requests.exceptions.RequestException as err:
-        log = LOG.debug if err.response.status_code == 404 else LOG.error
-        log("failed to fetch presspackage %s: %s", ppid, err) # probably an unpublished presspackage ...?
-
-    except BaseException:
-        LOG.exception("unhandled exception attempting to download and regenerate presspackage %s", ppid)
-
-def download_regenerate_digest(digest_id):
-    "convenience. Downloads the Digest with the given `digest_id` and then regenerates it's content."
-    try:
-        LOG.info("update event for digests %s", digest_id)
-        download_digest(digest_id)
-        regenerate_digest(digest_id)
-
-    except requests.exceptions.RequestException as err:
-        log = LOG.debug if err.response.status_code == 404 else LOG.error
-        log("failed to fetch digest %s: %s", digest_id, err) # probably an unpublished digest ...?
-
-    except BaseException:
-        LOG.exception("unhandled exception attempting to download and regenerate digest %s", digest_id)
-'''
 
 download_regenerate_labspost = partial(download_regenerate, models.LABS_POST)
 download_regenerate_digest = partial(download_regenerate, models.DIGEST)

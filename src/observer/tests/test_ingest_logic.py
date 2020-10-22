@@ -239,20 +239,20 @@ class ProfileCount(base.BaseCase):
         pfid = 'ssiyns7x'
         expected = self.jsonfix('profiles', pfid + '.json')
         with patch('observer.consume.consume', return_value=expected):
-            ingest_logic.download_profile(pfid)
+            ingest_logic.download_item(models.PROFILE, pfid)
         self.assertEqual(models.RawJSON.objects.count(), 1)
 
-        ingest_logic.regenerate_all_profiles()
+        ingest_logic.regenerate(models.PROFILE)
         self.assertEqual(models.Profile.objects.count(), 1)
 
     def test_download_many_profiles(self):
         expected = self.jsonfix('profiles', 'many.json')
         expected['total'] = 100
         with patch('observer.consume.consume', return_value=expected):
-            ingest_logic.download_all_profiles()
+            ingest_logic.download_all(models.PROFILE)
         self.assertEqual(models.RawJSON.objects.count(), 100)
 
-        ingest_logic.regenerate_all_profiles()
+        ingest_logic.regenerate(models.PROFILE)
         self.assertEqual(models.Profile.objects.count(), 100)
 
 class AggregateIngestLogic(base.BaseCase):

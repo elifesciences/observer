@@ -126,8 +126,8 @@ class ProfileCounts(BaseCase):
         expected = self.jsonfix('profiles', 'many.json')
         expected['total'] = 100
         with mock.patch('observer.consume.consume', return_value=expected):
-            ingest_logic.download_all_profiles()
-            ingest_logic.regenerate_all_profiles()
+            ingest_logic.download_all(models.PROFILE)
+            ingest_logic.regenerate(models.PROFILE)
 
         today = datetime.now()
         yesterday = today - timedelta(days=1)
