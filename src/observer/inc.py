@@ -56,10 +56,15 @@ def handler(json_event):
 
     try:
         # process event
+        # see: https://github.com/elifesciences/bus
+        # and: https://github.com/elifesciences/builder/blob/master/projects/elife.yaml#L1166
         handlers = {
             'article': ingest_logic.download_regenerate_article,
+            #'profile': ... pulled in via daily cronjob. see ./daily.sh
+            #'metrics': ... also pulled in via daily cronjob
             'presspackage': ingest_logic.download_regenerate_presspackage,
             'digest': ingest_logic.download_regenerate_digest,
+            'labs-post': ingest_logic.download_regenerate_labspost,
 
             '-unhandled-': lambda _: LOG.warn("sinking event for unhandled type: %s", event_type),
         }
