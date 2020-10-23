@@ -39,6 +39,6 @@ def test_handling_unexpected_error():
     "handlers that cause an exception log an exception"
     dummy_event = json.dumps({'type': 'presspackage', 'id': 'whatevs'})
     with patch('observer.inc.LOG') as mock:
-        with patch('observer.ingest_logic.download_regenerate_presspackage', side_effect=RuntimeError('no pants')):
+        with patch('observer.ingest_logic.download_regenerate', side_effect=RuntimeError('no pants')):
             inc.handler(dummy_event)
             assert mock.exception.called

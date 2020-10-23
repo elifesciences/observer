@@ -190,4 +190,3 @@ class LabsPosts(base.BaseCase):
         expected = open(join(base.FIXTURE_DIR, 'labs-posts', 'dc5acbde.xml'), 'r').read()
         actual = resp.content.decode('utf-8')
         self.assertEqual(expected, actual)
-

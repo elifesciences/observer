@@ -13,7 +13,14 @@ METRICS_SUMMARY = 'elife-metrics-summary'
 PRESSPACKAGE = 'press-packages-id'
 PROFILE = 'profiles-id'
 DIGEST = 'digests-id'
-LABS_POST = 'labs-posts'
+LABS_POST = 'labs-post'
+
+COMMUNITY = 'community'
+INTERVIEW = 'interview'
+COLLECTION = 'collection'
+BLOG_ARTICLE = 'blog-article'
+FEATURE = 'feature'
+
 
 MODEL_CHOICES = [
     ('lax', LAX_AJSON),
@@ -312,3 +319,86 @@ class LabsPost(models.Model):
 
     def __repr__(self):
         return '<LabsPost "%s">' % self
+
+class BlogArticle(models.Model):
+    id = CharField(max_length=8, primary_key=True)
+    title = CharField(max_length=255)
+    impact_statement = TextField()
+    datetime_published = DateTimeField()
+
+    datetime_record_created = DateTimeField(auto_now_add=True)
+    datetime_record_updated = DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ('-datetime_published',)
+
+    def __str__(self):
+        return self.id
+
+    def __repr__(self):
+        return '<BlogArticle "%s">' % self
+
+class Interview(models.Model):
+    id = CharField(max_length=8, primary_key=True)
+    title = CharField(max_length=255)
+    impact_statement = TextField()
+    datetime_published = DateTimeField()
+    image_uri = URLField(max_length=500)
+    image_height = PositiveSmallIntegerField()
+    image_width = PositiveSmallIntegerField()
+    image_mime = CharField(max_length=10, choices=DIGEST_IMAGE_MIME_CHOICES)
+
+    datetime_record_created = DateTimeField(auto_now_add=True)
+    datetime_record_updated = DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ('-datetime_published',)
+
+    def __str__(self):
+        return self.id
+
+    def __repr__(self):
+        return '<Interview "%s">' % self
+
+
+# can these just be pulled from Article?
+class Feature(models.Model):
+    id = CharField(max_length=8, primary_key=True)
+    title = CharField(max_length=255)
+    impact_statement = TextField()
+    datetime_published = DateTimeField()
+
+    datetime_record_created = DateTimeField(auto_now_add=True)
+    datetime_record_updated = DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ('-datetime_published',)
+
+    def __str__(self):
+        return self.id
+
+    def __repr__(self):
+        return '<Feature "%s">' % self
+
+
+class Collection(models.Model):
+    id = CharField(max_length=8, primary_key=True)
+    title = CharField(max_length=255)
+    impact_statement = TextField()
+    datetime_published = DateTimeField()
+    image_uri = URLField(max_length=500)
+    image_height = PositiveSmallIntegerField()
+    image_width = PositiveSmallIntegerField()
+    image_mime = CharField(max_length=10, choices=DIGEST_IMAGE_MIME_CHOICES)
+
+    datetime_record_created = DateTimeField(auto_now_add=True)
+    datetime_record_updated = DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ('-datetime_published',)
+
+    def __str__(self):
+        return self.id
+
+    def __repr__(self):
+        return '<Collection "%s">' % self

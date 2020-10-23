@@ -240,6 +240,9 @@ def extract_children(mush):
 
     Used with article data to extract subjects and authors.
     Used with digest data to extract subjects."""
+
+    assert isinstance(mush, dict), "`extract_children` must be a dictionary of data, not %r" % type(mush)
+
     known_children = {
         'subjects': {'Model': models.Subject, 'key_list': ["name"]},
         'authors': {'Model': models.Author},
@@ -462,6 +465,46 @@ LABS_POST_DESC = {
 }
 
 #
+# community
+#
+
+INTERVIEW_DESC = {
+    'id': [p('id')],
+    'title': [p('title')],
+    'impact_statement': [p('impactStatement')],
+    'image_uri': [p('image.thumbnail.uri')],
+    'image_width': [p('image.thumbnail.size.width')],
+    'image_height': [p('image.thumbnail.size.height')],
+    'image_mime': [p('image.thumbnail.source.mediaType')],
+    'datetime_published': [p('published')],
+}
+
+COLLECTION_DESC = {
+    'id': [p('id')],
+    'title': [p('title')],
+    'impact_statement': [p('impactStatement')],
+    'image_uri': [p('image.thumbnail.uri')],
+    'image_width': [p('image.thumbnail.size.width')],
+    'image_height': [p('image.thumbnail.size.height')],
+    'image_mime': [p('image.thumbnail.source.mediaType')],
+    'datetime_published': [p('published')],
+}
+
+BLOG_ARTICLE_DESC = {
+    'id': [p('id')],
+    'title': [p('title')],
+    'impact_statement': [p('impactStatement')],
+    'datetime_published': [p('published')],
+}
+
+FEATURE_DESC = {
+    'id': [p('id')],
+    'title': [p('title')],
+    'impact_statement': [p('impactStatement')],
+    'datetime_published': [p('published')],
+}
+
+#
 #
 #
 
@@ -490,7 +533,24 @@ content_descriptions = {
     models.PROFILE: {'description': PF_DESC,
                      'model': models.Profile,
                      'api-item': 'profiles/{id}',
-                     'api-list': 'profiles'}
+                     'api-list': 'profiles'},
+
+    # /community has no /community/{id}
+    # /community returns multiple content types
+    models.COMMUNITY: {'content-type-fn': lambda api_item: api_item['type'],
+                       'api-list': 'community'},
+
+    models.INTERVIEW: {'description': INTERVIEW_DESC,
+                       'model': models.Interview},
+
+    models.COLLECTION: {'description': COLLECTION_DESC,
+                        'model': models.Collection},
+
+    models.BLOG_ARTICLE: {'description': BLOG_ARTICLE_DESC,
+                          'model': models.BlogArticle},
+
+    models.FEATURE: {'description': FEATURE_DESC,
+                     'model': models.Feature},
 
 }
 
@@ -504,8 +564,16 @@ def flatten_data(content_type, data):
 
 def _regenerate_item(content_type, content_id):
     data = models.RawJSON.objects.get(msid=content_id, json_type=content_type).json
-    mush = flatten_data(content_type, data)
 
+    # no 1:1 mapping between endpoint and observer model.
+    # `/community` is like this, it returns interviews, blogs, collections, etc
+    # look for a `content-type-fn` to find the *actual* content type of the RawJSON
+    if 'content-type-fn' in content_descriptions[content_type]:
+        content_type = content_descriptions[content_type]['content-type-fn'](data)
+
+    assert content_type in content_descriptions, "unhandled content type %r" % content_type
+
+    mush = flatten_data(content_type, data)
     mush, children = extract_children(mush)
 
     Klass = content_descriptions[content_type]['model']
@@ -540,18 +608,9 @@ def download_item(content_type, content_type_id):
     return first(consume.single(api, id=content_type_id))
 
 def download_all(content_type):
+    assert content_type in content_descriptions, "unhandled content type %r" % content_type
     api = content_descriptions[content_type]['api-list']
     return consume.all_items(api)
-
-def download_regenerate(content_type, content_id):
-    try:
-        download_item(content_type, content_id)
-        regenerate_item(content_type, content_id)
-    except requests.exceptions.RequestException as err:
-        log = LOG.debug if err.response.status_code == 404 else LOG.error
-        log("failed to fetch %r %s: %s", content_type, content_id, err) # "failed to fetch presspackage '1234': 404 Not Found"
-    except BaseException:
-        LOG.exception("unhandled exception attempting to download and regenerate %s %r", content_type, content_id)
 
 #
 #
@@ -567,8 +626,6 @@ def regenerate_all():
 #
 #
 
-# TODO: moosh these into one function
-
 def download_regenerate_article(msid):
     """convenience. Downloads the article versions with the given `msid` and then regenerates it's content.
     WARN: Does not download metrics data, uses what it exists, if any. (this may be an oversight)"""
@@ -583,9 +640,20 @@ def download_regenerate_article(msid):
     except BaseException:
         LOG.exception("unhandled exception attempting to download and regenerate article %s", msid)
 
-download_regenerate_labspost = partial(download_regenerate, models.LABS_POST)
-download_regenerate_digest = partial(download_regenerate, models.DIGEST)
-download_regenerate_presspackage = partial(download_regenerate, models.PRESSPACKAGE)
+def download_regenerate(content_type, content_id):
+    if content_type == models.LAX_AJSON:
+        return download_regenerate_article(content_id)
+
+    # everything else is general purpose for now
+
+    try:
+        download_item(content_type, content_id)
+        regenerate_item(content_type, content_id)
+    except requests.exceptions.RequestException as err:
+        log = LOG.debug if err.response.status_code == 404 else LOG.error
+        log("failed to fetch %r %s: %s", content_type, content_id, err) # "failed to fetch presspackage '1234': 404 Not Found"
+    except BaseException:
+        LOG.exception("unhandled exception attempting to download and regenerate %s %r", content_type, content_id)
 
 #
 # upsert article-json from file/dir
