@@ -207,13 +207,17 @@ def content_to_rss_entry(content):
     item['dc:dc_date'] = utils.ymdhms(item['pubDate'])
     item['category'] = [{'term': cat.name, 'label': cat.label} for cat in content.categories.all()]
 
-    width = 800
-    thumbnail_width, thumbnail_height = utils.thumbnail_dimensions(width, content.image_width, content.image_height)
-    iiif_url = utils.iiif_thumbnail_link(content.image_uri, thumbnail_width, thumbnail_height)
-    item['webfeeds:featuredImage'] = {'url': iiif_url,
-                                      'height': str(thumbnail_height),
-                                      'width': str(thumbnail_width),
-                                      'type': "image/jpeg"}
+    # todo: add content.content_type to 'categories' ...?
+
+    # content has an image available
+    if content.image_uri:
+        max_xy = 800
+        thumbnail_width, thumbnail_height = utils.thumbnail_dimensions(max_xy, content.image_width, content.image_height)
+        iiif_url = utils.iiif_thumbnail_link(content.image_uri, thumbnail_width, thumbnail_height)
+        item['webfeeds:featuredImage'] = {'url': iiif_url,
+                                          'height': str(thumbnail_height),
+                                          'width': str(thumbnail_width),
+                                          'type': "image/jpeg"}
     return item
 
 def content_to_rss_entry_list(queryset):

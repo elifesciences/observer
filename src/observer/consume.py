@@ -94,6 +94,8 @@ def content_type_from_endpoint(endpoint):
     val = slugify(endpoint) # press-packages/{id} => press-packages-id
     aliases = {
         # summary endpoints
+        'community': models.COMMUNITY,
+        'labs-posts': models.LABS_POST,
         'profiles': models.PROFILE,
         'press-packages': models.PRESSPACKAGE,
         'digests': models.DIGEST,

@@ -16,12 +16,20 @@ PROFILE = 'profiles-id'
 
 DIGEST = 'digest'
 LABS_POST = 'labs-post'
+
 COMMUNITY = 'community'
+
 INTERVIEW = 'interview'
 COLLECTION = 'collection'
 BLOG_ARTICLE = 'blog-article'
 FEATURE = 'feature'
 
+COMMUNITY_CONTENT_TYPE_LIST = [
+    INTERVIEW,
+    COLLECTION,
+    BLOG_ARTICLE,
+    FEATURE
+]
 
 MODEL_CHOICES = [
     ('lax', LAX_AJSON),
@@ -303,7 +311,7 @@ class Content(models.Model):
     content_type = CharField(max_length=10, choices=CONTENT_TYPE_CHOICES)
 
     title = CharField(max_length=255)
-    description = TextField()
+    description = TextField(null=True)
     image_uri = URLField(max_length=500, null=True)
     image_height = PositiveSmallIntegerField(null=True)
     image_width = PositiveSmallIntegerField(null=True)
@@ -324,9 +332,3 @@ class Content(models.Model):
 
     def __repr__(self):
         return '<Content "%s">' % self
-
-
-DIGEST_IMAGE_MIME_CHOICES = [
-    ('jpg', 'image/jpeg'),
-    ('png', 'image/png'),
-]

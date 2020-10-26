@@ -111,6 +111,60 @@ def labs_posts():
         .filter(content_type=models.LABS_POST) \
         .order_by('-datetime_published')
 
+# note: 'article_meta' here works because of similar field names
+@report(article_meta(
+    title='community',
+    description='The latest eLife community content.',
+    serialisations=[RSS],
+))
+def community():
+    return models.Content.objects \
+        .filter(content_type__in=models.COMMUNITY_CONTENT_TYPE_LIST) \
+        .order_by('-datetime_published')
+
+# note: 'article_meta' here works because of similar field names
+@report(article_meta(
+    title='interviews',
+    description='The latest eLife interviews.',
+    serialisations=[RSS],
+))
+def interviews():
+    return models.Content.objects \
+        .filter(content_type=models.INTERVIEW) \
+        .order_by('-datetime_published')
+
+# note: 'article_meta' here works because of similar field names
+@report(article_meta(
+    title='collections',
+    description='The latest eLife collections.',
+    serialisations=[RSS],
+))
+def collections():
+    return models.Content.objects \
+        .filter(content_type=models.COLLECTION) \
+        .order_by('-datetime_published')
+
+# note: 'article_meta' here works because of similar field names
+@report(article_meta(
+    title='blog-articles',
+    description='The latest eLife blog articles.',
+    serialisations=[RSS],
+))
+def blog_articles():
+    return models.Content.objects \
+        .filter(content_type=models.BLOG_ARTICLE) \
+        .order_by('-datetime_published')
+
+# note: 'article_meta' here works because of similar field names
+@report(article_meta(
+    title='features',
+    description='The latest eLife featured articles.',
+    serialisations=[RSS],
+))
+def features():
+    return models.Content.objects \
+        .filter(content_type=models.FEATURE) \
+        .order_by('-datetime_published')
 
 #
 #
@@ -255,12 +309,18 @@ def format_report(report_data, serialisation, context):
     return known_formats[serialisation](report_data, context)
 
 def known_report_idx():
+    # [(/report/$name, reportfn), ...]
     return OrderedDict([
         ('latest-articles', latest_articles),
         ('latest-articles-by-subject', latest_articles_by_subject),
         ('upcoming-articles', upcoming_articles),
         ('digests', digests),
         ('labs-posts', labs_posts),
+        ('community', community),
+        ('interviews', interviews),
+        ('collections', collections),
+        ('blog-articles', blog_articles),
+        ('features', features),
         ('published-article-index', published_article_index),
         ('published-research-article-index', published_research_article_index),
         ('profile-count', profile_count),

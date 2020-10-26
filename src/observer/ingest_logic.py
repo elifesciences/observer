@@ -476,10 +476,11 @@ INTERVIEW_DESC = {
     'content_type': [models.INTERVIEW],
     'title': [p('title')],
     'description': [p('impactStatement')],
-    'image_uri': [p('image.thumbnail.uri')],
-    'image_width': [p('image.thumbnail.size.width')],
-    'image_height': [p('image.thumbnail.size.height')],
-    'image_mime': [p('image.thumbnail.source.mediaType')],
+    # there are interviews without images
+    'image_uri': [p('image.thumbnail.uri', None)],
+    'image_width': [p('image.thumbnail.size.width', None)],
+    'image_height': [p('image.thumbnail.size.height', None)],
+    'image_mime': [p('image.thumbnail.source.mediaType', None)],
     'datetime_published': [p('published')],
 }
 
@@ -499,7 +500,7 @@ BLOG_ARTICLE_DESC = {
     'id': [p('id')],
     'content_type': [models.BLOG_ARTICLE],
     'title': [p('title')],
-    'description': [p('impactStatement')],
+    'description': [p('impactStatement', None)],
     'datetime_published': [p('published')],
 }
 
@@ -566,8 +567,15 @@ content_descriptions = {
 #
 
 def flatten_data(content_type, data):
-    description = content_descriptions[content_type]['description']
-    return render.render_item(description, data)
+    try:
+        description = content_descriptions[content_type]['description']
+        return render.render_item(description, data)
+    except BaseException:
+        print('----')
+        print(content_type)
+        print(data)
+        print('----')
+        raise
 
 def _regenerate_item(content_type, content_id):
     data = models.RawJSON.objects.get(msid=content_id, json_type=content_type).json
@@ -577,6 +585,10 @@ def _regenerate_item(content_type, content_id):
     # look for a `content-type-fn` to find the *actual* content type of the RawJSON
     if 'content-type-fn' in content_descriptions[content_type]:
         content_type = content_descriptions[content_type]['content-type-fn'](data)
+
+    if not content_type in content_descriptions:
+        print("skipping unhandled content type %r" % content_type)
+        return
 
     assert content_type in content_descriptions, "unhandled content type %r" % content_type
 
