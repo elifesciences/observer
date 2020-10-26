@@ -20,7 +20,7 @@ def test_content_type_from_endpoint():
         ('/profiles', 'profiles-id'),
         ('/profiles/{id}', 'profiles-id'),
 
-        ('/digests', 'digests-id'),
+        ('/digests', 'digest'),
 
         # exceptions to the rule
         ('/articles/{id}/versions/{version}', models.LAX_AJSON), # not actually used (yet)

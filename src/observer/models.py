@@ -12,9 +12,10 @@ LAX_AJSON = 'lax-ajson'
 METRICS_SUMMARY = 'elife-metrics-summary'
 PRESSPACKAGE = 'press-packages-id'
 PROFILE = 'profiles-id'
-DIGEST = 'digests-id'
-LABS_POST = 'labs-post'
+# DIGEST = 'digests-id' # old, do not use, remove once RawJSON in db is removed
 
+DIGEST = 'digest'
+LABS_POST = 'labs-post'
 COMMUNITY = 'community'
 INTERVIEW = 'interview'
 COLLECTION = 'collection'
@@ -329,28 +330,3 @@ DIGEST_IMAGE_MIME_CHOICES = [
     ('jpg', 'image/jpeg'),
     ('png', 'image/png'),
 ]
-
-class Digest(models.Model):
-    id = CharField(max_length=25, primary_key=True)
-    title = CharField(max_length=255)
-    impact_statement = TextField()
-    image_uri = URLField(max_length=500)
-    image_height = PositiveSmallIntegerField()
-    image_width = PositiveSmallIntegerField()
-    image_mime = CharField(max_length=10, choices=DIGEST_IMAGE_MIME_CHOICES)
-    datetime_published = DateTimeField()
-    datetime_updated = DateTimeField()
-
-    subjects = models.ManyToManyField(Subject)
-
-    datetime_record_created = DateTimeField(auto_now_add=True)
-    datetime_record_updated = DateTimeField(auto_now=True)
-
-    class Meta:
-        ordering = ('-datetime_published',)
-
-    def __str__(self):
-        return self.id
-
-    def __repr__(self):
-        return '<Digest "%s">' % self

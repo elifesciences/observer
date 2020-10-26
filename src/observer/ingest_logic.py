@@ -239,7 +239,7 @@ def extract_children(mush):
     extract the child dependencies into a list of maps that can be passed to `utils.save_objects`.
 
     Used with article data to extract subjects and authors.
-    Used with digest data to extract subjects."""
+    Used with digest data to extract subjects (as 'categories') into ContentCategories."""
 
     assert isinstance(mush, dict), "`extract_children` must be a dictionary of data, not %r" % type(mush)
 
@@ -251,7 +251,7 @@ def extract_children(mush):
 
     children = []
     for childtype, kwargs in known_children.items():
-        # if 'subjects' in 'digest'
+        # if 'categories' in 'digest'
         # if 'authors' in 'article'
         if childtype in mush:
             data = mush[childtype]
@@ -439,16 +439,16 @@ PP_DESC = {
 
 DIGEST_DESC = {
     'id': [p('id'), int],
+    'content_type': [models.DIGEST],
     'title': [p('title')],
-    'impact_statement': [p('impactStatement')],
+    'description': [p('impactStatement')],
     'image_uri': [p('image.thumbnail.uri')],
     'image_width': [p('image.thumbnail.size.width')],
     'image_height': [p('image.thumbnail.size.height')],
     'image_mime': [p('image.thumbnail.source.mediaType')],
     'datetime_published': [p('published')],
     'datetime_updated': [p('updated')],
-    #'categories': [p('subjects', []), lambda sl: [{'name': v['id'], 'label': v['name']} for v in sl]],
-    'subjects': [p('subjects', []), lambda sl: [{'name': v['id'], 'label': v['name']} for v in sl]],
+    'categories': [p('subjects', []), lambda sl: [{'name': v['id'], 'label': v['name']} for v in sl]],
 }
 
 #
@@ -528,7 +528,7 @@ content_descriptions = {
                        'api-list': 'labs-posts'},
 
     models.DIGEST: {'description': DIGEST_DESC,
-                    'model': models.Digest,
+                    'model': models.Content,
                     'api-item': 'digests/{id}',
                     'api-list': 'digests'},
 

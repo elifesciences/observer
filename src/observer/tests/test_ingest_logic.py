@@ -363,15 +363,16 @@ def test_flatten_digest():
     "digest json data is extracted into something Observer can store"
     fixture = json.load(open(join(base.FIXTURE_DIR, 'digests', '59885.json'), 'r'))
     expected = {'id': 59885,
+                'content_type': models.DIGEST,
                 'title': 'Splitting up',
-                'impact_statement': 'Changes in protein levels during cell division reveal how the process is carefully controlled.',
+                'description': 'Changes in protein levels during cell division reveal how the process is carefully controlled.',
                 'image_uri': 'https://iiif.elifesciences.org/digests/59885%2Fdigest-59885.png',
                 'image_width': 805,
                 'image_height': 653,
                 'image_mime': 'image/jpeg',
                 'datetime_published': '2020-10-01T13:28:04Z',
                 'datetime_updated': '2020-10-01T13:28:31Z',
-                'subjects': [{'label': 'Cell Biology', 'name': 'cell-biology'}]}
+                'categories': [{'label': 'Cell Biology', 'name': 'cell-biology'}]}
     actual = ingest_logic.flatten_data(models.DIGEST, fixture)
     assert expected == actual
 
@@ -399,9 +400,9 @@ class Content(base.BaseCase):
         expected_collections = 1
 
         expected = expected_blog_articles + expected_interviews + expected_features + expected_collections
-        
+
         assert expected == models.Content.objects.count()
-        
+
         assert expected_blog_articles == models.Content.objects.filter(content_type=models.BLOG_ARTICLE).count()
         assert expected_interviews == models.Content.objects.filter(content_type=models.INTERVIEW).count()
         assert expected_features == models.Content.objects.filter(content_type=models.FEATURE).count()

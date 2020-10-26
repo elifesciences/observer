@@ -23,7 +23,7 @@ export DJANGO_SETTINGS_MODULE=core.settings
 # run the tests
 if [ $print_coverage -eq 0 ]; then
     # a *specific* test file or test has been given, don't bother with coverage et al
-    pytest "$module" -v
+    pytest "$module" -vv
 else
     pytest "$module" -vv --cov=src --cov-config=.coveragerc --junitxml=build/junit.xml --override-ini junit_family=xunit1
 

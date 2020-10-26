@@ -96,7 +96,8 @@ def upcoming_articles():
     serialisations=[RSS],
 ))
 def digests():
-    return models.Digest.objects \
+    return models.Content.objects \
+        .filter(content_type=models.DIGEST) \
         .order_by('-datetime_published')
 
 # note: 'article_meta' here works because of similar field names
