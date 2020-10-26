@@ -246,6 +246,7 @@ def extract_children(mush):
     known_children = {
         'subjects': {'Model': models.Subject, 'key_list': ["name"]},
         'authors': {'Model': models.Author},
+        'categories': {'Model': models.ContentCategory, 'key_list': ["name"]},
     }
 
     children = []
@@ -446,6 +447,7 @@ DIGEST_DESC = {
     'image_mime': [p('image.thumbnail.source.mediaType')],
     'datetime_published': [p('published')],
     'datetime_updated': [p('updated')],
+    #'categories': [p('subjects', []), lambda sl: [{'name': v['id'], 'label': v['name']} for v in sl]],
     'subjects': [p('subjects', []), lambda sl: [{'name': v['id'], 'label': v['name']} for v in sl]],
 }
 
@@ -455,8 +457,9 @@ DIGEST_DESC = {
 
 LABS_POST_DESC = {
     'id': [p('id')],
+    'content_type': [models.LABS_POST],
     'title': [p('title')],
-    'impact_statement': [p('impactStatement')],
+    'description': [p('impactStatement')],
     'image_uri': [p('image.thumbnail.uri')],
     'image_width': [p('image.thumbnail.size.width')],
     'image_height': [p('image.thumbnail.size.height')],
@@ -470,8 +473,9 @@ LABS_POST_DESC = {
 
 INTERVIEW_DESC = {
     'id': [p('id')],
+    'content_type': [models.INTERVIEW],
     'title': [p('title')],
-    'impact_statement': [p('impactStatement')],
+    'description': [p('impactStatement')],
     'image_uri': [p('image.thumbnail.uri')],
     'image_width': [p('image.thumbnail.size.width')],
     'image_height': [p('image.thumbnail.size.height')],
@@ -481,8 +485,9 @@ INTERVIEW_DESC = {
 
 COLLECTION_DESC = {
     'id': [p('id')],
+    'content_type': [models.COLLECTION],
     'title': [p('title')],
-    'impact_statement': [p('impactStatement')],
+    'description': [p('impactStatement')],
     'image_uri': [p('image.thumbnail.uri')],
     'image_width': [p('image.thumbnail.size.width')],
     'image_height': [p('image.thumbnail.size.height')],
@@ -492,15 +497,17 @@ COLLECTION_DESC = {
 
 BLOG_ARTICLE_DESC = {
     'id': [p('id')],
+    'content_type': [models.BLOG_ARTICLE],
     'title': [p('title')],
-    'impact_statement': [p('impactStatement')],
+    'description': [p('impactStatement')],
     'datetime_published': [p('published')],
 }
 
 FEATURE_DESC = {
     'id': [p('id')],
+    'content_type': [models.FEATURE],
     'title': [p('title')],
-    'impact_statement': [p('impactStatement')],
+    'description': [p('impactStatement')],
     'datetime_published': [p('published')],
 }
 
@@ -510,7 +517,7 @@ FEATURE_DESC = {
 
 content_descriptions = {
     models.LABS_POST: {'description': LABS_POST_DESC,
-                       'model': models.LabsPost,
+                       'model': models.Content,
 
                        # interesting thing here
                        # rawjson key conflicts. we're download list of summaries plus details as well
@@ -541,16 +548,16 @@ content_descriptions = {
                        'api-list': 'community'},
 
     models.INTERVIEW: {'description': INTERVIEW_DESC,
-                       'model': models.Interview},
+                       'model': models.Content},
 
     models.COLLECTION: {'description': COLLECTION_DESC,
-                        'model': models.Collection},
+                        'model': models.Content},
 
     models.BLOG_ARTICLE: {'description': BLOG_ARTICLE_DESC,
-                          'model': models.BlogArticle},
+                          'model': models.Content},
 
     models.FEATURE: {'description': FEATURE_DESC,
-                     'model': models.Feature},
+                     'model': models.Content},
 
 }
 

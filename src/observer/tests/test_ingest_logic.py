@@ -375,18 +375,11 @@ def test_flatten_digest():
     actual = ingest_logic.flatten_data(models.DIGEST, fixture)
     assert expected == actual
 
-#
-# collections
-# these have slightly different handling to Articles and the other simpler content types
-# the /collections endpoint may return any number of different content types including some that may not be handled.
-# the /collections endpoint also doesn't have a "/collections/{id}" endpoint, so we're fetching lists only
-#
-
-class Community(base.BaseCase):
+class Content(base.BaseCase):
     def setUp(self):
         pass
 
-    def test_download_collection(self):
+    def test_download_content(self):
         "raw /collection data isn't parsed out into individual models but stored simply as API results, like all the other endpoints."
         fixture = self.jsonfix('community', 'many.json')
         with patch('observer.consume.consume', return_value=fixture):
@@ -404,8 +397,12 @@ class Community(base.BaseCase):
         expected_interviews = 3
         expected_features = 4
         expected_collections = 1
-        assert expected_blog_articles == models.BlogArticle.objects.count()
-        assert expected_interviews == models.Interview.objects.count()
-        assert expected_features == models.Feature.objects.count()
-        assert expected_collections == models.Collection.objects.count()
-        assert expected_features == models.Feature.objects.count()
+
+        expected = expected_blog_articles + expected_interviews + expected_features + expected_collections
+        
+        assert expected == models.Content.objects.count()
+        
+        assert expected_blog_articles == models.Content.objects.filter(content_type=models.BLOG_ARTICLE).count()
+        assert expected_interviews == models.Content.objects.filter(content_type=models.INTERVIEW).count()
+        assert expected_features == models.Content.objects.filter(content_type=models.FEATURE).count()
+        assert expected_collections == models.Content.objects.filter(content_type=models.COLLECTION).count()

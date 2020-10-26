@@ -222,17 +222,16 @@ def digest_list_to_rss_entry_list(queryset):
     "converts many Digest objects to a list of data structures suitable for FeedGen coercion."
     return map(digest_to_rss_entry, queryset)
 
-# labs
+# content
 
-def labs_post_to_rss_entry(digest):
+def content_to_rss_entry(digest):
     "converts a single Digest object to a data structure suitable for FeedGen coercion."
     data = utils.to_dict(digest)
 
     item = utils.subdict(data, [
-        'id', 'title', 'impact_statement',
+        'id', 'title', 'description',
         'datetime_published', 'datetime_updated'])
     utils.renkeys(item, [
-        ('impact_statement', 'description'),
         ('datetime_published', 'pubDate'),
         ('datetime_updated', 'updated'),
     ])
@@ -249,8 +248,8 @@ def labs_post_to_rss_entry(digest):
 
     return item
 
-def labs_post_to_rss_entry_list(queryset):
-    return map(labs_post_to_rss_entry, queryset)
+def content_to_rss_entry_list(queryset):
+    return map(content_to_rss_entry, queryset)
 
 def _format_report(report, context):
     "generates an RSS feed from the given `report` and `context` data, returning XML content as a string"
@@ -261,7 +260,7 @@ def _format_report(report, context):
     dispatch = {
         models.Article: article_list_to_rss_entry_list,
         models.Digest: digest_list_to_rss_entry_list,
-        models.LabsPost: labs_post_to_rss_entry_list,
+        models.Content: content_to_rss_entry_list,
 
         # if we're given a map of data, assume it's already in the shape we want it in
         dict: lambda x: x

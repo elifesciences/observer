@@ -106,7 +106,8 @@ def digests():
     serialisations=[RSS],
 ))
 def labs_posts():
-    return models.LabsPost.objects \
+    return models.Content.objects \
+        .filter(content_type=models.LABS_POST) \
         .order_by('-datetime_published')
 
 
