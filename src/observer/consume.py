@@ -73,11 +73,11 @@ def upsert(iid, content_type, content):
 def upsert_all(content_type, rows, idfn):
     def do_safely(row):
         try:
-            iid = idfn(row)
+            item_id = idfn(row)
         except Exception:
             LOG.error("failed to extract item id from row: %s", row)
             return
-        return upsert(iid, content_type, row)
+        return upsert(item_id, content_type, row)
 
     with transaction.atomic():
         utils.lmap(do_safely, rows)
