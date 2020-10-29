@@ -1,0 +1,258 @@
+{
+  "total": 78,
+  "items": [
+    {
+      "id": "dc5acbde",
+      "title": "Welcome to a new ERA of reproducible publishing",
+      "published": "2020-08-24T09:01:44Z",
+      "image": {
+        "thumbnail": {
+          "uri": "https://iiif.elifesciences.org/journal-cms/labs_experiment%2F2020-08%2Fabstract-1278077_1920.jpg",
+          "alt": "numbers around a globe",
+          "source": {
+            "mediaType": "image/jpeg",
+            "uri": "https://iiif.elifesciences.org/journal-cms/labs_experiment%2F2020-08%2Fabstract-1278077_1920.jpg/full/full/0/default.jpg",
+            "filename": "abstract-1278077_1920.jpg"
+          },
+          "size": {
+            "width": 1003,
+            "height": 645
+          },
+          "focalPoint": {
+            "x": 50,
+            "y": 50
+          }
+        }
+      },
+      "impactStatement": "New open-source technology lets eLife authors publish Executable Research Articles that treat live code and data as first-class citizens."
+    },
+    {
+      "id": "f779833b",
+      "title": "Python for the practicing neuroscientist: an online educational resource",
+      "published": "2020-08-10T12:00:00Z",
+      "image": {
+        "thumbnail": {
+          "uri": "https://iiif.elifesciences.org/journal-cms/labs_experiment%2F2020-08%2Fmedicine-4764731_1920_0.jpg",
+          "alt": "electrophysiological signals",
+          "source": {
+            "mediaType": "image/jpeg",
+            "uri": "https://iiif.elifesciences.org/journal-cms/labs_experiment%2F2020-08%2Fmedicine-4764731_1920_0.jpg/full/full/0/default.jpg",
+            "filename": "medicine-4764731_1920_0.jpg"
+          },
+          "size": {
+            "width": 1920,
+            "height": 1278
+          },
+          "focalPoint": {
+            "x": 50,
+            "y": 50
+          }
+        }
+      },
+      "impactStatement": "Learn to analyze neural data using Python with this interactive, case study-based approach"
+    },
+    {
+      "id": "bced51c5",
+      "title": "Innovation Leaders 2020: A summary",
+      "published": "2020-07-30T12:30:31Z",
+      "image": {
+        "thumbnail": {
+          "uri": "https://iiif.elifesciences.org/journal-cms/labs_experiment%2F2020-07%2Fdino-reichmuth-d6ydsisni4w-unsplash_0.jpg",
+          "alt": "person looking at stars",
+          "source": {
+            "mediaType": "image/jpeg",
+            "uri": "https://iiif.elifesciences.org/journal-cms/labs_experiment%2F2020-07%2Fdino-reichmuth-d6ydsisni4w-unsplash_0.jpg/full/full/0/default.jpg",
+            "filename": "dino-reichmuth-d6ydsisni4w-unsplash_0.jpg"
+          },
+          "size": {
+            "width": 5304,
+            "height": 7952
+          },
+          "focalPoint": {
+            "x": 57,
+            "y": 67
+          }
+        }
+      },
+      "impactStatement": "We share some of the highlights, outcomes and learnings from our first open leadership and mentorship programme."
+    },
+    {
+      "id": "6c623581",
+      "title": "CoVis: a new tool to discover reliable COVID-19 research",
+      "published": "2020-07-23T12:33:59Z",
+      "image": {
+        "thumbnail": {
+          "uri": "https://iiif.elifesciences.org/journal-cms/labs_experiment%2F2020-07%2Fimage3.png",
+          "alt": "CoVis: discover relibale COVID-19 research",
+          "source": {
+            "mediaType": "image/jpeg",
+            "uri": "https://iiif.elifesciences.org/journal-cms/labs_experiment%2F2020-07%2Fimage3.png/full/full/0/default.jpg",
+            "filename": "image3.jpg"
+          },
+          "size": {
+            "width": 816,
+            "height": 401
+          },
+          "focalPoint": {
+            "x": 37,
+            "y": 45
+          }
+        }
+      },
+      "impactStatement": "CoVis is a community-driven resource to help scientists kick-start their COVID-19 research."
+    },
+    {
+      "id": "d8f1d697",
+      "title": "Making (neuro)science accessible world-wide: Online seminars for the globe",
+      "published": "2020-05-26T07:24:49Z",
+      "image": {
+        "thumbnail": {
+          "uri": "https://iiif.elifesciences.org/journal-cms/labs_experiment%2F2020-05%2Fbanner.jpg",
+          "alt": "worldwideneuro banner",
+          "source": {
+            "mediaType": "image/jpeg",
+            "uri": "https://iiif.elifesciences.org/journal-cms/labs_experiment%2F2020-05%2Fbanner.jpg/full/full/0/default.jpg",
+            "filename": "banner.jpg"
+          },
+          "size": {
+            "width": 1994,
+            "height": 538
+          },
+          "focalPoint": {
+            "x": 50,
+            "y": 50
+          }
+        }
+      },
+      "impactStatement": "World Wide Neuro reconnects researchers and facilitates scientific discourse in the times of the pandemic."
+    },
+    {
+      "id": "5ed408f4",
+      "title": "neuromatch: Algorithms to match scientists",
+      "published": "2020-05-18T13:35:00Z",
+      "image": {
+        "thumbnail": {
+          "uri": "https://iiif.elifesciences.org/journal-cms/labs_experiment%2F2020-05%2Fwork-4997565_1280.png",
+          "alt": "people working from home",
+          "source": {
+            "mediaType": "image/jpeg",
+            "uri": "https://iiif.elifesciences.org/journal-cms/labs_experiment%2F2020-05%2Fwork-4997565_1280.png/full/full/0/default.jpg",
+            "filename": "work-4997565_1280.jpg"
+          },
+          "size": {
+            "width": 1280,
+            "height": 1280
+          },
+          "focalPoint": {
+            "x": 50,
+            "y": 50
+          },
+          "attribution": [
+            "Image by <a href=\"https://pixabay.com/users/arivleone-14275976/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4997565\">Arivle One</a> from <a href=\"https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4997565\">Pixabay</a>"
+          ]
+        }
+      },
+      "impactStatement": "We developed machine-learning algorithms to help connect scientists during online research conferences."
+    },
+    {
+      "id": "41c404e3",
+      "title": "eLife Innovation Sprint 2020: Accepted projects",
+      "published": "2020-05-18T12:55:20Z",
+      "image": {
+        "thumbnail": {
+          "uri": "https://iiif.elifesciences.org/journal-cms/labs_experiment%2F2020-05%2F41749640924_c3dfcd3b53_k.jpg",
+          "alt": "sprint18",
+          "source": {
+            "mediaType": "image/jpeg",
+            "uri": "https://iiif.elifesciences.org/journal-cms/labs_experiment%2F2020-05%2F41749640924_c3dfcd3b53_k.jpg/full/full/0/default.jpg",
+            "filename": "41749640924_c3dfcd3b53_k.jpg"
+          },
+          "size": {
+            "width": 2048,
+            "height": 1447
+          },
+          "focalPoint": {
+            "x": 50,
+            "y": 50
+          }
+        }
+      },
+      "impactStatement": "We invite everyone passionate about transforming research communication and culture to join these 15 project teams in September."
+    },
+    {
+      "id": "9d062a9b",
+      "title": "SmartFigures Dashboard and Editor: tools for quick and easy research communication",
+      "published": "2020-04-14T14:47:24Z",
+      "image": {
+        "thumbnail": {
+          "uri": "https://iiif.elifesciences.org/journal-cms/labs_experiment%2F2020-04%2Fsourcedata_hero_image_elifelabspost.jpg",
+          "alt": "SmartFigure toolset",
+          "source": {
+            "mediaType": "image/jpeg",
+            "uri": "https://iiif.elifesciences.org/journal-cms/labs_experiment%2F2020-04%2Fsourcedata_hero_image_elifelabspost.jpg/full/full/0/default.jpg",
+            "filename": "sourcedata_hero_image_elifelabspost.jpg"
+          },
+          "size": {
+            "width": 1920,
+            "height": 1080
+          },
+          "focalPoint": {
+            "x": 50,
+            "y": 50
+          }
+        }
+      },
+      "impactStatement": "An open tool stack for collaboratively authoring and sharing interoperable, discoverable scientific figures."
+    },
+    {
+      "id": "8f2f09ea",
+      "title": "Innovation Sprint 2020: Design, test, learn, repeat",
+      "published": "2020-03-30T08:08:48Z",
+      "image": {
+        "thumbnail": {
+          "uri": "https://iiif.elifesciences.org/journal-cms/labs_experiment%2F2020-03%2F48753679242_89e5f00201_k.jpg",
+          "alt": "postits",
+          "source": {
+            "mediaType": "image/jpeg",
+            "uri": "https://iiif.elifesciences.org/journal-cms/labs_experiment%2F2020-03%2F48753679242_89e5f00201_k.jpg/full/full/0/default.jpg",
+            "filename": "48753679242_89e5f00201_k.jpg"
+          },
+          "size": {
+            "width": 1365,
+            "height": 2048
+          },
+          "focalPoint": {
+            "x": 50,
+            "y": 50
+          }
+        }
+      },
+      "impactStatement": "We reflected on the first two iterations of the eLife Innovation Sprint, and are ready to share our plans for the next."
+    },
+    {
+      "id": "6679ee39",
+      "title": "Open-Source Community Call: the latest technology updates in open research communication",
+      "published": "2020-03-04T14:13:04Z",
+      "image": {
+        "thumbnail": {
+          "uri": "https://iiif.elifesciences.org/journal-cms/labs_experiment%2F2020-03%2Fphoto-of-people-using-laptop-3194519.jpg",
+          "alt": "group of people working around a table",
+          "source": {
+            "mediaType": "image/jpeg",
+            "uri": "https://iiif.elifesciences.org/journal-cms/labs_experiment%2F2020-03%2Fphoto-of-people-using-laptop-3194519.jpg/full/full/0/default.jpg",
+            "filename": "photo-of-people-using-laptop-3194519.jpg"
+          },
+          "size": {
+            "width": 2640,
+            "height": 3960
+          },
+          "focalPoint": {
+            "x": 50,
+            "y": 50
+          }
+        }
+      },
+      "impactStatement": "Innovators share the latest updates and opportunities in the open-source space for research communication and publishing."
+    }
+  ]
+}

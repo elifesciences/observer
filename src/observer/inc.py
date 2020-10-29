@@ -1,7 +1,7 @@
 import json
 import boto3
 import logging
-from . import ingest_logic
+from . import ingest_logic, models
 
 # tell boto to pipe down
 logging.getLogger('botocore').setLevel(logging.WARN)
@@ -56,15 +56,31 @@ def handler(json_event):
 
     try:
         # process event
-        handlers = {
-            'article': ingest_logic.download_regenerate_article,
-            'presspackage': ingest_logic.download_regenerate_presspackage,
-            'digest': ingest_logic.download_regenerate_digest,
+        # see: https://github.com/elifesciences/bus
+        # and: https://github.com/elifesciences/builder/blob/master/projects/elife.yaml#L1166
 
-            '-unhandled-': lambda _: LOG.warn("sinking event for unhandled type: %s", event_type),
+        # because the event-type may not be identical to what is used internally,
+        # map all supported types here and comment them out as necessary
+        event_type_to_content_type = {
+            'article': models.LAX_AJSON,
+            # 'profile': ... pulled in via daily cronjob. see ./daily.sh
+            # 'metrics': ... also pulled in via daily cronjob
+            'presspackage': models.PRESSPACKAGE,
+            'digest': models.DIGEST,
+            'labs-post': models.LABS_POST,
+            'interview': models.INTERVIEW,
+            'collection': models.COLLECTION,
+            'blog-article': models.BLOG_ARTICLE,
+            # handled by 'article' I suppose?
+            # if so, it won't update the Content table. ensure 'community' is in ./daily.sh
+            # 'feature': ...
         }
-        fn = handlers[event_type if event_type in handlers else '-unhandled-']
-        fn(event_id)
+        if event_type not in event_type_to_content_type:
+            LOG.warn("sinking event for unhandled type: %s", event_type)
+            return
+
+        content_type = event_type_to_content_type[event_type]
+        ingest_logic.download_regenerate(content_type, event_id)
 
     except BaseException:
         LOG.exception("unhandled exception handling event %s", event)

@@ -6,6 +6,40 @@ from django.db.models import (
     ManyToManyField, URLField
 )
 
+# see `observer.consume.content_type_from_endpoint` for these values
+# essentially they are slugified api endpoints, e.g.: `/digests/id` => digests-id
+LAX_AJSON = 'lax-ajson'
+METRICS_SUMMARY = 'elife-metrics-summary'
+PRESSPACKAGE = 'press-packages-id'
+PROFILE = 'profiles-id'
+# DIGEST = 'digests-id' # old, do not use, remove once RawJSON in db is removed
+
+DIGEST = 'digest'
+LABS_POST = 'labs-post'
+
+COMMUNITY = 'community'
+
+INTERVIEW = 'interview'
+COLLECTION = 'collection'
+BLOG_ARTICLE = 'blog-article'
+FEATURE = 'feature'
+
+COMMUNITY_CONTENT_TYPE_LIST = [
+    INTERVIEW,
+    COLLECTION,
+    BLOG_ARTICLE,
+    FEATURE
+]
+
+MODEL_CHOICES = [
+    ('lax', LAX_AJSON),
+    ('elife-metrics', METRICS_SUMMARY),
+    ('press-packages', PRESSPACKAGE),
+    ('profiles', PROFILE),
+    ('digests', DIGEST),
+    ('labs-post', LABS_POST)
+]
+
 POA, VOR = 'poa', 'vor'
 UNKNOWN_TYPE = 'unknown-type'
 
@@ -168,11 +202,6 @@ class Article(models.Model):
     def __repr__(self):
         return '<Article "%s">' % self
 
-LAX_AJSON, METRICS_SUMMARY = 'lax-ajson', 'elife-metrics-summary'
-PRESSPACKAGE = 'press-packages-id'
-PROFILE = 'profiles-id'
-DIGEST = 'digests-id'
-
 def json_type_choices():
     return [
         (LAX_AJSON, 'lax article json'),
@@ -189,7 +218,7 @@ def json_type_choices():
     ]
 
 class RawJSON(models.Model):
-    msid = CharField(max_length=25)
+    msid = CharField(max_length=25) # todo: rename this field to just 'id'
     version = PositiveSmallIntegerField(null=True, blank=True) # only used by Article objects
     json = JSONField()
     json_type = CharField(max_length=25, choices=json_type_choices(), null=False, blank=False)
@@ -248,52 +277,58 @@ class Profile(models.Model):
     def __repr__(self):
         return '<Profile "%s">' % self
 
-DIGEST_IMAGE_MIME_CHOICES = [
+class ContentCategory(models.Model):
+    name = CharField(max_length=150, primary_key=True) # slug
+    label = CharField(max_length=150)
+
+    class Meta:
+        ordering = ('name',) # alphabetically, asc
+
+    def __str__(self):
+        return self.label
+
+    def __repr__(self):
+        return '<ContentCategory "%s">' % self.name
+
+
+CONTENT_TYPE_CHOICES = [
+    INTERVIEW,
+    COLLECTION,
+    BLOG_ARTICLE,
+    FEATURE,
+    DIGEST,
+    LABS_POST,
+]
+CONTENT_TYPE_CHOICES = zip(CONTENT_TYPE_CHOICES, CONTENT_TYPE_CHOICES)
+
+IMAGE_MIME_CHOICES = [
     ('jpg', 'image/jpeg'),
     ('png', 'image/png'),
 ]
 
-class Digest(models.Model):
+class Content(models.Model):
     id = CharField(max_length=25, primary_key=True)
-    title = CharField(max_length=255)
-    impact_statement = TextField()
-    image_uri = URLField(max_length=500)
-    image_height = PositiveSmallIntegerField()
-    image_width = PositiveSmallIntegerField()
-    image_mime = CharField(max_length=10, choices=DIGEST_IMAGE_MIME_CHOICES)
-    datetime_published = DateTimeField()
-    datetime_updated = DateTimeField()
+    content_type = CharField(max_length=12, choices=CONTENT_TYPE_CHOICES)
 
-    subjects = models.ManyToManyField(Subject)
+    title = CharField(max_length=255)
+    description = TextField(null=True)
+    image_uri = URLField(max_length=500, null=True)
+    image_height = PositiveSmallIntegerField(null=True)
+    image_width = PositiveSmallIntegerField(null=True)
+    image_mime = CharField(max_length=10, choices=IMAGE_MIME_CHOICES, null=True)
+    datetime_published = DateTimeField()
+    datetime_updated = DateTimeField(null=True)
+
+    categories = models.ManyToManyField(ContentCategory)
 
     datetime_record_created = DateTimeField(auto_now_add=True)
     datetime_record_updated = DateTimeField(auto_now=True)
 
-    def thumbnail_dimensions(self, thumbnail_width):
-        "returns a set of proportionate `x,y` dimensions for thumbnail given a `thumbnail_width`"
-        width, height = self.image_width, self.image_height
-        if height > width:
-            (width, height) = (height, width)
-        aspect_ratio = width / height
-        height = thumbnail_width / aspect_ratio
-        return int(thumbnail_width), int(height)
-
-    def iiif_thumbnail_link(self, thumbnail_width):
-        "returns a IIIF url to image thumbnail given a `thumbnail_width`"
-        uri = self.image_uri
-        new_width, new_height = self.thumbnail_dimensions(thumbnail_width)
-        region = "full"
-        size = "%s,%s" % (new_width, new_height)
-        rotation = "0" # no rotation
-        quality = "default" # native, color, grey, bitonal
-        image_format = "jpg"
-        return f"{uri}/{region}/{size}/{rotation}/{quality}.{image_format}"
-
     class Meta:
-        ordering = ('-datetime_published',)
+        ordering = ('-datetime_updated', '-datetime_published',)
 
     def __str__(self):
         return self.id
 
     def __repr__(self):
-        return '<Digest "%s">' % self
+        return '<Content "%s">' % self

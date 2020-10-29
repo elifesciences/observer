@@ -96,7 +96,74 @@ def upcoming_articles():
     serialisations=[RSS],
 ))
 def digests():
-    return models.Digest.objects \
+    return models.Content.objects \
+        .filter(content_type=models.DIGEST) \
+        .order_by('-datetime_published')
+
+# note: 'article_meta' here works because of similar field names
+@report(article_meta(
+    title='labs-posts',
+    description='The latest eLife labs-posts.',
+    serialisations=[RSS],
+))
+def labs_posts():
+    return models.Content.objects \
+        .filter(content_type=models.LABS_POST) \
+        .order_by('-datetime_published')
+
+# note: 'article_meta' here works because of similar field names
+@report(article_meta(
+    title='community',
+    description='The latest eLife community content.',
+    serialisations=[RSS],
+))
+def community():
+    return models.Content.objects \
+        .filter(content_type__in=models.COMMUNITY_CONTENT_TYPE_LIST) \
+        .order_by('-datetime_published')
+
+# note: 'article_meta' here works because of similar field names
+@report(article_meta(
+    title='interviews',
+    description='The latest eLife interviews.',
+    serialisations=[RSS],
+))
+def interviews():
+    return models.Content.objects \
+        .filter(content_type=models.INTERVIEW) \
+        .order_by('-datetime_published')
+
+# note: 'article_meta' here works because of similar field names
+@report(article_meta(
+    title='collections',
+    description='The latest eLife collections.',
+    serialisations=[RSS],
+))
+def collections():
+    return models.Content.objects \
+        .filter(content_type=models.COLLECTION) \
+        .order_by('-datetime_published')
+
+# note: 'article_meta' here works because of similar field names
+@report(article_meta(
+    title='blog-articles',
+    description='The latest eLife blog articles.',
+    serialisations=[RSS],
+))
+def blog_articles():
+    return models.Content.objects \
+        .filter(content_type=models.BLOG_ARTICLE) \
+        .order_by('-datetime_published')
+
+# note: 'article_meta' here works because of similar field names
+@report(article_meta(
+    title='features',
+    description='The latest eLife featured articles.',
+    serialisations=[RSS],
+))
+def features():
+    return models.Content.objects \
+        .filter(content_type=models.FEATURE) \
         .order_by('-datetime_published')
 
 #
@@ -242,11 +309,19 @@ def format_report(report_data, serialisation, context):
     return known_formats[serialisation](report_data, context)
 
 def known_report_idx():
+    "a mapping of a report's name as it appears in the URL to a function that will generate the data for that report."
+    # [(/report/$name, reportfn), ...]
     return OrderedDict([
         ('latest-articles', latest_articles),
         ('latest-articles-by-subject', latest_articles_by_subject),
         ('upcoming-articles', upcoming_articles),
         ('digests', digests),
+        ('labs-posts', labs_posts),
+        ('community', community),
+        ('interviews', interviews),
+        ('collections', collections),
+        ('blog-articles', blog_articles),
+        ('features', features),
         ('published-article-index', published_article_index),
         ('published-research-article-index', published_research_article_index),
         ('profile-count', profile_count),
@@ -255,6 +330,8 @@ def known_report_idx():
     ])
 
 def _report_meta(reportfn):
+    """normalises the metadata attached to a report function `reportfn`.
+    attaches friendly descriptions of report configuration suitable for use in the README."""
     labels = {
         'datetime_published': 'date and time this article was _first_ published',
         # poa published will always be the same as first published
@@ -276,7 +353,11 @@ def _report_meta(reportfn):
     return meta
 
 def report_meta():
+    """returns an ordered map of `{report-name: report-metadata, ...}`
+    Used in generating the body of README file."""
     return OrderedDict([(name, _report_meta(fn)) for name, fn in known_report_idx().items()])
 
 def get_report(name):
+    """fetches a given report but it's report `name`.
+    report functions are associated to a name in the `known_report_idx` function."""
     return known_report_idx()[name]

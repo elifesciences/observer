@@ -3,10 +3,10 @@ from observer import models
 from django.db.models import IntegerField
 from django.db.models.functions import Cast
 
-def known_content(blah):
+def known_content(content_type):
     """returns a queryset of object IDs from newest to oldest."""
     return models.RawJSON.objects \
-        .filter(json_type=blah) \
+        .filter(json_type=content_type) \
         .values_list('msid', flat=True) \
         .order_by('-msid') \
         .distinct()
@@ -20,20 +20,8 @@ def known_articles():
         .order_by('-msid_as_int') \
         .distinct()
 
-def known_presspackages():
-    "returns a queryset of PressPackage IDs from newest to oldest"
-    return known_content(models.PRESSPACKAGE)
-
-def known_profiles():
-    "returns a queryset of Profile IDs from newest to oldest"
-    return known_content(models.PROFILE)
-
-def known_digests():
-    "returns a queryset of Digest IDs from newest to oldest"
-    return known_content(models.DIGEST)
-
 def simple_subjects():
-    "returns a flat list of subject names"
+    "returns a list of subject name strings"
     return models.Subject.objects.values_list('name', flat=True) # ['foo', 'bar', 'baz']
 
 def verified_subjects(string_list):

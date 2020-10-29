@@ -1,0 +1,293 @@
+{
+  "total": 229,
+  "items": [
+    {
+      "type": "interview",
+      "id": "7379e8d5",
+      "title": "Equity, Diversity and Inclusion: Marcus Lambert",
+      "published": "2020-10-12T14:30:00Z",
+      "interviewee": {
+        "name": {
+          "preferred": "Marcus Lambert",
+          "index": "Lambert, Marcus"
+        }
+      },
+      "impactStatement": "Marcus Lambert, Assistant Dean of Diversity at Weill Cornell Medicine, describes how improving diversity in the scientific workforce is going to take more than attracting students from underrepresented groups.",
+      "image": {
+        "thumbnail": {
+          "uri": "https://iiif.elifesciences.org/journal-cms/interview%2F2020-10%2Fimage_lambert_thumbnail.jpg",
+          "alt": "",
+          "source": {
+            "mediaType": "image/jpeg",
+            "uri": "https://iiif.elifesciences.org/journal-cms/interview%2F2020-10%2Fimage_lambert_thumbnail.jpg/full/full/0/default.jpg",
+            "filename": "image_lambert_thumbnail.jpg"
+          },
+          "size": {
+            "width": 3613,
+            "height": 2568
+          },
+          "focalPoint": {
+            "x": 50,
+            "y": 50
+          }
+        }
+      }
+    },
+    {
+      "type": "blog-article",
+      "id": "696a62fb",
+      "title": "Ben Barres Spotlight Awards: Applications open for 2020",
+      "published": "2020-09-07T12:00:00Z",
+      "impactStatement": "Applications are now open for this year’s Ben Barres Spotlight Awards, offering scientists from groups that are underrepresented in science up to $6,000 each to use to advance their research career."
+    },
+    {
+      "id": "58654",
+      "doi": "10.7554/eLife.58654",
+      "pdf": "https://cdn.elifesciences.org/articles/58654/elife-58654-v1.pdf",
+      "type": "feature",
+      "stage": "published",
+      "title": "Changing how we evaluate research is difficult, but not impossible",
+      "status": "vor",
+      "volume": 9,
+      "version": 1,
+      "copyright": {
+        "holder": "Hatch and Curry",
+        "license": "CC-BY-4.0",
+        "statement": "This article is distributed under the terms of the <a href=\"http://creativecommons.org/licenses/by/4.0/\">Creative Commons Attribution License</a>, which permits unrestricted use and redistribution provided that the original author and source are credited."
+      },
+      "published": "2020-08-12T00:00:00Z",
+      "authorLine": "Anna Hatch, Stephen Curry",
+      "statusDate": "2020-08-12T00:00:00Z",
+      "elocationId": "e58654",
+      "titlePrefix": "Research Culture",
+      "versionDate": "2020-08-12T00:00:00Z",
+      "impactStatement": "The DORA initiative offers practical guidance on improving the assessment of research by universities, research institutions, and funders."
+    },
+    {
+      "id": "59806",
+      "doi": "10.7554/eLife.59806",
+      "pdf": "https://cdn.elifesciences.org/articles/59806/elife-59806-v1.pdf",
+      "type": "feature",
+      "stage": "published",
+      "title": "Actionable recommendations from trainees to improve science training",
+      "status": "vor",
+      "volume": 9,
+      "version": 1,
+      "copyright": {
+        "holder": "Davis et al.",
+        "license": "CC-BY-4.0",
+        "statement": "This article is distributed under the terms of the <a href=\"http://creativecommons.org/licenses/by/4.0/\">Creative Commons Attribution License</a>, which permits unrestricted use and redistribution provided that the original author and source are credited."
+      },
+      "published": "2020-08-07T00:00:00Z",
+      "authorLine": "Stephanie M Davis et al.",
+      "statusDate": "2020-08-07T00:00:00Z",
+      "elocationId": "e59806",
+      "titlePrefix": "Research Culture",
+      "versionDate": "2020-08-07T00:00:00Z",
+      "impactStatement": "Early-career researchers propose seven actions that can be taken by research institutions and departments to improve science training."
+    },
+    {
+      "type": "blog-article",
+      "id": "263fa4d1",
+      "title": "eLife Ambassadors: A celebration of the second cohort",
+      "published": "2020-07-13T15:48:11Z",
+      "impactStatement": "We look back on a year of promoting, advocating and championing responsible behaviours in science."
+    },
+    {
+      "id": "54097",
+      "doi": "10.7554/eLife.54097",
+      "pdf": "https://cdn.elifesciences.org/articles/54097/elife-54097-v2.pdf",
+      "type": "feature",
+      "stage": "published",
+      "title": "A survey-based analysis of the academic job market",
+      "status": "vor",
+      "volume": 9,
+      "version": 2,
+      "copyright": {
+        "holder": "Fernandes et al.",
+        "license": "CC-BY-4.0",
+        "statement": "This article is distributed under the terms of the <a href=\"http://creativecommons.org/licenses/by/4.0/\">Creative Commons Attribution License</a>, which permits unrestricted use and redistribution provided that the original author and source are credited."
+      },
+      "published": "2020-06-12T00:00:00Z",
+      "authorLine": "Jason D Fernandes et al.",
+      "figuresPdf": "https://cdn.elifesciences.org/articles/54097/elife-54097-figures-v2.pdf",
+      "statusDate": "2020-07-14T12:32:53Z",
+      "elocationId": "e54097",
+      "titlePrefix": "Research Culture",
+      "versionDate": "2020-07-14T12:32:53Z",
+      "impactStatement": "A survey of over 300 applicants for faculty positions reveals that there are many paths to securing a job offer.",
+      "researchOrganisms": [
+        "Human"
+      ]
+    },
+    {
+      "id": "59634",
+      "doi": "10.7554/eLife.59634",
+      "pdf": "https://cdn.elifesciences.org/articles/59634/elife-59634-v1.pdf",
+      "type": "feature",
+      "stage": "published",
+      "title": "The challenges of lockdown for early-career researchers",
+      "status": "vor",
+      "volume": 9,
+      "version": 1,
+      "abstract": {
+        "content": [
+          {
+            "text": "Thousands of UK doctoral students and early-career researchers shared the repercussions of lockdown on their work and wellbeing.",
+            "type": "paragraph"
+          }
+        ]
+      },
+      "copyright": {
+        "holder": "Byrom",
+        "license": "CC-BY-4.0",
+        "statement": "This article is distributed under the terms of the <a href=\"http://creativecommons.org/licenses/by/4.0/\">Creative Commons Attribution License</a>, which permits unrestricted use and redistribution provided that the original author and source are credited."
+      },
+      "published": "2020-06-12T00:00:00Z",
+      "authorLine": "Nicola Byrom",
+      "statusDate": "2020-06-12T00:00:00Z",
+      "elocationId": "e59634",
+      "titlePrefix": "COVID-19 and the Research Community",
+      "versionDate": "2020-06-12T00:00:00Z",
+      "impactStatement": "Thousands of UK doctoral students and early-career researchers shared the repercussions of lockdown on their work and wellbeing."
+    },
+    {
+      "type": "interview",
+      "id": "aa3d7e57",
+      "title": "Equity, Diversity and Inclusion: TIGER in STEMM",
+      "published": "2020-05-26T12:22:56Z",
+      "interviewee": {
+        "name": {
+          "preferred": "Izzy Jayasinghe",
+          "index": "Jayasinghe, Izzy"
+        }
+      },
+      "impactStatement": "Izzy Jayasinghe talks about efforts to change the system for funding research in the UK and make academic culture more inclusive, accessible and diverse.",
+      "image": {
+        "thumbnail": {
+          "uri": "https://iiif.elifesciences.org/journal-cms/interview%2F2020-05%2Ftigers_cropped.jpg",
+          "alt": "The TIGERS at a meeting in 2019",
+          "source": {
+            "mediaType": "image/jpeg",
+            "uri": "https://iiif.elifesciences.org/journal-cms/interview%2F2020-05%2Ftigers_cropped.jpg/full/full/0/default.jpg",
+            "filename": "tigers_cropped.jpg"
+          },
+          "size": {
+            "width": 5482,
+            "height": 3017
+          },
+          "focalPoint": {
+            "x": 59,
+            "y": 47
+          }
+        }
+      }
+    },
+    {
+      "type": "collection",
+      "id": "842f35d5",
+      "title": "#ECRWednesday webinars",
+      "published": "2018-10-04T09:28:21Z",
+      "image": {
+        "banner": {
+          "uri": "https://iiif.elifesciences.org/journal-cms/collection%2F2018-09%2Fwebinar-3199164_1920.jpg",
+          "alt": "Early-career researcher webinars from eLife",
+          "source": {
+            "mediaType": "image/jpeg",
+            "uri": "https://iiif.elifesciences.org/journal-cms/collection%2F2018-09%2Fwebinar-3199164_1920.jpg/full/full/0/default.jpg",
+            "filename": "webinar-3199164_1920.jpg"
+          },
+          "size": {
+            "width": 1920,
+            "height": 1184
+          },
+          "focalPoint": {
+            "x": 32,
+            "y": 55
+          }
+        },
+        "thumbnail": {
+          "uri": "https://iiif.elifesciences.org/journal-cms/collection%2F2018-09%2Fwebinar-3199164_1920.jpg",
+          "alt": "Early-career researcher webinars from eLife",
+          "source": {
+            "mediaType": "image/jpeg",
+            "uri": "https://iiif.elifesciences.org/journal-cms/collection%2F2018-09%2Fwebinar-3199164_1920.jpg/full/full/0/default.jpg",
+            "filename": "webinar-3199164_1920.jpg"
+          },
+          "size": {
+            "width": 1920,
+            "height": 1184
+          },
+          "focalPoint": {
+            "x": 32,
+            "y": 55
+          }
+        }
+      },
+      "impactStatement": "On the last Wednesday of each month, members of the eLife Early-Career Advisory Group invite experts to share their views and advice on subjects pertinent to research careers.",
+      "selectedCurator": {
+        "id": "3a87ec66",
+        "type": {
+          "id": "executive",
+          "label": "Associate features editor and web content manager"
+        },
+        "name": {
+          "surname": "Pewsey",
+          "givenNames": "Emma",
+          "preferred": "Emma Pewsey",
+          "index": "Pewsey, Emma"
+        },
+        "image": {
+          "uri": "https://iiif.elifesciences.org/journal-cms/person%2F2019-02%2Fhrdsc_0516.jpg",
+          "alt": "",
+          "source": {
+            "mediaType": "image/jpeg",
+            "uri": "https://iiif.elifesciences.org/journal-cms/person%2F2019-02%2Fhrdsc_0516.jpg/full/full/0/default.jpg",
+            "filename": "hrdsc_0516.jpg"
+          },
+          "size": {
+            "width": 3156,
+            "height": 2254
+          },
+          "focalPoint": {
+            "x": 44,
+            "y": 32
+          }
+        },
+        "etAl": true
+      }
+    },
+    {
+      "type": "interview",
+      "id": "49454377",
+      "title": "Mental Health in Academia: How to enact change",
+      "published": "2020-04-15T16:45:42Z",
+      "interviewee": {
+        "name": {
+          "preferred": "Wendy Marie Ingram",
+          "index": "Wendy Marie Ingram"
+        }
+      },
+      "impactStatement": "Postdoctoral fellow and activist Wendy Marie Ingram explains how she trains, educates and works with students and faculty to improve academic mental health.",
+      "image": {
+        "thumbnail": {
+          "uri": "https://iiif.elifesciences.org/journal-cms/interview%2F2020-04%2Fwendy-ingram-picture.jpg",
+          "alt": "Photograph of Wendy Marie Ingram ",
+          "source": {
+            "mediaType": "image/jpeg",
+            "uri": "https://iiif.elifesciences.org/journal-cms/interview%2F2020-04%2Fwendy-ingram-picture.jpg/full/full/0/default.jpg",
+            "filename": "wendy-ingram-picture.jpg"
+          },
+          "size": {
+            "width": 1957,
+            "height": 2903
+          },
+          "focalPoint": {
+            "x": 50,
+            "y": 50
+          }
+        }
+      }
+    }
+  ]
+}

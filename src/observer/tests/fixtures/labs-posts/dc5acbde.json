@@ -1,0 +1,414 @@
+{
+  "id": "dc5acbde",
+  "title": "Welcome to a new ERA of reproducible publishing",
+  "published": "2020-08-24T09:01:44Z",
+  "image": {
+    "thumbnail": {
+      "uri": "https://iiif.elifesciences.org/journal-cms/labs_experiment%2F2020-08%2Fabstract-1278077_1920.jpg",
+      "alt": "numbers around a globe",
+      "source": {
+        "mediaType": "image/jpeg",
+        "uri": "https://iiif.elifesciences.org/journal-cms/labs_experiment%2F2020-08%2Fabstract-1278077_1920.jpg/full/full/0/default.jpg",
+        "filename": "abstract-1278077_1920.jpg"
+      },
+      "size": {
+        "width": 1003,
+        "height": 645
+      },
+      "focalPoint": {
+        "x": 50,
+        "y": 50
+      }
+    }
+  },
+  "impactStatement": "New open-source technology lets eLife authors publish Executable Research Articles that treat live code and data as first-class citizens.",
+  "content": [
+    {
+      "text": "<strong>By Emmy Tsang and Giuliano Maciocci</strong>",
+      "type": "paragraph"
+    },
+    {
+      "text": "Since 2017, we have been working on the concept of computationally reproducible papers. The open-source suite of tools that started life as the <a href=\"https://elifesciences.org/labs/b521cf4d/reproducible-document-stack-towards-a-scalable-solution-for-reproducible-articles\">Reproducible Document Stack</a> is now live on eLife as ERA, the <strong>Executable Research Article</strong>, delivering a truly web-native format for taking published research to a new level of transparency, reproducibility and interactivity.",
+      "type": "paragraph"
+    },
+    {
+      "text": "From today, authors with a published eLife paper can register their interest to enrich their published work with the addition of live code blocks, programmatically-generated interactive figures, and dynamically generated in-line values, using familiar tools like R Markdown and Jupyter in combination with Stencila Hub’s intuitive asset management and format conversion interface. The resulting new ERA publication will be presented as a complement to the original published paper. Very soon, a Google Docs plugin will also be made available to let authors insert executable code and data blocks into their documents using the cloud service.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Readers of ERA publications will be able to inspect the code, modify it, and re-execute it directly in the browser, enabling them to better understand how a figure is generated. They will be able to change a plot from one format to another, alter the data range of a specific analysis, and much more. All changes are limited to an individual’s browsing session and do not affect the published article, so anyone can experiment safely. Readers can also download the ERA publication – with all embedded code and data preserved – and use it as a basis for further study or derivative works.",
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "image": {
+        "alt": "",
+        "uri": "https://iiif.elifesciences.org/journal-cms/labs-post-preview%2F2020-08%2Fimage1_0.png",
+        "size": {
+          "width": 1422,
+          "height": 515
+        },
+        "source": {
+          "uri": "https://iiif.elifesciences.org/journal-cms/labs-post-preview%2F2020-08%2Fimage1_0.png/full/full/0/default.jpg",
+          "filename": "image1_0.jpg",
+          "mediaType": "image/jpeg"
+        },
+        "focalPoint": {
+          "x": 50,
+          "y": 50
+        }
+      },
+      "title": "Figures in ERAs can be accompanied by editable code blocks, where the code can be edited and re-executed to immediately see the effects of those edits."
+    },
+    {
+      "text": "Started by eLife in partnership with <a href=\"https://substance.io/\">Substance</a>, and later developed by <a href=\"https://stenci.la/\">Stencila</a>, ERA takes many of the important lessons learned from pioneering technologies like Jupyter and R Markdown, and folds them into a new open-source research publication format that treats code and data as first-class citizens alongside the traditional text and figures. The ERA technology stack is also designed specifically towards preprint and journal publishing, with strong XML standards, native <a href=\"https://schema.org/\">schema.org</a> compliance, and a versatile theming solution that makes it adaptable to the visual style of virtually any online publication.",
+      "type": "paragraph"
+    },
+    {
+      "type": "section",
+      "title": "Getting started with ERA",
+      "content": [
+        {
+          "text": "Explore some of the functionalities that ERA offers with two published examples:",
+          "type": "paragraph"
+        },
+        {
+          "type": "list",
+          "items": [
+            "<a href=\"https://elifesciences.org/articles/30274/executable\">This ERA complement</a> of Lewis et al., 2018 (<a href=\"https://elifesciences.org/articles/30274\">original article</a>) showcases executable figures, tables and in-line numbers.",
+            "<a href=\"https://elifesciences.org/articles/52258/executable\">This ERA complement</a> of “Inter- and intra-animal variation in the integrative properties of stellate cells in the medial entorhinal cortex” by Pastoll et al. (<a href=\"https://elifesciences.org/articles/52258\">original article</a>) demonstrates a variety of executable plots."
+          ],
+          "prefix": "bullet"
+        },
+        {
+          "text": "Start by clicking the Run Document button at the top of the article. This will start a compute session. Be patient, as it may take a moment. When you see the “<em>Ready to run document</em>” message, you’re good to go.",
+          "type": "paragraph"
+        },
+        {
+          "text": "Then, look for the blue “eye” icons throughout the paper, which indicate code blocks. Clicking on those icons will reveal the underlying code, which can then be edited in place.",
+          "type": "paragraph"
+        },
+        {
+          "text": "After making an edit, press the white “play” icon at the top of the code block to execute your new code and see its effects. Please note that it may take some time for the code to execute, depending on its complexity and on server load.",
+          "type": "paragraph"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "title": "Publish an ERA with eLife",
+      "content": [
+        {
+          "text": "eLife authors can register their interest to enrich their published works on eLife by using the button below. At this initial stage of release, our aim is to work closely with the first few chosen ERA authors to further test and improve the ERA tools and workflow– your input will be crucial to helping us create a more seamless experience for more authors in the future.",
+          "type": "paragraph"
+        },
+        {
+          "uri": "https://crm.elifesciences.org/crm/ERA-InterestForm",
+          "text": "eLife authors: express your interest",
+          "type": "button"
+        },
+        {
+          "type": "image",
+          "image": {
+            "alt": "",
+            "uri": "https://iiif.elifesciences.org/journal-cms/labs-post-preview%2F2020-08%2Fimage2.jpg",
+            "size": {
+              "width": 1200,
+              "height": 675
+            },
+            "source": {
+              "uri": "https://iiif.elifesciences.org/journal-cms/labs-post-preview%2F2020-08%2Fimage2.jpg/full/full/0/default.jpg",
+              "filename": "image2.jpg",
+              "mediaType": "image/jpeg"
+            },
+            "focalPoint": {
+              "x": 50,
+              "y": 50
+            }
+          },
+          "title": "Workflow for eLife authors to compose and publish an ERA complement."
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "title": "Find out more about ERA",
+      "content": [
+        {
+          "type": "list",
+          "items": [
+            "If you are an eLife author and are interested in publishing an ERA complement to your published article, please <a href=\"https://crm.elifesciences.org/crm/ERA-InterestForm\">get in touch</a>.",
+            "We hosted a webinar and demo on September 8– please <a href=\"https://elifesciences.org/inside-elife/d417b916\">view the recording.</a>",
+            "Please <a href=\"https://crm.elifesciences.org/crm/RDS-updates\">sign up</a> for our approximately bi-monthly ERA community update."
+          ],
+          "prefix": "bullet"
+        },
+        {
+          "text": "<strong>Questions?</strong> Please check the Frequently Asked Questions section below, or email us at innovation [at] elifesciences [dot] org.",
+          "type": "paragraph"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "title": "Frequently Asked Questions",
+      "content": [
+        {
+          "type": "section",
+          "title": "Readers",
+          "content": [
+            {
+              "text": "<strong>Q: Can I share the changes I’ve made to the code?</strong>",
+              "type": "paragraph"
+            },
+            {
+              "text": "A: No – at the moment the changes are not saved and will disappear once you close/refresh your browser. You can however download the ERA (containing the Markdown/notebook file with the associated code and data files), edit the files locally and share the results.",
+              "type": "paragraph"
+            },
+            {
+              "text": "<strong>Q: I’d like to use the code that’s in this paper to analyse my own data – what’s the best way to do it?</strong>",
+              "type": "paragraph"
+            },
+            {
+              "text": "A: You can download the ERA (see above) and replace the data file with your own (although you may need to change some of the variables/parameters). Please remember to cite the original paper if you do publish those results!",
+              "type": "paragraph"
+            },
+            {
+              "text": "<strong>Q: Can I comment on the code?</strong>",
+              "type": "paragraph"
+            },
+            {
+              "text": "A: Not at the moment, unfortunately – Hypothesis is yet to be made available on ERA articles.",
+              "type": "paragraph"
+            },
+            {
+              "text": "<strong>Q: Can I download a particular code chunk/figure, or the underlying data file?</strong>",
+              "type": "paragraph"
+            },
+            {
+              "text": "A: At the moment, you cannot download a particular code chunk/executable figure. You can download the entire ERA (which contains the underlying code, CSV data and HTML).",
+              "type": "paragraph"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "title": "Authors",
+          "content": [
+            {
+              "text": "<strong>Q: What tools do I need to create an Executable Research Article?</strong>",
+              "type": "paragraph"
+            },
+            {
+              "text": "A: The <a href=\"https://hub.stenci.la\">Stencila Hub</a> interface allows for format conversion between various common tools such as RStudio, Jupyter, Google Docs, and even Word and PDF. Thanks to some embedding wizardry you can even convert to Word and PDF to share work with your colleagues for comment, and convert those back to R Markdown without losing any of your code and data!<br />",
+              "type": "paragraph"
+            },
+            {
+              "text": "<strong>Q: What kind of programming languages can ERA handle?</strong>",
+              "type": "paragraph"
+            },
+            {
+              "text": "A: ERA can currently handle R Markdown and Python. Dependency compatibility for non-standard packages may vary, but if you’re experiencing issues or need new packages added for your article, you can <a href=\"https://stenci.la\">contact Stencila</a> to request this.",
+              "type": "paragraph"
+            },
+            {
+              "text": "<strong>Q: How do I compose an executable companion to my paper?</strong>",
+              "type": "paragraph"
+            },
+            {
+              "text": "A: Did you:",
+              "type": "paragraph"
+            },
+            {
+              "type": "list",
+              "items": [
+                "publish with eLife,",
+                "have figures that are generated using R/Python in that paper,",
+                "have the raw data file for those figures?"
+              ],
+              "prefix": "number"
+            },
+            {
+              "text": "If yes for all three, please <a href=\"https://crm.elifesciences.org/crm/ERA-InterestForm\">express your interest</a>.",
+              "type": "paragraph"
+            },
+            {
+              "text": "<strong>Q: My figures are generated using SPSS, MATLAB or programming languages other than Python or R, can I make my paper executable?</strong>",
+              "type": "paragraph"
+            },
+            {
+              "text": "A: Not at the moment – as we add compatibility for other languages, we will keep the community informed via our <a href=\"https://elifesci.org/ERAupdates\">ERA community update</a>.",
+              "type": "paragraph"
+            },
+            {
+              "text": "<strong>Q: What if I’m already using Jupyter Notebook/R Markdown for data analysis/writing my articles?</strong>",
+              "type": "paragraph"
+            },
+            {
+              "text": "A: That will make composing your ERA a lot easier – Using Stencila Hub, you can take a copy of your paper published on the eLife website and convert it to a Jupyter Notebook/R Markdown file. You can then download it and add the appropriate code chunks. <a href=\"http://help.stenci.la/en/articles/4184684-enriching-an-elife-article\">Please read the tutorial</a> for more information.",
+              "type": "paragraph"
+            },
+            {
+              "text": "<strong>Q: What size/type of data can I upload to Stencila?</strong>",
+              "type": "paragraph"
+            },
+            {
+              "text": "A: Theoretically there is no limit on size or type – but for this phase of development we ask you to please stick to tabular data (e.g. csv, tsv).",
+              "type": "paragraph"
+            },
+            {
+              "text": "<strong>Q: Can I cite the executable complement?</strong>",
+              "type": "paragraph"
+            },
+            {
+              "text": "A: You cannot at the moment – please cite the standard eLife article.",
+              "type": "paragraph"
+            },
+            {
+              "text": "<strong>Q: Is my code/data going to be reviewed?</strong>",
+              "type": "paragraph"
+            },
+            {
+              "text": "A: There will be some minimal checks to make sure that the code is not generating errors, but other than that, the code will be presented as-is. We are working with other code and data reviewing initiatives to improve this in the near future.",
+              "type": "paragraph"
+            },
+            {
+              "text": "<strong>Q: Will this increase the amount of time it takes for my paper to be reviewed?</strong>",
+              "type": "paragraph"
+            },
+            {
+              "text": "A: No, your paper would need to have been published already for you to be eligible for an ERA complement.",
+              "type": "paragraph"
+            },
+            {
+              "text": "<strong>Q: How long will it take for me to compose an ERA?</strong>",
+              "type": "paragraph"
+            },
+            {
+              "text": "A: It depends on the complexity of your code and paper – it could take anything between a few hours to 2-3 weeks.",
+              "type": "paragraph"
+            },
+            {
+              "text": "<strong>Q: Does that mean people can do whatever they want with my paper?</strong>",
+              "type": "paragraph"
+            },
+            {
+              "text": "A: Yes and no. Yes, because people can explore your data and change your code in their browsers; no, because none of these changes will be saved, nor will they affect anyone else’s views on your data and code.",
+              "type": "paragraph"
+            },
+            {
+              "text": "<strong>Q: What happens when a package that my analysis is dependent on is updated/not maintained and my code doesn’t work anymore?</strong>",
+              "type": "paragraph"
+            },
+            {
+              "text": "A: This should not affect the code that’s published, Stencila Hub will make sure that the correct (legacy) version of the package is installed when it is started.",
+              "type": "paragraph"
+            },
+            {
+              "text": "<strong>Q: Do I have to convert all of my figures into executable versions? What if some (parts) of my figures cannot be made executable, e.g. images/diagrams?</strong>",
+              "type": "paragraph"
+            },
+            {
+              "text": "A: You do not have to convert all of your figures into executable versions. When a single figure contains multiple panels/images, and some but not all of these could be made executable, it would be acceptable to re-capture these as separate Figures or figure supplements, as appropriate, so that those panels/images can be made executable.",
+              "type": "paragraph"
+            },
+            {
+              "text": "<strong>Q: Can I only enrich figures? What about inline numbers/tables?</strong>",
+              "type": "paragraph"
+            },
+            {
+              "text": "A: Inline numbers and tables can also be enriched with code.",
+              "type": "paragraph"
+            },
+            {
+              "text": "<strong>Q: Can I style the executable version of my figures differently from those already published?</strong>",
+              "type": "paragraph"
+            },
+            {
+              "text": "A: Please style your figures as closely as possible to the ones in your published eLife article – this will help speed up our quality control processes for the ERA. See above for figures which are only partially executable.",
+              "type": "paragraph"
+            },
+            {
+              "text": "<strong>Q: Can I enrich figure supplements?</strong>",
+              "type": "paragraph"
+            },
+            {
+              "text": "A: Yes",
+              "type": "paragraph"
+            },
+            {
+              "text": "<strong>Q: How can I attach data – can I link to data published on other repositories, e.g. Zenodo, Figshare, etc?</strong>",
+              "type": "paragraph"
+            },
+            {
+              "text": "A: Yes – you can upload tabular data and also add URLs of data sources to your Stencila Hub project.",
+              "type": "paragraph"
+            },
+            {
+              "text": "<strong>Q: Can I preview my ERA before it’s published?</strong>",
+              "type": "paragraph"
+            },
+            {
+              "text": "A: Yes, you can preview what your ERA will look like on Stencila Hub, before it is shared with the eLife Production Team.",
+              "type": "paragraph"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "title": "Developers and publishers",
+          "content": [
+            {
+              "text": "<strong>Q: Is this an eLife-exclusive feature?</strong>",
+              "type": "paragraph"
+            },
+            {
+              "text": "A: Quite the opposite. eLife and Stencila developed ERA as open-source software specifically to encourage other publishers to offer the format to their authors. Interested publishers should contact us at innovation [at] elifesciences [dot] org.",
+              "type": "paragraph"
+            },
+            {
+              "text": "<strong>Q: Why not just use Jupyter or a commercial solution?</strong>",
+              "type": "paragraph"
+            },
+            {
+              "text": "The ERA technology stack is designed specifically to be faster at loading, displaying and executing articles than Jupyter Notebooks, and to provide a reading experience that’s closer to that of a traditional online publication. ERA’s theming and format conversion capabilities also let publishers more easily integrate ERA content within their journal websites. Finally, unlike commercial solutions in this space, ERA’s open-source nature means there is no lock-in to a singler vendor – publishers can even run their own instance of the tool stack should they choose to, although they may want to choose an implementation hosted by Stencila as a more cost-effective option.",
+              "type": "paragraph"
+            },
+            {
+              "text": "<strong>Q: How do I contribute to the development of this project?</strong>",
+              "type": "paragraph"
+            },
+            {
+              "text": "A: You can <a href=\"https://elifesci.org/ERAupdates\">sign up to our ERA community update</a> for the latest news and opportunities to contribute, and/or <a href=\"https://github.com/stencila\">explore Stencila’s repositories on GitHub</a>. If you see opportunities to collaborate, please don’t hesitate to email innovation [at] elifesciences [dot] org",
+              "type": "paragraph"
+            },
+            {
+              "text": "<strong>Q: Who is paying for the hosting/compute?</strong>",
+              "type": "paragraph"
+            },
+            {
+              "text": "A: eLife is paying at the moment – we hope to use this initial phase to assess the costs associated with these executable articles. Individual publishers wishing to adopt the technology will be able to negotiate their own hosted execution pricing directly with Stencila, or run their own instance of the technology stack on their own compute infrastructure.<br />",
+              "type": "paragraph"
+            },
+            {
+              "text": "#",
+              "type": "paragraph"
+            },
+            {
+              "text": "We welcome comments, questions and feedback. Please annotate publicly on the article or contact us at innovation [at] elifesciences [dot] org.",
+              "type": "paragraph"
+            },
+            {
+              "text": "Do you have an idea or innovation to share? Send a short outline for a <a href=\"https://elifesciences.org/labs\">Labs</a> blogpost to innovation [at] elifesciences [dot] org.",
+              "type": "paragraph"
+            },
+            {
+              "text": "For the latest in innovation, eLife Labs and new open-source tools, sign up for our <a href=\"https://crm.elifesciences.org/crm/tech-news?utm_source=Labs-ERAlaunch&amp;utm_medium=website&amp;utm_campaign=technews\">technology and innovation newsletter</a>. You can also follow <a href=\"https://twitter.com/eLifeInnovation\">@eLifeInnovation</a> on Twitter.",
+              "type": "paragraph"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

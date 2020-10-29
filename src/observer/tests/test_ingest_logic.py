@@ -31,7 +31,7 @@ class IngestLogic(base.BaseCase):
         ingest_logic.bulk_file_upsert(join(self.fixture_dir, 'ajson'))
         self.assertEqual(models.Article.objects.count(), self.unique_article_count)
 
-    def test_upsert_ajson(self):
+    def test_upsert_json(self):
         self.assertEqual(models.RawJSON.objects.count(), 0)
         ingest_logic.file_upsert(self.article_json)
         self.assertEqual(models.RawJSON.objects.count(), 1)
@@ -100,7 +100,7 @@ class Article(base.BaseCase):
     def setUp(self):
         pass
 
-    def test_upsert_ajson_msid_type(self):
+    def test_upsert_json_msid_type(self):
         "integer and string values for msid are supported"
         ajson = {}
         cases = [
@@ -112,12 +112,12 @@ class Article(base.BaseCase):
             ('720609628398071589300', 1, models.LAX_AJSON, ajson),
         ]
         for args in cases:
-            ingest_logic.upsert_ajson(*args)
+            ingest_logic.upsert_json(*args)
         self.assertEqual(2, models.RawJSON.objects.count())
 
     def test_id_normalised(self):
         msid, version, data = '00003', 1, {}
-        ingest_logic.upsert_ajson(msid, version, models.LAX_AJSON, data)
+        ingest_logic.upsert_json(msid, version, models.LAX_AJSON, data)
         # JSON was inserted
         self.assertEqual(models.RawJSON.objects.count(), 1)
         # and it's msid was normalised
@@ -208,7 +208,7 @@ class PressPackages(base.BaseCase):
         ppid = "81d42f7d"
         expected = self.jsonfix('presspackages', ppid + '.json')
         with patch('observer.consume.consume', return_value=expected):
-            ppobj = ingest_logic.download_presspackage(ppid)
+            ppobj = ingest_logic.download_item(models.PRESSPACKAGE, ppid)
             self.assertEqual(models.RawJSON.objects.count(), 1)
 
         expected_attrs = {
@@ -224,10 +224,10 @@ class PressPackages(base.BaseCase):
         expected = self.jsonfix('presspackages', 'many.json')
         expected['total'] = 100
         with patch('observer.consume.consume', return_value=expected):
-            ingest_logic.download_all_presspackages()
+            ingest_logic.download_all(models.PRESSPACKAGE)
         self.assertEqual(models.RawJSON.objects.count(), 100)
 
-        ingest_logic.regenerate_all_presspackages()
+        ingest_logic.regenerate(models.PRESSPACKAGE)
         self.assertEqual(models.PressPackage.objects.count(), 100)
 
 
@@ -239,20 +239,20 @@ class ProfileCount(base.BaseCase):
         pfid = 'ssiyns7x'
         expected = self.jsonfix('profiles', pfid + '.json')
         with patch('observer.consume.consume', return_value=expected):
-            ingest_logic.download_profile(pfid)
+            ingest_logic.download_item(models.PROFILE, pfid)
         self.assertEqual(models.RawJSON.objects.count(), 1)
 
-        ingest_logic.regenerate_all_profiles()
+        ingest_logic.regenerate(models.PROFILE)
         self.assertEqual(models.Profile.objects.count(), 1)
 
     def test_download_many_profiles(self):
         expected = self.jsonfix('profiles', 'many.json')
         expected['total'] = 100
         with patch('observer.consume.consume', return_value=expected):
-            ingest_logic.download_all_profiles()
+            ingest_logic.download_all(models.PROFILE)
         self.assertEqual(models.RawJSON.objects.count(), 100)
 
-        ingest_logic.regenerate_all_profiles()
+        ingest_logic.regenerate(models.PROFILE)
         self.assertEqual(models.Profile.objects.count(), 100)
 
 class AggregateIngestLogic(base.BaseCase):
@@ -363,14 +363,47 @@ def test_flatten_digest():
     "digest json data is extracted into something Observer can store"
     fixture = json.load(open(join(base.FIXTURE_DIR, 'digests', '59885.json'), 'r'))
     expected = {'id': 59885,
+                'content_type': models.DIGEST,
                 'title': 'Splitting up',
-                'impact_statement': 'Changes in protein levels during cell division reveal how the process is carefully controlled.',
+                'description': 'Changes in protein levels during cell division reveal how the process is carefully controlled.',
                 'image_uri': 'https://iiif.elifesciences.org/digests/59885%2Fdigest-59885.png',
                 'image_width': 805,
                 'image_height': 653,
                 'image_mime': 'image/jpeg',
                 'datetime_published': '2020-10-01T13:28:04Z',
                 'datetime_updated': '2020-10-01T13:28:31Z',
-                'subjects': [{'label': 'Cell Biology', 'name': 'cell-biology'}]}
-    actual = ingest_logic.flatten_digest_json(fixture)
+                'categories': [{'label': 'Cell Biology', 'name': 'cell-biology'}]}
+    actual = ingest_logic.flatten_data(models.DIGEST, fixture)
     assert expected == actual
+
+class Content(base.BaseCase):
+    def setUp(self):
+        pass
+
+    def test_download_content(self):
+        "raw /collection data isn't parsed out into individual models but stored simply as API results, like all the other endpoints."
+        fixture = self.jsonfix('community', 'many.json')
+        with patch('observer.consume.consume', return_value=fixture):
+            ingest_logic.download_all(models.COMMUNITY)
+        expected = 10
+        assert expected == models.RawJSON.objects.filter(json_type=models.COMMUNITY).count()
+
+    def test_download_ingest_collection(self):
+        "collections results are parsed out into their individual models"
+        fixture = self.jsonfix('community', 'many.json')
+        with patch('observer.consume.consume', return_value=fixture):
+            ingest_logic.download_all(models.COMMUNITY)
+        ingest_logic.regenerate(models.COMMUNITY)
+        expected_blog_articles = 2
+        expected_interviews = 3
+        expected_features = 4
+        expected_collections = 1
+
+        expected = expected_blog_articles + expected_interviews + expected_features + expected_collections
+
+        assert expected == models.Content.objects.count()
+
+        assert expected_blog_articles == models.Content.objects.filter(content_type=models.BLOG_ARTICLE).count()
+        assert expected_interviews == models.Content.objects.filter(content_type=models.INTERVIEW).count()
+        assert expected_features == models.Content.objects.filter(content_type=models.FEATURE).count()
+        assert expected_collections == models.Content.objects.filter(content_type=models.COLLECTION).count()

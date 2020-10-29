@@ -149,8 +149,8 @@ class Digests(base.BaseCase):
     maxDiff = None
 
     def setUp(self):
-        for path in listfiles(join(self.fixture_dir, 'digests'), ['.json']):
-            ingest_logic.file_upsert(path, ctype=models.DIGEST, regen=True)
+        fixture = join(self.fixture_dir, 'digests', '59885.json')
+        ingest_logic.file_upsert(fixture, content_type=models.DIGEST, regen=True)
         self.c = Client()
 
     def tearDown(self):
@@ -165,5 +165,48 @@ class Digests(base.BaseCase):
         self.assertEqual(200, resp.status_code)
 
         expected = open(join(base.FIXTURE_DIR, 'digests', '59885.xml'), 'r').read()
+        actual = resp.content.decode('utf-8')
+        self.assertEqual(expected, actual)
+
+class LabsPosts(base.BaseCase):
+    maxDiff = None
+
+    def setUp(self):
+        fixture = join(self.fixture_dir, 'labs-posts', 'dc5acbde.json')
+        ingest_logic.file_upsert(fixture, content_type=models.LABS_POST, regen=True)
+        self.c = Client()
+
+    def tearDown(self):
+        pass
+
+    # freezing time because FeedGen adds a `lastBuildDate` element to the generated
+    # RSS feed that can't be affected from here.
+    @pytest.mark.freeze_time('2020-10-12')
+    def test_labs(self):
+        url = reverse('report', kwargs={'name': 'labs-posts'})
+        resp = self.c.get(url)
+        self.assertEqual(200, resp.status_code)
+
+        expected = open(join(base.FIXTURE_DIR, 'labs-posts', 'dc5acbde.xml'), 'r').read()
+        actual = resp.content.decode('utf-8')
+        self.assertEqual(expected, actual)
+
+class Community(base.BaseCase):
+    maxDiff = None
+
+    def setUp(self):
+        fixture = join(self.fixture_dir, 'community', 'many.json')
+        ingest_logic.file_upsert(fixture, content_type=models.COMMUNITY, regen=True)
+        self.c = Client()
+
+    # freezing time because FeedGen adds a `lastBuildDate` element to the generated
+    # RSS feed that can't be affected from here.
+    @pytest.mark.freeze_time('2020-10-29')
+    def test_labs(self):
+        url = reverse('report', kwargs={'name': 'community'})
+        resp = self.c.get(url)
+        self.assertEqual(200, resp.status_code)
+
+        expected = open(join(base.FIXTURE_DIR, 'community', 'many.xml'), 'r').read()
         actual = resp.content.decode('utf-8')
         self.assertEqual(expected, actual)

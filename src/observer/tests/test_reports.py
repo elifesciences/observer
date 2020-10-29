@@ -1,4 +1,4 @@
-"""testing of logic specific to reports.py, not individual reports themselves. 
+"""testing of logic specific to reports.py, not individual reports themselves.
 See `test_views.py` for tests that cover *all* reports and *all* of their supported serialisations."""
 
 import copy
@@ -44,7 +44,7 @@ class One(BaseCase):
 class PublishedArticleIndex(BaseCase):
     def setUp(self):
         self.c = Client()
-        
+
     def test_published_article_index_with_headers(self):
         "all articles in database are returned as a CSV with the correct data."
         fixtures = [
@@ -126,10 +126,10 @@ class ProfileCounts(BaseCase):
         expected = self.jsonfix('profiles', 'many.json')
         expected['total'] = 100
         with mock.patch('observer.consume.consume', return_value=expected):
-            ingest_logic.download_all_profiles()
-            ingest_logic.regenerate_all_profiles()
+            ingest_logic.download_all(models.PROFILE)
+            ingest_logic.regenerate(models.PROFILE)
 
-        today = datetime.now()
+        today = utils.todt(datetime.now())
         yesterday = today - timedelta(days=1)
         models.Profile.objects.filter(id="pxl5don5").update(datetime_record_created=yesterday)
 

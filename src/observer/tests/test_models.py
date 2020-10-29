@@ -5,7 +5,7 @@ from observer.utils import first, create_or_update
 class One(BaseCase):
     def setUp(self):
         data = [
-            ('article', models.Article, {'msid': 666, 'journal_name': 'eLife', 'datetime_version_published': '2001-01-01'}, ['msid']),
+            ('article', models.Article, {'msid': 666, 'journal_name': 'eLife', 'datetime_version_published': '2001-01-01T00:00:00Z'}, ['msid']),
             ('author', models.Author, {'type': 'person', 'name': "John Jameson", "country": "uk"}, ['id']),
             ('subject', models.Subject, {'name': 'pants', 'label': 'Pants'}, ['id']),
             ('ajson', models.RawJSON, {'msid': 666, 'version': 1, 'json': 'pantsparty', 'json_type': models.LAX_AJSON}, ['id']),

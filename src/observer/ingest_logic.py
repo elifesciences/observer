@@ -147,7 +147,8 @@ DESC = {
 
     # assumes we're ingesting the most recent article!
     # this means bulk ingestion must be done in order
-    # this means we ignore updates to previous versions of an article
+    # this means we ignore updates to previous versions of an article OR
+    # we re-process all versions of an article
     'current_version': [p('version')],
     'status': [p('status')],
 
@@ -218,7 +219,7 @@ def flatten_article_json(data, known_version_list=[], history=None, metrics=None
 #
 #
 
-def upsert_ajson(msid, version, data_type, article_data):
+def upsert_json(msid, version, data_type, article_data):
     "insert/update RawJSON from a dictionary of article data"
     article_data = {
         'msid': utils.norm_msid(msid),
@@ -238,15 +239,19 @@ def extract_children(mush):
     extract the child dependencies into a list of maps that can be passed to `utils.save_objects`.
 
     Used with article data to extract subjects and authors.
-    Used with digest data to extract subjects."""
+    Used with digest data to extract subjects (as 'categories') into ContentCategories."""
+
+    assert isinstance(mush, dict), "`extract_children` must be a dictionary of data, not %r" % type(mush)
+
     known_children = {
         'subjects': {'Model': models.Subject, 'key_list': ["name"]},
         'authors': {'Model': models.Author},
+        'categories': {'Model': models.ContentCategory, 'key_list': ["name"]},
     }
 
     children = []
     for childtype, kwargs in known_children.items():
-        # if 'subjects' in 'digest'
+        # if 'categories' in 'digest'
         # if 'authors' in 'article'
         if childtype in mush:
             data = mush[childtype]
@@ -338,7 +343,7 @@ def _download_versions(msid, latest_version):
     version_range = range(1, latest_version + 1)
 
     def fetch(version):
-        upsert_ajson(msid, version, models.LAX_AJSON, consume.consume("articles/%s/versions/%s" % (msid, version)))
+        upsert_json(msid, version, models.LAX_AJSON, consume.consume("articles/%s/versions/%s" % (msid, version)))
     lmap(fetch, version_range)
 
 def download_article_versions(msid):
@@ -364,7 +369,7 @@ def _upsert_metrics_ajson(data):
     try:
         # TODO: shift this check elsewhere, db field validation checking perhaps
         ensure(utils.byte_length(data['id']) <= 8, "bad data encountered, cannot store msid: %s", data['id'])
-        upsert_ajson(data['id'], version, models.METRICS_SUMMARY, data)
+        upsert_json(data['id'], version, models.METRICS_SUMMARY, data)
     except AssertionError as err:
         LOG.error(err)
 
@@ -402,50 +407,6 @@ def download_all_article_metrics():
 #    consume.all("metrics/article/summary")
 
 #
-# presspackages
-#
-
-PP_DESC = {
-    'id': [p('id')],
-    'title': [p('title')],
-    'published': [p('published'), todt],
-    'updated': [p('updated', None), todt] # f0114f21 missing an updated date
-}
-
-def _regenerate_presspackage(ppid):
-    "creates a PressPackage record sans transaction (faster)"
-    data = models.RawJSON.objects.get(msid=ppid, json_type=models.PRESSPACKAGE).json
-    mush = render.render_item(PP_DESC, data)
-    return first(create_or_update(models.PressPackage, mush, ['id', 'idstr']))
-
-@transaction.atomic
-def regenerate_presspackage(ppid):
-    """regenerate a PressPackage record within a transaction.
-    Use this when regenerating individual or small numbers of items.
-    Does not download any content."""
-    return _regenerate_presspackage(ppid)
-
-def regenerate_many_presspackages(ppid_list):
-    """regenerates many PressPackage records using batched transactions.
-    Use this for large numbers of items.
-    Does not download any content."""
-    return do_all_atomically(_regenerate_presspackage, ppid_list)
-
-def regenerate_all_presspackages():
-    """regenerates *all* PressPackage records using batched transactions.
-    Does not download any content."""
-    return regenerate_many_presspackages(logic.known_presspackages())
-
-def download_presspackage(ppid):
-    "download and store a specific PressPackage. Does not regenerate item."
-    return first(consume.single("press-packages/{id}", id=ppid))
-
-def download_all_presspackages():
-    "download and store *all* PressPackages. Does not regenerate items."
-    consume.all_items("press-packages")
-
-
-#
 # profiles
 #
 
@@ -461,37 +422,16 @@ PF_DESC = {
     # 'name': [p('name'), trunc(255)],
 }
 
-def _regenerate_profile(pfid):
-    "creates a Profile record sans transaction (faster)"
-    data = models.RawJSON.objects.get(msid=pfid, json_type=models.PROFILE).json
-    mush = render.render_item(PF_DESC, data)
-    return first(create_or_update(models.Profile, mush, ['id']))
+#
+# presspackages
+#
 
-@transaction.atomic
-def regenerate_profile(pfid):
-    """regenerate a Profile record within a transaction.
-    Use this when regenerating individual or small numbers of items.
-    Does not download any content."""
-    return _regenerate_profile(pfid)
-
-def regenerate_many_profiles(pfid_list):
-    """regenerates many Profile records using batched transactions.
-    Use this for large numbers of items.
-    Does not download any content."""
-    return do_all_atomically(_regenerate_profile, pfid_list)
-
-def regenerate_all_profiles():
-    """regenerates *all* Profile records using batched transactions.
-    Does not download any content."""
-    return regenerate_many_profiles(logic.known_profiles())
-
-def download_profile(pfid):
-    "download and store a specific Profile. Does not regenerate item."
-    return consume.single("profiles/{id}", id=pfid)
-
-def download_all_profiles():
-    "download and store *all* Profiles. Does not regenerate items."
-    return consume.all_items("profiles")
+PP_DESC = {
+    'id': [p('id')],
+    'title': [p('title')],
+    'published': [p('published'), todt],
+    'updated': [p('updated', None), todt] # f0114f21 missing an updated date
+}
 
 #
 # digests
@@ -499,61 +439,196 @@ def download_all_profiles():
 
 DIGEST_DESC = {
     'id': [p('id'), int],
+    'content_type': [models.DIGEST],
     'title': [p('title')],
-    'impact_statement': [p('impactStatement')],
+    'description': [p('impactStatement')],
     'image_uri': [p('image.thumbnail.uri')],
     'image_width': [p('image.thumbnail.size.width')],
     'image_height': [p('image.thumbnail.size.height')],
     'image_mime': [p('image.thumbnail.source.mediaType')],
     'datetime_published': [p('published')],
     'datetime_updated': [p('updated')],
-    'subjects': [p('subjects', []), lambda sl: [{'name': v['id'], 'label': v['name']} for v in sl]],
+    'categories': [p('subjects', []), lambda sl: [{'name': v['id'], 'label': v['name']} for v in sl]],
 }
 
-def flatten_digest_json(data):
-    """takes digests json and squishes it into something observer can digest
-    no pun intended."""
-    return render.render_item(DIGEST_DESC, data)
+#
+# labs
+#
 
-def _regenerate_digest(digest_id):
-    "creates a Digest record sans transaction (faster)"
-    data = models.RawJSON.objects.get(msid=digest_id, json_type=models.DIGEST).json
-    mush = flatten_digest_json(data)
+LABS_POST_DESC = {
+    'id': [p('id')],
+    'content_type': [models.LABS_POST],
+    'title': [p('title')],
+    'description': [p('impactStatement')],
+    'image_uri': [p('image.thumbnail.uri')],
+    'image_width': [p('image.thumbnail.size.width')],
+    'image_height': [p('image.thumbnail.size.height')],
+    'image_mime': [p('image.thumbnail.source.mediaType')],
+    'datetime_published': [p('published')],
+}
 
+#
+# community
+#
+
+INTERVIEW_DESC = {
+    'id': [p('id')],
+    'content_type': [models.INTERVIEW],
+    'title': [p('title')],
+    'description': [p('impactStatement')],
+    # there are interviews without images
+    'image_uri': [p('image.thumbnail.uri', None)],
+    'image_width': [p('image.thumbnail.size.width', None)],
+    'image_height': [p('image.thumbnail.size.height', None)],
+    'image_mime': [p('image.thumbnail.source.mediaType', None)],
+    'datetime_published': [p('published')],
+}
+
+COLLECTION_DESC = {
+    'id': [p('id')],
+    'content_type': [models.COLLECTION],
+    'title': [p('title')],
+    'description': [p('impactStatement')],
+    'image_uri': [p('image.thumbnail.uri')],
+    'image_width': [p('image.thumbnail.size.width')],
+    'image_height': [p('image.thumbnail.size.height')],
+    'image_mime': [p('image.thumbnail.source.mediaType')],
+    'datetime_published': [p('published')],
+}
+
+BLOG_ARTICLE_DESC = {
+    'id': [p('id')],
+    'content_type': [models.BLOG_ARTICLE],
+    'title': [p('title')],
+    'description': [p('impactStatement', None)],
+    'datetime_published': [p('published')],
+}
+
+FEATURE_DESC = {
+    'id': [p('id')],
+    'content_type': [models.FEATURE],
+    'title': [p('title')],
+    'description': [p('impactStatement')],
+    'datetime_published': [p('published')],
+}
+
+#
+#
+#
+
+content_descriptions = {
+    models.LABS_POST: {'description': LABS_POST_DESC,
+                       'model': models.Content,
+
+                       # interesting thing here
+                       # rawjson key conflicts. we're download list of summaries plus details as well
+                       # so if a summary is downloaded it will overwrite the detail and vice versa.
+                       # perhaps a policy of skipping individual items and just consuming *all* summaries for some content types?
+                       # we could indicate this by disabling the api-item key...
+                       'api-item': 'labs-posts/{id}',
+                       'api-list': 'labs-posts'},
+
+    models.DIGEST: {'description': DIGEST_DESC,
+                    'model': models.Content,
+                    'api-item': 'digests/{id}',
+                    'api-list': 'digests'},
+
+    models.PRESSPACKAGE: {'description': PP_DESC,
+                          'model': models.PressPackage,
+                          'api-item': 'press-packages/{id}',
+                          'api-list': 'press-packages'},
+
+    models.PROFILE: {'description': PF_DESC,
+                     'model': models.Profile,
+                     'api-item': 'profiles/{id}',
+                     'api-list': 'profiles'},
+
+    # /community has no /community/{id}
+    # /community returns multiple content types
+    models.COMMUNITY: {'content-type-fn': lambda api_item: api_item['type'],
+                       'api-list': 'community'},
+
+    models.INTERVIEW: {'description': INTERVIEW_DESC,
+                       'model': models.Content},
+
+    models.COLLECTION: {'description': COLLECTION_DESC,
+                        'model': models.Content},
+
+    models.BLOG_ARTICLE: {'description': BLOG_ARTICLE_DESC,
+                          'model': models.Content},
+
+    models.FEATURE: {'description': FEATURE_DESC,
+                     'model': models.Content},
+
+}
+
+#
+# generic download and regenerate
+#
+
+def flatten_data(content_type, data):
+    """takes data from the eLife API and 'flattens' it into something that can be inserted into a database.
+    the name comes from the deeply nested article data that extracts fields into a shallow map.
+    simpler content types have hardly any nesting at all."""
+    description = content_descriptions[content_type]['description']
+    return render.render_item(description, data)
+
+def _regenerate_item(content_type, content_id):
+    data = models.RawJSON.objects.get(msid=content_id, json_type=content_type).json
+
+    # no 1:1 mapping between endpoint and observer model.
+    # `/community` is like this, it returns interviews, blogs, collections, etc
+    # look for a `content-type-fn` to find the *actual* content type of the RawJSON
+    if 'content-type-fn' in content_descriptions[content_type]:
+        content_type = content_descriptions[content_type]['content-type-fn'](data)
+
+    if not content_type in content_descriptions:
+        print("skipping unhandled content type %r" % content_type)
+        return
+
+    assert content_type in content_descriptions, "unhandled content type %r" % content_type
+
+    mush = flatten_data(content_type, data)
     mush, children = extract_children(mush)
-    parent = {'Model': models.Digest, 'orig_data': mush, 'key_list': ['id']}
 
+    Klass = content_descriptions[content_type]['model']
+
+    parent = {'Model': Klass, 'orig_data': mush, 'key_list': ['id']}
     object_list = [(parent, children)]
 
-    with transaction.atomic():
-        # destroy what we have, if anything. updating may be dangerous
-        models.Digest.objects.filter(id=digest_id).delete()
+    def do():
+        Klass.objects.filter(id=content_id).delete()
         utils.save_objects(object_list)
-        return models.Digest.objects.get(id=digest_id)
+        return Klass.objects.get(id=content_id)
+
+    if children:
+        # if content type has children then it's safest to insert them together.
+        # this negates any efficiency gains by preferring `_regenerate_item` over `regenerate_item`
+        with transaction.atomic():
+            return do()
+    return do()
 
 @transaction.atomic
-def regenerate_digest(digest_id):
-    """regenerates a Digest record within a transaction.
-    Use for individual or smaller numbers of items."""
-    _regenerate_digest(digest_id)
+def regenerate_item(content_type, content_type_id):
+    return _regenerate_item(content_type, content_type_id)
 
-def regenerate_many_digests(digest_id_list):
-    """regenerates many Digest records within batched transactions.
-    Does not download any content."""
-    return do_all_atomically(_regenerate_digest, digest_id_list)
+def regenerate_list(content_type, content_type_id_list):
+    return do_all_atomically(partial(_regenerate_item, content_type), content_type_id_list)
 
-def regenerate_all_digests():
-    """regenerate *all* Digest records within batched transactions.
-    Does not download any content."""
-    return regenerate_many_digests(logic.known_digests())
+def regenerate(content_type):
+    return regenerate_list(content_type, logic.known_content(content_type))
 
-def download_digest(digest_id):
-    "downloads data for a single Digest item."
-    return consume.single("digests/{id}", id=digest_id)
+def download_item(content_type, content_type_id):
+    api = content_descriptions[content_type]['api-item']
+    return first(consume.single(api, id=content_type_id))
 
-def download_all_digests():
-    "downloads data for *all* Digest items."
-    return consume.all_items('digests')
+def download_all(content_type):
+    """downloads *all* pages of content for the given `content_type`.
+    for some types of content this is relatively little, perhaps 1-3 pages.
+    for other types, like articles, it may be 100+ pages."""
+    assert content_type in content_descriptions, "unhandled content type %r" % content_type
+    api = content_descriptions[content_type]['api-list']
+    return consume.all_items(api)
 
 #
 #
@@ -561,15 +636,13 @@ def download_all_digests():
 
 def regenerate_all():
     regenerate_all_articles()
-    regenerate_all_presspackages()
-    regenerate_all_profiles()
-    regenerate_all_digests()
+
+    for content_type in content_descriptions.keys():
+        regenerate(content_type)
 
 #
 #
 #
-
-# TODO: moosh these into one function
 
 def download_regenerate_article(msid):
     """convenience. Downloads the article versions with the given `msid` and then regenerates it's content.
@@ -585,61 +658,58 @@ def download_regenerate_article(msid):
     except BaseException:
         LOG.exception("unhandled exception attempting to download and regenerate article %s", msid)
 
-def download_regenerate_presspackage(ppid):
-    "convenience. Downloads the PressPackage with the given `ppid` and then regenerates it's content."
-    try:
-        LOG.info("update event for presspackage %s", ppid)
-        download_presspackage(ppid)
-        regenerate_presspackage(ppid)
+def download_regenerate(content_type, content_id):
+    "convenience. downloads the specific `content_type` with the id `content_id` and then updates the database."
+    if content_type == models.LAX_AJSON:
+        return download_regenerate_article(content_id)
 
+    # all other content uses general handling
+
+    try:
+        download_item(content_type, content_id)
+        regenerate_item(content_type, content_id)
     except requests.exceptions.RequestException as err:
         log = LOG.debug if err.response.status_code == 404 else LOG.error
-        log("failed to fetch presspackage %s: %s", ppid, err) # probably an unpublished presspackage ...?
-
+        log("failed to fetch %r %s: %s", content_type, content_id, err) # "failed to fetch presspackage '1234': 404 Not Found"
     except BaseException:
-        LOG.exception("unhandled exception attempting to download and regenerate presspackage %s", ppid)
-
-def download_regenerate_digest(digest_id):
-    "convenience. Downloads the Digest with the given `digest_id` and then regenerates it's content."
-    try:
-        LOG.info("update event for digests %s", digest_id)
-        download_digest(digest_id)
-        regenerate_digest(digest_id)
-
-    except requests.exceptions.RequestException as err:
-        log = LOG.debug if err.response.status_code == 404 else LOG.error
-        log("failed to fetch digest %s: %s", digest_id, err) # probably an unpublished digest ...?
-
-    except BaseException:
-        LOG.exception("unhandled exception attempting to download and regenerate digest %s", digest_id)
-
+        LOG.exception("unhandled exception attempting to download and regenerate %s %r", content_type, content_id)
 
 #
 # upsert article-json from file/dir
-# this is used mostly for testing. consider shifting there
-# the load_from_fs command isn't really used anymore
+# this is used mostly for testing. consider shifting there.
+# the load_from_fs command isn't really used anymore.
 #
 
-def file_upsert(path, ctype=models.LAX_AJSON, regen=True, quiet=False):
+def file_upsert(path, content_type=models.LAX_AJSON, regen=True, quiet=False):
     "insert/update RawJSON from a file"
     try:
         if not os.path.isfile(path):
             raise ValueError("can't handle path %r" % path)
+
         LOG.info('loading %s', path)
-        article_data = json.load(open(path, 'r'))
-        if ctype == models.LAX_AJSON:
-            rawjson = upsert_ajson(article_data['id'], article_data['version'], ctype, article_data)[0]
+        data = json.load(open(path, 'r'))
+
+        if content_type == models.LAX_AJSON:
+            rawjson = upsert_json(data['id'], data['version'], content_type, data)[0]
             if regen:
                 regenerate_article(rawjson.msid)
-        else:
-            rawjson = consume.upsert(article_data['id'], ctype, article_data)[0]
-            if regen:
-                regenerate_all()
 
-        return rawjson.msid
+            return rawjson.msid
+
+        # non-article data
+
+        if 'items' in data:
+            consume.upsert_all(content_type, data['items'], consume.default_idfn)
+        else:
+            consume.upsert(data['id'], content_type, data)[0]
+
+        if regen:
+            regenerate_all()
+
+        return None
 
     except Exception as err:
-        LOG.exception("failed to insert article-json %r: %s", path, err)
+        LOG.exception("failed to insert/update %r json %r: %s", content_type, path, err)
         if not quiet:
             raise
 

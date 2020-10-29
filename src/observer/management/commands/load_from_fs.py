@@ -1,3 +1,14 @@
+"""./manage.py load_from_fs
+
+Development command used to load articles that have already been converted to article-json in bulk.
+
+If the given `--target` looks like a directory, it will attempt to load any article-json files from it.
+
+It it's a file, it will assume it's article-json and attempt to load it.
+
+This command was more useful during initial development and while we maintained a repository of article-json files:
+https://github.com/elifesciences/elife-article-json"""
+
 import os, sys, json
 from django.core.management.base import BaseCommand
 import logging
