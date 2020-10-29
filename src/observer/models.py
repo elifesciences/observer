@@ -308,7 +308,7 @@ IMAGE_MIME_CHOICES = [
 
 class Content(models.Model):
     id = CharField(max_length=25, primary_key=True)
-    content_type = CharField(max_length=10, choices=CONTENT_TYPE_CHOICES)
+    content_type = CharField(max_length=12, choices=CONTENT_TYPE_CHOICES)
 
     title = CharField(max_length=255)
     description = TextField(null=True)
