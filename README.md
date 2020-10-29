@@ -58,7 +58,7 @@ Articles published by eLife, filtered by given subjects
 * [RSS](/report/latest-articles-by-subject.rss), [CSV](/report/latest-articles-by-subject.csv)  formats
 * ordered by date and time this article was _first_ published (_most_ recent to least recent)
 * 28 articles per page (default) [50pp](/report/latest-articles-by-subject?per-page=50) [100pp](/report/latest-articles-by-subject?per-page=100)
-* accepts these extra parameters: subject () 
+* accepts these extra parameters: subject (biochemistry, biochemistry-chemical-biology, biophysics-structural-biology, cancer-biology, cell-biology, chromosomes-gene-expression, computational-systems-biology, developmental-biology, developmental-biology-stem-cells, ecology, epidemiology-global-health, evolutionary-biology, genes-chromosomes, genetics-genomics, genomics-evolutionary-biology, human-biology-medicine, immunology, immunology-inflammation, living-science, medicine, microbiology-infectious-disease, neuroscience, physics-living-systems, physics-of-living-systems, plant-biology, stem-cells-regenerative-medicine, structural-biology-molecular-biophysics) 
 
 #### upcoming articles report
 
