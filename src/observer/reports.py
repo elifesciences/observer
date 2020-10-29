@@ -309,6 +309,7 @@ def format_report(report_data, serialisation, context):
     return known_formats[serialisation](report_data, context)
 
 def known_report_idx():
+    "a mapping of a report's name as it appears in the URL to a function that will generate the data for that report."
     # [(/report/$name, reportfn), ...]
     return OrderedDict([
         ('latest-articles', latest_articles),
@@ -329,6 +330,8 @@ def known_report_idx():
     ])
 
 def _report_meta(reportfn):
+    """normalises the metadata attached to a report function `reportfn`.
+    attaches friendly descriptions of report configuration suitable for use in the README."""
     labels = {
         'datetime_published': 'date and time this article was _first_ published',
         # poa published will always be the same as first published
@@ -350,7 +353,11 @@ def _report_meta(reportfn):
     return meta
 
 def report_meta():
+    """returns an ordered map of `{report-name: report-metadata, ...}`
+    Used in generating the body of README file."""
     return OrderedDict([(name, _report_meta(fn)) for name, fn in known_report_idx().items()])
 
 def get_report(name):
+    """fetches a given report but it's report `name`.
+    report functions are associated to a name in the `known_report_idx` function."""
     return known_report_idx()[name]

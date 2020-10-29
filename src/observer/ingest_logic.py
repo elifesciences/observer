@@ -567,15 +567,11 @@ content_descriptions = {
 #
 
 def flatten_data(content_type, data):
-    try:
-        description = content_descriptions[content_type]['description']
-        return render.render_item(description, data)
-    except BaseException:
-        print('----')
-        print(content_type)
-        print(data)
-        print('----')
-        raise
+    """takes data from the eLife API and 'flattens' it into something that can be inserted into a database.
+    the name comes from the deeply nested article data that extracts fields into a shallow map.
+    simpler content types have hardly any nesting at all."""
+    description = content_descriptions[content_type]['description']
+    return render.render_item(description, data)
 
 def _regenerate_item(content_type, content_id):
     data = models.RawJSON.objects.get(msid=content_id, json_type=content_type).json
@@ -627,6 +623,9 @@ def download_item(content_type, content_type_id):
     return first(consume.single(api, id=content_type_id))
 
 def download_all(content_type):
+    """downloads *all* pages of content for the given `content_type`.
+    for some types of content this is relatively little, perhaps 1-3 pages.
+    for other types, like articles, it may be 100+ pages."""
     assert content_type in content_descriptions, "unhandled content type %r" % content_type
     api = content_descriptions[content_type]['api-list']
     return consume.all_items(api)
@@ -660,10 +659,11 @@ def download_regenerate_article(msid):
         LOG.exception("unhandled exception attempting to download and regenerate article %s", msid)
 
 def download_regenerate(content_type, content_id):
+    "convenience. downloads the specific `content_type` with the id `content_id` and then updates the database."
     if content_type == models.LAX_AJSON:
         return download_regenerate_article(content_id)
 
-    # everything else is general purpose for now
+    # all other content uses general handling
 
     try:
         download_item(content_type, content_id)
@@ -680,26 +680,36 @@ def download_regenerate(content_type, content_id):
 # the load_from_fs command isn't really used anymore
 #
 
-def file_upsert(path, ctype=models.LAX_AJSON, regen=True, quiet=False):
+def file_upsert(path, content_type=models.LAX_AJSON, regen=True, quiet=False):
     "insert/update RawJSON from a file"
     try:
         if not os.path.isfile(path):
             raise ValueError("can't handle path %r" % path)
+
         LOG.info('loading %s', path)
-        article_data = json.load(open(path, 'r'))
-        if ctype == models.LAX_AJSON:
-            rawjson = upsert_json(article_data['id'], article_data['version'], ctype, article_data)[0]
+        data = json.load(open(path, 'r'))
+
+        if content_type == models.LAX_AJSON:
+            rawjson = upsert_json(data['id'], data['version'], content_type, data)[0]
             if regen:
                 regenerate_article(rawjson.msid)
-        else:
-            rawjson = consume.upsert(article_data['id'], ctype, article_data)[0]
-            if regen:
-                regenerate_all()
 
-        return rawjson.msid
+            return rawjson.msid
+
+        # non-article data
+
+        if 'items' in data:
+            consume.upsert_all(content_type, data['items'], consume.default_idfn)
+        else:
+            consume.upsert(data['id'], content_type, data)[0]
+
+        if regen:
+            regenerate_all()
+
+        return None
 
     except Exception as err:
-        LOG.exception("failed to insert article-json %r: %s", path, err)
+        LOG.exception("failed to insert/update %r json %r: %s", content_type, path, err)
         if not quiet:
             raise
 

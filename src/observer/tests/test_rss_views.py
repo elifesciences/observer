@@ -150,7 +150,7 @@ class Digests(base.BaseCase):
 
     def setUp(self):
         fixture = join(self.fixture_dir, 'digests', '59885.json')
-        ingest_logic.file_upsert(fixture, ctype=models.DIGEST, regen=True)
+        ingest_logic.file_upsert(fixture, content_type=models.DIGEST, regen=True)
         self.c = Client()
 
     def tearDown(self):
@@ -173,7 +173,7 @@ class LabsPosts(base.BaseCase):
 
     def setUp(self):
         fixture = join(self.fixture_dir, 'labs-posts', 'dc5acbde.json')
-        ingest_logic.file_upsert(fixture, ctype=models.LABS_POST, regen=True)
+        ingest_logic.file_upsert(fixture, content_type=models.LABS_POST, regen=True)
         self.c = Client()
 
     def tearDown(self):

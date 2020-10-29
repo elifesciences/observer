@@ -68,6 +68,12 @@ def handler(json_event):
             'presspackage': models.PRESSPACKAGE,
             'digest': models.DIGEST,
             'labs-post': models.LABS_POST,
+            'interview': models.INTERVIEW,
+            'collection': models.COLLECTION,
+            'blog-article': models.BLOG_ARTICLE,
+            # handled by 'article' I suppose?
+            # if so, it won't update the Content table. ensure 'community' is in ./daily.sh
+            # 'feature': ...
         }
         if event_type not in event_type_to_content_type:
             LOG.warn("sinking event for unhandled type: %s", event_type)

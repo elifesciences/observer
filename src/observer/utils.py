@@ -275,14 +275,17 @@ def byte_length(i):
 
 def thumbnail_dimensions(max_xy, width, height):
     "returns a set of proportionate `x,y` dimensions for thumbnail given a `thumbnail_width`"
+    width = max(width, 1)
+    height = max(height, 1)
+
     if height > width:
         aspect_ratio = height / width
-        width = max_xy / aspect_ratio
-        return int(width), int(max_xy)
+        width = max(max_xy / aspect_ratio, 1)
+        return max(int(width), 1), max(int(max_xy), 1)
 
     aspect_ratio = width / height
-    height = max_xy / aspect_ratio
-    return int(max_xy), int(height)
+    height = max(max_xy / aspect_ratio, 1)
+    return max(int(max_xy), 1), max(int(height), 1)
 
 def iiif_thumbnail_link(uri, width, height):
     "returns a IIIF url to image thumbnail `uri` given a preferred `width` and `height`"

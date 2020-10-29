@@ -209,7 +209,7 @@ def content_to_rss_entry(content):
 
     # todo: add content.content_type to 'categories' ...?
 
-    # content has an image available
+    # content has an image available, generate a thumbnail with a max width or height depending on orientation.
     if content.image_uri:
         max_xy = 800
         thumbnail_width, thumbnail_height = utils.thumbnail_dimensions(max_xy, content.image_width, content.image_height)
@@ -221,6 +221,7 @@ def content_to_rss_entry(content):
     return item
 
 def content_to_rss_entry_list(queryset):
+    "converts a QuerySet of Content objects to a list of datastructures suitable for FeedGen coercion"
     return map(content_to_rss_entry, queryset)
 
 def _format_report(report, context):

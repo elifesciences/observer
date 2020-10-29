@@ -4,7 +4,7 @@ from .base import BaseCase
 from observer import reports, ingest_logic, models, utils
 from django.urls import reverse
 from observer.utils import listfiles, lmap
-from functools import reduce, partial
+from functools import reduce
 
 def http_dummy_params(reportfn):
     param_map = {
@@ -100,10 +100,13 @@ class Four(BaseCase):
         fixtures = {
             models.LAX_AJSON: listfiles(join(self.fixture_dir, 'ajson'), ['.json']),
             models.PROFILE: [join(self.fixture_dir, 'profiles', 'ssiyns7x.json')],
-            models.DIGEST: [join(self.fixture_dir, 'digests', '59885.json')],
+            models.DIGEST: [join(self.fixture_dir, 'digests', 'many.json')],
+            models.LABS_POST: [join(self.fixture_dir, 'labs-posts', 'many.json')],
+            models.COMMUNITY: [join(self.fixture_dir, 'community', 'many.json')],
         }
-        for group, pathlist in fixtures.items():
-            lmap(partial(ingest_logic.file_upsert, ctype=group, regen=False), pathlist)
+        for content_type, path_list in fixtures.items():
+            for path in path_list:
+                ingest_logic.file_upsert(path, content_type, regen=False)
         ingest_logic.regenerate_all()
 
     def test_report_format_hint(self):

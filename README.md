@@ -58,7 +58,7 @@ Articles published by eLife, filtered by given subjects
 * [RSS](/report/latest-articles-by-subject.rss), [CSV](/report/latest-articles-by-subject.csv)  formats
 * ordered by date and time this article was _first_ published (_most_ recent to least recent)
 * 28 articles per page (default) [50pp](/report/latest-articles-by-subject?per-page=50) [100pp](/report/latest-articles-by-subject?per-page=100)
-* accepts these extra parameters: subject (biochemistry-chemical-biology, cancer-biology, cell-biology, chromosomes-gene-expression, computational-systems-biology, developmental-biology, ecology, epidemiology-global-health, evolutionary-biology, genetics-genomics, immunology-inflammation, medicine, microbiology-infectious-disease, neuroscience, physics-living-systems, plant-biology, stem-cells-regenerative-medicine, structural-biology-molecular-biophysics) 
+* accepts these extra parameters: subject () 
 
 #### upcoming articles report
 
@@ -67,6 +67,62 @@ The latest eLife POA (publish-on-accept) articles. These articles are in-progres
 * [RSS](/report/upcoming-articles.rss), [CSV](/report/upcoming-articles.csv)  formats
 * ordered by date and time this article was _first_ published (_most_ recent to least recent)
 * 28 articles per page (default) [50pp](/report/upcoming-articles?per-page=50) [100pp](/report/upcoming-articles?per-page=100)
+
+#### digests report
+
+The latest eLife digests.
+
+* [RSS](/report/digests.rss)  formats
+* ordered by date and time this article was _first_ published (_most_ recent to least recent)
+* 28 articles per page (default) [50pp](/report/digests?per-page=50) [100pp](/report/digests?per-page=100)
+
+#### labs-posts report
+
+The latest eLife labs-posts.
+
+* [RSS](/report/labs-posts.rss)  formats
+* ordered by date and time this article was _first_ published (_most_ recent to least recent)
+* 28 articles per page (default) [50pp](/report/labs-posts?per-page=50) [100pp](/report/labs-posts?per-page=100)
+
+#### community report
+
+The latest eLife community content.
+
+* [RSS](/report/community.rss)  formats
+* ordered by date and time this article was _first_ published (_most_ recent to least recent)
+* 28 articles per page (default) [50pp](/report/community?per-page=50) [100pp](/report/community?per-page=100)
+
+#### interviews report
+
+The latest eLife interviews.
+
+* [RSS](/report/interviews.rss)  formats
+* ordered by date and time this article was _first_ published (_most_ recent to least recent)
+* 28 articles per page (default) [50pp](/report/interviews?per-page=50) [100pp](/report/interviews?per-page=100)
+
+#### collections report
+
+The latest eLife collections.
+
+* [RSS](/report/collections.rss)  formats
+* ordered by date and time this article was _first_ published (_most_ recent to least recent)
+* 28 articles per page (default) [50pp](/report/collections?per-page=50) [100pp](/report/collections?per-page=100)
+
+#### blog-articles report
+
+The latest eLife blog articles.
+
+* [RSS](/report/blog-articles.rss)  formats
+* ordered by date and time this article was _first_ published (_most_ recent to least recent)
+* 28 articles per page (default) [50pp](/report/blog-articles?per-page=50) [100pp](/report/blog-articles?per-page=100)
+
+#### features report
+
+The latest eLife featured articles.
+
+* [RSS](/report/features.rss)  formats
+* ordered by date and time this article was _first_ published (_most_ recent to least recent)
+* 28 articles per page (default) [50pp](/report/features?per-page=50) [100pp](/report/features?per-page=100)
 
 #### published article index report
 

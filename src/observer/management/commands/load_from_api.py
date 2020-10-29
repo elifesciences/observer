@@ -79,8 +79,7 @@ class Command(BaseCommand):
             if msidlist:
                 regen_articles = partial(lmap, ingest_logic.regenerate_article, msidlist)
                 if LAX not in targetlist:
-                    # actually, I'm just too lazy right now
-                    print("ignoring ID list, given content type doesn't support it.")
+                    print("ignoring ID list, given content type doesn't support it or isn't implemented.")
 
             for content_type, fn in subdict(regen_targets, targetlist).items():
                 print('regenerate %r' % content_type)

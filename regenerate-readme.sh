@@ -2,4 +2,5 @@
 # regenerates the README.md document.
 # the sections on available reports are generated from actual report definitions.
 
-./manage.sh readme > README.md
+source venv/bin/activate
+./src/manage.py readme > README.md

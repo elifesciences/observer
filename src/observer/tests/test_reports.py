@@ -129,7 +129,7 @@ class ProfileCounts(BaseCase):
             ingest_logic.download_all(models.PROFILE)
             ingest_logic.regenerate(models.PROFILE)
 
-        today = datetime.now()
+        today = utils.todt(datetime.now())
         yesterday = today - timedelta(days=1)
         models.Profile.objects.filter(id="pxl5don5").update(datetime_record_created=yesterday)
 

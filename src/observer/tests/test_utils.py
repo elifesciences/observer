@@ -23,3 +23,30 @@ def test_ymd():
     ]
     for given, expected in cases:
         assert expected == utils.ymd(given)
+
+def test_thumbnail_dimensions():
+    cases = [
+        # given (max, x, y) => expected (x, y)
+
+        # no zeroes allowed. prevents errant divide-by-zero problems
+        ([1, 0, 0], (1, 1)),
+
+        # no surprises here
+        ([1, 1, 1], (1, 1)),
+        ([1, 2, 1], (1, 1)),
+        ([1, 1, 2], (1, 1)),
+        ([2, 2, 2], (2, 2)),
+        ([2, 1, 2], (1, 2)),
+        ([2, 2, 1], (2, 1)),
+        ([800, 800, 800], (800, 800)),
+        ([800, 800, 600], (800, 600)),
+        ([800, 600, 800], (600, 800)),
+
+        # images below are scaled up
+        ([800, 750, 400], (800, 426)),
+
+        # images above are scaled down
+        ([800, 7500, 4000], (800, 426)),
+    ]
+    for given, expected in cases:
+        assert expected == utils.thumbnail_dimensions(*given)
