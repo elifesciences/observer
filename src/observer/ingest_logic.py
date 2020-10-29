@@ -676,8 +676,8 @@ def download_regenerate(content_type, content_id):
 
 #
 # upsert article-json from file/dir
-# this is used mostly for testing. consider shifting there
-# the load_from_fs command isn't really used anymore
+# this is used mostly for testing. consider shifting there.
+# the load_from_fs command isn't really used anymore.
 #
 
 def file_upsert(path, content_type=models.LAX_AJSON, regen=True, quiet=False):
