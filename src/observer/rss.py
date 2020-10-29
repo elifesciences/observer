@@ -190,67 +190,54 @@ def article_list_to_rss_entry_list(queryset):
     queryset = queryset.prefetch_related('subjects', 'authors')
     return map(article_to_rss_entry, queryset) # deliberate use of lazy `map`
 
-# digests
+# content
 
-def digest_to_rss_entry(digest):
-    "converts a single Digest object to a data structure suitable for FeedGen coercion."
-    data = utils.to_dict(digest)
+def content_link(content):
+    # todo: pad feature
+    path_map = {
+        models.INTERVIEW: "interviews/{id}",
+        models.COLLECTION: "collections/{id}",
+        models.BLOG_ARTICLE: "inside-elife/{id}",
+        models.FEATURE: "articles/{id}",
+        models.DIGEST: "digests/{id}",
+        models.LABS_POST: "labs/{id}"
+    }
+    assert content.content_type in path_map, "cannot find path to content for content type %r" % content.content_type
+    return path_map[content.content_type].format(id=content.id)
+
+def content_to_rss_entry(content):
+    "converts a single Content object to a data structure suitable for FeedGen coercion."
+    data = utils.to_dict(content)
 
     item = utils.subdict(data, [
-        'id', 'title', 'impact_statement',
+        'id', 'title', 'description',
         'datetime_published', 'datetime_updated'])
     utils.renkeys(item, [
-        ('impact_statement', 'description'),
         ('datetime_published', 'pubDate'),
         ('datetime_updated', 'updated'),
     ])
-    item['id'] = "https://elifesciences.org/digests/%s" % item['id']
+    self_link = "https://elifesciences.org/" + content_link(content)
+    item['id'] = self_link
+    item['link'] = {'href': self_link}
     item['dc:dc_date'] = utils.ymdhms(item['pubDate'])
-    item['category'] = [{'term': subject.name, 'label': subject.label} for subject in digest.subjects.all()]
+    item['category'] = [{'term': cat.name, 'label': cat.label} for cat in content.categories.all()]
 
-    width = 800
-    thumbnail_width, thumbnail_height = utils.thumbnail_dimensions(width, digest.image_width, digest.image_height)
-    iiif_url = utils.iiif_thumbnail_link(digest.image_uri, thumbnail_width, thumbnail_height)
-    item['webfeeds:featuredImage'] = {'url': iiif_url,
-                                      'height': str(thumbnail_height),
-                                      'width': str(thumbnail_width),
-                                      'type': "image/jpeg"}
+    # todo: add content.content_type to 'categories' ...?
 
+    # content has an image available, generate a thumbnail with a max width or height depending on orientation.
+    if content.image_uri:
+        max_xy = 800
+        thumbnail_width, thumbnail_height = utils.thumbnail_dimensions(max_xy, content.image_width, content.image_height)
+        iiif_url = utils.iiif_thumbnail_link(content.image_uri, thumbnail_width, thumbnail_height)
+        item['webfeeds:featuredImage'] = {'url': iiif_url,
+                                          'height': str(thumbnail_height),
+                                          'width': str(thumbnail_width),
+                                          'type': "image/jpeg"}
     return item
 
-def digest_list_to_rss_entry_list(queryset):
-    "converts many Digest objects to a list of data structures suitable for FeedGen coercion."
-    return map(digest_to_rss_entry, queryset)
-
-# labs
-
-def labs_post_to_rss_entry(digest):
-    "converts a single Digest object to a data structure suitable for FeedGen coercion."
-    data = utils.to_dict(digest)
-
-    item = utils.subdict(data, [
-        'id', 'title', 'impact_statement',
-        'datetime_published', 'datetime_updated'])
-    utils.renkeys(item, [
-        ('impact_statement', 'description'),
-        ('datetime_published', 'pubDate'),
-        ('datetime_updated', 'updated'),
-    ])
-    item['id'] = "https://elifesciences.org/digests/%s" % item['id']
-    item['dc:dc_date'] = utils.ymdhms(item['pubDate'])
-
-    width = 800
-    thumbnail_width, thumbnail_height = utils.thumbnail_dimensions(width, digest.image_width, digest.image_height)
-    iiif_url = utils.iiif_thumbnail_link(digest.image_uri, thumbnail_width, thumbnail_height)
-    item['webfeeds:featuredImage'] = {'url': iiif_url,
-                                      'height': str(thumbnail_height),
-                                      'width': str(thumbnail_width),
-                                      'type': "image/jpeg"}
-
-    return item
-
-def labs_post_to_rss_entry_list(queryset):
-    return map(labs_post_to_rss_entry, queryset)
+def content_to_rss_entry_list(queryset):
+    "converts a QuerySet of Content objects to a list of datastructures suitable for FeedGen coercion"
+    return map(content_to_rss_entry, queryset)
 
 def _format_report(report, context):
     "generates an RSS feed from the given `report` and `context` data, returning XML content as a string"
@@ -260,8 +247,7 @@ def _format_report(report, context):
 
     dispatch = {
         models.Article: article_list_to_rss_entry_list,
-        models.Digest: digest_list_to_rss_entry_list,
-        models.LabsPost: labs_post_to_rss_entry_list,
+        models.Content: content_to_rss_entry_list,
 
         # if we're given a map of data, assume it's already in the shape we want it in
         dict: lambda x: x

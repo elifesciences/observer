@@ -1,0 +1,1763 @@
+{
+  "total": 976,
+  "items": [
+    {
+      "id": "60647",
+      "title": "Shine a light",
+      "impactStatement": "Engineering light-sensitive proteins can help to understand how proteins send signals within cells.",
+      "stage": "published",
+      "published": "2020-10-21T15:33:43Z",
+      "updated": "2020-10-21T15:34:04Z",
+      "image": {
+        "thumbnail": {
+          "alt": "",
+          "uri": "https://iiif.elifesciences.org/digests/60647%2Fdigest-60647.jpg",
+          "size": {
+            "width": 1024,
+            "height": 682
+          },
+          "source": {
+            "uri": "https://iiif.elifesciences.org/digests/60647%2Fdigest-60647.jpg/full/full/0/default.jpg",
+            "filename": "digest-60647.jpg",
+            "mediaType": "image/jpeg"
+          }
+        }
+      },
+      "subjects": [
+        {
+          "id": "biochemistry-chemical-biology",
+          "name": "Biochemistry and Chemical Biology"
+        },
+        {
+          "id": "cell-biology",
+          "name": "Cell Biology"
+        }
+      ],
+      "content": [
+        {
+          "type": "image",
+          "image": {
+            "alt": "",
+            "uri": "https://iiif.elifesciences.org/digests/60647%2Fdigest-60647.jpg",
+            "size": {
+              "width": 1024,
+              "height": 682
+            },
+            "source": {
+              "uri": "https://iiif.elifesciences.org/digests/60647%2Fdigest-60647.jpg/full/full/0/default.jpg",
+              "filename": "digest-60647.jpg",
+              "mediaType": "image/jpeg"
+            }
+          },
+          "caption": [
+            {
+              "text": "Image credit: Daniel Horacio Agostini (CC BY-NC-ND 2.0)",
+              "type": "paragraph"
+            }
+          ]
+        },
+        {
+          "text": "Cells need to sense and respond to their environment. To do this, they have dedicated proteins that interpret outside signals and convert them into appropriate responses that are only active at a specific time and location within the cell.",
+          "type": "paragraph"
+        },
+        {
+          "text": "However, in many diseases, including cancer, these signaling proteins are switched on for too long or are active in the wrong place. To better understand why this is the case, researchers manipulate proteins to identify the processes they regulate. One way to do this is to engineer proteins so that they can be controlled by light, turning them either on or off.",
+          "type": "paragraph"
+        },
+        {
+          "text": "Ideally, a light-controlled tool can activate proteins at defined times, control proteins in specific locations within the cell and regulate any protein of interest. However, current methods do not combine all of these requirements in one tool, and scientists often have to use different methods, depending on the topic they are researching.",
+          "type": "paragraph"
+        },
+        {
+          "text": "Now, Shaaya et al. set out to develop a single tool that combines all required features. The researchers engineered a light-sensitive ‘switch’ that allowed them to activate a specific protein by illuminating it with blue light and to deactivate it by turning the light off. Unlike other methods, the new tool uses a light-sensitive switch that works like a clamp. In the dark, the clamp is open, which ‘stretches’ and distorts the protein, rendering it inactive. In light, however, the clamp closes and the structure of the protein and its activity are restored. Moreover, it can activate proteins multiple times, control proteins in specific locations within the cell and it can be applied to a variety of proteins.",
+          "type": "paragraph"
+        },
+        {
+          "text": "This specific design makes it possible to combine multiple features in one tool that will both simplify and broaden its use to investigate specific proteins and signaling pathways in a broad range of diseases.",
+          "type": "paragraph"
+        }
+      ],
+      "relatedContent": [
+        {
+          "id": "60647",
+          "doi": "10.7554/eLife.60647",
+          "type": "tools-resources",
+          "stage": "preview",
+          "title": "Light-regulated allosteric switch enables temporal and subcellular control of enzyme activity",
+          "status": "vor",
+          "volume": 9,
+          "version": 3,
+          "published": "2020-09-23T00:00:00Z",
+          "authorLine": "Mark Shaaya et al.",
+          "elocationId": "e60647"
+        }
+      ]
+    },
+    {
+      "id": "57101",
+      "title": "Turning on sex cells",
+      "impactStatement": "In fruit flies, a cascade of molecular events triggers egg precursors to multiply upon mating.",
+      "stage": "published",
+      "published": "2020-10-20T00:00:00Z",
+      "updated": "2020-10-20T07:01:41Z",
+      "image": {
+        "thumbnail": {
+          "alt": "",
+          "uri": "https://iiif.elifesciences.org/digests/57101%2Fdigest-57101.tiff",
+          "size": {
+            "width": 945,
+            "height": 480
+          },
+          "source": {
+            "uri": "https://iiif.elifesciences.org/digests/57101%2Fdigest-57101.tiff/full/full/0/default.jpg",
+            "filename": "digest-57101.tiff",
+            "mediaType": "image/jpeg"
+          }
+        }
+      },
+      "subjects": [
+        {
+          "id": "developmental-biology",
+          "name": "Developmental Biology"
+        }
+      ],
+      "content": [
+        {
+          "type": "image",
+          "image": {
+            "alt": "",
+            "uri": "https://iiif.elifesciences.org/digests/57101%2Fdigest-57101.tiff",
+            "size": {
+              "width": 945,
+              "height": 480
+            },
+            "source": {
+              "uri": "https://iiif.elifesciences.org/digests/57101%2Fdigest-57101.tiff/full/full/0/default.jpg",
+              "filename": "digest-57101.tiff",
+              "mediaType": "image/jpeg"
+            }
+          },
+          "caption": [
+            {
+              "text": "In fruit flies, neurons that release a molecular messenger known as octopamine (green) directly connect to the ovaries (oval shapes, magenta). Image credit: Yoshinari et al. (CC BY 4.0)",
+              "type": "paragraph"
+            }
+          ]
+        },
+        {
+          "text": "Stem cells have the unique ability to mature into the various, specialized groups of cells required for organisms to work properly. Local signals released by the tissues immediately surrounding stem cells usually trigger this specialization process. However, recent studies have revealed that external signals, such as hormones or neurotransmitters (the chemicals used by nerve cells to communicate), can also control the fate of stem cells. This is particularly the case during development, or in response to events such as injury.",
+          "type": "paragraph"
+        },
+        {
+          "text": "In the right conditions, germline stem cells can specialize into the egg or sperm required for many animals to reproduce. In fruit flies for example, the semen contains proteins that activate a cascade of molecular events in the female nervous system, ultimately resulting in female germline stem cells multiplying in the ovaries after mating. Yet, exactly how this process takes place was still unclear. To investigate this question, Yoshinari et al. focused on nerve cells in the fruit fly ovary which produce a neurotransmitter called octopamine.",
+          "type": "paragraph"
+        },
+        {
+          "text": "The experiments assessed changes in the ovaries of female fruit flies after mating, piecing together the sequence of events that activate germline stem cells. This showed that first, mating triggers the release of octopamine from the nerve cells. In turn, this activates a protein called Oamb, which is studded through the membrane of cells present around germline stem cells. Turning on Oamb prompts a cascade of molecular events which include an enzyme called Matrix metalloproteinase 2 regulating the signal sent from the local environment to germline stem cells.",
+          "type": "paragraph"
+        },
+        {
+          "text": "As mammals use a neurotransmitter similar to octopamine, future fruit fly studies could shed light on how neurotransmitters activate stem cells in other animals. Ultimately, unravelling the way external signals trigger the specialization process may offer insight into how diseases arise from uncontrolled stem cell activity.",
+          "type": "paragraph"
+        }
+      ],
+      "relatedContent": [
+        {
+          "id": "57101",
+          "doi": "10.7554/eLife.57101",
+          "type": "research-article",
+          "stage": "preview",
+          "title": "Neuronal octopamine signaling regulates mating-induced germline stem cell increase in female <i>Drosophila melanogaster</i>",
+          "status": "vor",
+          "volume": 9,
+          "version": 1,
+          "authorLine": "Yuto Yoshinari et al.",
+          "elocationId": "e57101"
+        }
+      ]
+    },
+    {
+      "id": "57395",
+      "title": "Healing light",
+      "impactStatement": "Light can be used to switch on regeneration and guide the repair of individual neurons in fruit fly larvae.",
+      "stage": "published",
+      "published": "2020-10-16T14:28:45Z",
+      "updated": "2020-10-16T14:29:08Z",
+      "image": {
+        "thumbnail": {
+          "alt": "",
+          "uri": "https://iiif.elifesciences.org/digests/57395%2Fdigest-57395.jpg",
+          "size": {
+            "width": 239,
+            "height": 238
+          },
+          "source": {
+            "uri": "https://iiif.elifesciences.org/digests/57395%2Fdigest-57395.jpg/full/full/0/default.jpg",
+            "filename": "digest-57395.jpg",
+            "mediaType": "image/jpeg"
+          }
+        }
+      },
+      "subjects": [
+        {
+          "id": "neuroscience",
+          "name": "Neuroscience"
+        }
+      ],
+      "content": [
+        {
+          "type": "image",
+          "image": {
+            "alt": "",
+            "uri": "https://iiif.elifesciences.org/digests/57395%2Fdigest-57395.jpg",
+            "size": {
+              "width": 239,
+              "height": 238
+            },
+            "source": {
+              "uri": "https://iiif.elifesciences.org/digests/57395%2Fdigest-57395.jpg/full/full/0/default.jpg",
+              "filename": "digest-57395.jpg",
+              "mediaType": "image/jpeg"
+            }
+          },
+          "caption": [
+            {
+              "text": "Neuron. Image credit: MikeBlogs (CC BY 2.0)",
+              "type": "paragraph"
+            }
+          ]
+        },
+        {
+          "text": "Most cells have a built-in regeneration signaling program that allows them to divide and repair. But, in the cells of the central nervous system, which are called neurons, this program is ineffective. This is why accidents and illnesses affecting the brain and spinal cord can cause permanent damage. Reactivating regeneration in neurons could help them repair, but it is not easy. Certain small molecules can switch repair signaling programs back on. Unfortunately, these molecules diffuse easily through tissues, spreading around the body and making it hard to target individual damaged cells. This both hampers research into neuronal repair and makes treatments directed at healing damage to the nervous system more likely to have side-effects. It is unclear whether reactivating regeneration signaling in individual neurons is possible.",
+          "type": "paragraph"
+        },
+        {
+          "text": "One way to address this question is to use optogenetics. This technique uses genetic engineering to fuse proteins that are light-sensitive to proteins responsible for relaying signals in the cell. When specific wavelengths of light hit the light-sensitive proteins, the fused signaling proteins switch on, leading to the activation of any proteins they control, for example, those involved in regeneration.",
+          "type": "paragraph"
+        },
+        {
+          "text": "Wang et al. used optogenetic tools to determine if light can help repair neurons in fruit fly larvae. First, a strong laser light was used to damage an individual neuron in a fruit fly larva that had been genetically modified so that blue light would activate the regeneration program in its neurons. Then, Wang et al. illuminated the cell with dim blue light, switching on the regeneration program. Not only did this allow the neuron to repair itself, it also allowed the light to guide its regeneration. By focusing the blue light on the damaged end of the neuron, it was possible to guide the direction of the cell's growth as it regenerated.",
+          "type": "paragraph"
+        },
+        {
+          "text": "Regeneration programs in flies and mammals involve similar signaling proteins, but blue light does not penetrate well into mammalian tissues. This means that further research into LEDs that can be implanted may be necessary before neuronal repair experiments can be performed in mammals. In any case, the ability to focus treatment on individual neurons paves the way for future work into the regeneration of the nervous system, and the combination of light and genetics could reveal more about how repair signals work.",
+          "type": "paragraph"
+        }
+      ],
+      "relatedContent": [
+        {
+          "id": "57395",
+          "doi": "10.7554/eLife.57395",
+          "type": "research-article",
+          "stage": "preview",
+          "title": "Optical control of ERK and AKT signaling promotes axon regeneration and functional recovery of PNS and CNS in <i>Drosophila</i>",
+          "status": "vor",
+          "volume": 9,
+          "version": 2,
+          "published": "2020-10-06T00:00:00Z",
+          "authorLine": "Qin Wang et al.",
+          "elocationId": "e57395"
+        }
+      ]
+    },
+    {
+      "id": "54928",
+      "title": "Evolving fast and slow",
+      "impactStatement": "Can mutations in one gene or many explain why some traits evolve faster than others?",
+      "stage": "published",
+      "published": "2020-10-14T12:40:41Z",
+      "updated": "2020-10-14T12:41:01Z",
+      "image": {
+        "thumbnail": {
+          "alt": "",
+          "uri": "https://iiif.elifesciences.org/digests/54928%2Fdigest-54928.tif",
+          "size": {
+            "width": 1280,
+            "height": 1024
+          },
+          "source": {
+            "uri": "https://iiif.elifesciences.org/digests/54928%2Fdigest-54928.tif/full/full/0/default.jpg",
+            "filename": "digest-54928.tif",
+            "mediaType": "image/jpeg"
+          }
+        }
+      },
+      "subjects": [
+        {
+          "id": "evolutionary-biology",
+          "name": "Evolutionary Biology"
+        },
+        {
+          "id": "genetics-genomics",
+          "name": "Genetics and Genomics"
+        }
+      ],
+      "content": [
+        {
+          "type": "image",
+          "image": {
+            "alt": "",
+            "uri": "https://iiif.elifesciences.org/digests/54928%2Fdigest-54928.tif",
+            "size": {
+              "width": 1280,
+              "height": 1024
+            },
+            "source": {
+              "uri": "https://iiif.elifesciences.org/digests/54928%2Fdigest-54928.tif/full/full/0/default.jpg",
+              "filename": "digest-54928.tif",
+              "mediaType": "image/jpeg"
+            }
+          },
+          "caption": [
+            {
+              "text": "Microscopy image showing the development of the six external reproductive cells in the round worm <i>C. elegans</i>. The cell at the top evolves faster than the other cells. Image credit: Michalis Barkoulas (CC BY 4.0)",
+              "type": "paragraph"
+            }
+          ]
+        },
+        {
+          "text": "Heritable characteristics or traits of a group of organisms, for example the large brain size of primates or the hooves of a horse, are determined by genes, the environment, and by the interactions between them. Traits can change over time and generations when enough mutations in these genes have spread in a species to result in visible differences.",
+          "type": "paragraph"
+        },
+        {
+          "text": "However, some traits, such as the large brain of primates, evolve faster than others, but why this is the case has been unclear. It could be that a few specific genes important for that trait in question mutate at a high rate, or, that many genes affect the trait, creating a lot of variation for natural selection to choose from.",
+          "type": "paragraph"
+        },
+        {
+          "text": "Here, Besnard, Picao-Osorio et al. studied the roundworm <i>Caenorhabditis elegans</i> to better understand the causes underlying the different rates of trait evolution. These worms have a short life cycle and evolve quickly over many generations, making them an ideal candidate for studying mutation rates in different traits.",
+          "type": "paragraph"
+        },
+        {
+          "text": "Previous studies have shown that one of <i>C. elegans’</i> six cells of the reproductive system evolves faster than the others. To investigate this further, Besnard, Picao-Osorio et al. analysed the genetic mutations driving change in this cell in 250 worm generations. The results showed that five mutations in five different genes – all responsible for different processes in the cells – were behind the supercharged evolution of this particular cell. This suggests that fast evolution results from natural selection acting upon a collection of genes, rather than one gene, and that many genes and pathways shape this trait.",
+          "type": "paragraph"
+        },
+        {
+          "text": "In conclusion, these results demonstrate that how traits are coded at the molecular level, in one gene or many, can influence the rate at which they evolve.",
+          "type": "paragraph"
+        }
+      ],
+      "relatedContent": [
+        {
+          "id": "54928",
+          "doi": "10.7554/eLife.54928",
+          "type": "research-article",
+          "stage": "preview",
+          "title": "A broad mutational target explains a fast rate of phenotypic evolution",
+          "status": "vor",
+          "volume": 9,
+          "version": 2,
+          "published": "2020-08-27T00:00:00Z",
+          "authorLine": "Fabrice Besnard et al.",
+          "elocationId": "e54928"
+        }
+      ]
+    },
+    {
+      "id": "60067",
+      "title": "Predicting the flu",
+      "impactStatement": "A new open source forecasting tool combines genetic code with experimental data to improve flu vaccine design.",
+      "stage": "published",
+      "published": "2020-10-13T11:30:12Z",
+      "updated": "2020-10-13T11:30:33Z",
+      "image": {
+        "thumbnail": {
+          "alt": "",
+          "uri": "https://iiif.elifesciences.org/digests/60067%2Fdigest-60067.jpg",
+          "size": {
+            "width": 3375,
+            "height": 2250
+          },
+          "source": {
+            "uri": "https://iiif.elifesciences.org/digests/60067%2Fdigest-60067.jpg/full/full/0/default.jpg",
+            "filename": "digest-60067.jpg",
+            "mediaType": "image/jpeg"
+          }
+        }
+      },
+      "subjects": [
+        {
+          "id": "evolutionary-biology",
+          "name": "Evolutionary Biology"
+        },
+        {
+          "id": "microbiology-infectious-disease",
+          "name": "Microbiology and Infectious Disease"
+        }
+      ],
+      "content": [
+        {
+          "type": "image",
+          "image": {
+            "alt": "",
+            "uri": "https://iiif.elifesciences.org/digests/60067%2Fdigest-60067.jpg",
+            "size": {
+              "width": 3375,
+              "height": 2250
+            },
+            "source": {
+              "uri": "https://iiif.elifesciences.org/digests/60067%2Fdigest-60067.jpg/full/full/0/default.jpg",
+              "filename": "digest-60067.jpg",
+              "mediaType": "image/jpeg"
+            }
+          },
+          "caption": [
+            {
+              "text": "Image credit: SELF x American Academy of Pediatrics Vaccine Photo Project; Photographer: Heather Hazzan; Wardrobe: Ronald Burton; Props: Campbell Pearson; Hair: Hide Suzuki; Makeup: Deanna Melluso at See Management. Shot on location at One Medical (CC BY 2.0)",
+              "type": "paragraph"
+            }
+          ]
+        },
+        {
+          "text": "Vaccination is the best protection against seasonal flu. It teaches the immune system what the flu virus looks like, preparing it to fight off an infection. But the flu virus changes its molecular appearance every year, escaping the immune defences learnt the year before. So, every year, the vaccine needs updating. Since it takes almost a year to design and make a new flu vaccine, researchers need to be able to predict what flu viruses will look like in the future. Currently, this prediction relies on experiments that assess the molecular appearance of flu viruses, a complex and slow approach.",
+          "type": "paragraph"
+        },
+        {
+          "text": "One alternative is to examine the virus's genetic code. Mathematical models try to predict which genetic changes might alter the appearance of a flu virus, saving the cost of performing specialised experiments. Recent research has shown that these models can make good predictions, but including experimental measures of the virus’ appearance could improve them even further. This could help the model to work out which genetic changes are likely to be beneficial to the virus, and which are not.",
+          "type": "paragraph"
+        },
+        {
+          "text": "To find out whether experimental data improves model predictions, Huddleston et al. designed a new forecasting tool which used 25 years of historical data from past flu seasons. Each forecast predicted what the virus population might look like the next year using the previous year's genetic code, experimental data, or both. Huddleston et al. then compared the predictions with the historical data to find the most useful data types. This showed that the best predictions combined changes from the virus's genetic code with experimental measures of its appearance.",
+          "type": "paragraph"
+        },
+        {
+          "text": "This new forecasting tool is open source, allowing teams across the world to start using it to improve their predictions straight away. Seasonal flu infects between 5 and 15% of the world's population every year, causing between quarter of a million and half a million deaths. Better predictions could lead to better flu vaccines and fewer illnesses and deaths.",
+          "type": "paragraph"
+        }
+      ],
+      "relatedContent": [
+        {
+          "id": "60067",
+          "doi": "10.7554/eLife.60067",
+          "type": "research-article",
+          "stage": "preview",
+          "title": "Integrating genotypes and phenotypes improves long-term forecasts of seasonal influenza A/H3N2 evolution",
+          "status": "vor",
+          "volume": 9,
+          "version": 2,
+          "published": "2020-09-02T00:00:00Z",
+          "authorLine": "John Huddleston et al.",
+          "elocationId": "e60067"
+        }
+      ]
+    },
+    {
+      "id": "61026",
+      "title": "How moles come to a stop",
+      "impactStatement": "A study of moles sheds new light on how skin cells avoid turning into cancer.",
+      "stage": "published",
+      "published": "2020-10-13T00:00:00Z",
+      "updated": "2020-10-13T11:30:25Z",
+      "image": {
+        "thumbnail": {
+          "alt": "",
+          "uri": "https://iiif.elifesciences.org/digests/61026%2Fdigest-61026.jpg",
+          "size": {
+            "width": 1163,
+            "height": 582
+          },
+          "source": {
+            "uri": "https://iiif.elifesciences.org/digests/61026%2Fdigest-61026.jpg/full/full/0/default.jpg",
+            "filename": "digest-61026.jpg",
+            "mediaType": "image/jpeg"
+          }
+        }
+      },
+      "subjects": [
+        {
+          "id": "cancer-biology",
+          "name": "Cancer Biology"
+        },
+        {
+          "id": "computational-systems-biology",
+          "name": "Computational and Systems Biology"
+        }
+      ],
+      "content": [
+        {
+          "type": "image",
+          "image": {
+            "alt": "",
+            "uri": "https://iiif.elifesciences.org/digests/61026%2Fdigest-61026.jpg",
+            "size": {
+              "width": 1163,
+              "height": 582
+            },
+            "source": {
+              "uri": "https://iiif.elifesciences.org/digests/61026%2Fdigest-61026.jpg/full/full/0/default.jpg",
+              "filename": "digest-61026.jpg",
+              "mediaType": "image/jpeg"
+            }
+          },
+          "caption": [
+            {
+              "text": "Image showing the progression of pigmented moles in the paw of a mouse. Image credit: Rolando Ruiz-Vega and Emaad Razzak (CC BY 4.0)",
+              "type": "paragraph"
+            }
+          ]
+        },
+        {
+          "text": "Melanocytes are pigment-producing cells found throughout the skin. Mutations that activate a gene called <i>BRAF</i> cause these cells to divide and produce melanocytic nevi, also known as “moles”. These mutations are oncogenic, meaning they can cause cancer. Indeed, <i>BRAF</i> is the most commonly mutated gene in melanoma, a deadly skin cancer that arises from melanocytes. Yet, moles hardly ever progress to melanoma.",
+          "type": "paragraph"
+        },
+        {
+          "text": "A proposed explanation for this behavior is that, once activated, <i>BRAF</i> initiates a process called “oncogene-induced senescence” in each melanocyte. This process, likened to premature aging, is thought to be what causes cells in a mole to quit dividing. Although this hypothesis is widely accepted, it has proved difficult to test directly.",
+          "type": "paragraph"
+        },
+        {
+          "text": "To investigate this notion, Ruiz-Vega et al. studied mice with hundreds of moles created by the same <i>BRAF</i> mutation found in human moles. Analyzing the activity of genes in individual cells revealed that nevus melanocytes that have stopped growing are no more senescent than other skin cells, including non-mole melanocytes.",
+          "type": "paragraph"
+        },
+        {
+          "text": "Ruiz-Vega et al. then analyzed the sizes at which moles stopped growing, estimating the number of cells in each mole. The data were then compared with the results of a simulation and mathematical modeling. This revealed that any model based on the idea of cells independently shutting down after a number of random events could not reproduce the distribution of mole sizes that had been experimentally observed. On the other hand, models based on melanocytes acting collectively to shut down each other’s growth fit the observed data much better.",
+          "type": "paragraph"
+        },
+        {
+          "text": "These findings suggest that moles do not stop growing as a direct result of the activation of <i>BRAF</i>, but because they sense and respond to their own overgrowth. The same kind of collective sensing is observed in normal tissues that maintain a constant size. Discovering that melanocytes do this not only sheds light on why moles stop growing, it could also help researchers devise new ways to prevent melanomas from forming.",
+          "type": "paragraph"
+        }
+      ],
+      "relatedContent": [
+        {
+          "id": "61026",
+          "doi": "10.7554/eLife.61026",
+          "type": "research-article",
+          "stage": "preview",
+          "title": "Dynamics of nevus development implicate cell cooperation in the growth arrest of transformed melanocytes",
+          "status": "vor",
+          "volume": 9,
+          "version": 1,
+          "authorLine": "Rolando Ruiz-Vega et al.",
+          "elocationId": "e61026"
+        }
+      ]
+    },
+    {
+      "id": "55797",
+      "title": "Pleasure’s neurochemistry",
+      "impactStatement": "Opioids and dopamine play crucial but distinct roles in determining how people respond to rewards.",
+      "stage": "published",
+      "published": "2020-10-13T00:00:00Z",
+      "updated": "2020-10-13T07:00:25Z",
+      "image": {
+        "thumbnail": {
+          "alt": "",
+          "uri": "https://iiif.elifesciences.org/digests/55797%2Fdigest-55797.jpeg",
+          "size": {
+            "width": 5208,
+            "height": 3330
+          },
+          "source": {
+            "uri": "https://iiif.elifesciences.org/digests/55797%2Fdigest-55797.jpeg/full/full/0/default.jpg",
+            "filename": "digest-55797.jpeg",
+            "mediaType": "image/jpeg"
+          }
+        }
+      },
+      "subjects": [
+        {
+          "id": "neuroscience",
+          "name": "Neuroscience"
+        }
+      ],
+      "content": [
+        {
+          "type": "image",
+          "image": {
+            "alt": "",
+            "uri": "https://iiif.elifesciences.org/digests/55797%2Fdigest-55797.jpeg",
+            "size": {
+              "width": 5208,
+              "height": 3330
+            },
+            "source": {
+              "uri": "https://iiif.elifesciences.org/digests/55797%2Fdigest-55797.jpeg/full/full/0/default.jpg",
+              "filename": "digest-55797.jpeg",
+              "mediaType": "image/jpeg"
+            }
+          },
+          "caption": [
+            {
+              "text": "Caresses and chocolate can be used as rewards. Image credit: Korb et al. (CC BY 4.0)",
+              "type": "paragraph"
+            }
+          ]
+        },
+        {
+          "text": "Studies in rats and other species have shown that two chemical messengers in the brain regulate how much an animal desires a reward, and how pleasant receiving the reward is. In this context, chemicals called opioids control both wanting and enjoying a reward, whereas a chemical called dopamine only regulates how much an animal desires it. However, since these results were obtained from research performed on animals, further studies are needed to determine if these chemicals play the same roles in the human brain.",
+          "type": "paragraph"
+        },
+        {
+          "text": "Korb et al. show that the same brain chemicals that control reward anticipation and pleasure in rats are also at work in humans. In the experiment, 131 healthy volunteers received either a drug that blocks opioid signaling in the brain, a drug that blocks dopamine signaling, or a placebo, a pill with no effect. Then, participants were given, on several occasions, either sweet milk with chocolate or a gentle caress on the forearm. Participants rated how much they wanted each of the rewards before receiving it, and how much they liked it after experiencing it. To measure their implicit wanting of the reward, participants also pressed a force-measuring device to increase their chances of receiving the reward. Additionally, small electrodes measured the movement of the volunteer’s smiling or frowning muscles to detect changes in facial expressions of pleasure.",
+          "type": "paragraph"
+        },
+        {
+          "text": "Volunteers taking either drug pressed on the device less hard than the participants taking the placebo, suggesting they did not want the rewards as much, and they frowned more as they anticipated the reward, indicating less anticipatory pleasure. However, only the volunteers taking the opioid-blocking drug smiled less when they received a reward, indicating that these participants did not get as much pleasure as others out of receiving it. These differences were most pronounced when volunteers looked at or received the sweet milk with chocolate.",
+          "type": "paragraph"
+        },
+        {
+          "text": "This experiment helps to shed light on the chemicals in the human brain that are involved in reward-seeking behaviors. In the future, the results may be useful for developing better treatments for addictions.",
+          "type": "paragraph"
+        }
+      ],
+      "relatedContent": [
+        {
+          "id": "55797",
+          "doi": "10.7554/eLife.55797",
+          "type": "research-article",
+          "stage": "preview",
+          "title": "Dopaminergic and opioidergic regulation during anticipation and consumption of social and nonsocial rewards",
+          "status": "vor",
+          "volume": 9,
+          "version": 1,
+          "authorLine": "Sebastian Korb et al.",
+          "elocationId": "e55797"
+        }
+      ]
+    },
+    {
+      "id": "60482",
+      "title": "Zooming in on protein factories",
+      "impactStatement": "Electron microscopy reveals details of the ribosome relevant to protein production.",
+      "stage": "published",
+      "published": "2020-10-12T14:45:45Z",
+      "updated": "2020-10-12T14:46:07Z",
+      "image": {
+        "thumbnail": {
+          "alt": "",
+          "uri": "https://iiif.elifesciences.org/digests/60482%2Fdigest-60482.png",
+          "size": {
+            "width": 1800,
+            "height": 1440
+          },
+          "source": {
+            "uri": "https://iiif.elifesciences.org/digests/60482%2Fdigest-60482.png/full/full/0/default.jpg",
+            "filename": "digest-60482.png",
+            "mediaType": "image/jpeg"
+          }
+        }
+      },
+      "subjects": [
+        {
+          "id": "structural-biology-molecular-biophysics",
+          "name": "Structural Biology and Molecular Biophysics"
+        }
+      ],
+      "content": [
+        {
+          "type": "image",
+          "image": {
+            "alt": "",
+            "uri": "https://iiif.elifesciences.org/digests/60482%2Fdigest-60482.png",
+            "size": {
+              "width": 1800,
+              "height": 1440
+            },
+            "source": {
+              "uri": "https://iiif.elifesciences.org/digests/60482%2Fdigest-60482.png/full/full/0/default.jpg",
+              "filename": "digest-60482.png",
+              "mediaType": "image/jpeg"
+            }
+          },
+          "caption": [
+            {
+              "text": "High-resolution structural details of the bacterial ribosome imaged by cryo-electron microscopy. Image credit: Zoe Watson (CC BY 4.0)",
+              "type": "paragraph"
+            }
+          ]
+        },
+        {
+          "text": "Inside cells, proteins are produced by complex molecular machines called ribosomes. Techniques that allow scientists to visualize ribosomes at the atomic level, such as cryogenic electron microscopy (cryo-EM), help shed light on the structure of these molecular machines, revealing details of how they build proteins. Understanding how ribosomes work has many benefits, including the development of new antibiotics that can kill bacteria without affecting animal cells.",
+          "type": "paragraph"
+        },
+        {
+          "text": "Watson et al. used cryo-EM techniques with increased resolution to examine the ribosomes of the bacterium <i>Escherichia coli</i> in a higher level of detail than has been seen before. The results revealed two chemical modifications in proteins that form the ribosome that had not been observed in ribosomes previously. Additionally, a protein segment with a previously undescribed structure was identified close to the site where the ribosome reads the genetic instructions needed to make proteins. Further genetic analyses suggested these structures are in many related species, and may play important roles in how the ribosome works.",
+          "type": "paragraph"
+        },
+        {
+          "text": "Watson et al. were also able to see how paromomycin, an antibiotic used to treat parasitic infections, is positioned in the ribosome. The antibiotic interacts with a site near where the genetic code is read out, which might explain why certain changes to the antibiotic can interfere with its potency. Finally, the new ribosome structure reveals thousands of water molecules and metal ions that help keep the ribosome together as it produces proteins.",
+          "type": "paragraph"
+        },
+        {
+          "text": "This study shows the value of advances in cryo-EM technology and illustrates the importance of applying these techniques to other cell components. The results also reveal details of the ribosome useful for further research into this essential molecular machine.",
+          "type": "paragraph"
+        }
+      ],
+      "relatedContent": [
+        {
+          "id": "60482",
+          "doi": "10.7554/eLife.60482",
+          "type": "research-article",
+          "stage": "preview",
+          "title": "Structure of the bacterial ribosome at 2 Å resolution",
+          "status": "vor",
+          "volume": 9,
+          "version": 2,
+          "published": "2020-09-14T00:00:00Z",
+          "authorLine": "Zoe L Watson et al.",
+          "elocationId": "e60482"
+        }
+      ]
+    },
+    {
+      "id": "53994",
+      "title": "On the rebound",
+      "impactStatement": "Brain cells called astrocytes may be important to regulate recovery sleep after prolonged wakefulness.",
+      "stage": "published",
+      "published": "2020-10-12T14:09:51Z",
+      "updated": "2020-10-12T14:10:05Z",
+      "image": {
+        "thumbnail": {
+          "alt": "",
+          "uri": "https://iiif.elifesciences.org/digests/53994%2Fdigest-53994.png",
+          "size": {
+            "width": 7560,
+            "height": 2689
+          },
+          "source": {
+            "uri": "https://iiif.elifesciences.org/digests/53994%2Fdigest-53994.png/full/full/0/default.jpg",
+            "filename": "digest-53994.png",
+            "mediaType": "image/jpeg"
+          }
+        }
+      },
+      "subjects": [
+        {
+          "id": "neuroscience",
+          "name": "Neuroscience"
+        }
+      ],
+      "content": [
+        {
+          "type": "image",
+          "image": {
+            "alt": "",
+            "uri": "https://iiif.elifesciences.org/digests/53994%2Fdigest-53994.png",
+            "size": {
+              "width": 7560,
+              "height": 2689
+            },
+            "source": {
+              "uri": "https://iiif.elifesciences.org/digests/53994%2Fdigest-53994.png/full/full/0/default.jpg",
+              "filename": "digest-53994.png",
+              "mediaType": "image/jpeg"
+            }
+          },
+          "caption": [
+            {
+              "text": "Astrocytes (green) in the fruit fly brain express a molecule called AANAT1 (magenta), which regulates chemical messengers involved in sleep homeostasis. Image credit: Sejal Davla (CC BY-SA 4.0)",
+              "type": "paragraph"
+            }
+          ]
+        },
+        {
+          "text": "Sleep is essential for our physical and mental health. A lack of sleep can affect our energy and concentration levels and is often linked to chronic illnesses and mood disorders.",
+          "type": "paragraph"
+        },
+        {
+          "text": "Sleep is controlled by an internal clock in our brain that operates on a 24-hour cycle, telling our bodies when we are tired and ready for bed, or fresh and alert to start a new day. In addition, the brain tracks the need for sleep and drives the recovery of sleep after periods of prolonged wakefulness – a process known as sleep-wake homeostasis.",
+          "type": "paragraph"
+        },
+        {
+          "text": "Chemical messengers in the brain such as dopamine and serotonin also play an important part in regulating our sleep drive. While dopamine keeps us awake, serotonin can both prevent us from and help us falling asleep, depending on the part of the brain in which it is released.",
+          "type": "paragraph"
+        },
+        {
+          "text": "Most research has focused on the role of different brain circuits on sleep, but it has been shown that a certain type of brain cell, known as astrocyte, may also be important for sleep regulation. So far, it has been unclear if astrocytes could be involved in regulating the need for recovery sleep after a sleep-deprived night – also known as rebound sleep.",
+          "type": "paragraph"
+        },
+        {
+          "text": "Now, Davla, Artiushin et al. used sleep-deprived fruit flies to investigate this further. The flies were kept awake over 12 hours (from 6pm to 6am), using intermittent physical agitation. The researchers found that astrocytes in the brains of fruit flies express a molecule called AANAT1, which peaked at the beginning of the night, declined as the night went on and recovered by morning. In sleep deprived flies, it inactivated the chemical messengers and so lowered the amount of dopamine and serotonin in the brain.",
+          "type": "paragraph"
+        },
+        {
+          "text": "However, in mutant flies that lacked AANAT1, both dopamine and serotonin levels increased in the brain after sleep deprivation. When AANAT1 was selectively removed from astrocytes only, sleep-deprived flies needed more rebound sleep during the day to make up for lost sleep at night. This shows that both astrocytes and AANAT1 play a crucial role in sleep homeostasis.",
+          "type": "paragraph"
+        },
+        {
+          "text": "Molecules belonging to the AANAT family exist in both flies and humans, and these results could have important implications for the science of sleep. The study of Davla, Artiushin et al. paves the way for understanding the mechanisms of sleep homeostasis that are similar in both organisms, and may in the future, help to identify sleep drugs that target astrocytes and the molecules they express.",
+          "type": "paragraph"
+        }
+      ],
+      "relatedContent": [
+        {
+          "id": "53994",
+          "doi": "10.7554/eLife.53994",
+          "type": "short-report",
+          "stage": "preview",
+          "title": "AANAT1 functions in astrocytes to regulate sleep homeostasis",
+          "status": "vor",
+          "volume": 9,
+          "version": 2,
+          "published": "2020-09-21T00:00:00Z",
+          "authorLine": "Sejal Davla et al.",
+          "elocationId": "e53994"
+        }
+      ]
+    },
+    {
+      "id": "58596",
+      "title": "Mapping the mind through the eye",
+      "impactStatement": "How does the organization of a visual brain area support hunting behavior in zebrafish?",
+      "stage": "published",
+      "published": "2020-10-12T00:00:00Z",
+      "updated": "2020-10-12T14:49:40Z",
+      "image": {
+        "thumbnail": {
+          "alt": "",
+          "uri": "https://iiif.elifesciences.org/digests/58596%2Fdigest-58596.png",
+          "size": {
+            "width": 6236,
+            "height": 3463
+          },
+          "source": {
+            "uri": "https://iiif.elifesciences.org/digests/58596%2Fdigest-58596.png/full/full/0/default.jpg",
+            "filename": "digest-58596.png",
+            "mediaType": "image/jpeg"
+          }
+        }
+      },
+      "subjects": [
+        {
+          "id": "neuroscience",
+          "name": "Neuroscience"
+        }
+      ],
+      "content": [
+        {
+          "type": "image",
+          "image": {
+            "alt": "",
+            "uri": "https://iiif.elifesciences.org/digests/58596%2Fdigest-58596.png",
+            "size": {
+              "width": 6236,
+              "height": 3463
+            },
+            "source": {
+              "uri": "https://iiif.elifesciences.org/digests/58596%2Fdigest-58596.png/full/full/0/default.jpg",
+              "filename": "digest-58596.png",
+              "mediaType": "image/jpeg"
+            }
+          },
+          "caption": [
+            {
+              "text": "Top-view of a larval zebrafish brain showing reconstructed neurons in the tectum. Cells that respond to large objects are shown in green. Image credit: Förster et al. (CC BY 4.0)",
+              "type": "paragraph"
+            }
+          ]
+        },
+        {
+          "text": "The retina is the thin layer of tissue in the eye that can receive light stimuli and convert them into electric signals to be transmitted to the brain. The cells that sense fine detail cluster at the center of the retina while the motion-sensing cells that keep track of movement lie at the periphery.",
+          "type": "paragraph"
+        },
+        {
+          "text": "When zebrafish larvae hunt, their motion-sensing cells are triggered as a prey crosses their peripheral field of view. They then turn and swim towards it. As they approach, the prey image moves to the detail-sensing part of the retina and appears larger, filling more of the field of view at close range. The signals are then processed in defined parts of the brain, in particular in a region called the optic tectum. How this area is organized in response to the organization of the eye and the requirements of the hunt is still unclear.",
+          "type": "paragraph"
+        },
+        {
+          "text": "Förster et al. set out to explore how the hunting routine of zebrafish larvae shapes the arrangement of neurons in the optic tectum. The larvae were exposed to different images representing the various aspects of the prey capture process: small moving dots represented passing prey at a distance, while large moving dots stood for prey just before capture. Measuring activity in the neurons of the optic tectum revealed that, like the eye, different areas specialize in different tasks. The back of the tectum was frequently activated by small dots and worked out which direction they were moving in during the first hunting steps. The front of the tectum responded best to large dots, often ignoring their direction, and helped the larvae to track their prey straight ahead. To test these findings, Förster et al. destroyed the large object-responsive cells with a laser and watched the larvae hunting real prey. Without the cells, the fish found it much harder to track and catch their targets.",
+          "type": "paragraph"
+        },
+        {
+          "text": "These results shed light on the link between behavior and how neurons are arranged in the brain. Future work could explore how the different neurons in the optic tectum are connected, and the behaviors they trigger in the fish. This could help to reveal general principles about how sensory information guides behavior and how evolution has shaped the layout of the brain.",
+          "type": "paragraph"
+        }
+      ],
+      "relatedContent": [
+        {
+          "id": "58596",
+          "doi": "10.7554/eLife.58596",
+          "type": "research-article",
+          "stage": "preview",
+          "title": "Retinotectal circuitry of larval zebrafish is adapted to detection and pursuit of prey",
+          "status": "vor",
+          "volume": 9,
+          "version": 1,
+          "authorLine": "Dominique Förster et al.",
+          "elocationId": "e58596"
+        }
+      ]
+    },
+    {
+      "id": "57443",
+      "title": "Reconstructing the brain of fruit flies",
+      "impactStatement": "A map of the central region of the fruit fly brain, showing all neurons and their connections, is now freely available online.",
+      "stage": "published",
+      "published": "2020-10-09T14:40:16Z",
+      "updated": "2020-10-09T14:40:40Z",
+      "image": {
+        "thumbnail": {
+          "alt": "",
+          "uri": "https://iiif.elifesciences.org/digests/57443%2Fdigest-57443.jpg",
+          "size": {
+            "width": 2589,
+            "height": 1962
+          },
+          "source": {
+            "uri": "https://iiif.elifesciences.org/digests/57443%2Fdigest-57443.jpg/full/full/0/default.jpg",
+            "filename": "digest-57443.jpg",
+            "mediaType": "image/jpeg"
+          }
+        }
+      },
+      "subjects": [
+        {
+          "id": "computational-systems-biology",
+          "name": "Computational and Systems Biology"
+        },
+        {
+          "id": "neuroscience",
+          "name": "Neuroscience"
+        }
+      ],
+      "content": [
+        {
+          "type": "image",
+          "image": {
+            "alt": "",
+            "uri": "https://iiif.elifesciences.org/digests/57443%2Fdigest-57443.jpg",
+            "size": {
+              "width": 2589,
+              "height": 1962
+            },
+            "source": {
+              "uri": "https://iiif.elifesciences.org/digests/57443%2Fdigest-57443.jpg/full/full/0/default.jpg",
+              "filename": "digest-57443.jpg",
+              "mediaType": "image/jpeg"
+            }
+          },
+          "caption": [
+            {
+              "text": "613 neurons from one portion of the fruit fly’s brain, with artificial colors assigned to each neuron to make them easier to follow in the dense tangle of connections. Image credit: The FlyEM team, Janelia Research Campus, HHMI (CC BY 4.0)",
+              "type": "paragraph"
+            }
+          ]
+        },
+        {
+          "text": "Animal brains of all sizes, from the smallest to the largest, work in broadly similar ways. Studying the brain of any one animal in depth can thus reveal the general principles behind the workings of all brains. The fruit fly Drosophila is a popular choice for such research. With about 100,000 neurons – compared to some 86 billion in humans – the fly brain is small enough to study at the level of individual cells. But it nevertheless supports a range of complex behaviors, including navigation, courtship and learning.",
+          "type": "paragraph"
+        },
+        {
+          "text": "Thanks to decades of research, scientists now have a good understanding of which parts of the fruit fly brain support particular behaviors. But exactly how they do this is often unclear. This is because previous studies showing the connections between cells only covered small areas of the brain. This is like trying to understand a novel when all you can see is a few isolated paragraphs.",
+          "type": "paragraph"
+        },
+        {
+          "text": "To solve this problem, Scheffer, Xu, Januszewski, Lu, Takemura, Hayworth, Huang, Shinomiya et al. prepared the first complete map of the entire central region of the fruit fly brain. The central brain consists of approximately 25,000 neurons and around 20 million connections. To prepare the map – or connectome – the brain was cut into very thin 8nm slices and photographed with an electron microscope. A three-dimensional map of the neurons and connections in the brain was then reconstructed from these images using machine learning algorithms. Finally, Scheffer et al. used the new connectome to obtain further insights into the circuits that support specific fruit fly behaviors.",
+          "type": "paragraph"
+        },
+        {
+          "text": "The central brain connectome is freely available online for anyone to access. When used in combination with existing methods, the map will make it easier to understand how the fly brain works, and how and why it can fail to work correctly. Many of these findings will likely apply to larger brains, including our own. In the long run, studying the fly connectome may therefore lead to a better understanding of the human brain and its disorders. Performing a similar analysis on the brain of a small mammal, by scaling up the methods here, will be a likely next step along this path.",
+          "type": "paragraph"
+        }
+      ],
+      "relatedContent": [
+        {
+          "id": "57443",
+          "doi": "10.7554/eLife.57443",
+          "type": "research-article",
+          "stage": "preview",
+          "title": "A connectome and analysis of the adult <i>Drosophila</i> central brain",
+          "status": "vor",
+          "volume": 9,
+          "version": 3,
+          "published": "2020-09-03T00:00:00Z",
+          "authorLine": "Louis K Scheffer et al.",
+          "elocationId": "e57443"
+        }
+      ]
+    },
+    {
+      "id": "57189",
+      "title": "A burning question",
+      "impactStatement": "A gene regulator called KLF5 can be repurposed to activate genes involved in cells becoming cancerous in the lower oesophagus.",
+      "stage": "published",
+      "published": "2020-10-08T15:30:48Z",
+      "updated": "2020-10-08T15:31:05Z",
+      "image": {
+        "thumbnail": {
+          "alt": "",
+          "uri": "https://iiif.elifesciences.org/digests/57189%2Fdigest-57189.jpg",
+          "size": {
+            "width": 797,
+            "height": 833
+          },
+          "source": {
+            "uri": "https://iiif.elifesciences.org/digests/57189%2Fdigest-57189.jpg/full/full/0/default.jpg",
+            "filename": "digest-57189.jpg",
+            "mediaType": "image/jpeg"
+          }
+        }
+      },
+      "subjects": [
+        {
+          "id": "cancer-biology",
+          "name": "Cancer Biology"
+        }
+      ],
+      "content": [
+        {
+          "type": "image",
+          "image": {
+            "alt": "",
+            "uri": "https://iiif.elifesciences.org/digests/57189%2Fdigest-57189.jpg",
+            "size": {
+              "width": 797,
+              "height": 833
+            },
+            "source": {
+              "uri": "https://iiif.elifesciences.org/digests/57189%2Fdigest-57189.jpg/full/full/0/default.jpg",
+              "filename": "digest-57189.jpg",
+              "mediaType": "image/jpeg"
+            }
+          },
+          "caption": [
+            {
+              "text": "Stomach fluids can sometimes damage the oesophagus; in a small number of patients, this repeated exposure leads to abnormal cells in the lower oesophagus (arrowed), which in turn can become cancerous. Image credit: Servier Medical Art (CCBY 3.0)",
+              "type": "paragraph"
+            }
+          ]
+        },
+        {
+          "text": "Acid fluids present in the gut can sometimes ‘go up’ and damage the oesophagus, the pipe that connects the mouth and the stomach. As a result, a small number of individuals can develop Barrett’s oesophagus, a condition where cells in the lining of the lower oesophagus show abnormal shapes. In certain patients, these cells then become cancerous, but exactly how this happens is unknown. This lack of understanding contributes to late diagnoses, limited treatment and low survival rates.",
+          "type": "paragraph"
+        },
+        {
+          "text": "Many cancers feature ‘signature’ mutations in a set of genes that controls how a cell can multiply. Yet, in the case of cancers of the lower oesophagus, known genetic changes have had a limited impact on our understanding of the emergence of the disease. Here, Rogerson et al. focused instead on non-genetic changes and studied transcription factors, the proteins that bind to regulatory regions of the DNA to switch genes on and off.",
+          "type": "paragraph"
+        },
+        {
+          "text": "A close inspection of cancer cells in the lower oesophagus revealed that, in that state, a transcription factor called KLF5 controls the abnormal activation of genes involved in cell growth. This is linked to the transcription factor adopting a different pattern of binding onto regulatory regions in diseased cells. Crucially, when the cell growth genes regulated by KLF5 are activated, patients have lower survival rates. Further work is now required to examine whether this finding could help to identify patients who are most at risk from developing cancer. More broadly, the results from the work by Rogerson et al. demonstrate how transcription factors can be repurposed in a disease context.",
+          "type": "paragraph"
+        }
+      ],
+      "relatedContent": [
+        {
+          "id": "57189",
+          "doi": "10.7554/eLife.57189",
+          "type": "research-article",
+          "stage": "preview",
+          "title": "Repurposing of KLF5 activates a cell cycle signature during the progression from a precursor state to oesophageal adenocarcinoma",
+          "status": "vor",
+          "volume": 9,
+          "version": 2,
+          "published": "2020-09-03T00:00:00Z",
+          "authorLine": "Connor Rogerson et al.",
+          "elocationId": "e57189"
+        }
+      ]
+    },
+    {
+      "id": "58941",
+      "title": "Feeling SWELL",
+      "impactStatement": "In mice, the SWELL1 protein helps muscle cells to form and perform properly.",
+      "stage": "published",
+      "published": "2020-10-07T15:53:00Z",
+      "updated": "2020-10-07T15:53:19Z",
+      "image": {
+        "thumbnail": {
+          "alt": "",
+          "uri": "https://iiif.elifesciences.org/digests/58941%2Fdigest-58941.jpg",
+          "size": {
+            "width": 1920,
+            "height": 1421
+          },
+          "source": {
+            "uri": "https://iiif.elifesciences.org/digests/58941%2Fdigest-58941.jpg/full/full/0/default.jpg",
+            "filename": "digest-58941.jpg",
+            "mediaType": "image/jpeg"
+          }
+        }
+      },
+      "subjects": [
+        {
+          "id": "cell-biology",
+          "name": "Cell Biology"
+        }
+      ],
+      "content": [
+        {
+          "type": "image",
+          "image": {
+            "alt": "",
+            "uri": "https://iiif.elifesciences.org/digests/58941%2Fdigest-58941.jpg",
+            "size": {
+              "width": 1920,
+              "height": 1421
+            },
+            "source": {
+              "uri": "https://iiif.elifesciences.org/digests/58941%2Fdigest-58941.jpg/full/full/0/default.jpg",
+              "filename": "digest-58941.jpg",
+              "mediaType": "image/jpeg"
+            }
+          },
+          "caption": [
+            {
+              "text": "Image credit: Public domain",
+              "type": "paragraph"
+            }
+          ]
+        },
+        {
+          "text": "Skeletal muscles – the force-generating tissue attached to bones – must maintain their mass and health for the body to work properly. It is therefore necessary to understand how an organism can regulate the way skeletal muscles form, grow and heal.",
+          "type": "paragraph"
+        },
+        {
+          "text": "A multitude of factors can control how muscles form, including mechanical signals. The molecules that can sense these mechanical stimuli, however, remain unknown. Mechanoresponsive ion channels provide possible candidates for these molecular sensors. These proteins are studded through the cell membranes, where they can respond to mechanical changes by opening and allowing the flow of ions in and out of a cell, or by changing interactions with other proteins.",
+          "type": "paragraph"
+        },
+        {
+          "text": "The SWELL1 protein is a component of an ion channel known as VRAC, which potentially responds to mechanical stimuli. This channel is associated with many biological processes such as cells multiplying, migrating, growing and dying, but it is still unclear how.",
+          "type": "paragraph"
+        },
+        {
+          "text": "Here, Kumar et al. first tested whether SWELL1 controls how skeletal muscle precursors mature into their differentiated and functional form. These experiments showed that SWELL1 regulates this differentiation process under the influence of the hormone insulin, as well as mechanical signals such as cell stretching. In addition, this work revealed that SWELL1 relies on an adaptor molecule called GRB2 to relay these signals in the cell.",
+          "type": "paragraph"
+        },
+        {
+          "text": "Next, Kumar et al. genetically engineered mice lacking SWELL1 only in skeletal muscle. These animals had smaller muscle cells, as well as muscles that were weaker and less enduring. When raised on a high-calorie diet, the mutant mice also got more obese and developed resistance to insulin, which is an important step driving obesity-induced diabetes. Together, these findings show that SWELL1 helps to regulate the formation and function of muscle cells, and highlights how an ion channel participates in these processes.",
+          "type": "paragraph"
+        },
+        {
+          "text": "Healthy muscles are key for overall wellbeing, as they also protect against obesity and obesity-related conditions such as type 2 diabetes or nonalcoholic fatty liver disease. This suggests that targeting SWELL1 could prove advantageous in a clinical setting.",
+          "type": "paragraph"
+        }
+      ],
+      "relatedContent": [
+        {
+          "id": "58941",
+          "doi": "10.7554/eLife.58941",
+          "type": "research-article",
+          "stage": "preview",
+          "title": "SWELL1 regulates skeletal muscle cell size, intracellular signaling, adiposity and glucose metabolism",
+          "status": "vor",
+          "volume": 9,
+          "version": 3,
+          "published": "2020-09-15T00:00:00Z",
+          "authorLine": "Ashutosh Kumar et al.",
+          "elocationId": "e58941"
+        }
+      ]
+    },
+    {
+      "id": "57553",
+      "title": "New insights into heart disease",
+      "impactStatement": "A protein that helps protect against heart attack and stroke may make a good target for new therapies.",
+      "stage": "published",
+      "published": "2020-10-07T13:39:47Z",
+      "updated": "2020-10-07T13:39:59Z",
+      "image": {
+        "thumbnail": {
+          "alt": "",
+          "uri": "https://iiif.elifesciences.org/digests/57553%2Fdigest-57553.jpg",
+          "size": {
+            "width": 700,
+            "height": 726
+          },
+          "source": {
+            "uri": "https://iiif.elifesciences.org/digests/57553%2Fdigest-57553.jpg/full/full/0/default.jpg",
+            "filename": "digest-57553.jpg",
+            "mediaType": "image/jpeg"
+          }
+        }
+      },
+      "subjects": [
+        {
+          "id": "genetics-genomics",
+          "name": "Genetics and Genomics"
+        },
+        {
+          "id": "medicine",
+          "name": "Medicine"
+        }
+      ],
+      "content": [
+        {
+          "type": "image",
+          "image": {
+            "alt": "",
+            "uri": "https://iiif.elifesciences.org/digests/57553%2Fdigest-57553.jpg",
+            "size": {
+              "width": 700,
+              "height": 726
+            },
+            "source": {
+              "uri": "https://iiif.elifesciences.org/digests/57553%2Fdigest-57553.jpg/full/full/0/default.jpg",
+              "filename": "digest-57553.jpg",
+              "mediaType": "image/jpeg"
+            }
+          },
+          "caption": [
+            {
+              "text": "Figure caption: Microscopy image showing the blood flow in the brain of a mouse. Image credit: Hansen et al., 2020 (CC BY 4.0)",
+              "type": "paragraph"
+            }
+          ]
+        },
+        {
+          "text": "Restricted blood flow in the heart or brain can deprive these vital organs of oxygen, thereby causing a heart attack or stroke. However, the body has compensatory mechanisms to mitigate damage: if the blood flow is reduced in one blood vessel, acidic waste accumulates locally. This causes nearby blood vessels to widen and increase the oxygen supply. Although scientists first observed this process 140 years ago, they have not yet devised a way to use it for treatment of heart attack or stroke.",
+          "type": "paragraph"
+        },
+        {
+          "text": "Now, Hansen et al. discovered that a protein called RPTPγ, which is found on the lining of blood vessels, could be a good target for drugs intended to reduce the consequences of heart attacks and strokes. The protein RPTPγ has a similar structure to other proteins that bind bicarbonate, an important ion that buffers acids in the body. RPTPγ can also trigger signals to nearby cells, which suggests that the protein can monitor bicarbonate levels in the blood and tissue and alert blood vessels of the need to widen.",
+          "type": "paragraph"
+        },
+        {
+          "text": "Hansen et al. found that the blood vessels of mice that lacked RPTPγ were unable to widen when needed. Moreover, mice without RPTPγ experienced abnormal changes in blood pressure and blood flow to the brain when oxygen consumption was elevated or pH was disrupted. Hansen et al. further analyzed genetic and health data from nearly 50,000 individuals in the UK Biobank. These analyses revealed that people with genetic changes that render RPTPγ ineffective are at higher risk of having a heart attack or stroke. People with these genetic variants also have reduced heart pumping ability.",
+          "type": "paragraph"
+        },
+        {
+          "text": "The experiments suggest that a lack of functional RPTPγ affects an individual’s ability to adjust local blood flow in response to acid-base disturbances and oxygen deficits, increasing the risk of a heart attack or stroke. This information may help scientists develop new ways to prevent or treat heart attacks and strokes, or to treat other conditions like cancer, where pH is disturbed.",
+          "type": "paragraph"
+        }
+      ],
+      "relatedContent": [
+        {
+          "id": "57553",
+          "doi": "10.7554/eLife.57553",
+          "type": "research-article",
+          "stage": "preview",
+          "title": "<i>PTPRG</i> is an ischemia risk locus essential for HCO<sub>3</sub><sup>–</sup>-dependent regulation of endothelial function and tissue perfusion",
+          "status": "vor",
+          "volume": 9,
+          "version": 2,
+          "published": "2020-09-21T00:00:00Z",
+          "authorLine": "Kristoffer B Hansen et al.",
+          "elocationId": "e57553"
+        }
+      ]
+    },
+    {
+      "id": "58149",
+      "title": "Forming cell fingerprints",
+      "impactStatement": "How do mucus-covered cells acquire small ridges at their surface?",
+      "stage": "published",
+      "published": "2020-10-05T15:14:34Z",
+      "updated": "2020-10-05T15:15:14Z",
+      "image": {
+        "thumbnail": {
+          "alt": "",
+          "uri": "https://iiif.elifesciences.org/digests/58149%2Fdigest-58149.tif",
+          "size": {
+            "width": 2207,
+            "height": 2207
+          },
+          "source": {
+            "uri": "https://iiif.elifesciences.org/digests/58149%2Fdigest-58149.tif/full/full/0/default.jpg",
+            "filename": "digest-58149.tif",
+            "mediaType": "image/jpeg"
+          }
+        }
+      },
+      "subjects": [
+        {
+          "id": "cell-biology",
+          "name": "Cell Biology"
+        },
+        {
+          "id": "developmental-biology",
+          "name": "Developmental Biology"
+        }
+      ],
+      "content": [
+        {
+          "type": "image",
+          "image": {
+            "alt": "",
+            "uri": "https://iiif.elifesciences.org/digests/58149%2Fdigest-58149.tif",
+            "size": {
+              "width": 2207,
+              "height": 2207
+            },
+            "source": {
+              "uri": "https://iiif.elifesciences.org/digests/58149%2Fdigest-58149.tif/full/full/0/default.jpg",
+              "filename": "digest-58149.tif",
+              "mediaType": "image/jpeg"
+            }
+          },
+          "caption": [
+            {
+              "text": "Keratin filaments (green) and actin filaments (magenta) are both required for microridge protrusions to form. Image credit: Inaba et al. (CC BY 4.0)",
+              "type": "paragraph"
+            }
+          ]
+        },
+        {
+          "text": "Cells adopt a wide array of irregular and bumpy shapes, which are scaffolded by an internal structure called the cytoskeleton. This network of filaments can deform the cell membrane the way tent poles frame a canvas. Cells contain three types of cytoskeleton elements (actin filaments, intermediate filaments, and microtubules), each with unique chemical and mechanical properties.",
+          "type": "paragraph"
+        },
+        {
+          "text": "One of the main roles of the cytoskeleton is to create protrusions, a range of structures that ‘stick out’ of a cell to allow movement and interactions with the environment. Both actin filaments and microtubules help form protrusions, but the role of intermediate filaments remains unclear.",
+          "type": "paragraph"
+        },
+        {
+          "text": "Microridges are a type of protrusion found on cells covered by mucus, for instance on the surface of the eye, inside the mouth, or on fish skin. These small bumps are organised on the membrane of a cell in fingerprint-like arrangements. Scientists know that actin networks are necessary for microridges to form; yet, many structures supported by actin filaments are not stable over time, suggesting that another component of the cytoskeleton might be lending support.",
+          "type": "paragraph"
+        },
+        {
+          "text": "Intermediate filaments are the strongest, most stable type of cytoskeleton element, and they can connect to actin filaments via linker proteins. However, research has yet to show that this kind of cooperation happens in any membrane protrusion.",
+          "type": "paragraph"
+        },
+        {
+          "text": "Here, Inaba et al. used high-resolution microscopy to monitor microridge development in the skin of live fish. In particular, they focused on a type of intermediate filaments known as keratin filaments. This revealed that, inside microridges, the keratin and actin networks form alongside each other, with linker proteins called Envoplakin and Periplakin connecting the two structures together.",
+          "type": "paragraph"
+        },
+        {
+          "text": "Genetic experiments revealed that Envoplakin and Periplakin must attach to actin for microridges to start forming. However, the two proteins bind to keratin for protrusions to grow. This work therefore highlights how intermediate filaments and linker proteins contribute to the formation of these structures.",
+          "type": "paragraph"
+        },
+        {
+          "text": "Many tissues must be covered in mucus to remain moist and healthy. As microridges likely contribute to mucus retention, the findings by Inaba et al. may help to better understand how disorders linked to problems in mucus emerge.",
+          "type": "paragraph"
+        }
+      ],
+      "relatedContent": [
+        {
+          "id": "58149",
+          "doi": "10.7554/eLife.58149",
+          "type": "research-article",
+          "stage": "preview",
+          "title": "Keratins and the plakin family cytolinker proteins control the length of epithelial microridge protrusions",
+          "status": "vor",
+          "volume": 9,
+          "version": 2,
+          "published": "2020-09-07T00:00:00Z",
+          "authorLine": "Yasuko Inaba et al.",
+          "elocationId": "e58149"
+        }
+      ]
+    },
+    {
+      "id": "59566",
+      "title": "Sculpting the nervous system",
+      "impactStatement": "The nervous system removes specific types of neurons during development to generate its mature form, this process impacts behaviours and evolution.",
+      "stage": "published",
+      "published": "2020-10-05T14:40:54Z",
+      "updated": "2020-10-05T14:41:22Z",
+      "image": {
+        "thumbnail": {
+          "alt": "",
+          "uri": "https://iiif.elifesciences.org/digests/59566%2Fdigest-59566.tif",
+          "size": {
+            "width": 1176,
+            "height": 928
+          },
+          "source": {
+            "uri": "https://iiif.elifesciences.org/digests/59566%2Fdigest-59566.tif/full/full/0/default.jpg",
+            "filename": "digest-59566.tif",
+            "mediaType": "image/jpeg"
+          }
+        }
+      },
+      "subjects": [
+        {
+          "id": "developmental-biology",
+          "name": "Developmental Biology"
+        }
+      ],
+      "content": [
+        {
+          "type": "image",
+          "image": {
+            "alt": "",
+            "uri": "https://iiif.elifesciences.org/digests/59566%2Fdigest-59566.tif",
+            "size": {
+              "width": 1176,
+              "height": 928
+            },
+            "source": {
+              "uri": "https://iiif.elifesciences.org/digests/59566%2Fdigest-59566.tif/full/full/0/default.jpg",
+              "filename": "digest-59566.tif",
+              "mediaType": "image/jpeg"
+            }
+          },
+          "caption": [
+            {
+              "text": "Neurons being born and dying in the nervous system of the swift lousefly. Cells shown in green are neurons that have recently divided, and cells shown in magenta newly born neurons that are dying. Image credit: Sinziana Pop (CC BY 4.0)",
+              "type": "paragraph"
+            }
+          ]
+        },
+        {
+          "text": "Just like a sculptor chips away at a block of granite to make a statue, the nervous system reaches its mature state by eliminating neurons during development through a process known as programmed cell death.",
+          "type": "paragraph"
+        },
+        {
+          "text": "In vertebrates, this mechanism often involves newly born neurons shrivelling away and dying if they fail to connect with others during development. Most studies in insects have focused on the death of neurons that occurs at metamorphosis, during the transition between larva to adult, when cells which are no longer needed in the new life stage are eliminated.",
+          "type": "paragraph"
+        },
+        {
+          "text": "Pop et al. harnessed a newly designed genetic probe to point out that, in fruit flies, programmed cell death of neurons at metamorphosis is not the main mechanism through which cells die. Rather, the majority of cell death takes place as soon as neurons are born throughout all larval stages, when most of the adult nervous system is built. To gain further insight into the role of this ‘early’ cell death, the neurons were stopped from dying, showing that these cells were able to reach maturity and function. Together, these results suggest that early cell death may be a mechanism fine-tuned by evolution to shape the many and varied nervous systems of insects.",
+          "type": "paragraph"
+        },
+        {
+          "text": "To explore this, Pop et al. looked for hints of early cell death in relatives of fruit flies that are unable to fly: the swift lousefly and the bee lousefly. This analysis showed that early cell death is likely to occur in these two insects, but it follows different patterns than in the fruit fly, potentially targeting the neurons that would have controlled flight in these flies’ ancestors.",
+          "type": "paragraph"
+        },
+        {
+          "text": "Brains are the product of evolution: learning how neurons change their connections and adapt could help us understand how the brain works in health and disease. This knowledge may also be relevant to work on artificial intelligence, a discipline that often bases the building blocks and connections in artificial ‘brains’ on how neurons communicate with one another.",
+          "type": "paragraph"
+        }
+      ],
+      "relatedContent": [
+        {
+          "id": "59566",
+          "doi": "10.7554/eLife.59566",
+          "type": "research-article",
+          "stage": "preview",
+          "title": "Extensive and diverse patterns of cell death sculpt neural networks in insects",
+          "status": "vor",
+          "volume": 9,
+          "version": 2,
+          "published": "2020-09-07T00:00:00Z",
+          "authorLine": "Sinziana Pop et al.",
+          "elocationId": "e59566"
+        }
+      ]
+    },
+    {
+      "id": "56829",
+      "title": "Taking the bite out of mosquito research",
+      "impactStatement": "A new device may replace human volunteers in studies of mosquito-biting behavior, allowing scientists to test new ways to prevent mosquito bites and the diseases caused by them.",
+      "stage": "published",
+      "published": "2020-10-05T14:31:28Z",
+      "updated": "2020-10-05T14:31:53Z",
+      "image": {
+        "thumbnail": {
+          "alt": "",
+          "uri": "https://iiif.elifesciences.org/digests/56829%2Fdigest-56829.jpg",
+          "size": {
+            "width": 5184,
+            "height": 3456
+          },
+          "source": {
+            "uri": "https://iiif.elifesciences.org/digests/56829%2Fdigest-56829.jpg/full/full/0/default.jpg",
+            "filename": "digest-56829.jpg",
+            "mediaType": "image/jpeg"
+          }
+        }
+      },
+      "subjects": [
+        {
+          "id": "ecology",
+          "name": "Ecology"
+        },
+        {
+          "id": "neuroscience",
+          "name": "Neuroscience"
+        }
+      ],
+      "content": [
+        {
+          "type": "image",
+          "image": {
+            "alt": "",
+            "uri": "https://iiif.elifesciences.org/digests/56829%2Fdigest-56829.jpg",
+            "size": {
+              "width": 5184,
+              "height": 3456
+            },
+            "source": {
+              "uri": "https://iiif.elifesciences.org/digests/56829%2Fdigest-56829.jpg/full/full/0/default.jpg",
+              "filename": "digest-56829.jpg",
+              "mediaType": "image/jpeg"
+            }
+          },
+          "caption": [
+            {
+              "text": "Female <i>Aedes aegypti</i> mosquitos descend upon an artificial bite substrate in search of a blood meal (filmed from below). Image credit: Hol et al., 2020 (CC BY 4.0)",
+              "type": "paragraph"
+            }
+          ]
+        },
+        {
+          "text": "Scientists often sacrifice their own skin to study how mosquitos drink blood. They allow mosquitos to bite them in laboratory settings so they can observe the insects’ feeding behavior. By observing blood feeding, scientists hope to find ways to prevent deadly diseases like malaria, which is transmitted by bites from mosquitos carrying the malaria parasite. These studies are not only unpleasant for the volunteers, they also have important limitations. For example, it is too risky to use pathogen-infected mosquitos that could make the volunteers sick.",
+          "type": "paragraph"
+        },
+        {
+          "text": "A device called the biteOscope developed by Hol et al. may give scientists and their skin a reprieve. The device has a transparent skin-like covering that attracts mosquitos and supplies them an artificial blood meal when they bite. The device captures high-resolution images of the insects’ behavior. It is small enough to fit in a backpack when disassembled, costs about $900 to $3,500 US dollars, and is suitable for use in the laboratory or in the field. Using machine-learning techniques, Hol et al. also developed an automated system for analyzing the images.",
+          "type": "paragraph"
+        },
+        {
+          "text": "The researchers tested the device on four types of disease-transmitting mosquitos. In one set of experiments, <i>Anopheles</i> mosquitos were recorded interacting with a biteOscope partially coated with an insect repellent called DEET. The images captured by the biteOscope showed that the mosquitos are attracted to the warm surface and land on the part coated with DEET. But when their legs come in contact with the repellent, they leave.",
+          "type": "paragraph"
+        },
+        {
+          "text": "The biteOscope provides scientists a new way to study blood feeding, even in mosquitos infected with dangerous pathogens. It might also be used to test new ways to prevent mosquitos from biting and spreading disease. Because the device is portable and relatively inexpensive, it may enable larger studies in a variety of settings.",
+          "type": "paragraph"
+        }
+      ],
+      "relatedContent": [
+        {
+          "id": "56829",
+          "doi": "10.7554/eLife.56829",
+          "type": "tools-resources",
+          "stage": "preview",
+          "title": "BiteOscope, an open platform to study mosquito biting behavior",
+          "status": "vor",
+          "volume": 9,
+          "version": 2,
+          "published": "2020-09-22T00:00:00Z",
+          "authorLine": "Felix JH Hol et al.",
+          "elocationId": "e56829"
+        }
+      ]
+    },
+    {
+      "id": "59686",
+      "title": "Opposing roles in cancer",
+      "impactStatement": "A protein involved in mitochondrial energy production can increase the growth of colorectal tumors, while blocking the cancer’s spread to other organs.",
+      "stage": "published",
+      "published": "2020-10-01T16:53:21Z",
+      "updated": "2020-10-02T17:16:32Z",
+      "image": {
+        "thumbnail": {
+          "alt": "",
+          "uri": "https://iiif.elifesciences.org/digests/59686%2Fdigest-59686.tif",
+          "size": {
+            "width": 1800,
+            "height": 1470
+          },
+          "source": {
+            "uri": "https://iiif.elifesciences.org/digests/59686%2Fdigest-59686.tif/full/full/0/default.jpg",
+            "filename": "digest-59686.tif",
+            "mediaType": "image/jpeg"
+          }
+        }
+      },
+      "subjects": [
+        {
+          "id": "structural-biology-molecular-biophysics",
+          "name": "Structural Biology and Molecular Biophysics"
+        }
+      ],
+      "content": [
+        {
+          "type": "image",
+          "image": {
+            "alt": "",
+            "uri": "https://iiif.elifesciences.org/digests/59686%2Fdigest-59686.tif",
+            "size": {
+              "width": 1800,
+              "height": 1470
+            },
+            "source": {
+              "uri": "https://iiif.elifesciences.org/digests/59686%2Fdigest-59686.tif/full/full/0/default.jpg",
+              "filename": "digest-59686.tif",
+              "mediaType": "image/jpeg"
+            }
+          },
+          "caption": [
+            {
+              "text": "A mouse injected with colorectal cancer cells from a human tumor that produce NCLX (left), and another mouse that has been injected with colorectal cancer cells that lack NCLX (right). The image on the right shows that the cells lacking NCLX are more likely to spread to other organs. Image credit: Pathak, Gueguinou et al. (CC BY 4.0)",
+              "type": "paragraph"
+            }
+          ]
+        },
+        {
+          "text": "Colorectal cancer is the second largest cause of cancer deaths worldwide. Even in cases where the cancer is diagnosed and treated early, cells can sometimes survive treatment and spread to other organs. Once the cancer has spread, the survival rate is less than 15%.",
+          "type": "paragraph"
+        },
+        {
+          "text": "Mitochondria are compartments in the cell that produce energy, and they play an important role in supporting the rapid growth of cancer cells. The levels of calcium ions in mitochondria control how they produce energy, a process that is altered in cancer cells. To better understand how calcium ions influence colorectal cancer growth, Pathak, Gueguinou et al. studied a protein called NCLX, which controls calcium levels by pumping them out of the mitochondria.",
+          "type": "paragraph"
+        },
+        {
+          "text": "Two mouse strains that were used to study what happens if NCLX is missing. The first strain was genetically modified to disable the gene for NCLX and then exposed to carcinogens. The second strain was injected with colorectal cancer cells from a human tumor that were lacking NCLX. In both strains, the tumors that formed were smaller than in mice with NCLX. However, the human cancer cells in the second model were more likely to spread to other organs. This is likely because the build-up of calcium ions in the mitochondria of mice lacking NCLX led to an increase in the production of hypoxia-inducible factor-1a, a protein that is a common driver of cancer spread.",
+          "type": "paragraph"
+        },
+        {
+          "text": "Pathak, Gueguinou et al. demonstrated how NCLX can affect colorectal cancer progression. It suggests that it may have opposing effects during early and late-stage colorectal cancer, encouraging tumor growth but also decreasing the spread to other organs. Further research could help refine treatments at different stages of the disease.",
+          "type": "paragraph"
+        }
+      ],
+      "relatedContent": [
+        {
+          "id": "59686",
+          "doi": "10.7554/eLife.59686",
+          "type": "research-article",
+          "stage": "published",
+          "title": "Dichotomous role of the human mitochondrial Na<sup>+</sup>/Ca2<sup>+</sup>/Li<sup>+</sup> exchanger NCLX in colorectal cancer growth and metastasis",
+          "status": "vor",
+          "volume": 9,
+          "version": 3,
+          "published": "2020-09-11T00:00:00Z",
+          "authorLine": "Trayambak Pathak et al.",
+          "statusDate": "2020-10-01T16:53:21Z",
+          "elocationId": "e59686"
+        }
+      ]
+    },
+    {
+      "id": "58487",
+      "title": "Measuring the cost of treating HIV",
+      "impactStatement": "A study of 3,019 people living with HIV in Eswatini suggests that starting treatment early does not negatively impact the economic welfare of patients, even in poorer communities.",
+      "stage": "published",
+      "published": "2020-10-01T15:12:07Z",
+      "updated": "2020-10-15T09:00:11Z",
+      "image": {
+        "thumbnail": {
+          "alt": "",
+          "uri": "https://iiif.elifesciences.org/digests/58487%2Fdigest-58487.jpg",
+          "size": {
+            "width": 3264,
+            "height": 2448
+          },
+          "source": {
+            "uri": "https://iiif.elifesciences.org/digests/58487%2Fdigest-58487.jpg/full/full/0/default.jpg",
+            "filename": "digest-58487.jpg",
+            "mediaType": "image/jpeg"
+          }
+        }
+      },
+      "subjects": [
+        {
+          "id": "epidemiology-global-health",
+          "name": "Epidemiology and Global Health"
+        },
+        {
+          "id": "medicine",
+          "name": "Medicine"
+        }
+      ],
+      "content": [
+        {
+          "type": "image",
+          "image": {
+            "alt": "",
+            "uri": "https://iiif.elifesciences.org/digests/58487%2Fdigest-58487.jpg",
+            "size": {
+              "width": 3264,
+              "height": 2448
+            },
+            "source": {
+              "uri": "https://iiif.elifesciences.org/digests/58487%2Fdigest-58487.jpg/full/full/0/default.jpg",
+              "filename": "digest-58487.jpg",
+              "mediaType": "image/jpeg"
+            }
+          },
+          "caption": [
+            {
+              "text": "A variety of antiretroviral drugs used to treat HIV infection. Image credit: NIAID (CC BY 2.0)",
+              "type": "paragraph"
+            }
+          ]
+        },
+        {
+          "text": "Human immunodeficiency virus (HIV) is an incurable virus that attacks the immune system and affects around 39 million people worldwide. Once diagnosed, HIV can be treated with antiretroviral therapy (ART) to limit its effects and stop it spreading to other people. HIV rates vary across the world, but the African country of Eswatini has the highest prevalence with more than one in four (27%) people classed as HIV-positive.",
+          "type": "paragraph"
+        },
+        {
+          "text": "Until 2015, people living with HIV were typically only treated with ART once their immune system weakened. Recent studies found that starting treatment earlier enhances the positive effects of ART. This caused the World Health Organization (WHO) to change their guidelines and advise people living with HIV to begin ART as soon as they are diagnosed. While antiretroviral drugs are usually provided to patients free of charge, accessing care can be expensive for patients because of high transport costs or lost time from income-generating activities. This means starting treatment earlier and, thus, having more frequent healthcare visits, may result in a greater cost to the patient. The economic impact of this change is unclear, and for patients living in poverty, these added costs can affect their decision on whether to continue treatment.",
+          "type": "paragraph"
+        },
+        {
+          "text": "Steinert et al. interviewed 3,019 HIV-patients from 14 health facilities in Eswatini who began treatment with ART either immediately after diagnosis or after their immune system became suppressed. Patients were asked about their time spent being active to generate income, employment status, monthly household expenditures, and household living standards. On average, beginning ART earlier appears to have had no large negative effects on the economic wellbeing of patients. The same results were found for patient groups defined by sex, education, age, and time spent taking ART.",
+          "type": "paragraph"
+        },
+        {
+          "text": "These findings suggest that starting ART for HIV as soon as possible offers medical benefits and seems to have no large economic consequences for patients in the short term, even for poorer communities. This adds weight to the WHO advice on HIV treatment and supports the need to continue to deliver effective treatments to countries like Eswatini that have a high rate of HIV infection.",
+          "type": "paragraph"
+        }
+      ],
+      "relatedContent": [
+        {
+          "id": "58487",
+          "doi": "10.7554/eLife.58487",
+          "type": "research-article",
+          "stage": "published",
+          "title": "A stepped-wedge randomised trial on the impact of early ART initiation on HIV-patients’ economic outcomes in Eswatini",
+          "status": "vor",
+          "volume": 9,
+          "version": 2,
+          "published": "2020-08-24T00:00:00Z",
+          "authorLine": "Janina Isabel Steinert et al.",
+          "statusDate": "2020-10-01T15:12:07Z",
+          "elocationId": "e58487"
+        }
+      ]
+    },
+    {
+      "id": "59885",
+      "title": "Splitting up",
+      "impactStatement": "Changes in protein levels during cell division reveal how the process is carefully controlled.",
+      "stage": "published",
+      "published": "2020-10-01T13:28:04Z",
+      "updated": "2020-10-01T13:28:31Z",
+      "image": {
+        "thumbnail": {
+          "alt": "",
+          "uri": "https://iiif.elifesciences.org/digests/59885%2Fdigest-59885.png",
+          "size": {
+            "width": 805,
+            "height": 653
+          },
+          "source": {
+            "uri": "https://iiif.elifesciences.org/digests/59885%2Fdigest-59885.png/full/full/0/default.jpg",
+            "filename": "digest-59885.png",
+            "mediaType": "image/jpeg"
+          }
+        }
+      },
+      "subjects": [
+        {
+          "id": "cell-biology",
+          "name": "Cell Biology"
+        }
+      ],
+      "content": [
+        {
+          "type": "image",
+          "image": {
+            "alt": "",
+            "uri": "https://iiif.elifesciences.org/digests/59885%2Fdigest-59885.png",
+            "size": {
+              "width": 805,
+              "height": 653
+            },
+            "source": {
+              "uri": "https://iiif.elifesciences.org/digests/59885%2Fdigest-59885.png/full/full/0/default.jpg",
+              "filename": "digest-59885.png",
+              "mediaType": "image/jpeg"
+            }
+          },
+          "caption": [
+            {
+              "text": "Cell dividing, with the DNA shown in red. Image credit: Zeiss Microscopy (CC BY 2.0)",
+              "type": "paragraph"
+            }
+          ]
+        },
+        {
+          "text": "New cells are made when a single cell duplicates its DNA and divides into two cells, distributing the DNA equally between them, in a process called mitosis. The splitting of the two copies of DNA happens through a series of controlled events known as mitotic exit. Previous research has suggested that mitotic exit relies on both the destruction of specific proteins and the removal of tags called phosphate groups from other proteins. Phosphate groups modify how proteins behave and their removal can trigger changes in a protein’s activity.",
+          "type": "paragraph"
+        },
+        {
+          "text": "Although protein destruction and phosphate group removal were known to be important to mitotic exit, it was not understood how they are coordinated in the cell to ensure the correct order of events. Holder et al. have used a technique called mass spectrometry to monitor the level of thousands of proteins, and any tags attached to them, during mitotic exit in human cells grown in the laboratory.",
+          "type": "paragraph"
+        },
+        {
+          "text": "The experiments revealed that the destruction of a single protein, known as cyclin B, plays a major role in triggering subsequent events. The removal of cyclin B activates enzymes known as phosphatases, which remove phosphate groups from proteins. Phosphatases then act on a wide range of proteins in a specific order that depends on the environment surrounding the phosphate group. This ‘chain’ of phosphatase activity determines the order of events during mitotic exit.",
+          "type": "paragraph"
+        },
+        {
+          "text": "The findings of Holder et al. contribute to the basic understanding of how mitotic exit works. Errors in the process can affect the stability of a cell’s genome, contributing to diseases such as cancer. In the future, this may help to identify what goes wrong in these cases and potential avenues for developing treatments.",
+          "type": "paragraph"
+        }
+      ],
+      "relatedContent": [
+        {
+          "id": "59885",
+          "doi": "10.7554/eLife.59885",
+          "type": "research-article",
+          "stage": "preview",
+          "title": "Ordered dephosphorylation initiated by the selective proteolysis of cyclin B drives mitotic exit",
+          "status": "vor",
+          "volume": 9,
+          "version": 2,
+          "published": "2020-09-01T00:00:00Z",
+          "authorLine": "James Holder et al.",
+          "elocationId": "e59885"
+        }
+      ]
+    }
+  ]
+}

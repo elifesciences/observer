@@ -12,8 +12,24 @@ LAX_AJSON = 'lax-ajson'
 METRICS_SUMMARY = 'elife-metrics-summary'
 PRESSPACKAGE = 'press-packages-id'
 PROFILE = 'profiles-id'
-DIGEST = 'digests-id'
-LABS_POST = 'labs-posts'
+# DIGEST = 'digests-id' # old, do not use, remove once RawJSON in db is removed
+
+DIGEST = 'digest'
+LABS_POST = 'labs-post'
+
+COMMUNITY = 'community'
+
+INTERVIEW = 'interview'
+COLLECTION = 'collection'
+BLOG_ARTICLE = 'blog-article'
+FEATURE = 'feature'
+
+COMMUNITY_CONTENT_TYPE_LIST = [
+    INTERVIEW,
+    COLLECTION,
+    BLOG_ARTICLE,
+    FEATURE
+]
 
 MODEL_CHOICES = [
     ('lax', LAX_AJSON),
@@ -261,54 +277,58 @@ class Profile(models.Model):
     def __repr__(self):
         return '<Profile "%s">' % self
 
-DIGEST_IMAGE_MIME_CHOICES = [
+class ContentCategory(models.Model):
+    name = CharField(max_length=150, primary_key=True) # slug
+    label = CharField(max_length=150)
+
+    class Meta:
+        ordering = ('name',) # alphabetically, asc
+
+    def __str__(self):
+        return self.label
+
+    def __repr__(self):
+        return '<ContentCategory "%s">' % self.name
+
+
+CONTENT_TYPE_CHOICES = [
+    INTERVIEW,
+    COLLECTION,
+    BLOG_ARTICLE,
+    FEATURE,
+    DIGEST,
+    LABS_POST,
+]
+CONTENT_TYPE_CHOICES = zip(CONTENT_TYPE_CHOICES, CONTENT_TYPE_CHOICES)
+
+IMAGE_MIME_CHOICES = [
     ('jpg', 'image/jpeg'),
     ('png', 'image/png'),
 ]
 
-class Digest(models.Model):
+class Content(models.Model):
     id = CharField(max_length=25, primary_key=True)
-    title = CharField(max_length=255)
-    impact_statement = TextField()
-    image_uri = URLField(max_length=500)
-    image_height = PositiveSmallIntegerField()
-    image_width = PositiveSmallIntegerField()
-    image_mime = CharField(max_length=10, choices=DIGEST_IMAGE_MIME_CHOICES)
-    datetime_published = DateTimeField()
-    datetime_updated = DateTimeField()
+    content_type = CharField(max_length=12, choices=CONTENT_TYPE_CHOICES)
 
-    subjects = models.ManyToManyField(Subject)
+    title = CharField(max_length=255)
+    description = TextField(null=True)
+    image_uri = URLField(max_length=500, null=True)
+    image_height = PositiveSmallIntegerField(null=True)
+    image_width = PositiveSmallIntegerField(null=True)
+    image_mime = CharField(max_length=10, choices=IMAGE_MIME_CHOICES, null=True)
+    datetime_published = DateTimeField()
+    datetime_updated = DateTimeField(null=True)
+
+    categories = models.ManyToManyField(ContentCategory)
 
     datetime_record_created = DateTimeField(auto_now_add=True)
     datetime_record_updated = DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ('-datetime_published',)
+        ordering = ('-datetime_updated', '-datetime_published',)
 
     def __str__(self):
         return self.id
 
     def __repr__(self):
-        return '<Digest "%s">' % self
-
-class LabsPost(models.Model):
-    id = CharField(max_length=8, primary_key=True)
-    title = CharField(max_length=255)
-    impact_statement = TextField()
-    image_uri = URLField(max_length=500)
-    image_height = PositiveSmallIntegerField()
-    image_width = PositiveSmallIntegerField()
-    image_mime = CharField(max_length=10, choices=DIGEST_IMAGE_MIME_CHOICES)
-    datetime_published = DateTimeField()
-
-    datetime_record_created = DateTimeField(auto_now_add=True)
-    datetime_record_updated = DateTimeField(auto_now=True)
-
-    class Meta:
-        ordering = ('-datetime_published',)
-
-    def __str__(self):
-        return self.id
-
-    def __repr__(self):
-        return '<LabsPost "%s">' % self
+        return '<Content "%s">' % self
