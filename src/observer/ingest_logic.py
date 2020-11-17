@@ -614,9 +614,6 @@ def _regenerate_item(content_type, content_id):
     if 'content-type-fn' in content_descriptions[content_type]:
         content_type = content_descriptions[content_type]['content-type-fn'](data)
 
-    if content_type == models.EDITORIAL:
-        print(json.dumps(data, indent=4))
-
     if not content_type in content_descriptions:
         print("skipping unhandled content type %r" % content_type)
         return
@@ -649,7 +646,7 @@ def regenerate_item(content_type, content_type_id):
 
 def regenerate_list(content_type, content_type_id_list):
     if not content_type_id_list:
-        LOG.warn("no content found for content type %r to regenerate", content_type)
+        LOG.warning("no content found for content type %r to regenerate", content_type)
     return do_all_atomically(partial(_regenerate_item, content_type), content_type_id_list)
 
 def regenerate(content_type):

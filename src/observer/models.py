@@ -33,6 +33,12 @@ COMMUNITY_CONTENT_TYPE_LIST = [
     EDITORIAL
 ]
 
+# used in `reports.py` to group certain content types together
+MAGAZINE_CONTENT_TYPE_LIST = [
+    # insights?
+    EDITORIAL, FEATURE, PODCAST, COLLECTION, DIGEST, INTERVIEW
+]
+
 POA, VOR = 'poa', 'vor'
 UNKNOWN_TYPE = 'unknown-type'
 
@@ -292,6 +298,7 @@ CONTENT_TYPE_CHOICES = [
     DIGEST,
     LABS_POST,
     EDITORIAL,
+    PODCAST,
 ]
 CONTENT_TYPE_CHOICES = zip(CONTENT_TYPE_CHOICES, CONTENT_TYPE_CHOICES)
 
