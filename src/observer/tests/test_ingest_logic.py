@@ -381,7 +381,7 @@ class Content(base.BaseCase):
         pass
 
     def test_download_content(self):
-        "raw /collection data isn't parsed out into individual models but stored simply as API results, like all the other endpoints."
+        "raw /collection data can be downloaded and is stored as individual items"
         fixture = self.jsonfix('community', 'many.json')
         with patch('observer.consume.consume', return_value=fixture):
             ingest_logic.download_all(models.COMMUNITY)
@@ -409,3 +409,27 @@ class Content(base.BaseCase):
         assert expected_features == models.Content.objects.filter(content_type=models.FEATURE).count()
         assert expected_collections == models.Content.objects.filter(content_type=models.COLLECTION).count()
         assert expected_editorials == models.Content.objects.filter(content_type=models.EDITORIAL).count()
+
+
+class Podcasts(base.BaseCase):
+    def setUp(self):
+        pass
+
+    def test_download_results(self):
+        "raw /podcast-episodes data can be downloaded and is stored as individual items"
+        fixture = self.jsonfix('podcasts', 'many.json')
+        with patch('observer.consume.consume', return_value=fixture):
+            ingest_logic.download_all(models.PODCAST)
+        expected = 10
+        assert expected == models.RawJSON.objects.filter(json_type=models.PODCAST).count()
+        expected = 70
+        assert 1 == models.RawJSON.objects.filter(json_type=models.PODCAST, msid=expected).count()
+
+    def test_download_ingest_results(self):
+        "podcast-episodes results are parsed out into their individual models"
+        fixture = self.jsonfix('podcasts', 'many.json')
+        with patch('observer.consume.consume', return_value=fixture):
+            ingest_logic.download_all(models.PODCAST)
+        ingest_logic.regenerate(models.PODCAST)
+        expected = 10
+        assert expected == models.Content.objects.count()

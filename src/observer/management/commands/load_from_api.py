@@ -5,9 +5,9 @@ from observer import ingest_logic, models
 from observer.utils import lmap, subdict
 from functools import partial
 
-LAX, METRICS, PRESSPACKAGES, PROFILES, DIGESTS, LABS_POST, COMMUNITY = \
+LAX, METRICS, PRESSPACKAGES, PROFILES, DIGESTS, LABS_POSTS, COMMUNITY, PODCASTS = \
     TARGETS = \
-    ['lax', 'elife-metrics', 'press-packages', 'profiles', 'digests', 'labs-posts', 'community']
+    ['lax', 'elife-metrics', 'press-packages', 'profiles', 'digests', 'labs-posts', 'community', 'podcasts']
 
 class Command(BaseCommand):
     help = "loads ALL elife articles and versions and metrics summary"
@@ -33,6 +33,7 @@ class Command(BaseCommand):
             dl_digests = partial(ingest_logic.download_all, models.DIGEST)
             dl_labs = partial(ingest_logic.download_all, models.LABS_POST)
             dl_community = partial(ingest_logic.download_all, models.COMMUNITY)
+            dl_podcasts = partial(ingest_logic.download_all, models.PODCAST)
 
             dl_targets = OrderedDict([
                 (LAX, dl_ajson),
@@ -40,8 +41,9 @@ class Command(BaseCommand):
                 (PRESSPACKAGES, dl_presspackages),
                 (PROFILES, dl_profiles),
                 (DIGESTS, dl_digests),
-                (LABS_POST, dl_labs),
+                (LABS_POSTS, dl_labs),
                 (COMMUNITY, dl_community),
+                (PODCASTS, dl_podcasts),
             ])
 
             if msidlist:
@@ -66,14 +68,16 @@ class Command(BaseCommand):
             regen_digests = partial(ingest_logic.regenerate, models.DIGEST)
             regen_labs_posts = partial(ingest_logic.regenerate, models.LABS_POST)
             regen_community = partial(ingest_logic.regenerate, models.COMMUNITY) # includes features, blog posts, interviews, etc
+            regen_podcasts = partial(ingest_logic.regenerate, models.PODCAST)
 
             regen_targets = OrderedDict([
                 (LAX, regen_articles),
                 (PRESSPACKAGES, regen_presspackages),
                 (PROFILES, regen_profiles),
                 (DIGESTS, regen_digests),
-                (LABS_POST, regen_labs_posts),
+                (LABS_POSTS, regen_labs_posts),
                 (COMMUNITY, regen_community),
+                (PODCASTS, regen_podcasts)
             ])
 
             if msidlist:

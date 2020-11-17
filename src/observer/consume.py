@@ -99,6 +99,7 @@ def content_type_from_endpoint(endpoint):
         'profiles': models.PROFILE,
         'press-packages': models.PRESSPACKAGE,
         'digests': models.DIGEST,
+        'podcast-episodes': models.PODCAST,
 
         # backwards support
         'articles-id-versions-version': models.LAX_AJSON,

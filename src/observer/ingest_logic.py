@@ -520,7 +520,21 @@ EDITORIAL_DESC = {
     'datetime_published': [p('published')],
 }
 
+#
+# podcasts
+#
 
+PODCAST_DESC = {
+    'id': [p('number')],
+    'content_type': [models.PODCAST],
+    'title': [p('title')],
+    'description': [p('impactStatement')],
+    'datetime_published': [p('published')],
+    'image_uri': [p('image.thumbnail.uri')],
+    'image_width': [p('image.thumbnail.size.width')],
+    'image_height': [p('image.thumbnail.size.height')],
+    'image_mime': [p('image.thumbnail.source.mediaType')],
+}
 
 #
 #
@@ -571,7 +585,12 @@ content_descriptions = {
                      'model': models.Content},
 
     models.EDITORIAL: {'description': EDITORIAL_DESC,
-                       'model': models.Content}
+                       'model': models.Content},
+
+    models.PODCAST: {'description': PODCAST_DESC,
+                     'model': models.Content,
+                     'api-list': 'podcast-episodes',
+                     'idfn': lambda data: str(data['number'])},
 
 }
 
@@ -597,7 +616,7 @@ def _regenerate_item(content_type, content_id):
 
     if content_type == models.EDITORIAL:
         print(json.dumps(data, indent=4))
-    
+
     if not content_type in content_descriptions:
         print("skipping unhandled content type %r" % content_type)
         return
@@ -629,6 +648,8 @@ def regenerate_item(content_type, content_type_id):
     return _regenerate_item(content_type, content_type_id)
 
 def regenerate_list(content_type, content_type_id_list):
+    if not content_type_id_list:
+        LOG.warn("no content found for content type %r to regenerate", content_type)
     return do_all_atomically(partial(_regenerate_item, content_type), content_type_id_list)
 
 def regenerate(content_type):
@@ -643,8 +664,10 @@ def download_all(content_type):
     for some types of content this is relatively little, perhaps 1-3 pages.
     for other types, like articles, it may be 100+ pages."""
     assert content_type in content_descriptions, "unhandled content type %r" % content_type
-    api = content_descriptions[content_type]['api-list']
-    return consume.all_items(api)
+    content_description = content_descriptions[content_type]
+    api = content_description['api-list']
+    idfn = content_description.get('idfn', consume.default_idfn)
+    return consume.all_items(api, idfn)
 
 #
 #
