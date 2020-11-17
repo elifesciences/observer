@@ -23,6 +23,7 @@ INTERVIEW = 'interview'
 COLLECTION = 'collection'
 BLOG_ARTICLE = 'blog-article'
 FEATURE = 'feature'
+EDITORIAL = 'editorial'
 
 COMMUNITY_CONTENT_TYPE_LIST = [
     INTERVIEW,

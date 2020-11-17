@@ -512,6 +512,16 @@ FEATURE_DESC = {
     'datetime_published': [p('published')],
 }
 
+EDITORIAL_DESC = {
+    'id': [p('id')],
+    'content_type': [models.EDITORIAL],
+    'title': [p('title')],
+    'description': [p('impactStatement')],
+    'datetime_published': [p('published')],
+}
+
+
+
 #
 #
 #
@@ -560,6 +570,9 @@ content_descriptions = {
     models.FEATURE: {'description': FEATURE_DESC,
                      'model': models.Content},
 
+    models.EDITORIAL: {'description': EDITORIAL_DESC,
+                       'model': models.Content}
+
 }
 
 #
@@ -582,6 +595,9 @@ def _regenerate_item(content_type, content_id):
     if 'content-type-fn' in content_descriptions[content_type]:
         content_type = content_descriptions[content_type]['content-type-fn'](data)
 
+    if content_type == models.EDITORIAL:
+        print(json.dumps(data, indent=4))
+    
     if not content_type in content_descriptions:
         print("skipping unhandled content type %r" % content_type)
         return

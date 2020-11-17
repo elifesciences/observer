@@ -385,7 +385,7 @@ class Content(base.BaseCase):
         fixture = self.jsonfix('community', 'many.json')
         with patch('observer.consume.consume', return_value=fixture):
             ingest_logic.download_all(models.COMMUNITY)
-        expected = 10
+        expected = 11
         assert expected == models.RawJSON.objects.filter(json_type=models.COMMUNITY).count()
 
     def test_download_ingest_collection(self):
@@ -398,8 +398,9 @@ class Content(base.BaseCase):
         expected_interviews = 3
         expected_features = 4
         expected_collections = 1
+        expected_editorials = 1
 
-        expected = expected_blog_articles + expected_interviews + expected_features + expected_collections
+        expected = expected_blog_articles + expected_interviews + expected_features + expected_collections + expected_editorials
 
         assert expected == models.Content.objects.count()
 
@@ -407,3 +408,4 @@ class Content(base.BaseCase):
         assert expected_interviews == models.Content.objects.filter(content_type=models.INTERVIEW).count()
         assert expected_features == models.Content.objects.filter(content_type=models.FEATURE).count()
         assert expected_collections == models.Content.objects.filter(content_type=models.COLLECTION).count()
+        assert expected_editorials == models.Content.objects.filter(content_type=models.EDITORIAL).count()

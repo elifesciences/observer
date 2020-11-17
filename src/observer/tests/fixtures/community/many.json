@@ -288,6 +288,37 @@
           }
         }
       }
-    }
+    },
+{
+    "abstract": {
+        "content": [
+            {
+                "text": "Journals can benefit from listening to graduate students, postdocs and newly-independent group leaders.",
+                "type": "paragraph"
+            }
+        ]
+    },
+    "authorLine": "Mark Patterson, Randy Schekman",
+    "copyright": {
+        "holder": "Patterson et al.",
+        "license": "CC-BY-4.0",
+        "statement": "This article is distributed under the terms of the <a href=\"http://creativecommons.org/licenses/by/4.0/\">Creative Commons Attribution License</a>, which permits unrestricted use and redistribution provided that the original author and source are credited."
+    },
+    "doi": "10.7554/eLife.36263",
+    "elocationId": "e36263",
+    "id": "36263",
+    "impactStatement": "Journals can benefit from listening to graduate students, postdocs and newly-independent group leaders.",
+    "pdf": "https://cdn.elifesciences.org/articles/36263/elife-36263-v1.pdf",
+    "published": "2018-03-27T00:00:00Z",
+    "stage": "published",
+    "status": "vor",
+    "statusDate": "2018-03-27T00:00:00Z",
+    "title": "How early-career researchers are shaping eLife",
+    "titlePrefix": "Scientific Publishing",
+    "type": "editorial",
+    "version": 1,
+    "versionDate": "2018-03-27T00:00:00Z",
+    "volume": 7
+}
   ]
 }
