@@ -105,7 +105,8 @@ DATABASES = {
         'USER': cfg('database.user'),
         'PASSWORD': cfg('database.password'),
         'HOST': cfg('database.host'),
-        'PORT': cfg('database.port')
+        'PORT': cfg('database.port'),
+        #'CONN_MAX_AGE': None
     }
 }
 

@@ -200,6 +200,7 @@ def content_link(content):
         models.BLOG_ARTICLE: "inside-elife/{id}",
         models.FEATURE: "articles/{id}",
         models.EDITORIAL: "articles/{id}",
+        models.INSIGHT: "articles/{id}",
         models.DIGEST: "digests/{id}",
         models.LABS_POST: "labs/{id}",
         models.PODCAST: "podcast/episode{id}",
