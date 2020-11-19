@@ -24,6 +24,10 @@ FEATURE = 'feature'
 EDITORIAL = 'editorial'
 PODCAST = 'podcast'
 
+# insights are regular articles stored in lax but a subset of data
+# is stored as a Content type to make RSS feeds more convenient.
+INSIGHT = 'insight'
+
 # used in `reports.py` to group certain content types together
 COMMUNITY_CONTENT_TYPE_LIST = [
     INTERVIEW,
@@ -35,7 +39,7 @@ COMMUNITY_CONTENT_TYPE_LIST = [
 
 # used in `reports.py` to group certain content types together
 MAGAZINE_CONTENT_TYPE_LIST = [
-    EDITORIAL, FEATURE, PODCAST, COLLECTION, DIGEST, INTERVIEW
+    INSIGHT, EDITORIAL, FEATURE, PODCAST, COLLECTION, DIGEST, INTERVIEW
 ]
 
 POA, VOR = 'poa', 'vor'

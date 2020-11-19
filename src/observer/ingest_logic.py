@@ -261,6 +261,17 @@ def extract_children(mush):
     delall(mush, known_children.keys())
     return mush, children
 
+INSIGHTS_DESC = {
+    'id': [p('id')],
+    'content_type': [models.INSIGHT], # also available as `p('type')`
+    'title': [p('title')],
+    'description': [p('impactStatement')],
+    'datetime_published': [p('published')],
+}
+
+def extract_insight(raw_article_data):
+    return render.render_item(INSIGHTS_DESC, raw_article_data)
+
 def extract_article(msid):
     """converts article, metrics, subjects and author data into a list of objects that can be passed to `utils.save_objects`.
     Most of the data lives in the raw article-json from Lax, but it also combines metrics data from elife-metrics."""
@@ -287,7 +298,19 @@ def extract_article(msid):
     article_mush, children = extract_children(article_mush)
 
     parent = {'Model': models.Article, 'orig_data': article_mush, 'key_list': ['msid']}
-    return [(parent, children)]
+    object_pair_list = [(parent, children)]
+
+    # 2020-11: create an 'Insight' `models.Content` object if article is an Insight type.
+    # bit of a tacked-on hack, but Observer is a practical project first and foremost.
+    # we're reusing `utils.save_objects` that handles parents and children, except skipping the children part
+    # because this entry has no relation to the models.Article being created.
+    if article_mush['type'] == models.INSIGHT:
+        insight_mush = extract_insight(article_data)
+        parent = {'Model': models.Content, 'orig_data': insight_mush, 'key_list': ['id']}
+        children = []
+        object_pair_list.append((parent, children))
+
+    return object_pair_list
 
 def _regenerate_article(msid):
     object_list = extract_article(msid)
