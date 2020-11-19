@@ -199,8 +199,10 @@ def content_link(content):
         models.COLLECTION: "collections/{id}",
         models.BLOG_ARTICLE: "inside-elife/{id}",
         models.FEATURE: "articles/{id}",
+        models.EDITORIAL: "articles/{id}",
         models.DIGEST: "digests/{id}",
-        models.LABS_POST: "labs/{id}"
+        models.LABS_POST: "labs/{id}",
+        models.PODCAST: "podcast/episode{id}",
     }
     assert content.content_type in path_map, "cannot find path to content for content type %r" % content.content_type
     return path_map[content.content_type].format(id=content.id)

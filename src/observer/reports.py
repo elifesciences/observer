@@ -166,6 +166,26 @@ def features():
         .filter(content_type=models.FEATURE) \
         .order_by('-datetime_published')
 
+@report(article_meta(
+    title='podcasts',
+    description='The latest eLife podcast episodes.',
+    serialisations=[RSS],
+))
+def podcasts():
+    return models.Content.objects \
+        .filter(content_type=models.PODCAST) \
+        .order_by('-datetime_published')
+
+@report(article_meta(
+    title='magazine',
+    description='The latest eLife magazine content',
+    serialisations=[RSS],
+))
+def magazine():
+    return models.Content.objects \
+        .filter(content_type__in=models.MAGAZINE_CONTENT_TYPE_LIST) \
+        .order_by('-datetime_published')
+
 #
 #
 #
@@ -322,6 +342,8 @@ def known_report_idx():
         ('collections', collections),
         ('blog-articles', blog_articles),
         ('features', features),
+        ('podcasts', podcasts),
+        ('magazine', magazine),
         ('published-article-index', published_article_index),
         ('published-research-article-index', published_research_article_index),
         ('profile-count', profile_count),

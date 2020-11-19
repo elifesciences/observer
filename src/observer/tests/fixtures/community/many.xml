@@ -93,5 +93,13 @@
       <dc:date>2018-10-04T09:28:21Z</dc:date>
       <webfeeds:featuredImage url="https://iiif.elifesciences.org/journal-cms/collection%2F2018-09%2Fwebinar-3199164_1920.jpg/full/800,493/0/default.jpg" height="493" width="800" type="image/jpeg"/>
     </item>
+    <item>
+      <title>How early-career researchers are shaping eLife</title>
+      <link>https://elifesciences.org/articles/36263</link>
+      <description>Journals can benefit from listening to graduate students, postdocs and newly-independent group leaders.</description>
+      <guid isPermaLink="false">https://elifesciences.org/articles/36263</guid>
+      <pubDate>Tue, 27 Mar 2018 00:00:00 +0000</pubDate>
+      <dc:date>2018-03-27T00:00:00Z</dc:date>
+    </item>
   </channel>
 </rss>

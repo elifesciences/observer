@@ -16,28 +16,26 @@ PROFILE = 'profiles-id'
 
 DIGEST = 'digest'
 LABS_POST = 'labs-post'
-
 COMMUNITY = 'community'
-
 INTERVIEW = 'interview'
 COLLECTION = 'collection'
 BLOG_ARTICLE = 'blog-article'
 FEATURE = 'feature'
+EDITORIAL = 'editorial'
+PODCAST = 'podcast'
 
+# used in `reports.py` to group certain content types together
 COMMUNITY_CONTENT_TYPE_LIST = [
     INTERVIEW,
     COLLECTION,
     BLOG_ARTICLE,
-    FEATURE
+    FEATURE,
+    EDITORIAL
 ]
 
-MODEL_CHOICES = [
-    ('lax', LAX_AJSON),
-    ('elife-metrics', METRICS_SUMMARY),
-    ('press-packages', PRESSPACKAGE),
-    ('profiles', PROFILE),
-    ('digests', DIGEST),
-    ('labs-post', LABS_POST)
+# used in `reports.py` to group certain content types together
+MAGAZINE_CONTENT_TYPE_LIST = [
+    EDITORIAL, FEATURE, PODCAST, COLLECTION, DIGEST, INTERVIEW
 ]
 
 POA, VOR = 'poa', 'vor'
@@ -298,6 +296,8 @@ CONTENT_TYPE_CHOICES = [
     FEATURE,
     DIGEST,
     LABS_POST,
+    EDITORIAL,
+    PODCAST,
 ]
 CONTENT_TYPE_CHOICES = zip(CONTENT_TYPE_CHOICES, CONTENT_TYPE_CHOICES)
 

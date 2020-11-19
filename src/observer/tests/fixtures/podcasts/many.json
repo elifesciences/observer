@@ -1,0 +1,339 @@
+{
+  "total": 70,
+  "items": [
+    {
+      "number": 70,
+      "title": "Episode 70: November 2020",
+      "published": "2020-11-16T13:12:51Z",
+      "impactStatement": "In this episode, we hear about artificial intelligence and in vitro fertilization, scar-free wound healing, decision-making, mosquitoes and open-access publishing.",
+      "image": {
+        "thumbnail": {
+          "uri": "https://iiif.elifesciences.org/journal-cms/podcast_episode%2F2020-11%2F55301-a_striking_image.jpg",
+          "alt": "",
+          "source": {
+            "mediaType": "image/jpeg",
+            "uri": "https://iiif.elifesciences.org/journal-cms/podcast_episode%2F2020-11%2F55301-a_striking_image.jpg/full/full/0/default.jpg",
+            "filename": "55301-a_striking_image.jpg"
+          },
+          "size": {
+            "width": 2387,
+            "height": 1209
+          },
+          "focalPoint": {
+            "x": 50,
+            "y": 50
+          },
+          "attribution": [
+            "Bormann et al. 2020 (CC BY 4.0)"
+          ]
+        }
+      },
+      "sources": [
+        {
+          "mediaType": "audio/mpeg",
+          "uri": "https://www.thenakedscientists.com/sites/default/files/media/podcasts/episodes/eLife_Podcast_20.10.mp3"
+        }
+      ]
+    },
+    {
+      "number": 69,
+      "title": "Episode 69: September 2020",
+      "published": "2020-10-09T11:33:35Z",
+      "impactStatement": "In this episode, we hear about prostate cancer, cultural diversity in bonobos, blood fat imbalances in Latin America and the Caribbean, insect behaviour, and how astrocytes can form new neurons.",
+      "image": {
+        "thumbnail": {
+          "uri": "https://iiif.elifesciences.org/journal-cms/podcast_episode%2F2020-10%2F59191-b_striking_image.jpeg",
+          "alt": "",
+          "source": {
+            "mediaType": "image/jpeg",
+            "uri": "https://iiif.elifesciences.org/journal-cms/podcast_episode%2F2020-10%2F59191-b_striking_image.jpeg/full/full/0/default.jpg",
+            "filename": "59191-b_striking_image.jpeg"
+          },
+          "size": {
+            "width": 3717,
+            "height": 2034
+          },
+          "focalPoint": {
+            "x": 50,
+            "y": 50
+          },
+          "attribution": [
+            "Image credit: Liran Samuni (CC BY 4.0)"
+          ]
+        }
+      },
+      "sources": [
+        {
+          "mediaType": "audio/mpeg",
+          "uri": "https://www.thenakedscientists.com/sites/default/files/media/podcasts/episodes/eLife_Podcast_20.09.30.mp3"
+        }
+      ]
+    },
+    {
+      "number": 68,
+      "title": "Episode 68: August 2020",
+      "published": "2020-09-07T14:35:25Z",
+      "impactStatement": "In this episode, we hear about Huntington’s and heart disease, insights into the academic job market, the effect of noise on whales, and how tiny ear movements can help detect the direction of a sound.<br />",
+      "image": {
+        "thumbnail": {
+          "uri": "https://iiif.elifesciences.org/journal-cms/podcast_episode%2F2020-09%2F56760-a_striking_image.jpg",
+          "alt": "A humpback whale and her calf",
+          "source": {
+            "mediaType": "image/jpeg",
+            "uri": "https://iiif.elifesciences.org/journal-cms/podcast_episode%2F2020-09%2F56760-a_striking_image.jpg/full/full/0/default.jpg",
+            "filename": "56760-a_striking_image.jpg"
+          },
+          "size": {
+            "width": 3840,
+            "height": 2160
+          },
+          "focalPoint": {
+            "x": 50,
+            "y": 50
+          },
+          "attribution": [
+            "Sprogis et al. 2020 (CC BY 4.0)"
+          ]
+        }
+      },
+      "sources": [
+        {
+          "mediaType": "audio/mpeg",
+          "uri": "https://www.thenakedscientists.com/sites/default/files/media/podcasts/episodes/eLife_Podcast_20.08.31.mp3"
+        }
+      ]
+    },
+    {
+      "number": 67,
+      "title": "Episode 67: June 2020",
+      "published": "2020-07-03T11:03:58Z",
+      "impactStatement": "In this episode, we hear about a controversial claim in plant science, why we cannot get enough of chocolate, HIV in women, sex as a biological variable, and why not all zebrafish like to mingle.",
+      "image": {
+        "thumbnail": {
+          "uri": "https://iiif.elifesciences.org/journal-cms/podcast_episode%2F2020-07%2Fzebrafish_cc0_pixabay.jpg",
+          "alt": "June 2020",
+          "source": {
+            "mediaType": "image/jpeg",
+            "uri": "https://iiif.elifesciences.org/journal-cms/podcast_episode%2F2020-07%2Fzebrafish_cc0_pixabay.jpg/full/full/0/default.jpg",
+            "filename": "zebrafish_cc0_pixabay.jpg"
+          },
+          "size": {
+            "width": 1920,
+            "height": 1280
+          },
+          "focalPoint": {
+            "x": 50,
+            "y": 50
+          },
+          "attribution": [
+            "CCO"
+          ]
+        }
+      },
+      "sources": [
+        {
+          "mediaType": "audio/mpeg",
+          "uri": "https://www.thenakedscientists.com/sites/default/files/media/podcasts/episodes/eLife_Podcast_20.06.30.mp3"
+        }
+      ]
+    },
+    {
+      "number": 66,
+      "title": "Episode 66: May 2020",
+      "published": "2020-06-03T15:42:23Z",
+      "impactStatement": "In this episode we hear about sparrows, cave-dwelling fish, COVID-19 in hospital staff, anti-fungal drugs and lack of insect diversity in soil.",
+      "image": {
+        "thumbnail": {
+          "uri": "https://iiif.elifesciences.org/journal-cms/podcast_episode%2F2020-06%2F54160-a_striking_image.png",
+          "alt": "Blue and black pixels",
+          "source": {
+            "mediaType": "image/jpeg",
+            "uri": "https://iiif.elifesciences.org/journal-cms/podcast_episode%2F2020-06%2F54160-a_striking_image.png/full/full/0/default.jpg",
+            "filename": "54160-a_striking_image.jpg"
+          },
+          "size": {
+            "width": 2370,
+            "height": 1706
+          },
+          "focalPoint": {
+            "x": 50,
+            "y": 50
+          },
+          "attribution": [
+            "Image credit: Wambaugh et al. 2020"
+          ]
+        }
+      },
+      "sources": [
+        {
+          "mediaType": "audio/mpeg",
+          "uri": "https://www.thenakedscientists.com/sites/default/files/media/podcasts/episodes/eLife_Podcast_20.05.31.mp3"
+        }
+      ]
+    },
+    {
+      "number": 65,
+      "title": "Episode 65: March 2020",
+      "published": "2020-04-03T17:30:10Z",
+      "impactStatement": "In this episode we hear about bats hosting deadly viruses, screening travelers for COVID-19, Tuvan singers and predicting educational success.",
+      "image": {
+        "thumbnail": {
+          "uri": "https://iiif.elifesciences.org/journal-cms/podcast_episode%2F2020-04%2Fcovid-19-cc0-pixabay.jpg",
+          "alt": "People walking in an airport",
+          "source": {
+            "mediaType": "image/jpeg",
+            "uri": "https://iiif.elifesciences.org/journal-cms/podcast_episode%2F2020-04%2Fcovid-19-cc0-pixabay.jpg/full/full/0/default.jpg",
+            "filename": "covid-19-cc0-pixabay.jpg"
+          },
+          "size": {
+            "width": 1920,
+            "height": 1440
+          },
+          "focalPoint": {
+            "x": 50,
+            "y": 50
+          },
+          "attribution": [
+            "Public domain"
+          ]
+        }
+      },
+      "sources": [
+        {
+          "mediaType": "audio/mpeg",
+          "uri": "https://www.thenakedscientists.com/sites/default/files/media/podcasts/episodes/eLife_Podcast_20.03.mp3"
+        }
+      ]
+    },
+    {
+      "number": 64,
+      "title": "Episode 64: February 2020",
+      "published": "2020-03-06T13:15:39Z",
+      "impactStatement": "In this episode we hear about genetic privacy, plants with three parents, using cannabis to treat endometriosis, a new type of hearing test and how we can enjoy a cuddle.",
+      "image": {
+        "thumbnail": {
+          "uri": "https://iiif.elifesciences.org/journal-cms/podcast_episode%2F2020-03%2Fseeds_1.jpg",
+          "alt": "A seed next to a sign saying \"nothing to declare\"",
+          "source": {
+            "mediaType": "image/jpeg",
+            "uri": "https://iiif.elifesciences.org/journal-cms/podcast_episode%2F2020-03%2Fseeds_1.jpg/full/full/0/default.jpg",
+            "filename": "seeds_1.jpg"
+          },
+          "size": {
+            "width": 3200,
+            "height": 1800
+          },
+          "focalPoint": {
+            "x": 50,
+            "y": 50
+          },
+          "attribution": [
+            "Yanbo Mao et al. (CC BY 4.0)"
+          ]
+        }
+      },
+      "sources": [
+        {
+          "mediaType": "audio/mpeg",
+          "uri": "https://downloads.nakeddiscovery.com/downloads/active/eLife_Podcast_20.02.mp3"
+        }
+      ]
+    },
+    {
+      "number": 63,
+      "title": "Episode 63: January 2020",
+      "published": "2020-02-06T11:11:40Z",
+      "impactStatement": "In this episode we hear about a fall in average body temperature over time, how our brain encodes seasons, why members of underrepresented communities leave academia and more.",
+      "image": {
+        "thumbnail": {
+          "uri": "https://iiif.elifesciences.org/journal-cms/podcast_episode%2F2020-02%2Fspeech-from-authors.png",
+          "alt": "Blue sound waves on black background",
+          "source": {
+            "mediaType": "image/jpeg",
+            "uri": "https://iiif.elifesciences.org/journal-cms/podcast_episode%2F2020-02%2Fspeech-from-authors.png/full/full/0/default.jpg",
+            "filename": "speech-from-authors.jpg"
+          },
+          "size": {
+            "width": 7500,
+            "height": 4288
+          },
+          "focalPoint": {
+            "x": 50,
+            "y": 50
+          },
+          "attribution": [
+            "Image credit: Sergey Stavisky (CC BY 4.0)"
+          ]
+        }
+      },
+      "sources": [
+        {
+          "mediaType": "audio/mpeg",
+          "uri": "https://www.thenakedscientists.com/sites/default/files/media/podcasts/episodes/eLife_Podcast_20.01.mp3"
+        }
+      ]
+    },
+    {
+      "number": 62,
+      "title": "Episode 62: December 2019",
+      "published": "2019-12-20T16:40:33Z",
+      "impactStatement": "In this episode we hear about bomb-proof tardigrades, how tuberculosis gets transmitted between cows and badgers, why ants do not get stuck in traffic jams, the state of mental health in academia and more.",
+      "image": {
+        "thumbnail": {
+          "uri": "https://iiif.elifesciences.org/journal-cms/podcast_episode%2F2019-12%2Fmental-health-cc0.jpg",
+          "alt": "The silhouette of a head over a watercolour background",
+          "source": {
+            "mediaType": "image/jpeg",
+            "uri": "https://iiif.elifesciences.org/journal-cms/podcast_episode%2F2019-12%2Fmental-health-cc0.jpg/full/full/0/default.jpg",
+            "filename": "mental-health-cc0.jpg"
+          },
+          "size": {
+            "width": 1800,
+            "height": 900
+          },
+          "focalPoint": {
+            "x": 50,
+            "y": 50
+          }
+        }
+      },
+      "sources": [
+        {
+          "mediaType": "audio/mpeg",
+          "uri": "https://downloads.nakeddiscovery.com/downloads/active/eLife_Podcast_19.12.mp3"
+        }
+      ]
+    },
+    {
+      "number": 61,
+      "title": "Episode 61: October 2019",
+      "published": "2019-11-01T16:06:59Z",
+      "impactStatement": "In this episode we hear about parents passing on new mutations, a genetic mystery 100 years in the making, the experiences of early-career group leaders, and more.",
+      "image": {
+        "thumbnail": {
+          "uri": "https://iiif.elifesciences.org/journal-cms/podcast_episode%2F2019-11%2Facton.jpg",
+          "alt": "Group of raised hands ",
+          "source": {
+            "mediaType": "image/jpeg",
+            "uri": "https://iiif.elifesciences.org/journal-cms/podcast_episode%2F2019-11%2Facton.jpg/full/full/0/default.jpg",
+            "filename": "acton.jpg"
+          },
+          "size": {
+            "width": 6240,
+            "height": 4160
+          },
+          "focalPoint": {
+            "x": 50,
+            "y": 50
+          }
+        }
+      },
+      "sources": [
+        {
+          "mediaType": "audio/mpeg",
+          "uri": "https://www.thenakedscientists.com/sites/default/files/media/podcasts/episodes/eLife_Podcast_19.10.mp3"
+        }
+      ]
+    }
+  ]
+}
