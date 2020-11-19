@@ -525,7 +525,7 @@ EDITORIAL_DESC = {
 #
 
 PODCAST_DESC = {
-    'id': [p('number')],
+    'id': [p('number'), str],
     'content_type': [models.PODCAST],
     'title': [p('title')],
     'description': [p('impactStatement')],
@@ -606,6 +606,10 @@ def flatten_data(content_type, data):
     return render.render_item(description, data)
 
 def _regenerate_item(content_type, content_id):
+    """regenerate a single item with *no* transaction.
+    regenerating a single item may cause many child objects to also be created. If called outside
+    of a transaction you may end up with missing data.
+    see `regenerate_item` (no prefix) and `regenerate_list`."""
     data = models.RawJSON.objects.get(msid=content_id, json_type=content_type).json
 
     # no 1:1 mapping between endpoint and observer model.
@@ -642,10 +646,14 @@ def _regenerate_item(content_type, content_id):
 
 @transaction.atomic
 def regenerate_item(content_type, content_type_id):
+    "regenerate a single item in a single transaction"
     return _regenerate_item(content_type, content_type_id)
 
 def regenerate_list(content_type, content_type_id_list):
+    "given a `content_type` and a list of content ID values, regenerate all of them and manage the transaction."
     if not content_type_id_list:
+        # it's possible what has been downloaded can't be found given the `content_type` and an `id`.
+        # check `consume.content_type_from_endpoint`.
         LOG.warning("no content found for content type %r to regenerate", content_type)
     return do_all_atomically(partial(_regenerate_item, content_type), content_type_id_list)
 

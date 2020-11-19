@@ -35,7 +35,6 @@ COMMUNITY_CONTENT_TYPE_LIST = [
 
 # used in `reports.py` to group certain content types together
 MAGAZINE_CONTENT_TYPE_LIST = [
-    # insights?
     EDITORIAL, FEATURE, PODCAST, COLLECTION, DIGEST, INTERVIEW
 ]
 
