@@ -120,7 +120,7 @@ def labs_posts():
 def community():
     return models.Content.objects \
         .filter(content_type__in=models.COMMUNITY_CONTENT_TYPE_LIST) \
-        .order_by('-datetime_published')
+        .order_by('-datetime_published', 'title')
 
 # note: 'article_meta' here works because of similar field names
 @report(article_meta(
@@ -184,7 +184,7 @@ def podcasts():
 def magazine():
     return models.Content.objects \
         .filter(content_type__in=models.MAGAZINE_CONTENT_TYPE_LIST) \
-        .order_by('-datetime_published')
+        .order_by('-datetime_published', 'title')
 
 #
 #

@@ -433,3 +433,27 @@ class Podcasts(base.BaseCase):
         ingest_logic.regenerate(models.PODCAST)
         expected = 10
         assert expected == models.Content.objects.count()
+
+class Insights(base.BaseCase):
+    def setUp(self):
+        pass
+
+    def test_ingest_insight(self):
+        """downloading and ingesting an Insight type article creates a Content item.
+        slight overlap with the general article ingest/regenerate tests."""
+        test_fixture = join(self.fixture_dir, 'insights', 'elife-63871-v1.xml.json')
+        self.assertEqual(models.Article.objects.count(), 0)
+        self.assertEqual(models.Content.objects.count(), 0)
+        ingest_logic.file_upsert(test_fixture)
+        self.assertEqual(models.Article.objects.count(), 1)
+        self.assertEqual(models.Content.objects.count(), 1)
+
+    def test_ingest_insight_update(self):
+        """insight content is deleted and regenerated along with it's article (no duplicates)."""
+        test_fixture = join(self.fixture_dir, 'insights', 'elife-63871-v1.xml.json')
+        ingest_logic.file_upsert(test_fixture)
+        self.assertEqual(models.Article.objects.count(), 1)
+        self.assertEqual(models.Content.objects.count(), 1)
+        ingest_logic.file_upsert(test_fixture)
+        self.assertEqual(models.Article.objects.count(), 1)
+        self.assertEqual(models.Content.objects.count(), 1)

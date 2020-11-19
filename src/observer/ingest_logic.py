@@ -231,7 +231,25 @@ def upsert_json(msid, version, data_type, article_data):
     return create_or_update(models.RawJSON, article_data, ['msid', 'version'])
 
 #
+# insights, tied to models.Article and models.Content
 #
+
+
+INSIGHTS_DESC = {
+    'id': [p('id')],
+    'content_type': [models.INSIGHT], # also available as `p('type')`
+    'title': [p('title')],
+    'description': [p('impactStatement')],
+    'datetime_published': [p('published')],
+}
+
+def extract_insight(raw_article_data):
+    """`models.Content` insight data is extracted from the RawJSON article data.
+    it's just a subset of the full data stored in `models.Article`"""
+    return render.render_item(INSIGHTS_DESC, raw_article_data)
+
+#
+# articles
 #
 
 def extract_children(mush):
@@ -287,7 +305,19 @@ def extract_article(msid):
     article_mush, children = extract_children(article_mush)
 
     parent = {'Model': models.Article, 'orig_data': article_mush, 'key_list': ['msid']}
-    return [(parent, children)]
+    object_pair_list = [(parent, children)]
+
+    # 2020-11: create an 'Insight' `models.Content` object if article is an Insight type.
+    # bit of a tacked-on hack, but Observer is a practical project first and foremost.
+    # we're reusing `utils.save_objects` that handles parents and children, except skipping the children part
+    # because this entry has no relation to the models.Article being created.
+    if article_mush['type'] == models.INSIGHT:
+        insight_mush = extract_insight(article_data)
+        parent = {'Model': models.Content, 'orig_data': insight_mush, 'key_list': ['id']}
+        children = []
+        object_pair_list.append((parent, children))
+
+    return object_pair_list
 
 def _regenerate_article(msid):
     object_list = extract_article(msid)

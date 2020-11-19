@@ -24,6 +24,10 @@ FEATURE = 'feature'
 EDITORIAL = 'editorial'
 PODCAST = 'podcast'
 
+# insights are regular articles stored in lax but a subset of data
+# is stored as a Content type to make RSS feeds more convenient.
+INSIGHT = 'insight'
+
 # used in `reports.py` to group certain content types together
 COMMUNITY_CONTENT_TYPE_LIST = [
     INTERVIEW,
@@ -35,7 +39,7 @@ COMMUNITY_CONTENT_TYPE_LIST = [
 
 # used in `reports.py` to group certain content types together
 MAGAZINE_CONTENT_TYPE_LIST = [
-    EDITORIAL, FEATURE, PODCAST, COLLECTION, DIGEST, INTERVIEW
+    INSIGHT, EDITORIAL, FEATURE, PODCAST, COLLECTION, DIGEST, INTERVIEW
 ]
 
 POA, VOR = 'poa', 'vor'
@@ -190,6 +194,9 @@ class Article(models.Model):
 
     class Meta:
         db_table = 'articles'
+        indexes = [
+            models.Index(fields=["type"], name="type_idx"),
+        ]
 
     datetime_record_created = DateTimeField(auto_now_add=True)
     datetime_record_updated = DateTimeField(auto_now=True)
@@ -224,6 +231,9 @@ class RawJSON(models.Model):
     class Meta:
         unique_together = ('msid', 'version')
         ordering = ('-msid', 'version') # [09561 v1, 09561 v2, 09560 v1]
+        indexes = [
+            models.Index(fields=['msid', 'json_type'], name='msid_json_type_idx')
+        ]
 
     def __str__(self):
         return self.msid
@@ -326,6 +336,9 @@ class Content(models.Model):
 
     class Meta:
         ordering = ('-datetime_updated', '-datetime_published',)
+        indexes = [
+            models.Index(fields=['content_type'], name="content_type_idx")
+        ]
 
     def __str__(self):
         return self.id

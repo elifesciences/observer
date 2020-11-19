@@ -240,7 +240,10 @@ def save_objects(queue):
     """complements create_or_update(), saves a list of pairs of (parent, children-list).
     each parent and each child are the kwargs to be passed to `create_or_update`.
     each child requires an extra kwarg 'parent-relation' which will be used to 'attach' the
-    child to the parent."""
+    child to the parent.
+    An actual 'queue' object with queue semantics is not necessary but order is important!
+    parents must exist *before* children can be inserted and associated with them.
+    """
     for parent_kwargs, children in queue:
         ensure(isinstance(children, list), "'children' must be a list.")
         parent = create_or_update(**parent_kwargs)[0]

@@ -1,0 +1,600 @@
+{
+  "status": "vor",
+  "id": "63871",
+  "version": 1,
+  "type": "insight",
+  "doi": "10.7554/eLife.63871",
+  "authorLine": "Marlee Tucker",
+  "title": "Finding the right size for a group",
+  "titlePrefix": "Social Behaviour",
+  "published": "2020-11-10T00:00:00Z",
+  "versionDate": "2020-11-10T00:00:00Z",
+  "volume": 9,
+  "elocationId": "e63871",
+  "pdf": "https://cdn.elifesciences.org/articles/63871/elife-63871-v1.pdf",
+  "xml": "https://cdn.elifesciences.org/articles/63871/elife-63871-v1.xml",
+  "subjects": [
+    {
+      "id": "ecology",
+      "name": "Ecology"
+    }
+  ],
+  "abstract": {
+    "content": [
+      {
+        "text": "Vulturine guineafowl range over larger areas, explore more new places and are more likely to reproduce when they live in groups of intermediate size.",
+        "type": "paragraph"
+      }
+    ]
+  },
+  "copyright": {
+    "license": "CC-BY-4.0",
+    "holder": "Tucker",
+    "statement": "This article is distributed under the terms of the <a href=\"http://creativecommons.org/licenses/by/4.0/\">Creative Commons Attribution License</a>, which permits unrestricted use and redistribution provided that the original author and source are credited."
+  },
+  "authors": [
+    {
+      "affiliations": [
+        {
+          "address": {
+            "components": {
+              "country": "Netherlands",
+              "locality": [
+                "Nijmegen"
+              ]
+            },
+            "formatted": [
+              "Nijmegen",
+              "Netherlands"
+            ]
+          },
+          "name": [
+            "Department of Environmental Science, Radboud University"
+          ]
+        },
+        {
+          "address": {
+            "components": {
+              "country": "Netherlands",
+              "locality": [
+                "Nijmegen"
+              ]
+            },
+            "formatted": [
+              "Nijmegen",
+              "Netherlands"
+            ]
+          },
+          "name": [
+            "Institute for Wetland and Water Research, Radboud University"
+          ]
+        }
+      ],
+      "biography": [
+        {
+          "text": "<b>Marlee Tucker</b> is in the Department of Environmental Science and the Institute for Wetland and Water Research, Radboud University, Nijmegen, Netherlands",
+          "type": "paragraph"
+        }
+      ],
+      "competingInterests": "No competing interests declared",
+      "emailAddresses": [
+        "tucker.marlee@gmail.com"
+      ],
+      "name": {
+        "index": "Tucker, Marlee",
+        "preferred": "Marlee Tucker"
+      },
+      "orcid": "0000-0001-7535-3431",
+      "type": "person"
+    }
+  ],
+  "impactStatement": "Vulturine guineafowl range over larger areas, explore more new places and are more likely to reproduce when they live in groups of intermediate size.",
+  "keywords": [
+    "collective behaviour",
+    "collective movement",
+    "group living",
+    "movement ecology",
+    "social behaviour",
+    "group size"
+  ],
+  "body": [
+    {
+      "content": [
+        {
+          "text": "Think about the last time you were out in a group of people who were deciding where to eat: some members of the group likely had strong opinions about where to go, with others being happy to go with the flow. However, balancing everyone’s opinions without spending hours in discussions or losing people in the process can be tricky, especially in large groups.",
+          "type": "paragraph"
+        },
+        {
+          "text": "In the wild, animals also face similar challenges. Living together provides benefits such as sharing information on where to find food, and providing better protection from predators as there are more individuals to keep watch over the group (<a href=\"#bib3\">Krause and Ruxton, 2002</a>; <a href=\"#bib2\">Kao and Couzin, 2014</a>; <a href=\"#bib5\">Majolo and Huang, 2017</a>). There are also negatives associated with being in a group: inidividual members may compete with each other for resources, and as the group gets bigger it can become harder to maintain coordination (<a href=\"#bib4\">Kutsukake and Clutton-Brock, 2008</a>; <a href=\"#bib9\">Strandburg-Peshkin et al., 2015</a>). However, it is not clear if there is an optimal size that balances the costs and benefits of living together.",
+          "type": "paragraph"
+        },
+        {
+          "text": "Now, in eLife, Danai Papageorgiou and Damien Farine – who are based at the Max Planck Institute of Animal Behaviour, the University of Konstanz, the Kenya Wildlife Service and the National Museums of Kenya – report how group size influenced the movements of wild birds called vulturine guineafowl (<a href=\"#bib8\">Papageorgiou and Farine, 2020</a>). These birds – which are terrestrial in nature – are widely used for studying collective behaviour because they are highly social, form stable groups and often interact with other groups (e.g., for mating and sharing information). Papageorgiou and Farine fitted GPS tracking devices to a total of 58 birds from 21 different groups, and collected data on the size of each bird's 'home range' (that is, the area it covers to find food, to care for its young and to mate), the distance travelled per day, and how often groups re-visited an area. They also counted the number of chicks in each group to obtain an estimate of the group’s fitness.",
+          "type": "paragraph"
+        },
+        {
+          "text": "Papageorgiou and Farine found that intermediate-sized groups – which contained between 33 and 37 birds – had larger home ranges and tended to explore more new places than smaller and larger groups (<a href=\"#fig1\">Figure 1</a>). This is due to the balance between the benefit of increasing group size for navigation (more information about the landscape) and the costs of movement coordination (keeping everyone together) in large groups. The results also showed that groups of intermediate size had more chicks, meaning they have a higher level of fitness than smaller or larger groups. This higher fitness suggests that intermediate-sized groups may be the most effective at using the areas and resources available to them, indicating there is an optimal group size for collective movement.",
+          "type": "paragraph"
+        },
+        {
+          "assets": [
+            {
+              "caption": [
+                {
+                  "text": "Vulturine guineafowl are social birds that live in groups. Papageorgiou and Farine studied how the size of the home range of these birds, and the number of chicks in each group, varied with the number of adults in a group. They found, as illustrated schematically here, that groups containing an intermediate number of adults (between 33 and 37 birds in this case) have larger home ranges and more chicks than smaller and larger groups, which suggests that intermediate-sized groups benefit from increased fitness.",
+                  "type": "paragraph"
+                }
+              ],
+              "id": "fig1",
+              "image": {
+                "alt": "",
+                "uri": "https://iiif.elifesciences.org/lax:63871%2Felife-63871-fig1-v1.tif",
+                "size": {
+                  "width": 1616,
+                  "height": 1056
+                },
+                "source": {
+                  "mediaType": "image/jpeg",
+                  "uri": "https://iiif.elifesciences.org/lax:63871%2Felife-63871-fig1-v1.tif/full/full/0/default.jpg",
+                  "filename": "elife-63871-fig1-v1.jpg"
+                }
+              },
+              "label": "Figure 1",
+              "title": "What is the optimal size for a group of vulturine guineafowl?",
+              "type": "image"
+            }
+          ],
+          "type": "figure"
+        },
+        {
+          "text": "Papageorgiou and Farine found that most of the groups they studied were smaller or larger than this optimum size. While fitness is maximised in groups of intermediate size, it is difficult to maintain because the number of individuals may fluctuate due to reproduction and immigration (<a href=\"#bib1\">Grueter et al., 2020</a>). Notably, when the intermediate-sized groups had chicks, their home range size decreased. This is because the chicks are more vulnerable to predators, so groups tend to keep under cover and limit their movements. There is a potential trade-off here between those individuals who have successfully reproduced and want to maximise the survival chances of their chicks, and those who did not reproduce and may benefit from having a larger home range size and access to a wider range of resources (<a href=\"#bib7\">Papageorgiou et al., 2019</a>).",
+          "type": "paragraph"
+        },
+        {
+          "text": "The latest work could be taken forward in a number of ways. First, these data were collected during specific seasons with similar weather conditions so that the data for different groups could be compared. This raises the question of whether the benefits associated with intermediate group size are consistent across all seasons, even when resources such as food and water are limited. Second, it would be interesting to explore if similar effects are found across different taxa and landscapes, such as the tropics versus temperate regions, where seasons and resources differ. Finally, guineafowl groups are not territorial animals, and it would be interesting to study what happens when groups of animals are more defensive of their habitats. If competition between groups increases, the areas available would be reduced and groups may spend more energy on defending their territory, in which case it may be better to have a larger sized group (<a href=\"#bib6\">Mosser and Packer, 2009</a>).",
+          "type": "paragraph"
+        },
+        {
+          "text": "These findings shed new light on how the size and composition of groups can shape the movement patterns of animals. This type of integrated approach, using long-term tracking data, is essential to gain a better understanding of the mechanisms of collective behaviour and will be useful for the conservation of vulturine guineafowl and other social species.",
+          "type": "paragraph"
+        }
+      ],
+      "id": "s0",
+      "title": "Main text",
+      "type": "section"
+    }
+  ],
+  "references": [
+    {
+      "articleTitle": "Multilevel organisation of animal sociality",
+      "authors": [
+        {
+          "name": {
+            "index": "Grueter, CC",
+            "preferred": "CC Grueter"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Qi, X",
+            "preferred": "X Qi"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Zinner, D",
+            "preferred": "D Zinner"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Bergman, T",
+            "preferred": "T Bergman"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Li, M",
+            "preferred": "M Li"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Xiang, Z",
+            "preferred": "Z Xiang"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Zhu, P",
+            "preferred": "P Zhu"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Migliano, AB",
+            "preferred": "AB Migliano"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Miller, A",
+            "preferred": "A Miller"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Krützen, M",
+            "preferred": "M Krützen"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Fischer, J",
+            "preferred": "J Fischer"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Rubenstein, DI",
+            "preferred": "DI Rubenstein"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Vidya, TNC",
+            "preferred": "TNC Vidya"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Li, B",
+            "preferred": "B Li"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Cantor, M",
+            "preferred": "M Cantor"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Swedell, L",
+            "preferred": "L Swedell"
+          },
+          "type": "person"
+        }
+      ],
+      "date": "2020",
+      "doi": "10.1016/j.tree.2020.05.003",
+      "id": "bib1",
+      "journal": "Trends in Ecology & Evolution",
+      "pages": {
+        "first": "834",
+        "last": "847",
+        "range": "834–847"
+      },
+      "pmid": 32473744,
+      "type": "journal",
+      "volume": "35"
+    },
+    {
+      "articleTitle": "Decision accuracy in complex environments is often maximized by small group sizes",
+      "authors": [
+        {
+          "name": {
+            "index": "Kao, AB",
+            "preferred": "AB Kao"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Couzin, ID",
+            "preferred": "ID Couzin"
+          },
+          "type": "person"
+        }
+      ],
+      "date": "2014",
+      "doi": "10.1098/rspb.2013.3305",
+      "id": "bib2",
+      "journal": "Proceedings of the Royal Society B: Biological Sciences",
+      "pages": "20133305",
+      "type": "journal",
+      "volume": "281"
+    },
+    {
+      "authors": [
+        {
+          "name": {
+            "index": "Krause, J",
+            "preferred": "J Krause"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Ruxton, GD",
+            "preferred": "GD Ruxton"
+          },
+          "type": "person"
+        }
+      ],
+      "bookTitle": "Living in Groups",
+      "date": "2002",
+      "id": "bib3",
+      "publisher": {
+        "name": [
+          "Oxford University Press"
+        ]
+      },
+      "type": "book"
+    },
+    {
+      "articleTitle": "Do meerkats engage in conflict management following aggression? Reconciliation, submission and avoidance",
+      "authors": [
+        {
+          "name": {
+            "index": "Kutsukake, N",
+            "preferred": "N Kutsukake"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Clutton-Brock, TH",
+            "preferred": "TH Clutton-Brock"
+          },
+          "type": "person"
+        }
+      ],
+      "date": "2008",
+      "doi": "10.1016/j.anbehav.2007.09.018",
+      "id": "bib4",
+      "journal": "Animal Behaviour",
+      "pages": {
+        "first": "1441",
+        "last": "1453",
+        "range": "1441–1453"
+      },
+      "type": "journal",
+      "volume": "75"
+    },
+    {
+      "authors": [
+        {
+          "name": {
+            "index": "Majolo, B",
+            "preferred": "B Majolo"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Huang, P",
+            "preferred": "P Huang"
+          },
+          "type": "person"
+        }
+      ],
+      "bookTitle": "Encyclopedia of Animal Cognition and Behavior",
+      "chapterTitle": "Group Living",
+      "date": "2017",
+      "doi": "10.1007/978-3-319-47829-6",
+      "editors": [
+        {
+          "name": {
+            "index": "Vonk, J",
+            "preferred": "J Vonk"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Shackelford, T",
+            "preferred": "T Shackelford"
+          },
+          "type": "person"
+        }
+      ],
+      "id": "bib5",
+      "pages": {
+        "first": "1",
+        "last": "64",
+        "range": "1–64"
+      },
+      "publisher": {
+        "name": [
+          "Springer International Publishing"
+        ]
+      },
+      "type": "book-chapter"
+    },
+    {
+      "articleTitle": "Group territoriality and the benefits of sociality in the African lion, Panthera leo",
+      "authors": [
+        {
+          "name": {
+            "index": "Mosser, A",
+            "preferred": "A Mosser"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Packer, C",
+            "preferred": "C Packer"
+          },
+          "type": "person"
+        }
+      ],
+      "date": "2009",
+      "doi": "10.1016/j.anbehav.2009.04.024",
+      "id": "bib6",
+      "journal": "Animal Behaviour",
+      "pages": {
+        "first": "359",
+        "last": "370",
+        "range": "359–370"
+      },
+      "type": "journal",
+      "volume": "78"
+    },
+    {
+      "articleTitle": "The multilevel society of a small-brained bird",
+      "authors": [
+        {
+          "name": {
+            "index": "Papageorgiou, D",
+            "preferred": "D Papageorgiou"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Christensen, C",
+            "preferred": "C Christensen"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Gall, GEC",
+            "preferred": "GEC Gall"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Klarevas-Irby, JA",
+            "preferred": "JA Klarevas-Irby"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Nyaguthii, B",
+            "preferred": "B Nyaguthii"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Couzin, ID",
+            "preferred": "ID Couzin"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Farine, DR",
+            "preferred": "DR Farine"
+          },
+          "type": "person"
+        }
+      ],
+      "date": "2019",
+      "doi": "10.1016/j.cub.2019.09.072",
+      "id": "bib7",
+      "journal": "Current Biology",
+      "pages": {
+        "first": "R1120",
+        "last": "R1121",
+        "range": "R1120–R1121"
+      },
+      "pmid": 31689393,
+      "type": "journal",
+      "volume": "29"
+    },
+    {
+      "articleTitle": "Group size and composition influencecollective movement in a highly social terrestrial bird",
+      "authors": [
+        {
+          "name": {
+            "index": "Papageorgiou, D",
+            "preferred": "D Papageorgiou"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Farine, D",
+            "preferred": "D Farine"
+          },
+          "type": "person"
+        }
+      ],
+      "date": "2020",
+      "doi": "10.7554/eLife.59902",
+      "id": "bib8",
+      "journal": "eLife",
+      "pages": "e59902",
+      "type": "journal",
+      "volume": "9"
+    },
+    {
+      "articleTitle": "Shared decision-making drives collective movement in wild baboons",
+      "authors": [
+        {
+          "name": {
+            "index": "Strandburg-Peshkin, A",
+            "preferred": "A Strandburg-Peshkin"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Farine, DR",
+            "preferred": "DR Farine"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Couzin, ID",
+            "preferred": "ID Couzin"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Crofoot, MC",
+            "preferred": "MC Crofoot"
+          },
+          "type": "person"
+        }
+      ],
+      "date": "2015",
+      "doi": "10.1126/science.aaa5099",
+      "id": "bib9",
+      "journal": "Science",
+      "pages": {
+        "first": "1358",
+        "last": "1361",
+        "range": "1358–1361"
+      },
+      "pmid": 26089514,
+      "type": "journal",
+      "volume": "348"
+    }
+  ],
+  "stage": "published",
+  "statusDate": "2020-11-10T00:00:00Z"
+}

@@ -202,7 +202,7 @@ class Community(base.BaseCase):
     # freezing time because FeedGen adds a `lastBuildDate` element to the generated
     # RSS feed that can't be affected from here.
     @pytest.mark.freeze_time('2020-10-29')
-    def test_labs(self):
+    def test_community(self):
         url = reverse('report', kwargs={'name': 'community'})
         resp = self.c.get(url)
         self.assertEqual(200, resp.status_code)
