@@ -231,7 +231,25 @@ def upsert_json(msid, version, data_type, article_data):
     return create_or_update(models.RawJSON, article_data, ['msid', 'version'])
 
 #
+# insights, tied to models.Article and models.Content
 #
+
+
+INSIGHTS_DESC = {
+    'id': [p('id')],
+    'content_type': [models.INSIGHT], # also available as `p('type')`
+    'title': [p('title')],
+    'description': [p('impactStatement')],
+    'datetime_published': [p('published')],
+}
+
+def extract_insight(raw_article_data):
+    """`models.Content` insight data is extracted from the RawJSON article data.
+    it's just a subset of the full data stored in `models.Article`"""
+    return render.render_item(INSIGHTS_DESC, raw_article_data)
+
+#
+# articles
 #
 
 def extract_children(mush):
@@ -260,17 +278,6 @@ def extract_children(mush):
     # remove the children from the mush, they must be saved separately
     delall(mush, known_children.keys())
     return mush, children
-
-INSIGHTS_DESC = {
-    'id': [p('id')],
-    'content_type': [models.INSIGHT], # also available as `p('type')`
-    'title': [p('title')],
-    'description': [p('impactStatement')],
-    'datetime_published': [p('published')],
-}
-
-def extract_insight(raw_article_data):
-    return render.render_item(INSIGHTS_DESC, raw_article_data)
 
 def extract_article(msid):
     """converts article, metrics, subjects and author data into a list of objects that can be passed to `utils.save_objects`.

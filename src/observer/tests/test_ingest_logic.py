@@ -449,8 +449,7 @@ class Insights(base.BaseCase):
         self.assertEqual(models.Content.objects.count(), 1)
 
     def test_ingest_insight_update(self):
-        """downloading and ingesting an Insight type article creates a Content item.
-        slight overlap with the general article ingest/regenerate tests."""
+        """insight content is deleted and regenerated along with it's article (no duplicates)."""
         test_fixture = join(self.fixture_dir, 'insights', 'elife-63871-v1.xml.json')
         ingest_logic.file_upsert(test_fixture)
         self.assertEqual(models.Article.objects.count(), 1)
