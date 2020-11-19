@@ -239,7 +239,7 @@ INSIGHTS_DESC = {
     'id': [p('id')],
     'content_type': [models.INSIGHT], # also available as `p('type')`
     'title': [p('title')],
-    'description': [p('impactStatement')],
+    'description': [(p('impactStatement', None), p('abstract.content.0.text', None)), lambda pair: pair[0] or pair[1]],
     'datetime_published': [p('published')],
 }
 

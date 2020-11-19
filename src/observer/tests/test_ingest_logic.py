@@ -457,3 +457,12 @@ class Insights(base.BaseCase):
         ingest_logic.file_upsert(test_fixture)
         self.assertEqual(models.Article.objects.count(), 1)
         self.assertEqual(models.Content.objects.count(), 1)
+
+    def test_ingest_insight_no_impact_statement(self):
+        "older insight articles don't have an impactStatement field so we fall back to using the first line of the abstract."
+        test_fixture = join(self.fixture_dir, 'insights', 'elife-23447-v1.xml.json')
+        ingest_logic.file_upsert(test_fixture)
+        self.assertEqual(models.Article.objects.count(), 1)
+        self.assertEqual(models.Content.objects.count(), 1)
+        expected = "Experiments on a single-celled ciliate reveal how mobile genetic elements can shape a genome, even one which is not transcriptionally active."
+        self.assertEqual(expected, models.Content.objects.get(id="23447").description)

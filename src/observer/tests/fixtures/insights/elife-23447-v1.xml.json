@@ -1,0 +1,1244 @@
+{
+  "status": "vor",
+  "id": "23447",
+  "version": 1,
+  "type": "insight",
+  "doi": "10.7554/eLife.23447",
+  "authorLine": "Lydia J Bright, Douglas L Chalker",
+  "title": "One genome’s junk is another’s garbage",
+  "titlePrefix": "Genetic Rearrangement",
+  "published": "2016-12-23T00:00:00Z",
+  "versionDate": "2016-12-23T00:00:00Z",
+  "volume": 5,
+  "elocationId": "e23447",
+  "pdf": "https://cdn.elifesciences.org/articles/23447/elife-23447-v1.pdf",
+  "xml": "https://cdn.elifesciences.org/articles/23447/elife-23447-v1.xml",
+  "subjects": [
+    {
+      "id": "chromosomes-gene-expression",
+      "name": "Chromosomes and Gene Expression"
+    },
+    {
+      "id": "genetics-genomics",
+      "name": "Genetics and Genomics"
+    }
+  ],
+  "abstract": {
+    "content": [
+      {
+        "text": "Experiments on a single-celled ciliate reveal how mobile genetic elements can shape a genome, even one which is not transcriptionally active.",
+        "type": "paragraph"
+      }
+    ]
+  },
+  "copyright": {
+    "license": "CC-BY-4.0",
+    "holder": "Bright et al.",
+    "statement": "This article is distributed under the terms of the <a href=\"http://creativecommons.org/licenses/by/4.0/\">Creative Commons Attribution License</a>, which permits unrestricted use and redistribution provided that the original author and source are credited."
+  },
+  "authors": [
+    {
+      "affiliations": [
+        {
+          "address": {
+            "components": {
+              "country": "United States",
+              "locality": [
+                "New Paltz"
+              ]
+            },
+            "formatted": [
+              "New Paltz",
+              "United States"
+            ]
+          },
+          "name": [
+            "Department of Biology",
+            "State University of New York at New Paltz"
+          ]
+        }
+      ],
+      "competingInterests": "The authors declare that no competing interests exist.",
+      "emailAddresses": [
+        "brightl@newpaltz.edu"
+      ],
+      "name": {
+        "index": "Bright, Lydia J",
+        "preferred": "Lydia J Bright"
+      },
+      "orcid": "0000-0001-7185-9988",
+      "type": "person"
+    },
+    {
+      "affiliations": [
+        {
+          "address": {
+            "components": {
+              "country": "United States",
+              "locality": [
+                "St. Louis"
+              ]
+            },
+            "formatted": [
+              "St. Louis",
+              "United States"
+            ]
+          },
+          "name": [
+            "Biology Department",
+            "Washington University in St. Louis"
+          ]
+        }
+      ],
+      "competingInterests": "The authors declare that no competing interests exist.",
+      "emailAddresses": [
+        "dchalker@wustl.edu"
+      ],
+      "name": {
+        "index": "Chalker, Douglas L",
+        "preferred": "Douglas L Chalker"
+      },
+      "orcid": "0000-0002-0285-3344",
+      "type": "person"
+    }
+  ],
+  "keywords": [
+    "<i>Tetrahymena thermophila</i>",
+    "chromosome breakage",
+    "internal eliminated sequence",
+    "genetic rearrangement",
+    "transposable element",
+    "centromere"
+  ],
+  "body": [
+    {
+      "content": [
+        {
+          "text": "Most of us store all kinds of junk in our garages and basements because we think that it might be useful at some time in the future. One day, we convince ourselves, we will dig out those old cleats or need that widget. Then the time comes for a good spring cleaning, and we declare that much of the junk we’ve been saving is just garbage and put it out on the curb for pick-up.",
+          "type": "paragraph"
+        },
+        {
+          "text": "Much like basements, genomes are full of junk (such as repetitive sequences of DNA that have no obvious function). Of course, genomes also encode the instructions for making essential mRNA molecules and proteins, and these instructions need to be passed on to future generations. Many eukaryotes separate out these activities. For example, multicellular plants and animals use different cell types: the main “somatic” cells of the body express genes, while germline cells (such as egg and sperm cells) propagate DNA to offspring. Single-celled eukaryotes called ciliates, on the other hand, keep their germline genome in a germline micronucleus and their somatic genome in a separate somatic macronucleus. Now, in eLife, Robert Coyne of the J. Craig Venter Institute and colleagues – including Eileen Hamilton and Aurélie Kapusta as joint first authors – report that they have sequenced the germline genome of a ciliate called <i>Tetrahymena thermophila</i> (<a href=\"#bib6\">Hamilton et al., 2016</a>).",
+          "type": "paragraph"
+        },
+        {
+          "text": "When ciliates mate, their germline nuclei fuse to form a new nucleus that develops into both the somatic and germline nuclei of the offspring (<a href=\"#fig1\">Figure 1</a>). The new germline genome remains intact and is transcriptionally inactive. To form the somatic genome, germline chromosomes break into fragments to form the chromosomes that end up in the somatic macronucleus.",
+          "type": "paragraph"
+        },
+        {
+          "assets": [
+            {
+              "caption": [
+                {
+                  "text": "Left: <i>Tetrahymena</i> is a single-celled ciliate that stores its germline genome in a micronucleus and its somatic genome in a macronucleus. During reproduction, two micronuclei fuse to form a zygotic nucleus that splits to form a new germline micronucleus and a new somatic macronucleus. This means that the genetic material in the somatic macronuclei of the parents is discarded. Right: Germline DNA (purple; top) remains intact in the germline micronucleus, but is processed in the somatic macronucleus to form somatic DNA (blue; bottom). Junk DNA in the form of internally eliminated sequences (IES; green boxes) is removed and the DNA fragments at chromosome breakage sites (Cbs; red arrowhead) to form five chromosomes, which are stabilized by the addition of telomeres (purple triangles) at their ends.",
+                  "type": "paragraph"
+                }
+              ],
+              "id": "fig1",
+              "image": {
+                "alt": "",
+                "uri": "https://iiif.elifesciences.org/lax:23447%2Felife-23447-fig1-v1.tif",
+                "size": {
+                  "width": 630,
+                  "height": 220
+                },
+                "source": {
+                  "mediaType": "image/jpeg",
+                  "uri": "https://iiif.elifesciences.org/lax:23447%2Felife-23447-fig1-v1.tif/full/full/0/default.jpg",
+                  "filename": "elife-23447-fig1-v1.jpg"
+                }
+              },
+              "label": "Figure 1",
+              "title": "Junk DNA in <i>Tetrahymena</i>.",
+              "type": "image"
+            }
+          ],
+          "type": "figure"
+        },
+        {
+          "text": "During this developmental process, ciliates treat junk DNA like garbage, tossing it from their somatic genomes. One can therefore identify what these cells consider to be junk by comparing the contents of their germline and somatic genomes: junk DNA is only found in the germline. The fact that ciliates keep junk DNA in their germline, even though they have developed mechanisms to remove it, may indicate that this DNA serves (or has served) some role in the lifestyle of ciliates. On the other hand, the evolutionary cost of developing or deploying mechanisms to remove the nonfunctional DNA may exceed the cost of propagating it, leading to its retention.",
+          "type": "paragraph"
+        },
+        {
+          "text": "When Hamilton et al. compared the germline genome of <i>Tetrahymena</i> with the somatic genome, which was sequenced a decade ago (<a href=\"#bib4\">Eisen et al., 2006</a>), they found that one third of the germline genome is discarded to form the somatic genome. In particular, they discovered that approximately 12,000 junk DNA loci are “internally eliminated sequences” that are removed during development (<a href=\"#fig1\">Figure 1</a>), and they were able to map the exact locations of nearly 7500 of these.",
+          "type": "paragraph"
+        },
+        {
+          "text": "The sequence and distribution of these internally eliminated sequences in the germline genome reveal a history spent combating mobile DNA elements called transposons. Most of the internally eliminated sequences appear to be descendants of transposons and were highly enriched near the center of the five metacentric chromosomes. (A metacentric chromosome has its centromere – the structure that holds sister chromatids together – at its center, whereas an acentric chromosome lacks a centromere). Some of these sequences must act as centromeric DNA, only to be removed when the acentric somatic chromosomes form.",
+          "type": "paragraph"
+        },
+        {
+          "text": "The centromeres of most eukaryotes are rich in repetitive DNA that is packaged as heterochromatin to suppress the activity of the genes it contains. However, the germline chromosomes in <i>Tetrahymena</i> lack the form of heterochromatin found in the outer layer of the centromeres of most eukaryotes (<a href=\"#bib9\">Taverna et al., 2002</a>). Perhaps junk DNA accumulates around centromeres in order to keep those parts of the genome that are transcribed away from the centromere, where chromatin suppresses the transcription of DNA (<a href=\"#bib5\">Fukagawa and Earnshaw, 2014</a>).",
+          "type": "paragraph"
+        },
+        {
+          "text": "<i>Tetrahymena</i> still forms heterochromatin to combat transposon proliferation, but not in the germline genome. The ciliates have adapted a process by which small RNA molecules direct the formation of heterochromatin to silence, then eliminate, transposons before they reach the expressed genome (<a href=\"#bib9\">Taverna et al., 2002</a>, <a href=\"#bib8\">Mochizuki et al., 2002</a>). To go from silencing to elimination, <i>Tetrahymena</i> cells have domesticated Tpb2p – an enzyme that normally helps transposons to hop around the genome – to cut out any DNA that is packaged in newly formed heterochromatin (<a href=\"#bib3\">Cheng et al., 2010</a>).",
+          "type": "paragraph"
+        },
+        {
+          "text": "A related ciliate called <i>Paramecium tetraurelia</i> removes internally eliminated sequences using a more precise method than <i>Tetrahymena</i> (<a href=\"#bib2\">Bétermier, 2004</a>). Hamilton et al. show that all but a very small number of internally eliminated sequences in <i>Tetrahymena</i> are located within non-coding sequences, whereas thousands are located within coding sequences in <i>Paramecium</i> (<a href=\"#bib1\">Arnaiz et al., 2012</a>). <i>Tetrahymena</i>’s imprecise excision mechanism likely prevents internally eliminated sequences (or, more accurately, their ancestral active transposons) from accumulating in protein-coding genes, which errant excision events might render non-functional.",
+          "type": "paragraph"
+        },
+        {
+          "text": "Does any of the eliminated junk DNA contain useful stuff? There is a lot left to explore. When Hamilton et al. – who are based at institutes in the United States, Austria, the United Kingdom and China – mapped the 225 sites at which germline chromosomes break when creating the ends of the acentric somatic chromosomes, they discovered that 33 chromosome segments are not maintained in the somatic macronucleus. This appears to be more than happenstance. The sequence and position of each chromosome breakage site was conserved across <i>Tetrahymena</i> species, and new fragmentation sites appeared to be created by duplicating existing ones.",
+          "type": "paragraph"
+        },
+        {
+          "text": "These 33 fragments encode 47 predicted open reading frames, some of which are transcribed during development before they are eliminated. Hamilton et al. propose that these fragments present a strategy for regulating gene expression during development. This is not without precedent, as the region encoding a subunit of the telomerase enzyme that is only required during development is also eliminated from the somatic genome of the ciliate <i>Euplotes crassus</i> (<a href=\"#bib7\">Karamysheva et al., 2003</a>). In other words, the existence of junk and the means to remove it during development have been repeatedly co-opted to regulate gene expression, much like that widget in the basement proving to be useful after all. How much more of this junk DNA is more than garbage?",
+          "type": "paragraph"
+        }
+      ],
+      "id": "s0",
+      "title": "Main text",
+      "type": "section"
+    }
+  ],
+  "references": [
+    {
+      "articleTitle": "The <i>Paramecium</i> germline genome provides a niche for intragenic parasitic DNA: evolutionary dynamics of internal eliminated sequences",
+      "authors": [
+        {
+          "name": {
+            "index": "Arnaiz, O",
+            "preferred": "O Arnaiz"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Mathy, N",
+            "preferred": "N Mathy"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Baudry, C",
+            "preferred": "C Baudry"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Malinsky, S",
+            "preferred": "S Malinsky"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Aury, JM",
+            "preferred": "JM Aury"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Denby Wilkes, C",
+            "preferred": "C Denby Wilkes"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Garnier, O",
+            "preferred": "O Garnier"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Labadie, K",
+            "preferred": "K Labadie"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Lauderdale, BE",
+            "preferred": "BE Lauderdale"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Le Mouël, A",
+            "preferred": "A Le Mouël"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Marmignon, A",
+            "preferred": "A Marmignon"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Nowacki, M",
+            "preferred": "M Nowacki"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Poulain, J",
+            "preferred": "J Poulain"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Prajer, M",
+            "preferred": "M Prajer"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Wincker, P",
+            "preferred": "P Wincker"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Meyer, E",
+            "preferred": "E Meyer"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Duharcourt, S",
+            "preferred": "S Duharcourt"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Duret, L",
+            "preferred": "L Duret"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Bétermier, M",
+            "preferred": "M Bétermier"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Sperling, L",
+            "preferred": "L Sperling"
+          },
+          "type": "person"
+        }
+      ],
+      "date": "2012",
+      "doi": "10.1371/journal.pgen.1002984",
+      "id": "bib1",
+      "journal": "PLoS Genetics",
+      "pages": "e1002984",
+      "pmid": 23071448,
+      "type": "journal",
+      "volume": "8"
+    },
+    {
+      "articleTitle": "Large-scale genome remodelling by the developmentally programmed elimination of germ line sequences in the ciliate <i>Paramecium</i>",
+      "authors": [
+        {
+          "name": {
+            "index": "Bétermier, M",
+            "preferred": "M Bétermier"
+          },
+          "type": "person"
+        }
+      ],
+      "date": "2004",
+      "doi": "10.1016/j.resmic.2004.01.017",
+      "id": "bib2",
+      "journal": "Research in Microbiology",
+      "pages": {
+        "first": "399",
+        "last": "408",
+        "range": "399–408"
+      },
+      "pmid": 15207872,
+      "type": "journal",
+      "volume": "155"
+    },
+    {
+      "articleTitle": "A domesticated piggyBac transposase plays key roles in heterochromatin dynamics and DNA cleavage during programmed DNA deletion in <i>Tetrahymena thermophila</i>",
+      "authors": [
+        {
+          "name": {
+            "index": "Cheng, CY",
+            "preferred": "CY Cheng"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Vogt, A",
+            "preferred": "A Vogt"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Mochizuki, K",
+            "preferred": "K Mochizuki"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Yao, MC",
+            "preferred": "MC Yao"
+          },
+          "type": "person"
+        }
+      ],
+      "date": "2010",
+      "doi": "10.1091/mbc.E09-12-1079",
+      "id": "bib3",
+      "journal": "Molecular Biology of the Cell",
+      "pages": {
+        "first": "1753",
+        "last": "1762",
+        "range": "1753–1762"
+      },
+      "pmid": 20357003,
+      "type": "journal",
+      "volume": "21"
+    },
+    {
+      "articleTitle": "Macronuclear genome sequence of the ciliate <i>Tetrahymena thermophila</i>, a model eukaryote",
+      "authors": [
+        {
+          "name": {
+            "index": "Eisen, JA",
+            "preferred": "JA Eisen"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Coyne, RS",
+            "preferred": "RS Coyne"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Wu, M",
+            "preferred": "M Wu"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Wu, D",
+            "preferred": "D Wu"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Thiagarajan, M",
+            "preferred": "M Thiagarajan"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Wortman, JR",
+            "preferred": "JR Wortman"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Badger, JH",
+            "preferred": "JH Badger"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Ren, Q",
+            "preferred": "Q Ren"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Amedeo, P",
+            "preferred": "P Amedeo"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Jones, KM",
+            "preferred": "KM Jones"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Tallon, LJ",
+            "preferred": "LJ Tallon"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Delcher, AL",
+            "preferred": "AL Delcher"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Salzberg, SL",
+            "preferred": "SL Salzberg"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Silva, JC",
+            "preferred": "JC Silva"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Haas, BJ",
+            "preferred": "BJ Haas"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Majoros, WH",
+            "preferred": "WH Majoros"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Farzad, M",
+            "preferred": "M Farzad"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Carlton, JM",
+            "preferred": "JM Carlton"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Smith, RK",
+            "preferred": "RK Smith"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Garg, J",
+            "preferred": "J Garg"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Pearlman, RE",
+            "preferred": "RE Pearlman"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Karrer, KM",
+            "preferred": "KM Karrer"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Sun, L",
+            "preferred": "L Sun"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Manning, G",
+            "preferred": "G Manning"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Elde, NC",
+            "preferred": "NC Elde"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Turkewitz, AP",
+            "preferred": "AP Turkewitz"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Asai, DJ",
+            "preferred": "DJ Asai"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Wilkes, DE",
+            "preferred": "DE Wilkes"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Wang, Y",
+            "preferred": "Y Wang"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Cai, H",
+            "preferred": "H Cai"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Collins, K",
+            "preferred": "K Collins"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Stewart, BA",
+            "preferred": "BA Stewart"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Lee, SR",
+            "preferred": "SR Lee"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Wilamowska, K",
+            "preferred": "K Wilamowska"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Weinberg, Z",
+            "preferred": "Z Weinberg"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Ruzzo, WL",
+            "preferred": "WL Ruzzo"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Wloga, D",
+            "preferred": "D Wloga"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Gaertig, J",
+            "preferred": "J Gaertig"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Frankel, J",
+            "preferred": "J Frankel"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Tsao, CC",
+            "preferred": "CC Tsao"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Gorovsky, MA",
+            "preferred": "MA Gorovsky"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Keeling, PJ",
+            "preferred": "PJ Keeling"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Waller, RF",
+            "preferred": "RF Waller"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Patron, NJ",
+            "preferred": "NJ Patron"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Cherry, JM",
+            "preferred": "JM Cherry"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Stover, NA",
+            "preferred": "NA Stover"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Krieger, CJ",
+            "preferred": "CJ Krieger"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "del Toro, C",
+            "preferred": "C del Toro"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Ryder, HF",
+            "preferred": "HF Ryder"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Williamson, SC",
+            "preferred": "SC Williamson"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Barbeau, RA",
+            "preferred": "RA Barbeau"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Hamilton, EP",
+            "preferred": "EP Hamilton"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Orias, E",
+            "preferred": "E Orias"
+          },
+          "type": "person"
+        }
+      ],
+      "date": "2006",
+      "doi": "10.1371/journal.pbio.0040286",
+      "id": "bib4",
+      "journal": "PLoS Biology",
+      "pages": "e286",
+      "pmid": 16933976,
+      "type": "journal",
+      "volume": "4"
+    },
+    {
+      "articleTitle": "The centromere: chromatin foundation for the kinetochore machinery",
+      "authors": [
+        {
+          "name": {
+            "index": "Fukagawa, T",
+            "preferred": "T Fukagawa"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Earnshaw, WC",
+            "preferred": "WC Earnshaw"
+          },
+          "type": "person"
+        }
+      ],
+      "date": "2014",
+      "doi": "10.1016/j.devcel.2014.08.016",
+      "id": "bib5",
+      "journal": "Developmental Cell",
+      "pages": {
+        "first": "496",
+        "last": "508",
+        "range": "496–508"
+      },
+      "pmid": 25203206,
+      "type": "journal",
+      "volume": "30"
+    },
+    {
+      "articleTitle": "Structure of the germline genome of <i>Tetrahymena thermophila</i> and relationship to the massively rearranged somatic genome",
+      "authors": [
+        {
+          "name": {
+            "index": "Hamilton, EP",
+            "preferred": "EP Hamilton"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Kapusta, A",
+            "preferred": "A Kapusta"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Huvos, PE",
+            "preferred": "PE Huvos"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Bidwell, SL",
+            "preferred": "SL Bidwell"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Zafar, N",
+            "preferred": "N Zafar"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Tang, H",
+            "preferred": "H Tang"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Hadjithomas, M",
+            "preferred": "M Hadjithomas"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Krishnakumar, V",
+            "preferred": "V Krishnakumar"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Badger, JH",
+            "preferred": "JH Badger"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Caler, EV",
+            "preferred": "EV Caler"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Russ, C",
+            "preferred": "C Russ"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Zeng, Q",
+            "preferred": "Q Zeng"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Fan, L",
+            "preferred": "L Fan"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Levin, JZ",
+            "preferred": "JZ Levin"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Shea, T",
+            "preferred": "T Shea"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Young, SK",
+            "preferred": "SK Young"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Hegarty, R",
+            "preferred": "R Hegarty"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Daza, R",
+            "preferred": "R Daza"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Gujja, S",
+            "preferred": "S Gujja"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Wortman, JR",
+            "preferred": "JR Wortman"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Birren, BW",
+            "preferred": "BW Birren"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Nusbaum, C",
+            "preferred": "C Nusbaum"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Thomas, J",
+            "preferred": "J Thomas"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Carey, CM",
+            "preferred": "CM Carey"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Pritham, EJ",
+            "preferred": "EJ Pritham"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Feschotte, C",
+            "preferred": "C Feschotte"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Noto, T",
+            "preferred": "T Noto"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Mochizuki, K",
+            "preferred": "K Mochizuki"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Papazyan, R",
+            "preferred": "R Papazyan"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Taverna, SD",
+            "preferred": "SD Taverna"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Dear, PH",
+            "preferred": "PH Dear"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Cassidy-Hanley, DM",
+            "preferred": "DM Cassidy-Hanley"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Xiong, J",
+            "preferred": "J Xiong"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Miao, W",
+            "preferred": "W Miao"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Orias, E",
+            "preferred": "E Orias"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Coyne, RS",
+            "preferred": "RS Coyne"
+          },
+          "type": "person"
+        }
+      ],
+      "date": "2016",
+      "doi": "10.7554/eLife.19090",
+      "id": "bib6",
+      "journal": "eLife",
+      "pages": "e19090",
+      "pmid": 27892853,
+      "type": "journal",
+      "volume": "5"
+    },
+    {
+      "articleTitle": "Developmentally programmed gene elimination in <i>Euplotes crassus</i> facilitates a switch in the telomerase catalytic subunit",
+      "authors": [
+        {
+          "name": {
+            "index": "Karamysheva, Z",
+            "preferred": "Z Karamysheva"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Wang, L",
+            "preferred": "L Wang"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Shrode, T",
+            "preferred": "T Shrode"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Bednenko, J",
+            "preferred": "J Bednenko"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Hurley, LA",
+            "preferred": "LA Hurley"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Shippen, DE",
+            "preferred": "DE Shippen"
+          },
+          "type": "person"
+        }
+      ],
+      "date": "2003",
+      "doi": "10.1016/S0092-8674(03)00363-5",
+      "id": "bib7",
+      "journal": "Cell",
+      "pages": {
+        "first": "565",
+        "last": "576",
+        "range": "565–576"
+      },
+      "pmid": 12787498,
+      "type": "journal",
+      "volume": "113"
+    },
+    {
+      "articleTitle": "Analysis of a <i>piwi</i>-related gene implicates small RNAs in genome rearrangement in <i>Tetrahymena</i>",
+      "authors": [
+        {
+          "name": {
+            "index": "Mochizuki, K",
+            "preferred": "K Mochizuki"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Fine, NA",
+            "preferred": "NA Fine"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Fujisawa, T",
+            "preferred": "T Fujisawa"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Gorovsky, MA",
+            "preferred": "MA Gorovsky"
+          },
+          "type": "person"
+        }
+      ],
+      "date": "2002",
+      "doi": "10.1016/S0092-8674(02)00909-1",
+      "id": "bib8",
+      "journal": "Cell",
+      "pages": {
+        "first": "689",
+        "last": "699",
+        "range": "689–699"
+      },
+      "pmid": 12297043,
+      "type": "journal",
+      "volume": "110"
+    },
+    {
+      "articleTitle": "Methylation of histone H3 at lysine 9 targets programmed DNA elimination in <i>Tetrahymena</i>",
+      "authors": [
+        {
+          "name": {
+            "index": "Taverna, SD",
+            "preferred": "SD Taverna"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Coyne, RS",
+            "preferred": "RS Coyne"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Allis, CD",
+            "preferred": "CD Allis"
+          },
+          "type": "person"
+        }
+      ],
+      "date": "2002",
+      "doi": "10.1016/S0092-8674(02)00941-8",
+      "id": "bib9",
+      "journal": "Cell",
+      "pages": {
+        "first": "701",
+        "last": "711",
+        "range": "701–711"
+      },
+      "pmid": 12297044,
+      "type": "journal",
+      "volume": "110"
+    }
+  ],
+  "stage": "published",
+  "statusDate": "2016-12-23T00:00:00Z"
+}

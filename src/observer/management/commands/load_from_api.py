@@ -21,11 +21,6 @@ class Command(BaseCommand):
             targetlist = options['target'] or TARGETS
             msidlist = options['msid']
 
-            if len(targetlist) > 1 and msidlist:
-                print('cannot mix and match targets and lists of ids.')
-                print('choose one target and many IDs or many targets and no IDs')
-                exit(1)
-
             dl_ajson = ingest_logic.download_all_article_versions
             dl_metrics = ingest_logic.download_all_article_metrics
             dl_presspackages = partial(ingest_logic.download_all, models.PRESSPACKAGE)
@@ -34,6 +29,16 @@ class Command(BaseCommand):
             dl_labs = partial(ingest_logic.download_all, models.LABS_POST)
             dl_community = partial(ingest_logic.download_all, models.COMMUNITY)
             dl_podcasts = partial(ingest_logic.download_all, models.PODCAST)
+
+            if msidlist:
+                dl_ajson = partial(lmap, ingest_logic.download_article_versions, msidlist)
+                dl_metrics = partial(lmap, ingest_logic.download_article_metrics, msidlist)
+                if LAX not in targetlist or METRICS not in targetlist:
+                    # except articles and article-metrics, all other content is just a few pages to download,
+                    # the extra complexity isn't worth it (yet).
+                    # community is ~3 pages, digests is ~10
+                    print("ignoring ID list, given content type doesn't support it.")
+
 
             dl_targets = OrderedDict([
                 (LAX, dl_ajson),
@@ -45,16 +50,7 @@ class Command(BaseCommand):
                 (COMMUNITY, dl_community),
                 (PODCASTS, dl_podcasts),
             ])
-
-            if msidlist:
-                dl_ajson = partial(lmap, ingest_logic.download_article_versions, msidlist)
-                dl_metrics = partial(lmap, ingest_logic.download_article_metrics, msidlist)
-                if LAX not in targetlist or METRICS not in targetlist:
-                    # except articles and article-metrics, all other content is just a few pages to download,
-                    # the extra complexity isn't worth it (yet).
-                    # community is ~3 pages, digests is ~10
-                    print("ignoring ID list, given content type doesn't support it.")
-
+                    
             for content_type, fn in subdict(dl_targets, targetlist).items():
                 print('downloading %r' % content_type)
                 fn()
@@ -70,6 +66,11 @@ class Command(BaseCommand):
             regen_community = partial(ingest_logic.regenerate, models.COMMUNITY) # includes features, blog posts, interviews, etc
             regen_podcasts = partial(ingest_logic.regenerate, models.PODCAST)
 
+            if msidlist:
+                regen_articles = partial(lmap, ingest_logic.regenerate_article, msidlist)
+                if LAX not in targetlist:
+                    print("ignoring ID list, given content type doesn't support it or isn't implemented.")
+
             regen_targets = OrderedDict([
                 (LAX, regen_articles),
                 (PRESSPACKAGES, regen_presspackages),
@@ -79,12 +80,7 @@ class Command(BaseCommand):
                 (COMMUNITY, regen_community),
                 (PODCASTS, regen_podcasts)
             ])
-
-            if msidlist:
-                regen_articles = partial(lmap, ingest_logic.regenerate_article, msidlist)
-                if LAX not in targetlist:
-                    print("ignoring ID list, given content type doesn't support it or isn't implemented.")
-
+                    
             for content_type, fn in subdict(regen_targets, targetlist).items():
                 print('regenerate %r' % content_type)
                 fn()
