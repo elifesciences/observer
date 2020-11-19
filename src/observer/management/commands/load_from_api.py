@@ -39,7 +39,6 @@ class Command(BaseCommand):
                     # community is ~3 pages, digests is ~10
                     print("ignoring ID list, given content type doesn't support it.")
 
-
             dl_targets = OrderedDict([
                 (LAX, dl_ajson),
                 (METRICS, dl_metrics),
@@ -50,7 +49,7 @@ class Command(BaseCommand):
                 (COMMUNITY, dl_community),
                 (PODCASTS, dl_podcasts),
             ])
-                    
+
             for content_type, fn in subdict(dl_targets, targetlist).items():
                 print('downloading %r' % content_type)
                 fn()
@@ -80,7 +79,7 @@ class Command(BaseCommand):
                 (COMMUNITY, regen_community),
                 (PODCASTS, regen_podcasts)
             ])
-                    
+
             for content_type, fn in subdict(regen_targets, targetlist).items():
                 print('regenerate %r' % content_type)
                 fn()
