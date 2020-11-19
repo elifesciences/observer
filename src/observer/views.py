@@ -20,6 +20,7 @@ def request_args(request, report_meta, **overrides):
         'per_page': report_meta['per_page'],
         'page_num': 1,
         'order': report_meta['order'], # ll: 'ASC'
+        # is anything using these?? are they exposed to the public?
         'min_per_page': 1,
         'max_per_page': 100, # ignored if report disables pagination
         'format': report_meta['serialisations'][0] # default format is the first

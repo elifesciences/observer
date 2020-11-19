@@ -1,6 +1,8 @@
+import pytest
 from os.path import join
 from django.test import Client
 from .base import BaseCase
+from . import base
 from observer import reports, ingest_logic, models, utils
 from django.urls import reverse
 from observer.utils import listfiles, lmap
@@ -25,73 +27,88 @@ def dummy_params(reportfn):
         kwargs = utils.subdict(param_map, reportfn.meta['params'].keys())
     return kwargs
 
-class Zero(BaseCase):
-    def test_reports_no_data(self):
-        "an unpopulated observer instance doesn't break when empty"
-        self.assertEqual(models.Article.objects.count(), 0)
-        for report_name, reportfn in reports.known_report_idx().items():
-            report = reportfn(**dummy_params(reportfn))
-            for output_format in report['serialisations']:
-                context = {}
-                resp = reports.format_report(report, output_format, context)
-                # realize any results
-                if resp.streaming:
-                    lmap(str, resp.streaming_content)
-                else:
-                    str(resp.content)
+#
+#
+#
 
-class One(BaseCase):
-    def setUp(self):
-        self.c = Client()
-        for path in listfiles(join(self.fixture_dir, 'ajson'), ['.json']):
-            ingest_logic.file_upsert(path)
-        ingest_logic.regenerate_all()
+def test_ping():
+    resp = Client().get(reverse('ping'))
+    assert 200 == resp.status_code
+    assert 'text/plain; charset=UTF-8' == resp['content-type']
+    assert 'must-revalidate, no-cache, no-store, private' == resp['cache-control']
+    assert 'pong' == resp.content.decode('utf-8')
 
-    def test_reports(self):
-        "all known reports can be formatted with results"
-        for report_name, reportfn in reports.known_report_idx().items():
-            report = reportfn(**dummy_params(reportfn))
-            for output_format in report['serialisations']:
-                context = {}
-                resp = reports.format_report(report, output_format, context)
-                # realize any results
-                if resp.streaming:
-                    lmap(str, resp.streaming_content)
-                else:
-                    str(resp.content)
+@pytest.mark.django_db
+def test_landing_page():
+    resp = Client().get("/")
+    assert 200 == resp.status_code
 
-class Two(BaseCase):
-    def setUp(self):
-        self.c = Client()
-        for path in listfiles(join(self.fixture_dir, 'ajson'), ['.json']):
-            ingest_logic.file_upsert(path)
-        ingest_logic.regenerate_all()
+@pytest.mark.django_db
+def test_slashes_not_appended():
+    "ensure a slash is not appended to the end of a url"
+    url = reverse('report', kwargs={'name': 'latest-articles'})
+    assert not url.endswith('/')
+    # ensure we go directly to the url without redirecting to a slash suffixed one
+    resp = Client().get(url, follow=False)
+    assert 200 == resp.status_code
 
-    def test_reports(self):
-        "all known reports in all supported formats can be hit with a successful response"
-        for report_name, reportfn in reports.known_report_idx().items():
-            url = reverse('report', kwargs={'name': report_name})
-            for output_format in reportfn.meta['serialisations']:
-                args = {'format': output_format}
-                args.update(http_dummy_params(reportfn))
-                resp = self.c.get(url, args)
-                self.assertEqual(resp.status_code, 200, "report at %r returned non-200 response" % url)
+@pytest.mark.django_db
+def test_reports_no_data():
+    """an unpopulated observer instance doesn't break when empty.
+    iterates through all reports and each report serialisation and requests it."""
+    assert 0 == models.Article.objects.count()
+    for report_name, reportfn in reports.known_report_idx().items():
+        report = reportfn(**dummy_params(reportfn))
+        for output_format in report['serialisations']:
+            context = {}
+            resp = reports.format_report(report, output_format, context)
+            # realize any results
+            if resp.streaming:
+                lmap(str, resp.streaming_content)
+            else:
+                str(resp.content)
 
-class Three(BaseCase):
-    def setUp(self):
-        self.c = Client()
+@pytest.mark.django_db
+def test_reports():
+    "all known reports in all supported formats can be successfully fetched through code"
+    fixture_list = listfiles(join(base.FIXTURE_DIR, 'ajson'), ['.json'])
+    fixture_list += [
+        # ... # TODO: extend this with other fixtures
+    ]
+    for path in fixture_list:
+        ingest_logic.file_upsert(path)
+    ingest_logic.regenerate_all()
 
-    def test_landing_page(self):
-        resp = self.c.get("/")
-        self.assertEqual(resp.status_code, 200)
+    for report_name, reportfn in reports.known_report_idx().items():
+        report = reportfn(**dummy_params(reportfn))
+        for output_format in report['serialisations']:
+            context = {}
+            resp = reports.format_report(report, output_format, context)
+            # realize any results
+            if resp.streaming:
+                lmap(str, resp.streaming_content)
+            else:
+                str(resp.content)
 
-    def test_slashes_not_appended(self):
-        "ensure a slash is not appended to the end of a url"
-        url = reverse('report', kwargs={'name': 'latest-articles'})
-        self.assertFalse(url.endswith('/'))
-        # ensure we go directly to the url without redirecting to a slash suffixed one
-        resp = self.c.get(url, follow=False)
-        self.assertEqual(resp.status_code, 200)
+@pytest.mark.django_db
+def test_reports_via_views():
+    "all known reports in all supported formats can be hit with a successful response"
+    fixture_list = listfiles(join(base.FIXTURE_DIR, 'ajson'), ['.json'])
+    fixture_list += [
+        # ... # TODO: extend this with other fixtures
+    ]
+    for path in fixture_list:
+        ingest_logic.file_upsert(path)
+    ingest_logic.regenerate_all()
+    c = Client()
+
+    for report_name, reportfn in reports.known_report_idx().items():
+        url = reverse('report', kwargs={'name': report_name})
+        for output_format in reportfn.meta['serialisations']:
+            args = {'format': output_format}
+            args.update(http_dummy_params(reportfn))
+            resp = c.get(url, args)
+            assert 200 == resp.status_code, "report at %r returned non-200 response" % url
 
 class Four(BaseCase):
     def setUp(self):
@@ -152,13 +169,6 @@ class Four(BaseCase):
                     prefix = "<?xml version='1.0' encoding='UTF-8'?>"
                     resp2.content.decode('utf8').startswith(prefix)
 
-class Five(BaseCase):
-    def setUp(self):
-        self.c = Client()
-
-    def test_ping(self):
-        resp = self.c.get(reverse('ping'))
-        self.assertEqual(resp.status_code, 200)
-        self.assertEqual(resp['content-type'], 'text/plain; charset=UTF-8')
-        self.assertEqual(resp['cache-control'], 'must-revalidate, no-cache, no-store, private')
-        self.assertEqual(resp.content.decode('utf-8'), 'pong')
+    def test_report_ordering_pagination(self):
+        # TODO: test order, per_page, page_num, min_per_page, max_per_page
+        pass
