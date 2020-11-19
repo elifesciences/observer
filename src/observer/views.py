@@ -7,7 +7,7 @@ from et3.render import render_item
 from et3.extract import path as p
 from et3.utils import uppercase
 from annoying.decorators import render_to
-from .utils import ensure, isint
+from .utils import ensure, isint, subdict
 from . import reports
 import logging
 
@@ -63,11 +63,14 @@ def chop(q, page, per_page, order, order_by):
     """orders and chops a query into pages, returning the total of the original query and a query object"""
     total = q.count()
 
-    # switch directions if descending (default ASC)
-    if order == DESC:
-        order_by = '-' + order_by
+    # `order` only supported if `order_by` is supported
+    # put `order_by=None` in your report to ignore user preferred ordering
+    if order_by:
+        # switch directions if descending (default ASC)
+        if order == DESC:
+            order_by = '-' + order_by
 
-    q = q.order_by(order_by)
+        q = q.order_by(order_by)
 
     # a per-page = 0 means 'all results'
     if per_page > NO_PAGINATION:
@@ -79,19 +82,16 @@ def chop(q, page, per_page, order, order_by):
 
 def paginate_report_results(reportfn, rargs):
     # TODO: shift this into request_args
-    order_by = reportfn.meta['order_by']
+    order_by = reportfn.meta.get('order_by')
 
     report_data = reportfn(**rargs['kwargs']) # results will stay lazy until realised
 
     # this gives us an opportunity to chop them up and enforce any ordering
 
-    def vals(d, ks):
-        return [d[k] for k in ks]
-
-    # TODO: order_by here is a bit gnarly.
-    # see: https://github.com/elifesciences/elife-metrics/blob/develop/src/metrics/api_v2_logic.py#L7
-    report_data['count'], report_data['items'] = \
-        chop(report_data['items'], *vals(rargs, ['page', 'per_page', 'order']), order_by=order_by)
+    items = report_data['items']
+    kwargs = subdict(rargs, ['page', 'per_page', 'order'])
+    kwargs['order_by'] = order_by
+    report_data['count'], report_data['items'] = chop(items, **kwargs)
 
     # update the report with any user overrides
     report_data.update(rargs)

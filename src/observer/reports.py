@@ -42,6 +42,23 @@ def article_meta(**kwargs):
     meta.update(kwargs)
     return meta
 
+def content_meta(**kwargs):
+    "returns standard metadata most reports returning models.Article objects will need"
+    meta = {
+        'serialisations': [RSS],
+        'per_page': 28,
+        'params': None,
+
+        'order': DESC, # urgh, not supported but everything breaks without it
+
+        # content reports use their own, sometimes complex, ordering
+        # don't allow user defined ordering and if anything asks, it's just 'datetime_published'
+        'order_label_key': DESC,
+        'order_by_label_key': 'datetime_published',
+    }
+    meta.update(kwargs)
+    return meta
+
 #
 # reports
 #
@@ -89,97 +106,81 @@ def upcoming_articles():
         .filter(status=models.POA) \
         .order_by('-datetime_published')
 
-# note: 'article_meta' here works because of similar field names
-@report(article_meta(
+@report(content_meta(
     title='digests',
     description='The latest eLife digests.',
-    serialisations=[RSS],
 ))
 def digests():
     return models.Content.objects \
         .filter(content_type=models.DIGEST) \
         .order_by('-datetime_published')
 
-# note: 'article_meta' here works because of similar field names
-@report(article_meta(
+@report(content_meta(
     title='labs-posts',
     description='The latest eLife labs-posts.',
-    serialisations=[RSS],
 ))
 def labs_posts():
     return models.Content.objects \
         .filter(content_type=models.LABS_POST) \
         .order_by('-datetime_published')
 
-# note: 'article_meta' here works because of similar field names
-@report(article_meta(
+@report(content_meta(
     title='community',
     description='The latest eLife community content.',
-    serialisations=[RSS],
 ))
 def community():
     return models.Content.objects \
         .filter(content_type__in=models.COMMUNITY_CONTENT_TYPE_LIST) \
         .order_by('-datetime_published', 'title')
 
-# note: 'article_meta' here works because of similar field names
-@report(article_meta(
+@report(content_meta(
     title='interviews',
     description='The latest eLife interviews.',
-    serialisations=[RSS],
 ))
 def interviews():
     return models.Content.objects \
         .filter(content_type=models.INTERVIEW) \
         .order_by('-datetime_published')
 
-# note: 'article_meta' here works because of similar field names
-@report(article_meta(
+@report(content_meta(
     title='collections',
     description='The latest eLife collections.',
-    serialisations=[RSS],
 ))
 def collections():
     return models.Content.objects \
         .filter(content_type=models.COLLECTION) \
         .order_by('-datetime_published')
 
-# note: 'article_meta' here works because of similar field names
-@report(article_meta(
+@report(content_meta(
     title='blog-articles',
     description='The latest eLife blog articles.',
-    serialisations=[RSS],
 ))
 def blog_articles():
     return models.Content.objects \
         .filter(content_type=models.BLOG_ARTICLE) \
         .order_by('-datetime_published')
 
-# note: 'article_meta' here works because of similar field names
-@report(article_meta(
+@report(content_meta(
     title='features',
     description='The latest eLife featured articles.',
-    serialisations=[RSS],
 ))
 def features():
     return models.Content.objects \
         .filter(content_type=models.FEATURE) \
         .order_by('-datetime_published')
 
-@report(article_meta(
+@report(content_meta(
     title='podcasts',
     description='The latest eLife podcast episodes.',
-    serialisations=[RSS],
 ))
 def podcasts():
     return models.Content.objects \
         .filter(content_type=models.PODCAST) \
         .order_by('-datetime_published')
 
-@report(article_meta(
+@report(content_meta(
     title='magazine',
     description='The latest eLife magazine content',
-    serialisations=[RSS],
 ))
 def magazine():
     return models.Content.objects \
@@ -370,8 +371,8 @@ def _report_meta(reportfn):
     meta = copy.deepcopy(reportfn.meta)
     meta['params'] = list((meta.get('params') or {})) # remove the param wrangling description
     meta['http_params'] = list(subdict(url_to_kwarg_params, meta['params']).values())
-    meta['order_by_label'] = labels[meta['order_by']]
-    meta['order_label'] = labels[meta['order']]
+    meta['order_by_label'] = labels[meta.get('order_by_label_key') or meta.get('order_by')]
+    meta['order_label'] = labels[meta.get('order_label_key') or meta['order']]
     return meta
 
 def report_meta():
