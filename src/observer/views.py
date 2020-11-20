@@ -7,11 +7,11 @@ from et3.render import render_item
 from et3.extract import path as p
 from et3.utils import uppercase
 from annoying.decorators import render_to
-from .utils import ensure, isint
+from .utils import ensure, isint, subdict
 from . import reports
 import logging
 
-from .reports import NO_PAGINATION, ASC, DESC
+from .reports import NO_PAGINATION, NO_ORDERING, ASC, DESC
 
 LOG = logging.getLogger(__name__)
 
@@ -19,7 +19,9 @@ def request_args(request, report_meta, **overrides):
     opts = {
         'per_page': report_meta['per_page'],
         'page_num': 1,
-        'order': report_meta['order'], # ll: 'ASC'
+        'order': report_meta['order'], # "ASC" or "DESC" or None
+        # reports can override these values but so far none do.
+        # what has happened is that the default of 100 is good enough or pagination is turned off entirely.
         'min_per_page': 1,
         'max_per_page': 100, # ignored if report disables pagination
         'format': report_meta['serialisations'][0] # default format is the first
@@ -46,7 +48,7 @@ def request_args(request, report_meta, **overrides):
     desc = {
         'page': [p('page', opts['page_num']), ispositiveint],
         'per_page': [p('per-page', opts['per_page']), ispositiveint, inrange(opts['min_per_page'], opts['max_per_page'])],
-        'order': [p('order', opts['order']), uppercase, isin([ASC, DESC])],
+        'order': [p('order', opts['order']), uppercase, isin([NO_ORDERING, ASC, DESC])],
         'format': [p('format', opts['format']), uppercase, isin(report_meta['serialisations'])]
     }
     if opts['per_page'] == NO_PAGINATION:
@@ -63,11 +65,14 @@ def chop(q, page, per_page, order, order_by):
     """orders and chops a query into pages, returning the total of the original query and a query object"""
     total = q.count()
 
-    # switch directions if descending (default ASC)
-    if order == DESC:
-        order_by = '-' + order_by
+    # `order` only supported if `order_by` is supported
+    # put `order_by=None` in your report to ignore user preferred ordering
+    if order_by:
+        # switch directions if descending (default ASC)
+        if order == DESC:
+            order_by = '-' + order_by
 
-    q = q.order_by(order_by)
+        q = q.order_by(order_by)
 
     # a per-page = 0 means 'all results'
     if per_page > NO_PAGINATION:
@@ -79,19 +84,16 @@ def chop(q, page, per_page, order, order_by):
 
 def paginate_report_results(reportfn, rargs):
     # TODO: shift this into request_args
-    order_by = reportfn.meta['order_by']
+    order_by = reportfn.meta.get('order_by')
 
     report_data = reportfn(**rargs['kwargs']) # results will stay lazy until realised
 
     # this gives us an opportunity to chop them up and enforce any ordering
 
-    def vals(d, ks):
-        return [d[k] for k in ks]
-
-    # TODO: order_by here is a bit gnarly.
-    # see: https://github.com/elifesciences/elife-metrics/blob/develop/src/metrics/api_v2_logic.py#L7
-    report_data['count'], report_data['items'] = \
-        chop(report_data['items'], *vals(rargs, ['page', 'per_page', 'order']), order_by=order_by)
+    items = report_data['items']
+    kwargs = subdict(rargs, ['page', 'per_page', 'order'])
+    kwargs['order_by'] = order_by
+    report_data['count'], report_data['items'] = chop(items, **kwargs)
 
     # update the report with any user overrides
     report_data.update(rargs)
@@ -128,7 +130,7 @@ def report(request, name, format_hint=None):
     except KeyError:
         raise Http404("report not found")
     try:
-        # extract and validate any params user has given us
+        # extract and validate any params user has given us.
         overrides = {}
         if format_hint:
             overrides['format'] = format_hint
