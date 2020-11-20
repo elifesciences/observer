@@ -11,7 +11,7 @@ from .utils import ensure, isint, subdict
 from . import reports
 import logging
 
-from .reports import NO_PAGINATION, ASC, DESC
+from .reports import NO_PAGINATION, NO_ORDERING, ASC, DESC
 
 LOG = logging.getLogger(__name__)
 
@@ -19,8 +19,9 @@ def request_args(request, report_meta, **overrides):
     opts = {
         'per_page': report_meta['per_page'],
         'page_num': 1,
-        'order': report_meta['order'], # ll: 'ASC'
-        # is anything using these?? are they exposed to the public?
+        'order': report_meta['order'], # "ASC" or "DESC" or None
+        # reports can override these values but so far none do.
+        # what has happened is that the default of 100 is good enough or pagination is turned off entirely.
         'min_per_page': 1,
         'max_per_page': 100, # ignored if report disables pagination
         'format': report_meta['serialisations'][0] # default format is the first
@@ -47,7 +48,7 @@ def request_args(request, report_meta, **overrides):
     desc = {
         'page': [p('page', opts['page_num']), ispositiveint],
         'per_page': [p('per-page', opts['per_page']), ispositiveint, inrange(opts['min_per_page'], opts['max_per_page'])],
-        'order': [p('order', opts['order']), uppercase, isin([ASC, DESC])],
+        'order': [p('order', opts['order']), uppercase, isin([NO_ORDERING, ASC, DESC])],
         'format': [p('format', opts['format']), uppercase, isin(report_meta['serialisations'])]
     }
     if opts['per_page'] == NO_PAGINATION:
@@ -129,7 +130,7 @@ def report(request, name, format_hint=None):
     except KeyError:
         raise Http404("report not found")
     try:
-        # extract and validate any params user has given us
+        # extract and validate any params user has given us.
         overrides = {}
         if format_hint:
             overrides['format'] = format_hint

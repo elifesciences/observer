@@ -54,7 +54,7 @@ def test_slashes_not_appended():
 
 @pytest.mark.django_db
 def test_reports_no_data():
-    """an unpopulated observer instance doesn't break when empty.
+    """an unpopulated application doesn't break when empty.
     iterates through all reports and each report serialisation and requests it."""
     assert 0 == models.Article.objects.count()
     for report_name, reportfn in reports.known_report_idx().items():
@@ -169,6 +169,42 @@ class Four(BaseCase):
                     prefix = "<?xml version='1.0' encoding='UTF-8'?>"
                     resp2.content.decode('utf8').startswith(prefix)
 
-    def test_report_ordering_pagination(self):
-        # TODO: test order, per_page, page_num, min_per_page, max_per_page
-        pass
+@pytest.mark.django_db
+def test_reports_with_parameters():
+    "all known reports in all supported formats can handle all supported parameters successfully"
+    fixture_list = listfiles(join(base.FIXTURE_DIR, 'ajson'), ['.json'])
+    fixture_list += [
+        # ... # TODO: extend this with other fixtures
+    ]
+    for path in fixture_list:
+        ingest_logic.file_upsert(path)
+    ingest_logic.regenerate_all()
+    c = Client()
+
+    param_cases = [
+        {"order": reports.ASC},
+        {"order": reports.DESC},
+        {"order": reports.NO_ORDERING},
+
+        {"order": reports.ASC, "order_by": "datetime_published"},
+        {"order": reports.DESC, "order_by": "datetime_published"},
+        {"order": reports.NO_ORDERING, "order_by": "datetime_published"},
+
+        {"order": reports.ASC, "order_by": "datetime_published", "page": 2},
+        {"order": reports.DESC, "order_by": "datetime_published", "page": 2},
+        {"order": reports.NO_ORDERING, "order_by": "datetime_published", "page": 2},
+
+        {"order": reports.ASC, "order_by": "datetime_published", "page": 2, "per_page": 1},
+        {"order": reports.DESC, "order_by": "datetime_published", "page": 2, "per_page": 1},
+        {"order": reports.NO_ORDERING, "order_by": "datetime_published", "page": 2, "per_page": 1},
+    ]
+
+    for report_name, reportfn in reports.known_report_idx().items():
+        url = reverse('report', kwargs={'name': report_name})
+        for output_format in reportfn.meta['serialisations']:
+            for params in param_cases:
+                args = {'format': output_format}
+                args.update(http_dummy_params(reportfn))
+                args.update(params)
+                resp = c.get(url, args)
+                assert 200 == resp.status_code, "report at %r returned non-200 response" % url

@@ -14,6 +14,7 @@ from datetime import datetime
 
 KNOWN_SERIALISATIONS = JSON, CSV, RSS = 'JSON', 'CSV', 'RSS'
 NO_PAGINATION = 0
+NO_ORDERING = "NONE"
 DESC, ASC = 'DESC', 'ASC'
 
 def report(meta):
@@ -28,7 +29,7 @@ def report(meta):
     return wrap1
 
 def article_meta(**kwargs):
-    "returns standard metadata most reports returning models.Article objects will need"
+    "returns report metadata suitable for most `models.Article` reports"
     meta = {
         'serialisations': [RSS, CSV],
         # 2018-06-27: changed from 'datetime_version_published' to 'datetime_published'
@@ -43,13 +44,12 @@ def article_meta(**kwargs):
     return meta
 
 def content_meta(**kwargs):
-    "returns standard metadata most reports returning models.Article objects will need"
+    "returns report metadata suitable for most `models.Content` reports"
     meta = {
         'serialisations': [RSS],
         'per_page': 28,
         'params': None,
-
-        'order': DESC, # urgh, not supported but everything breaks without it
+        'order': NO_ORDERING,
 
         # content reports use their own, sometimes complex, ordering
         # don't allow user defined ordering and if anything asks, it's just 'datetime_published'
@@ -363,7 +363,7 @@ def _report_meta(reportfn):
         'msid': 'eLife manuscript ID',
         'day': 'year, month and day',
         DESC: '_most_ recent to least recent',
-        ASC: '_least_ recent to most recent'
+        ASC: '_least_ recent to most recent',
     }
     url_to_kwarg_params = {
         'subjects': ('subject', ', '.join(logic.simple_subjects()))
@@ -371,6 +371,10 @@ def _report_meta(reportfn):
     meta = copy.deepcopy(reportfn.meta)
     meta['params'] = list((meta.get('params') or {})) # remove the param wrangling description
     meta['http_params'] = list(subdict(url_to_kwarg_params, meta['params']).values())
+
+    # not all reports support `order_by` and `order` (see `NO_ORDERING`).
+    # in these cases a `order_by_label_key` and `order_label_key` can be specified to find a description.
+    # these descriptions are used in the README.
     meta['order_by_label'] = labels[meta.get('order_by_label_key') or meta.get('order_by')]
     meta['order_label'] = labels[meta.get('order_label_key') or meta['order']]
     return meta
