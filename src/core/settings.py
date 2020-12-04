@@ -116,7 +116,7 @@ DATABASES = {
 
 API_URL = cfg('general.api-url')
 EVENT_QUEUE = cfg('sqs.queue-name', None) # ll: observer--ci, observer--prod, observer--2017-04-282
-FEEDLY_GA_MEASUREMENT_ID = cfg('general.feedly-ga-measurement-id') or 'G-xxxxxxxxxx'
+FEEDLY_GA_MEASUREMENT_ID = cfg('general.feedly-ga-measurement-id', None) or 'G-xxxxxxxxxx'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
