@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.http import HttpResponse
 from feedgen.feed import FeedGenerator
 import logging
@@ -134,11 +135,14 @@ def mkfeed(report):
     data['language'] = 'en'
     data['generator'] = 'observer (using python-feedgen)'
 
-    # the setter magic will work for most of the attributes most of the time,
+    # the setter magic will work for *most* of the attributes *most* of the time,
     # but there are some exceptions.
     # order matters as well, so the below doesn't work if called *after* the setter magic.
     if 'self-link' in report:
         fg.link(href=report['self-link'], rel='self', replace=False)
+
+    default_analytics = {'id': settings.FEEDLY_GA_MEASUREMENT_ID, 'engine': 'GoogleAnalytics'}
+    data['webfeeds:analytics'] = data.get('webfeeds:analytics', default_analytics)
 
     # set the attributes
     # http://lkiesow.github.io/python-feedgen/#create-a-feed
