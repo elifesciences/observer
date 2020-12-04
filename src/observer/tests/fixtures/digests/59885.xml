@@ -9,6 +9,7 @@
     <generator>observer (using python-feedgen)</generator>
     <language>en</language>
     <lastBuildDate>Mon, 12 Oct 2020 00:00:00 +0000</lastBuildDate>
+    <webfeeds:analytics id="G-xxxxxxxxxx" engine="GoogleAnalytics"/>
     <item>
       <title>Splitting up</title>
       <link>https://elifesciences.org/digests/59885</link>

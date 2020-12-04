@@ -9,6 +9,7 @@
     <generator>observer (using python-feedgen)</generator>
     <language>en</language>
     <lastBuildDate>Thu, 29 Oct 2020 00:00:00 +0000</lastBuildDate>
+    <webfeeds:analytics id="G-xxxxxxxxxx" engine="GoogleAnalytics"/>
     <item>
       <title>Equity, Diversity and Inclusion: Marcus Lambert</title>
       <link>https://elifesciences.org/interviews/7379e8d5</link>
