@@ -18,7 +18,7 @@
       <category>Cell Biology</category>
       <pubDate>Thu, 01 Oct 2020 13:28:04 +0000</pubDate>
       <dc:date>2020-10-01T13:28:04Z</dc:date>
-      <webfeeds:featuredImage url="https://iiif.elifesciences.org/digests/59885%2Fdigest-59885.png/full/800,648/0/default.jpg" height="648" width="800" type="image/jpeg"/>
+      <webfeeds:featuredImage url="https://iiif.elifesciences.org/digests/59885%2Fdigest-59885.png/full/800,/0/default.jpg" height="648" width="800" type="image/jpeg"/>
     </item>
   </channel>
 </rss>

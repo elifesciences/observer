@@ -277,23 +277,34 @@ def byte_length(i):
 #
 
 def thumbnail_dimensions(max_xy, width, height):
-    "returns a set of proportionate `x,y` dimensions for thumbnail given a `thumbnail_width`"
+    """returns a set of proportionate `x,y` dimensions for thumbnail given a `thumbnail_width`.
+    if size of largest dimension * 2 is still less than `max_xy`, then that becomes `max_xy`.
+    this is because IIIF can scale an image up to a maximum of x2 but no further."""
     width = max(width, 1)
     height = max(height, 1)
 
     if height > width:
+        if (height * 2) < max_xy:
+            max_xy = height * 2
         aspect_ratio = height / width
         width = max(max_xy / aspect_ratio, 1)
         return max(int(width), 1), max(int(max_xy), 1)
 
+    if (width * 2) < max_xy:
+        max_xy = width * 2
     aspect_ratio = width / height
     height = max(max_xy / aspect_ratio, 1)
     return max(int(max_xy), 1), max(int(height), 1)
 
 def iiif_thumbnail_link(uri, width, height):
-    "returns a IIIF url to image thumbnail `uri` given a preferred `width` and `height`"
+    """returns a IIIF url to image thumbnail `uri` given a preferred `width` and `height`.
+    only the largest dimension is used in the url and the `width` is preferred if both are equal."""
     region = "full"
-    size = "%s,%s" % (width, height)
+
+    width = width or 1
+    height = height or 1
+    size = "%s,%s" % (width if width >= height else "", height if height > width else "")
+
     rotation = "0" # no rotation
     quality = "default" # native, color, grey, bitonal
     image_format = "jpg"

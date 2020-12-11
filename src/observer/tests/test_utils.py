@@ -45,8 +45,28 @@ def test_thumbnail_dimensions():
         # images below are scaled up
         ([800, 750, 400], (800, 426)),
 
+        # images below are scaled up, but no more than 2x
+        ([800, 200, 150], (400, 300)),
+
         # images above are scaled down
         ([800, 7500, 4000], (800, 426)),
+
+        # floats are handled
+        ([800, 400.5, 400], (800, 799)),
+        ([800, 200.5, 150], (401, 300)),
+        ([800, 150, 400.5], (299, 800)),
     ]
     for given, expected in cases:
         assert expected == utils.thumbnail_dimensions(*given)
+
+def test_iiif_thumbnail_link():
+    cases = [
+        ((800, 800), "https://domain.tld/image-id.jpg/full/800,/0/default.jpg"),
+        ((800, 600), "https://domain.tld/image-id.jpg/full/800,/0/default.jpg"),
+        ((800, None), "https://domain.tld/image-id.jpg/full/800,/0/default.jpg"),
+        ((None, 800), "https://domain.tld/image-id.jpg/full/,800/0/default.jpg"),
+        ((600, 800), "https://domain.tld/image-id.jpg/full/,800/0/default.jpg"),
+    ]
+    uri = "https://domain.tld/image-id.jpg"
+    for given, expected in cases:
+        assert expected == utils.iiif_thumbnail_link(uri, *given)
