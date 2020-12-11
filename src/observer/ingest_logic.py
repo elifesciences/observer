@@ -219,6 +219,7 @@ def flatten_article_json(data, known_version_list=[], history=None, metrics=None
 #
 #
 
+# deprecated: only used by articles and metrics. use `consume.upsert` instead.
 def upsert_json(msid, version, data_type, article_data):
     "insert/update RawJSON from a dictionary of article data"
     article_data = {
@@ -228,7 +229,7 @@ def upsert_json(msid, version, data_type, article_data):
         'json_type': data_type
     }
     version and ensure(version > 0, "'version' in RawJSON must be as a positive integer")
-    return create_or_update(models.RawJSON, article_data, ['msid', 'version'])
+    return create_or_update(models.RawJSON, article_data, ['msid', 'version', 'json_type'])
 
 #
 # insights, tied to models.Article and models.Content
@@ -369,6 +370,7 @@ def mkidx():
     return msid_ver_idx
 
 def _download_versions(msid, latest_version):
+    "loads *all* versions of a given article `msid`"
     LOG.info('%s versions to fetch' % latest_version)
     version_range = range(1, latest_version + 1)
 
@@ -377,12 +379,12 @@ def _download_versions(msid, latest_version):
     lmap(fetch, version_range)
 
 def download_article_versions(msid):
-    "loads *all* versions of given article via API"
+    "loads *all* versions of a given article `msid`"
     resp = consume.consume("articles/%s/versions" % msid)
     _download_versions(msid, len(resp["versions"]))
 
 def download_all_article_versions():
-    "loads *all* versions of *all* articles via API"
+    "loads *all* versions of *all* articles"
     msid_ver_idx = mkidx() # urgh. this sucks. lax needs a /summary endpoint too
     LOG.info("%s articles to fetch" % len(msid_ver_idx))
     idx = sorted(msid_ver_idx.items(), key=lambda x: x[0], reverse=True)
