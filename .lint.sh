@@ -12,11 +12,15 @@ pyflakes ./src/
 
 echo "pylint"
 # E1103 - a variable is accessed for a nonexistent member, but astng was not able to interpret all possible types of this variable.
-pylint -E ./src/observer/** --load-plugins=pylint_django \
+pylint -E ./src/observer/** \
+    --load-plugins=pylint_django \
+    --django-settings-module=core.settings \
     --disable=E1103
 # specific warnings we're interested in, comma separated with no spaces
 # presence of these warnings are a failure
-pylint ./src/observer/** --load-plugins=pylint_django \
+pylint ./src/observer/** \
+    --load-plugins=pylint_django \
+    --django-settings-module=core.settings \
     --disable=all --reports=n --score=n \
     --enable=redefined-builtin,pointless-string-statement,no-else-return,redefined-outer-name
 
