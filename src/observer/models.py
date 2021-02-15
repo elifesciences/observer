@@ -345,3 +345,31 @@ class Content(models.Model):
 
     def __repr__(self):
         return '<Content "%s">' % self
+
+
+# ---
+
+def content_link(content):
+    # todo: pad feature
+    path_map = {
+        INTERVIEW: "interviews/{id}",
+        COLLECTION: "collections/{id}",
+        BLOG_ARTICLE: "inside-elife/{id}",
+        FEATURE: "articles/{id}",
+        EDITORIAL: "articles/{id}",
+        INSIGHT: "articles/{id}",
+        DIGEST: "digests/{id}",
+        LABS_POST: "labs/{id}",
+        PODCAST: "podcast/episode{id}",
+    }
+    assert content.content_type in path_map, "cannot find path to content for content type %r" % content.content_type
+    return path_map[content.content_type].format(id=content.id)
+
+def content_url(content):
+    if isinstance(content, Content):
+        path = content_link(content)
+    elif isinstance(content, Article):
+        path = "articles/{id}".format(id=content.msid)
+    else:
+        raise ValueError("content type not supported: %s" % type(content))
+    return "https://elifesciences.org/" + path
