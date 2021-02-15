@@ -42,6 +42,15 @@ MAGAZINE_CONTENT_TYPE_LIST = [
     INSIGHT, EDITORIAL, FEATURE, PODCAST, COLLECTION, DIGEST, INTERVIEW
 ]
 
+# models.Content types that are *not* covered by an entry in models.Article
+NON_ARTICLE_CONTENT_TYPE_LIST = [
+    INTERVIEW,
+    COLLECTION,
+    BLOG_ARTICLE,
+    LABS_POST,
+    PODCAST
+]
+
 POA, VOR = 'poa', 'vor'
 UNKNOWN_TYPE = 'unknown-type'
 

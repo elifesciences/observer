@@ -1,5 +1,6 @@
+import itertools
 import copy
-from . import models, rss, csv, logic, json_lines
+from . import models, rss, sitemap, csv, logic, json_lines
 from .utils import ensure, subdict
 from functools import wraps
 from collections import OrderedDict
@@ -12,7 +13,7 @@ from datetime import datetime
 
 # utils
 
-KNOWN_SERIALISATIONS = JSON, CSV, RSS = 'JSON', 'CSV', 'RSS'
+KNOWN_SERIALISATIONS = JSON, CSV, RSS, SITEMAP = 'JSON', 'CSV', 'RSS', 'SITEMAP'
 NO_PAGINATION = 0
 NO_ORDERING = "NONE"
 DESC, ASC = 'DESC', 'ASC'
@@ -252,6 +253,22 @@ def profile_count():
         .annotate(count=Count('id')) \
         .order_by('-day')
 
+@report(meta={
+    'title': 'sitemap',
+    'description': 'some desc',
+    'serialisations': [SITEMAP],
+    'order_by': 'datetime_published', # tbd
+    'order': DESC, # tbd
+    'per_page': NO_PAGINATION,
+    'params': None
+})
+def sitemap_report():
+    return itertools.chain(
+        models.Article.objects.only("msid", "datetime_version_published"),
+        models.Content.objects.filter(content_type__in=models.NON_ARTICLE_CONTENT_TYPE_LIST),
+        models.PressPackage.objects.all()
+    )
+
 #
 # exeter reports
 #
@@ -324,6 +341,7 @@ def format_report(report_data, serialisation, context):
         JSON: json_lines.format_report,
         RSS: rss.format_report,
         CSV: csv.format_report,
+        SITEMAP: sitemap.format_report,
     }
     ensure(serialisation in report_data['serialisations'], "unsupported format %r for report %s" % (format, report_data['title']))
     report_data = copy.deepcopy(report_data)
@@ -350,6 +368,7 @@ def known_report_idx():
         ('profile-count', profile_count),
         ('exeter-new-poa-articles', exeter_new_poa_articles),
         ('exeter-new-and-updated-vor-articles', exeter_new_and_updated_vor_articles),
+        ('sitemap', sitemap_report),
     ])
 
 def _report_meta(reportfn):

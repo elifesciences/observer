@@ -152,8 +152,7 @@ class SiteMap(unittest.TestCase):
     <loc>https://elifesciences.org/for-the-press/2adbe814</loc>
     <lastmod>2021-02-03T02:03:04Z</lastmod>
   </url>
-</urlset>
-""" # <-- trailing newline
+</urlset>"""
         report = sitemap._format_report(report, context)
         actual = sitemap.realise_as_string(report)
         self.assertEqual(expected, actual)

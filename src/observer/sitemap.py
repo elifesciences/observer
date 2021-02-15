@@ -3,12 +3,12 @@ from observer import models, utils
 from django.http import StreamingHttpResponse
 
 xml_doc_header = """<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">"""
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">\n"""
 
 xml_doc_footer = """</urlset>"""
 
 def url_elem(loc_str, mod_str):
-    return "  <url>\n    <loc>" + loc_str + "</loc>\n    <lastmod>" + mod_str + "</lastmod>\n  </url>"
+    return "  <url>\n    <loc>" + loc_str + "</loc>\n    <lastmod>" + mod_str + "</lastmod>\n  </url>\n"
 
 def render(data_pair_list):
     "returns a generator function that first yields the header, then each body item, then the footer"
@@ -37,12 +37,12 @@ def _format_report(report, context):
 
 def realise(formatted_report, fn):
     "consumes a report, calling `fn` on each item until it is empty"
-    [fn(x) for x in formatted_report]
+    all(fn(x) for x in formatted_report)
 
 def realise_as_string(formatted_report):
     "realises report as a simple newline delimited string"
     with StringIO() as buffer:
-        realise(formatted_report, lambda x: buffer.write(x + "\n"))
+        realise(formatted_report, buffer.write)
         return buffer.getvalue()
 
 def format_report(report, context):

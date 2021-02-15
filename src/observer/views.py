@@ -93,7 +93,12 @@ def paginate_report_results(reportfn, rargs):
     items = report_data['items']
     kwargs = subdict(rargs, ['page', 'per_page', 'order'])
     kwargs['order_by'] = order_by
-    report_data['count'], report_data['items'] = chop(items, **kwargs)
+
+    if reportfn.meta.get('per_page') == NO_PAGINATION:
+        report_data['count'] = None
+        report_data['items'] = items
+    else:
+        report_data['count'], report_data['items'] = chop(items, **kwargs)
 
     # update the report with any user overrides
     report_data.update(rargs)
