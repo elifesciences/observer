@@ -45,21 +45,18 @@ class SiteMap(unittest.TestCase):
                           'content_type': models.COLLECTION,
                           'datetime_published': "2021-02-09T07:30:07-05:00"
                       }),
-
                       models.Content(**{
                           'id': '12345',
                           'title': "doesn't matter",
                           'content_type': models.BLOG_ARTICLE,
                           'datetime_published': "2021-02-09T07:30:07Z"
                       }),
-
                       models.Content(**{
                           'id': '23456',
                           'title': "doesn't matter",
                           "content_type": models.FEATURE,
                           "datetime_published": "2021-02-09T07:30:07Z"
                       }),
-
                       models.Content(**{
                           'id': '23456',
                           'title': "doesn't matter",
@@ -91,6 +88,14 @@ class SiteMap(unittest.TestCase):
                           "datetime_published": "2021-02-09T07:30:07Z"
                       }),
 
+                      # models.PressPackage
+                      # prefers `updated` over `published`
+                      models.PressPackage(**{
+                          'id': '2adbe814',
+                          'title': "doesn't matter",
+                          'published': "2021-02-02T01:02:03Z",
+                          "updated": "2021-02-03T02:03:04Z"
+                      }),
                   ]}
         context = {}
         expected = """<?xml version="1.0" encoding="UTF-8"?>
@@ -142,6 +147,10 @@ class SiteMap(unittest.TestCase):
   <url>
     <loc>https://elifesciences.org/podcast/episode23456</loc>
     <lastmod>2021-02-09T07:30:07Z</lastmod>
+  </url>
+  <url>
+    <loc>https://elifesciences.org/for-the-press/2adbe814</loc>
+    <lastmod>2021-02-03T02:03:04Z</lastmod>
   </url>
 </urlset>
 """ # <-- trailing newline

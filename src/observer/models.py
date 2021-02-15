@@ -370,6 +370,8 @@ def content_url(content):
         path = content_link(content)
     elif isinstance(content, Article):
         path = "articles/{id}".format(id=content.msid)
+    elif isinstance(content, PressPackage):
+        path = "for-the-press/{id}".format(id=content.id)
     else:
         raise ValueError("content type not supported: %s" % type(content))
     return "https://elifesciences.org/" + path

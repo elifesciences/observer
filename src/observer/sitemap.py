@@ -24,11 +24,11 @@ def coerce(item):
         return (item['url'], utils.ymdhms(item['last-modified']))
     if isinstance(item, models.Article):
         return (models.content_url(item), utils.ymdhms(item.datetime_version_published))
+    if isinstance(item, models.PressPackage):
+        return (models.content_url(item), utils.ymdhms(item.updated or item.published))
     if isinstance(item, models.Content):
         return (models.content_url(item), utils.ymdhms(item.datetime_updated or item.datetime_published))
     raise ValueError("item %r cannot be coerced to a pair of (url, last-modified) values" % (item,))
-    # if isinstance(item, models.Article):
-    #   yield (item...,. ..)
 
 def _format_report(report, context):
     "generates a `sitemap.xml` from the given `report` and `context` data, returning an HttpResponse."
