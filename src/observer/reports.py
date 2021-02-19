@@ -26,7 +26,7 @@ KNOWN_SERIALISATIONS = JSON, CSV, RSS, SITEMAP = 'JSON', 'CSV', 'RSS', 'XML'
 #    CSV: "csv",
 #    RSS: "rss", # '.xml' works as well. should this be a list?
 #    SITEMAP: "xml"
-#}
+# }
 
 NO_PAGINATION = 0
 NO_ORDERING = "NONE"
