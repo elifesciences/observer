@@ -19,6 +19,8 @@ LOG = logging.getLogger(__name__)
 PROFILING = False
 
 def profile(fn):
+    "prints profiling stats using cProfile when used a view decorator."
+
     if not PROFILING:
         return fn
 
@@ -45,7 +47,7 @@ def request_args(request, report_meta, **overrides):
     opts = {
         'per_page': report_meta['per_page'],
         'page_num': 1,
-        'order': report_meta['order'], # "ASC" or "DESC" or None
+        'order': report_meta.get('order'), # "ASC" or "DESC" or None
         # reports can override these values but so far none do.
         # what has happened is that the default of 100 is good enough or pagination is turned off entirely.
         'min_per_page': 1,
@@ -155,7 +157,6 @@ def ping(request):
     resp['Cache-Control'] = 'must-revalidate, no-cache, no-store, private'
     return resp
 
-@profile
 def report(request, name, format_hint=None):
     try:
         reportfn = reports.get_report(name)

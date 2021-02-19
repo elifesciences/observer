@@ -291,14 +291,16 @@ msid DESC"""
 
 @report(meta={
     'title': 'sitemap',
-    'description': 'some desc',
+    'description': 'generates a complete listing of journal content as a sitemap.xml file',
     'serialisations': [SITEMAP],
-    'order_by': 'datetime_published', # tbd
-    'order': DESC, # tbd
     'per_page': NO_PAGINATION,
-    'params': None
+    'order': NO_ORDERING,
+    'order_by_label_key': 'mixed',
+    'order_label_key': 'msid'
 })
 def sitemap_report():
+    """'sitemap.xml' as served up by the journal.
+    should contain a complete listing of journal content for reports to visit."""
     #article_q = models.Article.objects\
     #    .only("msid", "datetime_version_published")
     article_q = sitemap__article_data()
@@ -429,6 +431,7 @@ def _report_meta(reportfn):
         'day': 'year, month and day',
         DESC: '_most_ recent to least recent',
         ASC: '_least_ recent to most recent',
+        'mixed': 'mixed, depending on content type'
     }
     url_to_kwarg_params = {
         'subjects': ('subject', ', '.join(logic.simple_subjects()))
@@ -450,6 +453,6 @@ def report_meta():
     return OrderedDict([(name, _report_meta(fn)) for name, fn in known_report_idx().items()])
 
 def get_report(name):
-    """fetches a given report by it's report `name`.
+    """fetches a given report by its report `name`.
     report functions are associated to a name in the `known_report_idx` function."""
     return known_report_idx()[name]

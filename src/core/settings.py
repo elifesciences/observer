@@ -15,7 +15,7 @@ SRC_DIR = os.path.dirname(os.path.dirname(__file__)) # ll: /path/to/app/src/
 PROJECT_DIR = os.path.dirname(SRC_DIR) # ll: /path/to/app/
 
 CFG_NAME = 'app.cfg'
-DYNCONFIG = configparser.SafeConfigParser(**{
+DYNCONFIG = configparser.ConfigParser(**{
     'allow_no_value': True,
     'defaults': {'dir': SRC_DIR, 'project': PROJECT_NAME}})
 DYNCONFIG.read(join(PROJECT_DIR, CFG_NAME)) # ll: /path/to/app/app.cfg

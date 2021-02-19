@@ -13,7 +13,7 @@ def http_dummy_params(reportfn):
         'subjects': {'subject': 'cell-biology'}
     }
     kwargs = {}
-    if reportfn.meta['params']:
+    if 'params' in reportfn.meta and reportfn.meta['params']:
         kwargs = utils.subdict(param_map, reportfn.meta['params'].keys())
         kwargs = reduce(utils.dict_update, kwargs.values())
     return kwargs
@@ -23,7 +23,7 @@ def dummy_params(reportfn):
         'subjects': ['cell-biology']
     }
     kwargs = {}
-    if reportfn.meta['params']:
+    if 'params' in reportfn.meta and reportfn.meta['params']:
         kwargs = utils.subdict(param_map, reportfn.meta['params'].keys())
     return kwargs
 
