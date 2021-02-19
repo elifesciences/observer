@@ -183,7 +183,7 @@ def article_to_rss_entry(art):
 
     # wrangle
     item['id'] = "https://dx.doi.org/" + item['link']
-    item['link'] = {'href': "https://elifesciences.org/articles/" + utils.pad_msid(art.msid)}
+    item['link'] = {'href': art.get_absolute_url()}
     item['author'] = [{'name': a.name, 'email': art.author_email} for a in art.authors.all()]
     item['category'] = [{'term': subject.name, 'label': subject.label} for subject in art.subjects.all()]
     item['dc:dc_date'] = utils.ymdhms(item['pubDate'])
@@ -207,7 +207,7 @@ def content_to_rss_entry(content):
         ('datetime_published', 'pubDate'),
         ('datetime_updated', 'updated'),
     ])
-    self_link = "https://elifesciences.org/" + models.content_link(content)
+    self_link = content.get_absolute_url()
     item['id'] = self_link
     item['link'] = {'href': self_link}
     item['dc:dc_date'] = utils.ymdhms(item['pubDate'])

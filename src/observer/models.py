@@ -5,6 +5,7 @@ from django.db.models import (
     CharField, DateTimeField, TextField, NullBooleanField, EmailField,
     ManyToManyField, URLField
 )
+from observer import utils
 
 # see `observer.consume.content_type_from_endpoint` for these values
 # essentially they are slugified api endpoints, e.g.: `/digests/id` => digests-id
@@ -210,6 +211,9 @@ class Article(models.Model):
     datetime_record_created = DateTimeField(auto_now_add=True)
     datetime_record_updated = DateTimeField(auto_now=True)
 
+    def get_absolute_url(self):
+        return "https://elifesciences.org/articles/" + utils.pad_msid(self.msid)
+
     def __str__(self):
         return "%05d" % self.msid
 
@@ -266,6 +270,9 @@ class PressPackage(models.Model):
     # TODO - this would require scraping full press package data
     #articles = ManyToManyField(Article, blank=True, help_text="articles this press package mentions directly")
     #contacts = ManyToManyField(PressPackageContact, blank=True)
+
+    def get_absolute_url(self):
+        return "https://elifesciences.org/for-the-press/{id}".format(id=self.id)
 
     def __str__(self):
         return self.title
@@ -349,38 +356,25 @@ class Content(models.Model):
             models.Index(fields=['content_type'], name="content_type_idx")
         ]
 
+    def get_absolute_url(self):
+        # todo: pad feature
+        path_map = {
+            INTERVIEW: "interviews/{id}",
+            COLLECTION: "collections/{id}",
+            BLOG_ARTICLE: "inside-elife/{id}",
+            FEATURE: "articles/{id}",
+            EDITORIAL: "articles/{id}",
+            INSIGHT: "articles/{id}",
+            DIGEST: "digests/{id}",
+            LABS_POST: "labs/{id}",
+            PODCAST: "podcast/episode{id}",
+        }
+        assert self.content_type in path_map, "cannot find path to content for content type %r" % self.content_type
+        path = path_map[self.content_type].format(id=self.id)
+        return "https://elifesciences.org/" + path
+
     def __str__(self):
         return self.id
 
     def __repr__(self):
         return '<Content "%s">' % self
-
-
-# ---
-
-def content_link(content):
-    # todo: pad feature
-    path_map = {
-        INTERVIEW: "interviews/{id}",
-        COLLECTION: "collections/{id}",
-        BLOG_ARTICLE: "inside-elife/{id}",
-        FEATURE: "articles/{id}",
-        EDITORIAL: "articles/{id}",
-        INSIGHT: "articles/{id}",
-        DIGEST: "digests/{id}",
-        LABS_POST: "labs/{id}",
-        PODCAST: "podcast/episode{id}",
-    }
-    assert content.content_type in path_map, "cannot find path to content for content type %r" % content.content_type
-    return path_map[content.content_type].format(id=content.id)
-
-def content_url(content):
-    if isinstance(content, Content):
-        path = content_link(content)
-    elif isinstance(content, Article):
-        path = "articles/{id}".format(id=content.msid)
-    elif isinstance(content, PressPackage):
-        path = "for-the-press/{id}".format(id=content.id)
-    else:
-        raise ValueError("content type not supported: %s" % type(content))
-    return "https://elifesciences.org/" + path

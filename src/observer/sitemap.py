@@ -23,11 +23,11 @@ def coerce(item):
     if isinstance(item, dict):
         return (item['url'], utils.ymdhms(item['last-modified']))
     if isinstance(item, models.Article):
-        return (models.content_url(item), utils.ymdhms(item.datetime_version_published))
+        return (item.get_absolute_url(), utils.ymdhms(item.datetime_version_published))
     if isinstance(item, models.PressPackage):
-        return (models.content_url(item), utils.ymdhms(item.updated or item.published))
+        return (item.get_absolute_url(), utils.ymdhms(item.updated or item.published))
     if isinstance(item, models.Content):
-        return (models.content_url(item), utils.ymdhms(item.datetime_updated or item.datetime_published))
+        return (item.get_absolute_url(), utils.ymdhms(item.datetime_updated or item.datetime_published))
     raise ValueError("item %r cannot be coerced to a pair of (url, last-modified) values" % (item,))
 
 def _format_report(report, context):
