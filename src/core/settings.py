@@ -106,9 +106,10 @@ DATABASES = {
         'PASSWORD': cfg('database.password'),
         'HOST': cfg('database.host'),
         'PORT': cfg('database.port'),
-        # 'CONN_MAX_AGE': None
     }
 }
+
+CONN_MAX_AGE = 0 # 0 = no pooling
 
 #
 # custom app settings

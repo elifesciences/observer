@@ -10,6 +10,8 @@ from slugify import slugify
 from django.db.models import Count
 from django.db.models.functions import TruncDay
 from datetime import datetime
+from django.conf import settings
+from django.db import connection
 
 # utils
 
@@ -253,6 +255,23 @@ def profile_count():
         .annotate(count=Count('id')) \
         .order_by('-day')
 
+def raw_articles():
+    psql_sql = """SELECT
+'https://elifesciences.org/articles/' || msid,
+to_char(datetime_version_published, 'YYYY-MM-DD"T"HH24:MI:SS"Z"')
+FROM
+articles"""
+    sqlite_sql = """SELECT
+'https://elifesciences.org/articles/' || msid,
+strftime(r'%Y-%m-%d\T%H:%M:%S\Z', datetime_version_published)
+FROM
+articles"""
+    db = settings.DATABASES['default']['ENGINE']
+    sql = sqlite_sql if db == "django.db.backends.sqlite3" else psql_sql
+    with connection.cursor() as cursor:
+        cursor.execute(sql)
+        return cursor.fetchall()
+
 @report(meta={
     'title': 'sitemap',
     'description': 'some desc',
@@ -263,11 +282,21 @@ def profile_count():
     'params': None
 })
 def sitemap_report():
+    #article_q = models.Article.objects\
+    #    .only("msid", "datetime_version_published")
+    article_q = raw_articles()
+
+    content_q = models.Content.objects\
+        .filter(content_type__in=models.NON_ARTICLE_CONTENT_TYPE_LIST)\
+        .only("id", "datetime_updated", "datetime_published", "content_type")
+
+    presspackage_q = models.PressPackage.objects\
+        .only("id", "updated", "published")
+
     return itertools.chain(
-        models.Article.objects.only("msid", "datetime_version_published"),
-        models.Content.objects.filter(content_type__in=models.NON_ARTICLE_CONTENT_TYPE_LIST),
-        models.PressPackage.objects.all()
-    )
+        article_q,
+        content_q,
+        presspackage_q)
 
 #
 # exeter reports
@@ -344,7 +373,7 @@ def format_report(report_data, serialisation, context):
         SITEMAP: sitemap.format_report,
     }
     ensure(serialisation in report_data['serialisations'], "unsupported format %r for report %s" % (format, report_data['title']))
-    report_data = copy.deepcopy(report_data)
+    report_data = copy.deepcopy(report_data) # this is expensive!
     return known_formats[serialisation](report_data, context)
 
 def known_report_idx():

@@ -1,3 +1,4 @@
+import cProfile, pstats
 from datetime import date
 from django.urls import reverse
 from django.http import HttpResponse
@@ -14,6 +15,31 @@ import logging
 from .reports import NO_PAGINATION, NO_ORDERING, ASC, DESC
 
 LOG = logging.getLogger(__name__)
+
+PROFILING = True
+
+def profile(fn):
+    if not PROFILING:
+        return fn
+
+    def wrapper(*args, **kwargs):
+        pr = cProfile.Profile(timeunit=0.001)
+        pr.enable()
+        result = fn(*args, **kwargs)
+        pr.disable()
+
+        sortby = "cumulative"
+        ps = pstats.Stats(pr).sort_stats(sortby)
+        ps.print_stats(.01)
+        fname = "/tmp/output-%s.prof" % fn.__name__
+        ps.dump_stats(fname)
+        print("wrote", fname)
+
+        return result
+
+    return wrapper
+
+#
 
 def request_args(request, report_meta, **overrides):
     opts = {
@@ -129,6 +155,7 @@ def ping(request):
     resp['Cache-Control'] = 'must-revalidate, no-cache, no-store, private'
     return resp
 
+@profile
 def report(request, name, format_hint=None):
     try:
         reportfn = reports.get_report(name)
