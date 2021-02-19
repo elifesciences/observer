@@ -17,7 +17,7 @@ class SiteMap(unittest.TestCase):
                       {"url": "https://elifesciences.org/articles/61639", "last-modified": "2021-02-08T10:55:27-05:00"},
 
                       # tuples
-                      # timezones are normalised to UTC.
+                      # data is passed through, timezones are *not* normalised to UTC.
                       ("https://elifesciences.org/articles/61082", "2021-02-09T10:07:34-05:00"),
 
                       # models.Article objects
@@ -106,7 +106,7 @@ class SiteMap(unittest.TestCase):
   </url>
   <url>
     <loc>https://elifesciences.org/articles/61082</loc>
-    <lastmod>2021-02-09T15:07:34Z</lastmod>
+    <lastmod>2021-02-09T10:07:34-05:00</lastmod>
   </url>
   <url>
     <loc>https://elifesciences.org/articles/123456</loc>

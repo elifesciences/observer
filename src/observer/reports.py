@@ -15,7 +15,19 @@ from django.db import connection
 
 # utils
 
-KNOWN_SERIALISATIONS = JSON, CSV, RSS, SITEMAP = 'JSON', 'CSV', 'RSS', 'SITEMAP'
+# todo: separate 'known serialisations' from 'serialisation extension'.
+# I'm conflating the two and it's going to bite me soon.
+KNOWN_SERIALISATIONS = JSON, CSV, RSS, SITEMAP = 'JSON', 'CSV', 'RSS', 'XML'
+
+# mapping of known serialisations to their filename extensions.
+# used in report format hinting
+# SERIALISATION_EXT = {
+#    JSON: "json",
+#    CSV: "csv",
+#    RSS: "rss", # '.xml' works as well. should this be a list?
+#    SITEMAP: "xml"
+#}
+
 NO_PAGINATION = 0
 NO_ORDERING = "NONE"
 DESC, ASC = 'DESC', 'ASC'
@@ -255,17 +267,22 @@ def profile_count():
         .annotate(count=Count('id')) \
         .order_by('-day')
 
-def raw_articles():
-    psql_sql = """SELECT
+def sitemap__article_data():
+    "returns a list of pre-formatted article data designed for the sitemap."
+    psql_sql = r"""SELECT
 'https://elifesciences.org/articles/' || msid,
 to_char(datetime_version_published, 'YYYY-MM-DD"T"HH24:MI:SS"Z"')
 FROM
-articles"""
-    sqlite_sql = """SELECT
+articles
+ORDER BY
+msid DESC"""
+    sqlite_sql = r"""SELECT
 'https://elifesciences.org/articles/' || msid,
 strftime(r'%Y-%m-%d\T%H:%M:%S\Z', datetime_version_published)
 FROM
-articles"""
+articles
+ORDER BY
+msid DESC"""
     db = settings.DATABASES['default']['ENGINE']
     sql = sqlite_sql if db == "django.db.backends.sqlite3" else psql_sql
     with connection.cursor() as cursor:
@@ -284,7 +301,7 @@ articles"""
 def sitemap_report():
     #article_q = models.Article.objects\
     #    .only("msid", "datetime_version_published")
-    article_q = raw_articles()
+    article_q = sitemap__article_data()
 
     content_q = models.Content.objects\
         .filter(content_type__in=models.NON_ARTICLE_CONTENT_TYPE_LIST)\
@@ -433,6 +450,6 @@ def report_meta():
     return OrderedDict([(name, _report_meta(fn)) for name, fn in known_report_idx().items()])
 
 def get_report(name):
-    """fetches a given report but it's report `name`.
+    """fetches a given report by it's report `name`.
     report functions are associated to a name in the `known_report_idx` function."""
     return known_report_idx()[name]

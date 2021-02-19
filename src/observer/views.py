@@ -16,7 +16,7 @@ from .reports import NO_PAGINATION, NO_ORDERING, ASC, DESC
 
 LOG = logging.getLogger(__name__)
 
-PROFILING = True
+PROFILING = False
 
 def profile(fn):
     if not PROFILING:
