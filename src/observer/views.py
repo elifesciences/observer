@@ -1,3 +1,4 @@
+import cProfile, pstats
 from datetime import date
 from django.urls import reverse
 from django.http import HttpResponse
@@ -15,11 +16,38 @@ from .reports import NO_PAGINATION, NO_ORDERING, ASC, DESC
 
 LOG = logging.getLogger(__name__)
 
+PROFILING = False
+
+def profile(fn):
+    "prints profiling stats using cProfile when used a view decorator."
+
+    if not PROFILING:
+        return fn
+
+    def wrapper(*args, **kwargs):
+        pr = cProfile.Profile(timeunit=0.001)
+        pr.enable()
+        result = fn(*args, **kwargs)
+        pr.disable()
+
+        sortby = "cumulative"
+        ps = pstats.Stats(pr).sort_stats(sortby)
+        ps.print_stats(.01)
+        fname = "/tmp/output-%s.prof" % fn.__name__
+        ps.dump_stats(fname)
+        print("wrote", fname)
+
+        return result
+
+    return wrapper
+
+#
+
 def request_args(request, report_meta, **overrides):
     opts = {
         'per_page': report_meta['per_page'],
         'page_num': 1,
-        'order': report_meta['order'], # "ASC" or "DESC" or None
+        'order': report_meta.get('order'), # "ASC" or "DESC" or None
         # reports can override these values but so far none do.
         # what has happened is that the default of 100 is good enough or pagination is turned off entirely.
         'min_per_page': 1,
@@ -93,7 +121,12 @@ def paginate_report_results(reportfn, rargs):
     items = report_data['items']
     kwargs = subdict(rargs, ['page', 'per_page', 'order'])
     kwargs['order_by'] = order_by
-    report_data['count'], report_data['items'] = chop(items, **kwargs)
+
+    if reportfn.meta.get('per_page') == NO_PAGINATION:
+        report_data['count'] = None
+        report_data['items'] = items
+    else:
+        report_data['count'], report_data['items'] = chop(items, **kwargs)
 
     # update the report with any user overrides
     report_data.update(rargs)

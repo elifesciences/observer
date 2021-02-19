@@ -39,8 +39,8 @@ class LoadFromFS(BaseCase):
         self.assertEqual(errcode, 1)
         self.assertEqual(models.Article.objects.count(), 0)
 
-    @skip("test is obsolete as ingestion has changed from scraping each article version in "
-          "order to scraping 'an article' with article version fixtures from database")
+    @skip("""test is obsolete as ingestion has changed from scraping each article version in
+    order to scraping 'an article' with article version fixtures from database""")
     def test_ingest_from_cli_bad_article(self):
         self.assertEqual(models.Article.objects.count(), 0)
         data = json.load(open(self.ajson_fixture, 'r'))

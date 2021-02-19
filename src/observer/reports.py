@@ -1,5 +1,6 @@
+import itertools
 import copy
-from . import models, rss, csv, logic, json_lines
+from . import models, rss, sitemap, csv, logic, json_lines
 from .utils import ensure, subdict
 from functools import wraps
 from collections import OrderedDict
@@ -9,10 +10,24 @@ from slugify import slugify
 from django.db.models import Count
 from django.db.models.functions import TruncDay
 from datetime import datetime
+from django.conf import settings
+from django.db import connection
 
 # utils
 
-KNOWN_SERIALISATIONS = JSON, CSV, RSS = 'JSON', 'CSV', 'RSS'
+# todo: separate 'known serialisations' from 'serialisation extension'.
+# I'm conflating the two and it's going to bite me soon.
+KNOWN_SERIALISATIONS = JSON, CSV, RSS, SITEMAP = 'JSON', 'CSV', 'RSS', 'XML'
+
+# mapping of known serialisations to their filename extensions.
+# used in report format hinting
+# SERIALISATION_EXT = {
+#    JSON: "json",
+#    CSV: "csv",
+#    RSS: "rss", # '.xml' works as well. should this be a list?
+#    SITEMAP: "xml"
+# }
+
 NO_PAGINATION = 0
 NO_ORDERING = "NONE"
 DESC, ASC = 'DESC', 'ASC'
@@ -252,6 +267,56 @@ def profile_count():
         .annotate(count=Count('id')) \
         .order_by('-day')
 
+def sitemap__article_data():
+    "returns a list of pre-formatted article data designed for the sitemap."
+    psql_sql = r"""SELECT
+'https://elifesciences.org/articles/' || msid,
+to_char(datetime_version_published, 'YYYY-MM-DD"T"HH24:MI:SS"Z"')
+FROM
+articles
+ORDER BY
+msid DESC"""
+    sqlite_sql = r"""SELECT
+'https://elifesciences.org/articles/' || msid,
+strftime(r'%Y-%m-%d\T%H:%M:%S\Z', datetime_version_published)
+FROM
+articles
+ORDER BY
+msid DESC"""
+    db = settings.DATABASES['default']['ENGINE']
+    sql = sqlite_sql if db == "django.db.backends.sqlite3" else psql_sql
+    with connection.cursor() as cursor:
+        cursor.execute(sql)
+        return cursor.fetchall()
+
+@report(meta={
+    'title': 'sitemap',
+    'description': 'generates a complete listing of journal content as a sitemap.xml file',
+    'serialisations': [SITEMAP],
+    'per_page': NO_PAGINATION,
+    'order': NO_ORDERING,
+    'order_by_label_key': 'mixed',
+    'order_label_key': 'msid'
+})
+def sitemap_report():
+    """'sitemap.xml' as served up by the journal.
+    should contain a complete listing of journal content for reports to visit."""
+    #article_q = models.Article.objects\
+    #    .only("msid", "datetime_version_published")
+    article_q = sitemap__article_data()
+
+    content_q = models.Content.objects\
+        .filter(content_type__in=models.NON_ARTICLE_CONTENT_TYPE_LIST)\
+        .only("id", "datetime_updated", "datetime_published", "content_type")
+
+    presspackage_q = models.PressPackage.objects\
+        .only("id", "updated", "published")
+
+    return itertools.chain(
+        article_q,
+        content_q,
+        presspackage_q)
+
 #
 # exeter reports
 #
@@ -324,9 +389,10 @@ def format_report(report_data, serialisation, context):
         JSON: json_lines.format_report,
         RSS: rss.format_report,
         CSV: csv.format_report,
+        SITEMAP: sitemap.format_report,
     }
     ensure(serialisation in report_data['serialisations'], "unsupported format %r for report %s" % (format, report_data['title']))
-    report_data = copy.deepcopy(report_data)
+    report_data = copy.deepcopy(report_data) # this is expensive!
     return known_formats[serialisation](report_data, context)
 
 def known_report_idx():
@@ -350,6 +416,7 @@ def known_report_idx():
         ('profile-count', profile_count),
         ('exeter-new-poa-articles', exeter_new_poa_articles),
         ('exeter-new-and-updated-vor-articles', exeter_new_and_updated_vor_articles),
+        ('sitemap', sitemap_report),
     ])
 
 def _report_meta(reportfn):
@@ -364,6 +431,7 @@ def _report_meta(reportfn):
         'day': 'year, month and day',
         DESC: '_most_ recent to least recent',
         ASC: '_least_ recent to most recent',
+        'mixed': 'mixed, depending on content type'
     }
     url_to_kwarg_params = {
         'subjects': ('subject', ', '.join(logic.simple_subjects()))
@@ -385,6 +453,6 @@ def report_meta():
     return OrderedDict([(name, _report_meta(fn)) for name, fn in known_report_idx().items()])
 
 def get_report(name):
-    """fetches a given report but it's report `name`.
+    """fetches a given report by its report `name`.
     report functions are associated to a name in the `known_report_idx` function."""
     return known_report_idx()[name]

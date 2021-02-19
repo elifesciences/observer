@@ -15,7 +15,7 @@ SRC_DIR = os.path.dirname(os.path.dirname(__file__)) # ll: /path/to/app/src/
 PROJECT_DIR = os.path.dirname(SRC_DIR) # ll: /path/to/app/
 
 CFG_NAME = 'app.cfg'
-DYNCONFIG = configparser.SafeConfigParser(**{
+DYNCONFIG = configparser.ConfigParser(**{
     'allow_no_value': True,
     'defaults': {'dir': SRC_DIR, 'project': PROJECT_NAME}})
 DYNCONFIG.read(join(PROJECT_DIR, CFG_NAME)) # ll: /path/to/app/app.cfg
@@ -46,11 +46,11 @@ ALLOWED_HOSTS = cfg('general.allowed-hosts', '').split(',')
 # Application definition
 
 INSTALLED_APPS = (
-    'django.contrib.admin',
-    'django.contrib.auth',
+    # 'django.contrib.admin',
+    # 'django.contrib.auth',
     'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
+    # 'django.contrib.sessions',
+    # 'django.contrib.messages',
     'django.contrib.staticfiles',
 
     'django_markdown2', # landing page is rendered markdown
@@ -59,14 +59,18 @@ INSTALLED_APPS = (
 )
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
+    # 'django.middleware.security.SecurityMiddleware',
+    # 'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.contrib.auth.middleware.AuthenticationMiddleware',
+    # 'django.contrib.messages.middleware.MessageMiddleware',
+    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
+    # etag handling
+    "django.middleware.http.ConditionalGetMiddleware",
+
+    # cache hinting
     'core.middleware.DownstreamCaching',
 ]
 
@@ -84,8 +88,8 @@ TEMPLATES = [
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+                # 'django.contrib.auth.context_processors.auth',
+                # 'django.contrib.messages.context_processors.messages',
             ],
         },
     },
@@ -106,9 +110,10 @@ DATABASES = {
         'PASSWORD': cfg('database.password'),
         'HOST': cfg('database.host'),
         'PORT': cfg('database.port'),
-        # 'CONN_MAX_AGE': None
     }
 }
+
+CONN_MAX_AGE = 0 # 0 = no pooling
 
 #
 # custom app settings

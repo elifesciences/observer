@@ -5,6 +5,7 @@ from django.db.models import (
     CharField, DateTimeField, TextField, NullBooleanField, EmailField,
     ManyToManyField, URLField
 )
+from observer import utils
 
 # see `observer.consume.content_type_from_endpoint` for these values
 # essentially they are slugified api endpoints, e.g.: `/digests/id` => digests-id
@@ -40,6 +41,15 @@ COMMUNITY_CONTENT_TYPE_LIST = [
 # used in `reports.py` to group certain content types together
 MAGAZINE_CONTENT_TYPE_LIST = [
     INSIGHT, EDITORIAL, FEATURE, PODCAST, COLLECTION, DIGEST, INTERVIEW
+]
+
+# models.Content types that are *not* covered by an entry in models.Article
+NON_ARTICLE_CONTENT_TYPE_LIST = [
+    INTERVIEW,
+    COLLECTION,
+    BLOG_ARTICLE,
+    LABS_POST,
+    PODCAST
 ]
 
 POA, VOR = 'poa', 'vor'
@@ -201,6 +211,9 @@ class Article(models.Model):
     datetime_record_created = DateTimeField(auto_now_add=True)
     datetime_record_updated = DateTimeField(auto_now=True)
 
+    def get_absolute_url(self):
+        return "https://elifesciences.org/articles/" + utils.pad_msid(self.msid)
+
     def __str__(self):
         return "%05d" % self.msid
 
@@ -257,6 +270,9 @@ class PressPackage(models.Model):
     # TODO - this would require scraping full press package data
     #articles = ManyToManyField(Article, blank=True, help_text="articles this press package mentions directly")
     #contacts = ManyToManyField(PressPackageContact, blank=True)
+
+    def get_absolute_url(self):
+        return "https://elifesciences.org/for-the-press/{id}".format(id=self.id)
 
     def __str__(self):
         return self.title
@@ -339,6 +355,23 @@ class Content(models.Model):
         indexes = [
             models.Index(fields=['content_type'], name="content_type_idx")
         ]
+
+    def get_absolute_url(self):
+        # todo: pad feature
+        path_map = {
+            INTERVIEW: "interviews/{id}",
+            COLLECTION: "collections/{id}",
+            BLOG_ARTICLE: "inside-elife/{id}",
+            FEATURE: "articles/{id}",
+            EDITORIAL: "articles/{id}",
+            INSIGHT: "articles/{id}",
+            DIGEST: "digests/{id}",
+            LABS_POST: "labs/{id}",
+            PODCAST: "podcast/episode{id}",
+        }
+        assert self.content_type in path_map, "cannot find path to content for content type %r" % self.content_type
+        path = path_map[self.content_type].format(id=self.id)
+        return "https://elifesciences.org/" + path
 
     def __str__(self):
         return self.id
