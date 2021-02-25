@@ -22,9 +22,10 @@ class SiteMap(unittest.TestCase):
 
                       # models.Article objects
                       # the date of the most recent version is used.
+                      # short msids are padded
                       models.Article(**{
                           'journal_name': 'eLife',
-                          'msid': 123456,
+                          'msid': 123,
                           'type': 'research-article',
                           'datetime_version_published': '2001-01-01T01:02:03Z',
                       }),
@@ -109,7 +110,7 @@ class SiteMap(unittest.TestCase):
     <lastmod>2021-02-09T10:07:34-05:00</lastmod>
   </url>
   <url>
-    <loc>https://elifesciences.org/articles/123456</loc>
+    <loc>https://elifesciences.org/articles/00123</loc>
     <lastmod>2001-01-01T01:02:03Z</lastmod>
   </url>
   <url>

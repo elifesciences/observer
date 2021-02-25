@@ -270,15 +270,16 @@ def profile_count():
 def sitemap__article_data():
     "returns a list of pre-formatted article data designed for the sitemap."
     psql_sql = r"""SELECT
-'https://elifesciences.org/articles/' || msid,
+'https://elifesciences.org/articles/' || LPAD(msid::text, 5, '0'),
 to_char(datetime_version_published, 'YYYY-MM-DD"T"HH24:MI:SS"Z"')
 FROM
 articles
 ORDER BY
 msid DESC"""
+    # 'substr' here is used to zero-pad the msid
     sqlite_sql = r"""SELECT
-'https://elifesciences.org/articles/' || msid,
-strftime(r'%Y-%m-%d\T%H:%M:%S\Z', datetime_version_published)
+'https://elifesciences.org/articles/' || substr('00000'||msid,-5),
+strftime('%Y-%m-%d\T%H:%M:%S\Z', datetime_version_published)
 FROM
 articles
 ORDER BY

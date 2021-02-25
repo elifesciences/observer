@@ -1,6 +1,16 @@
 from datetime import datetime, date
 from observer import utils
 
+def test_pad_msid():
+    cases = [
+        (3, '00003'),
+        (30, '00030'),
+        (30000, '30000'),
+        (300000, '300000'),
+    ]
+    for given, expected in cases:
+        assert expected == utils.pad_msid(given)
+
 def test_norm_msid():
     cases = [
         (3, '3'),
