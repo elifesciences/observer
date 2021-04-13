@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:webfeeds="http://webfeeds.org/rss/1.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0">
+  <channel>
+    <title>eLife: latest articles</title>
+    <link>https://elifesciences.org</link>
+    <description>All of the latest articles published at eLife, including in-progress POA (publish-on-accept) articles.</description>
+    <atom:link href="https://observer.elifesciences.org/report/latest-articles" rel="self"/>
+    <docs>http://www.rssboard.org/rss-specification</docs>
+    <generator>observer (using python-feedgen)</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 12 Oct 2020 00:00:00 +0000</lastBuildDate>
+    <webfeeds:analytics id="G-xxxxxxxxxx" engine="GoogleAnalytics"/>
+    <item>
+      <title>ERG signaling in prostate cancer is driven through PRMT5-dependent methylation of the androgen receptor</title>
+      <link>https://elifesciences.org/articles/13964</link>
+      <description>The &lt;i&gt;TMPRSS2:ERG&lt;/i&gt; gene fusion is common in androgen receptor (AR) positive prostate cancers, yet its function remains poorly understood. From a screen for functionally relevant ERG interactors, we identify the arginine methyltransferase PRMT5. ERG recruits PRMT5 to AR-target genes, where PRMT5 methylates AR on arginine 761. This attenuates AR recruitment and transcription of genes expressed in differentiated prostate epithelium. The AR-inhibitory function of PRMT5 is restricted to &lt;i&gt;TMPRSS2:ERG&lt;/i&gt;-positive prostate cancer cells. Mutation of this methylation site on AR results in a transcriptionally hyperactive AR, suggesting that the proliferative effects of ERG and PRMT5 are mediated through attenuating AR's ability to induce genes normally involved in lineage differentiation. This provides a rationale for targeting PRMT5 in &lt;i&gt;TMPRSS2:ERG&lt;/i&gt; positive prostate cancers. Moreover, methylation of AR at arginine 761 highlights a mechanism for how the ERG oncogene may coax AR towards inducing proliferation versus differentiation.</description>
+      <author>raymond.pagliarini@novartis.com (Anke Hartung)</author>
+      <author>raymond.pagliarini@novartis.com (Christina A Kirby)</author>
+      <author>raymond.pagliarini@novartis.com (Christopher Quinn)</author>
+      <author>raymond.pagliarini@novartis.com (David Randal Kipp)</author>
+      <author>raymond.pagliarini@novartis.com (Fallon Lin)</author>
+      <author>raymond.pagliarini@novartis.com (Gilles Buchwalter)</author>
+      <author>raymond.pagliarini@novartis.com (Greg Hoffman)</author>
+      <author>raymond.pagliarini@novartis.com (Gregg McAllister)</author>
+      <author>raymond.pagliarini@novartis.com (James Deeds)</author>
+      <author>raymond.pagliarini@novartis.com (Jason Baird)</author>
+      <author>raymond.pagliarini@novartis.com (Joshua M Korn)</author>
+      <author>raymond.pagliarini@novartis.com (Marie Schoumacher)</author>
+      <author>raymond.pagliarini@novartis.com (Markus Schirle)</author>
+      <author>raymond.pagliarini@novartis.com (Michelle Fodor)</author>
+      <author>raymond.pagliarini@novartis.com (Myles Brown)</author>
+      <author>raymond.pagliarini@novartis.com (Nadire Ramadan)</author>
+      <author>raymond.pagliarini@novartis.com (Nicholas Keen)</author>
+      <author>raymond.pagliarini@novartis.com (Raymond A Pagliarini)</author>
+      <author>raymond.pagliarini@novartis.com (Ronald Meyer)</author>
+      <author>raymond.pagliarini@novartis.com (Thomas Westerling)</author>
+      <author>raymond.pagliarini@novartis.com (Travis Stams)</author>
+      <author>raymond.pagliarini@novartis.com (William R Sellers)</author>
+      <author>raymond.pagliarini@novartis.com (Yan Feng)</author>
+      <author>raymond.pagliarini@novartis.com (Zineb Mounir)</author>
+      <guid isPermaLink="false">https://dx.doi.org/10.7554/eLife.13964</guid>
+      <category>Cancer Biology</category>
+      <category>Cell Biology</category>
+      <pubDate>Mon, 16 May 2016 00:00:00 +0000</pubDate>
+      <dc:date>2016-05-16T00:00:00Z</dc:date>
+      <webfeeds:featuredImage url="https://elifesciences.org/assets/patterns/img/patterns/organisms/elife-logo-xs.fd623d00.svg" height="51" width="136" type="image/svg"/>
+    </item>
+  </channel>
+</rss>

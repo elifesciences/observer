@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:webfeeds="http://webfeeds.org/rss/1.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0">
+  <channel>
+    <title>eLife: latest articles</title>
+    <link>https://elifesciences.org</link>
+    <description>All of the latest articles published at eLife, including in-progress POA (publish-on-accept) articles.</description>
+    <atom:link href="https://observer.elifesciences.org/report/latest-articles" rel="self"/>
+    <docs>http://www.rssboard.org/rss-specification</docs>
+    <generator>observer (using python-feedgen)</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 12 Oct 2020 00:00:00 +0000</lastBuildDate>
+    <webfeeds:analytics id="G-xxxxxxxxxx" engine="GoogleAnalytics"/>
+    <item>
+      <title>From mice to men</title>
+      <link>https://elifesciences.org/articles/67895</link>
+      <description>All-trans retinoic acid induces functional and structural plasticity of synapses in human cortical circuits through the engagement of the spine apparatus.</description>
+      <author>masutton@umich.edu (J Christian Althaus)</author>
+      <author>masutton@umich.edu (Michael A Sutton)</author>
+      <guid isPermaLink="false">https://dx.doi.org/10.7554/eLife.67895</guid>
+      <category>Neuroscience</category>
+      <pubDate>Thu, 01 Apr 2021 00:00:00 +0000</pubDate>
+      <dc:date>2021-04-01T00:00:00Z</dc:date>
+      <webfeeds:featuredImage url="https://iiif.elifesciences.org/journal-cms/article%2Fsocial%2F2021-04%2F67895-synapse-retinoic.png/full/full/0/default.jpg" height="51" width="136" type="image/svg"/>
+    </item>
+  </channel>
+</rss>

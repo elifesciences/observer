@@ -1,0 +1,714 @@
+{
+  "status": "vor",
+  "id": "67895",
+  "version": 1,
+  "type": "insight",
+  "doi": "10.7554/eLife.67895",
+  "authorLine": "J Christian Althaus, Michael A Sutton",
+  "title": "From mice to men",
+  "titlePrefix": "Remodeling Synapses",
+  "published": "2021-04-01T00:00:00Z",
+  "versionDate": "2021-04-01T00:00:00Z",
+  "volume": 10,
+  "elocationId": "e67895",
+  "pdf": "https://cdn.elifesciences.org/articles/67895/elife-67895-v1.pdf",
+  "xml": "https://cdn.elifesciences.org/articles/67895/elife-67895-v1.xml",
+  "subjects": [
+    {
+      "id": "neuroscience",
+      "name": "Neuroscience"
+    }
+  ],
+  "researchOrganisms": [
+    "Human",
+    "Mouse"
+  ],
+  "abstract": {
+    "content": [
+      {
+        "text": "All-trans retinoic acid induces functional and structural plasticity of synapses in human cortical circuits through the engagement of the spine apparatus.",
+        "type": "paragraph"
+      }
+    ]
+  },
+  "copyright": {
+    "license": "CC-BY-4.0",
+    "holder": "Althaus and Sutton",
+    "statement": "This article is distributed under the terms of the <a href=\"http://creativecommons.org/licenses/by/4.0/\">Creative Commons Attribution License</a>, which permits unrestricted use and redistribution provided that the original author and source are credited."
+  },
+  "authors": [
+    {
+      "affiliations": [
+        {
+          "address": {
+            "components": {
+              "country": "United States",
+              "locality": [
+                "Ann Arbor"
+              ]
+            },
+            "formatted": [
+              "Ann Arbor",
+              "United States"
+            ]
+          },
+          "name": [
+            "Department of Molecular and Integrative Physiology, University of Michigan"
+          ]
+        },
+        {
+          "address": {
+            "components": {
+              "country": "United States",
+              "locality": [
+                "Ann Arbor"
+              ]
+            },
+            "formatted": [
+              "Ann Arbor",
+              "United States"
+            ]
+          },
+          "name": [
+            "Michigan Neuroscience Institute, University of Michigan"
+          ]
+        }
+      ],
+      "biography": [
+        {
+          "text": "<b>J Christian Althaus</b> is in the Department of Molecular and Integrative Physiology and the Michigan Neuroscience Institute, University of Michigan, Ann Arbor, United States",
+          "type": "paragraph"
+        }
+      ],
+      "competingInterests": "No competing interests declared",
+      "name": {
+        "index": "Althaus, J Christian",
+        "preferred": "J Christian Althaus"
+      },
+      "orcid": "0000-0001-6744-5651",
+      "type": "person"
+    },
+    {
+      "affiliations": [
+        {
+          "address": {
+            "components": {
+              "country": "United States",
+              "locality": [
+                "Ann Arbor"
+              ]
+            },
+            "formatted": [
+              "Ann Arbor",
+              "United States"
+            ]
+          },
+          "name": [
+            "Department of Molecular and Integrative Physiology, University of Michigan"
+          ]
+        },
+        {
+          "address": {
+            "components": {
+              "country": "United States",
+              "locality": [
+                "Ann Arbor"
+              ]
+            },
+            "formatted": [
+              "Ann Arbor",
+              "United States"
+            ]
+          },
+          "name": [
+            "Michigan Neuroscience Institute, University of Michigan"
+          ]
+        }
+      ],
+      "biography": [
+        {
+          "text": "<b>Michael A Sutton</b> is in the Department of Molecular and Integrative Physiology and the Michigan Neuroscience Institute, University of Michigan, Ann Arbor, United States",
+          "type": "paragraph"
+        }
+      ],
+      "competingInterests": "No competing interests declared",
+      "emailAddresses": [
+        "masutton@umich.edu"
+      ],
+      "name": {
+        "index": "Sutton, Michael A",
+        "preferred": "Michael A Sutton"
+      },
+      "orcid": "0000-0003-1593-727X",
+      "type": "person"
+    }
+  ],
+  "impactStatement": "All-trans retinoic acid induces functional and structural plasticity of synapses in human cortical circuits through the engagement of the spine apparatus.",
+  "keywords": [
+    "synaptopodin",
+    "synaptic plasticity",
+    "human cortex",
+    "vitamin A",
+    "retinoic acid"
+  ],
+  "body": [
+    {
+      "content": [
+        {
+          "text": "Over the last decade, the synapses that connect neurons have emerged as important therapeutic targets in a host of neurological disorders ranging from autism to Alzheimer’s disease. Synaptic signaling can either excite or inhibit the postsynaptic neuron, and the vast majority of excitatory synapses in the mammalian brain rely on structures called dendritic spines (<a href=\"#fig1\">Figure 1</a>). The 'head' of each dendritic spine contains receptors for the chemical neurotransmitter glutamate, which is released by the presynaptic neuron. Neurons can contain different types of glutamate receptors, but the AMPA-type glutamate receptor (AMPAR) is responsible for the majority of fast synaptic transmission and also controls the strength of the synapse.",
+          "type": "paragraph"
+        },
+        {
+          "assets": [
+            {
+              "caption": [
+                {
+                  "text": "Left: the synapse modulating effects of all-trans retinoic acid (atRA) first reported in rodent neurons are preserved in human cortical neurons in intact cortical circuits. Right: all-trans retinoic acid increases the strength (measured as the number of AMPA-type glutamate receptors; AMPARs, green) and size of excitatory synapses in layer 2/3 pyramidal neurons in human cortical slices. All-trans retinoic acid also increases the size of the spine apparatus, a synaptic organelle found in dendritic spines and previously linked to synapse remodeling (orange). To test whether the spine apparatus is important for the effects of all-trans retinoic acid on synapses, Lenz et al. compared wild-type (Synpo +, top), and synaptopodin-deficient (Synpo -, bottom) mice, which lack the spine apparatus. Synapses lacking the spine apparatus were smaller and failed to increase in strength after applying all-trans retinoic acid. However, applying the molecule still enlarged the spines without a spine apparatus, demonstrating that this organelle has a specific role in regulating changes in synaptic strength induced by all-trans retinoic acid.",
+                  "type": "paragraph"
+                }
+              ],
+              "id": "fig1",
+              "image": {
+                "alt": "",
+                "uri": "https://iiif.elifesciences.org/lax:67895%2Felife-67895-fig1-v1.tif",
+                "size": {
+                  "width": 1411,
+                  "height": 933
+                },
+                "source": {
+                  "mediaType": "image/jpeg",
+                  "uri": "https://iiif.elifesciences.org/lax:67895%2Felife-67895-fig1-v1.tif/full/full/0/default.jpg",
+                  "filename": "elife-67895-fig1-v1.jpg"
+                }
+              },
+              "label": "Figure 1",
+              "title": "Remodeling human cortical synapses with all-trans retinoic acid.",
+              "type": "image"
+            }
+          ],
+          "type": "figure"
+        },
+        {
+          "text": "Many forms of synaptic plasticity – the process that allows specific synapses to become stronger or weaker over time – rely on the addition and removal of AMPARs (<a href=\"#bib2\">Diering and Huganir, 2018</a>). These changes are often accompanied by an increase or decrease in the size of the dendritic spine head (<a href=\"#bib7\">Matsuzaki et al., 2004</a>). Changes in synapse number or strength are a pathological hallmark of several diseases, including neurodevelopmental disorders and Alzheimer’s disease (<a href=\"#bib3\">Forrest et al., 2018</a>), which means that molecules that can consistently modify synapses are attractive as potential therapeutics. Among the most promising of these is a derivative of vitamin A called all-trans retinoic acid, which can potently increase synaptic strength in cultured rodent neurons (<a href=\"#bib1\">Aoto et al., 2008</a>). This molecule appears to function as part of a homeostatic pathway that engages the protein translation machinery in dendritic spines to increase the strength of synapses when synaptic input drops (<a href=\"#bib4\">Jakawich et al., 2010</a>; <a href=\"#bib10\">Wang et al., 2011</a>).",
+          "type": "paragraph"
+        },
+        {
+          "text": "Since all-trans retinoic acid is a potent synaptic regulator with a well-defined mechanism of action, it offers tremendous promise to guide therapeutic development for disorders characterized by synaptic dysfunction. But the critical question is whether these effects and mechanisms are readily translatable to the human brain. Now, in eLife, Andreas Vlachos of the University of Freiburg and colleagues – including Maximilian Lenz as first author – report striking parallels between human and rodent neurons in the synaptic effects of all-trans retinoic acid (<a href=\"#bib6\">Lenz et al., 2021</a>).",
+          "type": "paragraph"
+        },
+        {
+          "text": "The researchers prepared slices from surgically resected brain tissue from patients undergoing neurosurgery to ask whether all-trans retinoic acid has the same effects on human pyramidal neurons from layer 2/3 of the cortex as it has on rodent neurons. They found that the molecule enhanced synaptic currents, without altering many other features of neuronal excitability. Along with these changes, Lenz et al. found that all-trans retinoic acid drove enlargement of dendritic spine heads, but the overall density of dendritic spines did not change: this suggests that all-trans retinoic acid drives AMPAR accumulation and structural plasticity at pre-existing synaptic sites. Finally, Lenz et al. demonstrated that the changes in synaptic strength induced by all-trans retinoic acid in human neurons depended on mRNA translation but not on transcription, a mechanistic signature first seen in rodent neurons.",
+          "type": "paragraph"
+        },
+        {
+          "text": "Next, Lenz et al. – who are based at the University of Freiburg and Goethe-University Frankfurt – explored the relationship between synaptic modulation by all-trans retinoic acid and the spine apparatus, an organelle that is present in a subset of dendritic spines and whose function has remained enigmatic (<a href=\"#bib5\">Jedlicka and Deller, 2017</a>). They found that all-trans retinoic acid enlarged the spine apparatus and, strikingly, that the cross-sectional area of the spine apparatus varied with the size of the dendritic spine itself. This suggests that the spine apparatus might have a key role in the modulation of synaptic strength by all-trans retinoic acid.",
+          "type": "paragraph"
+        },
+        {
+          "text": "To test this hypothesis, Lenz et al. examined the effects of all-trans retinoic acid in synaptopodin knockout mice, which lack the spine apparatus. They found that all-trans retinoic acid did not enhance synaptic currents in cortical pyramidal neurons in the knockout mice; however, when synaptopodin was reintroduced, all-trans retinoic acid was able to increase synaptic currents. Curiously, losing the spine apparatus did not prevent all-trans retinoic acid from enlarging dendritic spines, even though spine size was reduced in the synaptopodin knockout mice.",
+          "type": "paragraph"
+        },
+        {
+          "text": "These results suggest that the spine apparatus helps regulate synaptic architecture, but that all-trans retinoic acid can induce structural remodeling of synapses independently of this organelle. This finding was particularly intriguing because the enlargement of spines and the enhancement of synaptic function often go hand-in-hand. These results underscore the fact that while morphological and functional changes are highly coordinated at cortical synapses, they likely rely on distinct mechanistic pathways.",
+          "type": "paragraph"
+        },
+        {
+          "text": "These results provide a clear answer as to whether the effects of all-trans retinoic acid in rodents can be translated to humans. The molecule is a potent regulator of excitatory synapses in human cortical neurons and uses a mechanism for synaptic regulation that appears largely conserved from rodents to humans. The work of Lenz et al. also raises some important questions about the role of the spine apparatus in the regulation of synapses by all-trans retinoic acid in particular, and by other modulators more generally.",
+          "type": "paragraph"
+        },
+        {
+          "text": "It is tempting to speculate that the spine apparatus may be part of a satellite secretory pathway that delivers locally-translated membrane proteins, such as AMPARs, in dendrites. However, future studies are needed to address the specific role of the spine apparatus relative to other secretory mechanisms that might also operate in dendrites (<a href=\"#bib9\">Pierce et al., 2001</a>; <a href=\"#bib8\">Mikhaylova et al., 2016</a>).",
+          "type": "paragraph"
+        }
+      ],
+      "id": "s0",
+      "title": "Main text",
+      "type": "section"
+    }
+  ],
+  "references": [
+    {
+      "articleTitle": "Synaptic signaling by all-trans retinoic acid in homeostatic synaptic plasticity",
+      "authors": [
+        {
+          "name": {
+            "index": "Aoto, J",
+            "preferred": "Aoto J"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Nam, CI",
+            "preferred": "Nam CI"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Poon, MM",
+            "preferred": "Poon MM"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Ting, P",
+            "preferred": "Ting P"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Chen, L",
+            "preferred": "Chen L"
+          },
+          "type": "person"
+        }
+      ],
+      "date": "2008",
+      "doi": "10.1016/j.neuron.2008.08.012",
+      "id": "bib1",
+      "journal": "Neuron",
+      "pages": {
+        "first": "308",
+        "last": "320",
+        "range": "308–320"
+      },
+      "pmid": 18957222,
+      "type": "journal",
+      "volume": "60"
+    },
+    {
+      "articleTitle": "The AMPA receptor code of synaptic plasticity",
+      "authors": [
+        {
+          "name": {
+            "index": "Diering, GH",
+            "preferred": "Diering GH"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Huganir, RL",
+            "preferred": "Huganir RL"
+          },
+          "type": "person"
+        }
+      ],
+      "date": "2018",
+      "doi": "10.1016/j.neuron.2018.10.018",
+      "id": "bib2",
+      "journal": "Neuron",
+      "pages": {
+        "first": "314",
+        "last": "329",
+        "range": "314–329"
+      },
+      "pmid": 30359599,
+      "type": "journal",
+      "volume": "100"
+    },
+    {
+      "articleTitle": "Dendritic structural plasticity and neuropsychiatric disease",
+      "authors": [
+        {
+          "name": {
+            "index": "Forrest, MP",
+            "preferred": "Forrest MP"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Parnell, E",
+            "preferred": "Parnell E"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Penzes, P",
+            "preferred": "Penzes P"
+          },
+          "type": "person"
+        }
+      ],
+      "date": "2018",
+      "doi": "10.1038/nrn.2018.16",
+      "id": "bib3",
+      "journal": "Nature Reviews Neuroscience",
+      "pages": {
+        "first": "215",
+        "last": "234",
+        "range": "215–234"
+      },
+      "pmid": 29545546,
+      "type": "journal",
+      "volume": "19"
+    },
+    {
+      "articleTitle": "Local presynaptic activity gates homeostatic changes in presynaptic function driven by dendritic BDNF synthesis",
+      "authors": [
+        {
+          "name": {
+            "index": "Jakawich, SK",
+            "preferred": "Jakawich SK"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Nasser, HB",
+            "preferred": "Nasser HB"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Strong, MJ",
+            "preferred": "Strong MJ"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "McCartney, AJ",
+            "preferred": "McCartney AJ"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Perez, AS",
+            "preferred": "Perez AS"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Rakesh, N",
+            "preferred": "Rakesh N"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Carruthers, CJ",
+            "preferred": "Carruthers CJ"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Sutton, MA",
+            "preferred": "Sutton MA"
+          },
+          "type": "person"
+        }
+      ],
+      "date": "2010",
+      "doi": "10.1016/j.neuron.2010.11.034",
+      "id": "bib4",
+      "journal": "Neuron",
+      "pages": {
+        "first": "1143",
+        "last": "1158",
+        "range": "1143–1158"
+      },
+      "pmid": 21172615,
+      "type": "journal",
+      "volume": "68"
+    },
+    {
+      "articleTitle": "Understanding the role of synaptopodin and the spine apparatus in Hebbian synaptic plasticity - new perspectives and the need for computational modeling",
+      "authors": [
+        {
+          "name": {
+            "index": "Jedlicka, P",
+            "preferred": "Jedlicka P"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Deller, T",
+            "preferred": "Deller T"
+          },
+          "type": "person"
+        }
+      ],
+      "date": "2017",
+      "doi": "10.1016/j.nlm.2016.07.023",
+      "id": "bib5",
+      "journal": "Neurobiology of Learning and Memory",
+      "pages": {
+        "first": "21",
+        "last": "30",
+        "range": "21–30"
+      },
+      "pmid": 27470091,
+      "type": "journal",
+      "volume": "138"
+    },
+    {
+      "articleTitle": "All-trans retinoic acid induces synaptic plasticity in human cortical neurons",
+      "authors": [
+        {
+          "name": {
+            "index": "Lenz, M",
+            "preferred": "Lenz M"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Kruse, P",
+            "preferred": "Kruse P"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Eichler, A",
+            "preferred": "Eichler A"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Straehle, J",
+            "preferred": "Straehle J"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Beck, J",
+            "preferred": "Beck J"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Deller, T",
+            "preferred": "Deller T"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Vlachos, A",
+            "preferred": "Vlachos A"
+          },
+          "type": "person"
+        }
+      ],
+      "date": "2021",
+      "doi": "10.7554/eLife.63026",
+      "id": "bib6",
+      "journal": "eLife",
+      "pages": "e63026",
+      "type": "journal",
+      "volume": "10"
+    },
+    {
+      "articleTitle": "Structural basis of long-term potentiation in single dendritic spines",
+      "authors": [
+        {
+          "name": {
+            "index": "Matsuzaki, M",
+            "preferred": "Matsuzaki M"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Honkura, N",
+            "preferred": "Honkura N"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Ellis-Davies, GC",
+            "preferred": "Ellis-Davies GC"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Kasai, H",
+            "preferred": "Kasai H"
+          },
+          "type": "person"
+        }
+      ],
+      "date": "2004",
+      "doi": "10.1038/nature02617",
+      "id": "bib7",
+      "journal": "Nature",
+      "pages": {
+        "first": "761",
+        "last": "766",
+        "range": "761–766"
+      },
+      "pmid": 15190253,
+      "type": "journal",
+      "volume": "429"
+    },
+    {
+      "articleTitle": "A dendritic Golgi satellite between ERGIC and retromer",
+      "authors": [
+        {
+          "name": {
+            "index": "Mikhaylova, M",
+            "preferred": "Mikhaylova M"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Bera, S",
+            "preferred": "Bera S"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Kobler, O",
+            "preferred": "Kobler O"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Frischknecht, R",
+            "preferred": "Frischknecht R"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Kreutz, MR",
+            "preferred": "Kreutz MR"
+          },
+          "type": "person"
+        }
+      ],
+      "date": "2016",
+      "doi": "10.1016/j.celrep.2015.12.024",
+      "id": "bib8",
+      "journal": "Cell Reports",
+      "pages": {
+        "first": "189",
+        "last": "199",
+        "range": "189–199"
+      },
+      "pmid": 26748700,
+      "type": "journal",
+      "volume": "14"
+    },
+    {
+      "articleTitle": "Evidence for a satellite secretory pathway in neuronal dendritic spines",
+      "authors": [
+        {
+          "name": {
+            "index": "Pierce, JP",
+            "preferred": "Pierce JP"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Mayer, T",
+            "preferred": "Mayer T"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "McCarthy, JB",
+            "preferred": "McCarthy JB"
+          },
+          "type": "person"
+        }
+      ],
+      "date": "2001",
+      "doi": "10.1016/S0960-9822(01)00077-X",
+      "id": "bib9",
+      "journal": "Current Biology",
+      "pages": {
+        "first": "351",
+        "last": "355",
+        "range": "351–355"
+      },
+      "pmid": 11267872,
+      "type": "journal",
+      "volume": "11"
+    },
+    {
+      "articleTitle": "Decrease in calcium concentration triggers neuronal retinoic acid synthesis during homeostatic synaptic plasticity",
+      "authors": [
+        {
+          "name": {
+            "index": "Wang, HL",
+            "preferred": "Wang HL"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Zhang, Z",
+            "preferred": "Zhang Z"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Hintze, M",
+            "preferred": "Hintze M"
+          },
+          "type": "person"
+        },
+        {
+          "name": {
+            "index": "Chen, L",
+            "preferred": "Chen L"
+          },
+          "type": "person"
+        }
+      ],
+      "date": "2011",
+      "doi": "10.1523/JNEUROSCI.3964-11.2011",
+      "id": "bib10",
+      "journal": "Journal of Neuroscience",
+      "pages": {
+        "first": "17764",
+        "last": "17771",
+        "range": "17764–17771"
+      },
+      "pmid": 22159093,
+      "type": "journal",
+      "volume": "31"
+    }
+  ],
+  "stage": "published",
+  "statusDate": "2021-04-01T00:00:00Z",
+  "image": {
+    "social": {
+      "uri": "https://iiif.elifesciences.org/journal-cms/article%2Fsocial%2F2021-04%2F67895-synapse-retinoic.png",
+      "alt": "",
+      "source": {
+        "mediaType": "image/jpeg",
+        "uri": "https://iiif.elifesciences.org/journal-cms/article%2Fsocial%2F2021-04%2F67895-synapse-retinoic.png/full/full/0/default.jpg",
+        "filename": "67895-synapse-retinoic.jpg"
+      },
+      "size": {
+        "width": 1000,
+        "height": 999
+      }
+    }
+  }
+}

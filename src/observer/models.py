@@ -55,6 +55,11 @@ NON_ARTICLE_CONTENT_TYPE_LIST = [
 POA, VOR = 'poa', 'vor'
 UNKNOWN_TYPE = 'unknown-type'
 
+IMAGE_MIME_CHOICES = [
+    ('jpg', 'image/jpeg'),
+    ('png', 'image/png'),
+]
+
 def type_choices():
     # pull these from the json-spec somehow?
     lst = [
@@ -202,6 +207,11 @@ class Article(models.Model):
     subject2 = CharField(max_length=50, null=True)
     subject3 = CharField(max_length=50, null=True)
 
+    social_image_uri = URLField(max_length=500, null=True)
+    social_image_height = PositiveSmallIntegerField(null=True)
+    social_image_width = PositiveSmallIntegerField(null=True)
+    social_image_mime = CharField(max_length=10, choices=IMAGE_MIME_CHOICES, null=True)
+    
     class Meta:
         db_table = 'articles'
         indexes = [
@@ -210,7 +220,7 @@ class Article(models.Model):
 
     datetime_record_created = DateTimeField(auto_now_add=True)
     datetime_record_updated = DateTimeField(auto_now=True)
-
+    
     def get_absolute_url(self):
         return "https://elifesciences.org/articles/" + utils.pad_msid(self.msid)
 
@@ -327,11 +337,6 @@ CONTENT_TYPE_CHOICES = [
 ]
 CONTENT_TYPE_CHOICES = zip(CONTENT_TYPE_CHOICES, CONTENT_TYPE_CHOICES)
 
-IMAGE_MIME_CHOICES = [
-    ('jpg', 'image/jpeg'),
-    ('png', 'image/png'),
-]
-
 class Content(models.Model):
     id = CharField(max_length=25, primary_key=True)
     content_type = CharField(max_length=12, choices=CONTENT_TYPE_CHOICES)
@@ -342,6 +347,7 @@ class Content(models.Model):
     image_height = PositiveSmallIntegerField(null=True)
     image_width = PositiveSmallIntegerField(null=True)
     image_mime = CharField(max_length=10, choices=IMAGE_MIME_CHOICES, null=True)
+    
     datetime_published = DateTimeField()
     datetime_updated = DateTimeField(null=True)
 
