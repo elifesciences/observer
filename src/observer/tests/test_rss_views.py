@@ -149,7 +149,6 @@ class Articles(base.BaseCase):
     maxDiff = None
 
     def setUp(self):
-        
         self.c = Client()
 
     # freezing time because FeedGen adds a `lastBuildDate` element to the generated

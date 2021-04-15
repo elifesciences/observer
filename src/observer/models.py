@@ -211,7 +211,7 @@ class Article(models.Model):
     social_image_height = PositiveSmallIntegerField(null=True)
     social_image_width = PositiveSmallIntegerField(null=True)
     social_image_mime = CharField(max_length=10, choices=IMAGE_MIME_CHOICES, null=True)
-    
+
     class Meta:
         db_table = 'articles'
         indexes = [
@@ -220,7 +220,7 @@ class Article(models.Model):
 
     datetime_record_created = DateTimeField(auto_now_add=True)
     datetime_record_updated = DateTimeField(auto_now=True)
-    
+
     def get_absolute_url(self):
         return "https://elifesciences.org/articles/" + utils.pad_msid(self.msid)
 
@@ -347,7 +347,7 @@ class Content(models.Model):
     image_height = PositiveSmallIntegerField(null=True)
     image_width = PositiveSmallIntegerField(null=True)
     image_mime = CharField(max_length=10, choices=IMAGE_MIME_CHOICES, null=True)
-    
+
     datetime_published = DateTimeField()
     datetime_updated = DateTimeField(null=True)
 

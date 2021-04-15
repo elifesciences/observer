@@ -20,7 +20,7 @@
       <category>Neuroscience</category>
       <pubDate>Thu, 01 Apr 2021 00:00:00 +0000</pubDate>
       <dc:date>2021-04-01T00:00:00Z</dc:date>
-      <webfeeds:featuredImage url="https://iiif.elifesciences.org/journal-cms/article%2Fsocial%2F2021-04%2F67895-synapse-retinoic.png/full/full/0/default.jpg" height="51" width="136" type="image/svg"/>
+      <webfeeds:featuredImage url="https://iiif.elifesciences.org/journal-cms/article%2Fsocial%2F2021-04%2F67895-synapse-retinoic.png/full/800,/0/default.jpg" height="799" width="800" type="image/jpeg"/>
     </item>
   </channel>
 </rss>
