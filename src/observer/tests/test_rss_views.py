@@ -155,7 +155,7 @@ class Articles(base.BaseCase):
     # RSS feed that can't be affected from here.
     @pytest.mark.freeze_time('2020-10-12')
     def test_article(self):
-        "a regular article emits RSS xml as expected"
+        "a regular article emits RSS xml with the default elife logo placeholder."
         fixture = join(self.fixture_dir, 'ajson', 'elife-13964-v1.xml.json')
         ingest_logic.file_upsert(fixture)
         url = reverse('report', kwargs={'name': 'latest-articles'})
@@ -167,7 +167,7 @@ class Articles(base.BaseCase):
 
     @pytest.mark.freeze_time('2020-10-12')
     def test_article__social_image(self):
-        "an article with a social image emits RSS xml as expected"
+        "an article with a social image emits RSS xml with a IIIF url to the social image"
         fixture = join(self.fixture_dir, 'articles', '67895.json')
         ingest_logic.file_upsert(fixture)
         url = reverse('report', kwargs={'name': 'latest-articles'})

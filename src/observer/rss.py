@@ -201,6 +201,7 @@ def article_to_rss_entry(art):
         image = {'url': iiif_url,
                  'height': str(thumbnail_height),
                  'width': str(thumbnail_width),
+                 # the mime we get from the social image is either jpg or png, but we're generating a new URL that is guaranteed to be a jpg
                  'type': "image/jpeg"}
 
     item['webfeeds:featuredImage'] = image
