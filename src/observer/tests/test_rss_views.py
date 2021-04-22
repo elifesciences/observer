@@ -145,6 +145,38 @@ class Two(base.BaseCase):
         with self.assertNumQueries(num):
             self.c.get(reverse('report', kwargs={'name': 'latest-articles'}), {'format': 'csv'})
 
+class Articles(base.BaseCase):
+    maxDiff = None
+
+    def setUp(self):
+        self.c = Client()
+
+    # freezing time because FeedGen adds a `lastBuildDate` element to the generated
+    # RSS feed that can't be affected from here.
+    @pytest.mark.freeze_time('2020-10-12')
+    def test_article(self):
+        "a regular article emits RSS xml with the default elife logo placeholder."
+        fixture = join(self.fixture_dir, 'ajson', 'elife-13964-v1.xml.json')
+        ingest_logic.file_upsert(fixture)
+        url = reverse('report', kwargs={'name': 'latest-articles'})
+        resp = self.c.get(url)
+        self.assertEqual(200, resp.status_code)
+        expected = open(join(base.FIXTURE_DIR, 'articles', '13964.xml'), 'r').read()
+        actual = resp.content.decode('utf-8')
+        self.assertEqual(expected, actual)
+
+    @pytest.mark.freeze_time('2020-10-12')
+    def test_article__social_image(self):
+        "an article with a social image emits RSS xml with a IIIF url to the social image"
+        fixture = join(self.fixture_dir, 'articles', '67895.json')
+        ingest_logic.file_upsert(fixture)
+        url = reverse('report', kwargs={'name': 'latest-articles'})
+        resp = self.c.get(url)
+        self.assertEqual(200, resp.status_code)
+        expected = open(join(base.FIXTURE_DIR, 'articles', '67895.xml'), 'r').read()
+        actual = resp.content.decode('utf-8')
+        self.assertEqual(expected, actual)
+
 class Digests(base.BaseCase):
     maxDiff = None
 

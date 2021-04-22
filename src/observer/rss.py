@@ -84,6 +84,7 @@ class Feedly(FeedlyBaseExtension):
 class FeedlyEntry(FeedlyBaseExtension):
     def __init__(self):
         self.elem_list = [
+            # (elem, attr-list)
             ('featuredImage', ['url', 'height', 'width', 'type']),
         ]
         self.setup()
@@ -187,6 +188,24 @@ def article_to_rss_entry(art):
     item['author'] = [{'name': a.name, 'email': art.author_email} for a in art.authors.all()]
     item['category'] = [{'term': subject.name, 'label': subject.label} for subject in art.subjects.all()]
     item['dc:dc_date'] = utils.ymdhms(item['pubDate'])
+
+    image = {'url': "https://elife-cdn.s3.amazonaws.com/observer/elife-logo-408x230.svg",
+             'height': "230",
+             'width': "408",
+             'type': "image/svg"}
+
+    if art.social_image_uri:
+        max_xy = 800
+        thumbnail_width, thumbnail_height = utils.thumbnail_dimensions(max_xy, art.social_image_width, art.social_image_height)
+        iiif_url = utils.iiif_thumbnail_link(art.social_image_uri, thumbnail_width, thumbnail_height)
+        image = {'url': iiif_url,
+                 'height': str(thumbnail_height),
+                 'width': str(thumbnail_width),
+                 # the mime we get from the social image is either jpg or png, but we're generating a new URL that is guaranteed to be a jpg
+                 'type': "image/jpeg"}
+
+    item['webfeeds:featuredImage'] = image
+
     return item
 
 def article_list_to_rss_entry_list(queryset):

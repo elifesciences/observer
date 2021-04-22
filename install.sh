@@ -5,14 +5,15 @@ echo "[-] install.sh"
 . mkvenv.sh
 
 source venv/bin/activate
+pip install pip wheel --upgrade
+pip install -r requirements.txt
 
 if [ ! -e app.cfg ]; then
     echo "* no app.cfg found! using the example settings (elife.cfg) by default."
     ln -s elife.cfg app.cfg
 fi
 
-pip install -r requirements.txt
-
+python src/manage.py collectstatic --no-input
 python src/manage.py migrate --no-input
 
 echo "[✓] install.sh"

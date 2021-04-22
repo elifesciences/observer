@@ -178,6 +178,13 @@ DESC = {
     'subject2': [p('subjects', []), second, key('id')],
     'subject3': [p('subjects', []), third, key('id')],
 
+    'social_image_uri': [p("image.social.uri", None)],
+    'social_image_height': [p("image.social.size.height", None)],
+    'social_image_width': [p("image.social.size.width", None)],
+    'social_image_mime': [p("image.social.source.mediaType", None)],
+
+    # relations
+
     'authors': [p('authors', []), foreach_render(AUTHOR_DESC), fltr(lambda a: a['country'])]
 }
 
