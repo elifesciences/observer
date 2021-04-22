@@ -189,9 +189,9 @@ def article_to_rss_entry(art):
     item['category'] = [{'term': subject.name, 'label': subject.label} for subject in art.subjects.all()]
     item['dc:dc_date'] = utils.ymdhms(item['pubDate'])
 
-    image = {'url': "https://elifesciences.org/assets/patterns/img/patterns/organisms/elife-logo-xs.fd623d00.svg",
-             'height': "51",
-             'width': "136",
+    image = {'url': "https://elife-cdn.s3.amazonaws.com/observer/elife-logo-408x230.svg",
+             'height': "230",
+             'width': "408",
              'type': "image/svg"}
 
     if art.social_image_uri:

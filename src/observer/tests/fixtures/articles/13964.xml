@@ -43,7 +43,7 @@
       <category>Cell Biology</category>
       <pubDate>Mon, 16 May 2016 00:00:00 +0000</pubDate>
       <dc:date>2016-05-16T00:00:00Z</dc:date>
-      <webfeeds:featuredImage url="https://elifesciences.org/assets/patterns/img/patterns/organisms/elife-logo-xs.fd623d00.svg" height="51" width="136" type="image/svg"/>
+      <webfeeds:featuredImage url="https://elife-cdn.s3.amazonaws.com/observer/elife-logo-408x230.svg" height="230" width="408" type="image/svg"/>
     </item>
   </channel>
 </rss>
