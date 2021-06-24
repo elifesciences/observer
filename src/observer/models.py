@@ -224,6 +224,15 @@ class Article(models.Model):
     def get_absolute_url(self):
         return "https://elifesciences.org/articles/" + utils.pad_msid(self.msid)
 
+    def get_pdf_url(self):
+        return self.get_absolute_url() + ".pdf"
+
+    def get_xml_url(self):
+        return self.get_absolute_url() + ".xml"
+
+    def get_json_url(self):
+        return "https://api.elifesciences.org/articles/" + utils.pad_msid(self.msid)
+
     def __str__(self):
         return "%05d" % self.msid
 
