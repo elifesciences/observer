@@ -381,6 +381,49 @@ def exeter_new_and_updated_vor_articles():
                      'title', 'type')
 
 #
+# EBSCO reports
+#
+
+def ebsco_new_and_updated_vor_articles_json_row_formatter(article_obj):
+    "per-row value formatting for the `ebsco_new_and_updated_vor_articles` report"
+    # has to match headers
+    field_list = [
+        'doi',
+        'datetime_published', 'datetime_version_published', 'datetime_vor_published',
+        'title', 'type'
+    ]
+    row = [getattr(article_obj, field) for field in field_list] + [article_obj.get_pdf_url()]
+    row[1] = datetime.date(row[1])
+    row[2] = datetime.date(row[2])
+    row[3] = datetime.date(row[3])
+
+    return row
+
+@report(article_meta(
+    title="EBSCO, new and updated VOR articles",
+    description="All new and updated VOR articles ordered by their updated date, most recent VOR articles to least recent.",
+    serialisations=[JSON, CSV],
+    row_formatters={JSON: ebsco_new_and_updated_vor_articles_json_row_formatter,
+                    CSV: ebsco_new_and_updated_vor_articles_json_row_formatter
+                    },
+    order_by='datetime_version_published',
+    order=DESC,
+    headers=['doi',
+             'first-published-date', 'latest-published-date', 'first-vor-published-date',
+             'article-title', 'article-type', 'article-pdf-url'],
+))
+def ebsco_new_and_updated_vor_articles():
+    """
+    the new and updated VOR articles for Exeter report:
+    * returns articles that have at least one VOR version
+    * ordered by the date and time of the latest version published, most recent to least recent
+    """
+    return models.Article.objects \
+        .filter(num_vor_versions__gte=1) \
+        .order_by('-datetime_version_published')
+
+
+#
 #
 #
 
@@ -418,6 +461,7 @@ def known_report_idx():
         ('exeter-new-poa-articles', exeter_new_poa_articles),
         ('exeter-new-and-updated-vor-articles', exeter_new_and_updated_vor_articles),
         ('sitemap', sitemap_report),
+        ('ebsco-new-and-updated-vor-articles', ebsco_new_and_updated_vor_articles),
     ])
 
 def _report_meta(reportfn):

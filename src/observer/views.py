@@ -180,8 +180,9 @@ def report(request, name, format_hint=None):
             # link to the webpage the feed belongs to.
             'self-link': "https://observer.elifesciences.org" + reverse('report', kwargs={'name': name}),
 
+            # lsh@2021-06-25: pushed into the modules themselves.
             # per-row value formatter for the requested report format (if any)
-            'row-formatter': reportfn.meta.get('row_formatters', {}).get(rargs['format'])
+            # 'row-formatter': reportfn.meta.get('row_formatters', {}).get(rargs['format'])
         }
         return reports.format_report(report_paginated, rargs['format'], context)
 

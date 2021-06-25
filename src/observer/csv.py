@@ -77,6 +77,11 @@ def format_report(report, context):
     }
     formatterfn = partial(formatters[type(peek)], headers=headers)
 
+    report_formatterfn = report.get('row_formatters', {}).get('CSV')
+
+    if report_formatterfn:
+        formatterfn = lambda row: format_list(report_formatterfn(row), headers=headers)
+
     rows = map(formatterfn, items_qs) # still lazy
     headers = headers or formatterfn(peek).keys()
     filename = report['title'].replace(' ', '-').lower()
