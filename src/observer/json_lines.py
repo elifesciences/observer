@@ -22,7 +22,7 @@ def format_report(report, context):
     #headers = headers or formatterfn(peek).keys()
 
     headers = report.get('headers')
-    row_formatter = context.get('row-formatter')
+    row_formatter = report.get('row_formatters', {}).get('JSON')
 
     def format_row(row):
         if row_formatter:

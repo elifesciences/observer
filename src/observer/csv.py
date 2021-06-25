@@ -77,10 +77,10 @@ def format_report(report, context):
     }
     formatterfn = partial(formatters[type(peek)], headers=headers)
 
-    custom_formatterfn = context.get('row-formatter')
+    report_formatterfn = report.get('row_formatters', {}).get('CSV')
 
-    if custom_formatterfn:
-        formatterfn = lambda row: format_list(custom_formatterfn(row), headers=headers)
+    if report_formatterfn:
+        formatterfn = lambda row: format_list(report_formatterfn(row), headers=headers)
 
     rows = map(formatterfn, items_qs) # still lazy
     headers = headers or formatterfn(peek).keys()
