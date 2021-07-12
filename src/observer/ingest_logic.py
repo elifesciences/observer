@@ -388,7 +388,9 @@ def _download_versions(msid, latest_version):
 def download_article_versions(msid):
     "loads *all* versions of a given article `msid`"
     resp = consume.consume("articles/%s/versions" % msid)
-    _download_versions(msid, len(resp["versions"]))
+    # exclude preprints from article history
+    versions = [v for v in resp["versions"] if v.get("status") != "preprint"]
+    _download_versions(msid, len(versions))
 
 def download_all_article_versions():
     "loads *all* versions of *all* articles"

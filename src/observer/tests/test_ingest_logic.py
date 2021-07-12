@@ -124,6 +124,20 @@ class Article(base.BaseCase):
         expected_id = '3'
         models.RawJSON.objects.get(msid=expected_id)
 
+    def test_preprints_excluded_from_ingests(self):
+        """preprints are now included in the list of versions of an article in the article history API endpoint.
+        these should be excluded from determining the version range."""
+        resp = {"versions": [{"status": "preprint"},
+                             {"totally": "an article version", "version": 1},
+                             {"also-totally": "another article version", "version": 2}]}
+        with patch('observer.consume.consume', return_value=resp):
+            with patch('observer.ingest_logic._download_versions') as mock:
+                ingest_logic.download_article_versions(12345)
+                expected_msid = 12345
+                expected_num_versions = 2
+                mock.assert_called_with(expected_msid, expected_num_versions)
+
+
 #
 #
 #
