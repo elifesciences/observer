@@ -389,13 +389,16 @@ def ebsco_new_and_updated_vor_articles_json_row_formatter(article_obj):
     # has to match headers
     field_list = [
         'doi',
-        'datetime_published', 'datetime_version_published', 'datetime_vor_published',
+        # v1
+        #'datetime_published', 'datetime_version_published', 'datetime_vor_published',
+        # v2
+        'datetime_published',
         'title', 'type'
     ]
     row = [getattr(article_obj, field) for field in field_list] + [article_obj.get_pdf_url()]
-    row[1] = datetime.date(row[1])
-    row[2] = datetime.date(row[2])
-    row[3] = datetime.date(row[3])
+    row[1] = datetime.date(row[1]) # datetime_published
+    # row[2] = datetime.date(row[2]) # datetime_version_published
+    # row[3] = datetime.date(row[3]) # datetime_vor_published
 
     return row
 
@@ -406,11 +409,17 @@ def ebsco_new_and_updated_vor_articles_json_row_formatter(article_obj):
     row_formatters={JSON: ebsco_new_and_updated_vor_articles_json_row_formatter,
                     CSV: ebsco_new_and_updated_vor_articles_json_row_formatter
                     },
-    order_by='datetime_version_published',
+    order_by='datetime_published',
     order=DESC,
+    # v1
+    # headers=['doi',
+    #         'first-published-date', 'latest-published-date', 'first-vor-published-date',
+    #         'article-title', 'article-type', 'article-pdf-url'],
+    # v2
     headers=['doi',
-             'first-published-date', 'latest-published-date', 'first-vor-published-date',
+             'first-published-date',
              'article-title', 'article-type', 'article-pdf-url'],
+
 ))
 def ebsco_new_and_updated_vor_articles():
     """
@@ -418,9 +427,12 @@ def ebsco_new_and_updated_vor_articles():
     * returns articles that have at least one VOR version
     * ordered by the date and time of the latest version published, most recent to least recent
     """
-    return models.Article.objects \
-        .filter(num_vor_versions__gte=1) \
-        .order_by('-datetime_version_published')
+    # v1
+    # return models.Article.objects \
+    #    .filter(num_vor_versions__gte=1) \
+    #    .order_by('-datetime_version_published')
+    # v2@2021-07-20
+    return models.Article.objects.order_by('-datetime_published')
 
 
 #
