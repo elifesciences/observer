@@ -403,19 +403,14 @@ def ebsco_new_and_updated_vor_articles_json_row_formatter(article_obj):
     return row
 
 @report(article_meta(
-    title="EBSCO, new and updated VOR articles",
-    description="All new and updated VOR articles ordered by their updated date, most recent VOR articles to least recent.",
+    title="EBSCO, new VOR articles",
+    description="All new VOR articles ordered by their  date, most recent VOR articles to least recent.",
     serialisations=[JSON, CSV],
     row_formatters={JSON: ebsco_new_and_updated_vor_articles_json_row_formatter,
                     CSV: ebsco_new_and_updated_vor_articles_json_row_formatter
                     },
-    order_by='datetime_published',
+    order_by='datetime_vor_published',
     order=DESC,
-    # v1
-    # headers=['doi',
-    #         'first-published-date', 'latest-published-date', 'first-vor-published-date',
-    #         'article-title', 'article-type', 'article-pdf-url'],
-    # v2
     headers=['doi',
              'first-published-date',
              'article-title', 'article-type', 'article-pdf-url'],
@@ -425,14 +420,11 @@ def ebsco_new_and_updated_vor_articles():
     """
     the new and updated VOR articles for Exeter report:
     * returns articles that have at least one VOR version
-    * ordered by the date and time of the latest version published, most recent to least recent
+    * ordered by the date and time of the first VOR version published, most recent to least recent
     """
-    # v1
-    # return models.Article.objects \
-    #    .filter(num_vor_versions__gte=1) \
-    #    .order_by('-datetime_version_published')
-    # v2@2021-07-20
-    return models.Article.objects.order_by('-datetime_published')
+    return models.Article.objects \
+        .filter(num_vor_versions__gte=1) \
+        .order_by('-datetime_vor_published')
 
 
 #
@@ -483,6 +475,7 @@ def _report_meta(reportfn):
         'datetime_published': 'date and time this article was _first_ published',
         # poa published will always be the same as first published
         'datetime_poa_published': 'date and time this article was _first_ published',
+        'datetime_vor_published': 'date and time the VOR of this article was published',
         'datetime_version_published': 'date and time this _version_ of the article was published',
         'msid': 'eLife manuscript ID',
         'day': 'year, month and day',
