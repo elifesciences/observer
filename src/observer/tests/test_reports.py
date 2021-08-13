@@ -1,6 +1,7 @@
 """testing of logic specific to reports.py, not individual reports themselves.
 See `test_views.py` for tests that cover *all* reports and *all* of their supported serialisations."""
-
+import json
+import pytest
 import copy
 from .base import BaseCase
 from observer import reports, ingest_logic, models, utils
@@ -142,3 +143,51 @@ class ProfileCounts(BaseCase):
             (utils.ymd(yesterday), 1), # least recent
         ]
         self.assertEqual(expected, results)
+
+@pytest.mark.django_db
+@pytest.mark.freeze_time('2021-08-13')
+def test_ebsco_report():
+    fixtures = [
+        # vor 1
+        {'msid': 123,
+         'doi': '10.7554/eLife.00123',
+         'num_vor_versions': 1,
+         'datetime_published': todt('2001-01-01'),
+         'datetime_poa_published': todt('2001-01-01'),
+         'datetime_vor_published': todt('2001-01-02')},
+
+        # vor 2
+        {'msid': 456,
+         'doi': '10.7554/eLife.00456',
+         'num_vor_versions': 2,
+         'datetime_published': todt('2001-01-02'),
+         'datetime_poa_published': None,
+         'datetime_vor_published': todt('2001-02-04')},
+
+        # poa, excluded, is poa
+        {'msid': 789,
+         'doi': '10.7554/eLife.00789',
+         'num_vor_versions': 0,
+         'datetime_published': todt('2001-03-05'),
+         'datetime_poa_published': todt('2001-03-05')},
+
+        # vor 3, excluded, outside period
+        {'msid': 234,
+         'doi': '10.7554/eLife.00234',
+         'num_vor_versions': 2,
+         'datetime_published': todt('2001-01-03'),
+         'datetime_poa_published': todt('2001-01-03'),
+         'datetime_vor_published': todt('2021-08-13')},
+    ]
+    for f in fixtures:
+        f['datetime_version_published'] = todt('1970-01-01') # doesn't affect report
+        utils.create_or_update(models.Article, f, ['msid'])
+
+    resp = Client().get(reverse('report', kwargs={'name': 'ebsco-new-and-updated-vor-articles'}))
+    report = [json.loads(row) for row in resp]
+
+    expected = [
+        {'doi': '10.7554/eLife.00456', 'first-published-date': '2001-01-02', 'first-vor-date': '2001-02-04', 'article-title': None, 'article-type': '', 'article-pdf-url': 'https://elifesciences.org/articles/00456.pdf'},
+        {'doi': '10.7554/eLife.00123', 'first-published-date': '2001-01-01', 'first-vor-date': '2001-01-02', 'article-title': None, 'article-type': '', 'article-pdf-url': 'https://elifesciences.org/articles/00123.pdf'},
+    ]
+    assert report == expected

@@ -6,6 +6,7 @@ import annoying.fields
 import datetime
 from django.db import migrations, models
 import django.db.models.deletion
+import pytz
 
 
 class Migration(migrations.Migration):
@@ -26,7 +27,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='article',
             name='datetime_record_created',
-            field=models.DateTimeField(auto_now_add=True, default=datetime.datetime(2017, 4, 24, 2, 56, 47, 243639)),
+            field=models.DateTimeField(auto_now_add=True, default=datetime.datetime(2017, 4, 24, 2, 56, 47, 243639, tzinfo=pytz.utc)),
             preserve_default=False,
         ),
         migrations.AddField(
