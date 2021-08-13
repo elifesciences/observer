@@ -183,7 +183,8 @@ def test_ebsco_report():
         f['datetime_version_published'] = todt('1970-01-01') # doesn't affect report
         utils.create_or_update(models.Article, f, ['msid'])
 
-    resp = Client().get(reverse('report', kwargs={'name': 'ebsco-new-and-updated-vor-articles'}))
+    resp = Client().get(reverse('report', kwargs={'name': 'ebsco-vor-articles'}))
+    assert resp.status_code == 200
     report = [json.loads(row) for row in resp]
 
     expected = [
