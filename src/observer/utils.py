@@ -111,6 +111,11 @@ def ymd(dt):
             return dt.strftime(formatstr)
         return todt(dt).strftime(formatstr)
 
+def utcnow():
+    "returns a UTC datetime stamp with a UTC timezone object attached"
+    # there is a datetime.utcnow(), but it doesn't attach a timezone object
+    return datetime.now(pytz.utc).replace(microsecond=0)
+
 def subdict(dt, ks):
     "returns a copy of the given dictionary `dt` with only the keys `ks` included"
     return {k: v for k, v in dt.items() if k in ks}

@@ -1,7 +1,7 @@
 import itertools
 import copy
 from . import models, rss, sitemap, csv, logic, json_lines
-from .utils import ensure, subdict
+from .utils import ensure, subdict, utcnow
 from functools import wraps
 from collections import OrderedDict
 from et3.utils import do_all_if_tuple as mapfn
@@ -9,7 +9,7 @@ from .logic import verified_subjects
 from slugify import slugify
 from django.db.models import Count
 from django.db.models.functions import TruncDay
-from datetime import datetime
+from datetime import datetime, timedelta
 from django.conf import settings
 from django.db import connection
 
@@ -389,17 +389,12 @@ def ebsco_new_and_updated_vor_articles_json_row_formatter(article_obj):
     # has to match headers
     field_list = [
         'doi',
-        # v1
-        #'datetime_published', 'datetime_version_published', 'datetime_vor_published',
-        # v2
-        'datetime_published',
+        'datetime_published', 'datetime_vor_published',
         'title', 'type'
     ]
     row = [getattr(article_obj, field) for field in field_list] + [article_obj.get_pdf_url()]
     row[1] = datetime.date(row[1]) # datetime_published
-    # row[2] = datetime.date(row[2]) # datetime_version_published
-    # row[3] = datetime.date(row[3]) # datetime_vor_published
-
+    row[2] = datetime.date(row[2]) # datetime_vor_published
     return row
 
 @report(article_meta(
@@ -412,9 +407,8 @@ def ebsco_new_and_updated_vor_articles_json_row_formatter(article_obj):
     order_by='datetime_vor_published',
     order=DESC,
     headers=['doi',
-             'first-published-date',
+             'first-published-date', 'first-vor-date',
              'article-title', 'article-type', 'article-pdf-url'],
-
 ))
 def ebsco_new_and_updated_vor_articles():
     """
@@ -422,10 +416,11 @@ def ebsco_new_and_updated_vor_articles():
     * returns articles that have at least one VOR version
     * ordered by the date and time of the first VOR version published, most recent to least recent
     """
+    one_day_ago = utcnow() - timedelta(days=1)
     return models.Article.objects \
         .filter(num_vor_versions__gte=1) \
+        .exclude(datetime_vor_published__gt=one_day_ago) \
         .order_by('-datetime_vor_published')
-
 
 #
 #
