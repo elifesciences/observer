@@ -15,7 +15,10 @@ et3 = "~=1.5"
 feedgen = "~=0.9"
 "kids.cache" = "==0.0.7"
 newrelic = "*"
-psycopg2 = "~=2.8"
+# psycopg2 doesn't use semver.
+# psycopg2 2.9.x isn't compatible with django 2.2:
+# https://github.com/psycopg/psycopg2/issues/1293
+psycopg2 = "==2.8.*"
 python-dateutil = "~=2.7"
 python-json-logger = "~=0.1"
 python-slugify = "~=1.2"
