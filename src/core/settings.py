@@ -122,6 +122,7 @@ CONN_MAX_AGE = 0 # 0 = no pooling
 API_URL = cfg('general.api-url')
 EVENT_QUEUE = cfg('sqs.queue-name', None) # ll: observer--ci, observer--prod, observer--2017-04-282
 FEEDLY_GA_MEASUREMENT_ID = cfg('general.feedly-ga-measurement-id', None) or 'G-xxxxxxxxxx'
+SECONDS_BETWEEN_REQUESTS = 0.2 # 200ms
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/

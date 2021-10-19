@@ -1,3 +1,4 @@
+import time
 import backoff, requests, requests_cache
 from . import utils, models
 from slugify import slugify
@@ -146,6 +147,9 @@ def all_items(endpoint, idfn=None, **kwargs):
         if len(accumulator) >= accumulate:
             upsert_all(content_type, accumulator, idfn)
             accumulator = []
+
+        # pause between requests to prevent flooding
+        time.sleep(settings.SECONDS_BETWEEN_REQUESTS)
 
     # handle any leftovers
     if accumulator:

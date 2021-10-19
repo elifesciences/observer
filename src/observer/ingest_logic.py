@@ -1,4 +1,4 @@
-import os, math, json
+import os, math, json, time
 from functools import partial
 from django.db import transaction
 from et3 import render
@@ -7,6 +7,7 @@ from . import utils, models, logic, consume
 from .utils import lmap, lfilter, create_or_update, delall, first, second, third, last, ensure, do_all_atomically
 import logging
 from requests.exceptions import RequestException
+from django.conf import settings
 
 LOG = logging.getLogger(__name__)
 
@@ -376,14 +377,15 @@ def mkidx():
             msid_ver_idx[snippet["id"]] = snippet["version"]
     return msid_ver_idx
 
+# todo: shift this to `consume.consume` somehow
 def _download_versions(msid, latest_version):
     "loads *all* versions of a given article `msid`"
     LOG.info('%s versions to fetch' % latest_version)
-    version_range = range(1, latest_version + 1)
-
-    def fetch(version):
-        upsert_json(msid, version, models.LAX_AJSON, consume.consume("articles/%s/versions/%s" % (msid, version)))
-    lmap(fetch, version_range)
+    for version in range(1, latest_version + 1):
+        article_json = consume.consume("articles/%s/versions/%s" % (msid, version))
+        upsert_json(msid, version, models.LAX_AJSON, article_json)
+        # pause between requests to prevent flooding
+        time.sleep(settings.SECONDS_BETWEEN_REQUESTS)
 
 def download_article_versions(msid):
     "loads *all* versions of a given article `msid`"
