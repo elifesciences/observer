@@ -6,7 +6,7 @@ from et3.extract import path as p
 from . import utils, models, logic, consume
 from .utils import lmap, lfilter, create_or_update, delall, first, second, third, last, ensure, do_all_atomically
 import logging
-import requests
+from requests.exceptions import RequestException
 
 LOG = logging.getLogger(__name__)
 
@@ -419,7 +419,7 @@ def download_article_metrics(msid):
     try:
         data = consume.consume("metrics/article/%s/summary" % msid)
         _upsert_metrics_ajson(data['items'][0]) # guaranteed to have either 1 result or 404
-    except requests.exceptions.RequestException as err:
+    except RequestException as err:
         LOG.error("failed to fetch page of summaries: %s", err)
 
 # def download_article_metrics(msid):
@@ -437,7 +437,7 @@ def download_all_article_metrics():
         try:
             resp = consume.consume("metrics/article/summary", {'page': page})
             results.extend(resp['items'])
-        except requests.exceptions.RequestException as err:
+        except RequestException as err:
             LOG.error("failed to fetch page of summaries: %s", err)
 
     with transaction.atomic():
@@ -736,7 +736,7 @@ def download_regenerate_article(msid):
         download_article_versions(msid)
         regenerate_article(msid)
 
-    except requests.exceptions.RequestException as err:
+    except RequestException as err:
         log = LOG.debug if err.response.status_code == 404 else LOG.error
         log("failed to fetch article %s: %s", msid, err) # probably an unpublished article.
 
@@ -753,7 +753,7 @@ def download_regenerate(content_type, content_id):
     try:
         download_item(content_type, content_id)
         regenerate_item(content_type, content_id)
-    except requests.exceptions.RequestException as err:
+    except RequestException as err:
         log = LOG.debug if err.response.status_code == 404 else LOG.error
         log("failed to fetch %r %s: %s", content_type, content_id, err) # "failed to fetch presspackage '1234': 404 Not Found"
     except BaseException:

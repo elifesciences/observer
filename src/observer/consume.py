@@ -24,8 +24,6 @@ if settings.DEBUG:
 def _giveup(err):
     "accepts the exception and returns a truthy value if the exception should not be retried"
     if err.response.status_code == 404:
-        # too noisy
-        #LOG.warn("object at %s not found, not re-attempting request", err)
         return True
 
 def _giving_up(details):
@@ -37,21 +35,24 @@ def _retrying(details):
 @backoff.on_exception(
     backoff.expo,
     requests.exceptions.RequestException,
-    max_tries=5,
+    max_tries=10,
     giveup=_giveup,
     on_backoff=_retrying,
-    on_giveup=_giving_up)
+    on_giveup=_giving_up,
+    max_time=300 # seconds, 5mins
+)
 def requests_get(*args, **kwargs):
     "requests.get wrapper that handles attempts to re-try a request on error EXCEPT on 404 responses"
     resp = requests.get(*args, **kwargs)
     resp.raise_for_status()
     return resp
 
-def consume(endpoint, usrparams={}):
-    params = {'per-page': 100, 'page': 1}
-    params.update(usrparams)
+def consume(endpoint, user_params={}):
+    params = {'headers': {}, 'per-page': 100, 'page': 1}
+    params.update(user_params)
     url = settings.API_URL + "/" + endpoint.strip('/')
     LOG.info('fetching %s params %s' % (url, params))
+    params['headers']['User-Agent'] = 'observer/unreleased (https://github.com/elifesciences/observer)'
     return requests_get(url, params).json()
 
 #
