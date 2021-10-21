@@ -29,6 +29,7 @@ def poll(queue_obj):
         yield messages[0]
 
 def _handler(json_event):
+    "accepts a json string from a message object on the elife bus, parses it, downloads the content and updates the database."
 
     DONE = True
 
@@ -73,6 +74,8 @@ def _handler(json_event):
     return DONE
 
 def handler(message_obj):
+    """accepts a message object from the elife bus, sends it off for processing, and, if successful, deletes the message.
+    failure to successfully process the message will leave the message on the queue."""
     try:
         if _handler(message_obj.body):
             message_obj.delete()

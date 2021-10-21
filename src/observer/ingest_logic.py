@@ -365,12 +365,13 @@ def regenerate_all_articles():
 
 def mkidx():
     "downloads *all* article snippets to create an msid:version index"
+    # figures out how many pages to fetch by inspecting 'total' value in response.
     ini = consume.consume("articles", {'per-page': 1})
     per_page = 100.0
     num_pages = math.ceil(ini["total"] / per_page)
     msid_ver_idx = {} # ll: {09560: 1, ...}
     LOG.info("%s pages to fetch" % num_pages)
-    # for page in range(1, num_pages): # TODO: do we have an off-by-1 here?? shift this pagination into something generic
+    # TODO: shift this pagination into something generic
     for page in range(1, num_pages + 1):
         resp = consume.consume("articles", {'page': page})
         for snippet in resp["items"]:
