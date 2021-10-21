@@ -1,4 +1,4 @@
-import os, math, json
+import os, math, json, time
 from functools import partial
 from django.db import transaction
 from et3 import render
@@ -6,7 +6,8 @@ from et3.extract import path as p
 from . import utils, models, logic, consume
 from .utils import lmap, lfilter, create_or_update, delall, first, second, third, last, ensure, do_all_atomically
 import logging
-import requests
+from requests.exceptions import RequestException
+from django.conf import settings
 
 LOG = logging.getLogger(__name__)
 
@@ -364,26 +365,28 @@ def regenerate_all_articles():
 
 def mkidx():
     "downloads *all* article snippets to create an msid:version index"
+    # figures out how many pages to fetch by inspecting 'total' value in response.
     ini = consume.consume("articles", {'per-page': 1})
     per_page = 100.0
     num_pages = math.ceil(ini["total"] / per_page)
     msid_ver_idx = {} # ll: {09560: 1, ...}
     LOG.info("%s pages to fetch" % num_pages)
-    # for page in range(1, num_pages): # TODO: do we have an off-by-1 here?? shift this pagination into something generic
+    # TODO: shift this pagination into something generic
     for page in range(1, num_pages + 1):
         resp = consume.consume("articles", {'page': page})
         for snippet in resp["items"]:
             msid_ver_idx[snippet["id"]] = snippet["version"]
     return msid_ver_idx
 
+# todo: shift this to `consume.consume` somehow
 def _download_versions(msid, latest_version):
     "loads *all* versions of a given article `msid`"
     LOG.info('%s versions to fetch' % latest_version)
-    version_range = range(1, latest_version + 1)
-
-    def fetch(version):
-        upsert_json(msid, version, models.LAX_AJSON, consume.consume("articles/%s/versions/%s" % (msid, version)))
-    lmap(fetch, version_range)
+    for version in range(1, latest_version + 1):
+        article_json = consume.consume("articles/%s/versions/%s" % (msid, version))
+        upsert_json(msid, version, models.LAX_AJSON, article_json)
+        # pause between requests to prevent flooding
+        time.sleep(settings.SECONDS_BETWEEN_REQUESTS)
 
 def download_article_versions(msid):
     "loads *all* versions of a given article `msid`"
@@ -419,7 +422,7 @@ def download_article_metrics(msid):
     try:
         data = consume.consume("metrics/article/%s/summary" % msid)
         _upsert_metrics_ajson(data['items'][0]) # guaranteed to have either 1 result or 404
-    except requests.exceptions.RequestException as err:
+    except RequestException as err:
         LOG.error("failed to fetch page of summaries: %s", err)
 
 # def download_article_metrics(msid):
@@ -437,7 +440,7 @@ def download_all_article_metrics():
         try:
             resp = consume.consume("metrics/article/summary", {'page': page})
             results.extend(resp['items'])
-        except requests.exceptions.RequestException as err:
+        except RequestException as err:
             LOG.error("failed to fetch page of summaries: %s", err)
 
     with transaction.atomic():
@@ -736,7 +739,7 @@ def download_regenerate_article(msid):
         download_article_versions(msid)
         regenerate_article(msid)
 
-    except requests.exceptions.RequestException as err:
+    except RequestException as err:
         log = LOG.debug if err.response.status_code == 404 else LOG.error
         log("failed to fetch article %s: %s", msid, err) # probably an unpublished article.
 
@@ -753,7 +756,7 @@ def download_regenerate(content_type, content_id):
     try:
         download_item(content_type, content_id)
         regenerate_item(content_type, content_id)
-    except requests.exceptions.RequestException as err:
+    except RequestException as err:
         log = LOG.debug if err.response.status_code == 404 else LOG.error
         log("failed to fetch %r %s: %s", content_type, content_id, err) # "failed to fetch presspackage '1234': 404 Not Found"
     except BaseException:

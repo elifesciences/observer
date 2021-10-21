@@ -1,6 +1,6 @@
 import json
 from .base import BaseCase
-from unittest.mock import patch
+from unittest.mock import patch, Mock
 from observer import inc, models, ingest_logic
 
 class One(BaseCase):
@@ -13,7 +13,8 @@ class One(BaseCase):
         self.assertEqual(1, models.RawJSON.objects.count()) # fixture
 
         # simulate receiving an event
-        dummy_event = json.dumps({'type': 'article', 'id': str(msid)})
+        dummy_event = Mock()
+        dummy_event.body = json.dumps({'type': 'article', 'id': str(msid)})
         with patch('observer.ingest_logic.download_article_versions'): # prevent downloading other versions
             inc.handler(dummy_event)
 
@@ -23,7 +24,8 @@ class One(BaseCase):
 
 def test_handling_unhandled_event():
     "unhandled events should issue a warning"
-    dummy_event = json.dumps({'type': 'pants', 'id': 'party'})
+    dummy_event = Mock()
+    dummy_event.body = json.dumps({'type': 'pants', 'id': 'party'})
     with patch('observer.inc.LOG') as mock_logger:
         inc.handler(dummy_event)
         assert mock_logger.warn.called
@@ -33,6 +35,9 @@ def test_handling_malformed_json():
     bad_event = 'foo'
     with patch('observer.inc.LOG') as mock_logger:
         inc.handler(bad_event)
+        assert mock_logger.exception.called
+
+        inc._handler(bad_event)
         assert mock_logger.error.called
 
 def test_handling_unexpected_error():

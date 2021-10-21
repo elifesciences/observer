@@ -18,6 +18,7 @@ class Command(BaseCommand):
 
         handler = inc.handler
 
+        # todo: remove the try/except. newrelic is always included with observer these days.
         try:
             import newrelic.agent
             handler = newrelic.agent.background_task()(handler)
