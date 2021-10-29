@@ -5,10 +5,17 @@ from unittest import mock
 from observer import consume, models
 
 def test_consume():
-    expected = {'omg': 'pants'}
-    mock_request = mock.MagicMock(json=lambda: expected)
-    with mock.patch('requests.get', return_value=mock_request):
-        assert expected == consume.consume("whatever")
+    expected_params = {'per-page': 100, 'page': 1}
+    expected_headers = {'headers': {'user-agent': 'observer/unreleased (https://github.com/elifesciences/observer)'}}
+    expected_result = {'omg': 'pants'}
+    mock_request = mock.MagicMock(json=lambda: expected_result)
+    with mock.patch('requests.get', return_value=mock_request) as mockobj:
+        assert expected_result == consume.consume("whatever")
+        actual_params, actual_headers = mockobj.call_args
+        actual_params = actual_params[1]
+
+        assert actual_params == expected_params
+        assert actual_headers == expected_headers
 
 def test_content_type_from_endpoint():
     """given a request, the content-type identifier is correctly generated.
