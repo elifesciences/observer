@@ -44,16 +44,18 @@ def _retrying(details):
 )
 def requests_get(*args, **kwargs):
     "requests.get wrapper that handles attempts to re-try a request on error EXCEPT on 404 responses"
+    headers = kwargs.pop('headers', {})
+    headers['user-agent'] = 'observer/unreleased (https://github.com/elifesciences/observer)'
+    kwargs['headers'] = headers
     resp = requests.get(*args, **kwargs)
     resp.raise_for_status()
     return resp
 
 def consume(endpoint, user_params={}):
-    params = {'headers': {}, 'per-page': 100, 'page': 1}
+    params = {'per-page': 100, 'page': 1}
     params.update(user_params)
     url = settings.API_URL + "/" + endpoint.strip('/')
     LOG.info('fetching %s params %s' % (url, params))
-    params['headers']['User-Agent'] = 'observer/unreleased (https://github.com/elifesciences/observer)'
     return requests_get(url, params).json()
 
 #
