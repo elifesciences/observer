@@ -52,17 +52,18 @@ def _handler(json_event):
     # map all supported types here and comment them out as necessary
     event_type_to_content_type = {
         'article': models.LAX_AJSON,
-        # 'profile': ... pulled in via daily cronjob. see `./daily.sh`
-        # 'metrics': ... also pulled in via daily cronjob
         'presspackage': models.PRESSPACKAGE,
-        'digest': models.DIGEST,
         'labs-post': models.LABS_POST,
-        'interview': models.INTERVIEW,
-        'collection': models.COLLECTION,
-        'blog-article': models.BLOG_ARTICLE,
-        # handled by 'article' I suppose?
-        # if so, it won't update the Content table. ensure 'community' is in ./daily.sh
-        # 'feature': ...
+        'digest': models.DIGEST,
+        # pulled in via daily cronjob, see ./daily.sh
+        # 'profile': ... 
+        # 'metrics': ... 
+        # 'community' content, also pulled in daily via cronjob
+        #'interview': models.INTERVIEW,
+        #'collection': models.COLLECTION,
+        #'blog-article': models.BLOG_ARTICLE,
+        #'feature': ...
+        #'editorial': ...
     }
     if event_type not in event_type_to_content_type:
         LOG.warn("sinking event for unhandled type: %s", event_type)
