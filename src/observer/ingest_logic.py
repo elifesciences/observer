@@ -723,27 +723,36 @@ def download_all(content_type):
 #
 
 def delete_item(content_type, content_type_id):
+    "deletes an item from the correct database table and it's raw json, if either exist."
     if not content_type or not content_type_id:
         LOG.error("cannot delete %r with id %r: both values are required" % (content_type, content_type_id))
         return
     if content_type not in content_descriptions:
         LOG.error("cannot delete %r, unknown content type. supported content_types: %s" % (content_type, ", ".join(content_descriptions.keys())))
         return
-    if content_type_id == models.LAX_AJSON:
-        # we don't delete articles (yet)
-        LOG.error("refusing to delete article %r, articles must be deleted manually." % (content_type_id,))
+
+    prohibited_list = [models.LAX_AJSON]
+    if content_type_id in prohibited_list:
+        LOG.error("refusing to delete %r with id %r, these items must be deleted manually." % (content_type, content_type_id,))
         return
+
     desc = content_descriptions[content_type]
     model = desc['model']
     idfn = desc.get('idfn', utils.identity)
-    args = {'id': idfn(content_type_id)}
+    idval = idfn(content_type_id)
+
     try:
-        obj = model.objects.get(**args)
+        obj = model.objects.get(id=idval)
         obj.delete()
         LOG.info("deleted %r with id %r" % (content_type, content_type_id))
-        return
     except dj_models.ObjectDoesNotExist:
-        LOG.error("cannot delete %r with id %r: item not found in database" % (content_type, content_type_id))
+        LOG.warning("cannot delete %r with id %r: item not found in database" % (content_type, content_type_id))
+
+    try:
+        raw_json = models.RawJSON.objects.get(msid=idval, json_type=content_type)
+        raw_json.delete()
+    except models.RawJSON.DoesNotExist:
+        LOG.warning("cannot delete raw json for %r with id %r: item not found in database" % (content_type, content_type_id))
 
 #
 #
@@ -785,7 +794,7 @@ def download_regenerate(content_type, content_id):
         regenerate_item(content_type, content_id)
     except RequestException as err:
         if err.response.status_code == 404:
-            # item not found, delete it
+            # item not found. delete it, if it exists.
             delete_item(content_type, content_id)
         else:
             # "failed to fetch presspackage '1234': 502 Gateway timed out"

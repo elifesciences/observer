@@ -27,8 +27,3 @@ class BaseCase(TestCase):
 
     def freshen(self, obj):
         return type(obj).objects.get(pk=obj.pk)
-
-    def jsonfix(self, *bits):
-        bits = [self.fixture_dir] + list(bits)
-        path = os.path.join(*bits)
-        return json.load(open(path, 'r'))

@@ -55,7 +55,7 @@ def _handler(json_event):
         'presspackage': models.PRESSPACKAGE,
         'labs-post': models.LABS_POST,
         'digest': models.DIGEST,
-        'podcast-episode': models.PODCAST_EPISODE,
+        'podcast-episode': models.PODCAST,
         'collection': models.COLLECTION,
         'interview': models.INTERVIEW,
         'blog-article': models.BLOG_ARTICLE,

@@ -1,1 +1,800 @@
-{"id":"80db56f5","title":"Living Science","published":"2019-05-24T09:14:03Z","image":{"banner":{"uri":"https:\/\/iiif.elifesciences.org\/journal-cms\/collection%2F2019-05%2Fliving_science_essays_by_eve_marder_detail_two.png","alt":"","source":{"mediaType":"image\/jpeg","uri":"https:\/\/iiif.elifesciences.org\/journal-cms\/collection%2F2019-05%2Fliving_science_essays_by_eve_marder_detail_two.png\/full\/full\/0\/default.jpg","filename":"living_science_essays_by_eve_marder_detail_two.jpg"},"size":{"width":1855,"height":906},"focalPoint":{"x":86,"y":80},"attribution":["BEN MARDER"]},"thumbnail":{"uri":"https:\/\/iiif.elifesciences.org\/journal-cms\/collection%2F2019-05%2Fliving_science_essays_by_eve_marder_detail_two.png","alt":"","source":{"mediaType":"image\/jpeg","uri":"https:\/\/iiif.elifesciences.org\/journal-cms\/collection%2F2019-05%2Fliving_science_essays_by_eve_marder_detail_two.png\/full\/full\/0\/default.jpg","filename":"living_science_essays_by_eve_marder_detail_two.jpg"},"size":{"width":1855,"height":906},"focalPoint":{"x":86,"y":80},"attribution":["BEN MARDER"]}},"impactStatement":"Essays on the human side of science by Eve Marder.","selectedCurator":{"id":"81dd36b6","type":{"id":"leadership","label":"Brandeis University"},"name":{"surname":"Marder","givenNames":"Eve","preferred":"Eve Marder","index":"Marder, Eve"},"image":{"uri":"https:\/\/iiif.elifesciences.org\/journal-cms\/person%2F2012-03%2Fem03.jpg","alt":"Eve Marder","source":{"mediaType":"image\/jpeg","uri":"https:\/\/iiif.elifesciences.org\/journal-cms\/person%2F2012-03%2Fem03.jpg\/full\/full\/0\/default.jpg","filename":"em03.jpg"},"size":{"width":3000,"height":2000},"focalPoint":{"x":50,"y":50}}},"curators":[{"id":"81dd36b6","type":{"id":"leadership","label":"Brandeis University"},"name":{"surname":"Marder","givenNames":"Eve","preferred":"Eve Marder","index":"Marder, Eve"},"image":{"uri":"https:\/\/iiif.elifesciences.org\/journal-cms\/person%2F2012-03%2Fem03.jpg","alt":"Eve Marder","source":{"mediaType":"image\/jpeg","uri":"https:\/\/iiif.elifesciences.org\/journal-cms\/person%2F2012-03%2Fem03.jpg\/full\/full\/0\/default.jpg","filename":"em03.jpg"},"size":{"width":3000,"height":2000},"focalPoint":{"x":50,"y":50}}}],"summary":[{"type":"paragraph","text":"Eve Marder wrote her first Living Science essay for eLife in 2012. Since then she has written about topics as diverse as the importance of clear writing, the benefits of living and working in a foreign country, and why we should \u0022own our mistakes\u0022. This collection brings together all of Marder\u0027s Living Science essays. Before the launch of eLife, Marder wrote a number of \u003Ca href=\u0022https:\/\/www.sciencedirect.com\/search\/advanced?pub=Current%20Biology\u0026amp;cid=272099\u0026amp;authors=marder\u0026amp;show=25\u0026amp;sortBy=relevance\u0026amp;lastSelectedFacet=articleTypes\u0026amp;articleTypes=SSU%2CDIS%2COT\u0022\u003EMy Word articles for Current Biology\u003C\/a\u003E."}],"content":[{"id":"76242","doi":"10.7554\/eLife.76242","pdf":"https:\/\/cdn.elifesciences.org\/articles\/76242\/elife-76242-v1.pdf","type":"feature","stage":"published","title":"Authorship then and now","status":"vor","volume":11,"version":1,"copyright":{"holder":"Marder","license":"CC-BY-4.0","statement":"This article is distributed under the terms of the \u003Ca href=\u0022http:\/\/creativecommons.org\/licenses\/by\/4.0\/\u0022\u003ECreative Commons Attribution License\u003C\/a\u003E, which permits unrestricted use and redistribution provided that the original author and source are credited."},"published":"2022-01-18T00:00:00Z","authorLine":"Eve Marder","statusDate":"2022-01-18T00:00:00Z","elocationId":"e76242","titlePrefix":"Living Science","versionDate":"2022-01-18T00:00:00Z","impactStatement":"A researcher should only be an author on a paper if they have contributed to it in a substantive way."},{"id":"66850","doi":"10.7554\/eLife.66850","pdf":"https:\/\/cdn.elifesciences.org\/articles\/66850\/elife-66850-v1.pdf","type":"feature","stage":"published","title":"Truth even unto its innermost parts","status":"vor","volume":10,"version":1,"copyright":{"holder":"Marder","license":"CC-BY-4.0","statement":"This article is distributed under the terms of the \u003Ca href=\u0022http:\/\/creativecommons.org\/licenses\/by\/4.0\/\u0022\u003ECreative Commons Attribution License\u003C\/a\u003E, which permits unrestricted use and redistribution provided that the original author and source are credited."},"published":"2021-03-05T00:00:00Z","authorLine":"Eve Marder","statusDate":"2021-03-05T00:00:00Z","elocationId":"e66850","titlePrefix":"Living Science","versionDate":"2021-03-05T00:00:00Z","impactStatement":"Challenging anyone who spreads falsehoods is an important part of respecting the truth in both science and the wider world."},{"id":"60703","doi":"10.7554\/eLife.60703","pdf":"https:\/\/cdn.elifesciences.org\/articles\/60703\/elife-60703-v1.pdf","type":"feature","image":{"thumbnail":{"alt":"Illustration of a hand and jigsaw puzzle","uri":"https:\/\/iiif.elifesciences.org\/journal-cms\/article%2F2020-08%2Fscreen-shot-2020-08-26-at-17.05.29.png","size":{"width":913,"height":637},"source":{"uri":"https:\/\/iiif.elifesciences.org\/journal-cms\/article%2F2020-08%2Fscreen-shot-2020-08-26-at-17.05.29.png\/full\/full\/0\/default.jpg","filename":"screen-shot-2020-08-26-at-17.05.29.jpg","mediaType":"image\/jpeg"}}},"stage":"published","title":"Theoretical musings","status":"vor","volume":9,"version":1,"subjects":[{"id":"neuroscience","name":"Neuroscience"}],"copyright":{"holder":"Marder","license":"CC-BY-4.0","statement":"This article is distributed under the terms of the \u003Ca href=\u0022http:\/\/creativecommons.org\/licenses\/by\/4.0\/\u0022\u003ECreative Commons Attribution License\u003C\/a\u003E, which permits unrestricted use and redistribution provided that the original author and source are credited."},"published":"2020-08-26T00:00:00Z","authorLine":"Eve Marder","statusDate":"2020-08-26T00:00:00Z","elocationId":"e60703","titlePrefix":"Living Science","versionDate":"2020-08-26T00:00:00Z","impactStatement":"The best theory papers help experimentalists to identify which of their results might be general and to plan a path through the maze of all possible future experiments."},{"id":"58965","doi":"10.7554\/eLife.58965","pdf":"https:\/\/cdn.elifesciences.org\/articles\/58965\/elife-58965-v1.pdf","type":"feature","image":{"thumbnail":{"alt":"","uri":"https:\/\/iiif.elifesciences.org\/journal-cms\/article%2F2020-07%2Fscreen-shot-2020-07-15-at-17.09.50.png","size":{"width":669,"height":441},"source":{"uri":"https:\/\/iiif.elifesciences.org\/journal-cms\/article%2F2020-07%2Fscreen-shot-2020-07-15-at-17.09.50.png\/full\/full\/0\/default.jpg","filename":"screen-shot-2020-07-15-at-17.09.50.jpg","mediaType":"image\/jpeg"}}},"stage":"published","title":"Intentional text","status":"vor","volume":9,"version":1,"copyright":{"holder":"Marder","license":"CC-BY-4.0","statement":"This article is distributed under the terms of the \u003Ca href=\u0022http:\/\/creativecommons.org\/licenses\/by\/4.0\/\u0022\u003ECreative Commons Attribution License\u003C\/a\u003E, which permits unrestricted use and redistribution provided that the original author and source are credited."},"published":"2020-06-22T00:00:00Z","authorLine":"Eve Marder","statusDate":"2020-06-22T00:00:00Z","elocationId":"e58965","titlePrefix":"Living Science","versionDate":"2020-06-22T00:00:00Z","impactStatement":"It is important to read what the authors have written and to pay attention to every word when you write."},{"id":"54867","doi":"10.7554\/eLife.54867","pdf":"https:\/\/cdn.elifesciences.org\/articles\/54867\/elife-54867-v1.pdf","type":"feature","stage":"published","title":"Words without meaning","status":"vor","volume":9,"version":1,"copyright":{"holder":"Marder","license":"CC-BY-4.0","statement":"This article is distributed under the terms of the \u003Ca href=\u0022http:\/\/creativecommons.org\/licenses\/by\/4.0\/\u0022\u003ECreative Commons Attribution License\u003C\/a\u003E, which permits unrestricted use and redistribution provided that the original author and source are credited."},"published":"2020-02-21T00:00:00Z","authorLine":"Eve Marder","statusDate":"2020-02-21T00:00:00Z","elocationId":"e54867","titlePrefix":"Living Science","versionDate":"2020-02-21T00:00:00Z","impactStatement":"Many of the words used by scientists when reviewing manuscripts, job candidates and grant applications \u2013 words such as incremental, novelty, mechanism, descriptive and impact \u2013 have lost their meaning."},{"id":"54265","doi":"10.7554\/eLife.54265","pdf":"https:\/\/cdn.elifesciences.org\/articles\/54265\/elife-54265-v1.pdf","type":"feature","stage":"published","title":"Stepping down","status":"vor","volume":9,"version":1,"copyright":{"holder":"Marder","license":"CC-BY-4.0","statement":"This article is distributed under the terms of the \u003Ca href=\u0022http:\/\/creativecommons.org\/licenses\/by\/4.0\/\u0022\u003ECreative Commons Attribution License\u003C\/a\u003E, which permits unrestricted use and redistribution provided that the original author and source are credited."},"published":"2020-01-14T00:00:00Z","authorLine":"Eve Marder","statusDate":"2020-01-14T00:00:00Z","elocationId":"e54265","titlePrefix":"Living Science","versionDate":"2020-01-14T00:00:00Z","impactStatement":"As Eve Marder stands down as a Deputy Editor of \u003Ci\u003EeLife\u003C\/i\u003E, she reflects on the need for journals to change and respond to their environment."},{"id":"52669","doi":"10.7554\/eLife.52669","pdf":"https:\/\/cdn.elifesciences.org\/articles\/52669\/elife-52669-v1.pdf","type":"feature","stage":"published","title":"Watching jellyfish","status":"vor","volume":8,"version":1,"copyright":{"holder":"Marder","license":"CC-BY-4.0","statement":"This article is distributed under the terms of the \u003Ca href=\u0022http:\/\/creativecommons.org\/licenses\/by\/4.0\/\u0022\u003ECreative Commons Attribution License\u003C\/a\u003E, which permits unrestricted use and redistribution provided that the original author and source are credited."},"published":"2019-10-25T00:00:00Z","authorLine":"Eve Marder","statusDate":"2019-10-25T00:00:00Z","elocationId":"e52669","titlePrefix":"Living Science","versionDate":"2019-10-25T00:00:00Z","impactStatement":"The natural world is more complex, and also more fragile, than it appears."},{"id":"45734","doi":"10.7554\/eLife.45734","pdf":"https:\/\/cdn.elifesciences.org\/articles\/45734\/elife-45734-v1.pdf","type":"feature","stage":"published","title":"Love writing","status":"vor","volume":8,"version":1,"copyright":{"holder":"Marder","license":"CC-BY-4.0","statement":"This article is distributed under the terms of the \u003Ca href=\u0022http:\/\/creativecommons.org\/licenses\/by\/4.0\/\u0022\u003ECreative Commons Attribution License\u003C\/a\u003E, which permits unrestricted use and redistribution provided that the original author and source are credited."},"published":"2019-03-07T00:00:00Z","authorLine":"Eve Marder","statusDate":"2019-03-07T00:00:00Z","elocationId":"e45734","titlePrefix":"Living Science","versionDate":"2019-03-07T00:00:00Z","impactStatement":"Clear writing is the key to success in science."},{"id":"44441","doi":"10.7554\/eLife.44441","pdf":"https:\/\/cdn.elifesciences.org\/articles\/44441\/elife-44441-v1.pdf","type":"feature","stage":"published","title":"Uniting the nations of science","status":"vor","volume":7,"version":1,"copyright":{"holder":"Marder","license":"CC-BY-4.0","statement":"This article is distributed under the terms of the \u003Ca href=\u0022http:\/\/creativecommons.org\/licenses\/by\/4.0\/\u0022\u003ECreative Commons Attribution License\u003C\/a\u003E, which permits unrestricted use and redistribution provided that the original author and source are credited."},"published":"2018-12-20T00:00:00Z","authorLine":"Eve Marder","statusDate":"2018-12-20T00:00:00Z","elocationId":"e44441","titlePrefix":"Living Science","versionDate":"2018-12-20T00:00:00Z","impactStatement":"As the world becomes smaller and more uniform, it is important to remember that creativity in science can happen anywhere."},{"id":"39915","doi":"10.7554\/eLife.39915","pdf":"https:\/\/cdn.elifesciences.org\/articles\/39915\/elife-39915-v1.pdf","type":"feature","stage":"published","title":"The voice of evidence","status":"vor","volume":7,"version":1,"copyright":{"holder":"Marder","license":"CC-BY-4.0","statement":"This article is distributed under the terms of the \u003Ca href=\u0022http:\/\/creativecommons.org\/licenses\/by\/4.0\/\u0022\u003ECreative Commons Attribution License\u003C\/a\u003E, which permits unrestricted use and redistribution provided that the original author and source are credited."},"published":"2018-07-11T00:00:00Z","authorLine":"Eve Marder","statusDate":"2018-07-11T00:00:00Z","elocationId":"e39915","titlePrefix":"Living Science","versionDate":"2018-07-11T00:00:00Z","impactStatement":"In an era in which evidence is being disregarded, scientists need to speak up in support of the pursuit for truth."},{"id":"30599","doi":"10.7554\/eLife.30599","pdf":"https:\/\/cdn.elifesciences.org\/articles\/30599\/elife-30599-v1.pdf","type":"feature","stage":"published","title":"The importance of remembering","status":"vor","volume":6,"version":1,"copyright":{"holder":"Marder","license":"CC-BY-4.0","statement":"This article is distributed under the terms of the \u003Ca href=\u0022http:\/\/creativecommons.org\/licenses\/by\/4.0\/\u0022\u003ECreative Commons Attribution License\u003C\/a\u003E, which permits unrestricted use and redistribution provided that the original author and source are credited."},"published":"2017-08-14T00:00:00Z","authorLine":"Eve Marder","statusDate":"2017-08-14T00:00:00Z","elocationId":"e30599","titlePrefix":"Living Science","versionDate":"2017-08-14T00:00:00Z","impactStatement":"Creativity in science requires the ability to recall information and data, and will suffer if we rely too much on technology to remember things for us."},{"id":"16846","doi":"10.7554\/eLife.16846","pdf":"https:\/\/cdn.elifesciences.org\/articles\/16846\/elife-16846-v1.pdf","type":"feature","stage":"published","title":"The rites of spring, Take 2","status":"vor","volume":5,"version":1,"copyright":{"holder":"Marder","license":"CC-BY-4.0","statement":"This article is distributed under the terms of the \u003Ca href=\u0022http:\/\/creativecommons.org\/licenses\/by\/4.0\/\u0022\u003ECreative Commons Attribution License\u003C\/a\u003E, which permits unrestricted use and redistribution provided that the original author and source are credited."},"published":"2016-05-18T00:00:00Z","authorLine":"Eve Marder","statusDate":"2016-05-18T00:00:00Z","elocationId":"e16846","titlePrefix":"Living Science","versionDate":"2016-05-18T00:00:00Z","impactStatement":"Recruiting PhD students can be a frustrating process, but Eve Marder looks forward to welcoming the latest crop in the autumn."},{"id":"11628","doi":"10.7554\/eLife.11628","pdf":"https:\/\/cdn.elifesciences.org\/articles\/11628\/elife-11628-v1.pdf","type":"feature","stage":"published","title":"Owning your mistakes","status":"vor","volume":4,"version":1,"copyright":{"holder":"Marder","license":"CC-BY-4.0","statement":"This article is distributed under the terms of the \u003Ca href=\u0022http:\/\/creativecommons.org\/licenses\/by\/4.0\/\u0022\u003ECreative Commons Attribution License\u003C\/a\u003E, which permits unrestricted use and redistribution provided that the original author and source are credited."},"published":"2015-10-22T00:00:00Z","authorLine":"Eve Marder","statusDate":"2015-10-22T00:00:00Z","elocationId":"e11628","titlePrefix":"Living Science","versionDate":"2015-10-22T00:00:00Z","impactStatement":"Most scientists admit to their errors but, as Eve Marder explains, the scientific community as a whole needs to rethink the way it recognizes achievement."},{"id":"06536","doi":"10.7554\/eLife.06536","pdf":"https:\/\/cdn.elifesciences.org\/articles\/06536\/elife-06536-v1.pdf","type":"feature","stage":"published","title":"Lost voices","status":"vor","volume":4,"version":1,"copyright":{"holder":"Marder","license":"CC-BY-4.0","statement":"This article is distributed under the terms of the \u003Ca href=\u0022http:\/\/creativecommons.org\/licenses\/by\/4.0\/\u0022\u003ECreative Commons Attribution License\u003C\/a\u003E, which permits unrestricted use and redistribution provided that the original author and source are credited."},"published":"2015-04-13T00:00:00Z","authorLine":"Eve Marder","statusDate":"2015-04-13T00:00:00Z","elocationId":"e06536","titlePrefix":"Living Science","versionDate":"2015-04-13T00:00:00Z","impactStatement":"When a scientist dies too early in their career we miss them as a colleague and as a person and, as Eve Marder explains, we also lose the science they would have done."},{"id":"05787","doi":"10.7554\/eLife.05787","pdf":"https:\/\/cdn.elifesciences.org\/articles\/05787\/elife-05787-v1.pdf","type":"feature","stage":"published","title":"Bars and medals","status":"vor","volume":4,"version":1,"copyright":{"holder":"Marder","license":"CC-BY-4.0","statement":"This article is distributed under the terms of the \u003Ca href=\u0022http:\/\/creativecommons.org\/licenses\/by\/4.0\/\u0022\u003ECreative Commons Attribution License\u003C\/a\u003E, which permits unrestricted use and redistribution provided that the original author and source are credited."},"published":"2015-02-17T00:00:00Z","authorLine":"Eve Marder","statusDate":"2015-02-17T00:00:00Z","elocationId":"e05787","titlePrefix":"Living Science","versionDate":"2015-02-17T00:00:00Z","impactStatement":"In science it is more important to recognize excellence in its many different forms than it is to identify a winner."},{"id":"04901","doi":"10.7554\/eLife.04901","pdf":"https:\/\/cdn.elifesciences.org\/articles\/04901\/elife-04901-v1.pdf","type":"feature","stage":"published","title":"Looking out for future scientists","status":"vor","volume":3,"version":1,"copyright":{"holder":"Marder","license":"CC-BY-4.0","statement":"This article is distributed under the terms of the \u003Ca href=\u0022http:\/\/creativecommons.org\/licenses\/by\/4.0\/\u0022\u003ECreative Commons Attribution License\u003C\/a\u003E, which permits unrestricted use and redistribution provided that the original author and source are credited."},"published":"2014-10-07T00:00:00Z","authorLine":"Eve Marder","statusDate":"2014-10-07T00:00:00Z","elocationId":"e04901","titlePrefix":"Living Science","versionDate":"2014-10-07T00:00:00Z","impactStatement":"Proposals to reduce the number of students who do PhDs are misguided because they would exclude young scientists with qualities that do not show up in exam results and interviews."},{"id":"02791","doi":"10.7554\/eLife.02791","pdf":"https:\/\/cdn.elifesciences.org\/articles\/02791\/elife-02791-v1.pdf","type":"feature","stage":"published","title":"In numbers we trust?","status":"vor","volume":3,"version":1,"copyright":{"holder":"Marder","license":"CC-BY-3.0","statement":"This article is distributed under the terms of the \u003Ca href=\u0022http:\/\/creativecommons.org\/licenses\/by\/3.0\/\u0022\u003ECreative Commons Attribution License\u003C\/a\u003E, which permits unrestricted use and redistribution provided that the original author and source are credited."},"published":"2014-04-01T00:00:00Z","authorLine":"Eve Marder","statusDate":"2014-04-01T00:00:00Z","elocationId":"e02791","titlePrefix":"Living Science","versionDate":"2014-04-01T00:00:00Z","impactStatement":"Scientists go to great lengths to ensure that data are collected and analysed properly, so why do they apply different standards to data about the number of times research papers have been cited and viewed?"},{"id":"01515","doi":"10.7554\/eLife.01515","pdf":"https:\/\/cdn.elifesciences.org\/articles\/01515\/elife-01515-v1.pdf","type":"feature","stage":"published","title":"The haves and the have nots","status":"vor","volume":2,"version":1,"copyright":{"holder":"Marder","license":"CC-BY-3.0","statement":"This article is distributed under the terms of the \u003Ca href=\u0022http:\/\/creativecommons.org\/licenses\/by\/3.0\/\u0022\u003ECreative Commons Attribution License\u003C\/a\u003E, which permits unrestricted use and redistribution provided that the original author and source are credited."},"published":"2013-11-19T00:00:00Z","authorLine":"Eve Marder","statusDate":"2013-11-19T00:00:00Z","elocationId":"e01515","titlePrefix":"Living Science","versionDate":"2013-11-19T00:00:00Z","impactStatement":"As the equipment needed to perform state-of-the-art research in many areas of biology becomes ever more expensive, Eve Marder worries that researchers in less wealthy institutions might be left behind."},{"id":"01140","doi":"10.7554\/eLife.01140","pdf":"https:\/\/cdn.elifesciences.org\/articles\/01140\/elife-01140-v1.pdf","type":"feature","stage":"published","title":"Grandmother elephants","status":"vor","volume":2,"version":1,"copyright":{"holder":"Marder","license":"CC-BY-3.0","statement":"This article is distributed under the terms of the \u003Ca href=\u0022http:\/\/creativecommons.org\/licenses\/by\/3.0\/\u0022\u003ECreative Commons Attribution License\u003C\/a\u003E, which permits unrestricted use and redistribution provided that the original author and source are credited."},"published":"2013-07-23T00:00:00Z","authorLine":"Eve Marder","statusDate":"2013-07-23T00:00:00Z","elocationId":"e01140","titlePrefix":"Living Science","versionDate":"2013-07-23T00:00:00Z","impactStatement":"As new technology makes it possible to perform experiments that were unimaginable a decade ago, Eve Marder argues that we can still learn from the past."},{"id":"00676","doi":"10.7554\/eLife.00676","pdf":"https:\/\/cdn.elifesciences.org\/articles\/00676\/elife-00676-v1.pdf","type":"feature","stage":"published","title":"Luck, jobs and learning","status":"vor","volume":2,"version":1,"copyright":{"holder":"Marder","license":"CC-BY-3.0","statement":"This article is distributed under the terms of the \u003Ca href=\u0022http:\/\/creativecommons.org\/licenses\/by\/3.0\/\u0022\u003ECreative Commons Attribution License\u003C\/a\u003E, which permits unrestricted use and redistribution provided that the original author and source are credited."},"published":"2013-04-16T00:00:00Z","authorLine":"Eve Marder","statusDate":"2013-04-16T00:00:00Z","elocationId":"e00676","titlePrefix":"Living Science","versionDate":"2013-04-16T00:00:00Z","impactStatement":"Eve Marder believes that many of the most important events in our lives, both personal and professional, depend to some degree on luck or chance."},{"id":"00477","doi":"10.7554\/eLife.00477","pdf":"https:\/\/cdn.elifesciences.org\/articles\/00477\/elife-00477-v1.pdf","type":"feature","stage":"published","title":"Crossing oceans","status":"vor","volume":2,"version":1,"copyright":{"holder":"Marder","license":"CC-BY-3.0","statement":"This article is distributed under the terms of the \u003Ca href=\u0022http:\/\/creativecommons.org\/licenses\/by\/3.0\/\u0022\u003ECreative Commons Attribution License\u003C\/a\u003E, which permits unrestricted use and redistribution provided that the original author and source are credited."},"published":"2013-01-22T00:00:00Z","authorLine":"Eve Marder","statusDate":"2013-01-22T00:00:00Z","elocationId":"e00477","titlePrefix":"Living Science","versionDate":"2013-01-22T00:00:00Z","impactStatement":"Eve Marder explains why all scientists should spend time living and working in a foreign country."},{"id":"00353","doi":"10.7554\/eLife.00353","pdf":"https:\/\/cdn.elifesciences.org\/articles\/00353\/elife-00353-v1.pdf","type":"feature","stage":"published","title":"A good life","status":"vor","volume":1,"version":1,"copyright":{"holder":"Marder","license":"CC-BY-3.0","statement":"This article is distributed under the terms of the \u003Ca href=\u0022http:\/\/creativecommons.org\/licenses\/by\/3.0\/\u0022\u003ECreative Commons Attribution License\u003C\/a\u003E, which permits unrestricted use and redistribution provided that the original author and source are credited."},"published":"2012-12-13T00:00:00Z","authorLine":"Eve Marder","statusDate":"2012-12-13T00:00:00Z","elocationId":"e00353","titlePrefix":"Living Science","versionDate":"2012-12-13T00:00:00Z","impactStatement":"Following a career in science involves long hours and hard work, but as Eve Marder explains in the first of a series of columns, it can also be extremely rewarding."}],"relatedContent":[{"id":"30076","doi":"10.7554\/eLife.30076","pdf":"https:\/\/cdn.elifesciences.org\/articles\/30076\/elife-30076-v1.pdf","type":"editorial","stage":"published","title":"Beyond scoops to best practices","status":"vor","volume":6,"version":1,"copyright":{"holder":"Marder","license":"CC-BY-4.0","statement":"This article is distributed under the terms of the \u003Ca href=\u0022http:\/\/creativecommons.org\/licenses\/by\/4.0\/\u0022\u003ECreative Commons Attribution License\u003C\/a\u003E, which permits unrestricted use and redistribution provided that the original author and source are credited."},"published":"2017-07-11T00:00:00Z","authorLine":"Eve Marder","statusDate":"2017-07-11T00:00:00Z","elocationId":"e30076","titlePrefix":"Scientific Publishing","versionDate":"2017-07-11T00:00:00Z","impactStatement":"Authors submitting a manuscript to eLife are encouraged to upload it to a recognized preprint server at the same time in order to make their results available as quickly and as widely as possible."},{"id":"05770","doi":"10.7554\/eLife.05770","pdf":"https:\/\/cdn.elifesciences.org\/articles\/05770\/elife-05770-v1.pdf","type":"editorial","stage":"published","title":"The pleasure of publishing","status":"vor","volume":4,"version":1,"copyright":{"holder":"Malhotra and Marder","license":"CC-BY-4.0","statement":"This article is distributed under the terms of the \u003Ca href=\u0022http:\/\/creativecommons.org\/licenses\/by\/4.0\/\u0022\u003ECreative Commons Attribution License\u003C\/a\u003E, which permits unrestricted use and redistribution provided that the original author and source are credited."},"published":"2015-01-06T00:00:00Z","authorLine":"Vivek Malhotra, Eve Marder","statusDate":"2015-01-06T00:00:00Z","elocationId":"e05770","titlePrefix":"Peer Review","versionDate":"2015-01-06T00:00:00Z","impactStatement":"When assessing manuscripts eLife editors look for a combination of rigour and insight, along with results and ideas that make other researchers think differently about their subject."},{"id":"52232","doi":"10.7554\/eLife.52232","pdf":"https:\/\/cdn.elifesciences.org\/articles\/52232\/elife-52232-v1.pdf","type":"feature","stage":"published","title":"Power analysis","status":"vor","volume":8,"version":1,"copyright":{"holder":"Raman","license":"CC-BY-4.0","statement":"This article is distributed under the terms of the \u003Ca href=\u0022http:\/\/creativecommons.org\/licenses\/by\/4.0\/\u0022\u003ECreative Commons Attribution License\u003C\/a\u003E, which permits unrestricted use and redistribution provided that the original author and source are credited."},"published":"2019-10-01T00:00:00Z","authorLine":"Indira M Raman","statusDate":"2019-10-01T00:00:00Z","elocationId":"e52232","titlePrefix":"Living Science","versionDate":"2019-10-01T00:00:00Z","impactStatement":"After acknowledging that power differentials exist, can scientists find inspiration to persevere anyway?"},{"id":"21723","doi":"10.7554\/eLife.21723","pdf":"https:\/\/cdn.elifesciences.org\/articles\/21723\/elife-21723-v2.pdf","type":"feature","stage":"published","title":"The truth is in the distribution","status":"vor","volume":5,"version":2,"copyright":{"holder":"Raman","license":"CC-BY-4.0","statement":"This article is distributed under the terms of the \u003Ca href=\u0022http:\/\/creativecommons.org\/licenses\/by\/4.0\/\u0022\u003ECreative Commons Attribution License\u003C\/a\u003E, which permits unrestricted use and redistribution provided that the original author and source are credited."},"published":"2016-10-19T00:00:00Z","authorLine":"Indira M Raman","statusDate":"2016-10-19T00:00:00Z","elocationId":"e21723","titlePrefix":"Living Science","versionDate":"2016-10-20T15:03:17Z","impactStatement":"There may be as many ways to think about the experience of women in science as there are women in science."},{"id":"07157","doi":"10.7554\/eLife.07157","pdf":"https:\/\/cdn.elifesciences.org\/articles\/07157\/elife-07157-v1.pdf","type":"feature","stage":"published","title":"Triaging Shakespeare","status":"vor","volume":4,"version":1,"copyright":{"holder":"Raman","license":"CC-BY-4.0","statement":"This article is distributed under the terms of the \u003Ca href=\u0022http:\/\/creativecommons.org\/licenses\/by\/4.0\/\u0022\u003ECreative Commons Attribution License\u003C\/a\u003E, which permits unrestricted use and redistribution provided that the original author and source are credited."},"published":"2015-03-17T00:00:00Z","authorLine":"Indira M Raman","statusDate":"2015-03-17T00:00:00Z","elocationId":"e07157","titlePrefix":"Living Science","versionDate":"2015-03-17T00:00:00Z","impactStatement":"What if every creative endeavor had to go through Peer Review? Indira M Rama considers the possibility."},{"id":"05846","doi":"10.7554\/eLife.05846","pdf":"https:\/\/cdn.elifesciences.org\/articles\/05846\/elife-05846-v1.pdf","type":"feature","stage":"published","title":"Teaching for the future","status":"vor","volume":4,"version":1,"copyright":{"holder":"Raman","license":"CC-BY-4.0","statement":"This article is distributed under the terms of the \u003Ca href=\u0022http:\/\/creativecommons.org\/licenses\/by\/4.0\/\u0022\u003ECreative Commons Attribution License\u003C\/a\u003E, which permits unrestricted use and redistribution provided that the original author and source are credited."},"published":"2015-01-13T00:00:00Z","authorLine":"Indira M Raman","statusDate":"2015-01-13T00:00:00Z","elocationId":"e05846","titlePrefix":"Living Science","versionDate":"2015-01-13T00:00:00Z","impactStatement":"Reading and discussing classic papers can be an effective way of teaching graduate students how to learn the skills they will need for a career in research."}]}
+{
+  "id": "80db56f5",
+  "title": "Living Science",
+  "published": "2019-05-24T09:14:03Z",
+  "image": {
+    "banner": {
+      "uri": "https://iiif.elifesciences.org/journal-cms/collection%2F2019-05%2Fliving_science_essays_by_eve_marder_detail_two.png",
+      "alt": "",
+      "source": {
+        "mediaType": "image/jpeg",
+        "uri": "https://iiif.elifesciences.org/journal-cms/collection%2F2019-05%2Fliving_science_essays_by_eve_marder_detail_two.png/full/full/0/default.jpg",
+        "filename": "living_science_essays_by_eve_marder_detail_two.jpg"
+      },
+      "size": {
+        "width": 1855,
+        "height": 906
+      },
+      "focalPoint": {
+        "x": 86,
+        "y": 80
+      },
+      "attribution": [
+        "BEN MARDER"
+      ]
+    },
+    "thumbnail": {
+      "uri": "https://iiif.elifesciences.org/journal-cms/collection%2F2019-05%2Fliving_science_essays_by_eve_marder_detail_two.png",
+      "alt": "",
+      "source": {
+        "mediaType": "image/jpeg",
+        "uri": "https://iiif.elifesciences.org/journal-cms/collection%2F2019-05%2Fliving_science_essays_by_eve_marder_detail_two.png/full/full/0/default.jpg",
+        "filename": "living_science_essays_by_eve_marder_detail_two.jpg"
+      },
+      "size": {
+        "width": 1855,
+        "height": 906
+      },
+      "focalPoint": {
+        "x": 86,
+        "y": 80
+      },
+      "attribution": [
+        "BEN MARDER"
+      ]
+    }
+  },
+  "impactStatement": "Essays on the human side of science by Eve Marder.",
+  "selectedCurator": {
+    "id": "81dd36b6",
+    "type": {
+      "id": "leadership",
+      "label": "Brandeis University"
+    },
+    "name": {
+      "surname": "Marder",
+      "givenNames": "Eve",
+      "preferred": "Eve Marder",
+      "index": "Marder, Eve"
+    },
+    "image": {
+      "uri": "https://iiif.elifesciences.org/journal-cms/person%2F2012-03%2Fem03.jpg",
+      "alt": "Eve Marder",
+      "source": {
+        "mediaType": "image/jpeg",
+        "uri": "https://iiif.elifesciences.org/journal-cms/person%2F2012-03%2Fem03.jpg/full/full/0/default.jpg",
+        "filename": "em03.jpg"
+      },
+      "size": {
+        "width": 3000,
+        "height": 2000
+      },
+      "focalPoint": {
+        "x": 50,
+        "y": 50
+      }
+    }
+  },
+  "curators": [
+    {
+      "id": "81dd36b6",
+      "type": {
+        "id": "leadership",
+        "label": "Brandeis University"
+      },
+      "name": {
+        "surname": "Marder",
+        "givenNames": "Eve",
+        "preferred": "Eve Marder",
+        "index": "Marder, Eve"
+      },
+      "image": {
+        "uri": "https://iiif.elifesciences.org/journal-cms/person%2F2012-03%2Fem03.jpg",
+        "alt": "Eve Marder",
+        "source": {
+          "mediaType": "image/jpeg",
+          "uri": "https://iiif.elifesciences.org/journal-cms/person%2F2012-03%2Fem03.jpg/full/full/0/default.jpg",
+          "filename": "em03.jpg"
+        },
+        "size": {
+          "width": 3000,
+          "height": 2000
+        },
+        "focalPoint": {
+          "x": 50,
+          "y": 50
+        }
+      }
+    }
+  ],
+  "summary": [
+    {
+      "type": "paragraph",
+      "text": "Eve Marder wrote her first Living Science essay for eLife in 2012. Since then she has written about topics as diverse as the importance of clear writing, the benefits of living and working in a foreign country, and why we should \"own our mistakes\". This collection brings together all of Marder's Living Science essays. Before the launch of eLife, Marder wrote a number of <a href=\"https://www.sciencedirect.com/search/advanced?pub=Current%20Biology&amp;cid=272099&amp;authors=marder&amp;show=25&amp;sortBy=relevance&amp;lastSelectedFacet=articleTypes&amp;articleTypes=SSU%2CDIS%2COT\">My Word articles for Current Biology</a>."
+    }
+  ],
+  "content": [
+    {
+      "id": "76242",
+      "doi": "10.7554/eLife.76242",
+      "pdf": "https://cdn.elifesciences.org/articles/76242/elife-76242-v1.pdf",
+      "type": "feature",
+      "stage": "published",
+      "title": "Authorship then and now",
+      "status": "vor",
+      "volume": 11,
+      "version": 1,
+      "copyright": {
+        "holder": "Marder",
+        "license": "CC-BY-4.0",
+        "statement": "This article is distributed under the terms of the <a href=\"http://creativecommons.org/licenses/by/4.0/\">Creative Commons Attribution License</a>, which permits unrestricted use and redistribution provided that the original author and source are credited."
+      },
+      "published": "2022-01-18T00:00:00Z",
+      "authorLine": "Eve Marder",
+      "statusDate": "2022-01-18T00:00:00Z",
+      "elocationId": "e76242",
+      "titlePrefix": "Living Science",
+      "versionDate": "2022-01-18T00:00:00Z",
+      "impactStatement": "A researcher should only be an author on a paper if they have contributed to it in a substantive way."
+    },
+    {
+      "id": "66850",
+      "doi": "10.7554/eLife.66850",
+      "pdf": "https://cdn.elifesciences.org/articles/66850/elife-66850-v1.pdf",
+      "type": "feature",
+      "stage": "published",
+      "title": "Truth even unto its innermost parts",
+      "status": "vor",
+      "volume": 10,
+      "version": 1,
+      "copyright": {
+        "holder": "Marder",
+        "license": "CC-BY-4.0",
+        "statement": "This article is distributed under the terms of the <a href=\"http://creativecommons.org/licenses/by/4.0/\">Creative Commons Attribution License</a>, which permits unrestricted use and redistribution provided that the original author and source are credited."
+      },
+      "published": "2021-03-05T00:00:00Z",
+      "authorLine": "Eve Marder",
+      "statusDate": "2021-03-05T00:00:00Z",
+      "elocationId": "e66850",
+      "titlePrefix": "Living Science",
+      "versionDate": "2021-03-05T00:00:00Z",
+      "impactStatement": "Challenging anyone who spreads falsehoods is an important part of respecting the truth in both science and the wider world."
+    },
+    {
+      "id": "60703",
+      "doi": "10.7554/eLife.60703",
+      "pdf": "https://cdn.elifesciences.org/articles/60703/elife-60703-v1.pdf",
+      "type": "feature",
+      "image": {
+        "thumbnail": {
+          "alt": "Illustration of a hand and jigsaw puzzle",
+          "uri": "https://iiif.elifesciences.org/journal-cms/article%2F2020-08%2Fscreen-shot-2020-08-26-at-17.05.29.png",
+          "size": {
+            "width": 913,
+            "height": 637
+          },
+          "source": {
+            "uri": "https://iiif.elifesciences.org/journal-cms/article%2F2020-08%2Fscreen-shot-2020-08-26-at-17.05.29.png/full/full/0/default.jpg",
+            "filename": "screen-shot-2020-08-26-at-17.05.29.jpg",
+            "mediaType": "image/jpeg"
+          }
+        }
+      },
+      "stage": "published",
+      "title": "Theoretical musings",
+      "status": "vor",
+      "volume": 9,
+      "version": 1,
+      "subjects": [
+        {
+          "id": "neuroscience",
+          "name": "Neuroscience"
+        }
+      ],
+      "copyright": {
+        "holder": "Marder",
+        "license": "CC-BY-4.0",
+        "statement": "This article is distributed under the terms of the <a href=\"http://creativecommons.org/licenses/by/4.0/\">Creative Commons Attribution License</a>, which permits unrestricted use and redistribution provided that the original author and source are credited."
+      },
+      "published": "2020-08-26T00:00:00Z",
+      "authorLine": "Eve Marder",
+      "statusDate": "2020-08-26T00:00:00Z",
+      "elocationId": "e60703",
+      "titlePrefix": "Living Science",
+      "versionDate": "2020-08-26T00:00:00Z",
+      "impactStatement": "The best theory papers help experimentalists to identify which of their results might be general and to plan a path through the maze of all possible future experiments."
+    },
+    {
+      "id": "58965",
+      "doi": "10.7554/eLife.58965",
+      "pdf": "https://cdn.elifesciences.org/articles/58965/elife-58965-v1.pdf",
+      "type": "feature",
+      "image": {
+        "thumbnail": {
+          "alt": "",
+          "uri": "https://iiif.elifesciences.org/journal-cms/article%2F2020-07%2Fscreen-shot-2020-07-15-at-17.09.50.png",
+          "size": {
+            "width": 669,
+            "height": 441
+          },
+          "source": {
+            "uri": "https://iiif.elifesciences.org/journal-cms/article%2F2020-07%2Fscreen-shot-2020-07-15-at-17.09.50.png/full/full/0/default.jpg",
+            "filename": "screen-shot-2020-07-15-at-17.09.50.jpg",
+            "mediaType": "image/jpeg"
+          }
+        }
+      },
+      "stage": "published",
+      "title": "Intentional text",
+      "status": "vor",
+      "volume": 9,
+      "version": 1,
+      "copyright": {
+        "holder": "Marder",
+        "license": "CC-BY-4.0",
+        "statement": "This article is distributed under the terms of the <a href=\"http://creativecommons.org/licenses/by/4.0/\">Creative Commons Attribution License</a>, which permits unrestricted use and redistribution provided that the original author and source are credited."
+      },
+      "published": "2020-06-22T00:00:00Z",
+      "authorLine": "Eve Marder",
+      "statusDate": "2020-06-22T00:00:00Z",
+      "elocationId": "e58965",
+      "titlePrefix": "Living Science",
+      "versionDate": "2020-06-22T00:00:00Z",
+      "impactStatement": "It is important to read what the authors have written and to pay attention to every word when you write."
+    },
+    {
+      "id": "54867",
+      "doi": "10.7554/eLife.54867",
+      "pdf": "https://cdn.elifesciences.org/articles/54867/elife-54867-v1.pdf",
+      "type": "feature",
+      "stage": "published",
+      "title": "Words without meaning",
+      "status": "vor",
+      "volume": 9,
+      "version": 1,
+      "copyright": {
+        "holder": "Marder",
+        "license": "CC-BY-4.0",
+        "statement": "This article is distributed under the terms of the <a href=\"http://creativecommons.org/licenses/by/4.0/\">Creative Commons Attribution License</a>, which permits unrestricted use and redistribution provided that the original author and source are credited."
+      },
+      "published": "2020-02-21T00:00:00Z",
+      "authorLine": "Eve Marder",
+      "statusDate": "2020-02-21T00:00:00Z",
+      "elocationId": "e54867",
+      "titlePrefix": "Living Science",
+      "versionDate": "2020-02-21T00:00:00Z",
+      "impactStatement": "Many of the words used by scientists when reviewing manuscripts, job candidates and grant applications – words such as incremental, novelty, mechanism, descriptive and impact – have lost their meaning."
+    },
+    {
+      "id": "54265",
+      "doi": "10.7554/eLife.54265",
+      "pdf": "https://cdn.elifesciences.org/articles/54265/elife-54265-v1.pdf",
+      "type": "feature",
+      "stage": "published",
+      "title": "Stepping down",
+      "status": "vor",
+      "volume": 9,
+      "version": 1,
+      "copyright": {
+        "holder": "Marder",
+        "license": "CC-BY-4.0",
+        "statement": "This article is distributed under the terms of the <a href=\"http://creativecommons.org/licenses/by/4.0/\">Creative Commons Attribution License</a>, which permits unrestricted use and redistribution provided that the original author and source are credited."
+      },
+      "published": "2020-01-14T00:00:00Z",
+      "authorLine": "Eve Marder",
+      "statusDate": "2020-01-14T00:00:00Z",
+      "elocationId": "e54265",
+      "titlePrefix": "Living Science",
+      "versionDate": "2020-01-14T00:00:00Z",
+      "impactStatement": "As Eve Marder stands down as a Deputy Editor of <i>eLife</i>, she reflects on the need for journals to change and respond to their environment."
+    },
+    {
+      "id": "52669",
+      "doi": "10.7554/eLife.52669",
+      "pdf": "https://cdn.elifesciences.org/articles/52669/elife-52669-v1.pdf",
+      "type": "feature",
+      "stage": "published",
+      "title": "Watching jellyfish",
+      "status": "vor",
+      "volume": 8,
+      "version": 1,
+      "copyright": {
+        "holder": "Marder",
+        "license": "CC-BY-4.0",
+        "statement": "This article is distributed under the terms of the <a href=\"http://creativecommons.org/licenses/by/4.0/\">Creative Commons Attribution License</a>, which permits unrestricted use and redistribution provided that the original author and source are credited."
+      },
+      "published": "2019-10-25T00:00:00Z",
+      "authorLine": "Eve Marder",
+      "statusDate": "2019-10-25T00:00:00Z",
+      "elocationId": "e52669",
+      "titlePrefix": "Living Science",
+      "versionDate": "2019-10-25T00:00:00Z",
+      "impactStatement": "The natural world is more complex, and also more fragile, than it appears."
+    },
+    {
+      "id": "45734",
+      "doi": "10.7554/eLife.45734",
+      "pdf": "https://cdn.elifesciences.org/articles/45734/elife-45734-v1.pdf",
+      "type": "feature",
+      "stage": "published",
+      "title": "Love writing",
+      "status": "vor",
+      "volume": 8,
+      "version": 1,
+      "copyright": {
+        "holder": "Marder",
+        "license": "CC-BY-4.0",
+        "statement": "This article is distributed under the terms of the <a href=\"http://creativecommons.org/licenses/by/4.0/\">Creative Commons Attribution License</a>, which permits unrestricted use and redistribution provided that the original author and source are credited."
+      },
+      "published": "2019-03-07T00:00:00Z",
+      "authorLine": "Eve Marder",
+      "statusDate": "2019-03-07T00:00:00Z",
+      "elocationId": "e45734",
+      "titlePrefix": "Living Science",
+      "versionDate": "2019-03-07T00:00:00Z",
+      "impactStatement": "Clear writing is the key to success in science."
+    },
+    {
+      "id": "44441",
+      "doi": "10.7554/eLife.44441",
+      "pdf": "https://cdn.elifesciences.org/articles/44441/elife-44441-v1.pdf",
+      "type": "feature",
+      "stage": "published",
+      "title": "Uniting the nations of science",
+      "status": "vor",
+      "volume": 7,
+      "version": 1,
+      "copyright": {
+        "holder": "Marder",
+        "license": "CC-BY-4.0",
+        "statement": "This article is distributed under the terms of the <a href=\"http://creativecommons.org/licenses/by/4.0/\">Creative Commons Attribution License</a>, which permits unrestricted use and redistribution provided that the original author and source are credited."
+      },
+      "published": "2018-12-20T00:00:00Z",
+      "authorLine": "Eve Marder",
+      "statusDate": "2018-12-20T00:00:00Z",
+      "elocationId": "e44441",
+      "titlePrefix": "Living Science",
+      "versionDate": "2018-12-20T00:00:00Z",
+      "impactStatement": "As the world becomes smaller and more uniform, it is important to remember that creativity in science can happen anywhere."
+    },
+    {
+      "id": "39915",
+      "doi": "10.7554/eLife.39915",
+      "pdf": "https://cdn.elifesciences.org/articles/39915/elife-39915-v1.pdf",
+      "type": "feature",
+      "stage": "published",
+      "title": "The voice of evidence",
+      "status": "vor",
+      "volume": 7,
+      "version": 1,
+      "copyright": {
+        "holder": "Marder",
+        "license": "CC-BY-4.0",
+        "statement": "This article is distributed under the terms of the <a href=\"http://creativecommons.org/licenses/by/4.0/\">Creative Commons Attribution License</a>, which permits unrestricted use and redistribution provided that the original author and source are credited."
+      },
+      "published": "2018-07-11T00:00:00Z",
+      "authorLine": "Eve Marder",
+      "statusDate": "2018-07-11T00:00:00Z",
+      "elocationId": "e39915",
+      "titlePrefix": "Living Science",
+      "versionDate": "2018-07-11T00:00:00Z",
+      "impactStatement": "In an era in which evidence is being disregarded, scientists need to speak up in support of the pursuit for truth."
+    },
+    {
+      "id": "30599",
+      "doi": "10.7554/eLife.30599",
+      "pdf": "https://cdn.elifesciences.org/articles/30599/elife-30599-v1.pdf",
+      "type": "feature",
+      "stage": "published",
+      "title": "The importance of remembering",
+      "status": "vor",
+      "volume": 6,
+      "version": 1,
+      "copyright": {
+        "holder": "Marder",
+        "license": "CC-BY-4.0",
+        "statement": "This article is distributed under the terms of the <a href=\"http://creativecommons.org/licenses/by/4.0/\">Creative Commons Attribution License</a>, which permits unrestricted use and redistribution provided that the original author and source are credited."
+      },
+      "published": "2017-08-14T00:00:00Z",
+      "authorLine": "Eve Marder",
+      "statusDate": "2017-08-14T00:00:00Z",
+      "elocationId": "e30599",
+      "titlePrefix": "Living Science",
+      "versionDate": "2017-08-14T00:00:00Z",
+      "impactStatement": "Creativity in science requires the ability to recall information and data, and will suffer if we rely too much on technology to remember things for us."
+    },
+    {
+      "id": "16846",
+      "doi": "10.7554/eLife.16846",
+      "pdf": "https://cdn.elifesciences.org/articles/16846/elife-16846-v1.pdf",
+      "type": "feature",
+      "stage": "published",
+      "title": "The rites of spring, Take 2",
+      "status": "vor",
+      "volume": 5,
+      "version": 1,
+      "copyright": {
+        "holder": "Marder",
+        "license": "CC-BY-4.0",
+        "statement": "This article is distributed under the terms of the <a href=\"http://creativecommons.org/licenses/by/4.0/\">Creative Commons Attribution License</a>, which permits unrestricted use and redistribution provided that the original author and source are credited."
+      },
+      "published": "2016-05-18T00:00:00Z",
+      "authorLine": "Eve Marder",
+      "statusDate": "2016-05-18T00:00:00Z",
+      "elocationId": "e16846",
+      "titlePrefix": "Living Science",
+      "versionDate": "2016-05-18T00:00:00Z",
+      "impactStatement": "Recruiting PhD students can be a frustrating process, but Eve Marder looks forward to welcoming the latest crop in the autumn."
+    },
+    {
+      "id": "11628",
+      "doi": "10.7554/eLife.11628",
+      "pdf": "https://cdn.elifesciences.org/articles/11628/elife-11628-v1.pdf",
+      "type": "feature",
+      "stage": "published",
+      "title": "Owning your mistakes",
+      "status": "vor",
+      "volume": 4,
+      "version": 1,
+      "copyright": {
+        "holder": "Marder",
+        "license": "CC-BY-4.0",
+        "statement": "This article is distributed under the terms of the <a href=\"http://creativecommons.org/licenses/by/4.0/\">Creative Commons Attribution License</a>, which permits unrestricted use and redistribution provided that the original author and source are credited."
+      },
+      "published": "2015-10-22T00:00:00Z",
+      "authorLine": "Eve Marder",
+      "statusDate": "2015-10-22T00:00:00Z",
+      "elocationId": "e11628",
+      "titlePrefix": "Living Science",
+      "versionDate": "2015-10-22T00:00:00Z",
+      "impactStatement": "Most scientists admit to their errors but, as Eve Marder explains, the scientific community as a whole needs to rethink the way it recognizes achievement."
+    },
+    {
+      "id": "06536",
+      "doi": "10.7554/eLife.06536",
+      "pdf": "https://cdn.elifesciences.org/articles/06536/elife-06536-v1.pdf",
+      "type": "feature",
+      "stage": "published",
+      "title": "Lost voices",
+      "status": "vor",
+      "volume": 4,
+      "version": 1,
+      "copyright": {
+        "holder": "Marder",
+        "license": "CC-BY-4.0",
+        "statement": "This article is distributed under the terms of the <a href=\"http://creativecommons.org/licenses/by/4.0/\">Creative Commons Attribution License</a>, which permits unrestricted use and redistribution provided that the original author and source are credited."
+      },
+      "published": "2015-04-13T00:00:00Z",
+      "authorLine": "Eve Marder",
+      "statusDate": "2015-04-13T00:00:00Z",
+      "elocationId": "e06536",
+      "titlePrefix": "Living Science",
+      "versionDate": "2015-04-13T00:00:00Z",
+      "impactStatement": "When a scientist dies too early in their career we miss them as a colleague and as a person and, as Eve Marder explains, we also lose the science they would have done."
+    },
+    {
+      "id": "05787",
+      "doi": "10.7554/eLife.05787",
+      "pdf": "https://cdn.elifesciences.org/articles/05787/elife-05787-v1.pdf",
+      "type": "feature",
+      "stage": "published",
+      "title": "Bars and medals",
+      "status": "vor",
+      "volume": 4,
+      "version": 1,
+      "copyright": {
+        "holder": "Marder",
+        "license": "CC-BY-4.0",
+        "statement": "This article is distributed under the terms of the <a href=\"http://creativecommons.org/licenses/by/4.0/\">Creative Commons Attribution License</a>, which permits unrestricted use and redistribution provided that the original author and source are credited."
+      },
+      "published": "2015-02-17T00:00:00Z",
+      "authorLine": "Eve Marder",
+      "statusDate": "2015-02-17T00:00:00Z",
+      "elocationId": "e05787",
+      "titlePrefix": "Living Science",
+      "versionDate": "2015-02-17T00:00:00Z",
+      "impactStatement": "In science it is more important to recognize excellence in its many different forms than it is to identify a winner."
+    },
+    {
+      "id": "04901",
+      "doi": "10.7554/eLife.04901",
+      "pdf": "https://cdn.elifesciences.org/articles/04901/elife-04901-v1.pdf",
+      "type": "feature",
+      "stage": "published",
+      "title": "Looking out for future scientists",
+      "status": "vor",
+      "volume": 3,
+      "version": 1,
+      "copyright": {
+        "holder": "Marder",
+        "license": "CC-BY-4.0",
+        "statement": "This article is distributed under the terms of the <a href=\"http://creativecommons.org/licenses/by/4.0/\">Creative Commons Attribution License</a>, which permits unrestricted use and redistribution provided that the original author and source are credited."
+      },
+      "published": "2014-10-07T00:00:00Z",
+      "authorLine": "Eve Marder",
+      "statusDate": "2014-10-07T00:00:00Z",
+      "elocationId": "e04901",
+      "titlePrefix": "Living Science",
+      "versionDate": "2014-10-07T00:00:00Z",
+      "impactStatement": "Proposals to reduce the number of students who do PhDs are misguided because they would exclude young scientists with qualities that do not show up in exam results and interviews."
+    },
+    {
+      "id": "02791",
+      "doi": "10.7554/eLife.02791",
+      "pdf": "https://cdn.elifesciences.org/articles/02791/elife-02791-v1.pdf",
+      "type": "feature",
+      "stage": "published",
+      "title": "In numbers we trust?",
+      "status": "vor",
+      "volume": 3,
+      "version": 1,
+      "copyright": {
+        "holder": "Marder",
+        "license": "CC-BY-3.0",
+        "statement": "This article is distributed under the terms of the <a href=\"http://creativecommons.org/licenses/by/3.0/\">Creative Commons Attribution License</a>, which permits unrestricted use and redistribution provided that the original author and source are credited."
+      },
+      "published": "2014-04-01T00:00:00Z",
+      "authorLine": "Eve Marder",
+      "statusDate": "2014-04-01T00:00:00Z",
+      "elocationId": "e02791",
+      "titlePrefix": "Living Science",
+      "versionDate": "2014-04-01T00:00:00Z",
+      "impactStatement": "Scientists go to great lengths to ensure that data are collected and analysed properly, so why do they apply different standards to data about the number of times research papers have been cited and viewed?"
+    },
+    {
+      "id": "01515",
+      "doi": "10.7554/eLife.01515",
+      "pdf": "https://cdn.elifesciences.org/articles/01515/elife-01515-v1.pdf",
+      "type": "feature",
+      "stage": "published",
+      "title": "The haves and the have nots",
+      "status": "vor",
+      "volume": 2,
+      "version": 1,
+      "copyright": {
+        "holder": "Marder",
+        "license": "CC-BY-3.0",
+        "statement": "This article is distributed under the terms of the <a href=\"http://creativecommons.org/licenses/by/3.0/\">Creative Commons Attribution License</a>, which permits unrestricted use and redistribution provided that the original author and source are credited."
+      },
+      "published": "2013-11-19T00:00:00Z",
+      "authorLine": "Eve Marder",
+      "statusDate": "2013-11-19T00:00:00Z",
+      "elocationId": "e01515",
+      "titlePrefix": "Living Science",
+      "versionDate": "2013-11-19T00:00:00Z",
+      "impactStatement": "As the equipment needed to perform state-of-the-art research in many areas of biology becomes ever more expensive, Eve Marder worries that researchers in less wealthy institutions might be left behind."
+    },
+    {
+      "id": "01140",
+      "doi": "10.7554/eLife.01140",
+      "pdf": "https://cdn.elifesciences.org/articles/01140/elife-01140-v1.pdf",
+      "type": "feature",
+      "stage": "published",
+      "title": "Grandmother elephants",
+      "status": "vor",
+      "volume": 2,
+      "version": 1,
+      "copyright": {
+        "holder": "Marder",
+        "license": "CC-BY-3.0",
+        "statement": "This article is distributed under the terms of the <a href=\"http://creativecommons.org/licenses/by/3.0/\">Creative Commons Attribution License</a>, which permits unrestricted use and redistribution provided that the original author and source are credited."
+      },
+      "published": "2013-07-23T00:00:00Z",
+      "authorLine": "Eve Marder",
+      "statusDate": "2013-07-23T00:00:00Z",
+      "elocationId": "e01140",
+      "titlePrefix": "Living Science",
+      "versionDate": "2013-07-23T00:00:00Z",
+      "impactStatement": "As new technology makes it possible to perform experiments that were unimaginable a decade ago, Eve Marder argues that we can still learn from the past."
+    },
+    {
+      "id": "00676",
+      "doi": "10.7554/eLife.00676",
+      "pdf": "https://cdn.elifesciences.org/articles/00676/elife-00676-v1.pdf",
+      "type": "feature",
+      "stage": "published",
+      "title": "Luck, jobs and learning",
+      "status": "vor",
+      "volume": 2,
+      "version": 1,
+      "copyright": {
+        "holder": "Marder",
+        "license": "CC-BY-3.0",
+        "statement": "This article is distributed under the terms of the <a href=\"http://creativecommons.org/licenses/by/3.0/\">Creative Commons Attribution License</a>, which permits unrestricted use and redistribution provided that the original author and source are credited."
+      },
+      "published": "2013-04-16T00:00:00Z",
+      "authorLine": "Eve Marder",
+      "statusDate": "2013-04-16T00:00:00Z",
+      "elocationId": "e00676",
+      "titlePrefix": "Living Science",
+      "versionDate": "2013-04-16T00:00:00Z",
+      "impactStatement": "Eve Marder believes that many of the most important events in our lives, both personal and professional, depend to some degree on luck or chance."
+    },
+    {
+      "id": "00477",
+      "doi": "10.7554/eLife.00477",
+      "pdf": "https://cdn.elifesciences.org/articles/00477/elife-00477-v1.pdf",
+      "type": "feature",
+      "stage": "published",
+      "title": "Crossing oceans",
+      "status": "vor",
+      "volume": 2,
+      "version": 1,
+      "copyright": {
+        "holder": "Marder",
+        "license": "CC-BY-3.0",
+        "statement": "This article is distributed under the terms of the <a href=\"http://creativecommons.org/licenses/by/3.0/\">Creative Commons Attribution License</a>, which permits unrestricted use and redistribution provided that the original author and source are credited."
+      },
+      "published": "2013-01-22T00:00:00Z",
+      "authorLine": "Eve Marder",
+      "statusDate": "2013-01-22T00:00:00Z",
+      "elocationId": "e00477",
+      "titlePrefix": "Living Science",
+      "versionDate": "2013-01-22T00:00:00Z",
+      "impactStatement": "Eve Marder explains why all scientists should spend time living and working in a foreign country."
+    },
+    {
+      "id": "00353",
+      "doi": "10.7554/eLife.00353",
+      "pdf": "https://cdn.elifesciences.org/articles/00353/elife-00353-v1.pdf",
+      "type": "feature",
+      "stage": "published",
+      "title": "A good life",
+      "status": "vor",
+      "volume": 1,
+      "version": 1,
+      "copyright": {
+        "holder": "Marder",
+        "license": "CC-BY-3.0",
+        "statement": "This article is distributed under the terms of the <a href=\"http://creativecommons.org/licenses/by/3.0/\">Creative Commons Attribution License</a>, which permits unrestricted use and redistribution provided that the original author and source are credited."
+      },
+      "published": "2012-12-13T00:00:00Z",
+      "authorLine": "Eve Marder",
+      "statusDate": "2012-12-13T00:00:00Z",
+      "elocationId": "e00353",
+      "titlePrefix": "Living Science",
+      "versionDate": "2012-12-13T00:00:00Z",
+      "impactStatement": "Following a career in science involves long hours and hard work, but as Eve Marder explains in the first of a series of columns, it can also be extremely rewarding."
+    }
+  ],
+  "relatedContent": [
+    {
+      "id": "30076",
+      "doi": "10.7554/eLife.30076",
+      "pdf": "https://cdn.elifesciences.org/articles/30076/elife-30076-v1.pdf",
+      "type": "editorial",
+      "stage": "published",
+      "title": "Beyond scoops to best practices",
+      "status": "vor",
+      "volume": 6,
+      "version": 1,
+      "copyright": {
+        "holder": "Marder",
+        "license": "CC-BY-4.0",
+        "statement": "This article is distributed under the terms of the <a href=\"http://creativecommons.org/licenses/by/4.0/\">Creative Commons Attribution License</a>, which permits unrestricted use and redistribution provided that the original author and source are credited."
+      },
+      "published": "2017-07-11T00:00:00Z",
+      "authorLine": "Eve Marder",
+      "statusDate": "2017-07-11T00:00:00Z",
+      "elocationId": "e30076",
+      "titlePrefix": "Scientific Publishing",
+      "versionDate": "2017-07-11T00:00:00Z",
+      "impactStatement": "Authors submitting a manuscript to eLife are encouraged to upload it to a recognized preprint server at the same time in order to make their results available as quickly and as widely as possible."
+    },
+    {
+      "id": "05770",
+      "doi": "10.7554/eLife.05770",
+      "pdf": "https://cdn.elifesciences.org/articles/05770/elife-05770-v1.pdf",
+      "type": "editorial",
+      "stage": "published",
+      "title": "The pleasure of publishing",
+      "status": "vor",
+      "volume": 4,
+      "version": 1,
+      "copyright": {
+        "holder": "Malhotra and Marder",
+        "license": "CC-BY-4.0",
+        "statement": "This article is distributed under the terms of the <a href=\"http://creativecommons.org/licenses/by/4.0/\">Creative Commons Attribution License</a>, which permits unrestricted use and redistribution provided that the original author and source are credited."
+      },
+      "published": "2015-01-06T00:00:00Z",
+      "authorLine": "Vivek Malhotra, Eve Marder",
+      "statusDate": "2015-01-06T00:00:00Z",
+      "elocationId": "e05770",
+      "titlePrefix": "Peer Review",
+      "versionDate": "2015-01-06T00:00:00Z",
+      "impactStatement": "When assessing manuscripts eLife editors look for a combination of rigour and insight, along with results and ideas that make other researchers think differently about their subject."
+    },
+    {
+      "id": "52232",
+      "doi": "10.7554/eLife.52232",
+      "pdf": "https://cdn.elifesciences.org/articles/52232/elife-52232-v1.pdf",
+      "type": "feature",
+      "stage": "published",
+      "title": "Power analysis",
+      "status": "vor",
+      "volume": 8,
+      "version": 1,
+      "copyright": {
+        "holder": "Raman",
+        "license": "CC-BY-4.0",
+        "statement": "This article is distributed under the terms of the <a href=\"http://creativecommons.org/licenses/by/4.0/\">Creative Commons Attribution License</a>, which permits unrestricted use and redistribution provided that the original author and source are credited."
+      },
+      "published": "2019-10-01T00:00:00Z",
+      "authorLine": "Indira M Raman",
+      "statusDate": "2019-10-01T00:00:00Z",
+      "elocationId": "e52232",
+      "titlePrefix": "Living Science",
+      "versionDate": "2019-10-01T00:00:00Z",
+      "impactStatement": "After acknowledging that power differentials exist, can scientists find inspiration to persevere anyway?"
+    },
+    {
+      "id": "21723",
+      "doi": "10.7554/eLife.21723",
+      "pdf": "https://cdn.elifesciences.org/articles/21723/elife-21723-v2.pdf",
+      "type": "feature",
+      "stage": "published",
+      "title": "The truth is in the distribution",
+      "status": "vor",
+      "volume": 5,
+      "version": 2,
+      "copyright": {
+        "holder": "Raman",
+        "license": "CC-BY-4.0",
+        "statement": "This article is distributed under the terms of the <a href=\"http://creativecommons.org/licenses/by/4.0/\">Creative Commons Attribution License</a>, which permits unrestricted use and redistribution provided that the original author and source are credited."
+      },
+      "published": "2016-10-19T00:00:00Z",
+      "authorLine": "Indira M Raman",
+      "statusDate": "2016-10-19T00:00:00Z",
+      "elocationId": "e21723",
+      "titlePrefix": "Living Science",
+      "versionDate": "2016-10-20T15:03:17Z",
+      "impactStatement": "There may be as many ways to think about the experience of women in science as there are women in science."
+    },
+    {
+      "id": "07157",
+      "doi": "10.7554/eLife.07157",
+      "pdf": "https://cdn.elifesciences.org/articles/07157/elife-07157-v1.pdf",
+      "type": "feature",
+      "stage": "published",
+      "title": "Triaging Shakespeare",
+      "status": "vor",
+      "volume": 4,
+      "version": 1,
+      "copyright": {
+        "holder": "Raman",
+        "license": "CC-BY-4.0",
+        "statement": "This article is distributed under the terms of the <a href=\"http://creativecommons.org/licenses/by/4.0/\">Creative Commons Attribution License</a>, which permits unrestricted use and redistribution provided that the original author and source are credited."
+      },
+      "published": "2015-03-17T00:00:00Z",
+      "authorLine": "Indira M Raman",
+      "statusDate": "2015-03-17T00:00:00Z",
+      "elocationId": "e07157",
+      "titlePrefix": "Living Science",
+      "versionDate": "2015-03-17T00:00:00Z",
+      "impactStatement": "What if every creative endeavor had to go through Peer Review? Indira M Rama considers the possibility."
+    },
+    {
+      "id": "05846",
+      "doi": "10.7554/eLife.05846",
+      "pdf": "https://cdn.elifesciences.org/articles/05846/elife-05846-v1.pdf",
+      "type": "feature",
+      "stage": "published",
+      "title": "Teaching for the future",
+      "status": "vor",
+      "volume": 4,
+      "version": 1,
+      "copyright": {
+        "holder": "Raman",
+        "license": "CC-BY-4.0",
+        "statement": "This article is distributed under the terms of the <a href=\"http://creativecommons.org/licenses/by/4.0/\">Creative Commons Attribution License</a>, which permits unrestricted use and redistribution provided that the original author and source are credited."
+      },
+      "published": "2015-01-13T00:00:00Z",
+      "authorLine": "Indira M Raman",
+      "statusDate": "2015-01-13T00:00:00Z",
+      "elocationId": "e05846",
+      "titlePrefix": "Living Science",
+      "versionDate": "2015-01-13T00:00:00Z",
+      "impactStatement": "Reading and discussing classic papers can be an effective way of teaching graduate students how to learn the skills they will need for a career in research."
+    }
+  ]
+}
