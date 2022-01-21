@@ -1,6 +1,6 @@
 import os, math, json, time
 from functools import partial
-from django.db import transaction
+from django.db import models as dj_models, transaction
 from et3 import render
 from et3.extract import path as p
 from . import utils, models, logic, consume
@@ -634,7 +634,7 @@ content_descriptions = {
     models.PODCAST: {'description': PODCAST_DESC,
                      'model': models.Content,
                      'api-list': 'podcast-episodes',
-                     'idfn': lambda data: str(data['number'])},
+                     'idfn': lambda data: str(data['number']) if isinstance(data, dict) else str(data)},
 
 }
 
@@ -649,12 +649,12 @@ def flatten_data(content_type, data):
     description = content_descriptions[content_type]['description']
     return render.render_item(description, data)
 
-def _regenerate_item(content_type, content_id):
+def _regenerate_item(content_type, content_id, data=None):
     """regenerate a single item with *no* transaction.
     regenerating a single item may cause many child objects to also be created. If called outside
     of a transaction you may end up with missing data.
     see `regenerate_item` (no prefix) and `regenerate_list`."""
-    data = models.RawJSON.objects.get(msid=content_id, json_type=content_type).json
+    data = data or models.RawJSON.objects.get(msid=content_id, json_type=content_type).json
 
     # no 1:1 mapping between endpoint and observer model.
     # `/community` is like this, it returns interviews, blogs, collections, etc
@@ -722,6 +722,33 @@ def download_all(content_type):
 #
 #
 
+def delete_item(content_type, content_type_id):
+    if not content_type or not content_type_id:
+        LOG.error("cannot delete %r with id %r: both values are required" % (content_type, content_type_id))
+        return
+    if content_type not in content_descriptions:
+        LOG.error("cannot delete %r, unknown content type. supported content_types: %s" % (content_type, ", ".join(content_descriptions.keys())))
+        return
+    if content_type_id == models.LAX_AJSON:
+        # we don't delete articles (yet)
+        LOG.error("refusing to delete article %r, articles must be deleted manually." % (content_type_id,))
+        return
+    desc = content_descriptions[content_type]
+    model = desc['model']
+    idfn = desc.get('idfn', utils.identity)
+    args = {'id': idfn(content_type_id)}
+    try:
+        obj = model.objects.get(**args)
+        obj.delete()
+        LOG.info("deleted %r with id %r" % (content_type, content_type_id))
+        return
+    except dj_models.ObjectDoesNotExist:
+        LOG.error("cannot delete %r with id %r: item not found in database" % (content_type, content_type_id))
+
+#
+#
+#
+
 def regenerate_all():
     regenerate_all_articles()
 
@@ -757,8 +784,12 @@ def download_regenerate(content_type, content_id):
         download_item(content_type, content_id)
         regenerate_item(content_type, content_id)
     except RequestException as err:
-        log = LOG.debug if err.response.status_code == 404 else LOG.error
-        log("failed to fetch %r %s: %s", content_type, content_id, err) # "failed to fetch presspackage '1234': 404 Not Found"
+        if err.response.status_code == 404:
+            # item not found, delete it
+            delete_item(content_type, content_id)
+        else:
+            # "failed to fetch presspackage '1234': 502 Gateway timed out"
+            LOG.error("failed to fetch %r %s: %s", content_type, content_id, err)
     except BaseException:
         LOG.exception("unhandled exception attempting to download and regenerate %s %r", content_type, content_id)
 

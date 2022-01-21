@@ -1,0 +1,351 @@
+{
+  "number": 70,
+  "title": "Episode 70: November 2020",
+  "published": "2020-11-16T13:12:51Z",
+  "image": {
+    "banner": {
+      "uri": "https://iiif.elifesciences.org/journal-cms/podcast_episode%2F2020-11%2F55301-a_striking_image.jpg",
+      "alt": "",
+      "source": {
+        "mediaType": "image/jpeg",
+        "uri": "https://iiif.elifesciences.org/journal-cms/podcast_episode%2F2020-11%2F55301-a_striking_image.jpg/full/full/0/default.jpg",
+        "filename": "55301-a_striking_image.jpg"
+      },
+      "size": {
+        "width": 2387,
+        "height": 1209
+      },
+      "focalPoint": {
+        "x": 50,
+        "y": 50
+      },
+      "attribution": [
+        "Bormann et al. 2020 (CC BY 4.0)"
+      ]
+    },
+    "thumbnail": {
+      "uri": "https://iiif.elifesciences.org/journal-cms/podcast_episode%2F2020-11%2F55301-a_striking_image.jpg",
+      "alt": "",
+      "source": {
+        "mediaType": "image/jpeg",
+        "uri": "https://iiif.elifesciences.org/journal-cms/podcast_episode%2F2020-11%2F55301-a_striking_image.jpg/full/full/0/default.jpg",
+        "filename": "55301-a_striking_image.jpg"
+      },
+      "size": {
+        "width": 2387,
+        "height": 1209
+      },
+      "focalPoint": {
+        "x": 50,
+        "y": 50
+      },
+      "attribution": [
+        "Bormann et al. 2020 (CC BY 4.0)"
+      ]
+    },
+    "social": {
+      "uri": "https://iiif.elifesciences.org/journal-cms/podcast_episode%2Fsocial%2F2020-11%2F55301-a_striking_image.jpg",
+      "alt": "",
+      "source": {
+        "mediaType": "image/jpeg",
+        "uri": "https://iiif.elifesciences.org/journal-cms/podcast_episode%2Fsocial%2F2020-11%2F55301-a_striking_image.jpg/full/full/0/default.jpg",
+        "filename": "55301-a_striking_image.jpg"
+      },
+      "size": {
+        "width": 2387,
+        "height": 1209
+      },
+      "focalPoint": {
+        "x": 50,
+        "y": 50
+      }
+    }
+  },
+  "sources": [
+    {
+      "mediaType": "audio/mpeg",
+      "uri": "https://www.thenakedscientists.com/sites/default/files/media/podcasts/episodes/eLife_Podcast_20.10.mp3"
+    }
+  ],
+  "impactStatement": "In this episode, we hear about artificial intelligence and in vitro fertilization, scar-free wound healing, decision-making, mosquitoes and open-access publishing.",
+  "chapters": [
+    {
+      "number": 1,
+      "title": "New hope for fertility treatments",
+      "time": 39,
+      "impactStatement": "Computer models to select human embryos could improve the success rates of IVF <br />",
+      "longTitle": "Listen to Hadi Shafiee explain how artificial intelligence could help improve the success rates of IVF.",
+      "content": [
+        {
+          "id": "55301",
+          "doi": "10.7554/eLife.55301",
+          "pdf": "https://cdn.elifesciences.org/articles/55301/elife-55301-v2.pdf",
+          "type": "short-report",
+          "stage": "published",
+          "title": "Performance of a deep learning based neural network in the selection of human blastocysts for implantation",
+          "status": "vor",
+          "volume": 9,
+          "version": 2,
+          "subjects": [
+            {
+              "id": "medicine",
+              "name": "Medicine"
+            }
+          ],
+          "copyright": {
+            "holder": "Bormann et al.",
+            "license": "CC-BY-4.0",
+            "statement": "This article is distributed under the terms of the <a href=\"http://creativecommons.org/licenses/by/4.0/\">Creative Commons Attribution License</a>, which permits unrestricted use and redistribution provided that the original author and source are credited."
+          },
+          "published": "2020-09-15T00:00:00Z",
+          "authorLine": "Charles L Bormann et al.",
+          "figuresPdf": "https://cdn.elifesciences.org/articles/55301/elife-55301-figures-v2.pdf",
+          "statusDate": "2020-09-30T13:48:35Z",
+          "elocationId": "e55301",
+          "versionDate": "2020-09-30T13:48:35Z",
+          "impactStatement": "A well-trained deep learning neural network can outperform and can potentially assist expertly trained embryologists in selecting embryos based on their implantation potential, even amongst high-quality euploid blastocyst embryos.",
+          "researchOrganisms": [
+            "Human"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "title": "What ketamine can teach us about schizophrenia",
+      "time": 360,
+      "impactStatement": "Ketamine mimics a lack of decision-making seen in schizophrenia <br />",
+      "longTitle": "Listen to Sean Cavanagh talk about how decision making becomes altered in psychiatric diseases.",
+      "content": [
+        {
+          "id": "53664",
+          "doi": "10.7554/eLife.53664",
+          "pdf": "https://cdn.elifesciences.org/articles/53664/elife-53664-v3.pdf",
+          "type": "research-article",
+          "stage": "published",
+          "title": "A circuit mechanism for decision-making biases and NMDA receptor hypofunction",
+          "status": "vor",
+          "volume": 9,
+          "version": 3,
+          "subjects": [
+            {
+              "id": "neuroscience",
+              "name": "Neuroscience"
+            }
+          ],
+          "copyright": {
+            "holder": "Cavanagh et al.",
+            "license": "CC-BY-4.0",
+            "statement": "This article is distributed under the terms of the <a href=\"http://creativecommons.org/licenses/by/4.0/\">Creative Commons Attribution License</a>, which permits unrestricted use and redistribution provided that the original author and source are credited."
+          },
+          "published": "2020-09-29T00:00:00Z",
+          "authorLine": "Sean Edward Cavanagh et al.",
+          "figuresPdf": "https://cdn.elifesciences.org/articles/53664/elife-53664-figures-v3.pdf",
+          "statusDate": "2020-09-29T00:00:00Z",
+          "elocationId": "e53664",
+          "versionDate": "2020-10-08T12:07:21Z",
+          "impactStatement": "Ketamine, an NMDA receptor antagonist and experimental model for schizophrenia, produces decision-making deficits in monkeys, which are predicted by a lowering of cortical excitation-inhibition balance in a spiking circuit model.",
+          "researchOrganisms": [
+            "Rhesus macaque"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "title": "A good place to bite",
+      "time": 799,
+      "impactStatement": "A new device mimicking human skin and blood provides new insights into the mosquito feeding behaviour <br />",
+      "longTitle": "Listen to Felix Hol explain how the biteOscope provides a new way to study blood-feeding in mosquitoes.",
+      "content": [
+        {
+          "id": "56829",
+          "doi": "10.7554/eLife.56829",
+          "pdf": "https://cdn.elifesciences.org/articles/56829/elife-56829-v2.pdf",
+          "type": "tools-resources",
+          "stage": "published",
+          "title": "BiteOscope, an open platform to study mosquito biting behavior",
+          "status": "vor",
+          "volume": 9,
+          "version": 2,
+          "subjects": [
+            {
+              "id": "ecology",
+              "name": "Ecology"
+            },
+            {
+              "id": "neuroscience",
+              "name": "Neuroscience"
+            }
+          ],
+          "copyright": {
+            "holder": "Hol et al.",
+            "license": "CC-BY-4.0",
+            "statement": "This article is distributed under the terms of the <a href=\"http://creativecommons.org/licenses/by/4.0/\">Creative Commons Attribution License</a>, which permits unrestricted use and redistribution provided that the original author and source are credited."
+          },
+          "published": "2020-09-22T00:00:00Z",
+          "authorLine": "Felix JH Hol et al.",
+          "figuresPdf": "https://cdn.elifesciences.org/articles/56829/elife-56829-figures-v2.pdf",
+          "statusDate": "2020-10-05T14:31:28Z",
+          "elocationId": "e56829",
+          "versionDate": "2020-10-05T14:31:28Z",
+          "impactStatement": "A new tool to visualize blood-feeding mosquitoes in high resolution and quantitatively characterize their behavior sheds light on contact-dependent sensing and blood-feeding dynamics of several medically relevant mosquito species."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "title": "Healing without scarring",
+      "time": 1136,
+      "impactStatement": "A genetic switch in early development can activate skin repair without scarring <br />",
+      "longTitle": "Listen to Ryan Driskell explain how a specific gene could be the key to scarless wound healing.",
+      "content": [
+        {
+          "id": "60066",
+          "doi": "10.7554/eLife.60066",
+          "pdf": "https://cdn.elifesciences.org/articles/60066/elife-60066-v1.pdf",
+          "type": "research-article",
+          "stage": "published",
+          "title": "Lef1 expression in fibroblasts maintains developmental potential in adult skin to regenerate wounds",
+          "status": "vor",
+          "volume": 9,
+          "version": 1,
+          "subjects": [
+            {
+              "id": "stem-cells-regenerative-medicine",
+              "name": "Stem Cells and Regenerative Medicine"
+            }
+          ],
+          "copyright": {
+            "holder": "Phan et al.",
+            "license": "CC-BY-4.0",
+            "statement": "This article is distributed under the terms of the <a href=\"http://creativecommons.org/licenses/by/4.0/\">Creative Commons Attribution License</a>, which permits unrestricted use and redistribution provided that the original author and source are credited."
+          },
+          "published": "2020-09-29T00:00:00Z",
+          "authorLine": "Quan M Phan et al.",
+          "figuresPdf": "https://cdn.elifesciences.org/articles/60066/elife-60066-figures-v1.pdf",
+          "statusDate": "2020-09-29T00:00:00Z",
+          "elocationId": "e60066",
+          "versionDate": "2020-09-29T00:00:00Z",
+          "impactStatement": "Adult wound repair can be rejuvenated to heal like young skin by activating neonatal transcription factors in fibroblasts.",
+          "researchOrganisms": [
+            "Mouse"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "title": "Open access publishing",
+      "time": 1441,
+      "impactStatement": "How successful have open access policies been? <br />",
+      "longTitle": "Listen to Chun-Kai Karl Huang talk about the impact of open access policies on research institutions.",
+      "content": [
+        {
+          "id": "57067",
+          "doi": "10.7554/eLife.57067",
+          "pdf": "https://cdn.elifesciences.org/articles/57067/elife-57067-v2.pdf",
+          "type": "feature",
+          "stage": "published",
+          "title": "Evaluating the impact of open access policies on research institutions",
+          "status": "vor",
+          "volume": 9,
+          "version": 2,
+          "copyright": {
+            "holder": "Huang et al.",
+            "license": "CC-BY-4.0",
+            "statement": "This article is distributed under the terms of the <a href=\"http://creativecommons.org/licenses/by/4.0/\">Creative Commons Attribution License</a>, which permits unrestricted use and redistribution provided that the original author and source are credited."
+          },
+          "published": "2020-09-14T00:00:00Z",
+          "authorLine": "Chun-Kai (Karl) Huang et al.",
+          "figuresPdf": "https://cdn.elifesciences.org/articles/57067/elife-57067-figures-v2.pdf",
+          "statusDate": "2020-10-05T14:57:54Z",
+          "elocationId": "e57067",
+          "titlePrefix": "Meta-Research",
+          "versionDate": "2020-10-05T14:57:54Z",
+          "impactStatement": "A longitudinal study of open access levels at 1,207 research institutions worldwide reveals high performing institutions in Latin America, Africa and Asia."
+        },
+        {
+          "type": "collection",
+          "id": "8d233d47",
+          "title": "Meta-Research: A Collection of Articles",
+          "published": "2018-11-23T15:13:10Z",
+          "image": {
+            "banner": {
+              "uri": "https://iiif.elifesciences.org/journal-cms/collection%2F2018-07%2Fmetadata_-_1_1.jpg",
+              "alt": "Meta-research",
+              "source": {
+                "mediaType": "image/jpeg",
+                "uri": "https://iiif.elifesciences.org/journal-cms/collection%2F2018-07%2Fmetadata_-_1_1.jpg/full/full/0/default.jpg",
+                "filename": "metadata_-_1_1.jpg"
+              },
+              "size": {
+                "width": 9921,
+                "height": 4961
+              },
+              "focalPoint": {
+                "x": 50,
+                "y": 50
+              },
+              "attribution": [
+                "http://vividbiology.com/"
+              ]
+            },
+            "thumbnail": {
+              "uri": "https://iiif.elifesciences.org/journal-cms/collection%2F2018-07%2Fmetadata_-_1_1.jpg",
+              "alt": "Meta-research",
+              "source": {
+                "mediaType": "image/jpeg",
+                "uri": "https://iiif.elifesciences.org/journal-cms/collection%2F2018-07%2Fmetadata_-_1_1.jpg/full/full/0/default.jpg",
+                "filename": "metadata_-_1_1.jpg"
+              },
+              "size": {
+                "width": 9921,
+                "height": 4961
+              },
+              "focalPoint": {
+                "x": 50,
+                "y": 50
+              },
+              "attribution": [
+                "http://vividbiology.com/"
+              ]
+            }
+          },
+          "impactStatement": "The study of science itself is a growing field of research.",
+          "selectedCurator": {
+            "id": "392bba9e",
+            "type": {
+              "id": "senior-editor",
+              "label": "Features Editor, eLife, United Kingdom"
+            },
+            "name": {
+              "surname": "Rodgers",
+              "givenNames": "Peter A",
+              "preferred": "Peter A Rodgers",
+              "index": "Rodgers, Peter A"
+            },
+            "orcid": "0000-0001-8332-936X",
+            "image": {
+              "uri": "https://iiif.elifesciences.org/journal-cms/person%2F2019-02%2Fhrdsc_0491.jpg",
+              "alt": "",
+              "source": {
+                "mediaType": "image/jpeg",
+                "uri": "https://iiif.elifesciences.org/journal-cms/person%2F2019-02%2Fhrdsc_0491.jpg/full/full/0/default.jpg",
+                "filename": "hrdsc_0491.jpg"
+              },
+              "size": {
+                "width": 2862,
+                "height": 2044
+              },
+              "focalPoint": {
+                "x": 49,
+                "y": 31
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

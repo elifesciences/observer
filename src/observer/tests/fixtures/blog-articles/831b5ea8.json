@@ -1,0 +1,199 @@
+{
+  "id": "831b5ea8",
+  "title": "Event Report: Evolutionary Medicine Symposium",
+  "published": "2021-12-17T17:30:19Z",
+  "image": {
+    "social": {
+      "uri": "https://iiif.elifesciences.org/journal-cms/blog_article%2Fsocial%2F2021-12%2Fevo-med-symposium-screenshot.png",
+      "alt": "",
+      "source": {
+        "mediaType": "image/jpeg",
+        "uri": "https://iiif.elifesciences.org/journal-cms/blog_article%2Fsocial%2F2021-12%2Fevo-med-symposium-screenshot.png/full/full/0/default.jpg",
+        "filename": "evo-med-symposium-screenshot.jpg"
+      },
+      "size": {
+        "width": 2860,
+        "height": 1516
+      },
+      "focalPoint": {
+        "x": 50,
+        "y": 50
+      }
+    }
+  },
+  "impactStatement": "eLife authors showcase their research from the Evolutionary Medicine Special Issue – watch now.",
+  "content": [
+    {
+      "text": "Our online symposium, hosted by eLife Senior Editor, George Perry of Pennsylvania State University, features four authors as they present key findings from their research recently published in eLife’s <a href=\"https://elifesciences.org/collections/8d9426aa/evolutionary-medicine-a-special-issue\">Evolutionary Medicine Special Issue</a>.",
+      "type": "paragraph"
+    },
+    {
+      "text": "From how adaptations to our past lifestyles and pathogens impact risk for current diseases to the emergence and spread of antibiotic-resistant bacteria, evolutionary theory is critical for understanding modern human health.",
+      "type": "paragraph"
+    },
+    {
+      "text": "A short Q&amp;A followed each author presentation.",
+      "type": "paragraph"
+    },
+    {
+      "id": "pQdZCCiBvxU",
+      "type": "youtube",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "type": "section",
+      "title": "Chair:",
+      "content": [
+        {
+          "type": "profile",
+          "image": {
+            "alt": "",
+            "uri": "https://iiif.elifesciences.org/journal-cms/blog-article-preview%2F2021-12%2Fgeorge.png",
+            "size": {
+              "width": 1580,
+              "height": 1420
+            },
+            "source": {
+              "uri": "https://iiif.elifesciences.org/journal-cms/blog-article-preview%2F2021-12%2Fgeorge.png/full/full/0/default.jpg",
+              "filename": "george.jpg",
+              "mediaType": "image/jpeg"
+            },
+            "focalPoint": {
+              "x": 50,
+              "y": 50
+            }
+          },
+          "content": [
+            {
+              "text": "<strong>George H Perry</strong><br /><em>Pennsylvania State University, United States</em><br /><br />George Perry received his PhD in 2008 from Arizona State University, and did postdoctoral work at the University of Chicago. In 2011, he began a faculty position at Penn State University, where he is now Associate Professor of Anthropology and Biology, Chair of the Bioinformatics and Genomics Graduate Degree Program, and member of the Huck Institutes of the Life Sciences. His research interests focus on human evolution, evolutionary ecology, and evolutionary medicine, and how human behavior and biology have affected non-human evolutionary biology. Research methods and theory from anthropology, evolutionary biology, parasitology, and population, comparative, functional, and paleo (ancient DNA) genomics are integrated in this work. He has received the Faculty Early Career Development (CAREER) Award from the National Science Foundation, among others.<br /><br /><strong>Follow George on<a href=\"https://twitter.com/grg_perry\"> Twitter</a>.</strong>",
+              "type": "paragraph"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "title": "Panelists:",
+      "content": [
+        {
+          "type": "profile",
+          "image": {
+            "alt": "",
+            "uri": "https://iiif.elifesciences.org/journal-cms/blog-article-preview%2F2021-12%2Fstephanie_yan.jpg",
+            "size": {
+              "width": 3712,
+              "height": 3713
+            },
+            "source": {
+              "uri": "https://iiif.elifesciences.org/journal-cms/blog-article-preview%2F2021-12%2Fstephanie_yan.jpg/full/full/0/default.jpg",
+              "filename": "stephanie_yan.jpg",
+              "mediaType": "image/jpeg"
+            },
+            "focalPoint": {
+              "x": 50,
+              "y": 50
+            }
+          },
+          "content": [
+            {
+              "text": "<strong>Stephanie Yan</strong><br /><em>Johns Hopkins University</em><br /><br /><a href=\"https://youtu.be/pQdZCCiBvxU?t=237\"><strong>00:03:57 – Local adaptation and archaic introgression at human structural variant loci</strong></a><br />Large genomic insertions, deletions, and inversions are a potent source of functional and fitness-altering variation, but are challenging to resolve with short-read sequencing alone. While recent long-read sequencing technologies have greatly expanded the catalog of structural variants (SVs), their costs have so far precluded their application at population scales. Given these limitations, the role of SVs in human adaptation remains poorly characterized.<br />Here, we used a graph-based approach to genotype 107,866 long-read-discovered SVs in short-read sequencing data from diverse human populations. We identified 220 SVs exhibiting extreme population-specific allele frequency differentiation — a signature of local adaptation. The top two adaptive signatures traced to variants at the immunoglobulin heavy chain locus, together tagging a 325 Kbp region that swept to high frequency in certain Southeast Asian populations. Further investigation revealed that the adaptive sequence closely matches with that of Neanderthals, providing strong evidence of a Neanderthal-introgressed origin. This extraordinary episode of positive selection, which we infer to have occurred between 1700 and 8400 years ago, corroborates the role of immune-related genes as prominent targets of adaptive archaic introgression.<br /><br />Read the full Research Article <a href=\"https://elifesciences.org/articles/67615\">here</a>.<br /><br /><strong>Follow Stephanie on <a href=\"https://twitter.com/smyan__\">Twitter</a>.</strong>",
+              "type": "paragraph"
+            }
+          ]
+        },
+        {
+          "type": "profile",
+          "image": {
+            "alt": "",
+            "uri": "https://iiif.elifesciences.org/journal-cms/blog-article-preview%2F2021-12%2Fjero.png",
+            "size": {
+              "width": 870,
+              "height": 930
+            },
+            "source": {
+              "uri": "https://iiif.elifesciences.org/journal-cms/blog-article-preview%2F2021-12%2Fjero.png/full/full/0/default.jpg",
+              "filename": "jero.jpg",
+              "mediaType": "image/jpeg"
+            },
+            "focalPoint": {
+              "x": 50,
+              "y": 50
+            }
+          },
+          "content": [
+            {
+              "text": "<strong>Jerónimo Rodríguez-Beltrán</strong><br /><em>Ramón y Cajal University Hospital-IRYCIS and CIBERINFEC</em><br /><br /><a href=\"https://youtu.be/pQdZCCiBvxU?t=1387\"><strong>00:23:07 – Collateral sensitivity associated with antibiotic resistance plasmids</strong></a><br />Collateral sensitivity (CS) is a promising alternative approach to counteract the rising problem of antibiotic resistance (AR). CS occurs when the acquisition of resistance to one antibiotic produces increased susceptibility to a second antibiotic. For CS to be widely applicable in clinical practice, it would need to be effective against the main resistance mechanisms available to bacteria. Recent studies have focused on CS strategies designed against chromosomal resistance mutations. However, one of the main drivers of AR in clinically relevant bacteria is the horizontal gene transfer of AR genes mediated by plasmids. In this talk, we report the first analysis of CS associated with the acquisition of complete AR plasmids, including the clinically important carbapenem-resistance conjugative plasmid pOXA-48. In addition, we explored the conservation of CS in clinical <em>E. coli </em>isolates and its applicability to selectively eliminate plasmid-carrying bacteria. Our results provide new insights that establish the basis for the development of CS-informed treatment strategies to combat plasmid-mediated AR.<br /><br />Read the full Research Article <a href=\"https://elifesciences.org/articles/65130\">here</a>.<br /><br /><strong>Follow Jerónimo on<a href=\"https://twitter.com/Jero_RB\"> Twitter</a>.</strong>",
+              "type": "paragraph"
+            }
+          ]
+        },
+        {
+          "type": "profile",
+          "image": {
+            "alt": "",
+            "uri": "https://iiif.elifesciences.org/journal-cms/blog-article-preview%2F2021-12%2Fscreenshot_2021-12-17_at_17_45_13.png",
+            "size": {
+              "width": 766,
+              "height": 780
+            },
+            "source": {
+              "uri": "https://iiif.elifesciences.org/journal-cms/blog-article-preview%2F2021-12%2Fscreenshot_2021-12-17_at_17_45_13.png/full/full/0/default.jpg",
+              "filename": "screenshot_2021-12-17_at_17_45_13.jpg",
+              "mediaType": "image/jpeg"
+            },
+            "focalPoint": {
+              "x": 50,
+              "y": 50
+            }
+          },
+          "content": [
+            {
+              "text": "<strong>Josh D'Aeth</strong><br /><em>Imperial College London</em><br /><br /><a href=\"https://youtu.be/pQdZCCiBvxU?t=2300\"><strong>00:38:20 – Interspecies spread of AMR elements via recombination within pneumococci</strong></a><br />Homologous recombination has been known to spread resistance to antimicrobials via the importation of mutations within core <em>Streptococcus pneumonia</em> (the pneumococcus) genes. These resistant sequences often come from closely related commensal species. In this talk though I'll focus on how larger mobile genetic elements (MGEs), particularly Tn<em>1207.1 </em>and Tn<em>916</em> encoding macrolide and tetracycline resistance respectively, can also be transferred via transformation and recombination into pneumococci populations. I'll show how these elements are often imported from commensal species such as <em>Streptococcus mitis</em> and <em>Streptococcus oralis</em>. This work has important implications both for strategies around mitigating the spread of AMR in important human pathogens and in the wider question of how we define bacterial species that can exchange genes between each other. <br /><br />Read the full Research Article<a href=\"https://elifesciences.org/articles/67113\"> here</a>.",
+              "type": "paragraph"
+            }
+          ]
+        },
+        {
+          "type": "profile",
+          "image": {
+            "alt": "",
+            "uri": "https://iiif.elifesciences.org/journal-cms/blog-article-preview%2F2021-12%2Fscreenshot_2021-12-17_at_17_47_44.png",
+            "size": {
+              "width": 700,
+              "height": 874
+            },
+            "source": {
+              "uri": "https://iiif.elifesciences.org/journal-cms/blog-article-preview%2F2021-12%2Fscreenshot_2021-12-17_at_17_47_44.png/full/full/0/default.jpg",
+              "filename": "screenshot_2021-12-17_at_17_47_44.jpg",
+              "mediaType": "image/jpeg"
+            },
+            "focalPoint": {
+              "x": 50,
+              "y": 50
+            }
+          },
+          "content": [
+            {
+              "text": "<strong>Juan Manuel Vazquez</strong><br /><em>University of California, Berkeley</em><br /><br /><a href=\"https://youtu.be/pQdZCCiBvxU?t=3468\"><strong>00:57:48 –</strong> <strong>Of Mice and Elephants: Trade-Offs of Tumor Suppressor Duplication and Body Size Evolution in <em>Afrotheria</em></strong></a><br />Peto's Paradox describes the observation that while cancer risk is correlated with body size and lifespan within species, no such correlation holds between species. This indicates that large, long-lived species have evolved enhanced cancer protection mechanisms, and that these mechanisms may be used to treat and even prevent human cancers, and extend the human healthspan. The recent expansion of body size in elephants relative to other members of their resident clade of <em>Afrotheria</em> led us to explore how both body size and lifespan evolved in this group. We found that ancestrally, large body sizes evolved multiple times throughout Afrotheria, and that tumor suppressor duplications were pervasive in Afrotherian genomes, rather than restricted to modern or recent Proboscideans. Proboscideans, however, have duplicates in unique pathways that may underlie some aspects of their remarkable anti-cancer cell biology. These data suggest that duplication of tumor suppressor genes facilitated the evolution of increased body size by compensating for decreasing intrinsic cancer risk. <br /><br />Read the full Research Article <a href=\"https://elifesciences.org/articles/65041\">here</a>.<br /><br /><strong>Follow Juan on <a href=\"https://twitter.com/TheMainManManny\">Twitter</a>.</strong>",
+              "type": "paragraph"
+            }
+          ]
+        },
+        {
+          "text": "#",
+          "type": "paragraph"
+        },
+        {
+          "text": "Questions and comments are welcome. Please annotate publicly on the article or contact us at hello [at] elifesciences [dot] org.",
+          "type": "paragraph"
+        },
+        {
+          "text": "For the latest in published research sign up for our <a href=\"https://elifesciences.org/content-alerts\">bi-weekly email alerts</a>. You can also follow <a href=\"https://twitter.com/elife\">@eLife</a> on Twitter.",
+          "type": "paragraph"
+        }
+      ]
+    }
+  ]
+}

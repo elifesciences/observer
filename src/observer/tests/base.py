@@ -16,6 +16,11 @@ def call_command(*args, **kwargs):
         return err.code, stdout.getvalue()
     raise AssertionError("management commands should always throw a systemexit()")
 
+def jsonfix(*bits):
+    bits = [FIXTURE_DIR] + list(bits)
+    path = os.path.join(*bits)
+    return json.load(open(path, 'r'))
+
 class BaseCase(TestCase):
     this_dir = THIS_DIR
     fixture_dir = FIXTURE_DIR

@@ -335,6 +335,7 @@ class ContentCategory(models.Model):
 
 
 CONTENT_TYPE_CHOICES = [
+    # INSIGHT # lsh@2022-01-21: is this supposed to be missing?
     INTERVIEW,
     COLLECTION,
     BLOG_ARTICLE,
@@ -392,4 +393,4 @@ class Content(models.Model):
         return self.id
 
     def __repr__(self):
-        return '<Content "%s">' % self
+        return '<Content %s "%s">' % (self.content_type, self)
