@@ -442,7 +442,7 @@ class Podcasts(base.BaseCase):
 
     def test_download_ingest_results(self):
         "podcast-episodes results are parsed out into their individual models"
-        fixture = self.jsonfix('podcast-episdoes', 'many.json')
+        fixture = self.jsonfix('podcast-episodes', 'many.json')
         with patch('observer.consume.consume', return_value=fixture):
             ingest_logic.download_all(models.PODCAST)
         ingest_logic.regenerate(models.PODCAST)
