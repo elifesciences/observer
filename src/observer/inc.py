@@ -55,13 +55,15 @@ def _handler(json_event):
         'presspackage': models.PRESSPACKAGE,
         'labs-post': models.LABS_POST,
         'digest': models.DIGEST,
+        'podcast-episode': models.PODCAST,
+        'collection': models.COLLECTION,
+        'interview': models.INTERVIEW,
+        'blog-article': models.BLOG_ARTICLE,
+
         # pulled in via daily cronjob, see ./daily.sh
         # 'profile': ...
         # 'metrics': ...
         # 'community' content, also pulled in daily via cronjob
-        # 'interview': models.INTERVIEW,
-        # 'collection': models.COLLECTION,
-        # 'blog-article': models.BLOG_ARTICLE,
         # 'feature': ...
         # 'editorial': ...
     }

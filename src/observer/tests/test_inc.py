@@ -1,13 +1,15 @@
 import json
-from .base import BaseCase
+from . import base
 from unittest.mock import patch, Mock
-from observer import inc, models, ingest_logic
+from observer import inc, models, ingest_logic, consume
+import pytest
+import requests
 
-class One(BaseCase):
+class One(base.BaseCase):
 
     def test_handling_event(self):
         msid = 13964
-        fixture = self.jsonfix('ajson', 'elife-13964-v1.xml.json')
+        fixture = base.jsonfix('ajson', 'elife-13964-v1.xml.json')
         ingest_logic.upsert_json(msid, 1, models.LAX_AJSON, fixture)
         self.assertEqual(0, models.Article.objects.count())
         self.assertEqual(1, models.RawJSON.objects.count()) # fixture
@@ -47,3 +49,30 @@ def test_handling_unexpected_error():
         with patch('observer.ingest_logic.download_regenerate', side_effect=RuntimeError('no pants')):
             inc.handler(dummy_event)
             assert mock.exception.called
+
+@pytest.mark.django_db
+def test_404_deletes_item():
+    "receiving a 404 for content that exists causes the item to be deleted"
+    item_id = 'ecc32978'
+    fixture = base.jsonfix('interviews/ecc32978.json')
+
+    consume.upsert(item_id, models.INTERVIEW, fixture)
+    ingest_logic._regenerate_item(models.INTERVIEW, item_id)
+
+    assert models.Content.objects.count() == 1
+    assert models.RawJSON.objects.count() == 1
+
+    # simulate receiving an event
+    dummy_event = Mock()
+    dummy_event.body = json.dumps({'type': models.INTERVIEW, 'id': item_id})
+
+    # simulate a 404 error response
+    response = requests.Response()
+    response.status_code = 404
+    exc = requests.exceptions.RequestException()
+    exc.response = response
+    with patch('observer.ingest_logic.download_item', side_effect=exc): # prevent downloading other versions
+        inc.handler(dummy_event)
+
+    assert models.Content.objects.count() == 0
+    assert models.RawJSON.objects.count() == 0

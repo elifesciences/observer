@@ -314,3 +314,7 @@ def iiif_thumbnail_link(uri, width, height):
     quality = "default" # native, color, grey, bitonal
     image_format = "jpg"
     return f"{uri}/{region}/{size}/{rotation}/{quality}.{image_format}"
+
+def identity(x):
+    "returns the value it was given"
+    return x

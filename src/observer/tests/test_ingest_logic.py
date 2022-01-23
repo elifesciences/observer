@@ -6,6 +6,7 @@ from unittest.mock import patch
 from observer.ingest_logic import p, pp
 from datetime import datetime
 import pytz
+import pytest
 
 class IngestLogic(base.BaseCase):
     def setUp(self):
@@ -200,7 +201,7 @@ class Metrics(base.BaseCase):
 
     def test_metrics_summary_consume(self):
         "an article's metrics summary can be downloaded and turned into RawJSON"
-        expected = self.jsonfix('metrics-summary', '9560.json')
+        expected = base.jsonfix('metrics-summary', '9560.json')
         self.assertEqual(0, models.RawJSON.objects.count())
         with patch('observer.consume.consume', return_value=expected):
             ingest_logic.download_article_metrics(9560)
@@ -208,7 +209,7 @@ class Metrics(base.BaseCase):
 
     def test_metrics_summary_consume_all(self):
         "all metrics summaries can be downloaded and turned into RawJSON records"
-        expected = self.jsonfix('metrics-summary', 'many.json')
+        expected = base.jsonfix('metrics-summary', 'many.json')
         with patch('observer.consume.consume', return_value=expected):
             ingest_logic.download_all_article_metrics()
         self.assertEqual(100, models.RawJSON.objects.count())
@@ -220,7 +221,7 @@ class Metrics(base.BaseCase):
 class PressPackages(base.BaseCase):
     def test_download_single_presspackage(self):
         ppid = "81d42f7d"
-        expected = self.jsonfix('presspackages', ppid + '.json')
+        expected = base.jsonfix('presspackages', ppid + '.json')
         with patch('observer.consume.consume', return_value=expected):
             ppobj = ingest_logic.download_item(models.PRESSPACKAGE, ppid)
             self.assertEqual(models.RawJSON.objects.count(), 1)
@@ -235,7 +236,7 @@ class PressPackages(base.BaseCase):
             self.assertEqual(getattr(ppobj, attr), expected)
 
     def test_download_many_presspackages(self):
-        expected = self.jsonfix('presspackages', 'many.json')
+        expected = base.jsonfix('presspackages', 'many.json')
         expected['total'] = 100
         with patch('observer.consume.consume', return_value=expected):
             ingest_logic.download_all(models.PRESSPACKAGE)
@@ -251,7 +252,7 @@ class ProfileCount(base.BaseCase):
 
     def test_download_single_profile(self):
         pfid = 'ssiyns7x'
-        expected = self.jsonfix('profiles', pfid + '.json')
+        expected = base.jsonfix('profiles', pfid + '.json')
         with patch('observer.consume.consume', return_value=expected):
             ingest_logic.download_item(models.PROFILE, pfid)
         self.assertEqual(models.RawJSON.objects.count(), 1)
@@ -260,7 +261,7 @@ class ProfileCount(base.BaseCase):
         self.assertEqual(models.Profile.objects.count(), 1)
 
     def test_download_many_profiles(self):
-        expected = self.jsonfix('profiles', 'many.json')
+        expected = base.jsonfix('profiles', 'many.json')
         expected['total'] = 100
         with patch('observer.consume.consume', return_value=expected):
             ingest_logic.download_all(models.PROFILE)
@@ -396,7 +397,7 @@ class Content(base.BaseCase):
 
     def test_download_content(self):
         "raw /collection data can be downloaded and is stored as individual items"
-        fixture = self.jsonfix('community', 'many.json')
+        fixture = base.jsonfix('community', 'many.json')
         with patch('observer.consume.consume', return_value=fixture):
             ingest_logic.download_all(models.COMMUNITY)
         expected = 11
@@ -404,7 +405,7 @@ class Content(base.BaseCase):
 
     def test_download_ingest_collection(self):
         "collections results are parsed out into their individual models"
-        fixture = self.jsonfix('community', 'many.json')
+        fixture = base.jsonfix('community', 'many.json')
         with patch('observer.consume.consume', return_value=fixture):
             ingest_logic.download_all(models.COMMUNITY)
         ingest_logic.regenerate(models.COMMUNITY)
@@ -431,7 +432,7 @@ class Podcasts(base.BaseCase):
 
     def test_download_results(self):
         "raw /podcast-episodes data can be downloaded and is stored as individual items"
-        fixture = self.jsonfix('podcasts', 'many.json')
+        fixture = base.jsonfix('podcast-episodes', 'many.json')
         with patch('observer.consume.consume', return_value=fixture):
             ingest_logic.download_all(models.PODCAST)
         expected = 10
@@ -441,7 +442,7 @@ class Podcasts(base.BaseCase):
 
     def test_download_ingest_results(self):
         "podcast-episodes results are parsed out into their individual models"
-        fixture = self.jsonfix('podcasts', 'many.json')
+        fixture = base.jsonfix('podcast-episodes', 'many.json')
         with patch('observer.consume.consume', return_value=fixture):
             ingest_logic.download_all(models.PODCAST)
         ingest_logic.regenerate(models.PODCAST)
@@ -480,3 +481,50 @@ class Insights(base.BaseCase):
         self.assertEqual(models.Content.objects.count(), 1)
         expected = "Experiments on a single-celled ciliate reveal how mobile genetic elements can shape a genome, even one which is not transcriptionally active."
         self.assertEqual(expected, models.Content.objects.get(id="23447").description)
+
+@pytest.mark.django_db
+def test_delete_items():
+
+    cases = [
+        (models.PRESSPACKAGE, '81d42f7d', 'presspackages/81d42f7d.json'),
+        (models.PROFILE, 'ssiyns7x', 'profiles/ssiyns7x.json'),
+
+        # --- content objects
+
+        # (models.INSIGHT, '23447', 'insights/elife-23447-v1.xml.json'),
+        (models.INTERVIEW, 'ecc32978', 'interviews/ecc32978.json'),
+        (models.COLLECTION, '80db56f5', 'collections/80db56f5.json'),
+
+        (models.BLOG_ARTICLE, '831b5ea8', 'blog-articles/831b5ea8.json'),
+        # (models.FEATURE, 'adsf'),
+        (models.DIGEST, '59885', 'digests/59885.json'),
+        (models.LABS_POST, 'dc5acbde', 'labs-posts/dc5acbde.json'),
+        #(models.EDITORIAL, 'asdf'),
+        (models.PODCAST, 70, 'podcast-episodes/70.json'),
+    ]
+
+    for content_type, content_type_id, fixture_path in cases:
+        fixture = base.jsonfix(fixture_path)
+        ingest_logic._regenerate_item(content_type, content_type_id, fixture)
+        ingest_logic.delete_item(content_type, content_type_id)
+
+    assert models.Content.objects.count() == 0
+    assert models.RawJSON.objects.count() == 0 # test bypasses rawjson table, this is just in case
+
+
+@pytest.mark.django_db
+def test_delete_items__failure_cases():
+    cases = [
+        # empty cases
+        (None, None, None),
+        (None, 'foo', None),
+        ("", "", None),
+        # unknown content type
+        ('foo', None, None),
+        # articles not supported yet
+        (models.LAX_AJSON, 9560, None),
+        # no content in database
+        (models.INTERVIEW, "7379e8d5", None),
+    ]
+    for content_type, content_id, expected in cases:
+        assert ingest_logic.delete_item(content_type, content_id) == expected, "failed case %r" % str(content_type, content_id, expected)

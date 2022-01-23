@@ -3,7 +3,7 @@ See `test_views.py` for tests that cover *all* reports and *all* of their suppor
 import json
 import pytest
 import copy
-from .base import BaseCase
+from . import base
 from observer import reports, ingest_logic, models, utils
 from observer.utils import todt
 from django.test import Client
@@ -11,7 +11,7 @@ from django.urls import reverse
 from unittest import mock
 from datetime import datetime, timedelta
 
-class One(BaseCase):
+class One(base.BaseCase):
     def setUp(self):
         self.c = Client()
 
@@ -42,7 +42,7 @@ class One(BaseCase):
         expected_result['items'] = [1, 2, 3]
         self.assertEqual(foo(), expected_result)
 
-class PublishedArticleIndex(BaseCase):
+class PublishedArticleIndex(base.BaseCase):
     def setUp(self):
         self.c = Client()
 
@@ -119,12 +119,12 @@ class PublishedArticleIndex(BaseCase):
         ]
         self.assertEqual(expected, report)
 
-class ProfileCounts(BaseCase):
+class ProfileCounts(base.BaseCase):
     def setUp(self):
         self.c = Client()
 
     def test_profile_counts(self):
-        expected = self.jsonfix('profiles', 'many.json')
+        expected = base.jsonfix('profiles', 'many.json')
         expected['total'] = 100
         with mock.patch('observer.consume.consume', return_value=expected):
             ingest_logic.download_all(models.PROFILE)

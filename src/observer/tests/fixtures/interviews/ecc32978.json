@@ -1,0 +1,224 @@
+{
+  "id": "ecc32978",
+  "title": "Scientists on Social Media: Inés Dawson",
+  "published": "2021-12-10T16:03:00Z",
+  "interviewee": {
+    "name": {
+      "preferred": "Inés Dawson",
+      "index": "Dawson, Inés"
+    }
+  },
+  "impactStatement": "Creating YouTube videos for the scientifically curious helped a researcher stay motivated during her PhD.",
+  "image": {
+    "thumbnail": {
+      "uri": "https://iiif.elifesciences.org/journal-cms/interview%2F2021-12%2Fines_social-image-1.jpg",
+      "alt": "Image of Inés Dawson leaning on a tree branch",
+      "source": {
+        "mediaType": "image/jpeg",
+        "uri": "https://iiif.elifesciences.org/journal-cms/interview%2F2021-12%2Fines_social-image-1.jpg/full/full/0/default.jpg",
+        "filename": "ines_social-image-1.jpg"
+      },
+      "size": {
+        "width": 1915,
+        "height": 1079
+      },
+      "focalPoint": {
+        "x": 50,
+        "y": 50
+      }
+    },
+    "social": {
+      "uri": "https://iiif.elifesciences.org/journal-cms/interview%2Fsocial%2F2021-12%2Fines_social-image-1.jpg",
+      "alt": "",
+      "source": {
+        "mediaType": "image/jpeg",
+        "uri": "https://iiif.elifesciences.org/journal-cms/interview%2Fsocial%2F2021-12%2Fines_social-image-1.jpg/full/full/0/default.jpg",
+        "filename": "ines_social-image-1.jpg"
+      },
+      "size": {
+        "width": 1915,
+        "height": 1079
+      },
+      "focalPoint": {
+        "x": 50,
+        "y": 50
+      }
+    }
+  },
+  "content": [
+    {
+      "text": "As a child, <a href=\"https://www.inesdawson.com/\">Inés Dawson</a> – creator of the YouTube channel <a href=\"https://www.youtube.com/c/DrawCuriosity/featured\">Draw Curiosity</a> – dreamed of making her own science documentaries. Fast forward to today and Draw Curiosity has over 50K subscribers and features videos on topics as diverse as <a href=\"https://www.youtube.com/watch?v=RywNuROWnDg\">snails</a> and the <a href=\"https://www.youtube.com/watch?v=0tvSm_dcmpA&amp;list=PLdNfe9CByWuasVkgyl561m2yfEGWHqtSH&amp;index=8\">Mars Rover</a>. Here we talk to Inés about the history of Draw Curiosity – which she started when she was a PhD student at the University of Oxford – and how she thinks social media is changing people’s perceptions of science.",
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "image": {
+        "alt": "",
+        "uri": "https://iiif.elifesciences.org/journal-cms/interview-preview%2F2021-12%2Fines_article-cropped_0.jpg",
+        "size": {
+          "width": 1441,
+          "height": 2149
+        },
+        "source": {
+          "uri": "https://iiif.elifesciences.org/journal-cms/interview-preview%2F2021-12%2Fines_article-cropped_0.jpg/full/full/0/default.jpg",
+          "filename": "ines_article-cropped_0.jpg",
+          "mediaType": "image/jpeg"
+        },
+        "focalPoint": {
+          "x": 50,
+          "y": 50
+        }
+      },
+      "title": "Image credit: Inés Dawson",
+      "inline": true
+    },
+    {
+      "type": "section",
+      "title": "<strong>How would you describe the type of content you make?</strong>",
+      "content": [
+        {
+          "text": "Draw Curiosity is all about things you didn’t realize you wanted to know about, or about things that leave you feeling you’ve learnt something new or discovered an unexpected connection between topics. Deep down, it’s a way for me to make videos about things I’m interested in or had fun researching in the past and wanting to share that joy with my audience.",
+          "type": "paragraph"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "title": "<strong>Which video has been the most popular?</strong>",
+      "content": [
+        {
+          "text": "My most popular is a guest video called “<a href=\"https://www.youtube.com/watch?v=WKQT1MXfasM\">Seeing Things: Visual Disturbances We All Experience</a>” that I made for Tom Scott’s YouTube channel. Every so often the video seems to receive a new wave of views that brings people over to my channel – most of my new subscribers come from collaborations with other YouTubers.",
+          "type": "paragraph"
+        },
+        {
+          "text": "On Draw Curiosity, the most popular video is about <a href=\"https://www.youtube.com/watch?v=wl0I2vl6ul0\">glass batteries,</a> which now has almost 384K views. Ironically, I never felt it was particularly representative of the content I make, but the video ended up going viral as it was a hot topic in the press at the time. Other videos that have been popular are questions that get searched quite often, like “<a href=\"https://www.youtube.com/watch?v=rNiCkqrdVLw\">How do pregnancy tests work?</a>” or “<a href=\"https://www.youtube.com/watch?v=5C68yZmWpKo\">Do insects feel pain?</a>”",
+          "type": "paragraph"
+        },
+        {
+          "id": "WKQT1MXfasM",
+          "type": "youtube",
+          "width": 1280,
+          "height": 720
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "title": "<strong>What has the feedback to your videos been like?</strong>",
+      "content": [
+        {
+          "text": "Most regular viewers are very kind and thoughtful in their feedback. Occasionally, I receive unsavoury comments, but they often come from viewers who have just encountered my content and generally have no particular attachment to it.",
+          "type": "paragraph"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "title": "<strong>How would you describe your audience on YouTube? </strong>",
+      "content": [
+        {
+          "text": "Like most educational channels, my audience tends to be slightly older and more male than the average YouTube channel; although, sadly, this is likely algorithmically driven, since content listed under ‘science and technology' is usually suggested more to accounts belonging to men in their mid-twenties to early thirties.",
+          "type": "paragraph"
+        },
+        {
+          "text": "However, I’m proud to say that I have a very international audience! I’m a native bilingual speaker of English and Spanish, and creating accessible content was always my goal. I do my best to add English subtitles, and when I have time translate them into Spanish. More recently I launched another YouTube channel called <a href=\"https://www.youtube.com/channel/UCJJE7Kx6HDKikXhmu5m1hKg\">Inés-table</a>, which is entirely in Spanish.",
+          "type": "paragraph"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "title": "<strong>How does your content on Inés-table differ from Draw Curiosity?</strong>",
+      "content": [
+        {
+          "text": "I noticed when participating in Spanish scicomm events that attendees there are often younger than at English-speaking events, and have slightly different preferences and needs when turning to educational content on YouTube. For example, many Spanish-speaking viewers are looking for content that could serve as a supplementary study guide, as well as guidance in terms of what to study at university. So, the videos I post on Inés-table tend to provide a broader and more general overview of a subject, whereas Draw Curiosity tends to focus on highly-detailed topics.",
+          "type": "paragraph"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "title": "<strong>You created and ran Draw Curiosity at the same time as conducting your PhD at Oxford. How did you find balancing the two? </strong>",
+      "content": [
+        {
+          "text": "Looking back, I’m not sure how I did it! You know there’s that image of a triangle with “College”, “Social Life” and “Sleep” on each vertex, and a small quip stating you can only pick two of them – well, I could only focus on one. However, whenever I was feeling deflated due to work, or feeling purposeless due to experiments not working, making a Draw Curiosity video helped me recover some of the sense of wonder and curiosity required to keep my chin up with research.",
+          "type": "paragraph"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "title": "<strong>How has YouTube changed since you first started in 2016? </strong>",
+      "content": [
+        {
+          "text": "I’ve noticed that videos that do well now tend to be longer, and my own longer videos began doing much better after 2018. This is likely because YouTube started promoting videos based on the aggregated amount of time people spent watching them rather than number of viewers. Also, I think people enjoy watching deep dives and analyses on specific topics more than shorter, more superficial videos – I know I do!",
+          "type": "paragraph"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "title": "<strong>Which video are you the proudest of?</strong>",
+      "content": [
+        {
+          "text": "The videos in my playlist “<a href=\"https://www.youtube.com/playlist?list=PLdNfe9CByWuasVkgyl561m2yfEGWHqtSH\">New to the Channel? Start here!</a>” are secretly the ones I’m proudest of, and I think capture the essence of my channel best. It’s hard to choose a favourite, but perhaps I would pick “<a href=\"https://www.youtube.com/watch?v=exdL2H9PzJA\">5 Things You Didn’t Know About Insect Wings”</a>, as it ties in closely to my PhD, and many people said the five facts were completely new to them.",
+          "type": "paragraph"
+        },
+        {
+          "id": "exdL2H9PzJA",
+          "type": "youtube",
+          "width": 1280,
+          "height": 720
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "title": "<strong>How do you think social media is changing people’s perceptions of science?</strong>",
+      "content": [
+        {
+          "text": "In some ways, it’s a double-edged sword. On one hand, social media makes science information more accessible to those who are curious about a certain topic, as well as to people who may be less likely to seek out scientific content. However, it can also create a Dunning-Kruger effect whereby some people – particularly those who have limited prior knowledge of the subject – leave a post or video believing they are more of an expert than they are. There’s also a lot of false information that is portrayed in a way that feels like legitimate science.",
+          "type": "paragraph"
+        },
+        {
+          "text": "I think this problem is further exacerbated by the fact social media content is getting much shorter – like on TikTok, Instagram stories, Snapchat. While a good summary is fantastic for getting important points across quickly, it often leaves more room for misinterpretation or oversimplification, leading to clickbait headlines that do more harm than good. I generally hate to be anything but optimistic, but the way the pandemic and COP26 have panned out have highlighted the big gap that still exists between successful science communication and the general public.",
+          "type": "paragraph"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "title": "<strong>What advice would you give to budding YouTubers?</strong>",
+      "content": [
+        {
+          "text": "I would urge new science communicators to focus on delivery over video techniques at first – good storytelling trumps a flashy presentation every time. Also, if you’re starting YouTube as a hobby, make sure it is giving you something in return. For example, to improve your communication skills, to have an outlet to be creative, or to connect and socialize with other creators. Otherwise, you’ll just burn out!",
+          "type": "paragraph"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "title": "<strong>Who are some of your favourite scientists to follow on social media? </strong>",
+      "content": [
+        {
+          "text": "<a href=\"https://twitter.com/ravenscimaven\">Dr. Raven Baxter</a>, <a href=\"https://twitter.com/DrAdrianSmith\">Dr. Adrian Smith</a> and <a href=\"https://twitter.com/mcmsharksxx\">Melissa Cristina Marquez</a> are my current top picks – though I follow plenty more!",
+          "type": "paragraph"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "title": "<strong>What’s next for you?</strong>",
+      "content": [
+        {
+          "text": "I’ve been on a bit of a hiatus over the last year, partly due to boring reasons such as waiting on paperwork to be processed and moving countries amidst a pandemic. But I’m working on a series of videos touching on mangroves, conservation and ecology. Creating a series of videos that focus on tropical ecology has always been a passion project of mine and I’m very excited to finally release them!",
+          "type": "paragraph"
+        },
+        {
+          "text": "<em>You can read more interviews <a href=\"https://elifesciences.org/interviews\">here</a>.</em>",
+          "type": "paragraph"
+        }
+      ]
+    }
+  ]
+}
