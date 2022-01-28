@@ -617,13 +617,16 @@ content_descriptions = {
                        'api-list': 'community'},
 
     models.INTERVIEW: {'description': INTERVIEW_DESC,
-                       'model': models.Content},
+                       'model': models.Content,
+                       'api-item': 'interviews/{id}'},
 
     models.COLLECTION: {'description': COLLECTION_DESC,
-                        'model': models.Content},
+                        'model': models.Content,
+                        'api-item': 'collections/{id}'},
 
     models.BLOG_ARTICLE: {'description': BLOG_ARTICLE_DESC,
-                          'model': models.Content},
+                          'model': models.Content,
+                          'api-item': 'blog-articles/{id}'},
 
     models.FEATURE: {'description': FEATURE_DESC,
                      'model': models.Content},
@@ -633,6 +636,7 @@ content_descriptions = {
 
     models.PODCAST: {'description': PODCAST_DESC,
                      'model': models.Content,
+                     'api-item': 'podcast-episodes/{id}',
                      'api-list': 'podcast-episodes',
                      'idfn': lambda data: str(data['number']) if isinstance(data, dict) else str(data)},
 
@@ -753,6 +757,8 @@ def delete_item(content_type, content_type_id):
         raw_json.delete()
     except models.RawJSON.DoesNotExist:
         LOG.warning("cannot delete raw json for %r with id %r: item not found in database" % (content_type, content_type_id))
+        print('!!!!1')
+
 
 #
 #
