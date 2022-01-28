@@ -757,7 +757,6 @@ def delete_item(content_type, content_type_id):
         raw_json.delete()
     except models.RawJSON.DoesNotExist:
         LOG.warning("cannot delete raw json for %r with id %r: item not found in database" % (content_type, content_type_id))
-        print('!!!!1')
 
 
 #
