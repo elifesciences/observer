@@ -71,7 +71,7 @@ def test_404_deletes_item():
     response.status_code = 404
     exc = requests.exceptions.RequestException()
     exc.response = response
-    with patch('observer.ingest_logic.download_item', side_effect=exc): # prevent downloading other versions
+    with patch('observer.ingest_logic.download_item', side_effect=exc):
         inc.handler(dummy_event)
 
     assert models.Content.objects.count() == 0

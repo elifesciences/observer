@@ -3,10 +3,10 @@ from observer import models
 from django.db.models import IntegerField
 from django.db.models.functions import Cast
 
-def known_content(content_type):
+def known_content(json_type):
     """returns a queryset of object IDs from newest to oldest."""
     return models.RawJSON.objects \
-        .filter(json_type=content_type) \
+        .filter(json_type=json_type) \
         .values_list('msid', flat=True) \
         .order_by('-msid') \
         .distinct()

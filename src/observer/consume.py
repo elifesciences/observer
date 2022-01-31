@@ -65,23 +65,23 @@ def consume(endpoint, user_params={}):
 def default_idfn(row):
     return row['id']
 
-def upsert(iid, content_type, content):
+def upsert(iid, json_type, content):
     data = {
         'msid': iid,
         'version': None,
         'json': content,
-        'json_type': content_type
+        'json_type': json_type
     }
     return utils.create_or_update(models.RawJSON, data, ['msid', 'json_type'])
 
-def upsert_all(content_type, rows, idfn):
+def upsert_all(json_type, rows, idfn):
     def do_safely(row):
         try:
             item_id = idfn(row)
         except Exception:
             LOG.error("failed to extract item id from row: %s", row)
             return
-        return upsert(item_id, content_type, row)
+        return upsert(item_id, json_type, row)
 
     with transaction.atomic():
         utils.lmap(do_safely, rows)
@@ -91,25 +91,50 @@ def upsert_all(content_type, rows, idfn):
 # generic content consumption
 #
 
+# lsh@2022-02-01: this was such a bad idea. figure out how to get rid of it.
 def content_type_from_endpoint(endpoint):
-    """given an API `endpoint` like `press-packages/{id}`, returns a slugified version like `press-packages-id`.
-    if the given API `endpoint` doesn't exist in the alias map, it's value is returned as-is.
-    for example, `digests` is aliased `digests-id`."""
-    val = slugify(endpoint) # press-packages/{id} => press-packages-id
-    aliases = {
-        # summary endpoints
-        'community': models.COMMUNITY,
-        'labs-posts': models.LABS_POST,
-        'profiles': models.PROFILE,
-        'press-packages': models.PRESSPACKAGE,
-        'digests': models.DIGEST,
-        'podcast-episodes': models.PODCAST,
+    """given an API endpoint like `press-packages/{id}` returns the singular value matching the constants in `models`.
+    some endpoints are hardcoded to handle values that can't be derived."""
 
-        # backwards support
-        'articles-id-versions-version': models.LAX_AJSON,
-        'metrics-article-summary': models.METRICS_SUMMARY
+    # "press-packages/{id}" => "press-packages-id", "interviews" => "interviews"
+    val = slugify(endpoint)
+    aliases = {
+        # models.PODCAST == 'podcast' and not 'podcast-episode' :(
+        'podcast-episodes': models.PODCAST,
+        'podcast-episodes-id': models.PODCAST,
+
+        # models.PRESSPACKAGE == 'press-packages-id' :(
+        'press-packages-id': models.PRESSPACKAGE,
+        'press-packages': models.PRESSPACKAGE,
+
+        # models.PROFILE == 'profiles-id' :(
+        # as of 2022-01-31 we have 47k 'profiles-id' in RawJSON
+        'profiles': models.PROFILE,
+        'profiles-id': models.PROFILE,
+
+        # "/articles/{id}/versions/{version}"
+        'articles-id-versions-version': models.LAX_AJSON, # 'lax-ajson'
+
+        # "/metrics/article-summary" (non-api)
+        'metrics-article-summary': models.METRICS_SUMMARY, # 'elife-metrics-summary'
     }
-    return aliases.get(val, val)
+    alias = aliases.get(val)
+    if alias:
+        return alias
+
+    # at this point val will either be "digests" (api summary) or "digests/{id}" (api detail)
+    # we don't want "foo-id" with the "-id" suffix anywhere.
+
+    val = val.strip("/") # in case of a leading slash. "/digests/{id}" => "digests/{id}"
+    if "/" in val:
+        val = val[:val.index("/")] # "digests/{id}" => "digests"
+
+    # now, we don't want the plural version stored in the database, we use the singular internally
+    # i.e. models.DIGEST is 'digest' not 'digests'
+
+    val = val.rstrip('s')
+
+    return val
 
 def single(endpoint, idfn=None, **kwargs):
     "consumes a single item from the API `endpoint` and creates/inserts it into the database."
@@ -136,7 +161,7 @@ def all_items(endpoint, idfn=None, **kwargs):
     content_type = content_type_from_endpoint(endpoint)
 
     accumulator = []
-    accumulate = 100 # accumulate 10 pages before inserting
+    accumulate = 100 # accumulate n pages before inserting
     for page in range(1, num_pages + 1):
         try:
             resp = consume(endpoint, {'page': page, 'per-page': per_page})
