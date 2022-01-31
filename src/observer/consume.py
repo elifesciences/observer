@@ -91,17 +91,17 @@ def upsert_all(json_type, rows, idfn):
 # generic content consumption
 #
 
-# todo: this was such a bad idea. figure out how to get rid of it.
+# lsh@2022-02-01: this was such a bad idea. figure out how to get rid of it.
 def content_type_from_endpoint(endpoint):
-    """given an API `endpoint` like `press-packages/{id}`, returns a slugified version like `press-packages-id`.
-    if the given API `endpoint` doesn't exist in the alias map, it's value is returned as-is."""
+    """given an API endpoint like `press-packages/{id}` returns the singular value matching the constants in `models`.
+    some endpoints are hardcoded to handle values that can't be derived."""
 
     # "press-packages/{id}" => "press-packages-id", "interviews" => "interviews"
     val = slugify(endpoint)
     aliases = {
         # models.PODCAST == 'podcast' and not 'podcast-episode' :(
         'podcast-episodes': models.PODCAST,
-        'podcast-episodes/{id}': models.PODCAST,
+        'podcast-episodes-id': models.PODCAST,
 
         # models.PRESSPACKAGE == 'press-packages-id' :(
         'press-packages-id': models.PRESSPACKAGE,
@@ -118,16 +118,14 @@ def content_type_from_endpoint(endpoint):
         # "/metrics/article-summary" (non-api)
         'metrics-article-summary': models.METRICS_SUMMARY, # 'elife-metrics-summary'
     }
-    alias = aliases.get(slugify(endpoint))
+    alias = aliases.get(val)
     if alias:
         return alias
 
-    # at this point val will either be an alias as above, or something like "/profiles/{id}"
-    # we don't want "foo-id" with the "-id" suffix *at all*
-
-    val = val.strip("/") # just in case. "/digests/{id}" => "digests/{id}"
-
     # at this point val will either be "digests" (api summary) or "digests/{id}" (api detail)
+    # we don't want "foo-id" with the "-id" suffix anywhere.
+
+    val = val.strip("/") # in case of a leading slash. "/digests/{id}" => "digests/{id}"
     if "/" in val:
         val = val[:val.index("/")] # "digests/{id}" => "digests"
 
