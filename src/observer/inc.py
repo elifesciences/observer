@@ -48,8 +48,8 @@ def _handler(json_event):
     # see: https://github.com/elifesciences/bus
     # and: https://github.com/elifesciences/builder/blob/master/projects/elife.yaml#L1166
 
-    # because the event-type may not be identical to what is used internally,
-    # map all supported types here and comment them out as necessary
+    # 'event-type' may not match what is used internally.
+    # map supported types here and comment others out as necessary.
     event_type_to_content_type = {
         'article': models.LAX_AJSON,
         'presspackage': models.PRESSPACKAGE,

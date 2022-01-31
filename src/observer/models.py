@@ -13,7 +13,6 @@ LAX_AJSON = 'lax-ajson'
 METRICS_SUMMARY = 'elife-metrics-summary'
 PRESSPACKAGE = 'press-packages-id'
 PROFILE = 'profiles-id'
-# DIGEST = 'digests-id' # old, do not use, remove once RawJSON in db is removed
 
 DIGEST = 'digest'
 LABS_POST = 'labs-post'

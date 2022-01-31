@@ -228,13 +228,13 @@ def flatten_article_json(data, known_version_list=[], history=None, metrics=None
 #
 
 # deprecated: only used by articles and metrics. use `consume.upsert` instead.
-def upsert_json(msid, version, data_type, article_data):
+def upsert_json(msid, version, json_type, article_data):
     "insert/update RawJSON from a dictionary of article data"
     article_data = {
         'msid': utils.norm_msid(msid),
         'version': version,
         'json': article_data,
-        'json_type': data_type
+        'json_type': json_type
     }
     version and ensure(version > 0, "'version' in RawJSON must be as a positive integer")
     return create_or_update(models.RawJSON, article_data, ['msid', 'version', 'json_type'])
@@ -618,14 +618,17 @@ content_descriptions = {
 
     models.INTERVIEW: {'description': INTERVIEW_DESC,
                        'model': models.Content,
+                       'api-list': 'interviews',
                        'api-item': 'interviews/{id}'},
 
     models.COLLECTION: {'description': COLLECTION_DESC,
                         'model': models.Content,
+                        'api-list': 'collections',
                         'api-item': 'collections/{id}'},
 
     models.BLOG_ARTICLE: {'description': BLOG_ARTICLE_DESC,
                           'model': models.Content,
+                          'api-list': 'blog-articles',
                           'api-item': 'blog-articles/{id}'},
 
     models.FEATURE: {'description': FEATURE_DESC,
@@ -636,8 +639,8 @@ content_descriptions = {
 
     models.PODCAST: {'description': PODCAST_DESC,
                      'model': models.Content,
-                     'api-item': 'podcast-episodes/{id}',
                      'api-list': 'podcast-episodes',
+                     'api-item': 'podcast-episodes/{id}',
                      'idfn': lambda data: str(data['number']) if isinstance(data, dict) else str(data)},
 
 }
@@ -693,24 +696,24 @@ def _regenerate_item(content_type, content_id, data=None):
     return do()
 
 @transaction.atomic
-def regenerate_item(content_type, content_type_id):
+def regenerate_item(content_type, content_id):
     "regenerate a single item in a single transaction"
-    return _regenerate_item(content_type, content_type_id)
+    return _regenerate_item(content_type, content_id)
 
-def regenerate_list(content_type, content_type_id_list):
+def regenerate_list(content_type, content_id_list):
     "given a `content_type` and a list of content ID values, regenerate all of them and manage the transaction."
-    if not content_type_id_list:
+    if not content_id_list:
         # it's possible what has been downloaded can't be found given the `content_type` and an `id`.
         # check `consume.content_type_from_endpoint`.
         LOG.warning("no content found for content type %r to regenerate", content_type)
-    return do_all_atomically(partial(_regenerate_item, content_type), content_type_id_list)
+    return do_all_atomically(partial(_regenerate_item, content_type), content_id_list)
 
 def regenerate(content_type):
-    return regenerate_list(content_type, logic.known_content(content_type))
+    return regenerate_list(content_type, logic.known_content(json_type=content_type))
 
-def download_item(content_type, content_type_id):
+def download_item(content_type, content_id):
     api = content_descriptions[content_type]['api-item']
-    return first(consume.single(api, id=content_type_id))
+    return first(consume.single(api, id=content_id))
 
 def download_all(content_type):
     """downloads *all* pages of content for the given `content_type`.
@@ -726,37 +729,37 @@ def download_all(content_type):
 #
 #
 
-def delete_item(content_type, content_type_id):
+def delete_item(content_type, content_id):
     "deletes an item from the correct database table and it's raw json, if either exist."
-    if not content_type or not content_type_id:
-        LOG.error("cannot delete %r with id %r: both values are required" % (content_type, content_type_id))
+    if not content_type or not content_id:
+        LOG.error("cannot delete %r with id %r: both values are required" % (content_type, content_id))
         return
     if content_type not in content_descriptions:
         LOG.error("cannot delete %r, unknown content type. supported content_types: %s" % (content_type, ", ".join(content_descriptions.keys())))
         return
 
     prohibited_list = [models.LAX_AJSON]
-    if content_type_id in prohibited_list:
-        LOG.error("refusing to delete %r with id %r, these items must be deleted manually." % (content_type, content_type_id,))
+    if content_id in prohibited_list:
+        LOG.error("refusing to delete %r with id %r, these items must be deleted manually." % (content_type, content_id,))
         return
 
     desc = content_descriptions[content_type]
     model = desc['model']
     idfn = desc.get('idfn', utils.identity)
-    idval = idfn(content_type_id)
+    idval = idfn(content_id)
 
     try:
         obj = model.objects.get(id=idval)
         obj.delete()
-        LOG.info("deleted %r with id %r" % (content_type, content_type_id))
+        LOG.info("deleted %r with id %r" % (content_type, content_id))
     except dj_models.ObjectDoesNotExist:
-        LOG.warning("cannot delete %r with id %r: item not found in database" % (content_type, content_type_id))
+        LOG.warning("cannot delete %r with id %r: item not found in database" % (content_type, content_id))
 
     try:
         raw_json = models.RawJSON.objects.get(msid=idval, json_type=content_type)
         raw_json.delete()
     except models.RawJSON.DoesNotExist:
-        LOG.warning("cannot delete raw json for %r with id %r: item not found in database" % (content_type, content_type_id))
+        LOG.warning("cannot delete raw json for %r with id %r: item not found in database" % (content_type, content_id))
 
 
 #
