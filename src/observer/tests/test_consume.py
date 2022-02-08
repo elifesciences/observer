@@ -48,9 +48,9 @@ class Upsert(base.BaseCase):
             # TODO: replace `ingest_logic.upsert_json` with `consume.upsert`
             #('article/1234', 'ajson/elife-13964-v1.xml.json'),
             #('metrics/1234', 'metrics-summary/9560.json'),
-            ('profiles/1234', 'profiles/ssiyns7x.json'),
-            ('press-packages/1234', 'presspackages/81d42f7d.json'),
-            ('digests/1234', 'digests/59885.json'),
+            ('profiles/{id}', 'profiles/ssiyns7x.json'),
+            ('press-packages/{id}', 'presspackages/81d42f7d.json'),
+            ('digests/{id}', 'digests/59885.json'),
         ]
 
         for endpoint, fixture in cases:
@@ -61,7 +61,7 @@ class Upsert(base.BaseCase):
             #    fixture_data = fixture_data['items'][0]
 
             with mock.patch('observer.consume.consume', return_value=fixture_data):
-                consume.single(endpoint)
+                consume.single(endpoint, id=1234)
 
         expected = 5 - 2
         self.assertEqual(expected, models.RawJSON.objects.count())
@@ -70,22 +70,22 @@ class Upsert(base.BaseCase):
         "different types of consumed data can be inserted/updated in models.RawJSON"
         cases = [
             # *not* disabled because I'm proving a point
-            ('article/1234', 'ajson/elife-13964-v1.xml.json'),
-            ('metrics/1234', 'metrics-summary/9560.json'),
-            ('profiles/1234', 'profiles/ssiyns7x.json'),
-            ('press-packages/1234', 'presspackages/81d42f7d.json'),
-            ('digests/1234', 'digests/59885.json'),
+            ('articles/{id}', 'ajson/elife-13964-v1.xml.json'),
+            ('metrics-article-summary', 'metrics-summary/9560.json'), # disabled
+            ('profiles/{id}', 'profiles/ssiyns7x.json'),
+            ('press-packages/{id}', 'presspackages/81d42f7d.json'),
+            ('digests/{id}', 'digests/59885.json'),
         ]
 
         def insert():
             for endpoint, fixture in cases:
                 fixture_data = json.load(open(join(base.FIXTURE_DIR, fixture), 'r'))
-                if endpoint == 'metrics/1234':
+                if endpoint == 'metrics/{id}':
                     fixture_data = fixture_data['items'][0]
                 fixture_data['id'] = 1234
 
                 with mock.patch('observer.consume.consume', return_value=fixture_data):
-                    consume.single(endpoint)
+                    consume.single(endpoint, id=1234)
 
         expected = 5
 

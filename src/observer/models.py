@@ -28,6 +28,8 @@ PODCAST = 'podcast'
 # is stored as a Content type to make RSS feeds more convenient.
 INSIGHT = 'insight'
 
+ALL_CONTENT_TYPES = [LAX_AJSON, METRICS_SUMMARY, PRESSPACKAGE, PROFILE, DIGEST, LABS_POST, COMMUNITY, INTERVIEW, COLLECTION, BLOG_ARTICLE, FEATURE, EDITORIAL, PODCAST, INSIGHT]
+
 # used in `reports.py` to group certain content types together
 COMMUNITY_CONTENT_TYPE_LIST = [
     INTERVIEW,
@@ -50,6 +52,65 @@ NON_ARTICLE_CONTENT_TYPE_LIST = [
     LABS_POST,
     PODCAST
 ]
+
+#
+
+def find_content_type(val):
+    "given a `content_type` value, returns the canonical version or raises a `KeyError`"
+
+    if val in ALL_CONTENT_TYPES:
+        return val
+
+    aliases = {
+        # PODCAST == 'podcast' and not 'podcast-episode' :(
+        'podcast-episodes': PODCAST,
+        'podcast-episodes-id': PODCAST,
+
+        # PRESSPACKAGE == 'press-packages-id' :(
+        'press-packages-id': PRESSPACKAGE,
+        'press-packages': PRESSPACKAGE,
+
+        # PROFILE == 'profiles-id' :(
+        # as of 2022-01-31 we have 47k 'profiles-id' in RawJSON
+        'profiles': PROFILE,
+        'profiles-id': PROFILE,
+
+        # "/articles/{id}/versions/{version}"
+        'articles-id-versions-version': LAX_AJSON, # 'lax-ajson'
+        'articles-id': LAX_AJSON, # not actually used except in bad tests
+
+        # "/metrics/article-summary" (non-api)
+        'metrics-article-summary': METRICS_SUMMARY, # 'elife-metrics-summary'
+
+        # ---
+
+        'digests': DIGEST,
+        'digests-id': DIGEST,
+
+        'labs-posts': LABS_POST,
+        'labs-posts-id': LABS_POST,
+
+        'interviews': INTERVIEW,
+        'interviews-id': INTERVIEW,
+
+        'collections': COLLECTION,
+        'collections-id': COLLECTION,
+
+        'blog-articles': BLOG_ARTICLE,
+        'blog-articles-id': BLOG_ARTICLE,
+
+        'features': FEATURE,
+        'features-id': FEATURE,
+
+        'editorials': EDITORIAL,
+        'editorials-id': EDITORIAL,
+    }
+    if val not in aliases:
+        raise KeyError("could not coerce %r to a known content_type" % val)
+    return aliases[val]
+
+
+#
 
 POA, VOR = 'poa', 'vor'
 UNKNOWN_TYPE = 'unknown-type'

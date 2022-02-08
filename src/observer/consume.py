@@ -95,46 +95,7 @@ def upsert_all(json_type, rows, idfn):
 def content_type_from_endpoint(endpoint):
     """given an API endpoint like `press-packages/{id}` returns the singular value matching the constants in `models`.
     some endpoints are hardcoded to handle values that can't be derived."""
-
-    # "press-packages/{id}" => "press-packages-id", "interviews" => "interviews"
-    val = slugify(endpoint)
-    aliases = {
-        # models.PODCAST == 'podcast' and not 'podcast-episode' :(
-        'podcast-episodes': models.PODCAST,
-        'podcast-episodes-id': models.PODCAST,
-
-        # models.PRESSPACKAGE == 'press-packages-id' :(
-        'press-packages-id': models.PRESSPACKAGE,
-        'press-packages': models.PRESSPACKAGE,
-
-        # models.PROFILE == 'profiles-id' :(
-        # as of 2022-01-31 we have 47k 'profiles-id' in RawJSON
-        'profiles': models.PROFILE,
-        'profiles-id': models.PROFILE,
-
-        # "/articles/{id}/versions/{version}"
-        'articles-id-versions-version': models.LAX_AJSON, # 'lax-ajson'
-
-        # "/metrics/article-summary" (non-api)
-        'metrics-article-summary': models.METRICS_SUMMARY, # 'elife-metrics-summary'
-    }
-    alias = aliases.get(val)
-    if alias:
-        return alias
-
-    # at this point val will either be "digests" (api summary) or "digests/{id}" (api detail)
-    # we don't want "foo-id" with the "-id" suffix anywhere.
-
-    val = val.strip("/") # in case of a leading slash. "/digests/{id}" => "digests/{id}"
-    if "/" in val:
-        val = val[:val.index("/")] # "digests/{id}" => "digests"
-
-    # now, we don't want the plural version stored in the database, we use the singular internally
-    # i.e. models.DIGEST is 'digest' not 'digests'
-
-    val = val.rstrip('s')
-
-    return val
+    return models.find_content_type(slugify(endpoint))
 
 def single(endpoint, idfn=None, **kwargs):
     "consumes a single item from the API `endpoint` and creates/inserts it into the database."

@@ -661,6 +661,9 @@ def _regenerate_item(content_type, content_id, data=None):
     regenerating a single item may cause many child objects to also be created. If called outside
     of a transaction you may end up with missing data.
     see `regenerate_item` (no prefix) and `regenerate_list`."""
+
+    content_type = models.find_content_type(content_type)
+
     data = data or models.RawJSON.objects.get(msid=content_id, json_type=content_type).json
 
     # no 1:1 mapping between endpoint and observer model.
@@ -669,9 +672,9 @@ def _regenerate_item(content_type, content_id, data=None):
     if 'content-type-fn' in content_descriptions[content_type]:
         content_type = content_descriptions[content_type]['content-type-fn'](data)
 
-    if not content_type in content_descriptions:
-        print("skipping unhandled content type %r" % content_type)
-        return
+    # if not content_type in content_descriptions:
+    #    print("skipping unhandled content type %r" % content_type)
+    #    return
 
     assert content_type in content_descriptions, "unhandled content type %r" % content_type
 
