@@ -24,6 +24,26 @@ class One(base.BaseCase):
         self.assertEqual(1, models.Article.objects.count())
         models.Article.objects.get(msid=msid)
 
+def test_handling_event():
+    "simple events can be handled without issue."
+    cases = [
+        # (event, expected model)
+        {'type': 'article', 'id': 1},
+        {'type': 'presspackage', 'id': 2},
+        {'type': 'labs-post', 'id': 3},
+        {'type': 'digest', 'id': 4},
+        {'type': 'podcast-episode', 'number': 5},
+        {'type': 'collection', 'id': 6},
+        {'type': 'interview', 'id': 7},
+        {'type': 'blog-article', 'id': 8}
+    ]
+    for event in cases:
+        dummy_event = Mock()
+        dummy_event.body = json.dumps(event)
+        with patch('observer.ingest_logic.download_regenerate') as mock:
+            inc.handler(dummy_event)
+            assert mock.called, "not called for %r" % event
+
 def test_handling_unhandled_event():
     "unhandled events should issue a warning"
     dummy_event = Mock()
