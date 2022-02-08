@@ -38,7 +38,11 @@ def _handler(json_event):
         LOG.info("handling event %s" % json_event)
         event = json.loads(json_event)
         # rule: event id will always be a string
-        event_id, event_type = event['id'], event['type']
+        event_type = event['type']
+        if event_type == 'podcast-episode':
+            event_id = event['number']
+        else:
+            event_id = event['id']
         event_id = str(event_id)
     except Exception as ex:
         LOG.error("failed to parse event '%s' with error: %s", str(json_event)[:50], ex)
