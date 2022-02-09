@@ -423,7 +423,6 @@ def download_article_metrics(msid):
         data = consume.consume("metrics/article/%s/summary" % msid)
         _upsert_metrics_ajson(data['items'][0]) # guaranteed to have either 1 result or 404
     except RequestException:
-        # LOG.error("failed to fetch page of summaries: %s", err) # error logging moved to `consume.consume`
         pass
 
 
