@@ -56,7 +56,15 @@ def consume(endpoint, user_params={}):
     params.update(user_params)
     url = settings.API_URL + "/" + endpoint.strip('/')
     LOG.info('fetching %s params %s' % (url, params))
-    return requests_get(url, params).json()
+    try:
+        return requests_get(url, params).json()
+    except requests.exceptions.RequestException as err:
+        if not err.response.status_code == 404:
+            # we expect 404s on unpublished content. everything else should be logged.
+            context = {'url': url, 'params': params, 'user-params': user_params}
+            LOG.error("failed to fetch %s: %s", endpoint, err, extra=context)
+        raise err
+
 
 #
 #
@@ -100,12 +108,7 @@ def content_type_from_endpoint(endpoint):
 def single(endpoint, idfn=None, **kwargs):
     "consumes a single item from the API `endpoint` and creates/inserts it into the database."
     content_type = content_type_from_endpoint(endpoint)
-    try:
-        data = consume(endpoint.format_map(kwargs))
-    except requests.exceptions.RequestException as err:
-        LOG.error("failed to fetch %s: %s", endpoint, err)
-        raise err
-
+    data = consume(endpoint.format_map(kwargs))
     idfn = idfn or default_idfn
     return upsert(idfn(data), content_type, data)
 
@@ -126,8 +129,7 @@ def all_items(endpoint, idfn=None, **kwargs):
     for page in range(1, num_pages + 1):
         try:
             resp = consume(endpoint, {'page': page, 'per-page': per_page})
-        except requests.exceptions.RequestException as err:
-            LOG.error("failed to fetch %s: %s", endpoint, err)
+        except requests.exceptions.RequestException:
             continue
 
         accumulator.extend(resp['items'])
