@@ -528,3 +528,12 @@ def test_delete_items__failure_cases():
     ]
     for content_type, content_id, expected in cases:
         assert ingest_logic.delete_item(content_type, content_id) == expected, "failed case %r" % str(content_type, content_id, expected)
+
+@pytest.mark.django_db
+def test_unsupported_content_type_skipped():
+    fixture = base.jsonfix('unknown/content.json')
+    with patch('observer.consume.consume', return_value=fixture):
+        ingest_logic.download_all(models.COMMUNITY)
+    assert models.RawJSON.objects.count() == 1
+    ingest_logic.regenerate(models.COMMUNITY)
+    assert models.Content.objects.count() == 0
