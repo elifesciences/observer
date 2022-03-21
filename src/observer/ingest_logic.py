@@ -673,11 +673,14 @@ def _regenerate_item(content_type, content_id, data=None):
     if 'content-type-fn' in content_descriptions[content_type]:
         content_type = content_descriptions[content_type]['content-type-fn'](data)
 
-    # if not content_type in content_descriptions:
-    #    print("skipping unhandled content type %r" % content_type)
-    #    return
-
-    assert content_type in content_descriptions, "unhandled content type %r" % content_type
+    # lsh@2022-03-21: disabled assertion and enabled this section.
+    # /community was returning 'event' content types and dying mid-regeneration.
+    # observer shouldn't be encountering any unsupported content.
+    # in this case, it looks like it was accidental but was stored in RawJSON.
+    if not content_type in content_descriptions:
+        LOG.error("skipping unhandled content type %r. this may need to be deleted from the database: %s" % (content_type, data))
+        return
+    #assert content_type in content_descriptions, "unhandled content type %r: %s" % (content_type, data)
 
     mush = flatten_data(content_type, data)
     mush, children = extract_children(mush)
