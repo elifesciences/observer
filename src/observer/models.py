@@ -2,7 +2,8 @@ from annoying.fields import JSONField
 from django.db import models
 from django.db.models import (
     BigIntegerField, PositiveSmallIntegerField, PositiveIntegerField,
-    CharField, DateTimeField, TextField, NullBooleanField, EmailField,
+    CharField, DateTimeField, TextField, BooleanField,
+    EmailField,
     ManyToManyField, URLField
 )
 from observer import utils
@@ -261,7 +262,7 @@ class Article(models.Model):
     # xml_url
     # json_url
 
-    has_digest = NullBooleanField(null=True, help_text="Null/None means I don't know!")
+    has_digest = BooleanField(null=True, blank=True, help_text="Null/None means I don't know!")
 
     subject1 = CharField(max_length=50, null=True)
     subject2 = CharField(max_length=50, null=True)
