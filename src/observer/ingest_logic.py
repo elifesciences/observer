@@ -363,19 +363,22 @@ def regenerate_all_articles():
 # upsert article-json from api
 #
 
-def mkidx():
+# TODO: shift this pagination into something generic
+def mkidx(**kwargs):
     "downloads *all* article snippets to create an msid:version index"
     # figures out how many pages to fetch by inspecting 'total' value in response.
     ini = consume.consume("articles", {'per-page': 1})
     per_page = 100.0
     num_pages = math.ceil(ini["total"] / per_page)
     msid_ver_idx = {} # ll: {09560: 1, ...}
+    break_loop_fn = kwargs.pop('break_loop_fn', lambda _: False)
     LOG.info("%s pages to fetch" % num_pages)
-    # TODO: shift this pagination into something generic
     for page in range(1, num_pages + 1):
         resp = consume.consume("articles", {'page': page})
         for snippet in resp["items"]:
             msid_ver_idx[snippet["id"]] = snippet["version"]
+        if break_loop_fn(resp['items']):
+            break
     return msid_ver_idx
 
 # todo: shift this to `consume.consume` somehow
@@ -395,9 +398,9 @@ def download_article_versions(msid):
     versions = [v for v in resp["versions"] if v.get("status") != "preprint"]
     _download_versions(msid, len(versions))
 
-def download_all_article_versions():
+def download_all_article_versions(**kwargs):
     "loads *all* versions of *all* articles"
-    msid_ver_idx = mkidx() # urgh. this sucks. lax needs a /summary endpoint too
+    msid_ver_idx = mkidx(**kwargs) # urgh. this sucks. lax needs a /summary endpoint too
     LOG.info("%s articles to fetch" % len(msid_ver_idx))
     idx = sorted(msid_ver_idx.items(), key=lambda x: x[0], reverse=True)
     for msid, latest_version in idx:

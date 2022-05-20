@@ -1,7 +1,8 @@
+from datetime import datetime, timedelta
 from collections import OrderedDict
 import sys
 from django.core.management.base import BaseCommand
-from observer import ingest_logic, models
+from observer import ingest_logic, models, utils
 from observer.utils import lmap, subdict
 from functools import partial
 
@@ -15,11 +16,13 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument('--msid', nargs='+', required=False)
         parser.add_argument('--target', nargs='+', required=False, choices=TARGETS)
+        parser.add_argument('--days', type=int, required=False)
 
     def handle(self, *args, **options):
         try:
             targetlist = options['target'] or TARGETS
             msidlist = options['msid']
+            days = options['days']
 
             dl_ajson = ingest_logic.download_all_article_versions
             dl_metrics = ingest_logic.download_all_article_metrics
@@ -38,6 +41,19 @@ class Command(BaseCommand):
                     # the extra complexity isn't worth it (yet).
                     # community is ~3 pages, digests is ~10
                     print("ignoring ID list, given content type doesn't support it.")
+
+            if days:
+                if targetlist != [LAX]:
+                    print("the '--days' parameter is only compatible with '--target=lax' right now")
+                    exit(1)
+
+                def some_fn(page_of_results):
+                    """returns `True` when the pubdate in the last result in the given `page_of_results` falls outside of now() - N days ago.
+                    this will cause the `consume.all_items` to stop consuming pages of results."""
+                    pubdate = utils.todt(page_of_results[-1]['published'])
+                    cutoff = datetime.now() - timedelta(days=days)
+                    return pubdate >= cutoff
+                dl_ajson = partial(ingest_logic.download_all_article_versions, break_loop_fn=some_fn)
 
             dl_targets = OrderedDict([
                 (LAX, dl_ajson),
