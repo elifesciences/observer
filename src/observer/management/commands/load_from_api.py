@@ -47,12 +47,15 @@ class Command(BaseCommand):
                     print("the '--days' parameter is only compatible with '--target=lax' right now")
                     exit(1)
 
-                def some_fn(page_of_results):
+                cutoff = utils.todt(datetime.now()) - timedelta(days=days)
+                # print(cutoff)
+
+                def some_fn(result):
                     """returns `True` when the pubdate in the last result in the given `page_of_results` falls outside of now() - N days ago.
                     this will cause the `consume.all_items` to stop consuming pages of results."""
-                    pubdate = utils.todt(page_of_results[-1]['published'])
-                    cutoff = datetime.now() - timedelta(days=days)
-                    return pubdate >= cutoff
+                    pubdate = utils.todt(result['versionDate'])
+                    # print('pubdate',pubdate)
+                    return pubdate < cutoff
                 dl_ajson = partial(ingest_logic.download_all_article_versions, break_loop_fn=some_fn)
 
             dl_targets = OrderedDict([

@@ -97,10 +97,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
+# https://docs.djangoproject.com/en/3.2/ref/settings/#append-slash
 APPEND_SLASH = False
 
 # Database
-# https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
 DATABASES = {
     'default': {
@@ -125,7 +125,6 @@ FEEDLY_GA_MEASUREMENT_ID = cfg('general.feedly-ga-measurement-id', None) or 'G-x
 SECONDS_BETWEEN_REQUESTS = 0.2 # 200ms
 
 # Internationalization
-# https://docs.djangoproject.com/en/1.10/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
 
@@ -138,7 +137,7 @@ USE_L10N = True
 USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.10/howto/static-files/
+
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
@@ -171,7 +170,6 @@ FORMAT_STR = ' '.join(['%(' + v + ')s' for v in ATTRS])
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
-
     'formatters': {
         'json': {
             '()': jsonlogger.JsonFormatter,

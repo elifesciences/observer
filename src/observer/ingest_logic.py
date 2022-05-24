@@ -374,10 +374,14 @@ def mkidx(**kwargs):
     break_loop_fn = kwargs.pop('break_loop_fn', lambda _: False)
     LOG.info("%s pages to fetch" % num_pages)
     for page in range(1, num_pages + 1):
-        resp = consume.consume("articles", {'page': page})
+        resp = consume.consume("articles", {'page': page, 'order': 'desc'})
+        break_loop = False
         for snippet in resp["items"]:
             msid_ver_idx[snippet["id"]] = snippet["version"]
-        if break_loop_fn(resp['items']):
+            if break_loop_fn(snippet):
+                break_loop = True
+                break
+        if break_loop:
             break
     return msid_ver_idx
 
