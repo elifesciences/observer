@@ -1,3 +1,4 @@
+from unittest.mock import patch
 import os, math, json, time
 from functools import partial
 from django.db import models as dj_models, transaction
@@ -587,7 +588,7 @@ PODCAST_DESC = {
 
 content_descriptions = {
 
-    models.LAX_AJSON: {'api-list': 'articles'},
+    # models.LAX_AJSON: {'api-list': 'articles'},
 
     models.LABS_POST: {'description': LABS_POST_DESC,
                        'model': models.Content,
@@ -803,6 +804,11 @@ def download_regenerate_article(msid):
 
     except BaseException:
         LOG.exception("unhandled exception attempting to download and regenerate article %s", msid)
+
+def download_regenerate_article_list(some_fn):
+    with patch('observer.ingest_logic.content_descriptions', {models.LAX_AJSON: {'api-list': 'articles'}}):
+        for content_id in download_all(models.LAX_AJSON, some_fn=some_fn):
+            download_regenerate_article(content_id)
 
 def download_regenerate(content_type, content_id):
     "convenience. downloads the specific `content_type` with the id `content_id` and then updates the database."

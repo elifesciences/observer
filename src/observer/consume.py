@@ -130,7 +130,6 @@ def all_items(endpoint, idfn=None, some_fn=None):
         do_upsert = True
         content_type = content_type_from_endpoint(endpoint)
     except KeyError:
-        # 
         do_upsert = False
 
     accumulator = []
