@@ -48,15 +48,12 @@ class Command(BaseCommand):
                     exit(1)
 
                 cutoff = utils.todt(datetime.now()) - timedelta(days=days)
-                # print(cutoff)
-
                 def some_fn(result):
-                    """returns `True` when the pubdate in the last result in the given `page_of_results` falls outside of now() - N days ago.
-                    this will cause the `consume.all_items` to stop consuming pages of results."""
+                    "returns `True` when the versionDate for the given `result` falls within (now() - N days ago)."
                     pubdate = utils.todt(result['versionDate'])
-                    # print('pubdate',pubdate)
-                    return pubdate < cutoff
-                dl_ajson = partial(ingest_logic.download_all_article_versions, break_loop_fn=some_fn)
+                    return pubdate >= cutoff
+                ingest_logic.download_regenerate_list(models.LAX_AJSON, some_fn)
+                exit(0)
 
             dl_targets = OrderedDict([
                 (LAX, dl_ajson),

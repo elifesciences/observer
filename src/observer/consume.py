@@ -112,37 +112,58 @@ def single(endpoint, idfn=None, **kwargs):
     idfn = idfn or default_idfn
     return upsert(idfn(data), content_type, data)
 
-def all_items(endpoint, idfn=None, **kwargs):
+def all_items(endpoint, idfn=None, some_fn=None):
     """consumes all items from the given `endpoint` and then creates/inserts them into the database.
     items are inserted into the database in groups of 100.
-    `idfn` is used to derive the value for `models.RawJSON.json_id`."""
+    `idfn` is used to derive the value for `models.RawJSON.json_id`.
+
+    if `some_fn` then per-page consumption is broken as soon as some_fn(item) returns False.
+    whole page of results is upserted even if `some_fn` breaks part-way through results page.
+    a list of `idfn(item)` is returned when `some_fn` is supplied."""
     initial = consume(endpoint, {'per-page': 1})
     per_page = 100
     num_pages = math.ceil(initial["total"] / float(per_page))
     idfn = idfn or default_idfn
     LOG.info("%s pages to fetch" % num_pages)
 
-    content_type = content_type_from_endpoint(endpoint)
+    try:
+        do_upsert = True
+        content_type = content_type_from_endpoint(endpoint)
+    except KeyError:
+        # 
+        do_upsert = False
 
     accumulator = []
     accumulate = 100 # accumulate n pages before inserting
+    id_accumulator = [] if some_fn else None
+    break_iteration = False
     for page in range(1, num_pages + 1):
         try:
             resp = consume(endpoint, {'page': page, 'per-page': per_page})
         except requests.exceptions.RequestException:
             continue
 
+        if some_fn:
+            for item in resp['items']:
+                if some_fn(item):
+                    id_accumulator.append(idfn(item))
+                else:
+                    break_iteration = True
+
         accumulator.extend(resp['items'])
 
-        if len(accumulator) >= accumulate:
+        if do_upsert and len(accumulator) >= accumulate:
             upsert_all(content_type, accumulator, idfn)
             accumulator = []
+
+        if break_iteration:
+            break
 
         # pause between requests to prevent flooding
         time.sleep(settings.SECONDS_BETWEEN_REQUESTS)
 
     # handle any leftovers
-    if accumulator:
+    if do_upsert and accumulator:
         upsert_all(content_type, accumulator, idfn)
 
-    return None
+    return id_accumulator

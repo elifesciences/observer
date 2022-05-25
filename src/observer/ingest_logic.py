@@ -364,25 +364,18 @@ def regenerate_all_articles():
 #
 
 # TODO: shift this pagination into something generic
-def mkidx(**kwargs):
+def mkidx():
     "downloads *all* article snippets to create an msid:version index"
     # figures out how many pages to fetch by inspecting 'total' value in response.
     ini = consume.consume("articles", {'per-page': 1})
     per_page = 100.0
     num_pages = math.ceil(ini["total"] / per_page)
     msid_ver_idx = {} # ll: {09560: 1, ...}
-    break_loop_fn = kwargs.pop('break_loop_fn', lambda _: False)
     LOG.info("%s pages to fetch" % num_pages)
     for page in range(1, num_pages + 1):
         resp = consume.consume("articles", {'page': page, 'order': 'desc'})
-        break_loop = False
         for snippet in resp["items"]:
             msid_ver_idx[snippet["id"]] = snippet["version"]
-            if break_loop_fn(snippet):
-                break_loop = True
-                break
-        if break_loop:
-            break
     return msid_ver_idx
 
 # todo: shift this to `consume.consume` somehow
@@ -402,9 +395,9 @@ def download_article_versions(msid):
     versions = [v for v in resp["versions"] if v.get("status") != "preprint"]
     _download_versions(msid, len(versions))
 
-def download_all_article_versions(**kwargs):
+def download_all_article_versions():
     "loads *all* versions of *all* articles"
-    msid_ver_idx = mkidx(**kwargs) # urgh. this sucks. lax needs a /summary endpoint too
+    msid_ver_idx = mkidx() # urgh. this sucks. lax needs a /summary endpoint too
     LOG.info("%s articles to fetch" % len(msid_ver_idx))
     idx = sorted(msid_ver_idx.items(), key=lambda x: x[0], reverse=True)
     for msid, latest_version in idx:
@@ -593,6 +586,9 @@ PODCAST_DESC = {
 #
 
 content_descriptions = {
+
+    models.LAX_AJSON: {'api-list': 'articles'},
+
     models.LABS_POST: {'description': LABS_POST_DESC,
                        'model': models.Content,
 
@@ -729,7 +725,7 @@ def download_item(content_type, content_id):
     api = content_descriptions[content_type]['api-item']
     return first(consume.single(api, id=content_id))
 
-def download_all(content_type):
+def download_all(content_type, **kwargs):
     """downloads *all* pages of content for the given `content_type`.
     for some types of content this is relatively little, perhaps 1-3 pages.
     for other types, like articles, it may be 100+ pages."""
@@ -737,7 +733,8 @@ def download_all(content_type):
     content_description = content_descriptions[content_type]
     api = content_description['api-list']
     idfn = content_description.get('idfn', consume.default_idfn)
-    return consume.all_items(api, idfn)
+    some_fn = kwargs.pop('some_fn', None)
+    return consume.all_items(api, idfn, some_fn)
 
 #
 #
@@ -792,7 +789,7 @@ def regenerate_all():
 
 def download_regenerate_article(msid):
     """convenience. Downloads the article versions with the given `msid` and then regenerates it's content.
-    WARN: Does not download metrics data, uses what it exists, if any. (this may be an oversight)"""
+    WARN: Does not download metrics data, uses what exists, if any."""
     try:
         download_article_versions(msid)
         regenerate_article(msid)
@@ -800,6 +797,9 @@ def download_regenerate_article(msid):
     except RequestException as err:
         log = LOG.debug if err.response.status_code == 404 else LOG.error
         log("failed to fetch article %s: %s", msid, err) # probably an unpublished article.
+
+    except KeyboardInterrupt as exc:
+        raise exc
 
     except BaseException:
         LOG.exception("unhandled exception attempting to download and regenerate article %s", msid)
@@ -823,6 +823,10 @@ def download_regenerate(content_type, content_id):
             LOG.error("failed to fetch %r %s: %s", content_type, content_id, err)
     except BaseException:
         LOG.exception("unhandled exception attempting to download and regenerate %s %r", content_type, content_id)
+
+def download_regenerate_list(content_type, some_fn):
+    for content_id in download_all(content_type, some_fn=some_fn):
+        download_regenerate(content_type, content_id)
 
 #
 # upsert article-json from file/dir
