@@ -1,3 +1,4 @@
+import pytest
 import json
 from . import base
 from os.path import join
@@ -36,6 +37,33 @@ def test_content_type_from_endpoint():
     for given, expected in cases:
         actual = consume.content_type_from_endpoint(given)
         assert expected == actual
+
+@pytest.mark.django_db
+def test_all_items():
+    fixture = {"total": 1,
+               "items": [{"id": "foo", "val": "bar"}]}
+    with mock.patch('observer.consume.consume', return_value=fixture):
+        consume.all_items('profiles')
+        assert models.RawJSON.objects.count() == 1
+
+@pytest.mark.django_db
+def test_all_items__some_fn():
+    "a function `some_fn` can be passed in to limit the results consumed."
+    fixture = {"total": 2,
+               "items": [{"id": 1, "val": "foo"},
+                         {"id": 2, "val": "bar"},
+                         {"id": 3, "val": "baz"}]}
+    expected = [{"id": 2, "val": "bar"},
+                {"id": 1, "val": "foo"}]
+    expected_ids = [1, 2]
+
+    def some_fn(row):
+        return row['id'] <= 2
+    with mock.patch('observer.consume.consume', return_value=fixture):
+        result = consume.all_items('profiles', some_fn=some_fn)
+        assert models.RawJSON.objects.count() == 2
+        assert [i.json for i in models.RawJSON.objects.all()] == expected
+        assert result == expected_ids
 
 class Upsert(base.BaseCase):
     def setUp(self):
