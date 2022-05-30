@@ -118,13 +118,15 @@ def all_items(endpoint, idfn=None, some_fn=None):
     `idfn` is used to derive the value for `models.RawJSON.json_id`.
 
     if `some_fn` then per-page consumption is broken as soon as some_fn(item) returns False.
-    whole page of results is upserted even if `some_fn` breaks part-way through results page.
+    all results until some_fn(item) returned False are upserted.
     a list of `idfn(item)` is returned when `some_fn` is supplied."""
     initial = consume(endpoint, {'per-page': 1})
     per_page = 100
     num_pages = math.ceil(initial["total"] / float(per_page))
     idfn = idfn or default_idfn
-    LOG.info("%s pages to fetch" % num_pages)
+
+    if not some_fn:
+        LOG.info("%s pages to fetch" % num_pages)
 
     try:
         do_upsert = True
@@ -142,14 +144,18 @@ def all_items(endpoint, idfn=None, some_fn=None):
         except requests.exceptions.RequestException:
             continue
 
+        page = resp['items']
+
         if some_fn:
+            page = []
             for item in resp['items']:
                 if some_fn(item):
+                    page.append(item)
                     id_accumulator.append(idfn(item))
                 else:
                     break_iteration = True
 
-        accumulator.extend(resp['items'])
+        accumulator.extend(page)
 
         if do_upsert and len(accumulator) >= accumulate:
             upsert_all(content_type, accumulator, idfn)

@@ -1,4 +1,3 @@
-from unittest.mock import patch
 import os, math, json, time
 from functools import partial
 from django.db import models as dj_models, transaction
@@ -374,7 +373,7 @@ def mkidx():
     msid_ver_idx = {} # ll: {09560: 1, ...}
     LOG.info("%s pages to fetch" % num_pages)
     for page in range(1, num_pages + 1):
-        resp = consume.consume("articles", {'page': page, 'order': 'desc'})
+        resp = consume.consume("articles", {'page': page})
         for snippet in resp["items"]:
             msid_ver_idx[snippet["id"]] = snippet["version"]
     return msid_ver_idx
@@ -586,8 +585,10 @@ PODCAST_DESC = {
 #
 #
 
-content_descriptions = {
+CONTENT_DESCRIPTIONS = {
 
+    # 2022-05: kind of works but because it's not fully implemented it breaks elsewhere.
+    # this snippet is used in `download_regenerate_article_list` as a shim.
     # models.LAX_AJSON: {'api-list': 'articles'},
 
     models.LABS_POST: {'description': LABS_POST_DESC,
@@ -658,7 +659,7 @@ def flatten_data(content_type, data):
     """takes data from the eLife API and 'flattens' it into something that can be inserted into a database.
     the name comes from the deeply nested article data that extracts fields into a shallow map.
     simpler content types have hardly any nesting at all."""
-    description = content_descriptions[content_type]['description']
+    description = CONTENT_DESCRIPTIONS[content_type]['description']
     return render.render_item(description, data)
 
 def _regenerate_item(content_type, content_id, data=None):
@@ -674,22 +675,22 @@ def _regenerate_item(content_type, content_id, data=None):
     # no 1:1 mapping between endpoint and observer model.
     # `/community` is like this, it returns interviews, blogs, collections, etc
     # look for a `content-type-fn` to find the *actual* content type of the RawJSON
-    if 'content-type-fn' in content_descriptions[content_type]:
-        content_type = content_descriptions[content_type]['content-type-fn'](data)
+    if 'content-type-fn' in CONTENT_DESCRIPTIONS[content_type]:
+        content_type = CONTENT_DESCRIPTIONS[content_type]['content-type-fn'](data)
 
     # lsh@2022-03-21: disabled assertion and enabled this section.
     # /community was returning 'event' content types and dying mid-regeneration.
     # observer shouldn't be encountering any unsupported content.
     # in this case, it looks like it was accidental but was stored in RawJSON.
-    if not content_type in content_descriptions:
+    if not content_type in CONTENT_DESCRIPTIONS:
         LOG.error("skipping unhandled content type %r. this may need to be deleted from the database: %s" % (content_type, data))
         return
-    #assert content_type in content_descriptions, "unhandled content type %r: %s" % (content_type, data)
+    #assert content_type in CONTENT_DESCRIPTIONS, "unhandled content type %r: %s" % (content_type, data)
 
     mush = flatten_data(content_type, data)
     mush, children = extract_children(mush)
 
-    Klass = content_descriptions[content_type]['model']
+    Klass = CONTENT_DESCRIPTIONS[content_type]['model']
 
     parent = {'Model': Klass, 'orig_data': mush, 'key_list': ['id']}
     object_list = [(parent, children)]
@@ -723,15 +724,16 @@ def regenerate(content_type):
     return regenerate_list(content_type, logic.known_content(json_type=content_type))
 
 def download_item(content_type, content_id):
-    api = content_descriptions[content_type]['api-item']
+    api = CONTENT_DESCRIPTIONS[content_type]['api-item']
     return first(consume.single(api, id=content_id))
 
-def download_all(content_type, **kwargs):
+def download_all(content_type, alt_content_description_map=None, **kwargs):
     """downloads *all* pages of content for the given `content_type`.
     for some types of content this is relatively little, perhaps 1-3 pages.
     for other types, like articles, it may be 100+ pages."""
-    assert content_type in content_descriptions, "unhandled content type %r" % content_type
-    content_description = content_descriptions[content_type]
+    content_description_map = alt_content_description_map or CONTENT_DESCRIPTIONS
+    assert content_type in content_description_map, "unhandled content type %r" % content_type
+    content_description = content_description_map[content_type]
     api = content_description['api-list']
     idfn = content_description.get('idfn', consume.default_idfn)
     some_fn = kwargs.pop('some_fn', None)
@@ -746,8 +748,8 @@ def delete_item(content_type, content_id):
     if not content_type or not content_id:
         LOG.error("cannot delete %r with id %r: both values are required" % (content_type, content_id))
         return
-    if content_type not in content_descriptions:
-        LOG.error("cannot delete %r, unknown content type. supported content_types: %s" % (content_type, ", ".join(content_descriptions.keys())))
+    if content_type not in CONTENT_DESCRIPTIONS:
+        LOG.error("cannot delete %r, unknown content type. supported content_types: %s" % (content_type, ", ".join(CONTENT_DESCRIPTIONS.keys())))
         return
 
     prohibited_list = [models.LAX_AJSON]
@@ -755,7 +757,7 @@ def delete_item(content_type, content_id):
         LOG.error("refusing to delete %r with id %r, these items must be deleted manually." % (content_type, content_id,))
         return
 
-    desc = content_descriptions[content_type]
+    desc = CONTENT_DESCRIPTIONS[content_type]
     model = desc['model']
     idfn = desc.get('idfn', utils.identity)
     idval = idfn(content_id)
@@ -781,7 +783,7 @@ def delete_item(content_type, content_id):
 def regenerate_all():
     regenerate_all_articles()
 
-    for content_type in content_descriptions.keys():
+    for content_type in CONTENT_DESCRIPTIONS.keys():
         regenerate(content_type)
 
 #
@@ -806,9 +808,11 @@ def download_regenerate_article(msid):
         LOG.exception("unhandled exception attempting to download and regenerate article %s", msid)
 
 def download_regenerate_article_list(some_fn):
-    with patch('observer.ingest_logic.content_descriptions', {models.LAX_AJSON: {'api-list': 'articles'}}):
-        for content_id in download_all(models.LAX_AJSON, some_fn=some_fn):
-            download_regenerate_article(content_id)
+    """downloads and regenerates all articles returned in the article listing endpoint until `some_fn(article_summary)` returns `False`.
+    used by the `load_from_api` command to regenerate articles modified in the last N days."""
+    alt_content_description_map = {models.LAX_AJSON: {'api-list': 'articles'}}
+    for content_id in download_all(models.LAX_AJSON, alt_content_description_map, some_fn=some_fn):
+        download_regenerate_article(content_id)
 
 def download_regenerate(content_type, content_id):
     "convenience. downloads the specific `content_type` with the id `content_id` and then updates the database."
@@ -830,9 +834,10 @@ def download_regenerate(content_type, content_id):
     except BaseException:
         LOG.exception("unhandled exception attempting to download and regenerate %s %r", content_type, content_id)
 
-def download_regenerate_list(content_type, some_fn):
-    for content_id in download_all(content_type, some_fn=some_fn):
-        download_regenerate(content_type, content_id)
+# 2022-05: should work but unsupported
+# def download_regenerate_list(content_type, some_fn):
+#    for content_id in download_all(content_type, some_fn=some_fn):
+#        download_regenerate(content_type, content_id)
 
 #
 # upsert article-json from file/dir

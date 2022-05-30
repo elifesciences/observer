@@ -48,12 +48,15 @@ class Command(BaseCommand):
                     exit(1)
 
                 cutoff = utils.todt(datetime.now()) - timedelta(days=days)
+                print("cutoff date is: %s" % (utils.ymdhms(cutoff)))
 
                 def some_fn(result):
                     "returns `True` when the versionDate for the given `result` falls within (now() - N days ago)."
                     pubdate = utils.todt(result['versionDate'])
-                    return pubdate >= cutoff
-                #ingest_logic.download_regenerate_list(models.LAX_AJSON, some_fn)
+                    res = pubdate >= cutoff
+                    if res:
+                        print("%s: %s" % (result['id'], result['versionDate']))
+                    return res
                 ingest_logic.download_regenerate_article_list(some_fn)
                 exit(0)
 
