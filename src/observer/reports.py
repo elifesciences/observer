@@ -302,7 +302,7 @@ msid DESC"""
 def sitemap_report():
     """'sitemap.xml' as served up by the journal.
     should contain a complete listing of journal content for reports to visit."""
-    #article_q = models.Article.objects\
+    # article_q = models.Article.objects\
     #    .only("msid", "datetime_version_published")
     article_q = sitemap__article_data()
 

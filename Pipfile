@@ -31,11 +31,13 @@ uWSGI = "~=2.0"
 
 [dev-packages]
 pyflakes = "~=2.0"
-pylint = "~=2.4"
+# lsh@2022-10-31: pinned after upgrade to 2.15 gives "no module named 'core'" error.
+#pylint = "~=2.4"
+pylint = "==2.14.5"
 pylint-django = "~=2.0"
 pytest = "~=7.2"
-pytest-cov = "*"
+pytest-cov = "~=3.0"
 pytest-freezegun = "~=0.4"
-pytest-django = "*"
-coverage = "*"
+pytest-django = "~=4.5"
+coverage = "~=6.5"
 autopep8 = "~=1.4"
