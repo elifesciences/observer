@@ -57,7 +57,7 @@ def request_args(request, report_meta, **overrides):
     opts.update(overrides)
 
     def ispositiveint(v):
-        ensure(isint(v) and int(v) > 0, "expecting positive integer, got: %s" % v)
+        ensure(isint(v) and int(v) > 0, "expecting a positive integer")
         return int(v)
 
     def inrange(minpp, maxpp):

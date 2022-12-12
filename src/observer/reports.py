@@ -435,7 +435,8 @@ def format_report(report_data, serialisation, context):
         CSV: csv.format_report,
         SITEMAP: sitemap.format_report,
     }
-    ensure(serialisation in report_data['serialisations'], "unsupported format %r for report %s" % (format, report_data['title']))
+    ensure(serialisation in report_data['serialisations'],
+           "unsupported format for report %r, expecting one of: %s" % (report_data['title'], ", ".join(report_data['serialisations'])))
     report_data = copy.deepcopy(report_data) # this is expensive!
     return known_formats[serialisation](report_data, context)
 
