@@ -5,7 +5,6 @@ from .utils import ensure, subdict, utcnow
 from functools import wraps
 from collections import OrderedDict
 from et3.utils import do_all_if_tuple as mapfn
-from .logic import verified_subjects
 from slugify import slugify
 from django.db.models import Count
 from django.db.models.functions import TruncDay
@@ -94,7 +93,7 @@ def latest_articles():
     title="latest articles by subject",
     description="Articles published by eLife, filtered by given subjects",
     params={
-        'subjects': [lambda req: req.getlist('subject'), tuple, mapfn(slugify), verified_subjects, list],
+        'subjects': [lambda req: req.getlist('subject'), tuple, mapfn(slugify), logic.verified_subjects, list],
     }
 ))
 def latest_articles_by_subject(subjects=None):
@@ -103,7 +102,7 @@ def latest_articles_by_subject(subjects=None):
     * returns all articles in the given subject field
     * ordered by the date the first version was published, most recent to least recent
     """
-    valid_subjects = models.Subject.objects.values_list('name', flat=True) # not executed until realised
+    valid_subjects = sorted(logic.known_subjects())
     ensure(subjects, "at least one valid subject must be provided. valid subjects: %s" % ', '.join(valid_subjects))
     return models.Article.objects.all().filter(subjects__name__in=subjects).order_by('-datetime_published')
 
@@ -481,7 +480,7 @@ def _report_meta(reportfn):
         'mixed': 'mixed, depending on content type'
     }
     url_to_kwarg_params = {
-        'subjects': ('subject', ', '.join(logic.simple_subjects()))
+        'subjects': ('subject', ', '.join(sorted(logic.known_subjects())))
     }
     meta = copy.deepcopy(reportfn.meta)
     meta['params'] = list((meta.get('params') or {})) # remove the param wrangling description
