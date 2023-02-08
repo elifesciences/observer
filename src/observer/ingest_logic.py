@@ -724,8 +724,10 @@ def regenerate(content_type):
     return regenerate_list(content_type, logic.known_content(json_type=content_type))
 
 def download_item(content_type, content_id):
-    api = CONTENT_DESCRIPTIONS[content_type]['api-item']
-    return first(consume.single(api, id=content_id))
+    content_description = CONTENT_DESCRIPTIONS[content_type]
+    api = content_description['api-item']
+    idfn = content_description.get('idfn', consume.default_idfn)
+    return first(consume.single(api, id=content_id, idfn=idfn))
 
 def download_all(content_type, alt_content_description_map=None, **kwargs):
     """downloads *all* pages of content for the given `content_type`.
