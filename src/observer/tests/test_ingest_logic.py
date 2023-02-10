@@ -537,3 +537,20 @@ def test_unsupported_content_type_skipped():
     assert models.RawJSON.objects.count() == 1
     ingest_logic.regenerate(models.COMMUNITY)
     assert models.Content.objects.count() == 0
+
+@pytest.mark.django_db
+def test_download_with_idfn():
+    pid = "7"
+    data = {
+        "number": 7,
+        "title": "Episode 7: December 2013",
+        "impactStatement": "In this episode we hear about drug resistance, severe brain damage, sugar versus sweetener, public goods dilemmas, and the evolution of the machinary that makes proteins in cells.",
+        "published": "2014-01-09T13:45:10Z",
+        "image": {"thumbnail": {"uri": "foo", "size": {"height": 100, "width": 100}, "source": {"mediaType": "image/jpeg"}}}
+    }
+    with patch('observer.consume.consume', return_value=data):
+        ingest_logic.download_item(models.PODCAST, pid)
+        assert models.RawJSON.objects.count() == 1
+
+        ingest_logic.regenerate(models.PODCAST)
+        assert models.Content.objects.count() == 1
