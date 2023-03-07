@@ -263,6 +263,7 @@ class Article(models.Model):
     # json_url
 
     has_digest = BooleanField(null=True, blank=True, help_text="Null/None means I don't know!")
+    has_pdf = BooleanField(null=True, blank=True, help_text="Null/None means I don't know!")
 
     subject1 = CharField(max_length=50, null=True)
     subject2 = CharField(max_length=50, null=True)

@@ -170,7 +170,7 @@ DESC = {
 
     'has_digest': [has_key('digest')],
 
-    #
+    'has_pdf': [has_key("pdf")],
 
     'subjects': [p('subjects', []), lambda sl: [{'name': v['id'], 'label': v['name']} for v in sl]],
 
