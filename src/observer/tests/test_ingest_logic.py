@@ -18,7 +18,133 @@ class IngestLogic(base.BaseCase):
         "a basic transformation of the data is possible without errors"
         article_json = json.load(open(self.article_json, 'r'))
         article_json['version'] = 1 # patch fixture with missing
-        ingest_logic.flatten_article_json(article_json)
+        actual = ingest_logic.flatten_article_json(article_json)
+        expected = {'abstract': 'The <i>TMPRSS2:ERG</i> gene fusion is common in androgen '
+                    'receptor (AR) positive prostate cancers, yet its function '
+                    'remains poorly understood. From a screen for functionally '
+                    'relevant ERG interactors, we identify the arginine '
+                    'methyltransferase PRMT5. ERG recruits PRMT5 to AR-target genes, '
+                    'where PRMT5 methylates AR on arginine 761. This attenuates AR '
+                    'recruitment and transcription of genes expressed in '
+                    'differentiated prostate epithelium. The AR-inhibitory function '
+                    'of PRMT5 is restricted to <i>TMPRSS2:ERG</i>-positive prostate '
+                    'cancer cells. Mutation of this methylation site on AR results in '
+                    'a transcriptionally hyperactive AR, suggesting that the '
+                    'proliferative effects of ERG and PRMT5 are mediated through '
+                    "attenuating AR's ability to induce genes normally involved in "
+                    'lineage differentiation. This provides a rationale for targeting '
+                    'PRMT5 in <i>TMPRSS2:ERG</i> positive prostate cancers. Moreover, '
+                    'methylation of AR at arginine 761 highlights a mechanism for how '
+                    'the ERG oncogene may coax AR towards inducing proliferation '
+                    'versus differentiation.',
+                    'author_email': 'raymond.pagliarini@novartis.com',
+                    'author_line': 'Zineb Mounir et al.',
+                    'author_name': 'Raymond A Pagliarini',
+                    'authors': [{'country': 'United States',
+                                 'name': 'Zineb Mounir',
+                                 'type': 'person'},
+                                {'country': 'United States',
+                                 'name': 'Joshua M Korn',
+                                 'type': 'person'},
+                                {'country': 'United States',
+                                 'name': 'Thomas Westerling',
+                                 'type': 'person'},
+                                {'country': 'United States',
+                                 'name': 'Fallon Lin',
+                                 'type': 'person'},
+                                {'country': 'United States',
+                                 'name': 'Christina A Kirby',
+                                 'type': 'person'},
+                                {'country': 'United States',
+                                 'name': 'Markus Schirle',
+                                 'type': 'person'},
+                                {'country': 'United States',
+                                 'name': 'Gregg McAllister',
+                                 'type': 'person'},
+                                {'country': 'United States',
+                                 'name': 'Greg Hoffman',
+                                 'type': 'person'},
+                                {'country': 'United States',
+                                 'name': 'Nadire Ramadan',
+                                 'type': 'person'},
+                                {'country': 'United States',
+                                 'name': 'Anke Hartung',
+                                 'type': 'person'},
+                                {'country': 'United States', 'name': 'Yan Feng', 'type': 'person'},
+                                {'country': 'United States',
+                                 'name': 'David Randal Kipp',
+                                 'type': 'person'},
+                                {'country': 'United States',
+                                 'name': 'Christopher Quinn',
+                                 'type': 'person'},
+                                {'country': 'United States',
+                                 'name': 'Michelle Fodor',
+                                 'type': 'person'},
+                                {'country': 'United States',
+                                 'name': 'Jason Baird',
+                                 'type': 'person'},
+                                {'country': 'France',
+                                 'name': 'Marie Schoumacher',
+                                 'type': 'person'},
+                                {'country': 'United States',
+                                 'name': 'Ronald Meyer',
+                                 'type': 'person'},
+                                {'country': 'United States',
+                                 'name': 'James Deeds',
+                                 'type': 'person'},
+                                {'country': 'United States',
+                                 'name': 'Gilles Buchwalter',
+                                 'type': 'person'},
+                                {'country': 'United States',
+                                 'name': 'Travis Stams',
+                                 'type': 'person'},
+                                {'country': 'United States',
+                                 'name': 'Nicholas Keen',
+                                 'type': 'person'},
+                                {'country': 'United States',
+                                 'name': 'William R Sellers',
+                                 'type': 'person'},
+                                {'country': 'United States',
+                                 'name': 'Myles Brown',
+                                 'type': 'person'},
+                                {'country': 'United States',
+                                 'name': 'Raymond A Pagliarini',
+                                 'type': 'person'}],
+                    'current_version': 1,
+                    'datetime_published': datetime(2016, 5, 16, 0, 0, tzinfo=pytz.UTC),
+                    'datetime_version_published': datetime(2016, 5, 16, 0, 0, tzinfo=pytz.UTC),
+                    'days_publication_to_current_version': None,
+                    'doi': '10.7554/eLife.13964',
+                    'has_digest': False,
+                    'has_pdf': True,
+                    'impact_statement': None,
+                    'journal_name': 'elife',
+                    'msid': 13964,
+                    'num_authors': 24,
+                    'num_citations': 0,
+                    'num_citations_crossref': 0,
+                    'num_citations_pubmed': 0,
+                    'num_citations_scopus': 0,
+                    'num_downloads': 0,
+                    'num_poa_versions': 0,
+                    'num_references': 0,
+                    'num_views': 0,
+                    'num_vor_versions': 0,
+                    'social_image_height': None,
+                    'social_image_mime': None,
+                    'social_image_uri': None,
+                    'social_image_width': None,
+                    'status': 'poa',
+                    'subject1': 'cancer-biology',
+                    'subject2': 'cell-biology',
+                    'subject3': None,
+                    'subjects': [{'label': 'Cancer Biology', 'name': 'cancer-biology'},
+                                 {'label': 'Cell Biology', 'name': 'cell-biology'}],
+                    'title': 'ERG signaling in prostate cancer is driven through PRMT5-dependent '
+                    'methylation of the androgen receptor',
+                    'type': 'short-report',
+                    'volume': 5}
+        self.assertEqual(actual, expected)
 
     def test_upsert(self):
         "a basic upsert is possible"
@@ -98,8 +224,6 @@ class IngestLogicFns(base.BaseCase):
         self.assertRaises(KeyError, case, struct)
 
 class Article(base.BaseCase):
-    def setUp(self):
-        pass
 
     def test_upsert_json_msid_type(self):
         "integer and string values for msid are supported"
