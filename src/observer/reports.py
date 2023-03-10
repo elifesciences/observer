@@ -414,12 +414,14 @@ def ebsco_vor_articles():
     the new and updated VOR articles for Exeter report:
     * returns articles that have at least one VOR version
     * excludes articles published less than a day ago.
+    * excludes articles without an attached PDF
     * ordered by the date and time of the first VOR version published, most recent to least recent
     """
     one_day_ago = utcnow() - timedelta(days=1)
     return models.Article.objects \
         .filter(num_vor_versions__gte=1) \
         .exclude(datetime_vor_published__gt=one_day_ago) \
+        .exclude(has_pdf=False) \
         .order_by('-datetime_vor_published')
 
 #
