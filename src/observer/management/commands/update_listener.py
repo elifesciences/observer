@@ -16,17 +16,8 @@ class Command(BaseCommand):
 
         LOG.info("attempting connection %s ...", settings.EVENT_QUEUE)
 
-        handler = inc.handler
-
-        # todo: remove the try/except. newrelic is always included with observer these days.
-        try:
-            import newrelic.agent
-            handler = newrelic.agent.background_task()(handler)
-        except ImportError:
-            pass
-
         # `any` doesn't accumulate a list of results in memory so long as
         # `action` returns false-y values.
-        any(handler(event) for event in inc.poll(inc.queue(settings.EVENT_QUEUE)))
+        any(inc.handler(event) for event in inc.poll(inc.queue(settings.EVENT_QUEUE)))
 
         sys.exit(0)
