@@ -24,12 +24,13 @@ BLOG_ARTICLE = 'blog-article'
 FEATURE = 'feature'
 EDITORIAL = 'editorial'
 PODCAST = 'podcast'
+REVIEWED_PREPRINT = 'reviewed-preprint'
 
 # insights are regular articles stored in lax but a subset of data
 # is stored as a Content type to make RSS feeds more convenient.
 INSIGHT = 'insight'
 
-ALL_CONTENT_TYPES = [LAX_AJSON, METRICS_SUMMARY, PRESSPACKAGE, PROFILE, DIGEST, LABS_POST, COMMUNITY, INTERVIEW, COLLECTION, BLOG_ARTICLE, FEATURE, EDITORIAL, PODCAST, INSIGHT]
+ALL_CONTENT_TYPES = [LAX_AJSON, METRICS_SUMMARY, PRESSPACKAGE, PROFILE, DIGEST, LABS_POST, COMMUNITY, INTERVIEW, COLLECTION, BLOG_ARTICLE, FEATURE, EDITORIAL, PODCAST, REVIEWED_PREPRINT, INSIGHT]
 
 # used in `reports.py` to group certain content types together
 COMMUNITY_CONTENT_TYPE_LIST = [
@@ -51,7 +52,8 @@ NON_ARTICLE_CONTENT_TYPE_LIST = [
     COLLECTION,
     BLOG_ARTICLE,
     LABS_POST,
-    PODCAST
+    PODCAST,
+    REVIEWED_PREPRINT
 ]
 
 #
@@ -99,6 +101,9 @@ def find_content_type(val):
 
         'blog-articles': BLOG_ARTICLE,
         'blog-articles-id': BLOG_ARTICLE,
+
+        'reviewed-preprints': REVIEWED_PREPRINT,
+        'reviewed-preprints-id': REVIEWED_PREPRINT,
 
         'features': FEATURE,
         'features-id': FEATURE,
@@ -406,6 +411,7 @@ CONTENT_TYPE_CHOICES = [
     LABS_POST,
     EDITORIAL,
     PODCAST,
+    REVIEWED_PREPRINT,
 ]
 CONTENT_TYPE_CHOICES = zip(CONTENT_TYPE_CHOICES, CONTENT_TYPE_CHOICES)
 
@@ -446,6 +452,7 @@ class Content(models.Model):
             DIGEST: "digests/{id}",
             LABS_POST: "labs/{id}",
             PODCAST: "podcast/episode{id}",
+            REVIEWED_PREPRINT: "reviewed-preprints/{id}",
         }
         assert self.content_type in path_map, "cannot find path to content for content type %r" % self.content_type
         path = path_map[self.content_type].format(id=self.id)
