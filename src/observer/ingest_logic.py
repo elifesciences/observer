@@ -553,7 +553,7 @@ REVIEWED_PREPRINT_DESC = {
     'id': [p('id')],
     'content_type': [models.REVIEWED_PREPRINT],
     'title': [p('title')],
-    // Not sure if description is required but not available on reviewed-preprints.
+    # Not sure if description is required but not available on reviewed-preprints.
     'description': [p('impactStatement', None)],
     'datetime_published': [p('published')],
 }
