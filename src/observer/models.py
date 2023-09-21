@@ -417,7 +417,7 @@ CONTENT_TYPE_CHOICES = zip(CONTENT_TYPE_CHOICES, CONTENT_TYPE_CHOICES)
 
 class Content(models.Model):
     id = CharField(max_length=25, primary_key=True)
-    content_type = CharField(max_length=12, choices=CONTENT_TYPE_CHOICES)
+    content_type = CharField(max_length=17, choices=CONTENT_TYPE_CHOICES)
 
     title = CharField(max_length=255)
     description = TextField(null=True)
