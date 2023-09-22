@@ -553,8 +553,6 @@ REVIEWED_PREPRINT_DESC = {
     'id': [p('id')],
     'content_type': [models.REVIEWED_PREPRINT],
     'title': [p('title')],
-    # Not sure if description is required but not available on reviewed-preprints.
-    'description': [p('impactStatement', None)],
     'datetime_published': [p('published')],
 }
 
@@ -647,9 +645,9 @@ CONTENT_DESCRIPTIONS = {
                           'api-item': 'blog-articles/{id}'},
 
     models.REVIEWED_PREPRINT: {'description': REVIEWED_PREPRINT_DESC,
-                          'model': models.Content,
-                          'api-list': 'reviewed-preprints',
-                          'api-item': 'reviewed-preprints/{id}'},
+                               'model': models.Content,
+                               'api-list': 'reviewed-preprints',
+                               'api-item': 'reviewed-preprints/{id}'},
 
     models.FEATURE: {'description': FEATURE_DESC,
                      'model': models.Content},
