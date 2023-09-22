@@ -261,5 +261,4 @@ class ReviewedPreprints(base.BaseCase):
 
         expected = open(join(base.FIXTURE_DIR, 'reviewed-preprints', 'many.xml'), 'r').read()
         actual = resp.content.decode('utf-8')
-        open('/tmp/foo.xml', 'w').write(actual)
         self.assertEqual(expected, actual)
