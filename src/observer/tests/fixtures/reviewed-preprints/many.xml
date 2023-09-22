@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:webfeeds="http://webfeeds.org/rss/1.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0">
+  <channel>
+    <title>eLife: reviewed-preprints</title>
+    <link>https://elifesciences.org</link>
+    <description>The latest eLife reviewed preprints</description>
+    <atom:link href="https://observer.elifesciences.org/report/reviewed-preprints" rel="self"/>
+    <docs>http://www.rssboard.org/rss-specification</docs>
+    <generator>observer (using python-feedgen)</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 29 Oct 2020 00:00:00 +0000</lastBuildDate>
+    <webfeeds:analytics id="G-xxxxxxxxxx" engine="GoogleAnalytics"/>
+    <item>
+      <title>An example of a Reviewed preprint</title>
+      <link>https://elifesciences.org/reviewed-preprints/29561</link>
+      <guid isPermaLink="false">https://elifesciences.org/reviewed-preprints/29561</guid>
+      <pubDate>Mon, 01 Aug 2022 00:00:00 +0000</pubDate>
+      <dc:date>2022-08-01T00:00:00Z</dc:date>
+    </item>
+    <item>
+      <title>The locus coeruleus broadcasts prediction errors across the cortex to promote sensorimotor plasticity</title>
+      <link>https://elifesciences.org/reviewed-preprints/85111</link>
+      <guid isPermaLink="false">https://elifesciences.org/reviewed-preprints/85111</guid>
+      <pubDate>Sun, 03 Jul 2022 00:00:00 +0000</pubDate>
+      <dc:date>2022-07-03T00:00:00Z</dc:date>
+    </item>
+    <item>
+      <title>&lt;i&gt;Homo naledi&lt;/i&gt;, a new species of the genus &lt;i&gt;Homo&lt;/i&gt; from the Dinaledi Chamber, South Africa</title>
+      <link>https://elifesciences.org/reviewed-preprints/09560</link>
+      <guid isPermaLink="false">https://elifesciences.org/reviewed-preprints/09560</guid>
+      <pubDate>Fri, 10 Jul 2015 00:00:00 +0000</pubDate>
+      <dc:date>2015-07-10T00:00:00Z</dc:date>
+    </item>
+  </channel>
+</rss>

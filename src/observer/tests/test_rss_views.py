@@ -242,3 +242,23 @@ class Community(base.BaseCase):
         expected = open(join(base.FIXTURE_DIR, 'community', 'many.xml'), 'r').read()
         actual = resp.content.decode('utf-8')
         self.assertEqual(expected, actual)
+
+class ReviewedPreprints(base.BaseCase):
+    maxDiff = None
+
+    def setUp(self):
+        fixture = join(self.fixture_dir, 'reviewed-preprints', 'many.json')
+        ingest_logic.file_upsert(fixture, content_type=models.REVIEWED_PREPRINT, regen=True)
+        self.c = Client()
+
+    # freezing time because FeedGen adds a `lastBuildDate` element to the generated
+    # RSS feed that can't be affected from here.
+    @pytest.mark.freeze_time('2020-10-29')
+    def test_reviewed_preprint(self):
+        url = reverse('report', kwargs={'name': 'reviewed-preprints'})
+        resp = self.c.get(url)
+        self.assertEqual(200, resp.status_code)
+
+        expected = open(join(base.FIXTURE_DIR, 'reviewed-preprints', 'many.xml'), 'r').read()
+        actual = resp.content.decode('utf-8')
+        self.assertEqual(expected, actual)
