@@ -201,6 +201,15 @@ def magazine():
         .filter(content_type__in=models.MAGAZINE_CONTENT_TYPE_LIST) \
         .order_by('-datetime_published', 'title')
 
+@report(content_meta(
+    title='reviewed-preprints',
+    description='The latest eLife reviewed preprints',
+))
+def reviewed_preprints():
+    return models.Content.objects \
+        .filter(content_type=models.REVIEWED_PREPRINT) \
+        .order_by('-datetime_published', 'title')
+
 #
 #
 #
@@ -457,6 +466,7 @@ def known_report_idx():
         ('features', features),
         ('podcasts', podcasts),
         ('magazine', magazine),
+        ('reviewed-preprints', reviewed_preprints),
         ('published-article-index', published_article_index),
         ('published-research-article-index', published_research_article_index),
         ('profile-count', profile_count),

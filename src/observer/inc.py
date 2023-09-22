@@ -63,6 +63,7 @@ def _handler(json_event):
         'collection': models.COLLECTION,
         'interview': models.INTERVIEW,
         'blog-article': models.BLOG_ARTICLE,
+        'reviewed-preprint': models.REVIEWED_PREPRINT,
 
         # pulled in via daily cronjob, see ./daily.sh
         # 'profile': ...

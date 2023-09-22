@@ -6,9 +6,9 @@ from observer import ingest_logic, models, utils
 from observer.utils import lmap, subdict
 from functools import partial
 
-LAX, METRICS, PRESSPACKAGES, PROFILES, DIGESTS, LABS_POSTS, COMMUNITY, PODCASTS = \
+LAX, METRICS, PRESSPACKAGES, PROFILES, DIGESTS, LABS_POSTS, COMMUNITY, PODCASTS, REVIEWED_PREPRINTS = \
     TARGETS = \
-    ['lax', 'elife-metrics', 'press-packages', 'profiles', 'digests', 'labs-posts', 'community', 'podcasts']
+    ['lax', 'elife-metrics', 'press-packages', 'profiles', 'digests', 'labs-posts', 'community', 'podcasts', 'reviewed-preprints']
 
 class Command(BaseCommand):
     help = "loads ALL elife articles and versions and metrics summary"
@@ -32,6 +32,7 @@ class Command(BaseCommand):
             dl_labs = partial(ingest_logic.download_all, models.LABS_POST)
             dl_community = partial(ingest_logic.download_all, models.COMMUNITY)
             dl_podcasts = partial(ingest_logic.download_all, models.PODCAST)
+            dl_reviewed_preprints = partial(ingest_logic.download_all, models.REVIEWED_PREPRINT)
 
             if msidlist:
                 dl_ajson = partial(lmap, ingest_logic.download_article_versions, msidlist)
@@ -69,6 +70,7 @@ class Command(BaseCommand):
                 (LABS_POSTS, dl_labs),
                 (COMMUNITY, dl_community),
                 (PODCASTS, dl_podcasts),
+                (REVIEWED_PREPRINTS, dl_reviewed_preprints),
             ])
 
             for content_type, fn in subdict(dl_targets, targetlist).items():
@@ -85,6 +87,7 @@ class Command(BaseCommand):
             regen_labs_posts = partial(ingest_logic.regenerate, models.LABS_POST)
             regen_community = partial(ingest_logic.regenerate, models.COMMUNITY) # includes features, blog posts, interviews, etc
             regen_podcasts = partial(ingest_logic.regenerate, models.PODCAST)
+            regen_reviewed_preprints = partial(ingest_logic.regenerate, models.REVIEWED_PREPRINT)
 
             if msidlist:
                 regen_articles = partial(lmap, ingest_logic.regenerate_article, msidlist)
@@ -98,7 +101,8 @@ class Command(BaseCommand):
                 (DIGESTS, regen_digests),
                 (LABS_POSTS, regen_labs_posts),
                 (COMMUNITY, regen_community),
-                (PODCASTS, regen_podcasts)
+                (PODCASTS, regen_podcasts),
+                (REVIEWED_PREPRINTS, regen_reviewed_preprints),
             ])
 
             for content_type, fn in subdict(regen_targets, targetlist).items():

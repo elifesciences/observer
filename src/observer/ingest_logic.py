@@ -549,6 +549,13 @@ BLOG_ARTICLE_DESC = {
     'datetime_published': [p('published')],
 }
 
+REVIEWED_PREPRINT_DESC = {
+    'id': [p('id')],
+    'content_type': [models.REVIEWED_PREPRINT],
+    'title': [p('title')],
+    'datetime_published': [p('published')],
+}
+
 FEATURE_DESC = {
     'id': [p('id')],
     'content_type': [models.FEATURE],
@@ -636,6 +643,11 @@ CONTENT_DESCRIPTIONS = {
                           'model': models.Content,
                           'api-list': 'blog-articles',
                           'api-item': 'blog-articles/{id}'},
+
+    models.REVIEWED_PREPRINT: {'description': REVIEWED_PREPRINT_DESC,
+                               'model': models.Content,
+                               'api-list': 'reviewed-preprints',
+                               'api-item': 'reviewed-preprints/{id}'},
 
     models.FEATURE: {'description': FEATURE_DESC,
                      'model': models.Content},
