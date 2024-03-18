@@ -695,7 +695,7 @@ def _regenerate_item(content_type, content_id, data=None):
     # observer shouldn't be encountering any unsupported content.
     # in this case, it looks like it was accidental but was stored in RawJSON.
     if not content_type in CONTENT_DESCRIPTIONS:
-        LOG.error("skipping unhandled content type %r. this may need to be deleted from the database: %s" % (content_type, data))
+        LOG.warning("skipping unhandled content type %r. this may need to be deleted from the database: %s" % (content_type, data))
         return
     #assert content_type in CONTENT_DESCRIPTIONS, "unhandled content type %r: %s" % (content_type, data)
 
