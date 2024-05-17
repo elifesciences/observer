@@ -1,0 +1,42 @@
+services:
+  postgres:
+    image: postgres:16
+    env_file:
+      - .env
+    environment:
+      POSTGRES_USER: postgres  # Added example_user to avoid 'root' issue
+      POSTGRES_DB: db_prod         # Added db_prod for consistency with healthcheck 
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d db_prod -U postgres"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+  localstack:
+    image: localstack/localstack:3.2
+    environment:
+    - SERVICES=sqs
+    - AWS_DEFAULT_REGION=eu-east-1
+
+  app:
+    depends_on:
+      postgres:
+        condition: service_healthy
+      localstack:
+        condition: service_healthy
+      # migrate:
+      #   condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8000 || exit 1"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+    build:
+      context: .
+    ports:
+    - 8000:8000
+    volumes:
+    - ./schema/metrics:/app/schema/metrics
+    - ./schema/sql:/app/schema/sql
+    - ./src:/app/src
+    - ./app.cfg:/app/app.cfg
+    - ./install.sh:/app/install.sh
