@@ -11,6 +11,7 @@ RUN apt-get update && apt-get install -y \
     libssl-dev \
     libffi-dev \
     git \
+    curl \
     && rm -rf /var/lib/apt/lists/*
 
 # Set the working directory in the container
@@ -26,9 +27,6 @@ RUN chmod +x /app/install.sh
 
 # Expose port (if the application runs a web server)
 EXPOSE 8000
-
-# COPY src/manage.py  /app/manage.py
-
 
 # Run the application
 ENTRYPOINT ["/app/manage.sh", "runserver", "0.0.0.0:8000"]
