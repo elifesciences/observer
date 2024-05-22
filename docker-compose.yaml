@@ -2,16 +2,22 @@ services:
   postgres:
     image: postgres:16
     env_file:
-      - .env
+      - ./.docker/.env
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -d db_prod -U postgres"]
+      test: pg_isready -d db_prod
       interval: 10s
       timeout: 3s
       retries: 3
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./.docker/data:/data
+    ports:
+      - 5432:5432
+
   localstack:
     image: localstack/localstack:3.2
     environment:
-    - SERVICES=sqs
+    - SERVICES=sns
     - AWS_DEFAULT_REGION=eu-east-1
 
   app:
@@ -21,7 +27,7 @@ services:
       localstack:
         condition: service_healthy
     healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:8000 || exit 1"]
+      test: curl http://localhost:8000
       interval: 10s
       timeout: 3s
       retries: 3
@@ -30,8 +36,7 @@ services:
     ports:
     - 8000:8000
     volumes:
-    # - ./schema/metrics:/app/schema/metrics
-    # - ./schema/sql:/app/schema/sql
-    # - ./src:/app/src
-    # - ./app.cfg:/app/app.cfg
     - ./install.sh:/app/install.sh
+
+volumes:
+    db_data:
