@@ -1,8 +1,9 @@
 services:
   postgres:
     image: postgres:16
-    env_file:
-      - ./.docker/.env
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
     healthcheck:
       test: pg_isready -d db_prod
       interval: 10s
@@ -10,7 +11,6 @@ services:
       retries: 3
     volumes:
       - db_data:/var/lib/postgresql/data
-      - ./.docker/data:/data
     ports:
       - 5432:5432
 
@@ -36,7 +36,7 @@ services:
     ports:
     - 8000:8000
     volumes:
-    - ./install.sh:/app/install.sh
+    - ./.docker/app.cfg:/app/app.cfg
 
 volumes:
     db_data:
