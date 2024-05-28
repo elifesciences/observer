@@ -15,3 +15,7 @@ app.cfg
 uwsgi.ini
 ingestion-lax.log.json
 /src/core/prod_settings.py
+.docker/.env
+.vscode/
+.idea/
+*.iml
