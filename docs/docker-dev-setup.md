@@ -27,13 +27,6 @@ The application will be available at http://localhost:8000.
 ```
 docker-compose down
 ```
-Notes
-Ensure that the install.sh script has execute permissions before running the services:
-
-
-```
-chmod +x install.sh
-```
 
 The Postgres service will be checked for health every 10 seconds, and the application will wait until both Postgres and Localstack are healthy before starting.
 
