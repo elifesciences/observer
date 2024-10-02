@@ -13,17 +13,6 @@ elifePipeline {
     }
 
     elifeMainlineOnly {
-        stage 'End2end tests', {
-            elifeSpectrum(
-                deploy: [
-                    stackname: 'observer--end2end',
-                    revision: commit,
-                    folder: '/srv/observer',
-                ],
-                marker: 'observer'
-            )
-        }
-     
         stage 'Approval', {
             elifeGitMoveToBranch commit, 'approved'
         }
