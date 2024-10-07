@@ -28,7 +28,7 @@ mccabe==0.7.0
 packaging==24.0
 platformdirs==4.2.0
 pluggy==1.4.0
-psycopg2==2.8.6
+psycopg2==2.9.9
 pycodestyle==2.11.1
 pyflakes==2.5.0
 pylint==2.14.5
